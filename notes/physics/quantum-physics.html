@@ -60,35 +60,164 @@
         </section>
 
         <script type="text/plain" id="article-markdown">
-# Historic Remarks
+# Historical Remarks
 
-1900 Lord Kelvin: "Two clouds":
-- ether (Michelson-Morley experiment)
-- black body radiation (How to use Maxwell-Boltzmann theory to derive the black body radiation spectrum?)
+In his 1900 lecture "Nineteenth-Century Clouds over the Dynamical Theory of Heat and Light", Lord Kelvin pointed out two "clouds" over classical physics:
+- The ether: the null result of the Michelson–Morley experiment.
+- The Maxwell–Boltzmann doctrine of equipartition of energy: it fails to explain, e.g., the measured specific heats of gases, and it is closely related to the black-body radiation problem (classical equipartition cannot reproduce the black-body spectrum).
 
-Black body radiation is introduced in [Black Body](thermodynamics-and-statistical-physics.html#black-body). We can find that the explanation of phenomenon is based on energy quantization. Another evidence is from [Photoelectric Effect](optics.html#photoelectric-effect). Einstein also explained the phenomenon by the hypothesis. The experiment can also measure Planck constant.
+Black-body radiation is introduced in [Black Body](thermodynamics-and-statistical-physics.html#black-body). In 1900, Planck explained the black-body spectrum by assuming that the energy of the oscillators is quantized, $E=nh\nu$; this is the idea of <span style="color: red;">energy quantization</span>. In 1905, Einstein went further and proposed that light itself consists of quanta with energy $E=h\nu$, which explains the [Photoelectric Effect](optics.html#photoelectric-effect). Millikan's photoelectric experiments later confirmed Einstein's equation and provided a measurement of the Planck constant $h$.
+
 ## Stern-Gerlach Experiment
 
-Scientist wondered if other physical quantities are discrete, and Stern-Gerlach experiment is a classic experiment to prove that the components of an atom's angular momentum/magnetic moment in a certain direction are not continuous, but can only take certain discrete values.
+Scientists wondered whether other physical quantities are also discrete. The <span style="color: red;">Stern–Gerlach experiment</span> is a classic experiment showing that the component of an atom's angular momentum (magnetic moment) along a given direction is not continuous but can only take certain discrete values.
 
-Ag: $[\mathrm{Kr}]\,4d^{10}5s^1$
+Ag: $[\mathrm{Kr}]\,4d^{10}5s^1$. The magnetic moment of a silver atom comes from the spin of its single unpaired $5s$ electron (the orbital angular momentum is $L=0$).
+
 $$H=-\mathbf{\mu}\cdot\mathbf{B}$$
 
-$$\mathbf{\mu}=g\frac{e}{2m}\mathbf{S}$$
-$$\mathbf{F}=\nabla(\mathbf{\mu}\cdot\mathbf{B})$$
+$$\mathbf{\mu}=-g\frac{e}{2m}\mathbf{S},\qquad e>0,\ g\approx 2$$
 
-S-G sequential experiment
+$$\mathbf{F}=\nabla(\mathbf{\mu}\cdot\mathbf{B}),\qquad F_z\approx\mu_z\frac{\partial B_z}{\partial z}$$
 
-![S-G sequence experiment](../attachments/S-G%20sequence%20experiment.jpg)
-Explanation:
+S-G sequential experiment:
 
+![S-G sequence experiment](../attachments/S-G%20sequence%20experiment.jpg){width=450}
 
+Explanation: the first S-G apparatus along $z$ acts as a filter and selects $|z+\rangle$. A subsequent measurement along a perpendicular axis ($x$ or $y$) gives the two outcomes with probability $1/2$ each. Measuring $z$ again after that gives $z+$ and $z-$ with probability $1/2$ each again, because the perpendicular measurement destroys the earlier $z$ information.
+
+A general spin state is
+$$|\psi\rangle=c_1|z+\rangle+c_2|z-\rangle,\qquad c_1,c_2\in\mathbb{C},\qquad |c_1|^2+|c_2|^2=1$$
+In the $z$ basis,
 $$\left | z+  \right \rangle = \begin{pmatrix} 1\\0\end{pmatrix},\left | z-  \right \rangle = \begin{pmatrix} 0\\1\end{pmatrix}$$
-$$\left | y+  \right \rangle =\frac{1}{\sqrt{2}} \begin{pmatrix} 1\\i\end{pmatrix},\left | y-  \right \rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} i\\1\end{pmatrix}$$
-where we guarantee $$|c_1|^2+|c_2|^2=1,c_1,c_2\in\mathbb{C}$$
+$$\left | x\pm  \right \rangle =\frac{1}{\sqrt{2}} \begin{pmatrix} 1\\\pm 1\end{pmatrix}$$
+$$\left | y+  \right \rangle =\frac{1}{\sqrt{2}} \begin{pmatrix} 1\\i\end{pmatrix},\left | y-  \right \rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1\\-i\end{pmatrix}$$
 
-# Quantum Mechanics Postulates and Formulation
+# Quantum Mechanics Postulates
 
+## Mathematical Notes
+
+The following discussion takes place in a Hilbert space.
+
+In quantum mechanics, a state is written in two common forms: the ket $|\psi\rangle$ and the bra $\langle \psi|$.
+
+If
+
+$$ |\psi\rangle= \begin{pmatrix} a\\ b \end{pmatrix}, $$
+then
+
+$$ \langle\psi| = \begin{pmatrix} a^* & b^* \end{pmatrix}. $$
+
+That is,
+
+$$ \boxed{ \langle\psi|=(|\psi\rangle)^\dagger } $$
+
+Then we have two operations: the inner product $\langle \phi|\psi\rangle$ and the outer product $|\psi\rangle\langle \phi|$.
+
+If
+
+$$ |\psi\rangle= \begin{pmatrix} a\\ b \end{pmatrix}, \qquad \langle\phi|= \begin{pmatrix} c^* & d^* \end{pmatrix}, $$
+
+then
+
+$$\langle \phi|\psi\rangle=ac^*+bd^*, \qquad |\psi\rangle\langle\phi| = \begin{pmatrix} ac^* & ad^*\\ bc^* & bd^* \end{pmatrix}. $$
+
+---
+
+Here we list six postulates of quantum mechanics (different textbooks group and count them differently).
+
+## State-Space Postulate
+
+The state of a quantum system is represented by a normalized state vector in a Hilbert space $\mathcal H$:$$|\psi\rangle \in\mathcal H,\qquad\langle \psi|\psi\rangle=1$$
+Moreover, if
+$$
+|\psi_1\rangle,\ |\psi_2\rangle
+$$
+are allowed states, then
+$$
+a|\psi_1\rangle+b|\psi_2\rangle,\qquad a,b\in\mathbb{C}
+$$
+(after normalization) is also an allowed state. This is the <span style="color: red;">superposition principle</span>; it is a postulate rather than a theorem, and it is consistent with the fact that the Hilbert space is a linear space.
+
+## Observable Postulate
+
+Each observable physical quantity $A$ corresponds to a <span style="color: red;">Hermitian operator</span> on the Hilbert space, that is, $$A^\dagger=A$$
+In [Algebra](../math/algebra.html), we can prove that the eigenvalues of a Hermitian operator are real numbers.
+
+We define the <span style="color: red;">commutator</span> $$[A,B]=AB-BA$$
+and the anti-commutator $$\{A,B\}=AB+BA$$
+Both are operators. For Hermitian $A$ and $B$, $[A,B]$ is anti-Hermitian, so its expectation values are purely imaginary, while $\{A,B\}$ is Hermitian, so its expectation values are real.
+
+If $[A,B]=0$, then $$AB=BA$$
+In [Algebra](../math/algebra.html), for Hermitian operators this is equivalent to $A$ and $B$ having a common eigenbasis, i.e., they can be simultaneously diagonalized.
+
+## Born Probability Postulate
+
+Suppose the system is in the state $|\psi\rangle$ and we measure the observable $A$, whose eigenvalues and eigenstates satisfy$$A|a_n\rangle=a_n|a_n\rangle$$
+Then the probability of obtaining $a_n$ is
+$$P(a_n)=|\langle a_n|\psi\rangle|^2$$
+This is the <span style="color: red;">Born rule</span>.
+
+If $|\psi'\rangle=e^{i\alpha}|\psi\rangle$, then$$P'(a_n)=|\langle a_n|\psi'\rangle|^2=|\langle a_n|\psi\rangle e^{i\alpha}|^2=|\langle a_n|\psi\rangle|^2=P(a_n)$$
+As a result, all measurement probabilities are exactly the same. So physically, a state is not a specific vector but rather a "ray":
+$$
+|\psi\rangle \sim e^{i\alpha}|\psi\rangle
+$$
+If$$ |\psi\rangle=\sum_n c_n|a_n\rangle$$
+then the expectation value of $A$ is
+$$
+\langle A\rangle
+=
+\sum_n a_n P(a_n)=
+\sum_n a_n |c_n|^2
+$$
+We can verify that $$\langle A\rangle=\langle \psi|A|\psi\rangle$$
+
+Define the operators $$\Delta A=A-\langle A\rangle, \qquad \Delta B=B-\langle B\rangle $$
+and the standard deviations $$\sigma_A=\sqrt{\langle(\Delta A)^2\rangle}, \qquad \sigma_B=\sqrt{\langle(\Delta B)^2\rangle}. $$
+Let $$ |\alpha\rangle = \Delta A|\psi\rangle, \qquad |\beta\rangle = \Delta B|\psi\rangle. $$
+So we have $$\langle\alpha|\alpha\rangle = \langle\psi|(\Delta A)^2|\psi\rangle=\sigma_A^2, \qquad \langle\beta|\beta\rangle = \langle\psi|(\Delta B)^2|\psi\rangle=\sigma_B^2. $$
+Then we use the Cauchy–Schwarz inequality in Hilbert space (see [Algebra](../math/algebra.html)): $$\langle\alpha|\alpha\rangle\langle\beta|\beta\rangle\ge|\langle\alpha|\beta\rangle|^2= \left| \langle\psi| \Delta A\Delta B |\psi\rangle \right|^2$$
+$$\sigma_A^2\sigma_B^2\ge|\langle\Delta A\Delta B\rangle|^2$$
+Write $$\Delta A\Delta B=\frac{1}{2}[\Delta A,\Delta B]+\frac{1}{2}\{\Delta A,\Delta B\}$$
+The expectation value of the first term is purely imaginary and that of the second term is real. Since $[\Delta A,\Delta B]=[A,B]$, dropping the real part gives the <span style="color: red;">Robertson uncertainty relation</span>:
+$$\sigma_A\,\sigma_B \ge \frac12 \left| \langle[A,B]\rangle \right|$$
+Keeping both parts gives the <span style="color: red;">Schrödinger–Robertson inequality</span>:
+$$ \boxed{ \sigma_A^2\sigma_B^2 \ge \frac14 \left|\langle[A,B]\rangle\right|^2 + \frac14 \left| \left\langle \{\Delta A,\Delta B\} \right\rangle \right|^2 } $$
+
+If $[A,B]=0$, $A$ and $B$ share a common eigenbasis. In a common eigenstate, $$\sigma_A\,\sigma_B=0$$
+so both $A$ and $B$ have definite values simultaneously (this does not mean every state gives zero). So in quantum mechanics, $[A,B]=0$ means that the two observables are "compatible".
+
+## Post-Measurement State Postulate
+
+If a measurement of $A$ yields the result $a_n$, the state of the system collapses to the corresponding eigenstate:
+$$
+|\psi\rangle
+\longrightarrow
+|a_n\rangle.
+$$
+More generally, expressed using the projection operator $P_n$:
+$$
+|\psi\rangle
+\longrightarrow
+\frac{P_n|\psi\rangle}
+{\sqrt{\langle\psi|P_n|\psi\rangle}}.
+$$
+
+## Time Evolution Postulate
+
+A closed system evolves according to the <span style="color: red;">Schrödinger equation</span>:
+$$i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle=H|\psi(t)\rangle$$
+where $H$ is the Hamiltonian, i.e., the energy operator of the system.
+
+The solution is $$|\psi(t)\rangle=U(t,t_0)|\psi(t_0)\rangle$$where $U$ is a unitary operator. For a time-independent $H$, $$U(t,t_0)=e^{-iH(t-t_0)/\hbar}$$
+
+Therefore, $$\boxed{\text{Without measurement, quantum time evolution is linear, deterministic, and unitary.}}$$
+
+## Composite System Postulate
+
+If the state space of quantum system A is $\mathcal H_A$ and the state space of quantum system B is $\mathcal H_B$, then the state space of the composite system is $$\mathcal H_{AB}=\mathcal H_A \otimes \mathcal H_B$$
+where $\otimes$ is the tensor product: if $\{|i\rangle_A\}$ and $\{|j\rangle_B\}$ are bases of $\mathcal H_A$ and $\mathcal H_B$, then $\{|i\rangle_A\otimes|j\rangle_B\}$ is a basis of $\mathcal H_{AB}$, and $\dim\mathcal H_{AB}=\dim\mathcal H_A\cdot\dim\mathcal H_B$.
 
 # Dynamics
 

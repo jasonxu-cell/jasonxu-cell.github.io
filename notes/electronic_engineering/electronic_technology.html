@@ -207,7 +207,6 @@ The two subfunctions are called cofactors, written $f_{x_i}=f(x_1,\dots,x_{i-1},
 $$f=x_if_{x_i}+\overline{x_i}f_{\overline{x_i}}$$
 
 Repeated application about all $n$ variables decomposes any function into a sum of [minterms](#minterms-and-maxterms), which is why a unique canonical SOP (sum of products) exists for every Boolean function.
-
 # Computer Operations and Coding
 
 ## BCD Code
@@ -344,7 +343,8 @@ IEEE 754-2019 defines five rounding-direction attributes for binary arithmetic; 
 
 ![ascii-table-alpharithms-scaled-1024x610](../attachments/ascii-table-alpharithms-scaled-1024x610.jpg){width=600}
 
-
+# Introduction to the Circuit
+## Field-Programmable Gate Array (FPGA)
 # Combinational Logic Circuit
 
 ## Race and Hazard
@@ -526,23 +526,17 @@ endmodule
 
 For `SELECT_BITS = 2`, this is a 4-to-1 MUX; for `SELECT_BITS = 3`, it is an 8-to-1 MUX.
 
-The classic MSI counterpart is the <span style="color: red;">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in [Decoder](#decoder). It has three select inputs $S_2S_1S_0$, eight data inputs $D_0$–$D_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $W=\overline{Y}$:
+The classic MSI counterpart is the <span style="color: red;">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in [Decoder](#decoder). It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:
 
-| $\overline{E}$ | $S_2S_1S_0$ | $Y$   | $W$              |
+| $\overline{E}$ | $S_2S_1S_0$ | $Y$   | $\overline{Y}$   |
 | -------------- | ----------- | ----- | ---------------- |
 | 1              | XXX         | 0     | 1                |
-| 0              | $i$         | $D_i$ | $\overline{D_i}$ |
-![Screenshot 2026-09-23 at 22.18.39](../attachments/Screenshot%202026-09-23%20at%2022.18.39.png)
+| 0              | $i$         | $I_i$ | $\overline{I_i}$ |
+![exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b](../attachments/exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b.png)
 
 When enabled ($\overline{E}=0$), with $m_i$ the minterms of the select inputs,
 
-$$Y=\sum_{i=0}^{7}m_iD_i,\qquad W=\overline{Y}$$
-
-Typical uses:
-
-- Logic synthesis: a 3-variable function is implemented by wiring its truth table directly onto $D_0$–$D_7$; a 4-variable function needs only one external inverter, feeding each data input with $0$, $1$, $D$, or $\overline{D}$ according to the cofactors ([Shannon Expansion Theorem](#shannon-expansion-theorem)).
-- Parallel-to-serial conversion: a counter driving $S_2S_1S_0$ scans the eight inputs sequentially.
-
+$$Y=\sum_{i=0}^{7}m_iI_i$$
 ## Demultiplexer (DEMUX)
 
 A demultiplexer routes one data input to one of several outputs. In a 1-to-4 DEMUX, the two select bits $S_1S_0$ choose which output receives $D$; all other outputs are 0.
