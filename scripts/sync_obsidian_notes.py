@@ -348,7 +348,7 @@ def html_page(
     datetime_value = datetime_attr(time_text)
     tags_html = "\n".join(f"                    <span>{html.escape(str(tag))}</span>" for tag in tags)
     safe_markdown = markdown.replace("</script", "<\\/script")
-    page_title = html.escape(f"{target.title} | Yang", quote=True)
+    page_title = html.escape(f"{target.title} | Yang Xu", quote=True)
     page_url = f"{SITE_URL}notes/{target.subject}/{quote(target.filename)}"
 
     return f'''<!DOCTYPE html>
@@ -368,7 +368,7 @@ def html_page(
     <meta name="twitter:title" content="{page_title}">
     <meta name="twitter:image" content="{OG_IMAGE_URL}">
     <meta name="twitter:image:alt" content="{OG_IMAGE_ALT}">
-    <title>{html.escape(target.title)} | Yang</title>
+    <title>{html.escape(target.title)} | Yang Xu</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
