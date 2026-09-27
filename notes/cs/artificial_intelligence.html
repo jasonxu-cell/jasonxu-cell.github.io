@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Artificial Intelligence | Yang">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/my_website/notes/cs/artificial_intelligence.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Artificial Intelligence | Yang">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
     <title>Artificial Intelligence | Yang</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
-    <link rel="icon" type="image/png" href="../../assets/photo.jpg">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    >
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
     <nav>
@@ -59,45 +69,19 @@
         </section>
 
         <script type="text/plain" id="article-markdown">
-# Glossary
-
-A quick reference for the foundational terms that recur throughout these notes. The last column links to the section where the term is discussed in depth.
-
-| Term                                                    | Definition                                                                                          | See                                            |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| <span style="color: red;">Activation function</span>    | A nonlinear function applied to each hidden unit, giving the network its non-linear modeling power. | [Multilayer Perceptrons](#multilayer-perceptrons)                    |
-| <span style="color: red;">Backpropagation (BP)</span>   | The chain-rule procedure for computing the gradient of the loss w.r.t. every parameter.             | [Backpropagation (BP)](#backpropagation-bp)                      |
-| <span style="color: red;">Batch</span>                  | The subset of training data used in a single iteration to compute the gradient and update weights.  | [Multilayer Perceptrons](#multilayer-perceptrons)                    |
-| <span style="color: red;">Embedding</span>              | A learned, fixed-length dense vector that represents a discrete object (word, token, graph node).   | [Natural Language Processing (NLP)](#natural-language-processing-nlp)         |
-| <span style="color: red;">Epoch</span>                  | One full pass over the entire training set (consists of many iterations/batches).                   | —                                              |
-| <span style="color: red;">Feature</span>                | An individual measurable input variable describing a data point.                                    | [Machine Learning](#machine-learning)                          |
-| <span style="color: red;">Gradient Descent (GD)</span>  | Iterative optimization that moves parameters in the direction of the negative gradient.             | [Linear Neural Networks for Regression](#linear-neural-networks-for-regression)     |
-| <span style="color: red;">Hyperparameter</span>         | A setting chosen by you, not learned by the model (e.g. learning rate, batch size).                 | [Machine Learning](#machine-learning)                          |
-| <span style="color: red;">Iteration (step)</span>       | A single parameter update computed on one batch.                                                    | [Stochastic Gradient Descent (SGD)](#stochastic-gradient-descent-sgd)         |
-| <span style="color: red;">Label</span>                  | The ground-truth target for a data point in supervised learning.                                    | [Machine Learning](#machine-learning)                          |
-| <span style="color: red;">Learning rate ($\eta$)</span> | The step size that scales the gradient in each update.                                              | [Linear Neural Networks for Regression](#linear-neural-networks-for-regression)     |
-| <span style="color: red;">Logits</span>                 | The raw, pre-softmax output scores of a model.                                                      | [Linear Neural Networks for Classification](#linear-neural-networks-for-classification) |
-| <span style="color: red;">Loss function</span>          | A scalar measuring prediction error, minimized during training.                                     | [Linear Neural Networks for Regression](#linear-neural-networks-for-regression)     |
-| <span style="color: red;">Overfitting</span>            | When a model fits training noise and fails to generalize to unseen data.                            | [Machine Learning](#machine-learning)                          |
-| <span style="color: red;">Parameter</span>              | A value learned by the model during training (weights, biases).                                     | [Machine Learning](#machine-learning)                          |
-| <span style="color: red;">Regularization</span>         | A penalty added to the loss (L1/L2) to curb overfitting.                                            | [Linear Neural Networks for Regression](#linear-neural-networks-for-regression)     |
-| <span style="color: red;">Softmax</span>                | Maps a vector of logits to a probability distribution.                                              | [Linear Neural Networks for Classification](#linear-neural-networks-for-classification) |
-| <span style="color: red;">Token</span>                  | The atomic unit of text a model processes; mapped to an id and then an embedding.                   | [Tokenization](#tokenization)                              |
-| <span style="color: red;">Vocabulary ($V$)</span>       | The set of all distinct tokens a model knows.                                                       | [Tokenization](#tokenization)                              |
-
 # Machine Learning
 
 Machine learning is a core branch of artificial intelligence. It enables computer systems to automatically learn patterns through algorithms and statistical models, and make predictions or decisions without being explicitly programmed. The essence of machine learning is building and training models.
 
 Generally, machine learning can be divided into the following two categories:
 
-- <span style="color: red;">Supervised Learning</span>: Each data point can be fed back by "standard answers", which is officially called labels. It aims to learn a mapping (function) from inputs to outputs. It is the standard framework for <span style="color: red;">Regression</span> and <span style="color: red;">Classification</span>.
-- <span style="color: red;">Unsupervised Learning</span>: Each data point can not be fed back a label. The model explores the inherent structure of the data to identify patterns—essentially following the principle of "birds of a feather flock together." It is the standard framework for <span style="color: red;">Clustering</span> and <span style="color: red;">Dimensionality Reduction</span>.
+- <span style="color: red;">Supervised Learning</span>: Each data point can be fed back by "standard answers", which is officially called <span style="color: red;">labels</span>. It aims to learn a mapping (function) from inputs to outputs. It is the standard framework for Regression and Classification.
+- <span style="color: red;">Unsupervised Learning</span>: Each data point can not be fed back a label. The model explores the inherent structure of the data to identify patterns—essentially following the principle of "birds of a feather flock together." It is the standard framework for Clustering and Dimensionality Reduction.
 
 Data Set can be divided as:
 
 - <span style="color: red;">Training Set</span>: The set from which the model directly learns to discern patterns.
-- <span style="color: red;">Validation Set</span>: The set used to tune hyperparameters and prevent overfitting.
+- <span style="color: red;">Validation Set</span>: The set used to tune <span style="color: red;">hyperparameters</span> and prevent <span style="color: red;">overfitting</span>.
 - <span style="color: red;">Testing Set</span>: The set used to objectively evaluate the model after training.
 
 >Tip Difference between parameter and hyperparameter:
@@ -107,7 +91,7 @@ Data Set can be divided as:
 
 For the evaluation to be statistically valid, the training, validation, and testing sets must be representative of the same underlying distribution.
 
-For a supervised learning task in prediction (where you only need to answer yes or no), we define a <span style="color: red;">Confusion Matrix</span>：
+For a supervised learning task in prediction (where you only need to answer yes or no), we define a <span style="color: red;">Confusion Matrix</span>:
 
 | Actuality / Prediction | 0   | 1   |
 | ---------------------- | --- | --- |
@@ -117,7 +101,7 @@ Common Indicators:
 - <span style="color: red;">Accuracy</span> $= \frac{TP+TN}{TP+TN+FP+FN}$
 - <span style="color: red;">Precision</span> $= \frac{TP}{TP+FP}$
 - <span style="color: red;">Recall</span> $= \frac{TP}{TP+FN}$
-- <span style="color: red;">F1 score</span> $=\frac{2 \times Precision \times Recall}{Precision+Recall}= \frac{2TP}{2TP+FP+FN}$
+- F1 score $=\frac{2 \times Precision \times Recall}{Precision+Recall}= \frac{2TP}{2TP+FP+FN}$
 
 When a dataset is imbalanced, a model can achieve a high accuracy score simply by predicting the majority class for every input, while failing to identify the minority class entirely. This is obviously not a good model. In this case, we can use the precision or F1 score to evaluate the model.
 # Weighted Majority Algorithm
@@ -126,9 +110,9 @@ In a large model, we often need to address a question through lots of models. As
 
 ## Deterministic Version
 
-A natural idea is: every expert is given a weight $w_i$，and initialize it as $1$
-- If the answer is wrong, multiply its weight by penalty factor $a$
-- If the answer is right, multiply its weight by reward factor $b$
+A natural idea is: every expert is given a weight $w_i$, and initialize it as $1$
+- If the answer is wrong, multiply its weight by <span style="color: red;">penalty factor</span> $a$
+- If the answer is right, multiply its weight by <span style="color: red;">reward factor</span> $b$
 where $a<1,b>1$
 For each judgment, we simply compare the sum of the weights of the experts who answered $1$ and those who answered $0$.
 
@@ -269,12 +253,12 @@ Assume that $\epsilon$ follows a Gaussian distribution, because this guarantees 
 To find effective coefficients, we define
 $$L(w,b)=\frac{1}{n}\sum_{i=1}^n l^{(i)}(w,b)=\frac{1}{n}\sum_{i=1}^n (y^{(i)}-\hat{y}^{(i)})^2$$
 For a linear problem, we can get the analytical solution$$\mathbf{w}^∗=(\mathbf{x}^\top \mathbf{x})^{-1}\mathbf{x}^\top \mathbf{y}$$
-Generally, we can use Gradient Descent (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the learning rate $\eta$, i.e. $$w \leftarrow w−\eta \nabla L(w)$$
+Generally, we can use <span style="color: red;">Gradient Descent</span> (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the <span style="color: red;">learning rate</span> $\eta$, i.e. $$w \leftarrow w−\eta \nabla L(w)$$
 The learning rate must be neither too large nor too small.
 
-![Screenshot 2026-05-17 at 15.15.10](../attachments/Screenshot%202026-05-17%20at%2015.15.10.png)
+![Screenshot 2026-05-17 at 15.15.10](../attachments/Screenshot%202026-05-17%20at%2015.15.10.png){width=450}
 
-To avoid overfitting, we can regularize the loss function by adding $\lambda$ times the model complexity to the prediction loss.
+To avoid overfitting, we can <span style="color: red;">regularize</span> the <span style="color: red;">loss function</span> by adding $\lambda$ times the model complexity to the prediction loss.
 
 - L1 regularization
 
@@ -298,7 +282,7 @@ The purposes of normalization and standardization operations are similar. Withou
 
 ## Linear Neural Networks for Classification
 
-Regression is the hammer we reach for when we want to answer _how much?_ or _how many?_ questions. In this section, we focus on _classification_ problems where we put aside _how much?_ questions and instead focus on _which category?_ questions.
+Regression is the hammer we reach for when we want to answer _how much?_ or _how many?_ questions. In this section, we focus on _classification_ problems where we put aside _how much?_ questions and instead focus on _which category?_ questions.
 
 One way to accomplish this goal is to use probability to predict the answer to the question. We can use Sigmoid function to map a real number to a number between 0 and 1:
 $$\mathrm{Sigmoid}(x)=\frac{1}{1+e^{-x}}$$
@@ -308,7 +292,7 @@ $$-\log P(\mathbf{Y} \mid \mathbf{X}) = \sum_{i=1}^n -\log P(\mathbf{y}^{(i)} \m
 = \sum_{i=1}^n l(\mathbf{y}^{(i)}, \hat{\mathbf{y}}^{(i)})$$
 As a result, we define the <span style="color: red;">Cross-entropy loss</span> 
 $$l(\mathbf{y},\hat{\mathbf{y}})=-\sum_j y_j\log \hat{y_j}$$
-This is the general (multi-class) form paired with Softmax. For the binary case with a single Sigmoid output, it reduces to $l(y,\hat{y})=-[y\log\hat{y}+(1-y)\log(1-\hat{y})]$.
+This is the general (multi-class) form paired with <span style="color: red;">Softmax</span>. For the binary case with a single Sigmoid output, it reduces to $l(y,\hat{y})=-[y\log\hat{y}+(1-y)\log(1-\hat{y})]$.
 
 Sigmoid function is only suitable for binary classification problem. If we want to solve multi-class classification problems, we can use Softmax function.
 $$\hat{\mathbf{y}} = \mathrm{softmax}(\mathbf{o}) \quad \textrm{where}\quad \hat{y}_i = \frac{\exp(o_i)}{\sum_j \exp(o_j)}.$$
@@ -323,9 +307,9 @@ Linear models cannot solve every problem; for example, Marvin Lee Minsky propose
 > The Xor function needs to achieve: 0 Xor 0=0, 0 Xor 1=1, 1 Xor 0=1, 1 Xor 1=0
 It needs to group (0,0), (1,1) together, and (0,1), (1,0) into another group through linear transformation, but this obviously cannot be done by linear segmentation.
 
-We can overcome the limitations of linear models by incorporating one or more <span style="color: red;">hidden layers</span>. Each layer feeds into the layer above it, until we generate outputs. We can think of the first  layers as our representation and the final layer as our linear predictor. This architecture is commonly called a <span style="color: red;">multilayer perceptron (MLP)</span>.
+We can overcome the limitations of linear models by incorporating one or more <span style="color: red;">hidden layers</span>. Each layer feeds into the layer above it, until we generate outputs. We can think of the first  layers as our representation and the final layer as our linear predictor. This architecture is commonly called a <span style="color: red;">multilayer perceptron (MLP)</span>.
 
-Also, there is a commonly used terminology in AI: batch, which is a subset of the training dataset used in a single iteration to calculate the error and update the model's weights.
+Also, there is a commonly used terminology in AI: <span style="color: red;">batch</span>, which is a subset of the training dataset used in a single iteration to calculate the error and update the model's weights.
 - Smaller Batch Sizes (e.g., 8, 16, 32):
 	- Advantages: Gradient calculations are random (noisy). This "bumpy" update path can sometimes help the model escape local optima (pitfalls) and find a smoother, better-generalizing global optimum. Higher accuracy is usually achieved on the test set.
 	- Disadvantages: The path is winding, and the loss function oscillates significantly in the early stages of training.
@@ -333,12 +317,12 @@ Also, there is a commonly used terminology in AI: batch, which is a subset of th
 	- Advantages: The calculated gradients are very accurate, representing the true direction of the entire dataset. The loss decreases very smoothly and steadily.
 	- Disadvantages: The model can easily get stuck in an extremely steep "local optimum," resulting in high accuracy on the training set but poor performance on the test set (deteriorating generalization ability, i.e., the generalization gap). This conclusion holds true with a fixed number of training steps; the difference will narrow after adjusting the learning rate.
 
-In order to realize the potential of multilayer architectures, we need one more key ingredient: a nonlinear activation function to be applied to each hidden unit following the affine transformation.
+In order to realize the potential of multilayer architectures, we need one more key ingredient: a nonlinear <span style="color: red;">activation function</span> to be applied to each hidden unit following the affine transformation.
 
 The power of multilayer neural networks can be seen from the following theorem:
 
 > [!THEOREM] Universal Approximation Theorem
->  Even with a single-hidden-layer network, given enough nodes (possibly absurdly many), the right set of weights, and the activation function is nonlinear, we can model any function.
+>  Even with a single-hidden-layer network, given enough nodes (possibly absurdly many), the right set of weights, and the activation function is nonlinear, we can model any function.
 
 Some common activation functions:
 - ReLU Function$$ReLU(x)=\max(x,0)$$ $$ReLU'(x)=\left\{\begin{matrix}0,\text{if }x\le0\\1,\text{if }x>0\end{matrix}\right.$$ (the derivative is undefined at $x=0$; in practice it is conventionally set to $0$.)
@@ -346,7 +330,7 @@ Some common activation functions:
 - Tanh Function$$\tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$$ $$\tanh'(x)=1-\tanh^2 (x)$$
 ## Backpropagation (BP)
 
-Backpropagation refers to the method of calculating the gradient of neural network parameters. Assuming that we have $\mathbf{Y}=f(\mathbf{X})$ and $\mathbf{Z}=g(\mathbf{Y})$, by using the chain rule, we can compute the derivative of $\mathbf{Z}$ with respect to $\mathbf{X}$ via
+<span style="color: red;">Backpropagation</span> refers to the method of calculating the gradient of neural network parameters. Assuming that we have $\mathbf{Y}=f(\mathbf{X})$ and $\mathbf{Z}=g(\mathbf{Y})$, by using the chain rule, we can compute the derivative of $\mathbf{Z}$ with respect to $\mathbf{X}$ via
 $$\frac{\partial \mathbf{Z}}{\partial \mathbf{X}} = \frac{\partial \mathbf{Z}}{\partial \mathbf{Y}}\cdot\frac{\partial \mathbf{Y}}{\partial \mathbf{X}}$$
 
 So we only need to calculate the gradient in every layer, and then we can get the gradient of the neural networks.
@@ -378,7 +362,7 @@ We have lots of methods to normalize:
 	$$\mu_{b,l}=\frac{1}{D}\sum_{d=1}^D x_{b,l,d}$$
 	$$\sigma_{b,l}^2=\frac{1}{D}\sum_{d=1}^D (x_{b,l,d}-\mu_{b,l})^2$$
 	
-- <span style="color: red;">Root Mean Square (RMS) Layer Normalization</span>
+- Root Mean Square (RMS) Layer Normalization
 	It is a simplified version of LN. Since subtracting the average incurs significant computational overhead but yields minimal performance improvement, we can simply calculate
 	$$RMS(x) = \sqrt{\frac{1}{d}\sum_{i=1}^{d} x_i^2 + \epsilon}$$
 	$$x_{norm} = \frac{x}{RMS(x)} \cdot \gamma$$
@@ -387,7 +371,7 @@ We have lots of methods to normalize:
 
 Srivastava et al. (2014) developed a clever idea, called <span style="color: red;">dropout</span>, which involves injecting noise while computing each internal layer during forward propagation, and it has become a standard technique for training neural networks. The method is called dropout because we literally drop out some neurons during training. Throughout training, on each iteration, standard dropout consists of zeroing out some fraction of the nodes in each layer before calculating the subsequent layer.
 
-![Screenshot 2026-05-21 at 13.26.36](../attachments/Screenshot%202026-05-21%20at%2013.26.36.png)
+![Screenshot 2026-05-21 at 13.26.36](../attachments/Screenshot%202026-05-21%20at%2013.26.36.png){width=450}
 
 To be clear, the original paper on dropout offers intuition through a surprising analogy to sexual reproduction. The authors argue that neural network overfitting is characterized by a state in which each layer relies on a specific pattern of activations in the previous layer, calling this condition co-adaptation. Dropout, they claim, breaks up co-adaptation just as sexual reproduction is argued to break up co-adapted genes. While such a justification of this theory is certainly up for debate, the dropout technique itself has proved enduring, and various forms of dropout are implemented in most deep learning libraries.
 ## Stochastic Gradient Descent (SGD)
@@ -428,7 +412,7 @@ $$v_t = \beta_2 v_{t-1} + (1-\beta_2)\nabla L(w_t)\odot\nabla L(w_t)$$
 Since $m_0=v_0=0$, the estimates are biased toward zero early on, so we apply bias correction:
 $$\hat{m}_t = \frac{m_t}{1-\beta_1^t},\quad \hat{v}_t = \frac{v_t}{1-\beta_2^t}$$
 $$w_{t+1} = w_t - \frac{\eta}{\sqrt{\hat{v}_t}+\epsilon}\hat{m}_t$$
-Typical defaults are $\beta_1=0.9,\beta_2=0.999,\epsilon=10^{-8}$. (The Transformer warmup schedule in [Transformer](#transformer) is precisely the learning-rate $\eta$ fed into Adam.)
+Typical defaults are $\beta_1=0.9,\beta_2=0.999,\epsilon=10^{-8}$. (The Transformer warmup schedule is precisely the learning-rate $\eta$ fed into Adam.)
 
 ### AdamW
 AdamW (Loshchilov & Hutter, 2019) fixes a subtle but important flaw in how Adam handles L2 regularization / weight decay, and is now the default optimizer for training Transformers and most large models.
@@ -437,17 +421,17 @@ The issue: classic L2 regularization adds $\lambda w$ to the gradient (see [Line
 $$w_{t+1} = w_t - \frac{\eta}{\sqrt{\hat{v}_t}+\epsilon}\,(\hat{m}_t + \lambda w_t)$$
 This means parameters with large historical gradients (large $\hat v_t$) get their decay *scaled down*, so the regularization strength is no longer uniform across parameters—coupling decay to the gradient magnitude is not what we want.
 
-AdamW's fix is to <span style="color: red;">decouple</span> the weight decay from the gradient-based update, applying it directly to the weights:
+AdamW's fix is to decouple the weight decay from the gradient-based update, applying it directly to the weights:
 $$w_{t+1} = w_t - \eta\left(\frac{\hat{m}_t}{\sqrt{\hat{v}_t}+\epsilon} + \lambda w_t\right)$$
 Now every parameter is shrunk by the same factor $\eta\lambda$ regardless of its gradient history, restoring the intended behavior of weight decay. In practice this yields better generalization, which is why frameworks such as PyTorch ship `AdamW` as a separate optimizer and recommend it over `Adam` with `weight_decay` set.
 
 ## Residual Networks (ResNet)
 
-For non-nested function classes, a larger (indicated by area) function class does not guarantee we will get closer to the “truth” function ($f^*$). This does not happen in nested function classes.![Screenshot 2026-05-21 at 17.54.32](../attachments/Screenshot%202026-05-21%20at%2017.54.32.png)
-Thus, only if larger function classes contain the smaller ones are we guaranteed that increasing them strictly increases the expressive power of the network. For deep neural networks, if we can train the newly-added layer into an identity function $f(\mathbf{x})=\mathbf{x}$, the new model will be as effective as the original model. As the new model may get a better solution to fit the training dataset, the added layer might make it easier to reduce training errors.
+For non-nested function classes, a larger (indicated by area) function class does not guarantee we will get closer to the "truth" function ($f^*$). This does not happen in nested function classes.![Screenshot 2026-05-21 at 17.54.32](../attachments/Screenshot%202026-05-21%20at%2017.54.32.png){width=450}
+Thus, only if larger function classes contain the smaller ones are we guaranteed that increasing them strictly increases the expressive power of the network. For deep neural networks, if we can train the newly-added layer into an identity function $f(\mathbf{x})=\mathbf{x}$, the new model will be as effective as the original model. As the new model may get a better solution to fit the training dataset, the added layer might make it easier to reduce training errors.
 
-This is the question that He _et al._ considered when working on very deep computer vision models. In order to solve the problem, they proposed <span style="color: red;">residual networks (ResNet)</span>. The essence of it is we can study $g(\mathbf{x})=f(\mathbf{x})-\mathbf{x}$ instead of directly studying $f(\mathbf{x})$.
-![Screenshot 2026-05-21 at 17.51.01](../attachments/Screenshot%202026-05-21%20at%2017.51.01.png)
+This is the question that He _et al._ considered when working on very deep computer vision models. In order to solve the problem, they proposed <span style="color: red;">residual networks (ResNet)</span>. The essence of it is we can study $g(\mathbf{x})=f(\mathbf{x})-\mathbf{x}$ instead of directly studying $f(\mathbf{x})$.
+![Screenshot 2026-05-21 at 17.51.01](../attachments/Screenshot%202026-05-21%20at%2017.51.01.png){width=450}
 If the identity mapping $f(\mathbf{x})=\mathbf{x}$ is the desired underlying mapping, the residual mapping amounts to $g(\mathbf{x})=0$ and it is thus easier to learn: we only need to push the weights and biases of the upper weight layer within the dotted-line box to zero.
 
 
@@ -456,38 +440,38 @@ If the identity mapping $f(\mathbf{x})=\mathbf{x}$ is the desired underlying map
 ## Introduction
 
 Imagine that we want to detect an object in an image. It seems reasonable that whatever method we use to recognize objects should not be overly concerned with the precise location of the object in the image. We can make these intuitions more concrete by enumerating a few desiderata to guide our design of a neural network architecture suitable for computer vision:
-1. In the earliest layers, our network should respond similarly to the same patch, regardless of where it appears in the image. This principle is called _translation invariance_ (or _translation equivariance_).
-2. The earliest layers of the network should focus on local regions, without regard for the contents of the image in distant regions. This is the _locality_ principle. Eventually, these local representations can be aggregated to make predictions at the whole image level.
+1. In the earliest layers, our network should respond similarly to the same patch, regardless of where it appears in the image. This principle is called _translation invariance_ (or _translation equivariance_).
+2. The earliest layers of the network should focus on local regions, without regard for the contents of the image in distant regions. This is the _locality_ principle. Eventually, these local representations can be aggregated to make predictions at the whole image level.
 3. As we proceed, deeper layers should be able to capture longer-range features of the image, in a way similar to higher level vision in nature.
 
 If we use MLP to solve the problem,
 $$\begin{split}\begin{aligned} \left[\mathbf{H}\right]_{i, j} &= [\mathbf{U}]_{i, j} + \sum_k \sum_l[\mathbf{W}]_{i, j, k, l}  [\mathbf{X}]_{k, l}\\ &=  [\mathbf{U}]_{i, j} +
 \sum_a \sum_b [\mathbf{V}]_{i, j, a, b}  [\mathbf{X}]_{i+a, j+b}\end{aligned}\end{split}$$
-We will find that a $1000\times1000$ image (1 megapixel) is mapped to a $1000\times1000$ hidden representation. This requires $10^{12}$ parameters, far beyond what computers currently can handle.
+We will find that a $1000\times1000$ image (1 megapixel) is mapped to a $1000\times1000$ hidden representation. This requires $10^{12}$ parameters, far beyond what computers currently can handle.
 
-Now we focus on translation equivariance. This implies that a shift in the input $\mathbf{X}$ should simply lead to a shift in the hidden representation $\mathbf{H}$. This is only possible if $\mathbf{V}$ and $\mathbf{U}$ do not actually depend on $(i,j)$. To satisfy the property, let $\mathbf{U}$ be a constant and $[\mathbf{V}]_{i, j, a, b} = [\mathbf{V}]_{a, b}$, then 
+Now we focus on translation equivariance. This implies that a shift in the input $\mathbf{X}$ should simply lead to a shift in the hidden representation $\mathbf{H}$. This is only possible if $\mathbf{V}$ and $\mathbf{U}$ do not actually depend on $(i,j)$. To satisfy the property, let $\mathbf{U}$ be a constant and $[\mathbf{V}]_{i, j, a, b} = [\mathbf{V}]_{a, b}$, then 
 $$[\mathbf{H}]_{i, j} = u + \sum_a\sum_b [\mathbf{V}]_{a, b}  [\mathbf{X}]_{i+a, j+b}$$
 
-This is a _convolution_! $[\mathbf{V}]_{a, b}$ is referred to as a <span style="color: red;">convolution kernel</span>. In this way, we find that we only need $4\times10^6$ parameters to deal with a $1000\times1000$ figure. 
+This is a _convolution_! $[\mathbf{V}]_{a, b}$ is referred to as a <span style="color: red;">convolution kernel</span>. In this way, we find that we only need $4\times10^6$ parameters to deal with a $1000\times1000$ figure. 
 
 ## Padding and Stride
-Assuming that the input shape is $n_\textrm{h}\times n_\textrm{w}$ and the convolution kernel shape is $k_\textrm{h}\times k_\textrm{w}$, the output shape will be $(n_\textrm{h}-k_\textrm{h}+1) \times (n_\textrm{w}-k_\textrm{w}+1)$.
+Assuming that the input shape is $n_\textrm{h}\times n_\textrm{w}$ and the convolution kernel shape is $k_\textrm{h}\times k_\textrm{w}$, the output shape will be $(n_\textrm{h}-k_\textrm{h}+1) \times (n_\textrm{w}-k_\textrm{w}+1)$.
 
 One tricky issue when applying convolutional layers is that we tend to lose pixels on the perimeter of our image. 
 
-![Screenshot 2026-05-21 at 13.37.45](../attachments/Screenshot%202026-05-21%20at%2013.37.45.png)
+![Screenshot 2026-05-21 at 13.37.45](../attachments/Screenshot%202026-05-21%20at%2013.37.45.png){width=450}
 
 One straightforward solution to this problem is to add extra pixels of filler around the boundary of our input image, thus increasing the effective size of the image. Typically, we set the values of the extra pixels to zero. This is called as <span style="color: red;">padding</span>.
 
-In general, if we add a total of $p_\textrm{h}$ rows of padding (roughly half on top and half on bottom) and a total of $p_\textrm{w}$ columns of padding (roughly half on the left and half on the right), the output shape will be $(n_\textrm{h}-k_\textrm{h}+p_\textrm{h}+1)\times(n_\textrm{w}-k_\textrm{w}+p_\textrm{w}+1)$.
+In general, if we add a total of $p_\textrm{h}$ rows of padding (roughly half on top and half on bottom) and a total of $p_\textrm{w}$ columns of padding (roughly half on the left and half on the right), the output shape will be $(n_\textrm{h}-k_\textrm{h}+p_\textrm{h}+1)\times(n_\textrm{w}-k_\textrm{w}+p_\textrm{w}+1)$.
 
-![Screenshot 2026-05-21 at 13.04.12](../attachments/Screenshot%202026-05-21%20at%2013.04.12.png)
+![Screenshot 2026-05-21 at 13.04.12](../attachments/Screenshot%202026-05-21%20at%2013.04.12.png){width=450}
 
 Sometimes, either for computational efficiency or because we wish to downsample, we move our window more than one element at a time, skipping the intermediate locations. This is particularly useful if the convolution kernel is large since it captures a large area of the underlying image. This is called <span style="color: red;">stride</span>.
 
-In general, when the stride for the height is $s_\textrm{h}$ and the stride for the width is $s_\textrm{w}$, the output shape is $\lfloor(n_\textrm{h}-k_\textrm{h}+p_\textrm{h}+s_\textrm{h})/s_\textrm{h}\rfloor \times \lfloor(n_\textrm{w}-k_\textrm{w}+p_\textrm{w}+s_\textrm{w})/s_\textrm{w}\rfloor$.
+In general, when the stride for the height is $s_\textrm{h}$ and the stride for the width is $s_\textrm{w}$, the output shape is $\lfloor(n_\textrm{h}-k_\textrm{h}+p_\textrm{h}+s_\textrm{h})/s_\textrm{h}\rfloor \times \lfloor(n_\textrm{w}-k_\textrm{w}+p_\textrm{w}+s_\textrm{w})/s_\textrm{w}\rfloor$.
 
-![Screenshot 2026-05-21 at 13.04.29](../attachments/Screenshot%202026-05-21%20at%2013.04.29.png)
+![Screenshot 2026-05-21 at 13.04.29](../attachments/Screenshot%202026-05-21%20at%2013.04.29.png){width=450}
 ## Pooling
 
 In many cases, our ultimate task asks some global question about the image, e.g., does it contain a cat? Consequently, the units of our final layer should be sensitive to the entire input. By gradually aggregating information, yielding coarser and coarser maps, we accomplish this goal of ultimately learning a global representation, while keeping all of the advantages of convolutional layers at the intermediate layers of processing. The deeper we go in the network, the larger the receptive field (relative to the input) to which each hidden node is sensitive. Reducing spatial resolution accelerates this process, since the convolution kernels cover a larger effective area.
@@ -498,7 +482,7 @@ Pooling operators consist of a fixed-shape window that is slid over all regions 
 - Maximum pooling
 - Average pooling
 
-![Screenshot 2026-05-21 at 13.51.49](../attachments/Screenshot%202026-05-21%20at%2013.51.49.png)
+![Screenshot 2026-05-21 at 13.51.49](../attachments/Screenshot%202026-05-21%20at%2013.51.49.png){width=450}
 
 Pooling operators reduce spatial resolution and make the representation less sensitive to small translations. Strictly speaking, pooling is not fully translation invariant; it mainly provides local translation robustness.
 
@@ -506,14 +490,14 @@ Pooling operators reduce spatial resolution and make the representation less sen
 
 Traditional neural network assumes that every input and output is independent, but in many circumstances, we need to consider the context to understand the current content. We need to introduce a "loop" structure; specially, when we receive the current input, we simultaneously input the information from the previous time step. As a result, <span style="color: red;">recurrent neural network (RNN)</span> emerged in response to the need.
 
-![Screenshot 2026-05-17 at 15.35.16](../attachments/Screenshot%202026-05-17%20at%2015.35.16.png)
+![Screenshot 2026-05-17 at 15.35.16](../attachments/Screenshot%202026-05-17%20at%2015.35.16.png){width=450}
 Its mathematical formulation is:
 $$h_t=f_W(h_{t−1},x_t)=\tanh (W\begin{pmatrix}
  h_{t-1}\\x_t
 
 \end{pmatrix})$$
 
-![Screenshot 2026-05-17 at 15.41.38](../attachments/Screenshot%202026-05-17%20at%2015.41.38.png)
+![Screenshot 2026-05-17 at 15.41.38](../attachments/Screenshot%202026-05-17%20at%2015.41.38.png){width=450}
 Truncated Backpropagation Through Time (TBPTT) divides the complete sequence into multiple segments and performs forward and backward propagation only on each segment, rather than computing the entire sequence.
 
 RNNs have very extensive applications in natural language processing, speech recognition, and time series forecasting. 
@@ -542,7 +526,7 @@ where
 - $o$ is output gate
 - $g$ is candidate memory.
 
-![Screenshot 2026-05-17 at 15.53.33](../attachments/Screenshot%202026-05-17%20at%2015.53.33.png)
+![Screenshot 2026-05-17 at 15.53.33](../attachments/Screenshot%202026-05-17%20at%2015.53.33.png){width=450}
 LSTM cannot guarantee the complete avoidance of gradient vanishing or gradient exploding problems, but it provides an easier mechanism for models to learn long-range dependencies.
 
 ## Gated Recurrent Unit(GRU) (TODO)
@@ -551,15 +535,15 @@ LSTM cannot guarantee the complete avoidance of gradient vanishing or gradient e
 
 So far, all the networks we have reviewed crucially relied on the input being of a well-defined size. This approach can lead to significant problems when the input is truly of varying size with varying information content. In particular, for long sequences, it becomes quite difficult to keep track of everything that has already been generated or even viewed by the network. 
 
-This leads to one of the most exciting concepts introduced in deep learning in the past decade: the <span style="color: red;">attention mechanism</span>. For now, simply consider the following: denote by $\mathcal{D} = \{(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)\}$ a database of $m$ tuples of _keys_ and _values_. Moreover, denote by $\mathbf{q}$ a _query_. Then we can define the _attention_ over $\mathcal{D}$ as
+This leads to one of the most exciting concepts introduced in deep learning in the past decade: the <span style="color: red;">attention mechanism</span>. For now, simply consider the following: denote by $\mathcal{D} = \{(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)\}$ a database of $m$ tuples of _keys_ and _values_. Moreover, denote by $\mathbf{q}$ a _query_. Then we can define the _attention_ over $\mathcal{D}$ as
 $$\textrm{Attention}(\mathbf{q}, \mathcal{D}) =\sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i$$
-A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via$$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function. 
+A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via$$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function. 
 
 A mainstream attention scoring function is$$a(\mathbf{q}, \mathbf{k}_i) = \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{d_k}}$$where $d_k$ is the dimension of the vector.
 
 If we have many query vectors, arranging them as rows of $Q$ and keys as rows of $K$, the scaled dot-product attention scores are computed by $$\frac{QK^\top}{\sqrt{d_k}}$$
 
-Another one is the _additive attention_ scoring function given by$$a(\mathbf q, \mathbf k) = \mathbf w_v^\top \textrm{tanh}(\mathbf W_q\mathbf q + \mathbf W_k \mathbf k)$$where $\mathbf W_q\in\mathbb R^{h\times q}$, $\mathbf W_k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$ are the learnable parameters.
+Another one is the _additive attention_ scoring function given by$$a(\mathbf q, \mathbf k) = \mathbf w_v^\top \textrm{tanh}(\mathbf W_q\mathbf q + \mathbf W_k \mathbf k)$$where $\mathbf W_q\in\mathbb R^{h\times q}$, $\mathbf W_k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$ are the learnable parameters.
 
 ![qkv](../attachments/qkv.svg){width=478}
 
@@ -567,7 +551,7 @@ If the query, key, and value sequences all come from the same input sequence, th
 ## Multi-Head Attention
 
 Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values, and queries, It is beneficial to linearly project the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions, respectively, where$$d_k=d_v=d_{model}/h$$On each of these projected versions of queries, keys, and values, we then perform the attention function in parallel, yielding a $d_v$-dimensional output values. These are concatenated and once again projected, resulting in the final values.
-![Screenshot 2026-05-21 at 15.17.56](../attachments/Screenshot%202026-05-21%20at%2015.17.56.png)
+![Screenshot 2026-05-21 at 15.17.56](../attachments/Screenshot%202026-05-21%20at%2015.17.56.png){width=450}
 Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.
 $$MultiHead(Q,K,V)=Concat(head_1,\dots,head_h)W^O$$where$$head_i=\textrm{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$
 $W_i^Q\in\mathbb{R}^{d_{model}\times d_k},W_i^K\in\mathbb{R}^{d_{model}\times d_k},W_i^V\in\mathbb{R}^{d_{model}\times d_v},W_i^O\in\mathbb{R}^{hd_v\times d_{model}}$
@@ -584,14 +568,14 @@ In transformer, we always use LN instead of BN, the reasons are as follows:
 - In Natural Language Processing (NLP) tasks, sentence lengths within each batch are typically varied. To align tensors, shorter sentences are often padded with numerous meaningless tokens. LN, however, normalizes individual tokens independently along the feature dimension (i.e., the hidden layer dimension $d_{model}$). Its computation is completely independent of other tokens in the sentence or other samples in the batch, thus naturally immune to sequence length differences and padding interference.
 - Transformer architecture has a huge number of parameters. Limited by GPU memory, the batch size that can be incorporated during training is often very small. LN's computation only occurs within the current token, completely eliminating the need to collect data across samples.
 
-It is noted that the learning rate in the transformer is not fixed. It increases in the warm-up stage and decreases in the decay stage.
+It is noted that the learning rate in the transformer is not fixed. It increases in the warm-up stage and decreases in the decay stage. This schedule is the learning rate fed into the [Adam](#adam) optimizer.
 
 The specific expression is as follows:
 $$lr = d_{model}^{-0.5} \cdot \min(step\_num^{-0.5}, \ step\_num \cdot warmup\_steps^{-1.5})$$
 $$\alpha=lr \times \alpha_0$$
 ### Positional Encoding
 
-Unlike RNNs, self-attention processes all tokens in parallel and is permutation-equivariant: it has no inherent notion of word order, so "dog bites man" and "man bites dog" would look identical. To inject order information, we add a <span style="color: red;">positional encoding</span> to the token embeddings before the first layer.
+Unlike RNNs, self-attention processes all tokens in parallel and is permutation-equivariant: it has no inherent notion of word order, so "dog bites man" and "man bites dog" would look identical. To inject order information, we add a <span style="color: red;">positional encoding</span> to the token <span style="color: red;">embeddings</span> before the first layer.
 
 The original Transformer uses fixed sinusoidal encodings. For position $pos$ and dimension index $i$:
 $$PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right),\quad PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
@@ -611,16 +595,16 @@ The inner dimension is usually $4\times d_{model}$ (e.g. $2048$ for $d_{model}=5
 
 ### Encoder-Only
 
-When only the Transformer encoder is used, a sequence of input tokens is converted into the same number of representations that can be further projected into output (e.g., classification). A Transformer encoder consists of self-attention layers, where all input tokens attend to each other. Since this representation depends on all input tokens, it is further projected into classification labels. This design was inspired by an earlier encoder-only Transformer pre-trained on text: BERT (Bidirectional Encoder Representations from Transformers) (Devlin et al., 2018). For detailed information, please refer to the following: [Bidirectional Encoder Representations from Transformers (BERT)](#bidirectional-encoder-representations-from-transformers-bert).
+When only the Transformer encoder is used, a sequence of input tokens is converted into the same number of representations that can be further projected into output (e.g., classification). A Transformer encoder consists of self-attention layers, where all input tokens attend to each other. Since this representation depends on all input tokens, it is further projected into classification labels. This design was inspired by an earlier encoder-only Transformer pre-trained on text: BERT (Bidirectional Encoder Representations from Transformers) (Devlin et al., 2018). For detailed information, see the Bidirectional Encoder Representations from Transformers (BERT) section below.
 
 Advantage:
 - Because of its unmasked self-attention, when you feed a complete sentence to the Encoder, all the tokens interact with each other. When processing a word in the middle of the sentence, it sees all the information to the left and right of that word.
 ### Decoder-Only
 
-Decoder-only Transformers have been the common architecture in large-scale language modeling, which leverages the world’s abundant unlabeled text corpora via self-supervised learning. For detailed information, please refer to the following: [Natural Language Processing (NLP)](#natural-language-processing-nlp).
+Decoder-only Transformers have been the common architecture in large-scale language modeling, which leverages the world’s abundant unlabeled text corpora via self-supervised learning. For detailed information, see the Natural Language Processing (NLP) chapter below.
 
 Advantage:
-- Extremely high training efficiency, perfectly aligned with the [Scaling Law](#scaling-law).
+- Extremely high training efficiency, perfectly aligned with the Scaling Law.
 - No Information Bottleneck.
 - The Decoder-Only architecture is extremely pure, consisting of only one type of Masked Self-Attention that is continuously stacked. This minimalist "isomorphic" design makes it very easy to allocate memory and perform parallel optimization on the underlying hardware (such as GPUs and TPUs).
 ### Encoder-Decoder
@@ -646,7 +630,7 @@ Because $K,V$ come from the encoder while $Q$ comes from the decoder, this is *n
 
 A <span style="color: red;">Graph Neural Network (GNN)</span> is an optimizable transformation on all attributes of the graph that preserves graph symmetries.
 
-The Learning Objectives of Graph Neural Networks：
+The Learning Objectives of Graph Neural Networks:
 
 - Node-level Prediction
 - Link-level Prediction
@@ -671,7 +655,7 @@ It is noted that
 - These embeddings are task-agnostic: they are not trained for a specific task, but can be used for a variety of tasks.
 
 We can use a random walk to get the encoder.
-![Screenshot 2026-05-18 at 12.48.02](../attachments/Screenshot%202026-05-18%20at%2012.48.02.png)
+![Screenshot 2026-05-18 at 12.48.02](../attachments/Screenshot%202026-05-18%20at%2012.48.02.png){width=450}
 
 Under this circumstance, $z_u^\top z_v$ is the probability of the nodes $u$ and $v$ occur together on the graph on random walk.
 
@@ -698,7 +682,7 @@ This time, we cannot use the MLPs, because change the input order will result in
 Observation:
 - The neighbor of a node defines a <span style="color: red;">computation graph</span>
 - We can study propagating and transforming information on the graph to compute the node embedding.
-![Screenshot 2026-05-18 at 13.02.15](../attachments/Screenshot%202026-05-18%20at%2013.02.15.png)
+![Screenshot 2026-05-18 at 13.02.15](../attachments/Screenshot%202026-05-18%20at%2013.02.15.png){width=450}
 
 $$m_A^{(l)}=f^{(l)}(h_A^{(l)},h_u^{(l)}:u\in \mathcal{N}(A))=f^{(l)}(h_A^{(l)},h_B^{(l)},h_C^{(l)},h_D^{(l)})$$
 $$h_A^{(l+1)} = g^{(l)}(m_A^{(l)})$$where
@@ -713,14 +697,14 @@ $$h_v^{(l+1)} = \sigma(W^{(l)} \cdot m_v^{(l)})$$
 
 This network is called <span style="color: red;">Graph Convolutional Network (GCN)</span>, which is perfectly permutation equivariant.
 
-![Screenshot 2026-05-18 at 13.14.39](../attachments/Screenshot%202026-05-18%20at%2013.14.39.png)
+![Screenshot 2026-05-18 at 13.14.39](../attachments/Screenshot%202026-05-18%20at%2013.14.39.png){width=450}
 The problem of neighborhood aggregation is: the message of node $v$ itself may be lost. This is because the computation of $m_v^{(l)}$ is not related to $h_v^{(l-1)}$. The solution to it is as easy as the following:
 - Message $$m_u^{(l)}=W^{(l)}h_u^{(l-1)},m_v^{(l)}=B^{(l)}h_v^{(l-1)}$$
 - Aggregation $$h_v^{(l)}=concat(AGG(\{m_u^{(l)},u\in \mathcal{N}(v) \}),m_v^{(l)})$$
 As the number of network layers increases, the feature representations of all nodes in the graph gradually converge and become indistinguishable, leading to a precipitous decline in the model's performance on downstream tasks such as node classification.It is called the <span style="color: red;">over-smoothing problem</span>.
 
 This is because if the network is really deep, the "raw input range" that determines the output of a specific node within a particular layer, which is called <span style="color: red;">receptive field</span> officially, is highly overlap.
-![Screenshot 2026-05-18 at 13.28.14](../attachments/Screenshot%202026-05-18%20at%2013.28.14.png)
+![Screenshot 2026-05-18 at 13.28.14](../attachments/Screenshot%202026-05-18%20at%2013.28.14.png){width=450}
 The simplest solution is adding virtual node, which alleviates oversmoothing because it shortens the distance between any two nodes in the graph, preventing the receptive field of deep networks from expanding indefinitely and thus preserving the local characteristics of the nodes.
 ![Screenshot 2026-05-18 at 13.33.21](../attachments/Screenshot%202026-05-18%20at%2013.33.21.png){width=264}
 
@@ -728,16 +712,16 @@ Another solution is <span style="color: red;">skip connection</span>. Since node
 ![Screenshot 2026-05-18 at 13.30.03](../attachments/Screenshot%202026-05-18%20at%2013.30.03.png){width=391}
 Instead of choosing every neighbor of the nodes, we can randomly choose the neighbors of the nodes. It will significantly reduce computing costs and have excellent results in practical applications.
 
-![Screenshot 2026-05-18 at 14.23.34](../attachments/Screenshot%202026-05-18%20at%2014.23.34.png)
+![Screenshot 2026-05-18 at 14.23.34](../attachments/Screenshot%202026-05-18%20at%2014.23.34.png){width=450}
 
 ## Feature Augmentation
 
 The computational graph cannot represent all of the features of the graph. As shown in the following figure, if we want to count the number of cycles, we cannot only use the computational graph.
 
-![Screenshot 2026-05-18 at 13.31.31](../attachments/Screenshot%202026-05-18%20at%2013.31.31.png)
+![Screenshot 2026-05-18 at 13.31.31](../attachments/Screenshot%202026-05-18%20at%2013.31.31.png){width=450}
 In this scenario, we need to artificially "augment" the nodes with features—either to address the lack of features in the original graph or to help the GNN overcome the inherent bottlenecks in its expressive power.
-![Screenshot 2026-05-18 at 13.32.02](../attachments/Screenshot%202026-05-18%20at%2013.32.02.png)
-We can use lots of graph algorithms in [Data Structure and Algorithm](data_structure_and_algorithm.html) to augment node feature.
+![Screenshot 2026-05-18 at 13.32.02](../attachments/Screenshot%202026-05-18%20at%2013.32.02.png){width=450}
+We can use lots of graph algorithms (e.g. [DFS](data_structure_and_algorithm.html#depthfirst-search-dfs)) to augment node feature.
 # Computer Vision(TODO)
 
 ## You Only Look Once (YOLO) Image Processing
@@ -758,41 +742,41 @@ Compared to local observation, YOLO utilizes the surrounding contextual informat
 
 # Reinforcement Learning (RL)
 
-<span style="color: red;">Reinforcement Learning</span> is a suite of techniques that allows us to take the appropriate action at each stage of a sequential decision making problem in order to maximize some utility eventually.
+<span style="color: red;">Reinforcement Learning</span> is a suite of techniques that allows us to take the appropriate action at each stage of a sequential decision making problem in order to maximize some utility eventually.
 
 Given a state set $S$ and an action set $A$, we can define an event trajectory as $$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, s_2, a_2, r_2, \ldots)$$where $s_i \in S,a_i \in A$ and $r_i$ is the result of the action $a_i$.
 
-The _return_ of a trajectory is the total reward obtained by the robot along such a trajectory:
+The _return_ of a trajectory is the total reward obtained by the robot along such a trajectory:
 $$R(\tau) = r_0 + r_1 + r_2 + \cdots$$
 A more common return is as following:
 $$R(\tau) = r_0 + \gamma r_1 + \gamma^2 r_2 + \cdots = \sum_{t=0}^\infty \gamma^t r_t,\gamma<1$$
-We call a system a <span style="color: red;">Markov system</span> if the next state $s_{t+1}$ is only a function of the current state $s_t$ and the action $a_t$ taken at the current state. In Markov systems, the next state does not depend on which actions were taken in the past or the states that the robot was at in the past.
+We call a system a <span style="color: red;">Markov system</span> if the next state $s_{t+1}$ is only a function of the current state $s_t$ and the action $a_t$ taken at the current state. In Markov systems, the next state does not depend on which actions were taken in the past or the states that the robot was at in the past.
 
 It is noted that the reward in reinforcement learning can be sparse or delayed. In some tasks, the agent only receives a clear reward at the end of an episode, such as after winning or losing a game.
 ## Value Iteration
 
 Given a stochastic policy denoted as $a_t \sim \pi(s_t)$, then we have$$V^\pi(s_0) = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ R(\tau) \Big] = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=0}^\infty \gamma^t r(s_t, a_t) \Big]$$
 We next break down the trajectory into two stages:
-1. the first stage which corresponds to $s_0 \to s_1$ upon taking the action $a_0$
-2. a second stage which is the trajectory $\tau' = (s_1, a_1, r_1, \ldots)$ thereafter.
+1. the first stage which corresponds to $s_0 \to s_1$ upon taking the action $a_0$
+2. a second stage which is the trajectory $\tau' = (s_1, a_1, r_1, \ldots)$ thereafter.
 Mathematically, we write the two stages as
 $$V^\pi(s_0) =   \mathbb{E}_{a_0 \sim \pi(s_0)} \Big[r(s_0, a_0) + \gamma  \ \mathbb{E}_{s_1 \sim P(s_1 \mid s_0, a_0)} \Big[ V^\pi(s_1) \Big] \Big]$$
 We can write using the transition probabilities in the Markov decision process (MDP) as$$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^\pi(s') \Big],\forall s \in S$$
-In implementations, it is often useful to maintain a quantity called the “action value” function which is a closely related quantity to the value function. This is defined to be the average _return_ of a trajectory that begins at $s_0$ but when the action of the first stage is _fixed_ to be $a_0$:
+In implementations, it is often useful to maintain a quantity called the "action value" function which is a closely related quantity to the value function. This is defined to be the average _return_ of a trajectory that begins at $s_0$ but when the action of the first stage is _fixed_ to be $a_0$:
 $$Q^\pi(s_0, a_0) = r(s_0, a_0) + \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=1}^\infty \gamma^t r(s_t, a_t) \Big]$$
 
-We will next think of the “optimal policy” that achieves the maximal average return $$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore:$$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big],\ \forall  s \in S$$For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write$$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big\}$$It is called <span style="color: red;">Bellman Optimality Equation</span>, which can give the optimal policy$$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s'\in S} P(s'|s,a)V^*(s')\}$$
+We will next think of the "optimal policy" that achieves the maximal average return $$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore:$$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big],\ \forall  s \in S$$For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write$$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big\}$$It is called<span style="color: red;">Bellman Optimality Equation</span>, which can give the optimal policy$$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s'\in S} P(s'|s,a)V^*(s')\}$$
 We can also get Bellman Optimally Equation for $Q$:$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q^*(S_{t+1}, a') \mid S_t=s, A_t=a \right]$$
-We can turn the principle of dynamic programming into an algorithm for finding the optimal value function called <span style="color: red;">value iteration</span>. The key idea behind value iteration is to think of this identity as a set of constraints that tie together $V^*(s)$ at different states $s$. We initialize the value function to some arbitrary values $V_0(s)$ for all states $s$. At the $k^{\textrm{th}}$ iteration, the Value Iteration algorithm updates the value function as
+We can turn the principle of dynamic programming into an algorithm for finding the optimal value function called <span style="color: red;">value iteration</span>. The key idea behind value iteration is to think of this identity as a set of constraints that tie together $V^*(s)$ at different states $s$. We initialize the value function to some arbitrary values $V_0(s)$ for all states $s$. At the $k^{\textrm{th}}$ iteration, the Value Iteration algorithm updates the value function as
 $$V_{k+1}(s) = \max_{a \in A} \Big\{ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V_k(s') \Big\},\ \forall s \in S$$
-It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$.$$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$
+It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$.$$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$
 The same Value Iteration algorithm can be equivalently written using the action-value function as
 
 $$Q_{k+1}(s, a) = r(s, a) + \gamma \sum_{s' \in S} P(s' \mid s, a) \max_{a' \in A} Q_k (s', a'),\forall s \in S, a \in A$$
 $$Q^*(s,a) = \lim_{k \to \infty} Q_k(s,a),\forall s \in S, a \in A$$
 ## Q-Learning and Deep Q-Network (DQN)
 
-As we discussed, implementing this algorithm requires knowing the MDP, specifically the transition function $P(s' \mid s, a)$. The key idea behind Q-Learning is to replace the summation over all $s' \in S$ in the above expression by a summation over the states visited by the robot. This allows us to subvert the need to know the transition function.
+As we discussed, implementing this algorithm requires knowing the MDP, specifically the transition function $P(s' \mid s, a)$. The key idea behind Q-Learning is to replace the summation over all $s' \in S$ in the above expression by a summation over the states visited by the robot. This allows us to subvert the need to know the transition function.
 
 Mathematically, the essence of Q-learning is as follow:
 $$Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ R_{t+1} + \gamma \max_{a'} Q(
@@ -806,7 +790,7 @@ In academia, the convergence of Q-Learning was rigorously proven by Christopher 
 
 We can find that Q-learning is a value-based algorithm. It doesn't try to understand the environment, which is called model free algorithm. It tries to optimize value function to indirectly derive a strategy
 
-Tabular Q-Learning stores one entry per $(s,a)$ pair, which is infeasible when the state space is huge (e.g. raw game pixels). <span style="color: red;">DQN</span> (Mnih et al., 2015) approximates the action-value function with a neural network $Q(s,a;\theta)$ and minimizes the temporal-difference error
+Tabular Q-Learning stores one entry per $(s,a)$ pair, which is infeasible when the state space is huge (e.g. raw game pixels). DQN (Mnih et al., 2015) approximates the action-value function with a neural network $Q(s,a;\theta)$ and minimizes the temporal-difference error
 $$L(\theta) = \mathbb{E}\Big[\big(\underbrace{R_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a';\theta^-)}_{\text{target}} - Q(s_t, a_t;\theta)\big)^2\Big]$$
 Two key tricks stabilize training:
 - <span style="color: red;">Experience Replay</span>: store transitions $(s,a,r,s')$ in a buffer and sample random mini-batches, breaking the temporal correlation between consecutive samples.
@@ -821,7 +805,7 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau\sim\pi_\theta}\Big[\sum_{t=0}^{T} \
 
 ### REINFORCE
 
-<span style="color: red;">REINFORCE</span> is the basic Monte-Carlo policy gradient algorithm: run a full episode, then for each step push up the log-probability of actions in proportion to the (discounted) return that followed them.
+REINFORCE is the basic Monte-Carlo policy gradient algorithm: run a full episode, then for each step push up the log-probability of actions in proportion to the (discounted) return that followed them.
 $$\theta \leftarrow \theta + \eta\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, G_t,\qquad G_t = \sum_{k=t}^{T}\gamma^{k-t} r_k$$
 Its main weakness is high variance, since $G_t$ depends on the entire random trajectory. A common fix is to subtract a <span style="color: red;">baseline</span> $b(s_t)$ (often an estimate of the state value $V(s_t)$), which reduces variance without introducing bias:
 $$\theta \leftarrow \theta + \eta\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, (G_t - b(s_t))$$
@@ -832,7 +816,7 @@ $$\theta \leftarrow \theta + \eta\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\,
 $$\delta_t = r_t + \gamma V_w(s_{t+1}) - V_w(s_t)$$
 $$\theta \leftarrow \theta + \eta_\theta\, \delta_t\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\quad\text{(actor)}$$
 $$w \leftarrow w + \eta_w\, \delta_t\, \nabla_w V_w(s_t)\quad\text{(critic)}$$
-This bootstrapping lets the agent update at every step (like TD methods) while still optimizing the policy directly. Modern algorithms such as A2C/A3C, TRPO, and PPO build on this framework; PPO in particular is the workhorse behind RLHF (see Human Alignment in [Construction Method](#construction-method)).
+This bootstrapping lets the agent update at every step (like TD methods) while still optimizing the policy directly. Modern algorithms such as A2C/A3C, TRPO, and PPO build on this framework; PPO in particular is the workhorse behind RLHF (see Human Alignment in Construction Method).
 
 # Natural Language Processing (NLP)
 
@@ -840,20 +824,20 @@ Natural language processing studies interactions between computers and humans us
 
 ## Tokenization
 
-Before a model can represent or process text, the raw string must be broken into discrete units called tokens. A token is the atomic unit a model actually reads—it is mapped to an integer id, which then indexes into an embedding table to become a vector. The full set of distinct tokens a model knows is its vocabulary $V$, and the process of splitting text into tokens is called <span style="color: red;">tokenization</span>.
+Before a model can represent or process text, the raw string must be broken into discrete units called <span style="color: red;">tokens</span>. A token is the atomic unit a model actually reads—it is mapped to an integer id, which then indexes into an embedding table to become a vector. The full set of distinct tokens a model knows is its <span style="color: red;">vocabulary</span> $V$, and the process of splitting text into tokens is called <span style="color: red;">tokenization</span>.
 
 A token is *not* necessarily a word. There are several granularities, each with trade-offs:
 
-- Word-level: split on spaces/punctuation. Intuitive, but the vocabulary explodes (every inflection like "run/runs/running" is separate), and any word unseen during training becomes an <span style="color: red;">out-of-vocabulary (OOV)</span> token the model cannot handle.
+- Word-level: split on spaces/punctuation. Intuitive, but the vocabulary explodes (every inflection like "run/runs/running" is separate), and any word unseen during training becomes an out-of-vocabulary (OOV) token the model cannot handle.
 - Character-level: vocabulary is tiny (just the alphabet) and there is no OOV problem, but sequences become very long and individual characters carry little meaning, making learning harder.
 - Subword-level: a middle ground that is now standard. Frequent words stay whole, while rare words are split into meaningful pieces (e.g. `tokenization` → `token` + `ization`). This keeps the vocabulary bounded (typically 30k–100k) while eliminating OOV, since any string can ultimately fall back to characters.
 
 The dominant subword algorithms are:
 - <span style="color: red;">Byte Pair Encoding (BPE)</span>: start from individual characters and greedily merge the most frequent adjacent pair into a new token, repeating until the vocabulary reaches the target size. Used by GPT.
-- <span style="color: red;">WordPiece</span>: similar to BPE, but merges the pair that most increases the likelihood of the training corpus rather than the most frequent one. Used by BERT (see [Bidirectional Encoder Representations from Transformers (BERT)](#bidirectional-encoder-representations-from-transformers-bert)).
+- WordPiece: similar to BPE, but merges the pair that most increases the likelihood of the training corpus rather than the most frequent one. Used by BERT.
 - SentencePiece / Unigram: operates directly on the raw byte stream (no pre-splitting on whitespace), which makes it language-agnostic and able to handle any script.
 
-For large language models, "length" is almost always measured in tokens, not words or characters—context windows, pricing, and the scaling laws' data size $D$ in [Scaling Law](#scaling-law) are all counted in tokens. As a rough rule of thumb in English, one token $\approx 0.75$ words $\approx 4$ characters.
+For large language models, "length" is almost always measured in tokens, not words or characters—context windows, pricing, and the scaling laws' data size $D$ in the Scaling Law are all counted in tokens. As a rough rule of thumb in English, one token $\approx 0.75$ words $\approx 4$ characters.
 
 ## One-Hot Vector
 
@@ -868,9 +852,9 @@ As a result, it is a bad choice.
 
 To understand text, we can begin by learning its representations. But the vocabulary is too large to be manually labeled. A better method is self-supervised learning.
 
-<span style="color: red;">Self-supervised learning (SSL)</span> is a machine learning technique where an AI model teaches itself by generating its own "pseudo-labels" directly from raw, unlabeled data, rather than relying on expensive human annotations.
+<span style="color: red;">Self-supervised learning</span> (SSL) is a machine learning technique where an AI model teaches itself by generating its own "pseudo-labels" directly from raw, unlabeled data, rather than relying on expensive human annotations.
 
-The [word2vec](https://code.google.com/archive/p/word2vec/) tool was proposed to address the above issue. It maps each word to a fixed-length vector, and these vectors can better express the similarity and analogy relationship among different words. The word2vec tool contains two models, namely skip-gram and continuous bag of words (CBOW).
+The [word2vec](https://code.google.com/archive/p/word2vec/) tool was proposed to address the above issue. It maps each word to a fixed-length vector, and these vectors can better express the similarity and analogy relationship among different words. The word2vec tool contains two models, namely skip-gram and continuous bag of words (CBOW).
 
 ## Contrastive Learning
 
@@ -886,7 +870,7 @@ The supervision signal comes entirely from how we pair up samples.
 	- an image and its matching text caption (CLIP).
 - <span style="color: red;">Negative pair</span>: two samples that *should* be far apart because they come from different content—e.g. augmentations of two different images, or a word and a randomly sampled non-context word. Negatives are usually drawn cheaply at random; the number of negatives matters a lot, which is why methods use large batches (SimCLR) or a memory queue (MoCo).
 
-An <span style="color: red;">anchor</span> is the reference sample; a positive is then defined relative to the anchor, and everything else in the batch serves as its negatives.
+An anchor is the reference sample; a positive is then defined relative to the anchor, and everything else in the batch serves as its negatives.
 
 ### Contrastive Loss
 
@@ -895,39 +879,39 @@ The goal is to make the similarity (e.g. cosine similarity or dot product) of a 
 - Triplet loss uses one anchor $a$, one positive $p$, one negative $n$, and enforces that the anchor is closer to the positive than to the negative by at least a margin $m$:
 $$L = \max\big(0,\ \|f(a)-f(p)\|^2 - \|f(a)-f(n)\|^2 + m\big)$$
 
-- <span style="color: red;">InfoNCE</span> (used by SimCLR, MoCo, CLIP) treats it as classification: given an anchor, pick the true positive out of one positive plus $K$ negatives. For a positive pair $(i,j)$ with similarity function $\mathrm{sim}$ and temperature $\tau$:
+- InfoNCE (used by SimCLR, MoCo, CLIP) treats it as classification: given an anchor, pick the true positive out of one positive plus $K$ negatives. For a positive pair $(i,j)$ with similarity function $\mathrm{sim}$ and temperature $\tau$:
 $$L_{i,j} = -\log \frac{\exp(\mathrm{sim}(z_i, z_j)/\tau)}{\sum_{k=1}^{K+1} \exp(\mathrm{sim}(z_i, z_k)/\tau)}$$
 The numerator rewards the positive; the denominator (over the positive and all negatives) suppresses them. The temperature $\tau$ controls how sharply the model focuses on the hardest negatives. Note that this is structurally identical to a softmax cross-entropy where the "classes" are the candidate samples—and the negative-sampling objective in word2vec is essentially a special case with a Sigmoid instead of a softmax.
 
 Representative methods: SimCLR and MoCo (self-supervised vision), and CLIP (contrastive image–text pretraining, which powers modern multimodal and text-to-image models).
 ## The Skip-Gram Model
 
-The _skip-gram_ model assumes that a word can be used to generate its surrounding words in a text sequence.
+The _skip-gram_ model assumes that a word can be used to generate its surrounding words in a text sequence.
 
 ![skip-gram](../attachments/skip-gram.svg){width=348}
-The conditional probability of generating any context word $w_o$ (with index $o$ in the dictionary) given the center word $w_c$ (with index $c$ in the dictionary) can be modeled by a softmax operation on vector dot products:
+The conditional probability of generating any context word $w_o$ (with index $o$ in the dictionary) given the center word $w_c$ (with index $c$ in the dictionary) can be modeled by a softmax operation on vector dot products:
 $$P(w_o \mid w_c) = \frac{\exp(\mathbf{u}_o^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}$$
-Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the skip-gram model is the probability of generating all context words given any center word:
+Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the skip-gram model is the probability of generating all context words given any center word:
 $$\prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w^{(t+j)} \mid w^{(t)})$$
 
 In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:$$- \sum_{t=1}^{T} \sum_{-m \leq j \leq m,\ j \neq 0} \textrm{log}\, P(w^{(t+j)} \mid w^{(t)})$$where$$\log P(w_o \mid w_c) =\mathbf{u}_o^\top \mathbf{v}_c - \log\left(\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)\right)$$
-Through differentiation, we can obtain its gradient with respect to the center word vector $\mathbf{v}_c$ as
+Through differentiation, we can obtain its gradient with respect to the center word vector $\mathbf{v}_c$ as
 $$\begin{split}\begin{aligned}\frac{\partial \textrm{log}\, P(w_o \mid w_c)}{\partial \mathbf{v}_c}&= \mathbf{u}_o - \frac{\sum_{j \in V} \exp(\mathbf{u}_j^\top \mathbf{v}_c)\mathbf{u}_j}{\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\\&= \mathbf{u}_o - \sum_{j \in V} \left(\frac{\exp(\mathbf{u}_j^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\right) \mathbf{u}_j\\&= \mathbf{u}_o - \sum_{j \in V} P(w_j \mid w_c) \mathbf{u}_j\end{aligned}\end{split}$$
 ## The Continuous Bag of Words (CBOW) Model
 
-The _continuous bag of words_ (CBOW) model is similar to the skip-gram model. The major difference from the skip-gram model is that the continuous bag of words model assumes that a center word is generated based on its surrounding context words in the text sequence.
+The _continuous bag of words_ (CBOW) model is similar to the skip-gram model. The major difference from the skip-gram model is that the continuous bag of words model assumes that a center word is generated based on its surrounding context words in the text sequence.
 ![cbow](../attachments/cbow.svg){width=338}
 Since there are multiple context words in the continuous bag of words model, these context word vectors are averaged in the calculation of the conditional probability. Specifically, for any word with index $i$ in the dictionary, denote by $\mathbf{v}_i\in\mathbb{R}^d$ and $\mathbf{u}_i\in\mathbb{R}^d$ its two vectors when used as a context word and a center word (meanings are switched in the skip-gram model), respectively. 
 
-The conditional probability of generating any center word $w_c$ (with index $c$ in the dictionary) given its surrounding context words $W_o=\{w_{o_1}, \ldots, w_{o_{2m}}\}$ (with index $o_1, \ldots, o_{2m}$ in the dictionary) and $\bar{\mathbf{v}}_o = \left(\mathbf{v}_{o_1} + \ldots + \mathbf{v}_{o_{2m}} \right)/(2m)$ can be modeled by
+The conditional probability of generating any center word $w_c$ (with index $c$ in the dictionary) given its surrounding context words $W_o=\{w_{o_1}, \ldots, w_{o_{2m}}\}$ (with index $o_1, \ldots, o_{2m}$ in the dictionary) and $\bar{\mathbf{v}}_o = \left(\mathbf{v}_{o_1} + \ldots + \mathbf{v}_{o_{2m}} \right)/(2m)$ can be modeled by
 
 $$P(w_c \mid W_o) = \frac{\exp\left(\mathbf{u}_c^\top \bar{\mathbf{v}}_o\right)}{\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)}$$
-Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the CBOW model is the probability of generating all context words given any center word:
+Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the CBOW model is the probability of generating all context words given any center word:
 $$\prod_{t=1}^{T}  P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$
 In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:
 $$-\sum_{t=1}^T  \textrm{log}\, P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$
 Notice that$$\log\,P(w_c \mid W_o) = \mathbf{u}_c^\top \bar{\mathbf{v}}_o - \log\,\left(\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)\right)$$
-Through differentiation, we can obtain its gradient with respect to any context word vector $\mathbf{v}_{o_i}$ ($i = 1, \ldots, 2m$) as
+Through differentiation, we can obtain its gradient with respect to any context word vector $\mathbf{v}_{o_i}$ ($i = 1, \ldots, 2m$) as
 $$\frac{\partial \log\, P(w_c \mid \mathcal{W}_o)}{\partial \mathbf{v}_{o_i}} = \frac{1}{2m} \left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} \frac{\exp(\mathbf{u}_j^\top \bar{\mathbf{v}}_o)\mathbf{u}_j}{ \sum_{i \in \mathcal{V}} \exp(\mathbf{u}_i^\top \bar{\mathbf{v}}_o)} \right) = \frac{1}{2m}\left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} P(w_j \mid \mathcal{W}_o) \mathbf{u}_j \right)$$
 
 ## Approximate Training
@@ -945,7 +929,7 @@ $$P_n(w) = \frac{U(w)^{3/4}}{\sum_{w'} U(w')^{3/4}}$$
 
 ### Hierarchical Softmax
 
-<span style="color: red;">Hierarchical softmax</span> instead organizes the vocabulary as the leaves of a binary tree (often a Huffman tree, so frequent words have shorter paths). The probability of a word is the product of the binary decisions ("go left/right") along the path from the root to its leaf:
+Hierarchical softmax instead organizes the vocabulary as the leaves of a binary tree (often a Huffman tree, so frequent words have shorter paths). The probability of a word is the product of the binary decisions ("go left/right") along the path from the root to its leaf:
 $$P(w \mid w_c) = \prod_{j=1}^{L(w)-1} \sigma\Big( [\![\, n(w,j{+}1)=\mathrm{ch}(n(w,j)) \,]\!] \cdot \mathbf{u}_{n(w,j)}^\top \mathbf{v}_c\Big)$$
 where:
 - $n(w,j)$ is the $j$-th node on the path from the root to word $w$, and $L(w)$ is the path length (so there are $L(w)-1$ internal-node decisions).
@@ -956,7 +940,9 @@ Since $\sigma(\mathbf{u}^\top\mathbf{v})$ is the probability of turning one way 
 
 ## Bidirectional Encoder Representations from Transformers (BERT)
 
-In order to understand the context instead of only focusing on the word itself, we propose <span style="color: red;">Bidirectional Encoder Representations from Transformers (BERT)</span>.
+In order to understand the context instead of only focusing on the word itself, we propose Bidirectional Encoder Representations from Transformers (BERT).
+
+Architecturally, BERT is an encoder-only Transformer (see [Encoder-Only](#encoderonly)) and uses WordPiece tokenization (see [Tokenization](#tokenization)).
 
 Input:
 - Token embeddings: the fixed dimension of every token.
@@ -973,7 +959,7 @@ Pre-training:
 - Masked Language Modeling (MLM): Approximately 15% of the words in a sentence are randomly covered (replaced with special `[MASK]` tags), and the model is then asked to guess the word based on the surrounding context. This forces the model to delve deeper into the semantics and contextual dependencies of words.
 - Next Sentence Prediction (NSP): Each time, the model is fed two sentences ($A$ and $B$), and it is asked to determine whether $B$ immediately follows $A$ in the original text. This teaches the model to understand the logical relationships between sentences, which is especially important for subsequent question-answering systems.
 
-## N-gram Language Model
+## N-Gram Language Model
 
 Assume that we have a sentence sequence $W = (w_1, w_2, ..., w_T)$, the probability can be precisely expressed as:
 $$P(w_1, w_2, ..., w_T) = \prod_{i=1}^{T} P(w_i | w_1, w_2, ..., w_{i-1})$$
@@ -1050,7 +1036,7 @@ $$L(N,D) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}$$
 
 When a model scales to a certain size, advanced capabilities that were not present in smaller models suddenly emerge. 
 
-![Screenshot 2026-05-24 at 21.56.49](../attachments/Screenshot%202026-05-24%20at%2021.56.49.png)
+![Screenshot 2026-05-24 at 21.56.49](../attachments/Screenshot%202026-05-24%20at%2021.56.49.png){width=450}
 Typical examples include:
 - In-Context Learning: No gradient updates are required; the new task can be completed simply by following the example in the hint.
 - Instruction Following: Perform operations according to natural language instructions.
@@ -1061,13 +1047,13 @@ It is noted that these emergent capabilities don't appear suddenly, but rather g
 ### Construction Method
 - Pre-training
 	- Objective: To accumulate general knowledge and generate capabilities.
-	- Employ Transformer-based architectures (such as causal decoders). Autoregressive learning is performed by "predicting the next lexical term." Hybrid expert (MoE) architectures are often introduced to scale up the number of parameters without significantly increasing computational power.
+	- Employ Transformer-based architectures (such as causal decoders, see [Decoder-Only](#decoderonly)). Autoregressive learning is performed by "predicting the next lexical term." Hybrid expert (MoE) architectures are often introduced to scale up the number of parameters without significantly increasing computational power.
 - Supervised Fine-tuning (SFT)
 	- Objective: To stimulate task-solving and instruction comprehension abilities.
 	- Fine-tuning is performed using manually written instructions and high-quality datasets. To reduce computing costs, efficient parameter fine-tuning techniques such as LoRA are often employed.
 - Human Alignment
 	- Objective: Ensure that the output aligns with human values.
-	- The primary approach employed is RLHF (Reinforcement Learning Based on Human Feedback). A reward model is trained to score the output quality, guiding the model to meet the standards of usefulness, honesty, and harmlessness.
+	- The primary approach employed is RLHF (Reinforcement Learning Based on Human Feedback). A reward model is trained to score the output quality, guiding the model to meet the standards of usefulness, honesty, and harmlessness. The RL step typically uses PPO (see [Actor-Critic](#actorcritic)).
 
 
 
@@ -1079,7 +1065,31 @@ It is noted that these emergent capabilities don't appear suddenly, but rather g
         </script>
     </main>
 
-    <script src="../../scripts/markdown-article.js?v=20260917-callout-controls-1"></script>
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
     <script src="../../scripts/comments.js"></script>
 </body>
 </html>

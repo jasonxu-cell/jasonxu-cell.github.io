@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Equations of Mathematical Physics | Yang">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/my_website/notes/math/equations-of-mathematical-physics.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Equations of Mathematical Physics | Yang">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
     <title>Equations of Mathematical Physics | Yang</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
-    <link rel="icon" type="image/png" href="../../assets/photo.jpg">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    >
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
     <nav>
@@ -62,7 +72,7 @@
 
 Let a multivariable function $u(x_1, x_2, \dots, x_n)$ possess, in a spatial domain $V \subset \mathbb{R}^n$, all the continuous partial derivatives appearing in an equation, and make the equation
 $$F\left(x_1, \dots, x_n,\; u,\; \frac{\partial u}{\partial x_1}, \dots, \frac{\partial u}{\partial x_n}, \dots, \frac{\partial^{m} u}{\partial x_1^{m_1}\partial x_2^{m_2}\cdots\partial x_n^{m_n}}\right) = 0$$where$$ m = m_1+m_2+\cdots+m_n$$
-into an identity. Then this function is called a solution / classical solution of the equation on the domain $V$.
+into an identity. Then this function is called a solution / <span style="color: red;">classical solution</span> of the equation on the domain $V$.
 
 ## The Three Classical Equations
 
@@ -78,18 +88,18 @@ $$\text{Laplace equation:}\qquad \Delta u = 0$$
 
 ## Well-Posed Problems
 
-A given equation together with suitable definite conditions constitutes a definite-solution problem.
+A given equation together with suitable definite conditions constitutes a <span style="color: red;">definite-solution problem</span>.
 
-Initial-value problem:
+<span style="color: red;">Initial-value problem</span>:
 $$\begin{cases}\dfrac{\partial^2 u}{\partial t^2} = a^2 \dfrac{\partial^2 u}{\partial x^2} & (t > 0,\ -\infty < x < +\infty)\\[2mm] u(0,x) = \varphi(x),\quad u_t(0,x) = \psi(x)\end{cases}$$
 
-Boundary-value problem:
+<span style="color: red;">Boundary-value problem</span>:
 $$\begin{cases}\Delta u = f(x,y,z)\\ u\big|_S = \varphi(x,y,z)\end{cases}$$
 
 Mixed problem:
 $$\begin{cases}\dfrac{\partial^2 u}{\partial t^2} = a^2 \dfrac{\partial^2 u}{\partial x^2} & (0 < x < L)\\[1mm] u(t,0) = u(t,L) = 0\\ u(0,x) = \varphi(x),\quad u_t(0,x) = \psi(x)\end{cases}$$
 
-If the solution of a definite-solution problem exists, is unique, and is stable, the problem is said to be well-posed. Here *stable* means that when the definite conditions vary within a small range, the deviation of the corresponding solution can also be controlled within any prescribed small range.
+If the solution of a definite-solution problem exists, is unique, and is stable, the problem is said to be <span style="color: red;">well-posed</span>. Here *stable* means that when the definite conditions vary within a small range, the deviation of the corresponding solution can also be controlled within any prescribed small range.
 
 # Ordinary Differential Equations
 
@@ -97,10 +107,10 @@ If the solution of a definite-solution problem exists, is unique, and is stable,
 
 $$y^{(n)} + P_{n-1}(x)\,y^{(n-1)} + \cdots + P_1(x)\,y' + P_0(x)\,y = 0$$
 
-Its general solution is a linear combination of $n$ linearly independent solutions:
+Its <span style="color: red;">general solution</span> is a linear combination of $n$ linearly independent solutions:
 $$y = C_1 y_1(x) + C_2 y_2(x) + \cdots + C_n y_n(x)$$
 
-Linear independence can be checked by the Wronskian:
+Linear independence can be checked by the <span style="color: red;">Wronskian</span>:
 $$W = \begin{vmatrix} y_1 & y_2 & \cdots & y_n \\ y_1' & y_2' & \cdots & y_n' \\ \vdots & \vdots & \ddots & \vdots \\ y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)} \end{vmatrix}$$
 
 - If $W \neq 0$, the solutions are linearly independent.
@@ -108,7 +118,7 @@ $$W = \begin{vmatrix} y_1 & y_2 & \cdots & y_n \\ y_1' & y_2' & \cdots & y_n' \\
 
 ## First-Order Linear ODE
 
-For $y' + P(x)y = Q(x)$, multiply by the integrating factor $e^{\int P(x)\,\mathrm{d}x}$:
+For $y' + P(x)y = Q(x)$, multiply by the <span style="color: red;">integrating factor</span> $e^{\int P(x)\,\mathrm{d}x}$:
 $$\left(y\, e^{\int P(x)\,\mathrm{d}x}\right)' = Q(x)\, e^{\int P(x)\,\mathrm{d}x}\;\Longrightarrow\; y = e^{-\int P(x)\,\mathrm{d}x}\int Q(x)\, e^{\int P(x)\,\mathrm{d}x}\,\mathrm{d}x$$
 
 ## Second-Order Linear Homogeneous ODE — Liouville's Formula
@@ -119,7 +129,7 @@ Using $y_1'' = -P y_1' - q y_1$ and $y_2'' = -P y_2' - q y_2$:
 $$W'(x) = -P(x)\,W(x)\;\Longrightarrow\; W(x) = C\, e^{-\int_{x_0}^{x} P(t)\,\mathrm{d}t}$$
 Taking $C = 1$,
 $$\left(\frac{y_2}{y_1}\right)' = \frac{y_1 y_2' - y_1' y_2}{y_1^2} = \frac{1}{y_1^2}\, e^{-\int_{x_0}^{x} P(t)\,\mathrm{d}t}$$
-which gives Liouville's formula:
+which gives <span style="color: red;">Liouville's formula</span>:
 $$y_2(x) = y_1(x)\int \frac{1}{y_1^2(x)}\, e^{-\int_{x_0}^{x} P(t)\,\mathrm{d}t}\,\mathrm{d}x$$
 
 # First-Order Linear PDEs
@@ -145,7 +155,7 @@ Choose $\varphi$ so that $a\,\varphi_x + b\,\varphi_y = 0$; then the equation re
 
 Example — initial value problem for the right-traveling single wave.
 $$\begin{cases}\dfrac{\partial u}{\partial t} + a\dfrac{\partial u}{\partial x} = 0 & t > 0,\ -\infty < x < +\infty\\ u\big|_{t=0} = \varphi(x)\end{cases}$$
-Characteristics: $\dfrac{\mathrm{d}t}{1} = \dfrac{\mathrm{d}x}{a} \Rightarrow x - at = h$. Let $\varphi = x - at,\ \psi = x$, then $\dfrac{\partial(\varphi,\psi)}{\partial(x,t)} = \begin{vmatrix}1 & -a\\ 1 & 0\end{vmatrix} = -a \neq 0$. One obtains $a\,u_\varphi = 0 \Rightarrow u = f(\varphi) = f(x - at)$. The initial condition gives $u\big|_{t=0} = f(x) = \varphi(x)$, hence
+<span style="color: red;">Characteristics</span>: $\dfrac{\mathrm{d}t}{1} = \dfrac{\mathrm{d}x}{a} \Rightarrow x - at = h$. Let $\varphi = x - at,\ \psi = x$, then $\dfrac{\partial(\varphi,\psi)}{\partial(x,t)} = \begin{vmatrix}1 & -a\\ 1 & 0\end{vmatrix} = -a \neq 0$. One obtains $a\,u_\varphi = 0 \Rightarrow u = f(\varphi) = f(x - at)$. The initial condition gives $u\big|_{t=0} = f(x) = \varphi(x)$, hence
 $$u = \varphi(x - at)\qquad\text{(right-traveling wave solution).}$$
 Similarly, $\dfrac{\partial u}{\partial t} - a\dfrac{\partial u}{\partial x} = 0$ with $u|_{t=0}=\varphi(x)$ has the left-traveling wave solution $u = \varphi(x + at)$.
 
@@ -154,9 +164,9 @@ Similarly, $\dfrac{\partial u}{\partial t} - a\dfrac{\partial u}{\partial x} = 0
 $$\sum_{j=1}^{n} b_j\,\frac{\partial u}{\partial x_j} + cu = f$$
 where $b_j = b_j(x_1,\dots,x_n)$, $c = c(x_1,\dots,x_n)$, $f = f(x_1,\dots,x_n)$ are continuous on a known domain $D \subset \mathbb{R}^n$.
 
-Introduce the characteristic system
+Introduce the <span style="color: red;">characteristic system</span>
 $$\frac{\mathrm{d}x_1}{\mathrm{d}s}=b_1(x),\quad \frac{\mathrm{d}x_2}{\mathrm{d}s}=b_2(x),\quad \cdots,\quad \frac{\mathrm{d}x_n}{\mathrm{d}s}=b_n(x).$$
-It has $n-1$ independent first integrals $\varphi_1(x),\dots,\varphi_{n-1}(x)$ that are constant along each characteristic curve. Then choose one additional coordinate $\psi(x)$ along the characteristic direction, with $b\cdot\nabla\psi\neq 0$, so that
+It has $n-1$ independent <span style="color: red;">first integrals</span> $\varphi_1(x),\dots,\varphi_{n-1}(x)$ that are constant along each characteristic curve. Then choose one additional coordinate $\psi(x)$ along the characteristic direction, with $b\cdot\nabla\psi\neq 0$, so that
 $$J(\varphi_1,\dots,\varphi_{n-1},\psi)\neq 0.$$
 In the new variables, the PDE reduces to an ODE in the characteristic coordinate $\psi$.
 
@@ -183,7 +193,7 @@ Applying the initial data:
 $$u\big|_{t=0} = f(x) + g(x) = \varphi(x),\qquad u_t\big|_{t=0} = -a f'(x) + a g'(x) = \psi(x)$$
 Hence
 $$\begin{cases} f'(x) + g'(x) = \varphi'(x)\\ -f'(x) + g'(x) = \tfrac{1}{a}\psi(x)\end{cases}\Longrightarrow \begin{cases} f(x) = \tfrac12\varphi(x) - \tfrac{1}{2a}\int\psi(x)\,\mathrm{d}x\\ g(x) = \tfrac12\varphi(x) + \tfrac{1}{2a}\int\psi(x)\,\mathrm{d}x\end{cases}$$
-giving the d'Alembert formula:
+giving the <span style="color: red;">d'Alembert formula</span>:
 $$\boxed{\,u = \frac{1}{2}\big[\varphi(x - at) + \varphi(x + at)\big] + \frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)\,\mathrm{d}\xi\,}$$
 From this one sees the problem is well-posed.
 
@@ -200,7 +210,7 @@ $$\begin{cases}\dfrac{\partial^2 u_2}{\partial t^2} = a^2 \dfrac{\partial^2 u_2}
 Obviously, $$u=u_1+u_2$$
 And $u_1$ is the free wave equation, it can be solved by previous section.
 
-The problem is we want to solve $u_2$, and we can use Duhamel's Principle to solve it. The principle consider the function $f(t,x)$ as the impact exerted at time $\tau$, which triggers a subsequent period of free vibration. The final state of the system at the current time $t$ is the sum (i.e., the integral) of all the free vibrations generated at all historical times $\tau$ at time $t$.
+The problem is we want to solve $u_2$, and we can use <span style="color: red;">Duhamel's Principle</span> to solve it. The principle consider the function $f(t,x)$ as the impact exerted at time $\tau$, which triggers a subsequent period of free vibration. The final state of the system at the current time $t$ is the sum (i.e., the integral) of all the free vibrations generated at all historical times $\tau$ at time $t$.
 
 Mathematically, considering 
 $$\begin{cases}\dfrac{\partial^2 w}{\partial t^2} = a^2 \dfrac{\partial^2 w}{\partial x^2} & t > 0,\ -\infty < x < +\infty\\ w(\tau,x;\tau) = 0,\quad w_t(\tau,x;\tau) = f(\tau,x)\end{cases}$$
@@ -222,17 +232,17 @@ $$A_{22} = a_{11}\psi_x^2 + 2a_{12}\psi_x\psi_y + a_{22}\psi_y^2$$
 
 To make $A_{11} = 0$, take $\varphi$ to satisfy $a_{11}\varphi_x^2 + 2a_{12}\varphi_x\varphi_y + a_{22}\varphi_y^2 = 0$, which corresponds to the characteristic equation
 $$a_{11}(\mathrm{d}y)^2 - 2a_{12}\,\mathrm{d}x\,\mathrm{d}y + a_{22}(\mathrm{d}x)^2 = 0$$
-Define the discriminant $\Delta = a_{12}^2 - a_{11}a_{22}$. One verifies $A_{12}^2 - A_{11}A_{22} = J^2\,\Delta$.
+Define the <span style="color: red;">discriminant</span> $\Delta = a_{12}^2 - a_{11}a_{22}$. One verifies $A_{12}^2 - A_{11}A_{22} = J^2\,\Delta$.
 
-- $\Delta > 0$ — hyperbolic. Two families of real characteristics from $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}\pm\sqrt{\Delta}}{a_{11}}$, giving $\varphi(x,y) = h_1,\ \psi(x,y) = h_2$. Here $A_{11} = A_{22} = 0$, so
+- $\Delta > 0$ — <span style="color: red;">hyperbolic</span>. Two families of real characteristics from $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}\pm\sqrt{\Delta}}{a_{11}}$, giving $\varphi(x,y) = h_1,\ \psi(x,y) = h_2$. Here $A_{11} = A_{22} = 0$, so
 $$\frac{\partial^2 u}{\partial\varphi\partial\psi} = \Phi\!\left(u, u_\varphi, u_\psi\right)\qquad\text{(first hyperbolic canonical form).}$$
 Setting $s = \dfrac{\varphi+\psi}{2},\ t = \dfrac{\varphi-\psi}{2}$,
 $$\frac{\partial^2 u}{\partial s^2} - \frac{\partial^2 u}{\partial t^2} = \Phi'\!\left(u, u_\varphi, u_\psi\right)\qquad\text{(second hyperbolic canonical form).}$$
 
-- $\Delta = 0$ — parabolic. One family of real characteristics $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}}{a_{11}} \Rightarrow \varphi(x,y) = h$. Choose any $\psi(x,y)$ with $J \neq 0$; then $A_{11} = 0$ and $A_{12}^2 - A_{11}A_{22} = J^2\Delta = 0 \Rightarrow A_{12} = 0$ (with $A_{22} \neq 0$). Thus
+- $\Delta = 0$ — <span style="color: red;">parabolic</span>. One family of real characteristics $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}}{a_{11}} \Rightarrow \varphi(x,y) = h$. Choose any $\psi(x,y)$ with $J \neq 0$; then $A_{11} = 0$ and $A_{12}^2 - A_{11}A_{22} = J^2\Delta = 0 \Rightarrow A_{12} = 0$ (with $A_{22} \neq 0$). Thus
 $$\frac{\partial^2 u}{\partial\psi^2} = \Phi\!\left(u, u_\varphi, u_\psi\right)\qquad\text{(parabolic canonical form).}$$
 
-- $\Delta < 0$ — elliptic. Now $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}\pm i\sqrt{-\Delta}}{a_{11}}$; take the real/imaginary parts of the complex implicit solution $\varphi(x,y) \pm i\psi(x,y) = h$. Then $A_{11} = A_{22} \neq 0$, $A_{12} = 0$, giving
+- $\Delta < 0$ — <span style="color: red;">elliptic</span>. Now $\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{a_{12}\pm i\sqrt{-\Delta}}{a_{11}}$; take the real/imaginary parts of the complex implicit solution $\varphi(x,y) \pm i\psi(x,y) = h$. Then $A_{11} = A_{22} \neq 0$, $A_{12} = 0$, giving
 $$\frac{\partial^2 u}{\partial\varphi^2} + \frac{\partial^2 u}{\partial\psi^2} + \frac{1}{A_{11}}\big(B_1 u_\varphi + B_2 u_\psi + cu\big) = 0\qquad\text{(elliptic canonical form).}$$
 
 # Uniqueness for the Laplace / Poisson Equation (TODO)
@@ -254,7 +264,7 @@ $$\begin{cases}\dfrac{\partial^2 u}{\partial t^2} = a^2\dfrac{\partial^2 u}{\par
 
 Let $u(t,x) = T(t)X(x)$. Then $X\,T'' = a^2 T\,X''$, so
 $$-\lambda = \frac{T''}{a^2 T} = \frac{X''}{X}\;\Longrightarrow\;\begin{cases} X''(x) + \lambda X(x) = 0\\ T''(t) + \lambda a^2 T(t) = 0\end{cases}$$
-The boundary conditions $T(t)X(0) = T(t)X(l) = 0$ force $X(0) = X(l) = 0$. The eigenvalue problem is
+The boundary conditions $T(t)X(0) = T(t)X(l) = 0$ force $X(0) = X(l) = 0$. The <span style="color: red;">eigenvalue problem</span> is
 $$\begin{cases} X'' + \lambda X = 0\\ X(0) = X(l) = 0\end{cases}$$
 
 - $\lambda = -\omega^2 < 0$ ($\omega > 0$): $X = Ae^{\omega x} + Be^{-\omega x}$, $X(0)=X(l)=0 \Rightarrow A = B = 0$, only trivial solution.
@@ -262,7 +272,7 @@ $$\begin{cases} X'' + \lambda X = 0\\ X(0) = X(l) = 0\end{cases}$$
 - $\lambda = \omega^2 > 0$ ($\omega > 0$): $X = A\cos\omega x + B\sin\omega x$, $X(0)=A=0$, $X(l)=B\sin\omega l = 0$. Nontrivial solutions exist when
 $$\omega = \frac{n\pi}{l},\quad \lambda_n = \left(\frac{n\pi}{l}\right)^2\ (n=1,2,\dots),\qquad X_n(x) = B_n\sin\frac{n\pi x}{l}$$
 
-The problem of finding parameters $\lambda$ (the eigenvalues) for which the system has nontrivial solutions is the eigenvalue problem; the corresponding nontrivial solutions are the eigenfunctions. Then
+The problem of finding parameters $\lambda$ (the eigenvalues) for which the system has nontrivial solutions is the eigenvalue problem; the corresponding nontrivial solutions are the <span style="color: red;">eigenfunctions</span>. Then
 $$T_n(t) = C_n\cos\frac{a n\pi}{l}t + D_n\sin\frac{a n\pi}{l}t$$
 and superposing,
 $$u(t,x) = \sum_{n=1}^{\infty}\left(C_n\cos\frac{a n\pi}{l}t + D_n\sin\frac{a n\pi}{l}t\right)\sin\frac{n\pi x}{l}$$
@@ -303,13 +313,13 @@ Let $u(r,\theta) = R(r)\Theta(\theta)$:
 $$\begin{cases}\Theta''(\theta) + \lambda\Theta(\theta) = 0\\ \frac{1}{r}(rR'(r))' - \frac{\lambda}{r^2}R(r) = 0\end{cases}$$
 The angular eigenvalue problem $\begin{cases}\Theta'' + \lambda\Theta = 0\\ \Theta(\theta + 2\pi) = \Theta(\theta)\end{cases}$ gives eigenvalues $\lambda_n = n^2$ ($n = 0,1,2,\dots$) and
 $$\Theta_n(\theta) = A_n\cos n\theta + B_n\sin n\theta\quad(\text{harmonic functions}).$$
-The radial equation $r^2 R'' + r R' - n^2 R = 0$ is an Euler equation; with $r = e^t$ it becomes $\dfrac{\mathrm{d}^2 R}{\mathrm{d}t^2} - n^2 R = 0$, so
+The radial equation $r^2 R'' + r R' - n^2 R = 0$ is an <span style="color: red;">Euler equation</span>; with $r = e^t$ it becomes $\dfrac{\mathrm{d}^2 R}{\mathrm{d}t^2} - n^2 R = 0$, so
 $$R_0 = C_0 + D_0 t = C_0 + D_0\ln r,\qquad R_n = C_n r^n + D_n r^{-n}\ (n\ge 1)$$
 Boundedness $|R(0)| < \infty$ forces $D_n = 0$, so
 $$u(r,\theta) = \frac{A_0}{2} + \sum_{n=1}^{\infty}\left(\frac{r}{a}\right)^n\big(A_n\cos n\theta + B_n\sin n\theta\big)$$
 With $u(a,\theta) = f(\theta)$:
 $$A_n = \frac{1}{\pi}\int_0^{2\pi} f(\varphi)\cos n\varphi\,\mathrm{d}\varphi,\qquad B_n = \frac{1}{\pi}\int_0^{2\pi} f(\varphi)\sin n\varphi\,\mathrm{d}\varphi$$
-Summing the series leads to the Poisson integral formula:
+Summing the series leads to the <span style="color: red;">Poisson integral formula</span>:
 $$u(r,\theta) = \frac{1}{2\pi}\int_0^{2\pi} f(\varphi)\left[1 + 2\sum_{n=1}^{\infty}\left(\frac{r}{a}\right)^n\cos n(\varphi-\theta)\right]\,\mathrm{d}\varphi = \frac{a^2 - r^2}{2\pi}\int_0^{2\pi}\frac{f(\varphi)}{a^2 - 2ar\cos(\varphi-\theta) + r^2}\,\mathrm{d}\varphi$$
 This solution is well-posed.
 
@@ -327,7 +337,7 @@ yielding eigenvalues $\{\lambda_n\}$ and eigenfunctions $\{X_n(x)\}$. Substituti
 
 ## Sturm–Liouville (S-L) Theory
 
-The S-L equation is
+The <span style="color: red;">S-L equation</span> is
 $$[k(x)X'(x)]' - q(x)X(x) + \lambda\rho(x)X(x) = 0$$
 
 > [!THEOREM] Sturm–Liouville Theorem
@@ -357,7 +367,7 @@ Consider $w''(z) + p(z)w'(z) + q(z)w(z) = 0$ in the complex domain, with $p(z), 
 
 # Helmholtz Equation and Special Functions
 
-The Helmholtz equation is $\Delta_3 v + k^2 v = 0$.
+The <span style="color: red;">Helmholtz equation</span> is $\Delta_3 v + k^2 v = 0$.
 
 ## Cartesian Coordinates
 
@@ -377,14 +387,14 @@ $$D_{nm} = \frac{4}{ab\sinh\omega_{nm}c}\int_0^a\int_0^b \varphi(x,y)\sin\tfrac{
 
 Let $v(r,\theta,z) = R(r)\Theta(\theta)Z(z)$, so $\dfrac{(rR')'}{rR} + \dfrac{1}{r^2}\dfrac{\Theta''}{\Theta} + \dfrac{Z''}{Z} + k^2 = 0$, giving
 $$\begin{cases} Z'' + (k^2 - \lambda)Z = 0\\ \Theta'' + \nu^2\Theta = 0 & (\nu\ge 0)\\ (rR')' + \left(\lambda r - \frac{\nu^2}{r}\right)R = 0\end{cases}$$
-For $\lambda > 0$, let $x = \sqrt{\lambda}\,r$, $y(x) = R(x/\sqrt{\lambda})$, giving the Bessel equation of order $\nu$:
+For $\lambda > 0$, let $x = \sqrt{\lambda}\,r$, $y(x) = R(x/\sqrt{\lambda})$, giving the <span style="color: red;">Bessel equation</span> of order $\nu$:
 $$x^2 y'' + x y' + (x^2 - \nu^2)y = 0$$
 Take $\nu\ge 0$ and seek $y(x) = x^\rho\sum_{n=0}^{\infty} a_n x^n$ (Frobenius). The indicial relations give
 $$\begin{cases} a_0(\rho^2 - \nu^2) = 0\\ a_1[(1+\rho)^2 - \nu^2] = 0\\ a_n[(n+\rho)^2 - \nu^2] + a_{n-2} = 0\ (n\ge 2)\end{cases}\Longrightarrow \begin{cases}\rho = \pm\nu\\ a_1 = 0\\ a_n\, n(n\pm 2\nu) + a_{n-2} = 0\ (n\ge 2)\end{cases}$$
 
 Root $\rho_1 = \nu\ge 0$: $a_n = -\dfrac{a_{n-2}}{n(n+2\nu)}$, so $a_{2k+1}=0$ and
 $$a_{2k} = \frac{(-1)^k}{2^{2k}\,k!\,(k+\nu)(k+\nu-1)\cdots(\nu+1)}\,a_0 = \frac{(-1)^k\,\Gamma(\nu+1)}{2^{2k}\,k!\,\Gamma(k+\nu+1)}\,a_0$$
-Choosing $a_0 = \dfrac{1}{2^\nu\Gamma(\nu+1)}$ gives the Bessel function of order $\nu$:
+Choosing $a_0 = \dfrac{1}{2^\nu\Gamma(\nu+1)}$ gives the <span style="color: red;">Bessel function</span> of order $\nu$:
 $$J_\nu(x) = \sum_{k=0}^{\infty}\frac{(-1)^k}{k!\,\Gamma(k+\nu+1)}\left(\frac{x}{2}\right)^{2k+\nu}$$
 Since $$\lim_{k\to\infty}\left|\dfrac{a_{2k}}{a_{2k-2}}\right| = \lim_{k\to\infty}\dfrac{1}{4k(k+\nu)} = 0$$
 The power series has infinite radius of convergence, so $J_\nu(x)$ is finite for all $x\in\mathbb{R}$ and infinitely differentiable. 
@@ -397,7 +407,7 @@ For non-integer $\nu$, $J_\nu$ and $J_{-\nu}$ are linearly independent, so the g
 
 Integer order $\nu = m$: $J_{-m}(x) = (-1)^m J_m(x)$ (linearly dependent):
 $$J_{-m}(x) = \sum_{k=m}^{\infty}\frac{(-1)^k}{k!\,\Gamma(k-m+1)}\left(\frac{x}{2}\right)^{2k-m} = (-1)^m\sum_{l=0}^{\infty}\frac{(-1)^l}{l!\,\Gamma(l+m+1)}\left(\frac{x}{2}\right)^{2l+m} = (-1)^m J_m(x)$$
-So one introduces the Neumann function (Bessel function of the second kind). For non-integer $\nu$:
+So one introduces the <span style="color: red;">Neumann function</span> (Bessel function of the second kind). For non-integer $\nu$:
 $$N_\nu(x) = \frac{\cos\nu\pi}{\sin\nu\pi}J_\nu(x) - \frac{1}{\sin\nu\pi}J_{-\nu}(x)$$
 For integer $\nu = m$:
 $$\begin{align*}N_m(x) = \lim_{\nu\to m} N_\nu(x) &= \frac{2}{\pi}J_m(x)\left(\ln\frac{x}{2} + \gamma\right) - \frac{1}{\pi}\sum_{k=0}^{m-1}\frac{(m-k-1)!}{k!}\left(\frac{x}{2}\right)^{2k-m} \\&- \frac{1}{\pi}\sum_{k=0}^{\infty}\frac{(-1)^k}{k!(m+k)!}\left(\sum_{l=0}^{m+k-1}\frac{1}{l+1} + \sum_{l=0}^{k-1}\frac{1}{l+1}\right)\left(\frac{x}{2}\right)^{2k+m}\end{align*}$$
@@ -428,7 +438,7 @@ Generally, we can introduce two real functions:
 $$I_\nu(x)=e^{-i\frac{\nu\pi}{2}}J_{\nu}(ix)=\sum_{k=0}^\infty \frac{1}{k!\Gamma(\nu+k+1)}(\frac{x}{2})^{2k+\nu}$$
 $$K_\nu(x)=\frac{\pi}{2}e^{i\frac{(\nu+1)\pi}{2}}H^{(1)}_{\nu}(ix)=\frac{\pi[-I_\nu(x)+I_{-\nu}(x)]}{2\sin\nu\pi}$$
 Then we have$$y(x)=AI_\nu(x)+BK_\nu(x)$$
-![Screenshot 2026-06-15 at 20.28.36](../attachments/Screenshot%202026-06-15%20at%2020.28.36.png)
+![Screenshot 2026-06-15 at 20.28.36](../attachments/Screenshot%202026-06-15%20at%2020.28.36.png){width=450}
 
 Recurrence relations
 $$(x^\nu J_\nu)' = x^\nu J_{\nu-1},\qquad (x^{-\nu}J_\nu)' = -x^{-\nu}J_{\nu+1}$$
@@ -441,14 +451,14 @@ $$N_{n+\frac12}(x) = (-1)^{n+1}J_{-(n+\frac12)}(x),\qquad N_{-(n+\frac12)}(x) = 
 
 Generating function (integer order). From $e^{\frac{x}{2}(\zeta - \zeta^{-1})} = e^{\frac{x}{2}\zeta}\cdot e^{-\frac{x}{2}\zeta^{-1}}$,
 $$e^{\frac{x}{2}(\zeta - \zeta^{-1})} = \sum_{n=-\infty}^{+\infty} J_n(x)\,\zeta^n$$
-so $e^{\frac{x}{2}(\zeta-\zeta^{-1})}$ is the generating function of the integer-order Bessel functions. This gives the integral representation
+so $e^{\frac{x}{2}(\zeta-\zeta^{-1})}$ is the <span style="color: red;">generating function</span> of the integer-order Bessel functions. This gives the integral representation
 $$J_n(x) = \frac{1}{2\pi i}\oint_C \frac{e^{\frac{x}{2}(\zeta - \zeta^{-1})}}{\zeta^{n+1}}\,\mathrm{d}\zeta = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{i(x\sin\theta - n\theta)}\,\mathrm{d}\theta = \frac{1}{\pi}\int_0^{\pi}\cos(x\sin\theta - n\theta)\,\mathrm{d}\theta,\quad n\ge 0$$
 
 Asymptotics (large $x$).
 $$J_\nu(x) = \sqrt{\frac{2}{\pi x}}\cos\!\left(x - \frac{\nu\pi}{2} - \frac{\pi}{4}\right) + O(x^{-3/2}),\qquad N_\nu(x) = \sqrt{\frac{2}{\pi x}}\sin\!\left(x - \frac{\nu\pi}{2} - \frac{\pi}{4}\right) + O(x^{-3/2})$$
 Both $J_\nu$ and $N_\nu$ are oscillatory and decay like $x^{-1/2}$.
 
-![Pasted image 20260615151911](../attachments/Pasted%20image%2020260615151911.png)
+![Pasted image 20260615151911](../attachments/Pasted%20image%2020260615151911.png){width=450}
 ## Spherical Coordinates → Legendre Functions
 
 For the Helmholtz equation in spherical coordinates, let $v(r,\theta,\varphi) = R(r)\Theta(\theta)\Phi(\varphi)$:
@@ -456,7 +466,7 @@ $$\frac{(r^2 R')'}{R} + \frac{1}{r^2}\left[\frac{(\sin\theta\,\Theta')'}{\sin\th
 $$\Longrightarrow \begin{cases}\Phi'' + m^2\Phi = 0\\ \dfrac{1}{\sin\theta}(\sin\theta\,\Theta')' + \left(\lambda - \dfrac{m^2}{\sin^2\theta}\right)\Theta = 0\\ \dfrac{1}{r^2}(r^2 R')' + \left(k^2 - \dfrac{\lambda}{r^2}\right)R = 0\quad\text{(spherical Bessel equation; }k=0\Rightarrow\text{ Euler equation)}\end{cases}$$
 Putting $x = \cos\theta$, $y(x) = \Theta(\arccos x)$ gives the associated Legendre equation of order $m$:
 $$[(1 - x^2)y']' + \left(\lambda - \frac{m^2}{1 - x^2}\right)y = 0$$
-In particular, $m = 0$ gives the Legendre equation $[(1-x^2)y']' + \lambda y = 0$, i.e. in standard form
+In particular, $m = 0$ gives the <span style="color: red;">Legendre equation</span> $[(1-x^2)y']' + \lambda y = 0$, i.e. in standard form
 $$y'' - \frac{2x}{1 - x^2}y' + \frac{\lambda}{1 - x^2}y = 0$$
 By Cauchy's theorem, near the ordinary point $x = 0$ there is an analytic solution $y(x) = \sum_{n=0}^{\infty} a_n x^n$. Substituting,
 $$\sum_{n=0}^{\infty}\big\{(n+1)(n+2)a_{n+2} - [n(n+1) - \lambda]a_n\big\}x^n = 0 \;\Longrightarrow\; a_{n+2} = \frac{(n-l)(n+l+1)}{(n+1)(n+2)}a_n\ \ (\lambda = l(l+1))$$
@@ -492,7 +502,7 @@ Generating function. Let $w(t,x) = (1 - 2xt + t^2)^{-1/2} = \sum_{n=0}^{\infty} 
 $$C_n(x) = \frac{1}{2\pi i}\oint_C \frac{(1 - 2xt + t^2)^{-1/2}}{t^{n+1}}\,\mathrm{d}t$$
 where $C$ is any closed contour in $|t| < 1$ enclosing the origin $t = 0$. Substituting $(1 - 2xt + t^2)^{1/2} = 1 - t\zeta$ shows $C_n(x) = \dfrac{1}{2\pi i}\oint_{C'}\dfrac{(\zeta^2 - 1)^n}{2^n(\zeta - x)^{n+1}}\,\mathrm{d}\zeta = P_n(x)$. Therefore
 $$(1 - 2xt + t^2)^{-1/2} = \begin{cases}\displaystyle\sum_{n=0}^{\infty} P_n(x)t^n & |t| < 1\\[2mm] \displaystyle\frac{1}{t}\sum_{n=0}^{\infty} P_n(x)\left(\frac{1}{t}\right)^n & |t| > 1\end{cases}$$
-This is the generating function of the Legendre polynomials.
+This is the generating function of the <span style="color: red;">Legendre polynomials</span>.
 
 Recurrence relations.
 $$(n+1)P_{n+1}(x) - (2n+1)x P_n(x) + n P_{n-1}(x) = 0$$
@@ -515,7 +525,7 @@ Associated Legendre functions. From $[(1-x^2)y']' + \left(\lambda - \dfrac{m^2}{
 $$(1 - x^2)u'' - 2x(m+1)u' + [\lambda - m(m+1)]u = 0$$
 Note that differentiating the Legendre equation $(1-x^2)v'' - 2xv' + \lambda v = 0$ $m$ times gives
 $$(1 - x^2)v^{(m+2)} - 2x(m+1)v^{(m+1)} + [\lambda - m(m+1)]v^{(m)} = 0$$
-Hence define the associated Legendre functions:
+Hence define the <span style="color: red;">associated Legendre functions</span>:
 $$P_n^m(x) = (1 - x^2)^{m/2}\frac{\mathrm{d}^m}{\mathrm{d}x^m}P_n(x)\quad(\text{bounded at }x = \pm 1)$$
 $$ Q_n^m(x) = (1 - x^2)^{m/2}\frac{\mathrm{d}^m}{\mathrm{d}x^m}Q_n(x)\quad(\text{unbounded at }x = \pm 1)$$
 The general solution is $y = C P_n^m + D Q_n^m$.
@@ -558,19 +568,19 @@ $$u(r,\theta,\varphi) = \sum_{n=0}^{\infty}\sum_{m=0}^{n}P_n^m(\cos\theta)\left[
 ## Heat Equation 
 
 Consider heat equation $$u_t=a^2\Delta_3 u$$
-Do the Fourier transform (you can see it in [Signals and Systems](../electronic_engineering/signals_and_systems.html))
+Do the Fourier transform (you can see it in [CFT — Continuous Fourier Transform](../electronic_engineering/signals_and_systems.html#cft-continuous-fourier-transform))
 $$U_t=-a^2(\lambda^2+\mu^2+\nu^2)U$$
 As a result, $$U=\exp(-a^2(\lambda^2+\mu^2+\nu^2)t)$$
 $$u=\frac{1}{a^3(4\pi t)^{\frac{3}{2}}}\exp(-\frac{x^2+y^2+z^2}{4a^2t})$$
 We can find that $U\big|_{t=0} = 1$, so $$\lim_{t\rightarrow0^+}u=\delta(x)\delta(y)\delta(z)$$
-And the function $u$ is called the Fundamental Solution or Heat Kernel of the equation.
+And the function $u$ is called the <span style="color: red;">Fundamental Solution</span> or <span style="color: red;">Heat Kernel</span> of the equation.
 
-Similar to LTI system in [Signals and Systems](../electronic_engineering/signals_and_systems.html), if $u\big|_{t=0}=f(x,y,z)$ is given, then the solution of the equation can be determined uniquely.$$u=\frac{1}{a^3(4\pi t)^{\frac{3}{2}}}\exp(-\frac{x^2+y^2+z^2}{4a^2t})*f(x,y,z)$$
+Similar to LTI system in [LTI (Linear Time-Invariant) Systems](../electronic_engineering/signals_and_systems.html#lti-linear-timeinvariant-systems), if $u\big|_{t=0}=f(x,y,z)$ is given, then the solution of the equation can be determined uniquely.$$u=\frac{1}{a^3(4\pi t)^{\frac{3}{2}}}\exp(-\frac{x^2+y^2+z^2}{4a^2t})*f(x,y,z)$$
 This is a three-dimension operation.
 
 ## Fundamental Solutions
 
-Similar to LTI system in [Signals and Systems](../electronic_engineering/signals_and_systems.html), If we want to solve the equation $Lu=f$ and know the solution to equation $Lu=\delta$ as $U$, we can get $$u=f*U$$
+Similar to LTI system in [LTI (Linear Time-Invariant) Systems](../electronic_engineering/signals_and_systems.html#lti-linear-timeinvariant-systems), If we want to solve the equation $Lu=f$ and know the solution to equation $Lu=\delta$ as $U$, we can get $$u=f*U$$
 We call $U$ as the fundamental solution.
 ### Poisson Equation
 
@@ -601,7 +611,7 @@ so $U(r) = A J_0(kr) + B N_0(kr)$.
 
 Since $J_0(kr)$ is regular over the whole plane, take $A = 0$, leaving $$U(r) = B N_0(kr)\sim B\dfrac{2}{\pi}\ln(kr)$$near $r=0$. 
 
-Using $$\varphi(0,0) = \iint_{\mathbb{R}^2}\delta\,\varphi\,\mathrm{d}A = \iint_{\mathbb{R}^2}L U\,\varphi\,\mathrm{d}A$$ and applying Green's second identity over $D - D_\varepsilon$ (a small disk $D_\varepsilon$ of radius $\varepsilon$ around the origin removed):
+Using $$\varphi(0,0) = \iint_{\mathbb{R}^2}\delta\,\varphi\,\mathrm{d}A = \iint_{\mathbb{R}^2}L U\,\varphi\,\mathrm{d}A$$ and applying <span style="color: red;">Green's second identity</span> over $D - D_\varepsilon$ (a small disk $D_\varepsilon$ of radius $\varepsilon$ around the origin removed):
 $$\varphi(0,0) = \lim_{\varepsilon\to 0}\int_{\partial D_\varepsilon}\left(\varphi\frac{\partial U}{\partial r} - U\frac{\partial\varphi}{\partial r}\right)\,\mathrm{d}l = \lim_{\varepsilon\to 0} 2\pi\varepsilon\left[\varphi(x^*,y^*)B\frac{2}{\pi\varepsilon} - B\frac{2}{\pi}\ln(k\varepsilon)\frac{\partial\varphi}{\partial r}\right] = 4B\,\varphi(0,0)$$
 so $B = \dfrac14$.
 
@@ -611,7 +621,7 @@ $$(\Delta_2-k^2)U=\delta(x,y),\qquad U(r)=-\frac{1}{2\pi}K_0(kr).$$
 $$(\Delta_3+k^2)U=\delta(x,y,z),\qquad U(r)=-\frac{e^{-ikr}}{4\pi r}.$$
 $$(\Delta_3-k^2)U=\delta(x,y,z),\qquad U(r)=-\frac{e^{-kr}}{4\pi r}.$$
 
-### The Wave Equation
+### Wave Equation
 
 $$U_{tt}-a^2 U_{xx}=\delta(t,x)$$
 $$U(t, x)= \frac{1}{2a} \int_0^t \int_{x-a(t-\tau)}^{x+a(t-\tau)} \delta(\tau, \xi) \mathrm{d}\xi \mathrm{d}\tau$$
@@ -630,13 +640,13 @@ Summary:
 | $\Delta_3 U=\delta$         | $-\dfrac{1}{4\pi r}$                                  |
 | $U_{tt}-a^2 U_{xx}=\delta$  | $\frac{1}{2a} H\left(t - \frac{\mid x\mid}{a}\right)$ |
 
-These fundamental solutions are defined in the whole space. If the domain is bounded or has boundaries, the fundamental solution must be modified to satisfy the boundary conditions, often by the method of images, which is introduced in [Electromagnetism](../physics/electromagnetism.html).
+These fundamental solutions are defined in the whole space. If the domain is bounded or has boundaries, the fundamental solution must be modified to satisfy the boundary conditions, often by the method of images, which is introduced in [Uniqueness Theorems and Method of Images](../physics/electromagnetism.html#uniqueness-theorems-and-method-of-images).
 
 ## Green's Function for the Dirichlet Problem
 
 For the Type-I boundary value problem of the potential equation
 $$\begin{cases}\Delta u = -f(M) & M = (x,y,z)\in V\\ u\big|_{\partial V} = \varphi(M)\end{cases}$$
-split $u = u_1 + u_2$ with $\begin{cases}\Delta u_1 = -f(M)\\ u_1|_{\partial V} = 0\end{cases}$ and $\begin{cases}\Delta u_2 = 0\\ u_2|_{\partial V} = \varphi(M)\end{cases}$. The Green's function $G(M;M_0)$ solves
+split $u = u_1 + u_2$ with $\begin{cases}\Delta u_1 = -f(M)\\ u_1|_{\partial V} = 0\end{cases}$ and $\begin{cases}\Delta u_2 = 0\\ u_2|_{\partial V} = \varphi(M)\end{cases}$. The <span style="color: red;">Green's function</span> $G(M;M_0)$ solves
 $$\begin{cases}\Delta G(M;M_0) = -\delta(M - M_0) & M,M_0\in V\\ G\big|_{M\in\partial V} = 0\end{cases}$$
 Reciprocity (symmetry)
 $$G(M_1; M_2) = G(M_2; M_1)$$
@@ -658,7 +668,31 @@ $$u(M) = \int_V f(M_0)G(M;M_0)\,\mathrm{d}M_0 - \frac{1}{\alpha}\oint_{\partial 
         </script>
     </main>
 
-    <script src="../../scripts/markdown-article.js?v=20260917-callout-controls-1"></script>
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
     <script src="../../scripts/comments.js"></script>
 </body>
 </html>

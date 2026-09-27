@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Number Theory | Yang">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/my_website/notes/math/number-theory.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Number Theory | Yang">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
     <title>Number Theory | Yang</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
-    <link rel="icon" type="image/png" href="../../assets/photo.jpg">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    >
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
     <nav>
@@ -59,7 +69,7 @@
         <script type="text/plain" id="article-markdown">
 # Divisibility
 
-Let $a, b$ be integers with $b \neq 0$. If there exists an integer $c$ such that $a = bc$, we say $b$ divides $a$, written $b \mid a$; otherwise $b \nmid a$.
+Let $a, b$ be integers with $b \neq 0$. If there exists an integer $c$ such that $a = bc$, we say $b$ <span style="color: red;">divides</span> $a$, written $b \mid a$; otherwise $b \nmid a$.
 
 Properties.
 1. Any nonzero integer $a$ divides $0$.
@@ -67,15 +77,15 @@ Properties.
 3. If $a \mid b$ and $a \mid c$, then $a \mid (b \pm c)$.
 4. If $a \mid b$ and $a \mid c$, then $a \mid (bx + cy)$ for all integers $x, y$.
 5. (Divisibility chain) If $a \mid b$ and $b \mid a$, then $|a| = |b|$ and $b = \pm a$.
-6. Division algorithm: for integers $a, b$ with $b \neq 0$, there exist unique integers $q, r$ such that $a = bq + r$ with $0 \le r < |b|$.
+6. <span style="color: red;">Division algorithm</span>: for integers $a, b$ with $b \neq 0$, there exist unique integers $q, r$ such that $a = bq + r$ with $0 \le r < |b|$.
 
 ## Greatest Common Divisor
 
-Let $a, b$ be integers, not both zero. An integer $d$ is a greatest common divisor (gcd) of $a, b$ if
+Let $a, b$ be integers, not both zero. An integer $d$ is a <span style="color: red;">greatest common divisor</span> (gcd) of $a, b$ if
 1. $d \mid a$ and $d \mid b$;
 2. if $d' \mid a$ and $d' \mid b$, then $d' \mid d$.
 
-Denoted $(a, b)$ or $\gcd(a, b)$. If $(a, b) = 1$, then $a, b$ are coprime.
+Denoted $(a, b)$ or $\gcd(a, b)$. If $(a, b) = 1$, then $a, b$ are <span style="color: red;">coprime</span>.
 
 Properties. $(\pm a, \pm b) = (a, b)$; $(a, b) = (b, a)$; if $a \neq 0$, $(a, a) = (a, 0) = |a|$.
 
@@ -99,14 +109,14 @@ To compute $\gcd(a, b)$: set $r_0 = a$, $r_1 = b$, and iterate $r_{i+1} = r_{i-1
 
 ## Least Common Multiple
 
-$[a, b]$ is the least common multiple: if $a \mid m'$ and $b \mid m'$, then $[a, b] \mid m'$.
+$[a, b]$ is the <span style="color: red;">least common multiple</span>: if $a \mid m'$ and $b \mid m'$, then $[a, b] \mid m'$.
 - $a \mid b \Rightarrow [a, b] = b$;
 - $[ma, mb] = m[a, b]$;
 - $|ab| = (a, b) \cdot [a, b]$.
 
 # Fundamental Theorem of Arithmetic
 
-$(a^n - 1, a^m - 1) = a^{(n,m)} - 1$. Hence if $p = a^n - 1$ is prime, then $a = 2$ and $n$ is prime. The Mersenne numbers $M_n = 2^n - 1$: whether infinitely many are prime is an open problem.
+$(a^n - 1, a^m - 1) = a^{(n,m)} - 1$. Hence if $p = a^n - 1$ is prime, then $a = 2$ and $n$ is prime. The <span style="color: red;">Mersenne numbers</span> $M_n = 2^n - 1$: whether infinitely many are prime is an open problem.
 
 > [!THEOREM] Euclid's Lemma
 > Let $p$ be prime. If $p \mid ab$, then $p \mid a$ or $p \mid b$.
@@ -115,19 +125,19 @@ $(a^n - 1, a^m - 1) = a^{(n,m)} - 1$. Hence if $p = a^n - 1$ is prime, then $a =
 > [!THEOREM] Fundamental Theorem of Arithmetic
 > Every integer greater than $1$ can be factored into a product of finitely many primes, and this factorization is unique up to order.
 
-*Existence* by strong induction; *uniqueness* by Euclid's lemma. Hence every positive integer $n = \prod_p p^{v_p(n)}$ with $v_p(n) \in \mathbb{N}$, and every nonzero rational $r = \prod_p p^{v_p(r)}$ with $v_p(r) \in \mathbb{Z}$.
+*Existence* by strong induction; *uniqueness* by <span style="color: red;">Euclid's lemma</span>. Hence every positive integer $n = \prod_p p^{v_p(n)}$ with $v_p(n) \in \mathbb{N}$, and every nonzero rational $r = \prod_p p^{v_p(r)}$ with $v_p(r) \in \mathbb{Z}$.
 
 A positive integer $d \mid n \iff d = \prod_p p^{v_p(d)}$ with $0 \le v_p(d) \le v_p(n)$. In terms of valuations,
 $$(a, b) = \prod_p p^{\min(v_p(a), v_p(b))}, \qquad [a, b] = \prod_p p^{\max(v_p(a), v_p(b))}$$
 
 # Fast Exponentiation and Perfect Numbers
 
-Fast exponentiation (computing $a^n \bmod m$): write $n = \sum_i n_i 2^i$ in binary; with $a_0 = a$, repeatedly square $a_i = a_{i-1}^2 \bmod m$, accumulating the product over bits where $n_i = 1$. This takes $O(\log n)$ multiplications.
+<span style="color: red;">Fast exponentiation</span> (computing $a^n \bmod m$): write $n = \sum_i n_i 2^i$ in binary; with $a_0 = a$, repeatedly square $a_i = a_{i-1}^2 \bmod m$, accumulating the product over bits where $n_i = 1$. This takes $O(\log n)$ multiplications.
 
-A positive integer $n$ is perfect if $\sigma(n) = 2n$ (sum of divisors). 
+A positive integer $n$ is <span style="color: red;">perfect</span> if $\sigma(n) = 2n$ (sum of divisors). 
 
 > [!THEOREM] Euclid–Euler
-> $n$ is an even perfect number $\iff n = 2^{k-1}(2^k - 1)$ where $P = 2^k - 1$ is a Mersenne prime.
+> $n$ is an even perfect number $\iff n = 2^{k-1}(2^k - 1)$ where $P = 2^k - 1$ is a <span style="color: red;">Mersenne prime</span>.
 
 *Proof sketch.* Write $n = 2^{k-1}X$ with $X$ odd. Then $\sigma(n) = (2^k - 1)\sigma(X) = 2n = 2^k X$, so $\sigma(X) = \frac{2^k X}{2^k - 1}$. Writing $X = (2^k - 1)Y$, the analysis forces $Y = 1$ and $2^k - 1$ prime. $\square$
 
@@ -159,7 +169,7 @@ $$x = x_0 + \frac{b}{d}t, \qquad y = y_0 - \frac{a}{d}t, \quad t \in \mathbb{Z}$
 
 Frobenius (Chicken McNugget). For coprime positive integers $a, b$, the largest integer not representable as $ax + by$ with $x, y \ge 0$ is $g = ab - a - b$, and exactly $\frac{(a-1)(b-1)}{2}$ non-negative integers are non-representable. The equation $a_1 x_1 + \cdots + a_n x_n = c$ has a non-negative solution $\iff (a_1, \dots, a_n) \mid c$ (the general Frobenius number for $n \ge 3$ is an open problem).
 
-Pythagorean equation $x^2 + y^2 = z^2$. Primitive solutions (up to symmetry, $x$ odd, $y$ even):
+<span style="color: red;">Pythagorean equation</span> $x^2 + y^2 = z^2$. Primitive solutions (up to symmetry, $x$ odd, $y$ even):
 $$x = b^2 - a^2, \quad y = 2ab, \quad z = a^2 + b^2$$
 
 Related results.
@@ -177,15 +187,15 @@ Properties. If $a \equiv b \pmod m$: $na \equiv nb$; $ad \equiv bd \pmod{md}$; a
 
 Additive group $\mathbb{Z}/n\mathbb{Z} = \{[0], [1], \dots, [n-1]\}$ (cyclic of order $n$).
 
-Multiplicative group $(\mathbb{Z}/n\mathbb{Z})^* = \{[a] \mid (a, n) = 1,\ 0 \le a < n\}$ of order $\varphi(n)$ (Euler's totient). When $p$ is prime, $\mathbb{Z}/p\mathbb{Z}$ is the field $\mathbb{F}_p$ of $p$ elements.
+Multiplicative group $(\mathbb{Z}/n\mathbb{Z})^* = \{[a] \mid (a, n) = 1,\ 0 \le a < n\}$ of order $\varphi(n)$ (<span style="color: red;">Euler's totient</span>). When $p$ is prime, $\mathbb{Z}/p\mathbb{Z}$ is the field $\mathbb{F}_p$ of $p$ elements.
 
 - If $G$ is finite cyclic of order $n$: $G \cong \mathbb{Z}/n\mathbb{Z}$ and $\operatorname{Aut}(G) \cong (\mathbb{Z}/n\mathbb{Z})^*$.
 - If $G$ is infinite cyclic: $G \cong \mathbb{Z}$, $\operatorname{Aut}(G) \cong \mathbb{Z}/2\mathbb{Z}$.
 
-A complete residue system is a set of representatives of $\mathbb{Z}/n\mathbb{Z}$; a reduced residue system represents $(\mathbb{Z}/n\mathbb{Z})^*$ ($\varphi(n)$ elements).
+A <span style="color: red;">complete residue system</span> is a set of representatives of $\mathbb{Z}/n\mathbb{Z}$; a <span style="color: red;">reduced residue system</span> represents $(\mathbb{Z}/n\mathbb{Z})^*$ ($\varphi(n)$ elements).
 
 > [!THEOREM] Euler / Fermat
-> For $(a, n) = 1$: $\;a^{\varphi(n)} \equiv 1 \pmod n$. In particular (Fermat's little theorem), for prime $p$: $\;a^{p-1} \equiv 1 \pmod p$.
+> For $(a, n) = 1$: $\;a^{\varphi(n)} \equiv 1 \pmod n$. In particular (<span style="color: red;">Fermat's little theorem</span>), for prime $p$: $\;a^{p-1} \equiv 1 \pmod p$.
 
 *(Proof via Lagrange's theorem applied to $(\mathbb{Z}/n\mathbb{Z})^*$.)*
 
@@ -212,7 +222,7 @@ $$x \equiv \frac{m_1 k_1 x_2 + m_2 k_2 x_1}{d} \pmod{[m_1, m_2]}$$
 
 # Primitive Roots
 
-If $(\mathbb{Z}/m\mathbb{Z})^*$ is cyclic, a generator is a primitive root mod $m$. ($2$ has the primitive root $1$; $4$ has the primitive root $3$.)
+If $(\mathbb{Z}/m\mathbb{Z})^*$ is cyclic, a generator is a <span style="color: red;">primitive root</span> mod $m$. ($2$ has the primitive root $1$; $4$ has the primitive root $3$.)
 
 $2^k$ ($k \ge 3$) has no primitive root: for odd $a$, $a^{2^{k-2}} \equiv 1 \pmod{2^k}$ (induction on $k$), so the group is not cyclic.
 
@@ -223,11 +233,11 @@ $2^k$ ($k \ge 3$) has no primitive root: for odd $a$, $a^{2^{k-2}} \equiv 1 \pmo
 > [!THEOREM] Classification
 > A primitive root mod $m$ exists $\iff m = 2, 4, p^k,$ or $2p^k$ (with $p$ an odd prime, $k \ge 1$).
 
-Quadratic residues. Since $p$ is odd, the squaring map $\mathbb{F}_p^* \to \mathbb{F}_p^*$, $a \mapsto a^2$ has kernel $\{\pm 1\}$, so $\mathbb{F}_p^*/\{\pm 1\} \cong (\mathbb{F}_p^*)^2$: exactly half of $\mathbb{F}_p^*$ are quadratic residues and half are non-residues.
+<span style="color: red;">Quadratic residues</span>. Since $p$ is odd, the squaring map $\mathbb{F}_p^* \to \mathbb{F}_p^*$, $a \mapsto a^2$ has kernel $\{\pm 1\}$, so $\mathbb{F}_p^*/\{\pm 1\} \cong (\mathbb{F}_p^*)^2$: exactly half of $\mathbb{F}_p^*$ are quadratic residues and half are non-residues.
 
 # Quadratic Reciprocity
 
-For $a \in \mathbb{F}_p^*$, the Legendre symbol
+For $a \in \mathbb{F}_p^*$, the <span style="color: red;">Legendre symbol</span>
 $$\left(\frac{a}{p}\right) = \begin{cases} 1 & a \text{ a quadratic residue} \\ 0 & p \mid a \\ -1 & a \text{ a non-residue} \end{cases}$$
 The number of solutions of $x^2 \equiv a \pmod p$ is $1 + \left(\frac{a}{p}\right)$. The symbol is completely multiplicative: writing $a = (-1)^{e_\infty} p_1^{e_1}\cdots p_r^{e_r}$ reduces $\left(\frac{a}{p}\right)$ to the factors $\left(\frac{-1}{p}\right)$, $\left(\frac{2}{p}\right)$, $\left(\frac{p'}{p}\right)$.
 
@@ -264,7 +274,7 @@ Related: Gauss's three-square theorem and Fermat's two-square theorem (a prime $
 
 # Pell's Equation
 
-Type I: $x^2 - Dy^2 = 1$ ($D \in \mathbb{Z}$, $D \neq 0$). For $D = -1$, only $(\pm 1, 0), (0, \pm 1)$; for $D < -1$ or $D$ a perfect square, only the trivial $(\pm 1, 0)$. For $D > 0$ non-square, factor $x^2 - Dy^2 = (x + y\sqrt{D})(x - y\sqrt{D}) = 1$, and call the nontrivial solution minimizing $x + y\sqrt{D}$ the fundamental solution $(x_1, y_1)$.
+Type I: $x^2 - Dy^2 = 1$ ($D \in \mathbb{Z}$, $D \neq 0$). For $D = -1$, only $(\pm 1, 0), (0, \pm 1)$; for $D < -1$ or $D$ a perfect square, only the trivial $(\pm 1, 0)$. For $D > 0$ non-square, factor $x^2 - Dy^2 = (x + y\sqrt{D})(x - y\sqrt{D}) = 1$, and call the nontrivial solution minimizing $x + y\sqrt{D}$ the <span style="color: red;">fundamental solution</span> $(x_1, y_1)$.
 
 > [!THEOREM]
 > All positive solutions are given by $x_n + y_n\sqrt{D} = (x_1 + y_1\sqrt{D})^n$, equivalently
@@ -276,15 +286,15 @@ Type II: $x^2 - Dy^2 = -1$. When solvable, with fundamental solution $(x_1, y_1)
 
 # Fermat's Last Theorem, $n = 3$
 
-In the Eisenstein integers $\mathbb{Z}[\omega] = \{a + b\omega + c\omega^2 \mid a, b, c \in \mathbb{Z},\ \omega = e^{2\pi i/3}\}$, the equation $x^3 + y^3 + z^3 = 0$ has no nontrivial solution. Consequently $x^3 + y^3 = 3z^3$ has no integer solution, so $3$ is not a sum of two rational cubes.
+In the <span style="color: red;">Eisenstein integers</span> $\mathbb{Z}[\omega] = \{a + b\omega + c\omega^2 \mid a, b, c \in \mathbb{Z},\ \omega = e^{2\pi i/3}\}$, the equation $x^3 + y^3 + z^3 = 0$ has no nontrivial solution. Consequently $x^3 + y^3 = 3z^3$ has no integer solution, so $3$ is not a sum of two rational cubes.
 
 # The Riemann Zeta Function and the Prime Number Theorem
 
-Euler product. $\displaystyle \zeta(s) = \sum_{n=1}^{\infty}\frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$ for $\operatorname{Re}(s) > 1$. Taking logarithms and using $-\ln(1 - p^{-s}) = \sum_n \frac{1}{n}p^{-ns}$ and $\frac{1}{n}p^{-ns} = \int_{p^n}^{\infty}\frac{1}{n}s\, x^{-s-1}\,\mathrm{d}x$,
+<span style="color: red;">Euler product</span>. $\displaystyle \zeta(s) = \sum_{n=1}^{\infty}\frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$ for $\operatorname{Re}(s) > 1$. Taking logarithms and using $-\ln(1 - p^{-s}) = \sum_n \frac{1}{n}p^{-ns}$ and $\frac{1}{n}p^{-ns} = \int_{p^n}^{\infty}\frac{1}{n}s\, x^{-s-1}\,\mathrm{d}x$,
 $$\frac{1}{s}\ln\zeta(s) = \int_0^{\infty} J(x)\, x^{-s-1}\,\mathrm{d}x, \qquad J(x) = \sum_{p^n \le x}\frac{1}{n}$$
 By Mellin inversion, $J(x) = \frac{1}{2\pi i}\int_{a - i\infty}^{a + i\infty}\frac{\ln\zeta(z)}{z}x^z\,\mathrm{d}z$. The completed function $\xi(s) = \Gamma\!\left(\frac{s}{2} + 1\right)(s-1)\pi^{-s/2}\zeta(s)$ is symmetric about $s = \tfrac12$ and has a Hadamard product over the nontrivial zeros. Möbius inversion of $J(x) = \sum_n \frac{1}{n}\pi(x^{1/n})$ gives
 $$\pi(x) = \sum_n \frac{\mu(n)}{n}J(x^{1/n}), \qquad J(x) = \operatorname{Li}(x) - \sum_\rho \operatorname{Li}(x^\rho) - \ln 2 + \int_x^{\infty}\frac{\mathrm{d}t}{t(t^2 - 1)\ln t}$$
-Showing $\zeta$ has no zeros on $\operatorname{Re}(s) = 1$ yields the Prime Number Theorem (Hadamard, de la Vallée Poussin).
+Showing $\zeta$ has no zeros on $\operatorname{Re}(s) = 1$ yields the <span style="color: red;">Prime Number Theorem</span> (Hadamard, de la Vallée Poussin).
 
 # Selected Exercises
 
@@ -337,7 +347,31 @@ Showing $\zeta$ has no zeros on $\operatorname{Re}(s) = 1$ yields the Prime Numb
         </script>
     </main>
 
-    <script src="../../scripts/markdown-article.js?v=20260917-callout-controls-1"></script>
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
     <script src="../../scripts/comments.js"></script>
 </body>
 </html>

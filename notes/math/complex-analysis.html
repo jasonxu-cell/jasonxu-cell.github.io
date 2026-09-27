@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Complex Analysis | Yang">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/my_website/notes/math/complex-analysis.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Complex Analysis | Yang">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
     <title>Complex Analysis | Yang</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
-    <link rel="icon" type="image/png" href="../../assets/photo.jpg">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    >
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
     <nav>
@@ -131,7 +141,7 @@ If $u$ and $v$ have continuous first partial derivatives near a point and satisf
 
 ## Harmonic Functions and Harmonic Conjugates
 
-Differentiating the Cauchy-Riemann equations shows that the real and imaginary parts of a holomorphic function are harmonic:
+Differentiating the Cauchy-Riemann equations shows that the real and imaginary parts of a holomorphic function are <span style="color: red;">harmonic</span>:
 
 $$
 \Delta u=u_{xx}+u_{yy}=0,
@@ -223,7 +233,7 @@ $$
 \qquad k\in\mathbb Z.
 $$
 
-A single-valued branch is obtained by restricting the argument to an interval of length $2\pi$. The principal branch is usually
+A single-valued branch is obtained by restricting the argument to an interval of length $2\pi$. The <span style="color: red;">principal branch</span> is usually
 
 $$
 \operatorname{Log}z=\ln|z|+i\operatorname{Arg}z,
@@ -249,7 +259,7 @@ w_k=r^{1/n}\exp\left(i\frac{\phi+2k\pi}{n}\right),
 \qquad k=0,1,\ldots,n-1.
 $$
 
-The functions $z^{1/n}$ and $\log z$ have branch points at $0$ and $\infty$. A branch cut, often a ray from $0$ to $\infty$, is introduced to prevent a closed loop from changing the value of a chosen branch.
+The functions $z^{1/n}$ and $\log z$ have <span style="color: red;">branch points</span> at $0$ and $\infty$. A <span style="color: red;">branch cut</span>, often a ray from $0$ to $\infty$, is introduced to prevent a closed loop from changing the value of a chosen branch.
 
 If $w_k$ is a local single-valued branch of $z^{1/n}$, then
 
@@ -342,7 +352,7 @@ The following theorem is a really important theorem:
 \end{aligned}$$
 >by the Cauchy-Riemann equations.
 
-One consequence is path independence: in a simply connected domain,
+One consequence is <span style="color: red;">path independence</span>: in a simply connected domain,
 
 $$
 \int_{z_0}^{z}f(\zeta)\,\mathrm{d}\zeta
@@ -354,7 +364,7 @@ $$
 F(z)=\int_{z_0}^{z}f(\zeta)\,\mathrm{d}\zeta
 $$
 
-is a primitive of $f$ and satisfies $F'(z)=f(z)$.
+is a <span style="color: red;">primitive</span> of $f$ and satisfies $F'(z)=f(z)$.
 
 > [!THEOREM] Cauchy's integral formula
 > If $f$ is holomorphic on and inside a positively oriented closed contour $C$, and $z$ lies inside $C$, then
@@ -396,9 +406,9 @@ $$
 \sum_{n=0}^{\infty}a_n(z-a)^n,
 $$
 
-there is a radius of convergence $R\in[0,\infty]$ such that the series converges absolutely for $|z-a|<R$ and diverges for $|z-a|>R$. It converges uniformly on every closed disk $|z-a|\le r<R$.
+there is a <span style="color: red;">radius of convergence</span> $R\in[0,\infty]$ such that the series converges absolutely for $|z-a|<R$ and diverges for $|z-a|>R$. It converges uniformly on every closed disk $|z-a|\le r<R$.
 
-The Cauchy-Hadamard formula is
+The <span style="color: red;">Cauchy-Hadamard formula</span> is
 
 $$
 \boxed{
@@ -421,7 +431,7 @@ $$
 \le M\left(\frac{r}{|z_0-a|}\right)^n.
 $$
 
-The Weierstrass test gives absolute and uniform convergence on $|z-a|\le r$. Conversely, if the series diverges at $z_1$, it cannot converge at any point farther from $a$; otherwise the preceding argument would force convergence at $z_1$.
+The <span style="color: red;">Weierstrass test</span> gives absolute and uniform convergence on $|z-a|\le r$. Conversely, if the series diverges at $z_1$, it cannot converge at any point farther from $a$; otherwise the preceding argument would force convergence at $z_1$.
 
 More generally, a locally uniformly convergent series of holomorphic functions has a holomorphic sum. Under locally uniform convergence of the derivative series, differentiation can be performed term by term.
 
@@ -470,7 +480,7 @@ $$
 
 ## Liouville's Theorem
 
-Every bounded entire function is constant. If $|f(z)|\le M$ on $\mathbb C$, the Cauchy estimate gives
+Every bounded <span style="color: red;">entire function</span> is constant. If $|f(z)|\le M$ on $\mathbb C$, the Cauchy estimate gives
 
 $$
 |f'(z)|\le \frac{M}{R}.
@@ -480,7 +490,7 @@ Letting $R\to\infty$ yields $f'(z)=0$.
 
 ## Fundamental Theorem of Algebra
 
-Every nonconstant complex polynomial has a zero. Otherwise, for a polynomial $P$, the function $1/P$ would be entire. It tends to $0$ as $|z|\to\infty$ and is bounded on each compact disk, hence bounded on the whole plane. Liouville's theorem would make $1/P$ constant, a contradiction.
+Every nonconstant complex polynomial has a zero. Otherwise, for a polynomial $P$, the function $1/P$ would be entire. It tends to $0$ as $|z|\to\infty$ and is bounded on each compact disk, hence bounded on the whole plane. <span style="color: red;">Liouville's theorem</span> would make $1/P$ constant, a contradiction.
 
 # Harmonic Functions and the Poisson Formula
 
@@ -502,7 +512,7 @@ P_R(r,\theta-\phi)
 =\frac{R^2-r^2}{R^2-2Rr\cos(\theta-\phi)+r^2}
 $$
 
-is the Poisson kernel. The formula follows by applying Cauchy's formula both at $z$ and at the reflected point with respect to the circle, then taking real parts.
+is the <span style="color: red;">Poisson kernel</span>. The formula follows by applying Cauchy's formula both at $z$ and at the reflected point with respect to the circle, then taking real parts.
 
 # Taylor and Laurent Series
 
@@ -556,7 +566,7 @@ $$
 r<|z-a|<R,
 $$
 
-then it has a Laurent expansion
+then it has a <span style="color: red;">Laurent expansion</span>
 
 $$
 \boxed{
@@ -638,7 +648,7 @@ $$
 f(z)=\sum_{n=-\infty}^{\infty}a_n(z-a)^n.
 $$
 
-The terms with $n<0$ form the principal part and classify the isolated singularity.
+The terms with $n<0$ form the <span style="color: red;">principal part</span> and classify the <span style="color: red;">isolated singularity</span>.
 
 ## Removable Singularity
 
@@ -663,7 +673,7 @@ For $n<0$, letting $\rho_0\to0$ gives $a_n=0$.
 
 ## Pole
 
-The point $a$ is a pole of order $m$ if
+The point $a$ is a <span style="color: red;">pole</span> of order $m$ if
 
 $$
 f(z)=\frac{a_{-m}}{(z-a)^m}+\cdots+
@@ -682,11 +692,11 @@ where $\phi$ is holomorphic near $a$. In the extended complex plane, $f(z)\to\in
 
 ## Essential Singularity
 
-If infinitely many negative-power coefficients are nonzero, $a$ is an essential singularity. In this case $\lim_{z\to a}f(z)$ does not exist, even as a point of the Riemann sphere.
+If infinitely many negative-power coefficients are nonzero, $a$ is an <span style="color: red;">essential singularity</span>. In this case $\lim_{z\to a}f(z)$ does not exist, even as a point of the Riemann sphere.
 
 # Residues
 
-For an isolated singularity $a$, the residue of $f$ at $a$ is
+For an isolated singularity $a$, the <span style="color: red;">residue</span> of $f$ at $a$ is
 
 $$
 \boxed{
@@ -723,7 +733,7 @@ $$
 }
 $$
 
-For a simple pole,
+For a <span style="color: red;">simple pole</span>,
 
 $$
 \operatorname{Res}(f,a)=\lim_{z\to a}(z-a)f(z).
@@ -782,7 +792,7 @@ $$
 
 ## Argument Principle
 
-Suppose $f$ is meromorphic inside and on $C$ and has no zeros or poles on $C$. Let $N$ and $P$ denote, with multiplicity, the numbers of zeros and poles inside $C$. Then
+Suppose $f$ is <span style="color: red;">meromorphic</span> inside and on $C$ and has no zeros or poles on $C$. Let $N$ and $P$ denote, with multiplicity, the numbers of zeros and poles inside $C$. Then
 
 $$
 \boxed{
@@ -798,7 +808,7 @@ $$
 =\frac1{2\pi}\Delta_C\arg f(z).
 $$
 
-Thus the change of argument of $f$ around $C$ is
+Thus the <span style="color: red;">change of argument</span> of $f$ around $C$ is
 
 $$
 \Delta_C\arg f=2\pi(N-P).
@@ -849,7 +859,7 @@ $$
 P(z)=z^n[1+o(1)],
 $$
 
-and the change of argument approaches $n\pi$. If $m$ is the number of zeros in the left half-plane, the argument principle gives
+and the change of argument approaches $n\pi$. If $m$ is the number of zeros in the left half-plane, the <span style="color: red;">argument principle</span> gives
 
 $$
 2m\pi=2k\pi+n\pi,
@@ -1103,7 +1113,7 @@ $$
 \alpha_1,\alpha_2,\ldots
 $$
 
-with a limit point $a\in D$, then
+with a <span style="color: red;">limit point</span> $a\in D$, then
 
 $$
 \boxed{f(z)=g(z)\quad\text{for all }z\in D.}
@@ -1119,7 +1129,7 @@ $$
 F(z)=f(z),\qquad z\in E,
 $$
 
-is an analytic continuation of $f$ to $D$. The identity theorem guarantees uniqueness whenever two continuations overlap on a set having an interior accumulation point.
+is an <span style="color: red;">analytic continuation</span> of $f$ to $D$. The <span style="color: red;">identity theorem</span> guarantees uniqueness whenever two continuations overlap on a set having an interior accumulation point.
 
 # Parameter-Dependent Holomorphic Integrals
 
@@ -1136,7 +1146,7 @@ $$
 F(z)=\int_a^b f(t,z)\,\mathrm{d}t
 $$
 
-is holomorphic on $D$, and differentiation under the integral sign is valid:
+is holomorphic on $D$, and <span style="color: red;">differentiation under the integral sign</span> is valid:
 
 $$
 \boxed{
@@ -1160,7 +1170,7 @@ $$
 F(z)=\int_a^{\infty}f(t,z)\,\mathrm{d}t,
 $$
 
-uniform convergence on $D$ means that for every $\varepsilon>0$ there is $T(\varepsilon)$ such that
+<span style="color: red;">uniform convergence</span> on $D$ means that for every $\varepsilon>0$ there is $T(\varepsilon)$ such that
 
 $$
 \left|\int_{T_1}^{T_2}f(t,z)\,\mathrm{d}t\right|<\varepsilon
@@ -1268,7 +1278,7 @@ $$
 
 ## Euler Reflection Formula
 
-Euler's reflection formula is
+<span style="color: red;">Euler's reflection formula</span> is
 
 $$
 \boxed{
@@ -1276,7 +1286,7 @@ $$
 }
 $$
 
-For $0<\operatorname{Re}z<1$, the beta integral gives
+For $0<\operatorname{Re}z<1$, the <span style="color: red;">beta integral</span> gives
 
 $$
 \Gamma(z)\Gamma(1-z)
@@ -1328,7 +1338,7 @@ $$
 |\Delta w|\sim |f'(z_0)|\,|\Delta z|.
 $$
 
-The factor $|f'(z_0)|$ is the local magnification.
+The factor $|f'(z_0)|$ is the <span style="color: red;">local magnification</span>.
 
 ## A Univalent Holomorphic Map Has Nonzero Derivative
 
@@ -1353,7 +1363,7 @@ $$
 
 has $m$ zeros near $z_0$. Hence $f$ takes the value $f(z_0)+a$ at more than one nearby point, contradicting injectivity.
 
-A one-to-one holomorphic map is therefore conformal everywhere on its domain. Conversely, a holomorphic function is locally conformal precisely where its derivative is nonzero.
+A one-to-one holomorphic map is therefore <span style="color: red;">conformal</span> everywhere on its domain. Conversely, a holomorphic function is locally conformal precisely where its derivative is nonzero.
 
 ## The Riemann Mapping Theorem
 
@@ -1402,7 +1412,7 @@ $$
 
 wherever $M$ is finite.
 
-The extended plane $\widehat{\mathbb C}=\mathbb C\cup\{\infty\}$ makes the exceptional values natural:
+The <span style="color: red;">extended plane</span> $\widehat{\mathbb C}=\mathbb C\cup\{\infty\}$ makes the exceptional values natural:
 
 $$
 M\left(-\frac dc\right)=\infty,
@@ -1412,7 +1422,7 @@ $$
 
 when $c\ne0$.
 
-Every Mobius transformation is a composition of the elementary maps
+Every <span style="color: red;">Mobius transformation</span> is a composition of the elementary maps
 
 $$
 \begin{array}{ll}
@@ -1435,7 +1445,7 @@ which displays this decomposition directly.
 
 ## Generalized Circles
 
-A generalized circle means either a circle or a straight line in $\widehat{\mathbb C}$. Its equation can be written
+A <span style="color: red;">generalized circle</span> means either a circle or a straight line in $\widehat{\mathbb C}$. Its equation can be written
 
 $$
 A z\overline z+Bz+\overline B\,\overline z+C=0,
@@ -1566,7 +1576,7 @@ $$
 
 maps the upper half-plane conformally onto the unit disk, sends $z_0$ to $0$, and allows an arbitrary final rotation $e^{i\theta}$.
 
-A standard Cayley transform is
+A standard <span style="color: red;">Cayley transform</span> is
 
 $$
 w=\frac{z-i}{z+i},
@@ -1582,7 +1592,7 @@ Compositions with powers, rotations, translations, and inversions give maps betw
 
 ## Joukowski Transformation
 
-The Joukowski map is
+The <span style="color: red;">Joukowski map</span> is
 
 $$
 \boxed{
@@ -1652,7 +1662,7 @@ $$
 \sum_{k=1}^{n}\alpha_k=n-2.
 $$
 
-Near a prevertex $a_k$, the change of direction of the image boundary implies
+Near a <span style="color: red;">prevertex</span> $a_k$, the change of direction of the image boundary implies
 
 $$
 \frac{\mathrm{d}w}{\mathrm{d}z}\sim C_k(z-a_k)^{\alpha_k-1}.
@@ -1667,7 +1677,7 @@ $$
 }
 $$
 
-After integration, the Schwarz-Christoffel map is
+After integration, the <span style="color: red;">Schwarz-Christoffel map</span> is
 
 $$
 \boxed{
@@ -1680,7 +1690,31 @@ The constants $A$ and $C$, together with the prevertices $a_k$, are chosen to pl
         </script>
     </main>
 
-    <script src="../../scripts/markdown-article.js?v=20260917-callout-controls-1"></script>
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
     <script src="../../scripts/comments.js"></script>
 </body>
 </html>

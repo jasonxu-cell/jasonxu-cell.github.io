@@ -304,6 +304,9 @@
             "objc": "objectivec",
             "py": "python",
             "rb": "ruby",
+            "sv": "verilog",
+            "systemverilog": "verilog",
+            "v": "verilog",
             "shell": "bash",
             "sh": "bash",
             "vb": "vbnet",
@@ -355,6 +358,25 @@
                 { pattern: "\\b[1-5]\\d{2}(?=\\s)", className: "hljs-number" },
                 { pattern: "(?:https?://[^\\s]+|/[^\\s]*(?=\\s+HTTP/))", className: "hljs-string" }
             ]
+        },
+        verilog: {
+            keywords: [
+                "always", "always_comb", "always_ff", "always_latch", "and", "assign", "automatic", "begin", "buf",
+                "case", "casex", "casez", "deassign", "default", "defparam", "disable", "else", "end", "endcase",
+                "endfunction", "endgenerate", "endmodule", "endtask", "for", "force", "forever", "fork", "function",
+                "generate", "genvar", "if", "initial", "inout", "input", "join", "localparam", "module", "nand",
+                "negedge", "nor", "not", "or", "output", "parameter", "posedge", "release", "repeat", "return",
+                "task", "wait", "while", "xnor", "xor"
+            ],
+            types: [
+                "bit", "byte", "integer", "logic", "real", "reg", "signed", "supply0", "supply1", "time", "tri",
+                "unsigned", "wand", "wire", "wor"
+            ],
+            builtIns: [],
+            literals: [],
+            stringPatterns: ['"(?:\\\\.|[^"\\\\])*"'],
+            metaPatterns: ["`[A-Za-z_][A-Za-z0-9_]*", "\\$[A-Za-z_][A-Za-z0-9_$]*"],
+            numberPattern: "(?:\\b\\d[\\d_]*)?'[sS]?[bBoOdDhH]\\s*[0-9a-fA-FxXzZ_?]+|\\b\\d[\\d_]*(?:\\.\\d+)?\\b"
         },
         cpp: {
             keywords: [

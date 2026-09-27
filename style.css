@@ -320,6 +320,13 @@ section {
     line-height: 1.55;
 }
 
+/* Keep each fact (e.g. "Data-driven Geophysics") on one line; lines break
+   only between items unless a single item is wider than the column. */
+.profile-facts .fact-item {
+    display: inline-block;
+    max-width: 100%;
+}
+
 a:focus-visible,
 button:focus-visible {
     outline: 3px solid rgba(23, 95, 112, 0.35);
@@ -2274,9 +2281,10 @@ main,
     transform: translateY(-2px);
 }
 
-.site-footer .footer-contact-icon i {
-    font-size: 20px;
-    line-height: 1;
+.site-footer .footer-contact-icon svg {
+    display: block;
+    width: 20px;
+    height: 20px;
 }
 
 @media (max-width: 680px) {
