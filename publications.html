@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hidden page: intentionally not linked from any navigation and not listed in
+         scripts/update_site_metadata.py. Keep the robots meta below. -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Publications by Yang Xu.">
+    <meta property="og:title" content="Publications | Yang Xu">
+    <meta property="og:description" content="Publications by Yang Xu.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/my_website/publications.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Publications | Yang Xu">
+    <meta name="twitter:description" content="Publications by Yang Xu.">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/my_website/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
+    <title>Publications | Yang Xu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="research.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <style>
+        /* Page-specific styles for publications.html (reuses the shared surface tokens). */
+        .pubs-page {
+            width: min(100%, 980px);
+            margin: 72px auto 100px;
+        }
+
+        .pubs-intro {
+            margin: 18px auto 0;
+            color: rgba(0, 0, 0, 0.66);
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        .pubs-panel {
+            padding: 36px 45px;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .pubs-panel[hidden] {
+            display: none;
+        }
+
+        .pubs-year + .pubs-year {
+            margin-top: 34px;
+            padding-top: 30px;
+            border-top: 1px solid var(--line);
+        }
+
+        .pubs-year h2 {
+            margin: 0 0 18px;
+            color: #355f62;
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .pubs-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: pub;
+        }
+
+        .pubs-entry {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 6px;
+            counter-increment: pub;
+        }
+
+        .pubs-entry + .pubs-entry {
+            margin-top: 24px;
+        }
+
+        .pubs-entry::before {
+            content: counter(pub) ".";
+            padding-top: 1px;
+            color: #527376;
+            font-family: var(--serif);
+            font-size: 18px;
+        }
+
+        .pubs-body {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .pubs-title {
+            margin: 0;
+            color: var(--ink);
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        .pubs-authors,
+        .pubs-venue,
+        .pubs-note {
+            margin: 4px 0 0;
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .pubs-authors {
+            color: rgba(0, 0, 0, 0.72);
+        }
+
+        .pubs-authors strong {
+            color: var(--ink);
+        }
+
+        .pubs-venue {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .pubs-note {
+            color: #9a3412;
+            font-weight: 700;
+        }
+
+        .pubs-template-badge {
+            display: inline-block;
+            margin-bottom: 6px;
+            padding: 3px 10px;
+            color: #7c2d12;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: rgba(254, 243, 199, 0.85);
+            border: 1px dashed #d97706;
+            border-radius: 999px;
+        }
+
+        .pubs-links {
+            display: flex;
+            margin-top: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pubs-links a {
+            padding: 3px 11px;
+            color: var(--accent-strong);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(23, 95, 112, 0.45);
+            border-radius: 999px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .pubs-links a:hover {
+            color: #ffffff;
+            background: var(--accent);
+        }
+
+        @media (max-width: 900px) {
+            .pubs-page {
+                margin-top: 48px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .pubs-page {
+                margin-top: 34px;
+                margin-bottom: 64px;
+            }
+
+            .pubs-panel {
+                padding: 26px 20px;
+            }
+
+            .pubs-intro {
+                font-size: 16px;
+            }
+
+            .pubs-year h2 {
+                font-size: 26px;
+            }
+
+            .pubs-entry {
+                grid-template-columns: 30px minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="articles.html">Articles</a>
+            <a href="research.html">Research</a>
+        </div>
+    </nav>
+
+    <main id="main-content" class="pubs-page">
+        <header class="research-index-header">
+            <h1>Publications</h1>
+            <p class="pubs-intro" id="pubs-intro">Publications will be listed here.</p>
+        </header>
+
+        <noscript>
+            <p class="pubs-intro" style="text-align: center;">(Enable JavaScript to view the publication list.)</p>
+        </noscript>
+
+        <section class="pubs-panel" id="pubs-list" aria-label="Publications by year" hidden></section>
+    </main>
+
+    <!--
+    ==========================================================================
+    HOW TO ADD A PUBLICATION
+    ==========================================================================
+    Add one object to the PUBLICATIONS array below (order does not matter):
+
+        {
+            title: "Paper title",
+            authors: "Yang Xu, Coauthor A, Coauthor B",   // "Yang Xu" is bolded automatically
+            venue: "Journal or Conference Name, City",    // shown in italics, followed by "Month Year"
+            year: 2027,
+            month: 5,                                     // 1-12, or 0 if unknown
+            note: "",                                     // optional highlight, e.g. "Best Paper Award"
+            links: { arxiv: "", pdf: "", doi: "", code: "", scholar: "" }  // empty = button hidden
+        },
+
+    Entries are grouped under year headings (newest first), numbered within
+    each year, and sorted by month (newest first).
+
+    The entry marked `template: true` is an example only. It is hidden from
+    normal visitors and appears only at publications.html?preview (to check
+    the layout). Delete it or leave it; it never shows without ?preview.
+    ==========================================================================
+    -->
+    <script>
+        const PUBLICATIONS = [
+            {
+                template: true, // EXAMPLE ONLY: rendered only with ?preview
+                title: "Example Paper Title (template entry)",
+                authors: "Yang Xu, Coauthor A, Coauthor B",
+                venue: "Journal Name",
+                year: 2026,
+                month: 1,
+                note: "Example note line (e.g. Best Paper Award)",
+                links: { arxiv: "https://arxiv.org/", pdf: "", doi: "", code: "https://github.com/jasonxu-cell", scholar: "" }
+            }
+        ];
+
+        (function renderPublications() {
+            const OWN_NAME = "Yang Xu";
+            const MONTHS = ["", "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            const BUTTONS = [
+                ["arxiv", "arXiv"], ["pdf", "PDF"], ["doi", "DOI"], ["code", "Code"], ["scholar", "Scholar"]
+            ];
+            const preview = new URLSearchParams(window.location.search).has("preview");
+            const list = document.getElementById("pubs-list");
+            const intro = document.getElementById("pubs-intro");
+
+            const escapeHtml = (value) => String(value == null ? "" : value)
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+            const formatAuthors = (authors) => String(authors || "")
+                .split(",")
+                .map((name) => name.trim())
+                .filter(Boolean)
+                .map((name) => {
+                    const safe = escapeHtml(name);
+                    return name.replace(/[*†‡#]+$/, "").trim() === OWN_NAME ? `<strong>${safe}</strong>` : safe;
+                })
+                .join(", ");
+
+            const entries = PUBLICATIONS.filter((pub) => preview || !pub.template);
+            if (!entries.length) {
+                return; // clean empty state: only the intro line is shown
+            }
+
+            intro.textContent = "Publications in reverse chronological order.";
+
+            const byYear = new Map();
+            entries.forEach((pub) => {
+                const year = Number(pub.year) || 0;
+                if (!byYear.has(year)) byYear.set(year, []);
+                byYear.get(year).push(pub);
+            });
+
+            const html = [...byYear.keys()].sort((a, b) => b - a).map((year) => {
+                const items = byYear.get(year)
+                    .slice()
+                    .sort((a, b) => (Number(b.month) || 0) - (Number(a.month) || 0))
+                    .map((pub) => {
+                        const month = MONTHS[Number(pub.month)] || "";
+                        const when = [month, year || ""].filter(Boolean).join(" ");
+                        const venue = [pub.venue, when].filter(Boolean).join(", ");
+                        const links = BUTTONS
+                            .filter(([key]) => pub.links && String(pub.links[key] || "").trim())
+                            .map(([key, label]) => `<a href="${escapeHtml(pub.links[key].trim())}" target="_blank" rel="noopener noreferrer">${label}</a>`)
+                            .join("");
+                        return `
+                <li class="pubs-entry">
+                    <div class="pubs-body">
+                        ${pub.template ? '<span class="pubs-template-badge">Example entry – replace with a real publication</span>' : ""}
+                        <p class="pubs-title">${escapeHtml(pub.title)}</p>
+                        ${pub.authors ? `<p class="pubs-authors">${formatAuthors(pub.authors)}</p>` : ""}
+                        ${venue ? `<p class="pubs-venue">${escapeHtml(venue)}</p>` : ""}
+                        ${pub.note ? `<p class="pubs-note">${escapeHtml(pub.note)}</p>` : ""}
+                        ${links ? `<div class="pubs-links">${links}</div>` : ""}
+                    </div>
+                </li>`;
+                    }).join("");
+                return `
+            <div class="pubs-year">
+                <h2>${year || "Undated"}</h2>
+                <ol class="pubs-list">${items}
+                </ol>
+            </div>`;
+            }).join("");
+
+            list.innerHTML = html;
+            list.hidden = false;
+        })();
+    </script>
+
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>
