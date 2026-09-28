@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hidden page for now: not linked from navigation and not listed in
+         scripts/update_site_metadata.py. Add it to the nav (and drop the robots
+         meta below) once real items are in the list. -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Books, papers, and anime Yang Xu is reading, has finished, or wants to read.">
+    <meta property="og:title" content="Reading List | Yang Xu">
+    <meta property="og:description" content="Books, papers, and anime Yang Xu is reading, has finished, or wants to read.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/reading.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reading List | Yang Xu">
+    <meta name="twitter:description" content="Books, papers, and anime Yang Xu is reading, has finished, or wants to read.">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
+    <title>Reading List | Yang Xu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="research.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <style>
+        /* Page-specific styles for reading.html (reuses the shared surface tokens). */
+        .reading-page {
+            width: min(100%, 980px);
+            margin: 72px auto 100px;
+        }
+
+        .reading-intro {
+            margin: 18px auto 0;
+            color: rgba(0, 0, 0, 0.66);
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        .reading-panel {
+            padding: 36px 45px;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .reading-panel[hidden] {
+            display: none;
+        }
+
+        .reading-section + .reading-section {
+            margin-top: 34px;
+            padding-top: 30px;
+            border-top: 1px solid var(--line);
+        }
+
+        .reading-section h2 {
+            margin: 0 0 18px;
+            color: #355f62;
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .reading-year {
+            margin: 22px 0 12px;
+            color: #527376;
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .reading-section h2 + .reading-year {
+            margin-top: 0;
+        }
+
+        .reading-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .reading-item + .reading-item {
+            margin-top: 18px;
+        }
+
+        .reading-item {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .reading-heading {
+            display: flex;
+            margin: 0;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+        }
+
+        .reading-title {
+            color: var(--ink);
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+
+        a.reading-title {
+            text-decoration: underline;
+            text-decoration-color: rgba(23, 95, 112, 0.35);
+            text-underline-offset: 3px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        a.reading-title:hover {
+            color: var(--accent);
+            text-decoration-color: var(--accent);
+        }
+
+        .reading-type {
+            padding: 1px 9px;
+            color: var(--accent-strong);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(23, 95, 112, 0.45);
+            border-radius: 999px;
+        }
+
+        .reading-author,
+        .reading-note {
+            margin: 3px 0 0;
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .reading-author {
+            color: rgba(0, 0, 0, 0.72);
+        }
+
+        .reading-note {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .reading-template-badge {
+            display: inline-block;
+            margin-bottom: 6px;
+            padding: 3px 10px;
+            color: #7c2d12;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: rgba(254, 243, 199, 0.85);
+            border: 1px dashed #d97706;
+            border-radius: 999px;
+        }
+
+        @media (max-width: 900px) {
+            .reading-page {
+                margin-top: 48px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .reading-page {
+                margin-top: 34px;
+                margin-bottom: 64px;
+            }
+
+            .reading-panel {
+                padding: 26px 20px;
+            }
+
+            .reading-intro {
+                font-size: 16px;
+            }
+
+            .reading-section h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="articles.html">Articles</a>
+            <a href="research.html">Research</a>
+        </div>
+    </nav>
+
+    <main id="main-content" class="reading-page">
+        <header class="research-index-header">
+            <h1>Reading List</h1>
+            <p class="reading-intro" id="reading-intro">Nothing on the list yet.</p>
+        </header>
+
+        <noscript>
+            <p class="reading-intro" style="text-align: center;">(Enable JavaScript to view the reading list.)</p>
+        </noscript>
+
+        <section class="reading-panel" id="reading-list" aria-label="Reading list" hidden></section>
+    </main>
+
+    <!--
+    ==========================================================================
+    HOW TO ADD AN ITEM
+    ==========================================================================
+    Add one object to the READING array below (order does not matter):
+
+        {
+            title: "Title",
+            author: "Author or studio",                   // optional
+            type: "book",                                 // "book" | "paper" | "anime" | "other"
+            status: "finished",                           // "reading" | "finished" | "want"
+            year: 2026,                                   // year finished (optional, used for "finished")
+            note: "",                                     // optional one-line thought
+            link: ""                                      // optional URL; makes the title a link
+        },
+
+    Sections: Currently reading, Finished (grouped by year, newest first;
+    items without a year go under "Earlier"), Want to read. Empty sections
+    are hidden automatically.
+
+    The entry marked `template: true` is an example only. It is hidden from
+    normal visitors and appears only at reading.html?preview (to check the
+    layout). Delete it or leave it; it never shows without ?preview.
+    ==========================================================================
+    -->
+    <script>
+        const READING = [
+            {
+                template: true, // EXAMPLE ONLY: rendered only with ?preview
+                title: "Example Book Title (template entry)",
+                author: "Example Author",
+                type: "book",
+                status: "finished",
+                year: 2026,
+                note: "Example one-line thought (replace with a real one).",
+                link: ""
+            }
+        ];
+
+        (function renderReadingList() {
+            const SECTIONS = [
+                ["reading", "Currently reading"],
+                ["finished", "Finished"],
+                ["want", "Want to read"]
+            ];
+            const TYPES = { book: "Book", paper: "Paper", anime: "Anime", other: "Other" };
+            const preview = new URLSearchParams(window.location.search).has("preview");
+            const list = document.getElementById("reading-list");
+            const intro = document.getElementById("reading-intro");
+
+            const escapeHtml = (value) => String(value == null ? "" : value)
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+            const safeUrl = (value) => {
+                const url = String(value || "").trim();
+                return /^(https?:)?\/\//i.test(url) || /^[./]/.test(url) ? url : "";
+            };
+
+            const items = READING.filter((item) => preview || !item.template);
+            if (!items.length) {
+                return; // clean empty state: only the intro line is shown
+            }
+
+            intro.textContent = "Books, papers, and anime I'm reading, have finished, or want to get to.";
+
+            const renderItem = (item) => {
+                const type = TYPES[item.type] || TYPES.other;
+                const link = safeUrl(item.link);
+                const title = link
+                    ? `<a class="reading-title" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title)}</a>`
+                    : `<span class="reading-title">${escapeHtml(item.title)}</span>`;
+                return `
+                    <li class="reading-item">
+                        ${item.template ? '<span class="reading-template-badge">Example entry – replace with a real item</span>' : ""}
+                        <p class="reading-heading">${title}<span class="reading-type">${type}</span></p>
+                        ${item.author ? `<p class="reading-author">${escapeHtml(item.author)}</p>` : ""}
+                        ${item.note ? `<p class="reading-note">${escapeHtml(item.note)}</p>` : ""}
+                    </li>`;
+            };
+
+            const byTitle = (a, b) => String(a.title).localeCompare(String(b.title));
+
+            const html = SECTIONS.map(([status, label]) => {
+                const group = items.filter((item) => item.status === status);
+                if (!group.length) return "";
+                let body;
+                if (status === "finished") {
+                    const byYear = new Map();
+                    group.forEach((item) => {
+                        const year = Number(item.year) || 0;
+                        if (!byYear.has(year)) byYear.set(year, []);
+                        byYear.get(year).push(item);
+                    });
+                    body = [...byYear.keys()].sort((a, b) => b - a).map((year) => `
+                <h3 class="reading-year">${year || "Earlier"}</h3>
+                <ul class="reading-list">${byYear.get(year).slice().sort(byTitle).map(renderItem).join("")}
+                </ul>`).join("");
+                } else {
+                    body = `
+                <ul class="reading-list">${group.slice().sort(byTitle).map(renderItem).join("")}
+                </ul>`;
+                }
+                return `
+            <div class="reading-section">
+                <h2>${label}</h2>${body}
+            </div>`;
+            }).join("");
+
+            if (!html.trim()) {
+                return;
+            }
+            list.innerHTML = html;
+            list.hidden = false;
+        })();
+    </script>
+
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>
