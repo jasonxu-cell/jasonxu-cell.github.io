@@ -155,7 +155,8 @@
             flex-wrap: wrap;
         }
 
-        .pubs-links a {
+        .pubs-links a,
+        .pubs-abs-toggle {
             padding: 3px 11px;
             color: var(--accent-strong);
             font-size: 12px;
@@ -169,9 +170,71 @@
             transition: color 0.2s ease, background 0.2s ease;
         }
 
-        .pubs-links a:hover {
+        .pubs-links a:hover,
+        .pubs-abs-toggle:hover,
+        .pubs-abs-toggle[aria-expanded="true"] {
             color: #ffffff;
             background: var(--accent);
+        }
+
+        .pubs-abs-toggle {
+            margin: 0;
+            font-family: inherit;
+            line-height: inherit;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .pubs-links a:focus-visible,
+        .pubs-abs-toggle:focus-visible {
+            outline: 2px solid var(--accent-strong);
+            outline-offset: 2px;
+        }
+
+        /* Collapsible abstract: animates grid row 0fr -> 1fr for a smooth expand. */
+        .pubs-abstract {
+            display: grid;
+            grid-template-rows: 0fr;
+            visibility: hidden;
+            transition: grid-template-rows 0.32s ease, visibility 0s linear 0.32s;
+        }
+
+        .pubs-abstract.is-open {
+            grid-template-rows: 1fr;
+            visibility: visible;
+            transition: grid-template-rows 0.32s ease, visibility 0s linear 0s;
+        }
+
+        .pubs-abstract-inner {
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .pubs-abstract-box {
+            max-width: 72ch;
+            margin: 12px 0 2px;
+            padding: 14px 18px;
+            color: rgba(0, 0, 0, 0.74);
+            font-size: 15px;
+            line-height: 1.65;
+            text-align: left;
+            hyphens: auto;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--line);
+            border-left: 3px solid rgba(23, 95, 112, 0.55);
+            border-radius: 12px;
+        }
+
+        .pubs-abstract-box p {
+            margin: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pubs-abstract,
+            .pubs-abstract.is-open {
+                transition: none;
+            }
         }
 
         @media (max-width: 900px) {
@@ -200,6 +263,11 @@
 
             .pubs-entry {
                 grid-template-columns: 30px minmax(0, 1fr);
+            }
+
+            .pubs-abstract-box {
+                padding: 12px 14px;
+                font-size: 14.5px;
             }
         }
     </style>
@@ -241,6 +309,7 @@
             year: 2027,
             month: 5,                                     // 1-12, or 0 if unknown
             note: "",                                     // optional highlight, e.g. "Best Paper Award"
+            abstract: "",                                 // optional; non-empty adds an "ABS" toggle button
             links: { arxiv: "", pdf: "", doi: "", code: "", scholar: "" }  // empty = button hidden
         },
 
@@ -262,6 +331,7 @@
                 year: 2026,
                 month: 1,
                 note: "Example note line (e.g. Best Paper Award)",
+                abstract: "This is an example abstract for the template entry. Replace it with the real abstract of the paper when adding a publication. It appears in a collapsible box when the ABS button is clicked.",
                 links: { arxiv: "https://arxiv.org/", pdf: "", doi: "", code: "https://github.com/jasonxu-cell", scholar: "" }
             }
         ];
@@ -305,6 +375,7 @@
                 byYear.get(year).push(pub);
             });
 
+            let absCount = 0;
             const html = [...byYear.keys()].sort((a, b) => b - a).map((year) => {
                 const items = byYear.get(year)
                     .slice()
@@ -317,6 +388,12 @@
                             .filter(([key]) => pub.links && String(pub.links[key] || "").trim())
                             .map(([key, label]) => `<a href="${escapeHtml(pub.links[key].trim())}" target="_blank" rel="noopener noreferrer">${label}</a>`)
                             .join("");
+                        const abstract = String(pub.abstract || "").trim();
+                        const absId = abstract ? `pub-abstract-${++absCount}` : "";
+                        const absButton = abstract
+                            ? `<button type="button" class="pubs-abs-toggle" aria-expanded="false" aria-controls="${absId}">Abs</button>`
+                            : "";
+                        const buttons = absButton + links;
                         return `
                 <li class="pubs-entry">
                     <div class="pubs-body">
@@ -325,7 +402,8 @@
                         ${pub.authors ? `<p class="pubs-authors">${formatAuthors(pub.authors)}</p>` : ""}
                         ${venue ? `<p class="pubs-venue">${escapeHtml(venue)}</p>` : ""}
                         ${pub.note ? `<p class="pubs-note">${escapeHtml(pub.note)}</p>` : ""}
-                        ${links ? `<div class="pubs-links">${links}</div>` : ""}
+                        ${buttons ? `<div class="pubs-links">${buttons}</div>` : ""}
+                        ${abstract ? `<div class="pubs-abstract" id="${absId}" role="region" aria-label="Abstract"><div class="pubs-abstract-inner"><div class="pubs-abstract-box"><p>${escapeHtml(abstract)}</p></div></div></div>` : ""}
                     </div>
                 </li>`;
                     }).join("");
@@ -339,6 +417,16 @@
 
             list.innerHTML = html;
             list.hidden = false;
+
+            list.addEventListener("click", (event) => {
+                const button = event.target.closest(".pubs-abs-toggle");
+                if (!button) return;
+                const panel = document.getElementById(button.getAttribute("aria-controls"));
+                if (!panel) return;
+                const open = button.getAttribute("aria-expanded") !== "true";
+                button.setAttribute("aria-expanded", String(open));
+                panel.classList.toggle("is-open", open);
+            });
         })();
     </script>
 
