@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE_URL = "https://jasonxu-cell.github.io/my_website/"
+SITE_URL = "https://jasonxu-cell.github.io/"
 OG_IMAGE = {
     "url": f"{SITE_URL}assets/og-image.png",
     "width": "1200",

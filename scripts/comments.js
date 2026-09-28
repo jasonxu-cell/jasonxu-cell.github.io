@@ -22,7 +22,7 @@
     const script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.async = true;
-    script.setAttribute('repo', widget.dataset.commentsRepo || 'jasonxu-cell/my_website');
+    script.setAttribute('repo', widget.dataset.commentsRepo || 'jasonxu-cell/jasonxu-cell.github.io');
     script.setAttribute('issue-term', widget.dataset.issueTerm || 'pathname');
     script.setAttribute('label', widget.dataset.label || 'comment');
     script.setAttribute('theme', widget.dataset.theme || 'github-light');

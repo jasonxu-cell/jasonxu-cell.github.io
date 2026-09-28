@@ -94,7 +94,7 @@ IMAGE_SUFFIXES = {
 
 DEFAULT_VAULT = Path(os.environ.get("OBSIDIAN_VAULT", "/Users/xuyang/Documents/Obsidian Vault"))
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
-SITE_URL = "https://jasonxu-cell.github.io/my_website/"
+SITE_URL = "https://jasonxu-cell.github.io/"
 OG_IMAGE_URL = f"{SITE_URL}assets/og-image.png"
 OG_IMAGE_ALT = "Yang Xu — Geophysics · USTC"
 
@@ -412,7 +412,7 @@ def html_page(
                 <h2 id="comments-title">Comments</h2>
                 <p>Questions, corrections, and reading notes are welcome here.</p>
             </div>
-            <div class="article-comments-widget" data-comments-repo="jasonxu-cell/my_website"></div>
+            <div class="article-comments-widget" data-comments-repo="jasonxu-cell/jasonxu-cell.github.io"></div>
             <p class="article-comments-status" hidden>Comments load on the published website.</p>
             <noscript>Enable JavaScript to view comments.</noscript>
         </section>
