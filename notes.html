@@ -24,6 +24,222 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <style>
+        /* Page-specific styles for the note search on notes.html. */
+        .note-search {
+            width: min(100%, 760px);
+            margin: 0 auto clamp(32px, 4vw, 44px);
+        }
+
+        .note-search[hidden] {
+            display: none;
+        }
+
+        .note-search-field {
+            position: relative;
+        }
+
+        .note-search-field svg {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            width: 18px;
+            height: 18px;
+            color: var(--muted);
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .note-search-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 56px 14px 50px;
+            color: var(--ink);
+            font: inherit;
+            font-size: 17px;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 999px;
+            box-shadow: var(--shadow);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .note-search-input::placeholder {
+            color: rgba(20, 33, 38, 0.5);
+        }
+
+        .note-search-input:focus {
+            background: var(--surface-hover);
+            border-color: rgba(23, 95, 112, 0.45);
+            box-shadow: var(--shadow), 0 0 0 3px rgba(23, 95, 112, 0.16);
+        }
+
+        .note-search-input::-webkit-search-cancel-button {
+            cursor: pointer;
+        }
+
+        .note-search-key {
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            padding: 1px 8px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .note-search.has-query .note-search-key,
+        .note-search-input:focus + .note-search-key {
+            display: none;
+        }
+
+        .note-search-status {
+            margin: 12px 6px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .note-search-status:empty {
+            display: none;
+        }
+
+        .note-search-status.is-empty {
+            padding: 18px 22px;
+            color: var(--muted);
+            font-size: 15px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 18px;
+        }
+
+        .note-search-results {
+            margin: 10px 0 0;
+            padding: 8px;
+            list-style: none;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .note-search-results[hidden] {
+            display: none;
+        }
+
+        .note-search-results li + li {
+            border-top: 1px solid var(--line);
+        }
+
+        .note-search-result {
+            display: block;
+            padding: 14px 16px;
+            color: inherit;
+            text-decoration: none;
+            border-radius: 14px;
+            transition: background 0.2s ease;
+        }
+
+        .note-search-result:hover,
+        .note-search-result:focus-visible {
+            background: rgba(255, 255, 255, 0.72);
+            outline: none;
+        }
+
+        .note-search-result:focus-visible {
+            box-shadow: inset 0 0 0 2px rgba(23, 95, 112, 0.45);
+        }
+
+        .note-search-meta {
+            display: block;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .note-search-title {
+            display: block;
+            margin-top: 2px;
+            color: var(--ink);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .note-search-snippet {
+            margin: 6px 0 0;
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 14.5px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .note-search-section {
+            margin-right: 6px;
+            color: var(--accent-strong);
+            font-weight: 700;
+        }
+
+        .note-search-section::after {
+            content: " ›";
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .note-search-results mark {
+            padding: 0;
+            color: inherit;
+            background: rgba(250, 204, 21, 0.42);
+            border-radius: 3px;
+        }
+
+        .note-search-label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 680px) {
+            .note-search-input {
+                padding: 12px 18px 12px 44px;
+                font-size: 16px;
+            }
+
+            .note-search-field svg {
+                left: 16px;
+            }
+
+            .note-search-key {
+                display: none;
+            }
+
+            .note-search-result {
+                padding: 12px 10px;
+            }
+
+            .note-search-title {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -40,6 +256,17 @@
         <div class="note-header">
             <h1>Notes</h1>
         </div>
+
+        <form class="note-search" id="note-search" role="search" aria-label="Search notes" hidden>
+            <label class="note-search-label" for="note-search-input">Search notes</label>
+            <div class="note-search-field">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+                <input class="note-search-input" id="note-search-input" type="search" placeholder="Search notes… (中文 / English)" autocomplete="off" spellcheck="false" aria-describedby="note-search-status" aria-controls="note-search-results">
+                <kbd class="note-search-key" aria-hidden="true">/</kbd>
+            </div>
+            <p class="note-search-status" id="note-search-status" role="status" aria-live="polite"></p>
+            <ol class="note-search-results" id="note-search-results" aria-label="Search results" hidden></ol>
+        </form>
 
         <div class="note-grid">
             <a href="notes/math.html" class="note-card">
@@ -163,5 +390,7 @@
             </a>
         </nav>
     </footer>
+
+    <script src="scripts/note-search.js?v=20260928-1" defer></script>
 </body>
 </html>
