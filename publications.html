@@ -56,7 +56,13 @@
             display: none;
         }
 
-        .pubs-year + .pubs-year {
+        .pubs-year[hidden],
+        .pubs-entry[hidden] {
+            display: none;
+        }
+
+        /* Separator only between visible year groups (search can hide some). */
+        .pubs-year:not([hidden]) ~ .pubs-year:not([hidden]) {
             margin-top: 34px;
             padding-top: 30px;
             border-top: 1px solid var(--line);
@@ -237,6 +243,120 @@
             }
         }
 
+
+        /* ---------- Search (same look as the Notes page search box) ---------- */
+
+        .pubs-search {
+            width: min(100%, 760px);
+            margin: 0 auto clamp(32px, 4vw, 44px);
+        }
+
+        .pubs-search[hidden] {
+            display: none;
+        }
+
+        .pubs-search-field {
+            position: relative;
+        }
+
+        .pubs-search-field svg {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            width: 18px;
+            height: 18px;
+            color: var(--muted);
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .pubs-search-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 56px 14px 50px;
+            color: var(--ink);
+            font: inherit;
+            font-size: 17px;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 999px;
+            box-shadow: var(--shadow);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .pubs-search-input::placeholder {
+            color: rgba(20, 33, 38, 0.5);
+        }
+
+        .pubs-search-input:focus {
+            background: var(--surface-hover);
+            border-color: rgba(23, 95, 112, 0.45);
+            box-shadow: var(--shadow), 0 0 0 3px rgba(23, 95, 112, 0.16);
+        }
+
+        .pubs-search-input::-webkit-search-cancel-button {
+            cursor: pointer;
+        }
+
+        .pubs-search-status {
+            margin: 12px 6px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .pubs-search-status:empty {
+            display: none;
+        }
+
+        .pubs-search-status.is-empty {
+            padding: 18px 22px;
+            color: var(--muted);
+            font-size: 15px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 18px;
+        }
+
+        .pubs-search-label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+
+        .pubs-body mark {
+            padding: 0;
+            color: inherit;
+            background: rgba(250, 204, 21, 0.42);
+            border-radius: 3px;
+        }
+
+        .pubs-match-snippet {
+            max-width: 72ch;
+            margin: 8px 0 0;
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 14.5px;
+            line-height: 1.6;
+        }
+
+        .pubs-match-label {
+            margin-right: 6px;
+            color: var(--accent-strong);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 900px) {
             .pubs-page {
                 margin-top: 48px;
@@ -263,6 +383,15 @@
 
             .pubs-entry {
                 grid-template-columns: 30px minmax(0, 1fr);
+            }
+
+            .pubs-search-input {
+                padding: 12px 18px 12px 44px;
+                font-size: 16px;
+            }
+
+            .pubs-search-field svg {
+                left: 16px;
             }
 
             .pubs-abstract-box {
@@ -292,6 +421,15 @@
         <noscript>
             <p class="pubs-intro" style="text-align: center;">(Enable JavaScript to view the publication list.)</p>
         </noscript>
+
+        <form class="pubs-search" id="pubs-search" role="search" aria-label="Search publications" hidden>
+            <label class="pubs-search-label" for="pubs-search-input">Search publications</label>
+            <div class="pubs-search-field">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+                <input class="pubs-search-input" id="pubs-search-input" type="search" placeholder="Search publications…" autocomplete="off" spellcheck="false" aria-describedby="pubs-search-status" aria-controls="pubs-list">
+            </div>
+            <p class="pubs-search-status" id="pubs-search-status" role="status" aria-live="polite"></p>
+        </form>
 
         <section class="pubs-panel" id="pubs-list" aria-label="Publications by year" hidden></section>
     </main>
@@ -351,12 +489,22 @@
                 .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
-            const formatAuthors = (authors) => String(authors || "")
+            const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+            // Escapes text and wraps every occurrence of the search terms in <mark>.
+            const highlight = (value, terms) => {
+                const text = String(value == null ? "" : value);
+                if (!terms || !terms.length) return escapeHtml(text);
+                const pattern = new RegExp("(" + terms.map(escapeRegExp).sort((a, b) => b.length - a.length).join("|") + ")", "gi");
+                return text.split(pattern).map((part, i) => (i % 2 ? `<mark>${escapeHtml(part)}</mark>` : escapeHtml(part))).join("");
+            };
+
+            const formatAuthors = (authors, terms) => String(authors || "")
                 .split(",")
                 .map((name) => name.trim())
                 .filter(Boolean)
                 .map((name) => {
-                    const safe = escapeHtml(name);
+                    const safe = highlight(name, terms);
                     return name.replace(/[*†‡#]+$/, "").trim() === OWN_NAME ? `<strong>${safe}</strong>` : safe;
                 })
                 .join(", ");
@@ -375,15 +523,20 @@
                 byYear.get(year).push(pub);
             });
 
+            const venueText = (pub) => {
+                const year = Number(pub.year) || 0;
+                const month = MONTHS[Number(pub.month)] || "";
+                const when = [month, year || ""].filter(Boolean).join(" ");
+                return [pub.venue, when].filter(Boolean).join(", ");
+            };
+
             let absCount = 0;
             const html = [...byYear.keys()].sort((a, b) => b - a).map((year) => {
                 const items = byYear.get(year)
                     .slice()
                     .sort((a, b) => (Number(b.month) || 0) - (Number(a.month) || 0))
                     .map((pub) => {
-                        const month = MONTHS[Number(pub.month)] || "";
-                        const when = [month, year || ""].filter(Boolean).join(" ");
-                        const venue = [pub.venue, when].filter(Boolean).join(", ");
+                        const venue = venueText(pub);
                         const links = BUTTONS
                             .filter(([key]) => pub.links && String(pub.links[key] || "").trim())
                             .map(([key, label]) => `<a href="${escapeHtml(pub.links[key].trim())}" target="_blank" rel="noopener noreferrer">${label}</a>`)
@@ -395,13 +548,14 @@
                             : "";
                         const buttons = absButton + links;
                         return `
-                <li class="pubs-entry">
+                <li class="pubs-entry" data-pub="${entries.indexOf(pub)}">
                     <div class="pubs-body">
                         ${pub.template ? '<span class="pubs-template-badge">Example entry – replace with a real publication</span>' : ""}
                         <p class="pubs-title">${escapeHtml(pub.title)}</p>
                         ${pub.authors ? `<p class="pubs-authors">${formatAuthors(pub.authors)}</p>` : ""}
                         ${venue ? `<p class="pubs-venue">${escapeHtml(venue)}</p>` : ""}
                         ${pub.note ? `<p class="pubs-note">${escapeHtml(pub.note)}</p>` : ""}
+                        <p class="pubs-match-snippet" hidden></p>
                         ${buttons ? `<div class="pubs-links">${buttons}</div>` : ""}
                         ${abstract ? `<div class="pubs-abstract" id="${absId}" role="region" aria-label="Abstract"><div class="pubs-abstract-inner"><div class="pubs-abstract-box"><p>${escapeHtml(abstract)}</p></div></div></div>` : ""}
                     </div>
@@ -426,6 +580,97 @@
                 const open = button.getAttribute("aria-expanded") !== "true";
                 button.setAttribute("aria-expanded", String(open));
                 panel.classList.toggle("is-open", open);
+            });
+
+            /* ---------- Search ---------- */
+
+            const searchForm = document.getElementById("pubs-search");
+            const searchInput = document.getElementById("pubs-search-input");
+            const searchStatus = document.getElementById("pubs-search-status");
+            const SNIPPET_RADIUS = 70;
+
+            const searchable = entries.map((pub) => [
+                pub.title, pub.authors, venueText(pub), pub.year, pub.note, pub.abstract
+            ].map((part) => String(part == null ? "" : part)).join("\n").toLowerCase());
+
+            const abstractSnippet = (abstract, terms) => {
+                const lower = abstract.toLowerCase();
+                const hits = terms.map((term) => lower.indexOf(term)).filter((i) => i >= 0);
+                if (!hits.length) return "";
+                const position = Math.min(...hits);
+                let start = Math.max(0, position - SNIPPET_RADIUS);
+                let end = Math.min(abstract.length, position + SNIPPET_RADIUS * 2);
+                if (start > 0) {
+                    const space = abstract.indexOf(" ", start);
+                    if (space !== -1 && space < position) start = space + 1;
+                }
+                if (end < abstract.length) {
+                    const space = abstract.lastIndexOf(" ", end);
+                    if (space > position) end = space;
+                }
+                return (start > 0 ? "… " : "") + abstract.slice(start, end).trim() + (end < abstract.length ? " …" : "");
+            };
+
+            const applySearch = () => {
+                const terms = [...new Set(searchInput.value.trim().toLowerCase().split(/\s+/).filter(Boolean))];
+                let shown = 0;
+                list.querySelectorAll(".pubs-entry").forEach((item) => {
+                    const index = Number(item.dataset.pub);
+                    const pub = entries[index];
+                    const match = terms.every((term) => searchable[index].includes(term));
+                    item.hidden = !match;
+                    if (match) shown += 1;
+                    const title = item.querySelector(".pubs-title");
+                    const authors = item.querySelector(".pubs-authors");
+                    const venue = item.querySelector(".pubs-venue");
+                    const note = item.querySelector(".pubs-note");
+                    const snippet = item.querySelector(".pubs-match-snippet");
+                    if (title) title.innerHTML = highlight(pub.title, terms);
+                    if (authors) authors.innerHTML = formatAuthors(pub.authors, terms);
+                    if (venue) venue.innerHTML = highlight(venueText(pub), terms);
+                    if (note) note.innerHTML = highlight(pub.note, terms);
+                    const abstract = String(pub.abstract || "").trim();
+                    const text = match && terms.length && abstract ? abstractSnippet(abstract, terms) : "";
+                    snippet.hidden = !text;
+                    snippet.innerHTML = text ? `<span class="pubs-match-label">Abstract</span>${highlight(text, terms)}` : "";
+                });
+                list.querySelectorAll(".pubs-year").forEach((group) => {
+                    group.hidden = !group.querySelector(".pubs-entry:not([hidden])");
+                });
+                list.hidden = shown === 0;
+                searchForm.classList.toggle("has-query", terms.length > 0);
+                searchStatus.classList.toggle("is-empty", terms.length > 0 && shown === 0);
+                searchStatus.textContent = !terms.length ? ""
+                    : shown === 0 ? "No results."
+                    : shown === 1 ? "1 publication found."
+                    : `${shown} publications found.`;
+            };
+
+            let debounceTimer = 0;
+            searchForm.hidden = false;
+            searchForm.addEventListener("submit", (event) => event.preventDefault());
+            searchInput.addEventListener("input", () => {
+                window.clearTimeout(debounceTimer);
+                debounceTimer = window.setTimeout(applySearch, 120);
+            });
+            searchInput.addEventListener("keydown", (event) => {
+                if (event.key !== "Escape") return;
+                if (searchInput.value) {
+                    event.preventDefault();
+                    searchInput.value = "";
+                    applySearch();
+                } else {
+                    searchInput.blur();
+                }
+            });
+            document.addEventListener("keydown", (event) => {
+                if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey) return;
+                const target = event.target;
+                const tag = target && target.tagName;
+                if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (target && target.isContentEditable)) return;
+                event.preventDefault();
+                searchInput.focus();
+                searchInput.select();
             });
         })();
     </script>
