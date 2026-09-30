@@ -11,51 +11,51 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://jasonxu-cell.github.io/"
 OG_IMAGE = {
-    "url": f"{SITE_URL}assets/og-image.png",
-    "width": "1200",
-    "height": "630",
-    "alt": "Yang Xu — Geophysics · USTC",
+    "url": f"{SITE_URL}assets/og-image-yang.png",
+    "width": "1731",
+    "height": "909",
+    "alt": "Yang — Geophysics · USTC",
 }
 
 DESCRIPTIONS = {
     "index.html": (
-        "Yang Xu is a geophysics undergraduate at USTC interested in seismology, "
+        "Yang is a geophysics undergraduate at USTC interested in seismology, "
         "earthquake mechanics, planetary science, and data-driven geophysics."
     ),
     "notes.html": (
-        "Study notes by Yang Xu on mathematics, physics, computer science, geoscience, "
+        "Study notes by Yang on mathematics, physics, computer science, geoscience, "
         "and electronic engineering."
     ),
     "notes/math.html": (
-        "Mathematics notes by Yang Xu on analysis, algebra, geometry, numerical methods, "
+        "Mathematics notes by Yang on analysis, algebra, geometry, numerical methods, "
         "probability, topology, and differential equations."
     ),
     "notes/physics.html": (
-        "Physics notes by Yang Xu on mechanics, electromagnetism, optics, thermodynamics, "
+        "Physics notes by Yang on mechanics, electromagnetism, optics, thermodynamics, "
         "statistical physics, and quantum physics."
     ),
     "notes/cs.html": (
-        "Computer science notes by Yang Xu on algorithms, artificial intelligence, computer "
+        "Computer science notes by Yang on algorithms, artificial intelligence, computer "
         "systems, networks, operating systems, and parallel computing."
     ),
     "notes/geoscience.html": (
-        "Geoscience notes by Yang Xu on seismology, geology, astronomy, gravity, geomagnetism, "
+        "Geoscience notes by Yang on seismology, geology, astronomy, gravity, geomagnetism, "
         "and geoelectricity."
     ),
     "notes/electronic_engineering.html": (
-        "Electronic engineering notes by Yang Xu on signals and systems, circuits, "
+        "Electronic engineering notes by Yang on signals and systems, circuits, "
         "semiconductors, and electronic technology."
     ),
     "articles.html": (
-        "Essays by Yang Xu on space technology, mathematics, computing, and the history "
+        "Essays by Yang on space technology, mathematics, computing, and the history "
         "of science and technology."
     ),
     "research.html": (
-        "Research projects by Yang Xu in seismology, earthquake mechanics, planetary "
+        "Research projects by Yang in seismology, earthquake mechanics, planetary "
         "science, and data-driven geophysics."
     ),
     "ask.html": (
-        "Ask Yang Xu anything, anonymously: questions about geophysics, studying at "
+        "Ask Yang anything, anonymously: questions about geophysics, studying at "
         "USTC, notes, or anything else. Selected answers are published here."
     ),
     "articles/article_1.html": (
@@ -69,11 +69,11 @@ DESCRIPTIONS = {
         "and programming paradigms."
     ),
     "research/gofar-transform-fault.html": (
-        "Yang Xu's research on earthquake mechanics and focal-mechanism variation at "
+        "Yang's research on earthquake mechanics and focal-mechanism variation at "
         "the Gofar transform fault."
     ),
     "research/lunar-water-content.html": (
-        "Yang Xu's interdisciplinary study of lunar water using spectral, neutron, and "
+        "Yang's interdisciplinary study of lunar water using spectral, neutron, and "
         "thermal remote-sensing observations."
     ),
     "notes/cs/computer_organization_and_design.html": (
@@ -82,11 +82,11 @@ DESCRIPTIONS = {
     "notes/electronic_engineering/electronic_technology.html": (
         "电子技术课程笔记，整理电路、半导体器件、模拟电子技术与数字电子技术基础。"
     ),
-    "notes/cs/Parallel_Computing.html": "Planned study notes on parallel computing by Yang Xu.",
-    "notes/cs/operating_system.html": "Planned study notes on operating systems by Yang Xu.",
-    "notes/math/functional-analysis.html": "Planned study notes on functional analysis by Yang Xu.",
-    "notes/math/geometry.html": "Planned study notes on geometry by Yang Xu.",
-    "notes/math/topology.html": "Planned study notes on topology by Yang Xu.",
+    "notes/cs/Parallel_Computing.html": "Planned study notes on parallel computing by Yang.",
+    "notes/cs/operating_system.html": "Planned study notes on operating systems by Yang.",
+    "notes/math/functional-analysis.html": "Planned study notes on functional analysis by Yang.",
+    "notes/math/geometry.html": "Planned study notes on geometry by Yang.",
+    "notes/math/topology.html": "Planned study notes on topology by Yang.",
 }
 
 ZH_CN_PAGES = {
@@ -118,10 +118,10 @@ def page_description(relative: str, title: str) -> str:
 
     subject = title.split(" | ", 1)[0].strip()
     if relative.startswith("notes/") and relative.count("/") == 1:
-        return f"Course notes and topic guides by Yang Xu in {subject.lower()}."
+        return f"Course notes and topic guides by Yang in {subject.lower()}."
     if relative.startswith("notes/"):
-        return f"Study notes by Yang Xu on {subject}, with explanations, derivations, and examples."
-    return f"{subject} by Yang Xu."
+        return f"Study notes by Yang on {subject}, with explanations, derivations, and examples."
+    return f"{subject} by Yang."
 
 
 def replace_navigation(source: str, relative: str) -> str:
@@ -166,14 +166,14 @@ def replace_navigation(source: str, relative: str) -> str:
 
 
 def update_head(source: str, relative: str) -> str:
-    title = extract(r"<title>([\s\S]*?)</title>", source, "Yang Xu").strip()
+    title = extract(r"<title>([\s\S]*?)</title>", source, "Yang").strip()
     if relative != "index.html":
         if title.endswith(" | Research"):
-            title = f"{title} | Yang Xu"
+            title = f"{title} | Yang"
         elif re.search(r"\s+\|\s+Yang\s*$", title):
-            title = re.sub(r"\s+\|\s+Yang\s*$", " | Yang Xu", title)
-        elif not title.endswith(" | Yang Xu"):
-            title = f"{title} | Yang Xu"
+            title = re.sub(r"\s+\|\s+Yang\s*$", " | Yang", title)
+        elif not title.endswith(" | Yang"):
+            title = f"{title} | Yang"
     source = re.sub(
         r"<title>[\s\S]*?</title>",
         f"<title>{html.escape(title)}</title>",
@@ -218,7 +218,7 @@ def update_head(source: str, relative: str) -> str:
         f'\n    <meta property="og:title" content="{escaped_title}">'
         f'\n    <meta property="og:description" content="{escaped_description}">'
         f'\n    <meta property="og:type" content="{page_type}">'
-        f'\n    <meta property="og:site_name" content="Yang Xu">'
+        f'\n    <meta property="og:site_name" content="Yang">'
         f'\n    <meta property="og:locale" content="{locale}">'
         f'\n    <meta property="og:url" content="{page_url}">'
         f'\n    <meta property="og:image" content="{OG_IMAGE["url"]}">'
@@ -282,12 +282,12 @@ def update_shell(source: str, relative: str) -> str:
 
     if "class=\"site-footer\"" not in source:
         footer = f'''\n\n    <footer class="site-footer">
-        <p>© 2026 Yang Xu</p>
+        <p>© 2026 Yang</p>
         <nav class="footer-links footer-contact-icons" aria-label="Contact links">
             <a
                 href="mailto:xu_ustc@mail.ustc.edu.cn"
                 class="footer-contact-icon"
-                aria-label="Email Yang Xu"
+                aria-label="Email Yang"
                 title="Email"
             >
                 <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
@@ -297,7 +297,7 @@ def update_shell(source: str, relative: str) -> str:
                 target="_blank"
                 rel="noopener noreferrer"
                 class="footer-contact-icon"
-                aria-label="Yang Xu on GitHub"
+                aria-label="Yang on GitHub"
                 title="GitHub"
             >
                 <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>

@@ -233,7 +233,7 @@
             const doc = await fetchDocument(note.url);
             const source = doc.getElementById("article-markdown");
             const titleNode = doc.querySelector(".article-detail-header h1") || doc.querySelector("h1");
-            const title = collapse(titleNode ? titleNode.textContent : doc.title.replace(/\s*\|\s*Yang Xu\s*$/, ""));
+            const title = collapse(titleNode ? titleNode.textContent : doc.title.replace(/\s*\|\s*Yang\s*$/, ""));
             const markdown = source ? source.textContent : collapse((doc.querySelector("main") || doc.body).textContent);
             const path = new URL(note.url).pathname;
             return {

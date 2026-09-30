@@ -95,8 +95,8 @@ IMAGE_SUFFIXES = {
 DEFAULT_VAULT = Path(os.environ.get("OBSIDIAN_VAULT", "/Users/xuyang/Documents/Obsidian Vault"))
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
 SITE_URL = "https://jasonxu-cell.github.io/"
-OG_IMAGE_URL = f"{SITE_URL}assets/og-image.png"
-OG_IMAGE_ALT = "Yang Xu — Geophysics · USTC"
+OG_IMAGE_URL = f"{SITE_URL}assets/og-image-yang.png"
+OG_IMAGE_ALT = "Yang — Geophysics · USTC"
 
 
 class SyncError(RuntimeError):
@@ -348,7 +348,7 @@ def html_page(
     datetime_value = datetime_attr(time_text)
     tags_html = "\n".join(f"                    <span>{html.escape(str(tag))}</span>" for tag in tags)
     safe_markdown = markdown.replace("</script", "<\\/script")
-    page_title = html.escape(f"{target.title} | Yang Xu", quote=True)
+    page_title = html.escape(f"{target.title} | Yang", quote=True)
     page_url = f"{SITE_URL}notes/{target.subject}/{quote(target.filename)}"
 
     return f'''<!DOCTYPE html>
@@ -358,17 +358,17 @@ def html_page(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="{page_title}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:site_name" content="Yang">
     <meta property="og:url" content="{page_url}">
     <meta property="og:image" content="{OG_IMAGE_URL}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
     <meta property="og:image:alt" content="{OG_IMAGE_ALT}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{page_title}">
     <meta name="twitter:image" content="{OG_IMAGE_URL}">
     <meta name="twitter:image:alt" content="{OG_IMAGE_ALT}">
-    <title>{html.escape(target.title)} | Yang Xu</title>
+    <title>{html.escape(target.title)} | Yang</title>
     <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
@@ -424,12 +424,12 @@ def html_page(
     </main>
 
     <footer class="site-footer">
-        <p>© 2026 Yang Xu</p>
+        <p>© 2026 Yang</p>
         <nav class="footer-links footer-contact-icons" aria-label="Contact links">
             <a
                 href="mailto:xu_ustc@mail.ustc.edu.cn"
                 class="footer-contact-icon"
-                aria-label="Email Yang Xu"
+                aria-label="Email Yang"
                 title="Email"
             >
                 <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
@@ -439,7 +439,7 @@ def html_page(
                 target="_blank"
                 rel="noopener noreferrer"
                 class="footer-contact-icon"
-                aria-label="Yang Xu on GitHub"
+                aria-label="Yang on GitHub"
                 title="GitHub"
             >
                 <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
