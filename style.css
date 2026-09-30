@@ -2416,6 +2416,44 @@ main,
     }
 }
 
+/* Homepage desktop balance: left column (avatar, name, status panel) spans
+   the full height of the About Me card, everything on one centered axis. */
+@media (min-width: 901px) {
+    .home-page .hero {
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: clamp(48px, 5.5vw, 72px);
+        align-items: stretch;
+        width: min(100%, 1180px);
+        max-width: 1180px;
+    }
+
+    .home-page .profile {
+        justify-content: space-between;
+        gap: 18px;
+    }
+
+    .home-page .profile-photo {
+        width: 280px;
+        margin-bottom: 0;
+    }
+
+    .home-page .profile h1 {
+        margin: 0;
+    }
+
+    .home-page .site-status {
+        width: 280px;
+        max-width: 100%;
+        margin-top: 0;
+    }
+
+    .home-page .resume {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
