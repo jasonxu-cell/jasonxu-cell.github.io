@@ -24,6 +24,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <script src="scripts/site-status.js?v=20260930-1" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -54,6 +55,36 @@
                 <p class="profile-subtitle">
                     Using data to study earthquakes and planetary environments.
                 </p>
+
+                <section class="site-status" data-site-status aria-labelledby="site-status-title">
+                    <p class="site-status-title" id="site-status-title">Site Status</p>
+                    <dl class="site-status-list">
+                        <div>
+                            <dt>Running for</dt>
+                            <dd data-status="runtime">1 month</dd>
+                        </div>
+                        <div>
+                            <dt>Articles</dt>
+                            <dd data-status="articles">3</dd>
+                        </div>
+                        <div>
+                            <dt>Notes</dt>
+                            <dd data-status="notes">28</dd>
+                        </div>
+                        <div>
+                            <dt>Git commits</dt>
+                            <dd data-status="commits">48</dd>
+                        </div>
+                        <div>
+                            <dt>Last updated</dt>
+                            <dd><time data-status="updated" datetime="2026-09-30">2026-09-30</time><span class="site-status-relative" data-status="updated-relative">today</span></dd>
+                        </div>
+                        <div>
+                            <dt>Server status</dt>
+                            <dd><span class="site-status-alive"><span class="status-dot" aria-hidden="true"></span>Alive</span></dd>
+                        </div>
+                    </dl>
+                </section>
             </div>
 
             <div class="resume">
