@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hidden page for now: not linked from navigation and not listed in
+         scripts/update_site_metadata.py. Once FORM_ENDPOINT in scripts/ask.js
+         is set, add "Ask" to the nav and drop the robots meta below. -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Ask Yang Xu anything, anonymously: questions about geophysics, studying at USTC, notes, or anything else. Selected answers are published here.">
+    <meta property="og:title" content="Ask Me Anything | Yang Xu">
+    <meta property="og:description" content="Ask Yang Xu anything, anonymously: questions about geophysics, studying at USTC, notes, or anything else. Selected answers are published here.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yang Xu">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/ask.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yang Xu — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ask Me Anything | Yang Xu">
+    <meta name="twitter:description" content="Ask Yang Xu anything, anonymously: questions about geophysics, studying at USTC, notes, or anything else. Selected answers are published here.">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image.png">
+    <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
+    <title>Ask Me Anything | Yang Xu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="research.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <script src="scripts/ask.js?v=20260930-1" defer></script>
+    <style>
+        /* Page-specific styles for ask.html (reuses the shared surface tokens). */
+        .ask-page {
+            width: min(100%, 860px);
+            margin: 72px auto 100px;
+        }
+
+        .ask-intro {
+            width: min(100%, 620px);
+            margin: 18px auto 0;
+            color: rgba(0, 0, 0, 0.66);
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        .ask-panel {
+            padding: 36px 45px;
+            background: var(--surface);
+            backdrop-filter: blur(16px) saturate(115%);
+            -webkit-backdrop-filter: blur(16px) saturate(115%);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .ask-panel + .ask-panel {
+            margin-top: 30px;
+        }
+
+        .ask-kicker {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .ask-panel h2 {
+            margin: 0 0 8px;
+            color: #355f62;
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .ask-lead {
+            margin: 0 0 20px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.65;
+        }
+
+        .ask-form textarea {
+            display: block;
+            width: 100%;
+            min-height: 150px;
+            padding: 14px 16px;
+            color: var(--ink);
+            font: inherit;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ask-form textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(23, 95, 112, 0.5);
+            box-shadow: 0 0 0 3px rgba(23, 95, 112, 0.16);
+        }
+
+        .ask-form textarea:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .ask-honeypot,
+        .ask-sr-only {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .ask-form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            margin-top: 14px;
+        }
+
+        .ask-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .ask-count {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .ask-count.is-near-limit {
+            color: #b45309;
+        }
+
+        .ask-soon {
+            padding: 2px 10px;
+            color: #7c2d12;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(254, 243, 199, 0.85);
+            border: 1px dashed #d97706;
+            border-radius: 999px;
+        }
+
+        .ask-soon[hidden],
+        .ask-status[hidden],
+        .ask-list[hidden] {
+            display: none;
+        }
+
+        .ask-form .button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .ask-form .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none;
+        }
+
+        .ask-status {
+            margin: 16px 0 0;
+            padding: 11px 14px;
+            font-size: 15px;
+            line-height: 1.5;
+            border-radius: 12px;
+        }
+
+        .ask-status.is-success {
+            color: #14532d;
+            background: rgba(220, 252, 231, 0.8);
+            border: 1px solid rgba(22, 163, 74, 0.35);
+        }
+
+        .ask-status.is-error {
+            color: #7f1d1d;
+            background: rgba(254, 226, 226, 0.8);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .ask-empty {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .ask-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .ask-item {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .ask-item + .ask-item {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+        }
+
+        .ask-question {
+            margin: 0;
+            padding-left: 14px;
+            color: var(--ink);
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.55;
+            border-left: 3px solid rgba(23, 95, 112, 0.45);
+        }
+
+        .ask-answer {
+            margin-top: 10px;
+            color: rgba(0, 0, 0, 0.74);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .ask-answer p {
+            margin: 0;
+        }
+
+        .ask-answer p + p {
+            margin-top: 10px;
+        }
+
+        .ask-date {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .ask-template-badge {
+            display: inline-block;
+            margin-bottom: 8px;
+            padding: 3px 10px;
+            color: #7c2d12;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background: rgba(254, 243, 199, 0.85);
+            border: 1px dashed #d97706;
+            border-radius: 999px;
+        }
+
+        @media (max-width: 900px) {
+            .ask-page {
+                margin-top: 48px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .ask-page {
+                margin-top: 34px;
+                margin-bottom: 64px;
+            }
+
+            .ask-panel {
+                padding: 26px 20px;
+            }
+
+            .ask-panel + .ask-panel {
+                margin-top: 22px;
+            }
+
+            .ask-intro {
+                font-size: 16px;
+            }
+
+            .ask-panel h2 {
+                font-size: 26px;
+            }
+
+            .ask-form-footer .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="articles.html">Articles</a>
+            <a href="research.html">Research</a>
+        </div>
+    </nav>
+
+    <main id="main-content" class="ask-page">
+        <header class="research-index-header">
+            <p>Ask Me Anything</p>
+            <h1>Question Box</h1>
+            <p class="ask-intro">Curious about geophysics, studying at USTC, my notes, or which anime I'm watching right now? Ask away.</p>
+        </header>
+
+        <section class="ask-panel" aria-labelledby="ask-form-title">
+            <p class="ask-kicker">Anonymous</p>
+            <h2 id="ask-form-title">Send a question</h2>
+            <p class="ask-lead">No name, no email, no login. I only see the question itself. I read everything and publish some answers below.</p>
+
+            <form class="ask-form" id="ask-form" method="POST" novalidate>
+                <label class="ask-honeypot" aria-hidden="true">Leave this empty
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                </label>
+                <label for="ask-question" class="ask-sr-only">Your question</label>
+                <textarea id="ask-question" name="question" maxlength="1000" rows="6" required placeholder="Type your question here…"></textarea>
+                <div class="ask-form-footer">
+                    <div class="ask-meta">
+                        <span class="ask-count" id="ask-count" aria-live="polite">0 / 1000</span>
+                        <span class="ask-soon" id="ask-soon" hidden>Question box opening soon</span>
+                    </div>
+                    <button type="submit" class="button button-primary" id="ask-submit">Send <span aria-hidden="true">→</span></button>
+                </div>
+                <p class="ask-status" id="ask-status" role="status" aria-live="polite" hidden></p>
+            </form>
+            <noscript>
+                <p class="ask-lead" style="margin: 16px 0 0;">(Enable JavaScript to send a question.)</p>
+            </noscript>
+        </section>
+
+        <section class="ask-panel" aria-labelledby="ask-answers-title">
+            <p class="ask-kicker">Answered</p>
+            <h2 id="ask-answers-title">Questions &amp; answers</h2>
+            <p class="ask-empty" id="ask-empty">No answered questions yet.</p>
+            <ol class="ask-list" id="ask-list" hidden></ol>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Yang Xu</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang Xu"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang Xu on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+            <a
+                href="https://orcid.org/0009-0004-5519-0849"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="ORCID"
+                title="ORCID"
+            >
+                <svg class="footer-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+            </a>
+            <a
+                href="https://steamcommunity.com/profiles/76561199724275684/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Steam"
+                title="Steam"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.2 2.2 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.22 2.22 0 0 1-1.312-1.568L.33 10.333Z"/><path d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.7 1.7 0 0 0-1.263-.02l1.023.424a1.261 1.261 0 1 1-.97 2.33l-.99-.41a1.7 1.7 0 0 0 .882.84Zm3.726-6.687a2.03 2.03 0 0 0 2.027 2.029 2.03 2.03 0 0 0 2.027-2.029 2.03 2.03 0 0 0-2.027-2.027 2.03 2.03 0 0 0-2.027 2.027m2.03-1.527a1.524 1.524 0 1 1-.002 3.048 1.524 1.524 0 0 1 .002-3.048"/></svg>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>
