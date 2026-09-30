@@ -381,6 +381,7 @@ def html_page(
             <a href="../../notes.html">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../ask.html">Ask</a>
         </div>
     </nav>
 

@@ -4,7 +4,7 @@
  * 1) FORM_ENDPOINT: paste your Formspree form URL here, e.g.
  *        "https://formspree.io/f/abcdwxyz"
  *    While it is empty, the Send button stays disabled and the page shows
- *    "Question box opening soon".
+ *    "Question box opening soon". Setup: scripts/ASK_SETUP.md.
  *
  * 2) QA: to publish an answer, add one object to the QA array:
  *        {
@@ -17,7 +17,7 @@
  *    ask.html?preview. Delete it or leave it; it never shows without ?preview.
  * ---------------------------------------------------------------------------
  */
-var FORM_ENDPOINT = "";
+var FORM_ENDPOINT = "https://formspree.io/f/mzezwagj";
 
 var QA = [
     {
@@ -89,6 +89,7 @@ var QA = [
         var status = document.getElementById("ask-status");
         var endpoint = String(FORM_ENDPOINT || "").trim();
         var sending = false;
+        var honeypot = form.elements.namedItem("_gotcha");
 
         function showStatus(kind, message) {
             status.className = "ask-status is-" + kind;
@@ -100,7 +101,7 @@ var QA = [
             var length = textarea.value.length;
             count.textContent = length + " / " + MAX_LENGTH;
             count.classList.toggle("is-near-limit", length >= MAX_LENGTH * 0.9);
-            button.disabled = !endpoint || sending || !textarea.value.trim();
+            button.disabled = !endpoint || sending || !textarea.value.trim() || length > MAX_LENGTH;
         }
 
         if (!endpoint) {
@@ -109,7 +110,7 @@ var QA = [
         }
 
         textarea.addEventListener("input", function () {
-            if (!status.hidden && status.classList.contains("is-success")) status.hidden = true;
+            status.hidden = true;
             update();
         });
 
@@ -117,12 +118,14 @@ var QA = [
             event.preventDefault();
             var question = textarea.value.trim();
             if (!endpoint || sending || !question) return;
+            if (honeypot && honeypot.value) return;
             if (question.length > MAX_LENGTH) {
                 showStatus("error", "That's a bit long: please keep it under " + MAX_LENGTH + " characters.");
                 return;
             }
 
             sending = true;
+            textarea.readOnly = true;
             update();
             button.setAttribute("aria-busy", "true");
             var label = button.innerHTML;
@@ -131,11 +134,15 @@ var QA = [
 
             var data = new FormData(form);
             data.set("question", question);
+            var controller = new AbortController();
+            var timeout = window.setTimeout(function () { controller.abort(); }, 20000);
 
             fetch(endpoint, {
                 method: "POST",
                 body: data,
-                headers: { Accept: "application/json" }
+                headers: { Accept: "application/json" },
+                credentials: "omit",
+                signal: controller.signal
             }).then(function (response) {
                 if (response.ok) return null;
                 return response.json().catch(function () { return {}; }).then(function (body) {
@@ -148,11 +155,13 @@ var QA = [
                 textarea.value = "";
                 showStatus("success", "Thanks! Your question was sent anonymously.");
             }).catch(function (error) {
-                showStatus("error", "Sorry, your question couldn't be sent" +
-                    (error && error.message ? " (" + error.message + ")" : "") +
-                    ". Please try again in a moment.");
+                showStatus("error", error && error.name === "AbortError"
+                    ? "The request timed out, so we couldn't confirm delivery. Your question is still here; please try again later."
+                    : "Your question couldn't be sent. Your text has been kept; please try again in a moment.");
             }).then(function () {
+                window.clearTimeout(timeout);
                 sending = false;
+                textarea.readOnly = false;
                 button.removeAttribute("aria-busy");
                 button.innerHTML = label;
                 update();

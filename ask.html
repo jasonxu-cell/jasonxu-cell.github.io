@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Hidden page for now: not linked from navigation and not listed in
-         scripts/update_site_metadata.py. Once FORM_ENDPOINT in scripts/ask.js
-         is set, add "Ask" to the nav and drop the robots meta below. -->
-    <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Ask Yang Xu anything, anonymously: questions about geophysics, studying at USTC, notes, or anything else. Selected answers are published here.">
     <meta property="og:title" content="Ask Me Anything | Yang Xu">
     <meta property="og:description" content="Ask Yang Xu anything, anonymously: questions about geophysics, studying at USTC, notes, or anything else. Selected answers are published here.">
@@ -24,12 +20,12 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image.png">
     <meta name="twitter:image:alt" content="Yang Xu — Geophysics · USTC">
     <title>Ask Me Anything | Yang Xu</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="research.css">
+    <link rel="stylesheet" href="style.css?v=c63bdc8c16">
+    <link rel="stylesheet" href="research.css?v=5de8fe369d">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <script src="scripts/ask.js?v=20260930-1" defer></script>
+    <script src="scripts/ask.js?v=cd48159e30" defer></script>
     <style>
         /* Page-specific styles for ask.html (reuses the shared surface tokens). */
         .ask-page {
@@ -111,6 +107,13 @@
             opacity: 0.7;
         }
 
+        .ask-form label[for="ask-question"] {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
         .ask-honeypot,
         .ask-sr-only {
             position: absolute;
@@ -147,13 +150,14 @@
         }
 
         .ask-soon {
-            padding: 2px 10px;
+            margin: 0 0 18px;
+            padding: 12px 14px;
             color: #7c2d12;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.6;
             background: rgba(254, 243, 199, 0.85);
-            border: 1px dashed #d97706;
-            border-radius: 999px;
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            border-radius: 12px;
         }
 
         .ask-soon[hidden],
@@ -303,6 +307,7 @@
             <a href="notes.html">Notes</a>
             <a href="articles.html">Articles</a>
             <a href="research.html">Research</a>
+            <a href="ask.html" aria-current="page">Ask</a>
         </div>
     </nav>
 
@@ -316,20 +321,20 @@
         <section class="ask-panel" aria-labelledby="ask-form-title">
             <p class="ask-kicker">Anonymous</p>
             <h2 id="ask-form-title">Send a question</h2>
-            <p class="ask-lead">No name, no email, no login. I only see the question itself. I read everything and publish some answers below.</p>
+            <p class="ask-lead">No name, no email, no login. Send me a question in English or Chinese. Questions arrive privately; I publish selected answers below.</p>
+            <p class="ask-soon" id="ask-soon" role="status" hidden>The question box is opening soon. Submissions are not available yet.</p>
 
             <form class="ask-form" id="ask-form" method="POST" novalidate>
                 <label class="ask-honeypot" aria-hidden="true">Leave this empty
                     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
                 </label>
-                <label for="ask-question" class="ask-sr-only">Your question</label>
-                <textarea id="ask-question" name="question" maxlength="1000" rows="6" required placeholder="Type your question here…"></textarea>
+                <label for="ask-question">Your question</label>
+                <textarea id="ask-question" name="question" maxlength="1000" rows="6" required aria-describedby="ask-count" placeholder="What would you like to ask? / 写下你想问的问题…"></textarea>
                 <div class="ask-form-footer">
                     <div class="ask-meta">
                         <span class="ask-count" id="ask-count" aria-live="polite">0 / 1000</span>
-                        <span class="ask-soon" id="ask-soon" hidden>Question box opening soon</span>
                     </div>
-                    <button type="submit" class="button button-primary" id="ask-submit">Send <span aria-hidden="true">→</span></button>
+                    <button type="submit" class="button button-primary" id="ask-submit" disabled>Send anonymously <span aria-hidden="true">→</span></button>
                 </div>
                 <p class="ask-status" id="ask-status" role="status" aria-live="polite" hidden></p>
             </form>

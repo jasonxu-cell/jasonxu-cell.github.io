@@ -54,6 +54,10 @@ DESCRIPTIONS = {
         "Research projects by Yang Xu in seismology, earthquake mechanics, planetary "
         "science, and data-driven geophysics."
     ),
+    "ask.html": (
+        "Ask Yang Xu anything, anonymously: questions about geophysics, studying at "
+        "USTC, notes, or anything else. Selected answers are published here."
+    ),
     "articles/article_1.html": (
         "评估中国航天技术的发展现状、与世界领先水平的差距，以及面对国际技术限制时的应对策略。"
     ),
@@ -126,7 +130,8 @@ def replace_navigation(source: str, relative: str) -> str:
         "Home" if relative == "index.html" else
         "Notes" if relative.startswith("notes") else
         "Articles" if relative.startswith("articles") else
-        "Research" if relative.startswith("research") else ""
+        "Research" if relative.startswith("research") else
+        "Ask" if relative == "ask.html" else ""
     )
 
     nav_match = re.search(r"<nav\b[^>]*>[\s\S]*?</nav>", source, flags=re.IGNORECASE)
@@ -134,6 +139,13 @@ def replace_navigation(source: str, relative: str) -> str:
         return source
 
     nav = nav_match.group(0)
+    if 'class="nav-links"' in nav and not re.search(r'<a\b[^>]*href="(?:\.\./)*ask\.html"', nav):
+        nav = re.sub(
+            r'(\s*</div>)',
+            f'\n            <a href="{prefix}ask.html">Ask</a>' + r'\1',
+            nav,
+            count=1,
+        )
     nav = re.sub(
         r"<nav(?![^>]*aria-label)([^>]*)>",
         r'<nav\1 aria-label="Primary navigation">',
