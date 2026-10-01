@@ -409,7 +409,6 @@ def html_page(
 
         <section class="article-comments" aria-labelledby="comments-title">
             <div class="article-comments-header">
-                <span>Discussion</span>
                 <h2 id="comments-title">Comments</h2>
                 <p>Questions, corrections, and reading notes are welcome here.</p>
             </div>
