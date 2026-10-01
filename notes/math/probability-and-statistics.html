@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Probability and Statistics, with explanations, derivations, and examples.">
     <meta property="og:title" content="Probability and Statistics | Yang">
+    <meta property="og:description" content="Study notes by Yang on Probability and Statistics, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/math/probability-and-statistics.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Probability and Statistics | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Probability and Statistics, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Probability and Statistics | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../math.html" class="article-back-link">&larr; Mathematics</a>
             <h1>Probability and Statistics</h1>
@@ -54,7 +59,73 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="queueing-theory">Queueing Theory</h2>
+<h3 id="notation-explanation">Notation Explanation</h3>
+<p>In 1953, D.G.Kendall proposed a classification method for queueing theory:</p>
+<ol>
+<li>the distribution of the interval between successive customer arrivals ($X$)</li>
+<li>the distribution of service time ($Y$)</li>
+<li>the number of service counters ($Z$)</li>
+</ol>
+<p>We use Kendall’s notation: $X/Y/Z$</p>
+<p>Some common distribution notation:</p>
+<ul>
+<li>$M$: exponential distribution, which is like a Markov chain.</li>
+<li>$D$: deterministic</li>
+<li>$E_k$: k-stage Erlang distribution</li>
+<li>$GI$: the distribution of the general independent interval time</li>
+<li>$G$: the distribution of the general interval time</li>
+</ul>
+<p>In 1971, the notation was extended as: $X/Y/Z/A/B/C$, where the meanings of the first three items remains, and the meanings of the last three items are respectively:</p>
+<ol>
+<li>the restraint of the captivity ($N$)</li>
+<li>the number of ($m$)</li>
+<li>the rule of service, such as first come first service(FCFS), last come first service(LCFS).</li>
+</ol>
+<p>We only talk about the FCFS circumstance, so we omit the sixth item.</p>
+<h3 id="model-establishment">Model Establishment</h3>
+<p>We want to know the following index:</p>
+<ul>
+<li>average number of customers in the system ($L_s$)</li>
+<li>average number of customers in the queue ($L_q$)</li>
+<li>average waiting time of customers in the system ($W_s$)</li>
+<li>average waiting time of customers in the queue ($W_q$)</li>
+</ul>
+<p>We define $P_n(t)$ as the probability of $n$ service counters working at the $t$ moment. Given that $n$ is integer, we need to establish an equation, which is a differential equation with respect to $t$, and a difference equation with respect to $n$. The solution of the equation is the transient state solution, but solve this equation is really hard, so we usually solve the steady state solution: $$\lim_{t\rightarrow \infty} P_n(t)=P_n $$We only need to make $P_n’(t)=0$.</p>
+<p>Let $P_n(t_1,t_2)$ be the probability of $n$ customers arrive in the interval time $[t_1,t_2)$. The arrival of customers is <span class="obsidian-red">Poisson Stream</span> if:</p>
+<ol>
+<li>In the non-overlapping interval time, the number of arrivals of customers is independent.</li>
+<li>$$P_1(t,t+\Delta t)=\lambda \Delta t+o(\Delta t)$$</li>
+<li>$$\sum_{n=2}^{\infty}P_n(t,t+\Delta t)=o(\Delta t)$$</li>
+</ol>
+<p>As a result,$$P_0(t,t+\Delta t)=1-\lambda \Delta t +o(\Delta t)$$$$P_n(t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t)$$$$P_n’(t)=\lambda (P_{n-1}(t)-P_n(t))+o(\Delta t)/\Delta t$$ Let $\Delta t \rightarrow 0$, we can set up the following system of equations: $$\left\{\begin{matrix} \frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-\lambda P_n(t)+\lambda P_{n-1}(t),n\ge 1\\P_n(0)=0 \end{matrix}\right.$$ $$\left\{\begin{matrix} \frac{\mathrm{d}P_0 (t)}{\mathrm{d} t}=-\lambda P_0(t)\\P_0(0)=1 \end{matrix}\right.$$ The solution of the system of equations is $$P_n (t)=\frac{(\lambda t )^n}{n!}e^{-\lambda t},t&gt;0,n=0,1,2,\dots$$ It follows Poisson distribution.</p>
+<h3 id="m-m-1-model">$M/M/1$ Model</h3>
+<p>Let the time of service follow the exponential distribution with parameter $\mu$ and the system is unlimited ($M/M/1/\infty/\infty$). Similarly,</p>
+<p>$$\left\{\begin{matrix} \frac{\mathrm{d}P_0 (t)}{\mathrm{d} t}=-\lambda P_0(t)+\mu P_1(t)\\\frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-(\lambda+\mu) P_n(t)+\lambda P_{n-1}(t)+\mu P_{n+1}(t),n\ge 1\\P_n(0)=0 \end{matrix}\right.$$</p>
+<p>$$\left\{\begin{matrix} -\lambda P_0+\mu P_1=0\\ \lambda P_{n-1}+\mu P_{n+1}-(\lambda +\mu)P_n=0\\ \sum \limits_{n=0}^{\infty}P_n=1 \end{matrix}\right.$$ Let $\rho =\frac{\lambda}{\mu}&lt;1$, then$$P_n=(1-\rho)\rho^n$$ We can solve: $$L_s=\sum _{n=0}^{\infty} nP_n=\sum_{n=1}^{\infty}n(1-\rho)\rho^n=\frac{\rho}{1-\rho}=\frac{\lambda}{\mu-\lambda}$$ $$L_q=\sum _{n=1}^{\infty} (n-1)P_n=\sum_{n=1}^{\infty}nP_n-\sum_{n=1}^{\infty}P_n=L_s-\rho=\frac{\rho^2}{1-\rho}=\frac{\lambda^2}{\mu(\mu-\lambda)}$$ $$W_s=\frac{L_s}{\lambda}$$ $$W_q=\frac{L_q}{\lambda}$$ If the system is restrained ($M/M/1/N/\infty$), then $$\sum_{n=0}^N P_n=1$$ $$P_n=\frac{1-\rho}{1-\rho^{N+1}}\rho^N,\rho \ne 1,n\le N$$ $$L_s=\sum _{n=0}^{N} nP_n=\frac{\rho}{1-\rho}-\frac{(N+1)\rho^{N+1}}{1-\rho ^{N+1}},\rho \ne 1$$ $$L_q=\sum _{n=1}^{N} (n-1)P_n=L_s-(1-P_0)$$ $$W_s=\frac{L_s}{\mu (1-P_0)}=\frac{L_q}{\mu (1-P_N)}+\frac{1}{\mu}$$ $$W_q=W_s-\frac{1}{\mu}$$ If the system is restrained ($M/M/1/\infty/m$, or $M/M/1/m/m$), then we define the rate of effective arrival $\lambda_e$ as $$\lambda_e=\lambda (m-L_s)$$ As a result,$$\left\{\begin{matrix} \mu P_1=m\lambda P_0 \\ \mu P_{n+1} +(m+n-1)\lambda P_{n-1}=[(m-n)\lambda +\mu]P_n,1\le n\le m-1\\ \mu P_m=\lambda P_{m-1}\\\sum_{i=0}\limits^m P_i=1 \end{matrix}\right.$$ yields$$\left\{\begin{matrix} P_0=\frac{1}{\sum \limits_{i=0}^m\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^i} \\ P_n=\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^nP_0 \end{matrix}\right.$$$$L_s=m-\frac{\mu}{\lambda}(1-P_0)$$$$L_q=m-\frac{(\lambda+\mu)}{\lambda}(1-P_0)=L_s-(1-P_0)$$ $$W_s=\frac{m}{\mu(1-P_0)}-\frac{1}{\lambda}$$ $$W_q=W_s-\frac{1}{\mu}$$</p>
+<h3 id="m-m-c-model">$M/M/c$ Model</h3>
+<p>Let$$\rho=\frac{\lambda}{c\mu}$$Then$$\left\{\begin{matrix} \mu P_1=\lambda P_0 \\ (n+1)\mu P_{n+1} +\lambda P_{n-1}=(\lambda +n\mu)P_n,1\le n\le c\\ c\mu P_{n+1}+\lambda P_{n-1}=(\lambda +c\mu)P_n,n&gt;c \end{matrix}\right.$$</p>
+<ul>
+<li>$M/M/c/\infty/\infty$</li>
+</ul>
+<p>$$\sum \limits_{n=0}^{\infty}P_n=1$$ $$\left\{\begin{matrix} P_0=[\sum \limits _{k=0}^{c-1}\frac{1}{k!}(\frac{\lambda}{\mu})^k+\frac{1}{c!}\frac{1}{1-\rho}(\frac{\lambda}{\mu})^c]^{-1}\\P_n=\left\{\begin{matrix}\frac{1}{n!}(\frac{\lambda}{\mu})^nP_0,n\le c\\\frac{1}{c!c^{n-c}}(\frac{\lambda}{\mu})^nP_0,n&gt; c\end{matrix}\right. \end{matrix}\right.$$ $$\left\{\begin{matrix} L_q=\sum \limits _{n=c+1}^{\infty}(n-c)P_n=\frac{(c\rho)^c}{c!(1-\rho)^2}P_0\\L_s=L_q+\frac{\lambda}{\mu}\\W_q=\frac{L_q}{\lambda}\\W_s=\frac{L_s}{\lambda} \end{matrix}\right.$$</p>
+<ul>
+<li>$M/M/c/N/\infty$</li>
+</ul>
+<p>$$\sum \limits_{n=0}^{N}P_n=1$$ $$\left\{\begin{matrix} P_0=[\sum \limits _{k=0}^{c}\frac{(c\rho)^k}{k!}+\frac{c^c}{c!}\frac{\rho(\rho^c-\rho^N)}{1-\rho}]^{-1}\\P_n=\left\{\begin{matrix}\frac{(c\rho)^n}{n!}P_0,n\le c\\\frac{c^c}{c!}\rho^nP_0,c\le n \le N\end{matrix}\right. \end{matrix}\right.$$ $$\left\{\begin{matrix} L_q=\frac{P_0 \rho(c\rho)^c}{c!(1-\rho)^2}[1-\rho^{N-c}-(N-c)\rho^{N-c}(1-\rho)]\\L_s=L_q+c\rho(1-P_N)\\W_q=\frac{L_q}{\lambda(1-P_N)}\\W_s=W_q+\frac{1}{\mu} \end{matrix}\right.$$</p>
+<ul>
+<li>$M/M/c/m/m$</li>
+</ul>
+<p>$$\left\{\begin{matrix} \mu P_1=\lambda P_0 \\ (n+1)\mu P_{n+1} +\lambda P_{n-1}=(\lambda +n\mu)P_n,1\le n\le c\\ c\mu P_{n+1}+\lambda P_{n-1}=(\lambda +c\mu)P_n,n&gt;c \end{matrix}\right.$$ $$\left\{\begin{matrix} P_0=[\sum \limits _{k=0}^{c}\frac{(c\rho)^k}{k!}+\frac{c^c}{c!}\frac{\rho(\rho^c-\rho^N)}{1-\rho}]^{-1}\\P_n=\left\{\begin{matrix}\frac{(c\rho)^n}{n!}P_0,n\le c\\\frac{c^c}{c!}\rho^nP_0,c\le n \le N\end{matrix}\right. \end{matrix}\right.$$ $$\left\{\begin{matrix} L_q=\frac{P_0 \rho(c\rho)^c}{c!(1-\rho)^2}[1-\rho^{N-c}-(N-c)\rho^{N-c}(1-\rho)]\\L_s=L_q+c\rho(1-P_N)\\W_q=\frac{L_q}{\lambda(1-P_N)}\\W_s=W_q+\frac{1}{\mu} \end{matrix}\right.$$</p>
+<h3 id="m-g-1-infty-infty-model">$M/G/1/\infty/\infty$ Model</h3>
+<p>Pollaczek-Khintchine formula $$L_s=\rho+\frac{\rho^2+\lambda^2 Var[T]}{2(1-\rho )},\rho=\lambda \mathbb{E}[T]$$ $$L_s=\rho+L_q$$ $$W_s=\frac{L_s}{\lambda}$$ $$W_q=\frac{L_q}{\lambda}$$</p>
+<ul>
+<li>$M/D/1$ Model $$Var[T]=0$$</li>
+<li>$M/E_k/1$ Model $$Var[T]=\frac{1}{k\mu^2}$$</li>
+</ul>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"queueing-theory","level":1,"text":"Queueing Theory"},{"id":"notation-explanation","level":2,"text":"Notation Explanation"},{"id":"model-establishment","level":2,"text":"Model Establishment"},{"id":"m-m-1-model","level":2,"text":"$M/M/1$ Model"},{"id":"m-m-c-model","level":2,"text":"$M/M/c$ Model"},{"id":"m-g-1-infty-infty-model","level":2,"text":"$M/G/1/\\infty/\\infty$ Model"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -233,7 +304,7 @@ $$W_q=\frac{L_q}{\lambda}$$
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

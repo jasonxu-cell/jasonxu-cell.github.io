@@ -3,6 +3,16 @@
 
 Default behavior runs one sync pass. Use --watch to keep the process alive and
 resync when mapped Markdown notes or Obsidian Picture attachments change.
+
+Each pass also:
+  * optimises embedded images: raster attachments >= 100 KB are published as
+    ``<name>-optimized.webp`` (max 2400 px) and the page links the WebP;
+    smaller images, GIFs and SVGs are copied unchanged;
+  * applies the shared page shell/metadata from update_site_metadata.py
+    (description, skip link, nav labels, lang) and content-hash ``?v=`` asset
+    versions from site_assets.py;
+  * pre-renders the Markdown into static HTML (scripts/prerender_markdown.js,
+    needs Node.js) so search engines see the full note text.
 '''
 
 from __future__ import annotations
@@ -12,13 +22,21 @@ import dataclasses
 import html
 import os
 import re
+import json
 import shutil
+import subprocess
 import sys
 import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
-from urllib.parse import quote
+from urllib.parse import quote, unquote
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import update_site_metadata  # noqa: E402  (shared <head>/nav/shell for all pages)
+from site_assets import apply_asset_versions  # noqa: E402
+from site_images import SkipCache, optimize_into  # noqa: E402
 
 
 @dataclasses.dataclass(frozen=True)
@@ -49,7 +67,8 @@ NOTE_TARGETS: Tuple[NoteTarget, ...] = (
     NoteTarget("physics", "Physics", "Optics", "optics.html", "Physics", "Optics.md"),
     NoteTarget("physics", "Physics", "Quantum Physics", "quantum-physics.html", "Physics", "Quantum Mechanics.md", ("Quantum Mechanics",)),
     NoteTarget("electronic_engineering", "Electronic Technology", "Signals and Systems", "signals_and_systems.html", "Electronic Engineering", "Signals & Systems.md", ("Signal & System", "Signals & Systems")),
-    NoteTarget("electronic_engineering", "Electronic Technology", "Electronic Technology", "electronic_technology.html", "Electronic Engineering", "Electronic Technology.md"),
+    NoteTarget("electronic_engineering", "Electronic Technology", "Analog Circuits", "analog_circuits.html", "Electronic Engineering", "Analog Circuits.md"),
+    NoteTarget("electronic_engineering", "Electronic Technology", "Digital Circuits", "digital_circuits.html", "Electronic Engineering", "Digital Circuits.md"),
     NoteTarget("cs", "Computer Science", "Data Structure and Algorithm", "data_structure_and_algorithm.html", "Computer Science", "Data Structure & Algorithm.md", ("Data Structure & Algorithm",)),
     NoteTarget("cs", "Computer Science", "Computer Organization and Design", "computer_organization_and_design.html", "Computer Science", "Computer Organization & Design.md", ("Computer Organization & Design",)),
     NoteTarget("cs", "Computer Science", "Operating System", "operating_system.html", "Computer Science", "Operating System.md"),
@@ -285,31 +304,97 @@ def convert_wikilinks(text: str, current: NoteTarget, link_map: Dict[str, NoteTa
     return re.sub(r"(?<!!)\[\[([^\]]+)\]\]", replace, text)
 
 
+class ImagePublisher:
+    '''Publishes vault images into notes/attachments and decides which file
+    name the page should link.
+
+    Large raster images are published only as ``-optimized.webp``; the
+    original is copied as well only when no WebP is used (small files, GIF,
+    SVG, or when WebP would not be smaller).'''
+
+    def __init__(self, root: Path, dry_run: bool, optimize: bool = True):
+        self.attachments_dir = root / "notes" / "attachments"
+        self.dry_run = dry_run
+        self.optimize = optimize
+        self.skip_cache = SkipCache(root / ".cache" / "image-optimization-skip.json")
+        self._resolved: Dict[Path, str] = {}
+        self.copied = 0
+        self.optimized = 0
+
+    def publish(self, source: Path) -> str:
+        if source in self._resolved:
+            return self._resolved[source]
+
+        name: Optional[str] = None
+        if self.optimize:
+            webp = self.attachments_dir / f"{source.stem}-optimized.webp"
+            was_fresh = webp.exists() and webp.stat().st_mtime_ns >= source.stat().st_mtime_ns
+            name = optimize_into(source, self.attachments_dir, self.skip_cache, dry_run=self.dry_run)
+            if name and not was_fresh:
+                self.optimized += 1
+        if name is None:
+            if copy_image(source, self.attachments_dir / source.name, self.dry_run):
+                self.copied += 1
+            name = source.name
+
+        self._resolved[source] = name
+        return name
+
+    @property
+    def published(self) -> Set[str]:
+        return set(self._resolved.values())
+
+    def finish(self) -> None:
+        if not self.dry_run:
+            self.skip_cache.save()
+
+
 def convert_obsidian_images(
     text: str,
     picture_index: Dict[str, Path],
     used_images: Set[Path],
     missing_images: Set[str],
+    publisher: Optional[ImagePublisher] = None,
 ) -> str:
+    def published_name(basename: str) -> Optional[str]:
+        source = picture_index.get(basename)
+        if not source:
+            return None
+        used_images.add(source)
+        return publisher.publish(source) if publisher else basename
+
     def replace(match: re.Match[str]) -> str:
         body = match.group(1).strip()
         parts = [part.strip() for part in body.split("|")]
         image_name = parts[0]
         width = next((part for part in parts[1:] if re.fullmatch(r"\d+", part)), None)
         basename = Path(image_name).name
-        source = picture_index.get(basename)
-
-        if source:
-            used_images.add(source)
-        else:
+        name = published_name(basename)
+        if name is None:
             missing_images.add(image_name)
+            name = basename
 
-        encoded = quote(basename)
+        encoded = quote(name)
         alt = Path(basename).stem
         width_suffix = f"{{width={width}}}" if width else ""
         return f"![{alt}](../attachments/{encoded}){width_suffix}"
 
-    return re.sub(r"!\[\[([^\]]+)\]\]", replace, text)
+    def replace_markdown_image(match: re.Match[str]) -> str:
+        # Standard Markdown embeds of local vault files: ![alt](Picture/x.png)
+        alt, target, rest = match.group(1), match.group(2), match.group(3) or ""
+        if re.match(r"^(?:[a-z][a-z0-9+.-]*:|#|\.\./attachments/)", target, re.I):
+            return match.group(0)
+        basename = Path(unquote(target)).name
+        if Path(basename).suffix.casefold() not in IMAGE_SUFFIXES:
+            return match.group(0)
+        name = published_name(basename)
+        if name is None:
+            missing_images.add(unquote(target))
+            return match.group(0)
+        return f"![{alt}](../attachments/{quote(name)}){rest}"
+
+    text = re.sub(r"!\[\[([^\]]+)\]\]", replace, text)
+    return re.sub(r"!\[([^\]]*)\]\(([^)\s]+)\)(\{width=\d+\})?", replace_markdown_image, text)
 
 
 def prepare_markdown(
@@ -319,9 +404,10 @@ def prepare_markdown(
     link_map: Dict[str, NoteTarget],
     used_images: Set[Path],
     missing_images: Set[str],
+    publisher: Optional[ImagePublisher] = None,
 ) -> str:
     text = strip_frontmatter(read_text(vault_path))
-    text = convert_obsidian_images(text, picture_index, used_images, missing_images)
+    text = convert_obsidian_images(text, picture_index, used_images, missing_images, publisher)
     text = convert_wikilinks(text, target, link_map)
     return text.replace("\r\n", "\n").replace("\r", "\n")
 
@@ -369,23 +455,24 @@ def html_page(
     <meta name="twitter:image" content="{OG_IMAGE_URL}">
     <meta name="twitter:image:alt" content="{OG_IMAGE_ALT}">
     <title>{html.escape(target.title)} | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
-    <nav>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
-            <a href="../../notes.html">Notes</a>
+            <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../{target.subject}.html" class="article-back-link">&larr; {html.escape(SUBJECT_LABELS[target.subject])}</a>
             <h1>{html.escape(target.title)}</h1>
@@ -404,7 +491,7 @@ def html_page(
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body"></article>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -466,7 +553,7 @@ def html_page(
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
+    <script src="../../scripts/markdown-article.js"></script>
     <script src="../../scripts/comments.js"></script>
 </body>
 </html>
@@ -504,30 +591,73 @@ def update_subject_links(root: Path, targets: Sequence[NoteTarget], dry_run: boo
     return changed
 
 
-def copy_images(images: Iterable[Path], attachments_dir: Path, dry_run: bool) -> int:
-    changed = 0
+def copy_image(source: Path, dest: Path, dry_run: bool) -> bool:
+    source_stat = source.stat()
+    if dest.exists():
+        dest_stat = dest.stat()
+        # exFAT stores modification times at 10 ms precision.
+        same_mtime = abs(dest_stat.st_mtime_ns - source_stat.st_mtime_ns) < 10_000_000
+        if same_mtime and dest_stat.st_size == source_stat.st_size:
+            return False
     if not dry_run:
-        attachments_dir.mkdir(parents=True, exist_ok=True)
-    for source in sorted(images):
-        dest = attachments_dir / source.name
-        source_stat = source.stat()
-        if dest.exists():
-            dest_stat = dest.stat()
-            # exFAT stores modification times at 10 ms precision.
-            same_mtime = abs(dest_stat.st_mtime_ns - source_stat.st_mtime_ns) < 10_000_000
-            if same_mtime and dest_stat.st_size == source_stat.st_size:
-                continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        # copy2() also copies macOS file flags. That raises EINVAL when the
+        # website is on an exFAT volume, even though the file data was
+        # copied successfully. Web assets only need their bytes and mtime.
+        shutil.copyfile(source, dest)
+        os.utime(dest, ns=(source_stat.st_atime_ns, source_stat.st_mtime_ns))
+        # macOS may create an AppleDouble metadata companion on exFAT.
+        # It is not a web asset and should not be committed or deployed.
+        dest.with_name(f"._{dest.name}").unlink(missing_ok=True)
+    return True
+
+
+def finalize_page(page: str, relative: str) -> str:
+    '''Apply the site-wide head/nav/shell rules and asset versions.'''
+    page = update_site_metadata.update_head(page, relative)
+    page = update_site_metadata.replace_navigation(page, relative)
+    page = update_site_metadata.update_shell(page, relative)
+    return apply_asset_versions(page)
+
+
+PRERENDER_SCRIPT = Path(__file__).resolve().parent / "prerender_markdown.js"
+_prerender_warned = False
+
+
+def prerender_pages(pages: List[str]) -> List[str]:
+    '''Render the embedded Markdown to static HTML with the same renderer the
+    browser uses. Falls back to client-side rendering if Node.js is missing.'''
+    global _prerender_warned
+    if not pages:
+        return pages
+    node = shutil.which("node")
+    if not node:
+        if not _prerender_warned:
+            print("warning: Node.js not found; notes will be rendered in the browser only (worse SEO).", file=sys.stderr)
+            _prerender_warned = True
+        return pages
+    completed = subprocess.run(
+        [node, str(PRERENDER_SCRIPT), "--stdin-json"],
+        input=json.dumps(pages).encode("utf-8"),
+        stdout=subprocess.PIPE,
+        check=True,
+    )
+    return json.loads(completed.stdout.decode("utf-8"))
+
+
+def prune_attachments(attachments_dir: Path, keep: Set[str], dry_run: bool) -> List[str]:
+    '''Delete attachments no synced note references (originals of optimised
+    images, removed screenshots, ...). The Obsidian vault keeps the originals.'''
+    removed: List[str] = []
+    if not attachments_dir.exists():
+        return removed
+    for path in sorted(attachments_dir.iterdir()):
+        if not path.is_file() or path.name in keep:
+            continue
+        removed.append(path.name)
         if not dry_run:
-            # copy2() also copies macOS file flags. That raises EINVAL when the
-            # website is on an exFAT volume, even though the file data was
-            # copied successfully. Web assets only need their bytes and mtime.
-            shutil.copyfile(source, dest)
-            os.utime(dest, ns=(source_stat.st_atime_ns, source_stat.st_mtime_ns))
-            # macOS may create an AppleDouble metadata companion on exFAT.
-            # It is not a web asset and should not be committed or deployed.
-            dest.with_name(f"._{dest.name}").unlink(missing_ok=True)
-        changed += 1
-    return changed
+            path.unlink()
+    return removed
 
 
 def active_targets(root: Path, vault: Path) -> Tuple[List[NoteTarget], Dict[NoteTarget, Path], Dict[str, Dict[str, Dict[str, object]]], List[str]]:
@@ -576,6 +706,9 @@ def sync_once(
     dry_run: bool = False,
     quiet: bool = False,
     only: Optional[Sequence[str]] = None,
+    optimize_images: bool = True,
+    prerender: bool = True,
+    prune: bool = False,
 ) -> Dict[str, object]:
     attachments_dir = root / "notes" / "attachments"
     all_targets, all_vault_paths, cards, skipped = active_targets(root, vault)
@@ -584,25 +717,41 @@ def sync_once(
     link_map = build_link_map(all_targets, all_vault_paths)
     used_images: Set[Path] = set()
     missing_images: Set[str] = set()
+    publisher = ImagePublisher(root, dry_run=dry_run, optimize=optimize_images)
     written_pages = 0
 
-    for target in targets:
-        markdown = prepare_markdown(target, vault_paths[target], picture_index, link_map, used_images, missing_images)
+    # Pruning must know every image referenced by every note, not just --only.
+    render_targets = all_targets if prune else targets
+    pages: List[Tuple[Path, str]] = []
+    for target in render_targets:
+        markdown = prepare_markdown(
+            target, all_vault_paths[target], picture_index, link_map, used_images, missing_images, publisher
+        )
+        if target not in targets:
+            continue
         meta = cards[target.subject].get(target.title, {})
         out_path = root / "notes" / target.subject / target.filename
+        relative = out_path.relative_to(root).as_posix()
         detail_intro = extract_detail_intro(out_path)
-        if write_text(out_path, html_page(target, markdown, meta, detail_intro), dry_run=dry_run):
+        pages.append((out_path, finalize_page(html_page(target, markdown, meta, detail_intro), relative)))
+
+    rendered = prerender_pages([page for _path, page in pages]) if prerender else [page for _path, page in pages]
+    for (out_path, _page), page in zip(pages, rendered):
+        if write_text(out_path, page, dry_run=dry_run):
             written_pages += 1
 
     changed_subject_pages = update_subject_links(root, targets, dry_run=dry_run)
-    copied_images = copy_images(used_images, attachments_dir, dry_run=dry_run)
+    publisher.finish()
+    pruned = prune_attachments(attachments_dir, publisher.published, dry_run) if prune else []
 
     result = {
         "targets": len(targets),
         "written_pages": written_pages,
         "changed_subject_pages": changed_subject_pages,
         "used_images": len(used_images),
-        "copied_images": copied_images,
+        "copied_images": publisher.copied,
+        "optimized_images": publisher.optimized,
+        "pruned_attachments": pruned,
         "missing_images": sorted(missing_images),
         "skipped": skipped,
     }
@@ -612,7 +761,13 @@ def sync_once(
         print(f"{action} {result['targets']} notes.")
         print(f"pages changed: {result['written_pages']}")
         print(f"subject pages changed: {result['changed_subject_pages']}")
-        print(f"images used/copied: {result['used_images']}/{result['copied_images']}")
+        print(
+            f"images used/copied/optimised: {result['used_images']}/"
+            f"{result['copied_images']}/{result['optimized_images']}"
+        )
+        if pruned:
+            verb = "would remove" if dry_run else "removed"
+            print(f"unreferenced attachments {verb}: {len(pruned)}")
         if missing_images:
             print("missing images:")
             for name in sorted(missing_images):
@@ -648,10 +803,10 @@ def snapshot(paths: Iterable[Path]) -> Tuple[Tuple[str, int, int], ...]:
     return tuple(sorted(values))
 
 
-def watch(root: Path, vault: Path, interval: float, dry_run: bool, only: Optional[Sequence[str]] = None) -> None:
+def watch(root: Path, vault: Path, interval: float, dry_run: bool, only: Optional[Sequence[str]] = None, **options: bool) -> None:
     print(f"Watching Obsidian notes in {vault}")
     print(f"Website root: {root}")
-    sync_once(root, vault, dry_run=dry_run, only=only)
+    sync_once(root, vault, dry_run=dry_run, only=only, **options)
     previous = snapshot(iter_watch_paths(root, vault))
 
     while True:
@@ -664,7 +819,7 @@ def watch(root: Path, vault: Path, interval: float, dry_run: bool, only: Optiona
         previous = current
         print(time.strftime("\n[%Y-%m-%d %H:%M:%S] Change detected."))
         try:
-            sync_once(root, vault, dry_run=dry_run, only=only)
+            sync_once(root, vault, dry_run=dry_run, only=only, **options)
         except Exception as exc:
             print(f"Sync failed: {exc}", file=sys.stderr)
 
@@ -677,6 +832,13 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("--interval", type=float, default=5.0, help="Polling interval in seconds for --watch.")
     parser.add_argument("--dry-run", action="store_true", help="Print what would change without writing files.")
     parser.add_argument("--quiet", action="store_true", help="Reduce output for one-shot sync.")
+    parser.add_argument("--no-optimize-images", action="store_true", help="Copy attachments unchanged instead of publishing WebP versions.")
+    parser.add_argument("--no-prerender", action="store_true", help="Skip static HTML pre-rendering (pages render in the browser only).")
+    parser.add_argument(
+        "--prune-attachments",
+        action="store_true",
+        help="Delete files in notes/attachments that no synced note references (originals stay in the vault).",
+    )
     parser.add_argument(
         "--only",
         action="append",
@@ -695,10 +857,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not vault.exists():
         raise SyncError(f"Obsidian vault does not exist: {vault}")
 
+    options = {
+        "optimize_images": not args.no_optimize_images,
+        "prerender": not args.no_prerender,
+        "prune": args.prune_attachments,
+    }
     if args.watch:
-        watch(root, vault, interval=args.interval, dry_run=args.dry_run, only=args.only)
+        watch(root, vault, interval=args.interval, dry_run=args.dry_run, only=args.only, **options)
     else:
-        sync_once(root, vault, dry_run=args.dry_run, quiet=args.quiet, only=args.only)
+        sync_once(root, vault, dry_run=args.dry_run, quiet=args.quiet, only=args.only, **options)
     return 0
 
 

@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>History of Programming Languages | Yang</title>
-    <link rel="stylesheet" href="../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../style.css?v=a3389ce5a5">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
@@ -62,7 +62,1242 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<p>The following figure is a broad genealogy of programming languages from the 1950s to the 2010s. Each horizontal band marks a decade, while arrows show major lines of influence or descent, such as <code>CPL -&gt; BCPL -&gt; B -&gt; C</code>, <code>ALGOL -&gt; Pascal -&gt; Object Pascal</code>, and <code>C -&gt; C++ / Objective-C</code>. Dotted lines indicate looser design influence rather than direct inheritance. It should be read as a map of language evolution, not as a complete taxonomy or a popularity ranking.</p>
+<figure class="article-figure" id="figure-1">
+<a class="figure-media-link" href="images/programming language-optimized.webp" aria-label="查看Figure 1原图"><img src="images/programming language-optimized.webp" alt="Development of programming languages over time" loading="lazy" decoding="async" style="width: 60%;"></a>
+<figcaption class="article-caption figure-caption"><a class="caption-label" href="#figure-1">Figure 1</a><span class="caption-text">Development of programming languages over time</span></figcaption>
+</figure>
+<h2 id="1950s">1950s</h2>
+<h3 id="fortran">FORTRAN</h3>
+<p>The name stands for Formula Translation. It was invented by the American computer scientist John Warner Backus. He wanted to develop a language that could translate formulas written by users directly into machine code. This idea became a basic model for modern programming languages.</p>
+<p>Common FORTRAN source file extensions include <code>.f</code>, <code>.for</code>, and <code>.f90</code>. The following is an example of FORTRAN code:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">FORTRAN</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-fortran" data-highlighted="local"><span class="hljs-keyword">program</span> hello
+  <span class="hljs-keyword">print</span> *, <span class="hljs-string">&quot;Hello, World!&quot;</span>
+<span class="hljs-keyword">end</span> <span class="hljs-keyword">program</span> hello</code></pre></div>
+<p>FORTRAN primarily serves scientific and engineering computing, so it has two important properties:</p>
+<ul>
+<li>A natural style of description, with syntax close to mathematical formulas</li>
+<li>High efficiency in numerical computation</li>
+</ul>
+<p>Notably, to optimize the performance of matrix computation, FORTRAN stores arrays in column-major order.</p>
+<p>Nowadays, FORTRAN is widely used in parallel computing and high-performance computing, such as weather forecasting, geophysics, and fluid dynamics. As the first widely known programming language, FORTRAN made enormous historical contributions, mainly including the following aspects:</p>
+<ul>
+<li>Promoting the development of compiler technology</li>
+<li>Laying the foundation for later programming languages</li>
+<li>Promoting the standardization of programming languages</li>
+</ul>
+<h3 id="lisp">Lisp</h3>
+<p>Lisp was invented by the American computer scientist John McCarthy in the late 1950s. McCarthy wanted to build a language that could express symbolic reasoning and abstract computation on a computer. The name Lisp comes from &quot;LISt Processing&quot;, because lists are the central data structure of the language.</p>
+<p>Lisp is a programming language that uses symbolic representation as its core. In Lisp, there is no clear distinction between expressions and statements; programs are built from expressions that return values. The core philosophy of Lisp is: code is data. Because Lisp code is represented using the same list structure as ordinary data, programs can read, generate, and transform other programs. This made Lisp one of the earliest languages to support meta-programming.</p>
+<p>As an expression-oriented language, the main properties of Lisp include simplicity, consistency, and extensibility. Therefore, Lisp has been widely used in artificial intelligence, symbolic computation, language research, and rapid prototyping. However, early Lisp systems had weaker support for structured programming and relatively poor runtime performance, so Lisp was used less often in some performance-sensitive application areas.</p>
+<p>Lisp programs use S-expressions, which can be seen as a combination of prefix notation and parentheses. The following is an example of Lisp code:</p>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">LISP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-lisp" data-highlighted="local">(<span class="hljs-keyword">defun</span> factorial (n)
+	(<span class="hljs-keyword">if</span> (= n <span class="hljs-number">0</span>)
+		<span class="hljs-number">1</span> <span class="hljs-comment">; If n is equal to 0, return 1.</span>
+		(* n (factorial (- n <span class="hljs-number">1</span>))))) <span class="hljs-comment">; Otherwise, return n times factorial(n - 1).</span>
+
+(factorial <span class="hljs-number">4</span>) <span class="hljs-comment">; Use the function to calculate 4!</span>
+
+<span class="hljs-comment">; Use dotimes to print &quot;hello world&quot; five times.</span>
+(<span class="hljs-keyword">dotimes</span> (i <span class="hljs-number">5</span>)
+	(<span class="hljs-built_in">print</span> <span class="hljs-string">&quot;hello world&quot;</span>))</code></pre></div>
+<p>Lisp&#039;s historical contributions are also significant, mainly including the following aspects:</p>
+<ul>
+<li>Proposing the functional programming paradigm</li>
+<li>Carrying forward and developing recursion</li>
+<li>Becoming one of the earliest languages to support meta-programming</li>
+<li>Becoming one of the earliest dynamically typed languages</li>
+<li>Supporting the use of functions as arguments to other functions</li>
+<li>Introducing automatic garbage collection</li>
+</ul>
+<p>Lisp also played an important role in the history of artificial intelligence. From the 1960s to the 1980s, many expert systems, symbolic AI systems, and natural language processing (NLP) projects relied heavily on Lisp. It became a practical tool for exploring whether machines could manipulate symbols, represent knowledge, and perform forms of reasoning.</p>
+<h3 id="algol">ALGOL</h3>
+<p>In 1958, a joint conference for discussing and formulating a common programming language standard was held at ETH Zurich. Some of the participants became the main inventors of ALGOL, which stands for Algorithmic Language.</p>
+<p>ALGOL aimed to integrate the newest ideas in programming language design. It was influenced by FORTRAN and promoted the standardization of programming languages and fostered the rapid development of computing.</p>
+<p>ALGOL 58 introduced <code>:=</code> as the assignment operator, which influenced later programming languages such as Simula, Pascal, and Ada. We can see it in the following code:</p>
+<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">ALGOL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-algol" data-highlighted="local"><span class="hljs-keyword">begin</span>
+	<span class="hljs-type">integer</span> i; 
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span> <span class="hljs-keyword">step</span> <span class="hljs-number">1</span> <span class="hljs-keyword">until</span> <span class="hljs-number">10</span> <span class="hljs-keyword">do</span> 
+		<span class="hljs-keyword">begin</span> 
+			<span class="hljs-built_in">outinteger</span>(<span class="hljs-number">1</span>, i); 
+			<span class="hljs-built_in">newline</span>(<span class="hljs-number">1</span>) 
+		<span class="hljs-keyword">end</span> 
+<span class="hljs-keyword">end</span></code></pre></div>
+<p>It should be noted that there was no standard I/O method in ALGOL 60, because the committee could not reach a consensus on I/O. This flaw was corrected in ALGOL 68.</p>
+<p>The design of ALGOL 60 accumulated a wealth of valuable experience for later programming languages. Its complexity greatly exceeded that of FORTRAN and Lisp, so it can be regarded as one of the first truly high-level programming languages. It was also one of the first block-structured programming languages and one of the first programming languages to provide a clear <code>for</code> loop mechanism. Although ALGOL has not been widely adopted in industry, its influence is profound, inspiring subsequent languages such as C, Pascal, and Java.</p>
+<h3 id="cobol">COBOL</h3>
+<p>Common Business-Oriented Language (COBOL) was designed to reduce the cost of business programming. In 1959, a meeting held at the Pentagon in the United States marked the beginning of COBOL&#039;s development.</p>
+<p>COBOL is a business-oriented programming language whose syntax is close to English. Therefore, it has good readability and maintainability, although it may produce relatively long code.</p>
+<p>Grammatically, COBOL uses <code>.</code> to mark the end of a sentence and uses the keywords <code>ACCEPT</code> and <code>DISPLAY</code> to interact with users. The following is an example of COBOL code:</p>
+<div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">COBOL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cobol" data-highlighted="local"><span class="hljs-comment">* The identification of the code</span>
+<span class="hljs-keyword">IDENTIFICATION</span> <span class="hljs-keyword">DIVISION</span>.
+<span class="hljs-keyword">PROGRAM-ID</span>. FACTORIAL.
+<span class="hljs-keyword">AUTHOR</span>. YANG.
+
+<span class="hljs-comment">* The definition of the data</span>
+<span class="hljs-keyword">DATA</span> <span class="hljs-keyword">DIVISION</span>.
+<span class="hljs-keyword">WORKING-STORAGE</span> <span class="hljs-keyword">SECTION</span>.
+<span class="hljs-number">01</span> N <span class="hljs-keyword">PIC</span> S9(<span class="hljs-number">5</span>).
+<span class="hljs-number">01</span> FACT <span class="hljs-keyword">PIC</span> <span class="hljs-number">9</span>(<span class="hljs-number">18</span>).
+<span class="hljs-number">01</span> I <span class="hljs-keyword">PIC</span> <span class="hljs-number">9</span>(<span class="hljs-number">5</span>).
+
+<span class="hljs-comment">* Calculate the factorial</span>
+<span class="hljs-keyword">PROCEDURE</span> <span class="hljs-keyword">DIVISION</span>.
+MAIN.
+	<span class="hljs-keyword">DISPLAY</span> <span class="hljs-string">&quot;Please input a non-negative integer whose factorial is to be calculated:&quot;</span>.
+	<span class="hljs-keyword">ACCEPT</span> N.
+	<span class="hljs-keyword">IF</span> N&lt;<span class="hljs-number">0</span>
+		<span class="hljs-keyword">DISPLAY</span> <span class="hljs-string">&quot;Please input a non-negative number&quot;</span>
+		<span class="hljs-keyword">STOP</span> <span class="hljs-keyword">RUN</span>
+		<span class="hljs-keyword">END-IF</span>.
+	<span class="hljs-keyword">MOVE</span> <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> FACT
+	<span class="hljs-keyword">PERFORM</span> <span class="hljs-keyword">VARYING</span> I <span class="hljs-keyword">FROM</span> <span class="hljs-number">1</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span> <span class="hljs-keyword">UNTIL</span> I &gt; N
+		<span class="hljs-keyword">MULTIPLY</span> FACT <span class="hljs-keyword">BY</span> I
+	<span class="hljs-keyword">END-PERFORM</span>.
+	
+	<span class="hljs-keyword">DISPLAY</span> <span class="hljs-string">&quot;The factorial of &quot;</span> N <span class="hljs-string">&quot; is &quot;</span> FACT
+	<span class="hljs-keyword">STOP</span> <span class="hljs-keyword">RUN</span>.</code></pre></div>
+<p>COBOL has more than 300 keywords, which enables engineers to write programs in a similar style and provides convenience for business data processing. Besides, the syntax and structural design of COBOL are very transferable.</p>
+<p>COBOL has significant value and influence, making it one of the leading programming languages in commercial applications. Interestingly, in 2020, during the global COVID-19 pandemic, millions of people in the United States became unemployed. This caused many unemployment registration and social security systems to operate beyond capacity. Many of these old systems were written in COBOL, so governments needed COBOL engineers to maintain them.</p>
+<h2 id="1960s">1960s</h2>
+<p>By the end of the 1950s, programming languages had begun to follow two influential paths. COBOL focused on business data processing, particularly in banking and insurance, while ALGOL pursued a mathematically elegant way to express algorithms. Yet neither path fully addressed the emerging needs of operating systems and other systems software. The languages of the 1960s would lay the groundwork for an answer.</p>
+<h3 id="cpl-bcpl">CPL/BCPL</h3>
+<p>Combined Programming Language (CPL) was developed by Christopher Strachey, David Barron, and others at the University of Cambridge Mathematical Laboratory in the early 1960s. They wished to expand the application scope of ALGOL 60 from scientific computing to a wider range of fields, so the design became very complicated.</p>
+<div class="code-block" data-code-block="4"><div class="code-toolbar"><span class="code-language">CPL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpl" data-highlighted="local"><span class="hljs-keyword">function</span> factorial[<span class="hljs-type">integer</span> n]=<span class="hljs-keyword">result</span> of §<span class="hljs-number">1</span>
+	<span class="hljs-type">integer</span> temp = <span class="hljs-number">1</span>
+	<span class="hljs-keyword">until</span> n = <span class="hljs-number">0</span> <span class="hljs-keyword">do</span> § <span class="hljs-number">1.1</span>
+		temp = n * temp
+	n := n - <span class="hljs-number">1</span> § / <span class="hljs-number">1.1</span>
+<span class="hljs-keyword">result</span> := temp§/ <span class="hljs-number">1</span></code></pre></div>
+<p>In CPL, <code>§</code> and <code>§/</code> are similar to <code>{</code> and <code>}</code>. CPL also supports named blocks with identifiers, such as <code>§ / 1.1</code>.</p>
+<p>CPL introduced the concepts of introduction and replacement. It also introduced the important distinction between lvalues and rvalues. An lvalue, or left-hand value, describes a storage location that can appear on the left side of an assignment. An rvalue, or right-hand value, describes the value computed by an expression, usually appearing on the right side of an assignment. In CPL, this distinction was described as evaluating expressions in left-hand mode or right-hand mode. The same variable name can be used in both modes: as an lvalue, it identifies a location; as an rvalue, it reads the value stored in that location.</p>
+<div class="code-block" data-code-block="5"><div class="code-toolbar"><span class="code-language">CPL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpl" data-highlighted="local"><span class="hljs-type">integer</span> x, y
+x := <span class="hljs-number">10</span>
+y := x + <span class="hljs-number">1</span></code></pre></div>
+<p>In <code>x := 10</code>, <code>x</code> is evaluated as an lvalue because it gives the location to be updated, while <code>10</code> is evaluated as an rvalue because it gives the value to store. In <code>y := x + 1</code>, <code>y</code> is the lvalue, and <code>x + 1</code> is the rvalue. The expression <code>x + 1</code> cannot be placed on the left side of an assignment, because it computes a value but does not name a writable storage location.</p>
+<p>CPL introduced many keywords to make expressions more intuitive. However, many definitions in CPL existed only in design documents. In 1967, Basic Combined Programming Language (BCPL) was invented by Martin Richards. BCPL reduced CPL&#039;s redundancy and complexity and added some appropriate extensions.</p>
+<ul>
+<li>BCPL introduced <code>//</code> as a form of single-line comment.</li>
+<li>The BCPL compiler used an intermediate language called &quot;O-code&quot;, which divided the compiler into two parts: the first part translated BCPL into O-code, and the second part compiled O-code into the target file.</li>
+<li>BCPL inherited the concepts of lvalues and rvalues from CPL.</li>
+<li>BCPL defined the way function parameters are passed; the function parameter list could be defined as an array. This design also made it easier for BCPL to support variadic functions.</li>
+</ul>
+<p>However, BCPL used the machine word as its basic data type, so the exact size depended on the target machine. This design could not satisfy the requirements of all machines equally well.</p>
+<h3 id="basic">BASIC</h3>
+<p>Beginner&#039;s All-purpose Symbolic Instruction Code (BASIC) was invented by the American computer scientists John George Kemeny and Thomas Eugene Kurtz. They wanted to create a programming language that was easy for beginners to learn and use.</p>
+<p>The first version of BASIC had only a small set of commands. The simplicity of the language made its implementation simple and compact. This enabled BASIC to become one of the first-choice languages for personal computers. At that time, some personal computers had only a few kilobytes of memory, and a small BASIC interpreter suited that limited memory well. In personal computer systems, BASIC was usually implemented by an interpreter instead of a compiler.</p>
+<p>The following is an example of BASIC code:</p>
+<div class="code-block" data-code-block="6"><div class="code-toolbar"><span class="code-language">BASIC</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-basic" data-highlighted="local"><span class="hljs-number">10</span> <span class="hljs-keyword">INPUT</span> <span class="hljs-string">&quot;Please input a non-negative integer:&quot;</span>, n
+<span class="hljs-number">20</span> <span class="hljs-keyword">IF</span> n &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">PRINT</span> <span class="hljs-string">&quot;INPUT WRONG!&quot;</span> : <span class="hljs-keyword">GOTO</span> <span class="hljs-number">10</span>
+<span class="hljs-number">30</span> <span class="hljs-keyword">IF</span> n = <span class="hljs-number">0</span> <span class="hljs-keyword">OR</span> n = <span class="hljs-number">1</span> <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">PRINT</span> <span class="hljs-string">&quot;FACTORIAL is 1&quot;</span> : <span class="hljs-keyword">GOTO</span> <span class="hljs-number">90</span>
+<span class="hljs-number">40</span> f = <span class="hljs-number">1</span>
+<span class="hljs-number">50</span> <span class="hljs-keyword">FOR</span> i = <span class="hljs-number">2</span> <span class="hljs-keyword">TO</span> n <span class="hljs-keyword">STEP</span> <span class="hljs-number">1</span>
+<span class="hljs-number">60</span> f = f * i
+<span class="hljs-number">70</span> <span class="hljs-keyword">NEXT</span> i
+<span class="hljs-number">80</span> <span class="hljs-keyword">PRINT</span> <span class="hljs-string">&quot;FACTORIAL is:&quot;</span>, f
+<span class="hljs-number">90</span> <span class="hljs-keyword">END</span></code></pre></div>
+<p>BASIC has a very rich history. It has many versions and variants, such as Visual Basic. These versions extended the functions and properties of BASIC.</p>
+<p>However, the simple grammar and structure of BASIC could lead to redundant and confusing code, which was not conducive to program maintenance and upgrades. Besides, many BASIC implementations had relatively low performance, making them unsuitable for large-scale, high-performance programs. By the end of the 1980s, as personal computer hardware resources increased significantly, the advantage of small BASIC interpreters gradually weakened. Nowadays, Python, with its simple design and strong readability, has replaced BASIC in many beginner-friendly programming and scripting contexts, while BASIC has gradually faded from the center of the programming ecosystem.</p>
+<h3 id="simula">Simula</h3>
+<p>Simula was invented by the Norwegian computer scientists Ole-Johan Dahl and Kristen Nygaard. Kristen Nygaard started to write computer simulation programs in 1957. He wanted to find a friendlier programming language for describing simulation problems. The name Simula comes from simulation.</p>
+<p>Simula I introduced coroutines, which means it allowed multiple subroutines to cooperate and exchange control during execution. Later, Simula 67 introduced some important concepts of object-oriented programming (OOP), including classes, objects, encapsulation, and inheritance. Therefore, Simula is widely recognized as one of the earliest object-oriented programming languages.</p>
+<p>The following code is an example of Simula:</p>
+<div class="code-block" data-code-block="7"><div class="code-toolbar"><span class="code-language">SIMULA</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-simula" data-highlighted="local"><span class="hljs-keyword">Simulation</span> <span class="hljs-keyword">Begin</span>
+	<span class="hljs-keyword">Class</span> FittingRoom; <span class="hljs-keyword">Begin</span>
+		<span class="hljs-keyword">Ref</span> (Head) door;
+		<span class="hljs-type">Boolean</span> in_use;
+		<span class="hljs-comment">! FittingRoom provides request and leave methods for customers who queue to try on clothes</span>
+		<span class="hljs-keyword">Procedure</span> request; <span class="hljs-keyword">Begin</span>
+			<span class="hljs-keyword">If</span> in_use <span class="hljs-keyword">Then</span> <span class="hljs-keyword">Begin</span>
+				<span class="hljs-built_in">Wait</span> (door);
+				door.<span class="hljs-built_in">First</span>.<span class="hljs-built_in">Out</span>;
+			<span class="hljs-keyword">End</span>;
+			in_use:= <span class="hljs-literal">True</span>;
+		<span class="hljs-keyword">End</span>;
+		<span class="hljs-keyword">Procedure</span> leave; <span class="hljs-keyword">Begin</span>
+			in_use:= <span class="hljs-literal">False</span>;
+			<span class="hljs-keyword">Activate</span> door.<span class="hljs-built_in">First</span>;
+		<span class="hljs-keyword">End</span>;
+		door:- <span class="hljs-keyword">New</span> Head;
+	<span class="hljs-keyword">End</span>;
+		
+	<span class="hljs-keyword">Process</span> <span class="hljs-keyword">Class</span> Person (myname); <span class="hljs-type">Text</span> myname; <span class="hljs-keyword">Begin</span>
+		<span class="hljs-keyword">While</span> <span class="hljs-literal">True</span> <span class="hljs-keyword">Do</span> <span class="hljs-keyword">Begin</span>
+			<span class="hljs-comment">! Simulate each customer: pick up clothes for 15 minutes and try them on for 5 minutes</span>
+			<span class="hljs-built_in">Hold</span>(<span class="hljs-number">15</span>);
+			<span class="hljs-built_in">OutText</span>(myname &amp; <span class="hljs-string">&quot; is requesting the fitting room&quot;</span>);
+			fittingRoom1.request;
+			<span class="hljs-built_in">OutText</span>(myname &amp; <span class="hljs-string">&quot; has entered the fitting room&quot;</span>);
+			<span class="hljs-built_in">Hold</span>(<span class="hljs-number">5</span>);
+			fittingRoom1.leave;
+			<span class="hljs-built_in">OutText</span>(myname &amp; <span class="hljs-string">&quot; has left the fitting room&quot;</span>);
+		<span class="hljs-keyword">End</span>;
+	<span class="hljs-keyword">End</span>;
+	<span class="hljs-keyword">Ref</span> (FittingRoom) fittingRoom1;
+	fittingRoom1:- <span class="hljs-keyword">New</span> FittingRoom;
+	<span class="hljs-comment">! Create 3 customers</span>
+	<span class="hljs-keyword">Activate</span> <span class="hljs-keyword">New</span> Person (<span class="hljs-string">&quot;Customer_1&quot;</span>);
+	<span class="hljs-keyword">Activate</span> <span class="hljs-keyword">New</span> Person (<span class="hljs-string">&quot;Customer_2&quot;</span>);
+	<span class="hljs-keyword">Activate</span> <span class="hljs-keyword">New</span> Person (<span class="hljs-string">&quot;Customer_3&quot;</span>);
+	<span class="hljs-comment">! Start a 60-minute simulation</span>
+	<span class="hljs-built_in">Hold</span> (<span class="hljs-number">60</span>);
+<span class="hljs-keyword">End</span>;</code></pre></div>
+<p>Notably, Simula used a garbage collection mechanism for memory management. To emphasize the difference between reference assignment and value assignment, Simula uses <code>:-</code> for object references and <code>:=</code> for values.</p>
+<h3 id="b">B</h3>
+<p>B was developed by Ken Thompson around 1969, with later involvement from Dennis Ritchie. At that time, early Unix was still closely tied to assembly language. Assembly language could provide high performance, but it also depended heavily on the target machine and made system development difficult to port and maintain. Therefore, Thompson designed B as a small systems programming language derived from BCPL. B aimed to keep the essence of BCPL while making the language simpler and more suitable for early Unix development.</p>
+<p>B is a typeless or weakly typed programming language. In B, the <code>=</code> sign represents assignment and the <code>==</code> sign represents equality. B also introduced increment and decrement operators (<code>++</code> and <code>--</code>). The syntax style used in B was inherited by C and became a mainstream style thereafter.</p>
+<div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">B</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-b" data-highlighted="local">factorial(n) {
+	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)
+		<span class="hljs-keyword">return</span>(<span class="hljs-number">1</span>);
+	<span class="hljs-keyword">else</span>
+		<span class="hljs-keyword">return</span>(n * factorial(n - <span class="hljs-number">1</span>));
+}
+
+main() {
+	<span class="hljs-keyword">auto</span> a, result;
+	a = <span class="hljs-number">5</span>;
+	result = factorial(a);
+	<span class="hljs-built_in">printn</span>(result);
+}</code></pre></div>
+<p>The B programming language also revealed several limitations. It was typeless and word-oriented, so it was not convenient for representing different machine data types such as characters, integers, and pointers on newer hardware. It also lacked structures and other mechanisms that would make systems programming safer and clearer. Although B&#039;s period of widespread use was short, the experience of designing and using B laid a good foundation for C.</p>
+<h2 id="1970s">1970s</h2>
+<h3 id="pascal">Pascal</h3>
+<p>Pascal was developed from ALGOL 60 by the Swiss computer scientist Niklaus Wirth. Pascal&#039;s name comes from the French mathematician, philosopher, and physicist Blaise Pascal.</p>
+<p>Although ALGOL 60 had a unified system architecture and a clean language design, it was not practical enough for many fields outside numerical computation. Therefore, IFIP established a working group to design a successor to ALGOL. Wirth proposed a pragmatic language design called ALGOL W, but the committee eventually chose the more complicated ALGOL 68. ALGOL 68 was powerful but difficult to implement efficiently, which gave Pascal room to survive and develop as a smaller and clearer language.</p>
+<p>Pascal is a performance-oriented, statically typed, strongly typed general-purpose programming language, which largely retains the syntax of ALGOL, but it also has some differences, such as:</p>
+<ul>
+<li>Variable declaration: ALGOL uses the keyword <code>DECLARE</code>, but Pascal uses the keyword <code>VAR</code>, which gradually became popular later.</li>
+<li>Array declaration: ALGOL uses the keyword <code>ARRAY</code>, but Pascal uses both the keyword <code>ARRAY</code> and <code>[]</code>.</li>
+<li>Procedure and function: ALGOL uses the keyword <code>PROC</code> for both, while Pascal uses <code>procedure</code> and <code>function</code> respectively.</li>
+<li>Form of comment: ALGOL uses the keyword <code>COMMENT</code>, while Pascal uses <code>{}</code> and <code>(* *)</code> for comments.</li>
+<li>Data type: Compared to ALGOL, Pascal supports richer data types.</li>
+<li>Control structure: Compared to ALGOL, Pascal provides many control structures, such as if-then-else, case, and while.</li>
+</ul>
+<p>Pascal strongly reflects the idea of structured programming. It encourages programmers to divide a program into clear blocks, procedures, and functions, and to use structured control flow such as <code>if</code>, <code>case</code>, <code>while</code>, and <code>for</code> instead of relying on arbitrary jumps. This style supports top-down program design: a large problem is decomposed into smaller procedures, each procedure has a clear responsibility, and the program structure becomes easier to read, verify, and maintain. Therefore, Pascal was widely used in programming education to teach structured programming.</p>
+<div class="code-block" data-code-block="9"><div class="code-toolbar"><span class="code-language">PASCAL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-pascal" data-highlighted="local"><span class="hljs-comment">(* Calculate factorial *)</span>
+<span class="hljs-keyword">function</span> factorial(n: <span class="hljs-type">integer</span>): <span class="hljs-type">integer</span>;
+<span class="hljs-keyword">begin</span>
+	<span class="hljs-keyword">if</span> n = <span class="hljs-number">0</span> <span class="hljs-keyword">then</span>
+		factorial := <span class="hljs-number">1</span>
+	<span class="hljs-keyword">else</span>
+		factorial := n * factorial(n - <span class="hljs-number">1</span>);
+<span class="hljs-keyword">end</span>;</code></pre></div>
+<p>However, early Pascal lacked separate compilation and high-quality libraries. Besides, early Pascal did not support OOP. But structured programming prevailed in the 1970s and 1980s, and Pascal met the needs of that period, so it became one of the most popular programming languages of that era.</p>
+<p>In 1986, Apple released Object Pascal, which was an OOP extension of Pascal and supported OOP features including classes, polymorphism, and inheritance. In 1995, Borland released Delphi, a new visual rapid application development (RAD) environment that used Object Pascal as its main programming language. It mainly supported the Windows operating system. Delphi was once a major development tool for Windows systems, until Microsoft launched Visual Studio, at which point Delphi&#039;s market position gradually declined.</p>
+<div class="code-block" data-code-block="10"><div class="code-toolbar"><span class="code-language">PASCAL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-pascal" data-highlighted="local"><span class="hljs-keyword">type</span>
+	TPerson = <span class="hljs-keyword">class</span>
+	<span class="hljs-keyword">private</span>
+		FName: <span class="hljs-type">string</span>;
+	<span class="hljs-keyword">public</span>
+		<span class="hljs-keyword">procedure</span> SayHello;
+	<span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">procedure</span> TPerson.SayHello;
+<span class="hljs-keyword">begin</span>
+	<span class="hljs-built_in">WriteLn</span>(<span class="hljs-string">&#039;Hello&#039;</span>);
+<span class="hljs-keyword">end</span>;</code></pre></div>
+<h3 id="smalltalk">Smalltalk</h3>
+<p>Smalltalk&#039;s creation largely stemmed from Alan Kay and his team&#039;s thinking and research on graphical user interface (GUI) programming. In the era when command-line interface (CLI) programs were popular, a program usually only needed to execute the corresponding instructions based on command parameters. However, in GUI programming, a program needs to respond to users&#039; clicks and operations on interface elements. As a result, existing programming models could not easily support highly abstract GUI systems or provide a convenient programming experience. Smalltalk was born out of this need.</p>
+<p>Smalltalk is a pure object-oriented programming language. Objects communicate by sending and receiving messages. Smalltalk uses classes to define the shared behavior of their instances. Every object is an instance of a class, and classes themselves are also objects. This highly uniform object model gives Smalltalk powerful meta-programming capabilities. The following is an example of Smalltalk code:</p>
+<div class="code-block" data-code-block="11"><div class="code-toolbar"><span class="code-language">SMALLTALK</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-smalltalk" data-highlighted="local"><span class="hljs-comment">&quot;Define a class named Calculator&quot;</span>
+<span class="hljs-type">Object</span> <span class="hljs-built_in">subclass</span>: <span class="hljs-literal">#Calculator</span>
+	<span class="hljs-built_in">instanceVariableNames</span>: <span class="hljs-string">&#039;number&#039;</span>
+	<span class="hljs-built_in">classVariableNames</span>: <span class="hljs-string">&#039;&#039;</span>
+	<span class="hljs-built_in">poolDictionaries</span>: <span class="hljs-string">&#039;&#039;</span>
+	<span class="hljs-built_in">category</span>: <span class="hljs-string">&#039;MyApp&#039;</span>
+	
+<span class="hljs-type">Calculator</span> &gt;&gt; <span class="hljs-built_in">initialize</span>: n
+	<span class="hljs-comment">&quot;Define a method named initialize:, which is used to initialize the instance variable number&quot;</span>
+	number := n.
+	
+<span class="hljs-type">Calculator</span> &gt;&gt; factorial
+	| result |
+	result := <span class="hljs-number">1</span>.
+	<span class="hljs-number">1</span> <span class="hljs-built_in">to</span>: number <span class="hljs-built_in">do</span>: [<span class="hljs-keyword">:i</span> | result := result * i].
+	^ result.
+	
+<span class="hljs-comment">&quot;Main program&quot;</span>
+| n fact |
+n := <span class="hljs-number">5</span>.
+fact := <span class="hljs-type">Calculator</span> <span class="hljs-built_in">new</span>.
+fact <span class="hljs-built_in">initialize</span>: n.
+<span class="hljs-type">Transcript</span> <span class="hljs-built_in">show</span>: <span class="hljs-string">&#039;Factorial of &#039;</span>, n asString, <span class="hljs-string">&#039; is &#039;</span>, (fact factorial) asString.</code></pre></div>
+<p>Smalltalk also has the following advantages:</p>
+<ul>
+<li>Blocks: A block can be regarded as an anonymous function and can implement the closures commonly mentioned in modern languages.</li>
+</ul>
+<div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">SMALLTALK</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-smalltalk" data-highlighted="local">[<span class="hljs-keyword">:x</span> | x * x]</code></pre></div>
+<ul>
+<li>Cascading messages: the following two pieces of code are equivalent.</li>
+</ul>
+<div class="code-block" data-code-block="13"><div class="code-toolbar"><span class="code-language">SMALLTALK</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-smalltalk" data-highlighted="local">pen <span class="hljs-built_in">color</span>: <span class="hljs-type">Color</span> red.
+pen <span class="hljs-built_in">width</span>: <span class="hljs-number">3</span>.
+pen <span class="hljs-built_in">moveTo</span>: <span class="hljs-number">100</span>@<span class="hljs-number">200</span>.</code></pre></div>
+<div class="code-block" data-code-block="14"><div class="code-toolbar"><span class="code-language">SMALLTALK</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-smalltalk" data-highlighted="local">pen
+    <span class="hljs-built_in">color</span>: <span class="hljs-type">Color</span> red;
+    <span class="hljs-built_in">width</span>: <span class="hljs-number">3</span>;
+    <span class="hljs-built_in">moveTo</span>: <span class="hljs-number">100</span>@<span class="hljs-number">200</span>.</code></pre></div>
+<p>Smalltalk innovated in syntax and design. It not only influenced the design of programming languages, but also promoted the evolution of software development methods.</p>
+<p>Smalltalk also has several problems:</p>
+<ul>
+<li>Lack of strong commercial support</li>
+<li>Relatively low performance</li>
+<li>Non-mainstream syntax</li>
+</ul>
+<p>Later, Objective-C inherited some ideas from Smalltalk and was compatible with the C language. It reduced some of Smalltalk&#039;s performance and ecosystem problems while maintaining a flexible message-passing style. As a result, Objective-C became an important language for GUI and application development, especially in Apple&#039;s ecosystem.</p>
+<h3 id="c">C</h3>
+<p>C was developed by Dennis MacAlistair Ritchie around 1972 and was first used for Unix system programming. Unix was originally written in assembly language, but Ken Thompson and Dennis Ritchie wanted to use a higher-level language to improve development efficiency and portability.</p>
+<p>Their first choice was B, and Ritchie later developed an intermediate language sometimes called &quot;New B&quot; or NB. However, when they tried to use B-like languages for Unix development on newer machines such as the PDP-11, they faced several problems. B was typeless and word-oriented, so it could not naturally express different data types such as characters, integers, pointers, and structured records. It also made it harder to generate efficient machine code for the new hardware.</p>
+<p>To solve these problems, Ritchie added a type system, including types such as <code>int</code>, <code>char</code>, and later richer type forms. He also introduced structures and improved the compiler so that the generated machine code could be close to the efficiency of assembly language. Through these changes, B gradually evolved into C.</p>
+<p>One of C&#039;s major revolutions was source-code-level portability across hardware architectures. Before C, moving a system program to a new processor often meant rewriting large parts of it in a different assembly language. With C, most of the same source code could be recompiled for another machine once a C compiler and a relatively small machine-dependent layer were available. This did not make every C program automatically portable—word sizes, byte order, memory layouts, and operating-system interfaces could still differ—but it changed portability from rewriting an entire system to isolating and adapting its hardware-dependent parts.</p>
+<div class="code-block" data-code-block="15"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-meta">#include &lt;stdio.h&gt;</span>
+
+<span class="hljs-type">int</span> factorial(<span class="hljs-type">int</span> n) {
+	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) {
+		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	} <span class="hljs-keyword">else</span> {
+		<span class="hljs-keyword">return</span> n * factorial(n - <span class="hljs-number">1</span>);
+	}
+}
+
+<span class="hljs-type">int</span> main() {
+	<span class="hljs-type">int</span> n = <span class="hljs-number">5</span>;
+	<span class="hljs-type">int</span> result = factorial(n);
+	printf(<span class="hljs-string">&quot;%d! = %d\n&quot;</span>, n, result);
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>C also inherits and develops structured programming ideas. A C program is organized around functions, and each function can use local variables, block scope, and structured control statements such as <code>if</code>, <code>switch</code>, <code>while</code>, <code>for</code>, and <code>do while</code>. Compared with Pascal, C keeps the structure lighter and closer to hardware: it supports structured decomposition while still allowing pointer manipulation, manual memory control, and <code>goto</code> when necessary. This makes C suitable for building large system programs in a structured but low-level style.</p>
+<p>Both <code>.h</code> and <code>.c</code> files contain C source text; their extensions describe their usual roles rather than different C languages. A header (<code>.h</code>) normally declares an interface shared by other files: function prototypes, type declarations, macros, and constants. A source file (<code>.c</code>) normally provides function definitions and other implementation details. A <code>.c</code> file is compiled as a translation unit, while a header is usually brought into that unit by <code>#include</code>, which copies the header&#039;s text during preprocessing. File extensions and this division of work are conventions, not requirements of C syntax.</p>
+<p>For example, a small project can have these three files:</p>
+<div class="code-block" data-code-block="16"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-comment">/* math_utils.h: interface */</span>
+<span class="hljs-meta">#ifndef MATH_UTILS_H</span>
+<span class="hljs-meta">#define MATH_UTILS_H</span>
+
+<span class="hljs-type">int</span> add(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b);
+
+<span class="hljs-meta">#endif</span></code></pre></div>
+<div class="code-block" data-code-block="17"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-comment">/* math_utils.c: implementation */</span>
+<span class="hljs-meta">#include &quot;math_utils.h&quot;</span>
+
+<span class="hljs-type">int</span> add(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) {
+    <span class="hljs-keyword">return</span> a + b;
+}</code></pre></div>
+<div class="code-block" data-code-block="18"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-comment">/* main.c: caller */</span>
+<span class="hljs-meta">#include &lt;stdio.h&gt;</span>
+<span class="hljs-meta">#include &quot;math_utils.h&quot;</span>
+
+<span class="hljs-type">int</span> main(<span class="hljs-type">void</span>) {
+    printf(<span class="hljs-string">&quot;%d\n&quot;</span>, add(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>The declaration in <code>math_utils.h</code> lets <code>main.c</code> call <code>add</code> with its correct signature. The definition in <code>math_utils.c</code> supplies the code that the linker connects to that call. Both <code>.c</code> files include the same header, so a mismatch between the declaration and definition can be detected during compilation. Putting a non-<code>static</code> function definition directly in a header included by several <code>.c</code> files would usually create multiple definitions at link time.</p>
+<p>The <code>#ifndef</code> / <code>#define</code> pair in <code>math_utils.h</code> is an <em>include guard</em>. On the first inclusion it defines <code>MATH_UTILS_H</code>; on later inclusions in the same translation unit, the preprocessor skips the guarded contents. If <code>a.h</code> includes <code>b.h</code> and <code>b.h</code> includes <code>a.h</code>, guards stop that cycle from expanding forever. An alternative is to put <code>#pragma once</code> at the start of each header:</p>
+<div class="code-block" data-code-block="19"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-comment">/* math_utils.h: alternative to the #ifndef guard above */</span>
+<span class="hljs-meta">#pragma once</span>
+
+<span class="hljs-type">int</span> add(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b);</code></pre></div>
+<p><code>#pragma once</code> is supported by common compilers but is not part of the ISO C standard; <code>#ifndef</code> guards are the portable choice. Both techniques prevent repeated inclusion, but neither resolves every circular type dependency. If two headers refer to each other&#039;s structures through pointers, a forward declaration such as <code>struct Node;</code> can break the dependency; a structure used by value still needs its complete definition.</p>
+<p>Compared to FORTRAN, C is closer to the hardware and can be used to write drivers, kernels, and other low-level system software. Compared to Lisp, C is more efficient for systems programming and does not rely on a large runtime environment.</p>
+<p>The advantages of C include:</p>
+<ul>
+<li>Introducing a type system</li>
+<li>Using structures to organize data</li>
+<li>Directly operating memory through pointers</li>
+<li>Concise syntax style</li>
+<li>Good cross-platform capabilities</li>
+</ul>
+<p>In C, programmers can control memory and hardware-level details very directly. However, this also means that a single pointer out-of-bounds error can cause a program to crash, corrupt memory, or compromise system stability. Therefore, C is often regarded as a concise but dangerous language. Instead of protecting the programmer from every mistake, it gives the programmer more control and more responsibility.</p>
+<p>Because of its simplicity, efficiency, flexibility, and portability, C has gained wide recognition and application. It is widely used in systems programming, network programming, embedded programming, and many other fields.</p>
+<p>However, there are also some traps and pitfalls in C:</p>
+<ul>
+<li>Integer literal notation may cause confusion. For example, <code>int a = 42;</code> and <code>int b = 042;</code> are different, because the latter is interpreted as an octal number.</li>
+<li>Lexical analysis rules may cause surprising results. For example, <code>a---b;</code> is parsed as <code>a-- - b;</code>.</li>
+<li>The relationship between pointers and arrays can be confusing.</li>
+<li>The difference between a null pointer and an empty string is easy to misunderstand.</li>
+</ul>
+<p>Most importantly, C helped liberate Unix from assembly language. Unix became one of the early major operating systems whose core could be implemented in a relatively portable high-level language. In the 1970s, Unix spread through universities and became an important operating system for many students and researchers. The Unix philosophy influenced many later systems and programmers:</p>
+<ul>
+<li>Everything is a file, which makes the system model clearer.</li>
+<li>Each program should do one thing well, making programs simpler and more reliable.</li>
+<li>The pipeline mechanism allows the output of one program to be directly used as the input of another program.</li>
+</ul>
+<h3 id="unix-shell-1">Unix Shell 1</h3>
+<p>To make computers easier to use, early operating systems provided a simple command-line interpreter called a shell. A shell is a glue language that can run many predefined commands, such as running user programs, logging in and out of the system, and allocating, releasing, or manipulating devices and files.</p>
+<p>In the Multics operating system, the shell was defined as the program that read user input from the console and handled that input when no other program was active. Later, in 1971, Ken Thompson developed the Thompson shell for early Unix. Although it was simpler than the Multics shell, it had many important features, such as using <code>&gt;</code> and <code>&lt;</code> to redirect output and input. Unix shells later introduced pipelines. The pipe symbol was originally written as <code>^</code> in some early systems and was later commonly written as <code>|</code>, while <code>&gt;</code> continued to indicate output redirection to a file.</p>
+<p>In 1979, Stephen Bourne introduced the Bourne shell, usually invoked as <code>sh</code>, in Version 7 Unix. Compared with the Thompson shell, the Bourne shell was much more suitable for scripting. It added a clearer control-flow syntax, including <code>if</code>, <code>case</code>, <code>for</code>, <code>while</code>, and <code>until</code>, and it supported shell variables, command substitution, functions in later versions, and signal handling through <code>trap</code>. This made shell scripts more like small programs rather than just saved command sequences.</p>
+<p>The Bourne shell also helped establish the common Unix shell style. For example, variables are assigned without spaces around <code>=</code>, variables are expanded with <code>$name</code>, command substitution can insert the output of one command into another command, and exit status is used as the basis of conditional judgment. Many later shells, including Bash, KornShell, and Zsh, inherited Bourne shell syntax while adding their own extensions.</p>
+<p>A separate branch of Unix shell development emerged at the University of California, Berkeley. Bill Joy created the C shell, normally invoked as <code>csh</code>, in 1978, and it first appeared in the Second Berkeley Software Distribution (2BSD). Its name comes from control-flow expressions designed to resemble the C programming language. For example, C shell uses constructs such as <code>if (expression) then</code>, <code>switch</code>, and <code>foreach</code> rather than Bourne shell syntax.</p>
+<p>C shell was especially influential as an interactive command environment. It offered command history and <code>!</code>-based history substitution, aliases, job control through commands such as <code>jobs</code>, <code>fg</code>, and <code>bg</code>, directory stacks through <code>pushd</code> and <code>popd</code>, and interactive filename and username completion. These features made terminal work more convenient and helped establish capabilities that later became standard expectations for interactive shells.</p>
+<p>The following C shell script counts the regular files supplied as command-line arguments:</p>
+<div class="code-block" data-code-block="20"><div class="code-toolbar"><span class="code-language">CSH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-csh" data-highlighted="local"><span class="hljs-comment">#!/bin/csh</span>
+
+<span class="hljs-built_in">set</span> count = <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">foreach</span> file (<span class="hljs-meta">$argv:q</span>)
+	<span class="hljs-keyword">if</span> (-f <span class="hljs-string">&quot;$file&quot;</span>) <span class="hljs-keyword">then</span>
+		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;File: $file&quot;</span>
+		<span class="hljs-keyword">@</span> count++
+	<span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;$count regular file(s) found.&quot;</span></code></pre></div>
+<p>C shell syntax is not compatible with the Bourne shell. It uses <code>set</code> for shell variables, <code>setenv</code> for environment variables, <code>$argv` for command-line arguments, and `$status</code> for the previous command&#039;s exit status. In the example, the <code>:q</code> modifier preserves each argument as a single word when a filename contains spaces. Configuration is normally stored in <code>.cshrc</code>, while login-specific commands can be placed in <code>.login</code> and <code>.logout</code>.</p>
+<p>C shell&#039;s C-like surface made it attractive to many programmers, but its parsing, quoting, and error-handling rules can be difficult to use reliably in large scripts. Bourne-style and later POSIX shells consequently became more common for portable system scripting, while C shell remained strongly associated with interactive use. The later <code>tcsh</code> preserved C shell compatibility while adding a more capable command-line editor, programmable completion, spelling correction, and an enhanced history mechanism. Although <code>csh</code> and <code>tcsh</code> are less common today, their interactive ideas influenced later shells such as Bash and Zsh.</p>
+<p>In Bourne-style shell syntax, words that are not reserved keywords are normally treated as commands. Therefore, even within an <code>if</code> statement, the <code>test</code> command can be used to obtain a logical result. An example is as follows:</p>
+<div class="code-block" data-code-block="21"><div class="code-toolbar"><span class="code-language">SHELL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-bash" data-highlighted="local"><span class="hljs-comment">#!/bin/sh</span>
+
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> <span class="hljs-meta">-f</span> <span class="hljs-string">&quot;/etc/passwd&quot;</span>
+<span class="hljs-keyword">then</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The file /etc/passwd exists.&quot;</span>
+<span class="hljs-keyword">else</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The file /etc/passwd does not exist.&quot;</span>
+<span class="hljs-keyword">fi</span></code></pre></div>
+<p>Some common <code>test</code> options:</p>
+<ul>
+<li><code>-f</code>: check whether a regular file exists. If it exists, return <code>0</code>; otherwise, return a non-zero value.</li>
+<li><code>-z</code>: check whether a string is empty.</li>
+<li><code>-eq</code>: check whether two numbers are equal.</li>
+<li><code>-ne</code>: check whether two numbers are unequal.</li>
+</ul>
+<p>Shell also offers the <code>[ ]</code> form as another way to call the <code>test</code> command. For example:</p>
+<div class="code-block" data-code-block="22"><div class="code-toolbar"><span class="code-language">SHELL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-bash" data-highlighted="local"><span class="hljs-comment">#!/bin/sh</span>
+
+<span class="hljs-keyword">if</span> [ <span class="hljs-meta">-f</span> <span class="hljs-string">&quot;/etc/passwd&quot;</span> ]
+<span class="hljs-keyword">then</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The file /etc/passwd exists.&quot;</span>
+<span class="hljs-keyword">else</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The file /etc/passwd does not exist.&quot;</span>
+<span class="hljs-keyword">fi</span></code></pre></div>
+<p>Shell, as one of the programming languages with the heaviest historical burden, lags far behind many modern languages in readability and writability. Because it is deeply tied to operating systems and existing scripts, it is difficult to significantly optimize its syntax while preserving compatibility. To address this problem, operating system vendors often create new shells while still preserving old shell interpreters.</p>
+<p>Scenarios suitable for writing automation scripts in shell:</p>
+<ul>
+<li>System management and maintenance</li>
+<li>Simple text processing</li>
+<li>Simple process control</li>
+<li>System startup and initialization</li>
+</ul>
+<h3 id="ml">ML</h3>
+<p>Meta Language (ML) is a language primarily based on functional programming. It was developed by Robin Milner and his colleagues in the early 1970s.</p>
+<p>The name &quot;Meta Language&quot; reflects its original role as a language for describing and manipulating formal logic. ML was invented to support automatic theorem proving, especially the Logic for Computable Functions (LCF) system. At that time, other symbolic processing languages, such as Lisp, could also be used for similar tasks. However, because Lisp is usually dynamically typed, many errors are discovered only at runtime and may be difficult to understand. Therefore, one important aim of ML was to let programmers write flexible functions while still using a strong static type system.</p>
+<p>ML is a statically typed language. Besides, ML has a type inference mechanism that supports polymorphism, which makes ML both safe and flexible. ML is mainly a functional programming language, but it also supports the imperative programming paradigm. This makes ML a practical general-purpose programming language. Meanwhile, ML supports passing functions as arguments to other functions, which is useful for implementing complex algorithms and data structures.</p>
+<div class="code-block" data-code-block="23"><div class="code-toolbar"><span class="code-language">ML</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-ml" data-highlighted="local"><span class="hljs-comment">(* Factorial - recursive version *)</span>
+<span class="hljs-keyword">fun</span> factorial_recursive <span class="hljs-number">0</span> = <span class="hljs-number">1</span>
+	| factorial_recursive n = n * factorial_recursive (n - <span class="hljs-number">1</span>);
+	
+<span class="hljs-comment">(* Factorial - iterative version *)</span>
+<span class="hljs-keyword">fun</span> factorial_iterative n = 
+	<span class="hljs-keyword">let</span>
+		<span class="hljs-keyword">fun</span> iter acc <span class="hljs-number">0</span> = acc
+			| iter acc n = iter (acc * n) (n - <span class="hljs-number">1</span>);
+	<span class="hljs-keyword">in</span>
+		iter <span class="hljs-number">1</span> n;
+	<span class="hljs-keyword">end</span>;
+	
+<span class="hljs-comment">(* Test data *)</span>
+<span class="hljs-keyword">val</span> n = <span class="hljs-number">5</span>;
+
+<span class="hljs-comment">(* Calling the factorial function *)</span>
+<span class="hljs-keyword">val</span> result_1 = factorial_recursive n;
+<span class="hljs-keyword">val</span> result_2 = factorial_iterative n;
+
+<span class="hljs-comment">(* Output result *)</span>
+<span class="hljs-keyword">val</span> () = <span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;Factorial (recursive) of &quot;</span> ^ <span class="hljs-built_in">Int</span>.toString n ^ <span class="hljs-string">&quot; is: &quot;</span> ^ <span class="hljs-built_in">Int</span>.toString result_1 ^ <span class="hljs-string">&quot;\n&quot;</span>);
+<span class="hljs-keyword">val</span> () = <span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;Factorial (iterative) of &quot;</span> ^ <span class="hljs-built_in">Int</span>.toString n ^ <span class="hljs-string">&quot; is: &quot;</span> ^ <span class="hljs-built_in">Int</span>.toString result_2 ^ <span class="hljs-string">&quot;\n&quot;</span>);</code></pre></div>
+<p>Compared with Lisp, ML has the following differences:</p>
+<ul>
+<li>Type system: ML is statically typed and relies on type inference, while Lisp is usually dynamically typed.</li>
+<li>Data and syntax: ML uses algebraic data types, pattern matching, and expression-oriented syntax, while Lisp uses S-expressions and treats code as data.</li>
+<li>Meta-programming: Lisp is especially strong in macro systems and language extension, while ML is especially strong in type-safe abstraction.</li>
+<li>Error detection: ML can catch many type errors at compile time, while Lisp often discovers these errors during execution.</li>
+</ul>
+<p>ML is suitable for theorem proving, compiler implementation, language research, type-system research, and reliable functional programming. Lisp is suitable for symbolic computation, artificial intelligence, rapid prototyping, domain-specific languages, and programs that benefit from powerful macro-based extension.</p>
+<h3 id="modula">Modula</h3>
+<p>Modula was invented by the Swiss computer scientist Niklaus Emil Wirth, who was also the inventor of Pascal. He wanted to solve some problems in Pascal. At first, partly because Pascal inherited ideas from ALGOL, Pascal still had some design limitations. Therefore, Wirth wanted to improve Pascal&#039;s existing features and eliminate some design flaws. Modula was born as a result.</p>
+<p>The highlight of Modula is modular programming, which mainly uses the keywords <code>MODULE</code> and <code>IMPORT</code>. As software systems became increasingly complex, modularity became an important design principle because it can greatly improve the maintainability of complex systems.</p>
+<div class="code-block" data-code-block="24"><div class="code-toolbar"><span class="code-language">MODULA</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-modula" data-highlighted="local"><span class="hljs-keyword">MODULE</span> Factorial;
+<span class="hljs-comment">(* CalcFactorial is used to calculate the factorial. *)</span>
+<span class="hljs-keyword">PROCEDURE</span> CalcFactorial(n: <span class="hljs-type">INTEGER</span>): <span class="hljs-type">INTEGER</span>;
+<span class="hljs-keyword">VAR</span>
+	i, result: <span class="hljs-type">INTEGER</span>;
+<span class="hljs-keyword">BEGIN</span>
+	result := <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">FOR</span> i := <span class="hljs-number">1</span> <span class="hljs-keyword">TO</span> n <span class="hljs-keyword">DO</span>
+		result := result * i;
+	<span class="hljs-keyword">END</span>;
+	<span class="hljs-keyword">RETURN</span> result;
+<span class="hljs-keyword">END</span> CalcFactorial;
+
+<span class="hljs-keyword">END</span> Factorial.</code></pre></div>
+<p>To use this module, you can import the Factorial module into another Modula program and use the CalcFactorial procedure to calculate a factorial.</p>
+<div class="code-block" data-code-block="25"><div class="code-toolbar"><span class="code-language">MODULA</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-modula" data-highlighted="local"><span class="hljs-keyword">MODULE</span> Main;
+<span class="hljs-keyword">FROM</span> Terminal2 <span class="hljs-keyword">IMPORT</span> <span class="hljs-built_in">WriteLn</span>;
+<span class="hljs-keyword">IMPORT</span> Factorial; <span class="hljs-comment">(* Import the previous Factorial module. *)</span>
+
+<span class="hljs-keyword">VAR</span>
+	n, result: <span class="hljs-type">INTEGER</span>;
+	
+<span class="hljs-keyword">BEGIN</span>
+	n := <span class="hljs-number">5</span>;
+	result := Factorial.CalcFactorial(n);
+	<span class="hljs-built_in">WriteLn</span>(<span class="hljs-string">&quot;Factorial of &quot;</span>, n, <span class="hljs-string">&quot; is &quot;</span>, result);
+<span class="hljs-keyword">END</span> Main.</code></pre></div>
+<p>In 1987, Wirth invented another programming language, Oberon, which aimed to improve functionality and reduce complexity. The key new feature of Oberon is type extension, which supports building new data types from existing data types.</p>
+<h3 id="prolog">Prolog</h3>
+<p>Prolog was developed under the leadership of Alain Colmerauer in 1972. It was one of the earliest logic programming languages and has been widely used in artificial intelligence, automated theorem proving, computational linguistics, and related fields.</p>
+<p>Different from many other programming languages, Prolog is a declarative language based on first-order logic. Prolog has one basic kind of data: the term. A Prolog program uses clauses to define relationships, which describe the logic of the program. The Prolog engine tries to satisfy a query by searching for facts and rules that make the query true. If variables can be instantiated in a way that satisfies the query, Prolog returns those bindings as the logical result of the program. The following is a Prolog example.</p>
+<div class="code-block" data-code-block="26"><div class="code-toolbar"><span class="code-language">PROLOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-prolog" data-highlighted="local"><span class="hljs-comment">% Define parental relationship</span>
+<span class="hljs-built_in">father_child</span>(tom, sally).
+<span class="hljs-built_in">father_child</span>(sally, erica).
+<span class="hljs-built_in">mother_child</span>(trude, sally).
+
+<span class="hljs-comment">% Define grandparents relationship</span>
+<span class="hljs-built_in">grandparent</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Y</span>) :- <span class="hljs-built_in">father_child</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Z</span>), <span class="hljs-built_in">father_child</span>(<span class="hljs-type">Z</span>, <span class="hljs-type">Y</span>).
+<span class="hljs-built_in">grandparent</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Y</span>) :- <span class="hljs-built_in">mother_child</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Z</span>), <span class="hljs-built_in">father_child</span>(<span class="hljs-type">Z</span>, <span class="hljs-type">Y</span>).
+<span class="hljs-built_in">grandparent</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Y</span>) :- <span class="hljs-built_in">father_child</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Z</span>), <span class="hljs-built_in">mother_child</span>(<span class="hljs-type">Z</span>, <span class="hljs-type">Y</span>).
+<span class="hljs-built_in">grandparent</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Y</span>) :- <span class="hljs-built_in">mother_child</span>(<span class="hljs-type">X</span>, <span class="hljs-type">Z</span>), <span class="hljs-built_in">mother_child</span>(<span class="hljs-type">Z</span>, <span class="hljs-type">Y</span>).
+
+<span class="hljs-comment">% Query example</span>
+?- <span class="hljs-built_in">grandparent</span> (tom, erica).</code></pre></div>
+<h3 id="sql">SQL</h3>
+<p>Structured Query Language (SQL) was developed by Donald D. Chamberlin and Raymond F. Boyce at IBM in the early 1970s. It was originally designed for IBM&#039;s relational database research and was first called Structured English Query Language (SEQUEL). Later, the name was shortened to SQL. Nowadays, SQL has become the standard language for relational database management systems.</p>
+<p>SQL provides a concise and intuitive interface for data queries, updates, and management. It overcomes many limitations of traditional file systems by storing and processing data in tables, and it uses ideas from relational algebra and set theory to improve the expressiveness and reliability of data operations.</p>
+<h3 id="sas">SAS</h3>
+<p>Statistical Analysis System (SAS) is one of the earliest data analysis languages. It originated from a statistical analysis project at North Carolina State University that studied agricultural data. James Goodnight, John Sall, Anthony Barr, and Jane Helwig later helped turn this research project into SAS Institute, which was founded in 1976 and marked the start of SAS&#039;s commercial operation. Due to its early market entry and strong ability to analyze data, SAS grew rapidly and became a globally renowned analytics software provider.</p>
+<h3 id="scheme">Scheme</h3>
+<p>Scheme is a minimalist Lisp dialect created by Gerald Jay Sussman and Guy L. Steele Jr. at MIT in the 1970s. Compared with earlier Lisp dialects, Scheme deliberately kept its core small and elegant. Its design emphasized a few powerful ideas: lexical scope, first-class functions, closures, recursion, and a uniform expression-oriented syntax.</p>
+<p>Scheme was one of the first Lisp dialects to adopt lexical scope. Under lexical scope, the meaning of a variable is determined by the place where it is written in the program, rather than by the sequence of function calls at runtime. This makes closures easier to reason about, because a function can reliably remember the environment in which it was created.</p>
+<p>The following code shows a closure in Scheme:</p>
+<div class="code-block" data-code-block="27"><div class="code-toolbar"><span class="code-language">SCHEME</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-scheme" data-highlighted="local">(<span class="hljs-keyword">define</span> (make-adder x)
+  (<span class="hljs-keyword">lambda</span> (y)
+    (+ x y)))
+
+(<span class="hljs-keyword">define</span> add-five (make-adder <span class="hljs-number">5</span>))
+
+(add-five <span class="hljs-number">3</span>) <span class="hljs-comment">; 8</span></code></pre></div>
+<p>Scheme is also an important language in the history of functional programming. Functions are first-class values, which means they can be stored in variables, passed as arguments, and returned as results. This makes higher-order programming natural. Scheme also encourages recursion and expression composition instead of relying only on mutable state and loops.</p>
+<p>Another important feature of Scheme is proper tail recursion. A tail call is a function call whose result is returned directly as the result of the current function. Scheme requires implementations to execute tail calls without growing the call stack. Therefore, recursion can be used to express iteration safely and efficiently.</p>
+<div class="code-block" data-code-block="28"><div class="code-toolbar"><span class="code-language">SCHEME</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-scheme" data-highlighted="local">(<span class="hljs-keyword">define</span> (factorial n)
+  (<span class="hljs-keyword">define</span> (iter n acc)
+    (<span class="hljs-keyword">if</span> (= n <span class="hljs-number">0</span>)
+        acc
+        (iter (- n <span class="hljs-number">1</span>) (* acc n))))
+  (iter n <span class="hljs-number">1</span>))
+
+(factorial <span class="hljs-number">5</span>) <span class="hljs-comment">; 120</span></code></pre></div>
+<p>Scheme was also one of the earliest languages to provide first-class continuations. A continuation represents &quot;the rest of the computation&quot; at a certain point in the program. Scheme exposes this idea through <code>call-with-current-continuation</code>, usually written as <code>call/cc</code>. Continuations can be used to express advanced control flow, such as early exits, backtracking, coroutines, and user-defined control structures.</p>
+<p>Scheme also supports delayed evaluation through <code>delay</code> and <code>force</code>. Delayed evaluation means that an expression is packaged as a promise and is not computed until its value is needed. This is different from asynchronous programming. Delayed evaluation is about <em>when</em> a computation is performed, while asynchronous programming is about whether a computation can proceed independently or concurrently with other work.</p>
+<div class="code-block" data-code-block="29"><div class="code-toolbar"><span class="code-language">SCHEME</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-scheme" data-highlighted="local">(<span class="hljs-keyword">define</span> delayed-value
+  (<span class="hljs-keyword">delay</span> (+ <span class="hljs-number">2</span> <span class="hljs-number">3</span>)))
+
+(<span class="hljs-keyword">force</span> delayed-value) <span class="hljs-comment">; 5</span></code></pre></div>
+<p>Scheme&#039;s influence is much larger than its size. It helped clarify important ideas in programming language theory and became widely used in education. Many later languages inherited ideas from Scheme, including lexical closures, first-class functions, hygienic macros, and tail-call-oriented functional style.</p>
+<h2 id="1980s">1980s</h2>
+<p>By the beginning of the 1980s, structured programming had become well established through languages such as Pascal and C, while Simula and Smalltalk had demonstrated a different way to organize programs around objects. Functional programming also continued to develop along its own path. As software systems grew larger and more complex, language designers faced a broader question: how could they provide better abstraction, reuse, reliability, and concurrency without giving up practical performance? The languages of the 1980s offered several influential answers, with object-oriented programming moving decisively toward the mainstream.</p>
+<h3 id="cplusplus">C++</h3>
+<p>The creator of C++ is the Danish computer scientist Bjarne Stroustrup. He began developing &quot;C with Classes&quot; in 1979, and the language was renamed C++ in 1983. Stroustrup wanted the new language to keep the efficiency and performance of C while supporting high-level abstraction and object-oriented programming like Simula.</p>
+<p>C++ consists of two major parts: the language core and the standard library. The language core includes data types, operators, control statements, functions, classes, inheritance, polymorphism, templates, exceptions, and other mechanisms. The standard library includes many common data structures and algorithms, such as containers, iterators, algorithms, strings, I/O facilities, and utilities. The standard library uses generic programming to improve code reuse and generality.</p>
+<p>The following code demonstrates OOP and generic programming in C++:</p>
+<div class="code-block" data-code-block="30"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#include &lt;iostream&gt;</span>
+<span class="hljs-meta">#include &lt;memory&gt;</span>
+<span class="hljs-meta">#include &lt;vector&gt;</span>
+
+<span class="hljs-comment">// Define a base class Animal</span>
+<span class="hljs-keyword">class</span> Animal {
+<span class="hljs-keyword">public</span>:
+	<span class="hljs-keyword">virtual</span> ~Animal() = <span class="hljs-keyword">default</span>;
+	<span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> speak() <span class="hljs-keyword">const</span> = <span class="hljs-number">0</span>;
+};
+
+<span class="hljs-comment">// Define a derived class Dog</span>
+<span class="hljs-keyword">class</span> Dog : <span class="hljs-keyword">public</span> Animal {
+<span class="hljs-keyword">public</span>:
+	<span class="hljs-type">void</span> speak() <span class="hljs-keyword">const</span> override {
+		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Woof\n&quot;</span>;
+	}
+};
+
+<span class="hljs-comment">// Define a derived class Cat</span>
+<span class="hljs-keyword">class</span> Cat : <span class="hljs-keyword">public</span> Animal {
+<span class="hljs-keyword">public</span>:
+	<span class="hljs-type">void</span> speak() <span class="hljs-keyword">const</span> override {
+		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Meow\n&quot;</span>;
+	}
+};
+
+<span class="hljs-comment">// Define a generic function</span>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Range&gt;
+<span class="hljs-type">void</span> printAnimals(<span class="hljs-keyword">const</span> Range&amp; animals) {
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; animal : animals) {
+		animal-&gt;speak();
+	}
+}
+
+<span class="hljs-type">int</span> main() {
+	<span class="hljs-built_in">std</span>::<span class="hljs-type">vector</span>&lt;<span class="hljs-built_in">std</span>::unique_ptr&lt;Animal&gt;&gt; animals;
+	animals.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">std</span>::make_unique&lt;Dog&gt;());
+	animals.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">std</span>::make_unique&lt;Cat&gt;());
+
+	printAnimals(animals);
+
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>Notably, C++ generic programming is mainly achieved through templates. When a template is used with concrete types, the compiler instantiates type-specific code. This compile-time mechanism makes C++ support generic programming, template meta-programming, and compile-time polymorphism.</p>
+<p>For example, when we compile the following code:</p>
+<div class="code-block" data-code-block="31"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+T add(T a, T b) {
+	<span class="hljs-keyword">return</span> a + b;
+}</code></pre></div>
+<p>The compiler generates corresponding code based on the actual type arguments:</p>
+<div class="code-block" data-code-block="32"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-comment">// Generate int add(int, int) function</span>
+<span class="hljs-type">int</span> result1 = add&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// Generate double add(double, double) function</span>
+<span class="hljs-type">double</span> result2 = add&lt;<span class="hljs-type">double</span>&gt;(<span class="hljs-number">1.5</span>, <span class="hljs-number">2.5</span>);</code></pre></div>
+<p>Instead of relying on garbage collection by default, C++ uses deterministic object lifetime and destructors. A destructor is automatically executed when an object is destroyed. Its name is <code>~ClassName</code>, and a class can have only one destructor. This idea is the basis of RAII, which means that resources are acquired during object construction and released during object destruction. The following code is an example of a destructor:</p>
+<div class="code-block" data-code-block="33"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#include &lt;iostream&gt;</span>
+<span class="hljs-meta">#include &lt;string&gt;</span>
+<span class="hljs-meta">#include &lt;utility&gt;</span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-keyword">class</span> Person {
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-type">string</span> name;
+    <span class="hljs-type">int</span>* scores;
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-keyword">explicit</span> Person(<span class="hljs-type">string</span> n) {
+        name = <span class="hljs-built_in">std</span>::move(n);
+        scores = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">3</span>]{<span class="hljs-number">90</span>, <span class="hljs-number">85</span>, <span class="hljs-number">95</span>};
+        <span class="hljs-built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="hljs-string">&quot; is created.&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+
+    Person(<span class="hljs-keyword">const</span> Person&amp;) = <span class="hljs-keyword">delete</span>;
+    Person&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> Person&amp;) = <span class="hljs-keyword">delete</span>;
+
+    <span class="hljs-type">void</span> showScores() {
+        <span class="hljs-built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="hljs-string">&quot;&#039;s scores: &quot;</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; scores[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+
+    ~Person() {
+        <span class="hljs-comment">// Release dynamically allocated memory</span>
+        <span class="hljs-keyword">delete</span>[] scores;
+        <span class="hljs-built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="hljs-string">&quot; is destroyed.&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+};
+
+<span class="hljs-type">int</span> main() {
+    {
+        Person p(<span class="hljs-string">&quot;Alice&quot;</span>);
+        p.showScores();
+    }   <span class="hljs-comment">// The lifetime of p ends here, so the destructor runs.</span>
+
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;End of program.&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>C++ is often considered complicated, but its breadth also makes it capable of satisfying many different demands. This is one of the distinctive features of C++.</p>
+<p>Traditional C++ uses header files, and <code>#include</code> is a textual inclusion mechanism. C++20 introduced modules to provide a real module import mechanism and improve modular programming. For example:</p>
+<div class="code-block" data-code-block="34"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-keyword">export</span> module mymath;
+
+<span class="hljs-keyword">export</span> <span class="hljs-type">int</span> add(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) {
+    <span class="hljs-keyword">return</span> a + b;
+}</code></pre></div>
+<p>This code defines a module called <code>mymath</code> and exports the <code>add</code> function. Other code can import the module:</p>
+<div class="code-block" data-code-block="35"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local">import mymath;
+
+<span class="hljs-meta">#include &lt;iostream&gt;</span>
+
+<span class="hljs-type">int</span> main() {
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; add(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-string">&#039;\n&#039;</span>;
+}</code></pre></div>
+<p>Another highlight of modern C++ is <code>consteval</code> and <code>constexpr</code>. A <code>consteval</code> function must be evaluated at compile time, while a <code>constexpr</code> function can be evaluated at compile time when the context requires it and at runtime otherwise. These features make C++ more expressive and can improve both safety and runtime performance.</p>
+<p>The following code demonstrates compile-time checking with <code>consteval</code>:</p>
+<div class="code-block" data-code-block="36"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-comment">/*
+* isFibonacci is a consteval function, so it must be evaluated at compile time.
+* This simple function checks whether a string is a single-digit Fibonacci prefix.
+*/</span>
+consteval <span class="hljs-type">bool</span> isFibonacci(<span class="hljs-keyword">const</span> <span class="hljs-type">char</span>* str) {
+	<span class="hljs-type">int</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">while</span> (*str != <span class="hljs-string">&#039;\0&#039;</span>) {
+		<span class="hljs-keyword">auto</span> next = a + b;
+		<span class="hljs-comment">// (*str) - &#039;0&#039; converts a single-digit character to a number.</span>
+		<span class="hljs-keyword">if</span> (b != ((*str) - <span class="hljs-string">&#039;0&#039;</span>)) {
+			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+		}
+		a = b;
+		b = next;
+		++str;
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-type">int</span> main() {
+	static_assert(isFibonacci(<span class="hljs-string">&quot;112358&quot;</span>));
+	static_assert(!isFibonacci(<span class="hljs-string">&quot;112356&quot;</span>));
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>Symbian is an important historical example of C++ in mobile operating systems. Before iOS and Android became dominant, Symbian OS was widely used on smartphones, especially Nokia phones, and native Symbian applications were mainly developed in C++. Because mobile devices at that time had limited memory, battery life, and processing power, Symbian formed a distinctive style called Symbian C++. It used many special idioms, such as descriptors for string handling, the cleanup stack and leaves for error handling, two-phase construction for safe object creation, active objects for asynchronous event handling, and class naming conventions such as <code>C</code>, <code>T</code>, <code>R</code>, and <code>M</code> classes.</p>
+<p>The relationship between C++ and Symbian shows both the strength and the cost of C++. On the one hand, C++ could be adapted to build efficient software for resource-constrained devices. On the other hand, Symbian C++ was quite different from standard C++, so it had a steep learning curve and made porting code to other platforms more difficult. When iOS and Android became dominant, Symbian declined, but it remains a useful example of how C++ was used in early smartphone operating systems.</p>
+<p>However, C++ does not eliminate all disadvantages inherited from C. Pointers and memory leaks are still largely under the control of the programmer. Even so, C++ remains a de facto industry standard. The Windows kernel and driver framework use C++, the Oracle database is heavily optimized using C++, the JVM is implemented in C++, and browser engines, graphics systems, and game engines are almost all based on C++. It is not the simplest language, yet it forms the foundation of modern software.</p>
+<h3 id="objectivec">Objective-C</h3>
+<p>In the early 1980s, Brad Cox and Tom Love developed Objective-C at Productivity Products International (PPI), which later became Stepstone. Their aim was to add Smalltalk-style OOP to C. NeXT later adopted Objective-C as the main language for NeXTSTEP. After Apple acquired NeXT in 1997, technologies from NeXTSTEP became the foundation of modern macOS, and Objective-C became one of the main languages in Apple&#039;s software ecosystem.</p>
+<p>Objective-C is closely tied to macOS and iOS development. On macOS, the Cocoa framework inherited many ideas and APIs from NeXTSTEP, and Objective-C became the natural language for building native Mac applications. On iOS, Apple introduced Cocoa Touch and the iPhone SDK in 2008, and Objective-C became the main language for early iPhone and iPad application development. Therefore, for many years, understanding Objective-C was almost necessary for serious Apple platform development.</p>
+<p>Objective-C is a strict superset of C and adds Smalltalk-style message syntax with square brackets. Compared to C++, the highlight of Objective-C is its dynamic runtime environment, which means that even while the program is running, behavior can still be dynamically determined based on the object, type, selector, and message.</p>
+<div class="code-block" data-code-block="37"><div class="code-toolbar"><span class="code-language">OBJECTIVE-C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-objectivec" data-highlighted="local"><span class="hljs-meta">#import &lt;Foundation/Foundation.h&gt;</span>
+
+<span class="hljs-comment">// Define a base class Animal</span>
+<span class="hljs-meta">@interface</span> Animal : <span class="hljs-type">NSObject</span>
+<span class="hljs-comment">// Define a method of Animal</span>
+- (<span class="hljs-type">void</span>)speak;
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Implement Animal</span>
+<span class="hljs-meta">@implementation</span> Animal
+- (<span class="hljs-type">void</span>)speak {
+	<span class="hljs-comment">// Empty method, implemented by subclasses</span>
+}
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Define a derived class Dog</span>
+<span class="hljs-meta">@interface</span> Dog : Animal
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Implement Dog</span>
+<span class="hljs-meta">@implementation</span> Dog
+- (<span class="hljs-type">void</span>)speak {
+	<span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;Woof&quot;</span>);
+}
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Define a derived class Cat</span>
+<span class="hljs-meta">@interface</span> Cat : Animal
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Implement Cat</span>
+<span class="hljs-meta">@implementation</span> Cat
+- (<span class="hljs-type">void</span>)speak {
+	<span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;Meow&quot;</span>);
+}
+<span class="hljs-meta">@end</span>
+
+<span class="hljs-comment">// Define a function that prints all animals</span>
+<span class="hljs-type">void</span> printAnimals(<span class="hljs-type">NSArray</span>&lt;Animal *&gt; *animals) {
+	<span class="hljs-keyword">for</span> (Animal *animal in animals) {
+		[animal speak];
+	}
+}
+
+<span class="hljs-type">int</span> main(<span class="hljs-type">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-type">char</span> * argv[]) {
+	<span class="hljs-meta">@autoreleasepool</span> {
+		<span class="hljs-comment">// Define an Animal array</span>
+		<span class="hljs-type">NSArray</span>&lt;Animal *&gt; *animals = @[[[Dog <span class="hljs-built_in">alloc</span>] <span class="hljs-built_in">init</span>], [[Cat <span class="hljs-built_in">alloc</span>] <span class="hljs-built_in">init</span>]];
+
+		<span class="hljs-comment">// Call the print function</span>
+		printAnimals(animals);
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre></div>
+<p>Besides, Objective-C allows messages to be sent to <code>nil</code> objects without throwing exceptions by default. This can reduce some null-related crashes, although it may also hide bugs. Objective-C 2.0 later introduced Automatic Reference Counting (ARC). Under ARC, the compiler automatically inserts memory-management operations such as <code>retain</code>, <code>release</code>, and <code>autorelease</code> according to ownership rules. This avoids many error-prone problems of manual memory management and improves development efficiency.</p>
+<p>Although Objective-C improves language dynamism, it sacrifices some runtime performance and adds memory overhead, especially during message dispatch. Because its compile-time type checking is relatively weak, some type misuses can only be detected at runtime. Besides, because Objective-C combines C syntax, Smalltalk-style messaging, and optional C++ interoperability, its syntax can feel relatively complicated.</p>
+<p>With Apple&#039;s full-scale promotion of Swift, Objective-C has gradually become less central in new Apple development. However, it remains important in many existing macOS and iOS codebases, and Swift still interoperates with Objective-C to support these legacy frameworks and applications.</p>
+<h3 id="perl">Perl</h3>
+<p>Perl is often expanded as &quot;Practical Extraction and Report Language&quot;, although the name was originally chosen first and the expansion came later. The creator of Perl is the American programmer Larry Wall. He was working as a system administrator and needed to synchronize and process information across different systems. However, the tools available at the time were not convenient enough for the task. To solve this problem, Wall started to develop a new programming language: Perl.</p>
+<p>Perl is a general-purpose, interpreted, dynamically typed language. Similar to Unix shell, Perl integrates regular expressions and powerful string-processing capabilities. As a result, it is especially suitable for text processing, system administration, and programs that need to manipulate strings.</p>
+<p>The following example extracts URLs from a text file:</p>
+<div class="code-block" data-code-block="38"><div class="code-toolbar"><span class="code-language">PERL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-perl" data-highlighted="local"><span class="hljs-comment">#!/usr/bin/perl</span>
+<span class="hljs-keyword">use</span> strict;
+<span class="hljs-keyword">use</span> warnings;
+
+<span class="hljs-comment"># Open the file</span>
+<span class="hljs-built_in">open</span> <span class="hljs-keyword">my</span> <span class="hljs-type">$fh</span>, <span class="hljs-string">&#039;&lt;&#039;</span>, <span class="hljs-string">&#039;data.txt&#039;</span> or <span class="hljs-built_in">die</span> <span class="hljs-string">&quot;Cannot open file: $!&quot;</span>;
+
+<span class="hljs-comment"># Read the entire file content at once and store the file content in a local variable.</span>
+<span class="hljs-keyword">my</span> <span class="hljs-type">$content</span> = <span class="hljs-keyword">do</span> { <span class="hljs-keyword">local</span> $/; &lt;<span class="hljs-type">$fh</span>&gt; };
+
+<span class="hljs-comment"># Match URLs: Collect all matched URLs into the array @urls.</span>
+<span class="hljs-keyword">my</span> <span class="hljs-type">@urls</span> = <span class="hljs-type">$content</span> =~ <span class="hljs-keyword">m</span>{(https?://\S+)}g;
+
+<span class="hljs-comment"># Output the result</span>
+<span class="hljs-built_in">print</span> <span class="hljs-string">&quot;$_\n&quot;</span> <span class="hljs-keyword">for</span> <span class="hljs-type">@urls</span>;</code></pre></div>
+<p>Perl is also a dynamically and weakly typed language. It was strongly influenced by Unix shell, <code>sed</code>, and <code>awk</code>, but it is more flexible and expressive. Perl supports high-level features such as OOP, functional programming, closures, and modules. Its ecosystem also fostered the development of many feature-rich third-party libraries. Perl&#039;s motto is &quot;There&#039;s more than one way to do it&quot;, and positive and negative array indexes are a simple example of this flexibility.</p>
+<div class="code-block" data-code-block="39"><div class="code-toolbar"><span class="code-language">PERL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-perl" data-highlighted="local"><span class="hljs-keyword">my</span> <span class="hljs-type">@array</span> = (
+	<span class="hljs-string">&quot;hello&quot;</span>,
+	<span class="hljs-string">&quot;world&quot;</span>,
+	<span class="hljs-string">&quot;from&quot;</span>,
+	<span class="hljs-string">&quot;perl&quot;</span>
+);
+
+<span class="hljs-built_in">print</span> <span class="hljs-type">$array</span>[<span class="hljs-number">0</span>];  <span class="hljs-comment"># &quot;hello&quot;</span>
+<span class="hljs-built_in">print</span> <span class="hljs-type">$array</span>[-<span class="hljs-number">1</span>]; <span class="hljs-comment"># &quot;perl&quot;</span>
+<span class="hljs-built_in">print</span> <span class="hljs-type">$array</span>[-<span class="hljs-number">5</span>]; <span class="hljs-comment"># returns undef and may print a warning under warnings</span></code></pre></div>
+<p>As a first-generation glue language, Perl was one of the most popular web programming languages in the Web 1.0 era. With the rise of the Internet and the widespread pre-installation of Perl on Unix systems, Perl rapidly gained a huge user base. However, under competitive pressure from emerging programming languages such as Python, the Perl community chose a controversial path: developing a largely redesigned Perl 6, which was later renamed Raku. This path separated Raku from Perl&#039;s existing ecosystem advantages, indirectly leading to a lukewarm market response and a relatively small user base.</p>
+<h3 id="unix-shell-2">Unix Shell 2</h3>
+<p>The shell landscape of the 1980s was shaped by two competing strengths. Bourne shell syntax was well suited to portable scripting, while C shell offered a more comfortable interactive experience. KornShell and tcsh developed these two lineages in different directions, and Bash later combined many of their practical ideas in the GNU ecosystem.</p>
+<p>KornShell, normally invoked as <code>ksh</code>, was created by David Korn at Bell Laboratories. Its first version appeared in 1983. KornShell was designed as an upward-compatible extension of the Bourne shell, so existing <code>sh</code> users and scripts could adopt it more easily. At the same time, it incorporated interactive ideas associated with C shell, including command history, aliases, and job control. It was also the first widely used shell to provide both Emacs-style and vi-style command-line editing.</p>
+<p>KornShell treated the shell as a serious programming language rather than only a command launcher. It added shell functions, indexed arrays, built-in integer arithmetic, improved parameter expansion, coprocesses, and more expressive conditionals. The influential ksh88 version was adopted by UNIX System V Release 4 and helped shape the POSIX shell standard. The later ksh93 rewrite added features such as floating-point arithmetic, associative arrays, compound variables, name references, and dynamically loadable built-ins.</p>
+<p>The following ksh example uses a function, integer variables, arithmetic evaluation, and a default parameter to calculate a factorial:</p>
+<div class="code-block" data-code-block="40"><div class="code-toolbar"><span class="code-language">KSH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-ksh" data-highlighted="local"><span class="hljs-comment">#!/bin/ksh</span>
+
+<span class="hljs-keyword">function</span> factorial {
+	<span class="hljs-built_in">typeset</span> <span class="hljs-meta">-i</span> n=<span class="hljs-meta">$1</span>
+	<span class="hljs-built_in">typeset</span> <span class="hljs-meta">-i</span> result=<span class="hljs-number">1</span>
+
+	<span class="hljs-keyword">while</span> (( n &gt; <span class="hljs-number">1</span> )); <span class="hljs-keyword">do</span>
+		(( result *= n ))
+		(( n-- ))
+	<span class="hljs-keyword">done</span>
+
+	<span class="hljs-built_in">print</span> <span class="hljs-meta">-r</span> -- <span class="hljs-string">&quot;$result&quot;</span>
+}
+
+value=<span class="hljs-meta">${1:-5}</span>
+
+<span class="hljs-keyword">if</span> (( value &lt; <span class="hljs-number">0</span> )); <span class="hljs-keyword">then</span>
+	<span class="hljs-built_in">print</span> <span class="hljs-meta">-u2</span> -- <span class="hljs-string">&quot;The value must be non-negative.&quot;</span>
+	<span class="hljs-built_in">exit</span> <span class="hljs-number">1</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-built_in">print</span> <span class="hljs-meta">-n</span> -- <span class="hljs-string">&quot;$value! = &quot;</span>
+factorial <span class="hljs-string">&quot;$value&quot;</span></code></pre></div>
+<p>The <code>typeset -i</code> declarations give the local variables integer semantics, while <code>(( ... ))</code> evaluates arithmetic without external commands such as <code>expr</code>. Most of the surrounding control syntax remains familiar to Bourne shell users. However, scripts that depend on ksh-specific features should use a ksh shebang rather than claiming compatibility with a generic <code>/bin/sh</code>.</p>
+<p>The Tenex C shell, or <code>tcsh</code>, developed the other major lineage. It is an enhanced, highly compatible version of Berkeley <code>csh</code>. Its early completion work was inspired by the command interface of the TENEX and TOPS-20 operating systems; this history accounts for the <code>t</code> in its name. Ken Greer contributed filename completion in the early 1980s, and later contributors, including Mike Ellis and Paul Placeway, expanded command completion, line editing, prompts, history, portability, and performance.</p>
+<p>Unlike ksh, tcsh did not adopt Bourne-compatible scripting syntax. Its main strength was interactive use. It added an Emacs- or vi-style command-line editor, programmable word completion, spelling correction for commands and filenames, improved history search, richer prompts, and enhanced directory-stack handling. It reads <code>.tcshrc</code> for interactive configuration and can fall back to <code>.cshrc</code>, preserving compatibility with existing C shell environments.</p>
+<p>The following <code>.tcshrc</code> fragment enables several common interactive features:</p>
+<div class="code-block" data-code-block="41"><div class="code-toolbar"><span class="code-language">TCSH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-tcsh" data-highlighted="local"><span class="hljs-built_in">set</span> <span class="hljs-built_in">history</span> = <span class="hljs-number">1000</span>
+<span class="hljs-built_in">set</span> savehist = (<span class="hljs-number">1000</span> merge)
+<span class="hljs-built_in">set</span> autolist
+<span class="hljs-built_in">set</span> correct = cmd
+<span class="hljs-built_in">set</span> prompt = <span class="hljs-string">&quot;%n@%m:%~%# &quot;</span>
+
+<span class="hljs-built_in">bindkey</span> -e
+<span class="hljs-built_in">alias</span> ll <span class="hljs-string">&#039;ls -al&#039;</span></code></pre></div>
+<p>Here, <code>history</code> controls the in-memory history length, <code>savehist</code> preserves and merges history between sessions, <code>autolist</code> displays completion choices, and <code>correct</code> enables command-name correction. <code>bindkey -e</code> selects Emacs-style editing, while the prompt escapes display the user name, host name, and current directory. These features make tcsh comfortable as a login shell, but its inherited C shell syntax and quoting behavior make it a less common choice for new portable scripts.</p>
+<p>Bash, whose name stands for <em>Bourne Again SHell</em>, was developed for the GNU Project and first released in 1989. The name is both a reference to the Bourne shell and a pun on being &quot;born again.&quot; Bash is a commonly used command-line interpreter in Unix-like systems, especially Linux.</p>
+<p>Bash command syntax is largely compatible with Bourne shell syntax and adds many extensions. Bash supports features such as brace expansion, command history, programmable completion, job control, basic debugging, and signal handling. As two widely used command-line environments, both CMD and Bash support pipes (<code>|</code>) and redirection (<code>&gt;</code> and <code>&lt;</code>), but Bash offers greater richness and flexibility for system administration and automation.</p>
+<p>Bash predates Linux: Bash appeared in 1989, while the Linux kernel began in 1991. When the Linux kernel emerged, the GNU project had already produced a compiler, shell, libraries, and many Unix-like command-line tools. Combining the Linux kernel with this GNU user space made it possible to assemble a largely free Unix-like operating system. Bash consequently became closely associated with Linux and was adopted as the default interactive shell in many distributions.</p>
+<p>However, Bash is not part of the Linux kernel. It is an ordinary user-space program, usually installed as <code>/bin/bash</code>, and the kernel does not require it to schedule processes, manage memory, provide filesystems, or perform networking. A Linux system can use another login shell, and minimal containers or embedded systems often omit Bash in favor of smaller implementations such as BusyBox <code>ash</code>. Other distributions and users may choose Dash, ksh, Zsh, or another shell for particular roles.</p>
+<p>The distinction between <code>/bin/bash</code> and <code>/bin/sh</code> is especially important on Linux. <code>/bin/bash</code> explicitly requests Bash, whereas <code>/bin/sh</code> requests the system&#039;s Bourne/POSIX-style shell. On some distributions <code>/bin/sh</code> links to Bash, which enters a more POSIX-oriented mode when invoked as <code>sh</code>; on others, including Debian-derived systems, it commonly links to Dash for faster startup and lower overhead. A script that uses non-POSIX features available in Bash, such as arrays, <code>[[ ... ]]</code>, <code>source</code>, brace expansion, or process substitution, should therefore use an explicit Bash shebang. A genuinely portable script should use <code>#!/bin/sh</code> and restrict itself to the syntax guaranteed by its target POSIX-style shell.</p>
+<p>This relationship explains why Bash is highly visible in Linux administration without being synonymous with Linux itself. Bash scripts are widely used for installation, build systems, package maintenance, development environments, continuous integration, and operational automation. Nevertheless, these scripts run as user-space programs and coordinate other commands; they do not become part of the kernel merely because they are used to manage a Linux machine.</p>
+<p>Batch and Bash differ significantly. For example, their conditional statements are written differently:</p>
+<div class="code-block" data-code-block="42"><div class="code-toolbar"><span class="code-language">BATCH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-batch" data-highlighted="local"><span class="hljs-meta">@echo</span> off
+<span class="hljs-keyword">set</span> var=<span class="hljs-number">5</span>
+<span class="hljs-keyword">if</span> <span class="hljs-type">%var%</span> <span class="hljs-keyword">EQU</span> <span class="hljs-number">5</span> (
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Is equal to 5.&quot;</span>
+) <span class="hljs-keyword">else</span> (
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Is not equal to 5.&quot;</span>
+)</code></pre></div>
+<div class="code-block" data-code-block="43"><div class="code-toolbar"><span class="code-language">BASH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-bash" data-highlighted="local"><span class="hljs-comment">#!/bin/bash</span>
+var=<span class="hljs-number">5</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;$var&quot;</span> <span class="hljs-meta">-eq</span> <span class="hljs-number">5</span> ]; <span class="hljs-keyword">then</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Is equal to 5.&quot;</span>
+<span class="hljs-keyword">else</span> 
+	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Is not equal to 5.&quot;</span>
+<span class="hljs-keyword">fi</span></code></pre></div>
+<p>Their loop statements are also different:</p>
+<div class="code-block" data-code-block="44"><div class="code-toolbar"><span class="code-language">BATCH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-batch" data-highlighted="local"><span class="hljs-meta">@echo</span> off
+<span class="hljs-keyword">for</span> /L <span class="hljs-type">%%i</span> <span class="hljs-keyword">in</span> (<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>) <span class="hljs-keyword">do</span> (
+	<span class="hljs-built_in">echo</span> <span class="hljs-type">%%i</span>
+)</code></pre></div>
+<div class="code-block" data-code-block="45"><div class="code-toolbar"><span class="code-language">BASH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-bash" data-highlighted="local"><span class="hljs-comment">#!/bin/bash</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {<span class="hljs-number">1</span>..<span class="hljs-number">5</span>}; <span class="hljs-keyword">do</span>
+	<span class="hljs-built_in">echo</span> <span class="hljs-meta">$i</span>
+<span class="hljs-keyword">done</span></code></pre></div>
+<p>Because Bash is open-source and widely ported, it is convenient to use even on Windows platforms through tools such as WSL, Git Bash, and MSYS2. Learning shell scripts can greatly reduce manual work and improve automation efficiency and accuracy.</p>
+<p>These shells therefore belong to two different compatibility families. KornShell and Bash primarily extend Bourne shell syntax and are closely connected with POSIX-style scripting, whereas tcsh extends C shell syntax and is primarily valued for interactive use. Their commands may look similar at a terminal, but variable assignment, conditionals, loops, quoting, startup files, and script portability differ significantly.</p>
+<h3 id="ada">Ada</h3>
+<p>Ada was developed by a team led by the French computer scientist Jean Ichbiah at CII Honeywell Bull. The United States Department of Defense started the language project in the mid-1970s because it wanted to reduce the large number of programming languages used in defense software projects. In 1979, the new language was named Ada in honor of Ada Lovelace, who is often regarded as the world&#039;s first computer programmer because of her notes on Charles Babbage&#039;s Analytical Engine in the 1840s.</p>
+<p>The Ada compiler emphasizes strict compile-time checking. It can help detect many programming flaws early, such as type errors and some unsafe operations. Besides, Ada provides a rich type system, modular programming mechanisms, exception handling, tasking, and generic programming, which help engineers organize and manage large programs.</p>
+<p>Ada&#039;s syntax was influenced by Pascal and ALGOL-like languages. The following code is an example:</p>
+<div class="code-block" data-code-block="46"><div class="code-toolbar"><span class="code-language">ADA</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-ada" data-highlighted="local"><span class="hljs-keyword">with</span> <span class="hljs-built_in">Ada</span>.Text_IO; <span class="hljs-keyword">use</span> <span class="hljs-built_in">Ada</span>.Text_IO;
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">Ada</span>.Integer_Text_IO; <span class="hljs-keyword">use</span> <span class="hljs-built_in">Ada</span>.Integer_Text_IO;
+
+<span class="hljs-keyword">procedure</span> Fibonacci <span class="hljs-keyword">is</span>
+	N : <span class="hljs-type">Positive</span>;
+
+	<span class="hljs-comment">-- Define a recursive function to calculate the n-th Fibonacci number.</span>
+	<span class="hljs-keyword">function</span> Fib(N : <span class="hljs-type">Positive</span>) <span class="hljs-keyword">return</span> <span class="hljs-type">Positive</span> <span class="hljs-keyword">is</span>
+	<span class="hljs-keyword">begin</span>
+		<span class="hljs-keyword">if</span> N = <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> N = <span class="hljs-number">2</span> <span class="hljs-keyword">then</span>
+			<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">else</span>
+			<span class="hljs-keyword">return</span> Fib (N - <span class="hljs-number">1</span>) + Fib (N - <span class="hljs-number">2</span>);
+		<span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+	<span class="hljs-keyword">end</span> Fib;
+<span class="hljs-keyword">begin</span>
+	<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;Enter a positive integer: &quot;</span>);
+	<span class="hljs-built_in">Get</span>(N);
+	<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;Fibonacci(&quot;</span>);
+	<span class="hljs-built_in">Put</span>(N);
+	<span class="hljs-built_in">Put</span>(<span class="hljs-string">&quot;) = &quot;</span>);
+	<span class="hljs-built_in">Put</span>(Fib(N));
+	<span class="hljs-built_in">New_Line</span>;
+<span class="hljs-keyword">end</span> Fibonacci;</code></pre></div>
+<p>Opinions on Ada have been mixed. Supporters predicted that it would become a major general-purpose programming language. However, early Ada compilers often had performance and implementation difficulties because Ada was a large and complex language. Besides, compiler vendors spent considerable effort on passing government-mandated language conformance tests rather than improving usability and tooling, so early IDEs and debugging tools were relatively weak. By the late 1980s and early 1990s, Ada compiler performance had improved. Because Ada emphasizes safety and reliability, it became an important choice for systems that prioritize safety, robustness, and long-term maintainability.</p>
+<h3 id="matlab">MATLAB</h3>
+<p>MATLAB is a long-standing numerical computing language and environment created by the mathematician and computer scientist Cleve Moler. It began as an interactive matrix calculator that allowed students to use LINPACK and EISPACK without writing FORTRAN programs. In 1984, Jack Little, Cleve Moler, and Steve Bangert founded MathWorks to commercialize MATLAB. With its ease of use, high efficiency, and strong support for matrix computation, MATLAB quickly gained widespread recognition. Today, MATLAB is one of the most important computing tools in science, technology, and engineering.</p>
+<h3 id="abc">ABC</h3>
+<p>ABC was developed at the Dutch research institute Centrum Wiskunde &amp; Informatica (CWI). It was designed as an interactive programming language and environment for personal computing, with an emphasis on education, prototyping, and everyday programming.</p>
+<p>ABC aimed to be a modern replacement for BASIC and an easier alternative to Pascal. It supports data structuring and structured programming, but keeps the core language small. ABC has only five basic kinds of values: numbers, texts, compounds, lists, and tables. Its numbers are generally unbounded in length and can represent exact rational values, limited mainly by available memory.</p>
+<p>The following is an example of ABC code:</p>
+<div class="code-block" data-code-block="47"><div class="code-toolbar"><span class="code-language">ABC</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-abc" data-highlighted="local"><span class="hljs-keyword">HOW</span> <span class="hljs-keyword">TO</span> <span class="hljs-keyword">RETURN</span> factorial n:
+	<span class="hljs-keyword">PUT</span> <span class="hljs-number">1</span> <span class="hljs-keyword">IN</span> result
+	<span class="hljs-keyword">FOR</span> i <span class="hljs-keyword">IN</span> {<span class="hljs-number">1</span>..n}:
+		<span class="hljs-keyword">PUT</span> result * i <span class="hljs-keyword">IN</span> result
+	<span class="hljs-keyword">RETURN</span> result</code></pre></div>
+<p>ABC is also notable for its interactive environment. Commands can be executed directly, while user-defined commands, functions, and global values can remain available across sessions. The environment understands the structure of ABC programs and supports conveniences such as command completion, automatic indentation, matching brackets, and a generalized undo mechanism.</p>
+<p>However, ABC also had clear limitations. It was not designed for systems programming or high-performance software, and its dedicated environment made it difficult to connect smoothly with existing operating-system interfaces, C libraries, and external tools. Its limited extensibility and small ecosystem prevented it from becoming mainstream.</p>
+<p>Even so, ABC had an important indirect influence. Guido van Rossum worked in the ABC group at CWI and later drew on ABC&#039;s readability, indentation-based block structure, and high-level data types when designing Python. Python can be seen partly as an attempt to keep ABC&#039;s beginner-friendly style while adding better extensibility and practical system-integration ability.</p>
+<h3 id="erlang">Erlang</h3>
+<p>In the 1980s, the telecommunications industry placed extremely demanding requirements on software: systems had to run 24/7, handle large numbers of concurrent calls, and recover quickly when failures occurred. However, many programming languages and system architectures at the time were not specifically designed for high-concurrency, high-fault-tolerance scenarios.</p>
+<p>Erlang was developed at the Ericsson Computer Science Laboratory in Sweden by Joe Armstrong, Robert Virding, Mike Williams, and others. The project aimed to discover what kind of language features would make telecommunication systems easier to build and maintain. The name &quot;Erlang&quot; honors the Danish mathematician Agner Krarup Erlang, who contributed to queueing theory, although it also sounds like &quot;Ericsson Language&quot;. Erlang&#039;s syntax was influenced by Prolog, and its early implementations were closely connected with Prolog experiments.</p>
+<p>Erlang is a functional programming language, so data is immutable by default and programs are mainly organized around functions, recursion, and pattern matching. However, Erlang&#039;s most distinctive feature is its concurrency model. Erlang programs can create many lightweight processes. These processes do not share memory; instead, they communicate by sending and receiving messages. This design reduces many problems caused by shared mutable state.</p>
+<p>The following code shows a simple Erlang process that receives a message, sends a reply, and continues running:</p>
+<div class="code-block" data-code-block="48"><div class="code-toolbar"><span class="code-language">ERLANG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-erlang" data-highlighted="local"><span class="hljs-meta">-module</span>(counter).
+<span class="hljs-meta">-export</span>([start/<span class="hljs-number">0</span>, loop/<span class="hljs-number">1</span>]).
+
+<span class="hljs-built_in">start</span>() -&gt;
+    <span class="hljs-type">Pid</span> = <span class="hljs-built_in">spawn</span>(<span class="hljs-built_in">fun</span>() -&gt; <span class="hljs-built_in">loop</span>(<span class="hljs-number">0</span>) <span class="hljs-keyword">end</span>),
+    <span class="hljs-type">Pid</span> ! {increment, <span class="hljs-built_in">self</span>()},
+    <span class="hljs-keyword">receive</span>
+        {value, <span class="hljs-type">N</span>} -&gt;
+            <span class="hljs-type">N</span>
+    <span class="hljs-keyword">end</span>.
+
+<span class="hljs-built_in">loop</span>(<span class="hljs-type">N</span>) -&gt;
+    <span class="hljs-keyword">receive</span>
+        {increment, <span class="hljs-type">From</span>} -&gt;
+            <span class="hljs-type">NewN</span> = <span class="hljs-type">N</span> + <span class="hljs-number">1</span>,
+            <span class="hljs-type">From</span> ! {value, <span class="hljs-type">NewN</span>},
+            <span class="hljs-built_in">loop</span>(<span class="hljs-type">NewN</span>);
+        stop -&gt;
+            <span class="hljs-literal">ok</span>
+    <span class="hljs-keyword">end</span>.</code></pre></div>
+<p>Erlang also emphasizes fault tolerance. In Erlang/OTP systems, processes are often organized under supervisors. If a worker process crashes, its supervisor can restart it according to a predefined strategy. This approach is sometimes summarized as &quot;let it crash&quot;: instead of trying to handle every possible error locally, the system isolates failures and recovers at a higher level.</p>
+<p>Erlang has the following advantages:</p>
+<ul>
+<li>Lightweight process-based concurrency</li>
+<li>Message passing without shared memory</li>
+<li>Strong fault-tolerance mechanisms</li>
+<li>Built-in support for distributed systems</li>
+<li>Hot code loading for updating running systems</li>
+<li>Suitability for soft real-time systems</li>
+<li>Functional programming with pattern matching and immutable data</li>
+</ul>
+<p>Erlang was first used in telecommunications and later extended to databases, message queues, distributed platforms, and large-scale Internet services. Well-known systems and projects related to Erlang include RabbitMQ, CouchDB, Riak, and WhatsApp&#039;s messaging infrastructure. Although Erlang has never been a mainstream general-purpose language, it remains influential because it provides a clear model for building reliable concurrent and distributed systems.</p>
+<h2 id="1990s">1990s</h2>
+<p>By the 1990s, C++ had become one of the dominant languages for building high-performance software. However, as programs grew in scale, its complexity and reliance on manual memory management became increasingly costly. Language designers began searching for safer, simpler, and more portable ways to build software, helping languages such as Python and Java gain prominence.</p>
+<p>The 1990s also brought the rapid expansion of the Internet and the World Wide Web. This new environment created demand for languages that could support interactive web pages, server-side applications, and rapid development. JavaScript and PHP became closely associated with the Web, while languages such as Python and Ruby helped popularize a more productive style of general-purpose programming.</p>
+<h3 id="python">Python</h3>
+<p>Python was created by Dutch programmer Guido van Rossum. In December 1989, he wanted to find a personal programming project, so he started to design a new programming language. In tribute to the British comedy group Monty Python, Guido van Rossum named the language Python.</p>
+<p>Python was strongly influenced by ABC. ABC emphasized readability, simple syntax, indentation-based block structure, and high-level data types. Python inherited some of these ideas, but Guido also wanted to make Python more extensible, more practical for system scripting, and easier to integrate with Unix and C programs. This relationship helps explain why Python combines beginner-friendly syntax with strong real-world engineering utility. A common slogan in the Chinese Python community, &quot;Life is short, you need Python&quot;, captures this emphasis on simplicity and productivity.</p>
+<p>Python is commonly used as an interpreted, dynamically typed, high-level language. More precisely, CPython, the reference implementation, compiles Python source code into bytecode and then executes that bytecode on a virtual machine. Python supports multiple paradigms, including procedural programming, object-oriented programming, and functional programming.</p>
+<p>The following code shows Python&#039;s support for classes and magic methods:</p>
+<div class="code-block" data-code-block="49"><div class="code-toolbar"><span class="code-language">PYTHON</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-python" data-highlighted="local"><span class="hljs-keyword">class</span> Calculator:
+	<span class="hljs-keyword">def</span> __init__(self, name=<span class="hljs-string">&quot;Calculator&quot;</span>):
+		self.name = name
+
+	<span class="hljs-keyword">def</span> __str__(self):
+		<span class="hljs-keyword">return</span> self.name
+
+	<span class="hljs-keyword">def</span> factorial(self, num):
+		<span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">0</span>:
+			<span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;num must be non-negative&quot;</span>)
+		<span class="hljs-keyword">if</span> num == <span class="hljs-number">0</span>:
+			<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+		<span class="hljs-keyword">return</span> num * self.factorial(num - <span class="hljs-number">1</span>)
+
+	<span class="hljs-keyword">def</span> sum_factorials(self, start, end):
+		total = <span class="hljs-number">0</span>
+		<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(start, end + <span class="hljs-number">1</span>):
+			total += self.factorial(i)
+		<span class="hljs-keyword">return</span> total
+
+	<span class="hljs-keyword">def</span> __call__(self, start, end):
+		<span class="hljs-keyword">return</span> self.sum_factorials(start, end)
+
+<span class="hljs-comment"># Create a Calculator object</span>
+calculator = Calculator()
+
+<span class="hljs-comment"># Calculate the sum of factorials from 1 to 10</span>
+result = calculator(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)
+
+<span class="hljs-comment"># Output the result</span>
+<span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;{calculator}: {result}&quot;</span>)</code></pre></div>
+<p>Instead of putting everything into its core, Python relies on an extensive module and package system. Its standard library is often described as &quot;batteries included&quot;, and third-party packages can be installed with <code>pip</code>, the standard package installer. <code>pip</code> interacts with the Python Package Index (PyPI), a large online repository with many Python packages available for download and installation. This approach greatly simplifies the installation and management of third-party libraries, making Python a feature-rich programming language widely used in various fields.</p>
+<p>Another highlight of Python is magic methods, also called dunder methods because their names begin and end with double underscores. The previous code is an example: <code>calculator(1, 10)</code> calls <code>calculator.__call__(1, 10)</code>, and <code>f&quot;{calculator}&quot;</code> uses <code>calculator.__str__()</code>. This approach allows custom classes to blend naturally into Python&#039;s syntax, improving code expressiveness and readability.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Operation</th><th>Magic Method</th></tr></thead><tbody><tr><td><code>A()</code> Create object</td><td><code>__new__()</code>, <code>__init__()</code></td></tr><tr><td><code>print(a)</code></td><td><code>__str__()</code></td></tr><tr><td><code>a + b</code></td><td><code>a.__add__(b)</code></td></tr><tr><td><code>a - b</code></td><td><code>a.__sub__(b)</code></td></tr><tr><td><code>a == b</code></td><td><code>a.__eq__(b)</code></td></tr><tr><td><code>a &lt; b</code></td><td><code>a.__lt__(b)</code></td></tr><tr><td><code>len(a)</code></td><td><code>a.__len__()</code></td></tr><tr><td><code>a[i]</code></td><td><code>a.__getitem__(i)</code></td></tr><tr><td><code>a[i] = x</code></td><td><code>a.__setitem__(i, x)</code></td></tr><tr><td><code>for x in a</code></td><td><code>__iter__()</code>, <code>__next__()</code></td></tr><tr><td><code>with a:</code></td><td><code>__enter__()</code>, <code>__exit__()</code></td></tr><tr><td><code>a()</code></td><td><code>a.__call__()</code></td></tr><tr><td><code>del a[i]</code></td><td><code>a.__delitem__(i)</code></td></tr><tr><td>Object finalization</td><td><code>a.__del__()</code></td></tr></tbody></table></div>
+<p>Notably, although Python is dynamically typed, it is generally described as strongly typed: a name can be rebound to objects of different types, but every object has a definite type, and Python does not freely coerce unrelated types merely to make an operation succeed. Modern Python also supports optional type hints. These annotations improve documentation, IDE assistance, and static analysis, but the Python runtime does not normally enforce them, so they do not make Python a statically typed language.</p>
+<p>Although Python was initially a relatively small language, its concise syntax and ease of maintenance helped it spread through scripting, web development, education, and scientific computing. Important products and companies, such as YouTube and Dropbox, also helped demonstrate that Python could be used in large real-world systems.</p>
+<p>Python&#039;s rise became even stronger in data science and AI. Libraries such as NumPy, SciPy, pandas, Matplotlib, scikit-learn, TensorFlow, and PyTorch made Python a convenient front end for numerical computation and machine learning. Google open-sourced TensorFlow in 2015, and PyTorch was announced by Facebook AI Research in early 2017. Together with Python&#039;s easy syntax, notebook ecosystem, and strong C/C++ extension mechanism, these tools helped Python become one of the central languages of the AI era.</p>
+<p>The transition from Python 2 to Python 3 was one of the most difficult periods in Python&#039;s history. Python 3.0, released in 2008, deliberately removed or redesigned old features instead of preserving complete backward compatibility. Improvements such as Unicode text by default, <code>print()</code> as a function, and clearer division semantics produced a cleaner language, but they also forced many applications and libraries to be ported. Python 2 and Python 3 therefore coexisted for more than a decade. Python 2 officially reached end of life on January 1, 2020; Python 2.7.18, released later that year, was its final release.</p>
+<p>The default CPython build also has a Global Interpreter Lock (GIL), which allows only one thread at a time to execute Python bytecode in a given interpreter. The main limitation is on CPU-bound pure-Python multithreading, not on every use of threads: the GIL is released around blocking I/O, and native extensions can release it while performing long-running work. Consequently, threads and <code>asyncio</code> remain useful for I/O concurrency, while multiprocessing and process pools have traditionally been used for CPU parallelism.</p>
+<p>Python 3.13 introduced an experimental free-threaded CPython build that can disable the GIL. In Python 3.14, this build entered an officially supported but still optional phase; the normal CPython build continues to use the GIL by default. Free threading enables Python threads to run simultaneously on multiple CPU cores, but it is not an automatic speedup: programs must still synchronize shared mutable state, single-threaded execution can incur overhead, and an extension module that is not ready for free threading may cause the GIL to be re-enabled. Making free-threaded Python the default remains a possible future step rather than a completed transition.</p>
+<p>Pure Python code is often slower than equivalent code in ahead-of-time compiled languages because dynamic dispatch, object handling, and interpreter execution add runtime overhead. However, the performance of a Python application is not determined by Python code alone. Libraries such as NumPy, TensorFlow, and PyTorch perform much of their heavy computation in optimized native code or on accelerators, while Python provides the high-level interface. Other options include alternative implementations with Just-In-Time compilation, such as PyPy, and tools such as Cython or Numba for optimizing selected hot paths. In practice, developers usually profile a program first and optimize only the parts that dominate its running time.</p>
+<p>Overall, Python&#039;s strength comes from a productive combination of readable syntax, rapid development, a large ecosystem, and easy integration with software written in other languages. These qualities make it especially suitable for scripting, automation, web backends, data analysis, AI research, education, and glue code. Its design taste is summarized by the Zen of Python: &quot;Beautiful is better than ugly. Explicit is better than implicit. Simple is better than complex.&quot;</p>
+<h3 id="visual-basic">Visual Basic</h3>
+<p>Visual Basic was released by Microsoft in 1991 as a rapid application development environment for Windows. Its visual design system grew out of Tripod, later code-named Ruby, a drag-and-drop shell-building tool created by Alan Cooper and his team. Microsoft combined this visual interface concept with a BASIC-derived programming language and a larger development environment. For this contribution, Cooper is often called &quot;the father of Visual Basic&quot;, although Visual Basic itself was the work of a broader Microsoft team.</p>
+<p>The word <em>Visual</em> refers primarily to the way graphical user interfaces are constructed. A programmer can place buttons, text boxes, labels, menus, and other controls onto a form, edit their properties, and then write code that responds to events such as a mouse click or a key press. The program is still written in a textual language; the visual designer reduces the amount of code required to create and position the interface. This combination of a form designer, an event-driven language, and an integrated debugger made Windows application development much more accessible.</p>
+<p>This style became an influential example of Rapid Application Development (RAD). Instead of manually calling the complex Windows API for every window and control, developers could quickly design an interface, attach event handlers, run the application, and revise it in the same environment. Visual Basic therefore became especially popular for database front ends, internal business tools, small utilities, educational programs, and custom desktop applications.</p>
+<p>The following modern VB.NET example shows the event-driven model. The controls named <code>LeftTextBox</code>, <code>RightTextBox</code>, <code>AddButton</code>, and <code>ResultLabel</code> would normally be placed on the form with the visual designer:</p>
+<div class="code-block" data-code-block="50"><div class="code-toolbar"><span class="code-language">VBNET</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-vbnet" data-highlighted="local"><span class="hljs-keyword">Option</span> <span class="hljs-keyword">Strict</span> <span class="hljs-keyword">On</span>
+
+<span class="hljs-keyword">Public</span> <span class="hljs-keyword">Class</span> CalculatorForm
+	<span class="hljs-keyword">Private</span> <span class="hljs-keyword">Sub</span> AddButton_Click(
+		sender <span class="hljs-keyword">As</span> <span class="hljs-type">Object</span>,
+		e <span class="hljs-keyword">As</span> <span class="hljs-type">EventArgs</span>
+	) <span class="hljs-keyword">Handles</span> AddButton.Click
+		<span class="hljs-keyword">Dim</span> leftValue <span class="hljs-keyword">As</span> <span class="hljs-type">Integer</span>
+		<span class="hljs-keyword">Dim</span> rightValue <span class="hljs-keyword">As</span> <span class="hljs-type">Integer</span>
+
+		<span class="hljs-keyword">If</span> <span class="hljs-keyword">Not</span> <span class="hljs-type">Integer</span>.TryParse(LeftTextBox.Text, leftValue) <span class="hljs-keyword">OrElse</span>
+		   <span class="hljs-keyword">Not</span> <span class="hljs-type">Integer</span>.TryParse(RightTextBox.Text, rightValue) <span class="hljs-keyword">Then</span>
+			<span class="hljs-built_in">MessageBox</span>.Show(<span class="hljs-string">&quot;Please enter two integers.&quot;</span>)
+			<span class="hljs-keyword">Return</span>
+		<span class="hljs-keyword">End</span> <span class="hljs-keyword">If</span>
+
+		ResultLabel.Text = (leftValue + rightValue).ToString()
+	<span class="hljs-keyword">End</span> <span class="hljs-keyword">Sub</span>
+<span class="hljs-keyword">End</span> <span class="hljs-keyword">Class</span></code></pre></div>
+<p>In this example, clicking <code>AddButton</code> raises an event and invokes <code>AddButton_Click</code>. The <code>Handles</code> clause connects the event to its handler, while <code>Option Strict On</code> prevents many implicit narrowing conversions and late-bound operations. This illustrates an important feature of the language: Visual Basic favors readable, English-like keywords, but it can still use explicit types and compile-time checking.</p>
+<p>Classic Visual Basic evolved from version 1.0 to Visual Basic 6.0, released in 1998. It supported structured and procedural programming, event-driven forms, class modules, and component-based development through the Component Object Model (COM) and ActiveX. However, it did not provide full implementation inheritance, so it is more precise to describe classic VB as object-based rather than fully object-oriented. Its flexible <code>Variant</code> type, implicit conversions, and optional variable declarations made small programs quick to write, but careless use of these features could move errors from compile time to runtime. <code>Option Explicit</code> was therefore commonly used to require variable declarations.</p>
+<p>Visual Basic 6 could produce either interpreted-style p-code or native machine code, and it was fast enough for many business applications. Its larger limitations came from tight dependence on Windows, COM registration and deployment problems, limited control over low-level resources, and difficulty maintaining very large codebases built without clear structure. Visual Basic 6 was the final classic release. Its IDE is no longer supported, although Microsoft continues to ship and support important VB6 runtime files so that many existing applications can run on supported versions of Windows.</p>
+<p>Visual Basic for Applications (VBA) belongs to the same language family but serves a different purpose. VBA is embedded in applications such as Microsoft Office and allows users to automate documents, spreadsheets, databases, and application object models. It is closely related to classic Visual Basic, but it is not Visual Basic 6 and it is not VB.NET. A macro stored in an Excel workbook, for example, runs inside Excel rather than as an independent VB6 executable.</p>
+<p>In 2002, Microsoft introduced Visual Basic .NET as part of the new .NET platform. Despite retaining familiar syntax, VB.NET was a substantial redesign rather than a fully backward-compatible upgrade. It compiles to Common Intermediate Language and runs on the Common Language Runtime (CLR), gaining garbage collection, structured exception handling, full class inheritance, interfaces, generics, delegates, asynchronous programming, and access to the same .NET libraries used by C#. Migrating a large VB6 application to VB.NET can therefore require architectural changes rather than simple translation.</p>
+<p>Microsoft describes modern Visual Basic as an approachable language with a stable design. The core .NET libraries continue to support it, and improvements to the runtime can benefit Visual Basic programs automatically. However, Microsoft does not plan to extend the language to new workload categories and generally prioritizes compatibility, Visual Studio tooling, Windows Forms, libraries, and interoperability with C#. Visual Basic is therefore no longer at the center of Microsoft&#039;s language strategy, but its influence remains important: it helped popularize event-driven GUI programming, reusable visual components, and rapid application development for a generation of Windows programmers.</p>
+<h3 id="vbscript">VBScript</h3>
+<p>VBScript, formally called Visual Basic Scripting Edition, was another member of the Visual Basic family. Microsoft introduced it in 1996 alongside Internet Explorer 3.0 and ActiveX Scripting. It was designed as a lightweight, interpreted subset of VBA that could be embedded in a host environment. Unlike classic Visual Basic, VBScript did not include a visual form designer or compile programs into independent executables; the host supplied the user interface, object model, and other external capabilities.</p>
+<p>VBScript is dynamically typed and uses <code>Variant</code> as its only data type. A <code>Variant</code> can hold a number, string, date, Boolean value, object reference, or special value such as <code>Empty</code> or <code>Null</code>, depending on context. The language supports procedures, functions, conditionals, loops, arrays, basic classes, and error handling, but it omits many of the type declarations and development tools available in VB6 or VBA. <code>Option Explicit</code> is therefore especially valuable because it catches undeclared or misspelled variable names before a script runs further.</p>
+<p>VBScript became important through three main hosts. Internet Explorer could execute it inside client-side web pages, although this tied such pages closely to Microsoft browsers and ActiveX. Classic Active Server Pages (ASP) used VBScript as its default server-side language for generating dynamic HTML and accessing COM components such as ActiveX Data Objects (ADO). Windows Script Host provided a third environment: <code>WScript.exe</code> ran scripts in a window-oriented host, while <code>CScript.exe</code> ran them from the command line. Files intended for these hosts conventionally use the <code>.vbs</code> extension.</p>
+<p>The following script uses Windows Script Host and the <code>Scripting.FileSystemObject</code> COM component to list the files in the current directory. It can be run from a command prompt with <code>cscript ListFiles.vbs</code>:</p>
+<div class="code-block" data-code-block="51"><div class="code-toolbar"><span class="code-language">VBSCRIPT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-vbscript" data-highlighted="local"><span class="hljs-keyword">Option</span> <span class="hljs-keyword">Explicit</span>
+
+<span class="hljs-keyword">Dim</span> fileSystem, folder, file
+<span class="hljs-keyword">Set</span> fileSystem = <span class="hljs-built_in">CreateObject</span>(<span class="hljs-string">&quot;Scripting.FileSystemObject&quot;</span>)
+<span class="hljs-keyword">Set</span> folder = fileSystem<span class="hljs-built_in">.GetFolder</span>(<span class="hljs-string">&quot;.&quot;</span>)
+
+<span class="hljs-built_in">WScript</span><span class="hljs-built_in">.Echo</span> <span class="hljs-string">&quot;Files in &quot;</span> &amp; folder<span class="hljs-built_in">.Path</span> &amp; <span class="hljs-string">&quot;:&quot;</span>
+
+<span class="hljs-keyword">For</span> <span class="hljs-keyword">Each</span> file <span class="hljs-keyword">In</span> folder<span class="hljs-built_in">.Files</span>
+	<span class="hljs-built_in">WScript</span><span class="hljs-built_in">.Echo</span> file<span class="hljs-built_in">.Name</span>
+<span class="hljs-keyword">Next</span></code></pre></div>
+<p>This example illustrates the role of the host. <code>CreateObject</code> creates a late-bound COM object, the file-system component supplies operations that are not built directly into the language, and <code>WScript.Echo</code> asks Windows Script Host to display output. The same mechanism allowed VBScript to automate Office applications, query WMI, modify the registry, run logon scripts, and coordinate other COM-based software. It made administrative automation accessible, but scripts also inherited the permissions of the user who ran them. Malicious email attachments and untrusted web content consequently turned this convenience into a significant security risk.</p>
+<p>VBScript gradually lost each of its major roles. JavaScript became the cross-browser standard for client-side web programming, ASP.NET replaced classic ASP in much new Microsoft web development, and PowerShell provided a richer language and object-based pipeline for Windows administration. Microsoft deprecated VBScript in October 2023. Its retirement is staged: it is being made available as a Feature on Demand before eventual removal from Windows, and Windows Server 2025 still includes it as a preinstalled Feature on Demand. Microsoft recommends PowerShell for automation and JavaScript for browser-based code, although many organizations must continue maintaining older <code>.vbs</code> scripts and classic ASP applications during the transition.</p>
+<p>The distinctions among these related technologies are therefore important. Classic Visual Basic was a standalone Windows application-development environment; VBA is embedded inside applications such as Office; VBScript is a host-dependent scripting language for Windows and legacy web environments; and VB.NET is a substantially redesigned .NET language. Similar syntax does not make their runtimes, capabilities, or deployment models interchangeable.</p>
+<h3 id="r">R</h3>
+<p>R is a statistical computing and graphics language developed by Ross Ihaka and Robert Gentleman in the early 1990s. The name comes from the initials of its developers. It was strongly influenced by the S language, which was a statistical language developed at Bell Labs. Because R is open source, extensible, and convenient for statistical modeling and data visualization, it became popular worldwide.</p>
+<p>Similar to Python, R is a dynamically typed interpreted language. The main differences are its data structures and library ecosystem. Because R was designed for data analysis, visualization, and statistical modeling, its core data structures are vectors, matrices, arrays, lists, and data frames. R also treats scalar values as vectors of length one, so it does not have a separate scalar data type.</p>
+<p>The following code is an example of R:</p>
+<div class="code-block" data-code-block="52"><div class="code-toolbar"><span class="code-language">R</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-r" data-highlighted="local"><span class="hljs-comment"># Import data set</span>
+sales_data <span class="hljs-keyword">&lt;-</span> <span class="hljs-built_in">read.csv</span>(<span class="hljs-string">&quot;sales_data.csv&quot;</span>)
+
+<span class="hljs-comment"># Calculate the average sales and profit in every region</span>
+avg_sales_by_region <span class="hljs-keyword">&lt;-</span> <span class="hljs-built_in">aggregate</span>(Sales ~ Region, data=sales_data, FUN=<span class="hljs-built_in">mean</span>)
+avg_profit_by_region <span class="hljs-keyword">&lt;-</span> <span class="hljs-built_in">aggregate</span>(Profit ~ Region, data=sales_data, FUN=<span class="hljs-built_in">mean</span>)
+
+<span class="hljs-comment"># Draw a bar chart of sales and profit</span>
+<span class="hljs-built_in">par</span>(mfrow=<span class="hljs-built_in">c</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>))
+<span class="hljs-built_in">barplot</span>(avg_sales_by_region<span class="hljs-built_in">$Sales</span>, <span class="hljs-built_in">names</span>.arg=avg_sales_by_region<span class="hljs-built_in">$Region</span>, main=<span class="hljs-string">&quot;Average Sales&quot;</span>)
+<span class="hljs-built_in">barplot</span>(avg_profit_by_region<span class="hljs-built_in">$Profit</span>, <span class="hljs-built_in">names</span>.arg=avg_profit_by_region<span class="hljs-built_in">$Region</span>, main=<span class="hljs-string">&quot;Average Profit&quot;</span>)</code></pre></div>
+<h3 id="java">Java</h3>
+<p>Java was developed at Sun Microsystems by James Gosling and other members of the Green Project. James Gosling is often called &quot;the father of Java&quot;. The language was originally called Oak and was designed for embedded consumer electronics, but it was later redirected toward Internet programming and renamed Java. In 1995, Sun publicly introduced Java and the HotJava browser, and Java quickly became associated with the rise of the Web.</p>
+<p>One of Java&#039;s most important ideas is the Java Virtual Machine (JVM). Java source code is compiled into bytecode, and bytecode can run on any platform with a compatible JVM. This design made &quot;Write once, run anywhere&quot; Java&#039;s most famous slogan. In a sense, C helped operating systems become less dependent on specific hardware, while Java tried to make application programs less dependent on specific operating systems.</p>
+<figure class="article-figure" id="figure-2">
+<a class="figure-media-link" href="images/Java-optimized.webp" aria-label="查看Figure 2原图"><img src="images/Java-optimized.webp" alt="The execution process of Java code" loading="lazy" decoding="async" style="width: 60%;"></a>
+<figcaption class="article-caption figure-caption"><a class="caption-label" href="#figure-2">Figure 2</a><span class="caption-text">The execution process of Java code</span></figcaption>
+</figure>
+<p>Java is a statically typed, class-based, object-oriented language. It keeps a C-like syntax style but removes several dangerous low-level features from C and C++. For example, Java does not expose pointer arithmetic to programmers and provides automatic garbage collection. Garbage collection reduces problems such as dangling pointers and double free errors, although memory leaks can still happen if a program keeps unnecessary references to objects.</p>
+<p>Java&#039;s OOP model is based on classes, objects, encapsulation, inheritance, interfaces, and polymorphism. Java supports single inheritance for classes, but a class can implement multiple interfaces. This design avoids some complexity of multiple inheritance while still allowing flexible abstraction.</p>
+<p>The following code shows OOP, interfaces, generics, autoboxing, and unboxing in Java:</p>
+<div class="code-block" data-code-block="53"><div class="code-toolbar"><span class="code-language">JAVA</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-java" data-highlighted="local">import java.util.ArrayList;
+import java.util.List;
+
+interface Shape {
+	<span class="hljs-type">double</span> area();
+}
+
+<span class="hljs-keyword">class</span> Circle implements Shape {
+	<span class="hljs-keyword">private</span> final <span class="hljs-type">double</span> radius;
+
+	Circle(<span class="hljs-type">double</span> radius) {
+		<span class="hljs-keyword">this</span>.radius = radius;
+	}
+
+	@Override
+	<span class="hljs-keyword">public</span> <span class="hljs-type">double</span> area() {
+		<span class="hljs-keyword">return</span> Math.PI * radius * radius;
+	}
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Main {
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> main(String[] args) {
+		List&lt;Shape&gt; shapes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+		shapes.add(<span class="hljs-keyword">new</span> Circle(<span class="hljs-number">2.0</span>));
+
+		Integer count = shapes.<span class="hljs-built_in">size</span>(); <span class="hljs-comment">// autoboxing: int -&gt; Integer</span>
+		<span class="hljs-type">int</span> n = count;                 <span class="hljs-comment">// unboxing: Integer -&gt; int</span>
+
+		<span class="hljs-keyword">for</span> (Shape shape : shapes) {
+			System.out.println(<span class="hljs-string">&quot;Area: &quot;</span> + shape.area());
+		}
+		System.out.println(<span class="hljs-string">&quot;Count: &quot;</span> + n);
+	}
+}</code></pre></div>
+<p>In Java, boxing means converting a primitive value into its corresponding wrapper object, such as <code>int</code> to <code>Integer</code>. Unboxing means converting the wrapper object back into the primitive value. Since Java 5, autoboxing and unboxing allow the compiler to insert many of these conversions automatically.</p>
+<p>Java&#039;s first major stage was the applet era. Java applets allowed web pages to contain interactive programs such as animations, small tools, and games, which was a striking experience in the 1990s. However, browser applets later declined because of security risks, performance problems, plugin complexity, and the rise of JavaScript-based web applications.</p>
+<p>Java&#039;s second major stage was enterprise software. In 1999, Sun released Java 2 Platform, Enterprise Edition (J2EE), which later became Java EE and then Jakarta EE. This platform provided specifications and APIs for building portable, multi-tier enterprise applications, including servlets, JavaServer Pages, Enterprise JavaBeans, messaging, transactions, and database access. Around Java, a large industry ecosystem emerged, including application servers, IDEs, build tools, frameworks, and enterprise vendors. After Oracle acquired Sun in 2010, Java continued to develop through the Java Community Process, OpenJDK, and the broader Java ecosystem.</p>
+<p>Java&#039;s third major stage was mobile development through Android. Android 1.0 appeared commercially in 2008, and Java became the main application language of early Android development. Android enabled Java-style programming to enter the smartphones of hundreds of millions of users. This not only continued Java&#039;s influence, but also allowed many developers to enter programming through Android. Years later, Google introduced Kotlin as a preferred Android language, but Java remains deeply connected with Android&#039;s APIs, tools, and existing codebases.</p>
+<p>It is undeniable that Java sometimes paid a performance cost compared with native C++ on C / C++ systems such as Symbian or Objective-C on early iOS. However, JVM technology improved significantly through Just-In-Time (JIT) compilation, adaptive optimization, garbage-collector improvements, and mature runtime engineering. As a result, Java became one of the most important languages for server-side systems, enterprise applications, Android development, big-data infrastructure, and long-lived business software.</p>
+<h3 id="ruby">Ruby</h3>
+<p>Ruby was created in Japan by Yukihiro &quot;Matz&quot; Matsumoto. He began designing it in 1993 and publicly released Ruby 0.95 in December 1995. Matz wanted a genuine object-oriented scripting language that combined the convenience of Perl, the object model of Smalltalk, and ideas from languages such as Lisp, Eiffel, and Ada. The name Ruby continued the gemstone theme suggested by Perl.</p>
+<p>Ruby&#039;s central design goal is programmer happiness. Matz believed that a programming language is not merely a set of instructions for a computer; it is also a medium through which people express ideas and communicate with one another. Ruby therefore favors natural-looking, expressive code, even when this means allowing several ways to solve the same problem. This philosophy differs from languages that place greater emphasis on explicitness, strictness, or a single preferred style.</p>
+<p>Ruby is a dynamically typed, garbage-collected, object-oriented language. Every value is an object, including numbers, strings, classes, and even <code>nil</code>. Method calls form the basis of most operations, so an expression such as <code>3.times</code> sends the method <code>times</code> to the integer object <code>3</code>. Ruby also supports procedural and functional styles through callable objects such as <code>Proc</code> and <code>lambda</code>, closures, recursion, and higher-order collection operations.</p>
+<p>One of Ruby&#039;s most distinctive features is the block: a piece of code that can be passed to a method. Blocks make iterators such as <code>each</code>, <code>map</code>, <code>select</code>, and <code>reduce</code> concise and readable. Ruby classes use single inheritance, but modules can be included as <em>mixins</em> to share behavior among otherwise unrelated classes. The standard <code>Enumerable</code> module is a classic example: a class that defines <code>each</code> can include <code>Enumerable</code> and automatically gain many collection methods.</p>
+<div class="code-block" data-code-block="54"><div class="code-toolbar"><span class="code-language">RUBY</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-ruby" data-highlighted="local"><span class="hljs-keyword">class</span> <span class="hljs-type">Playlist</span>
+	<span class="hljs-built_in">include</span> <span class="hljs-type">Enumerable</span>
+
+	<span class="hljs-keyword">def</span> initialize(songs)
+		<span class="hljs-meta">@songs</span> = songs
+	<span class="hljs-keyword">end</span>
+
+	<span class="hljs-keyword">def</span> each(&amp;block)
+		<span class="hljs-meta">@songs</span>.each(&amp;block)
+	<span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+playlist = <span class="hljs-type">Playlist</span>.new([
+	{ <span class="hljs-literal">title:</span> <span class="hljs-string">&quot;Imagine&quot;</span>, <span class="hljs-literal">seconds:</span> <span class="hljs-number">183</span> },
+	{ <span class="hljs-literal">title:</span> <span class="hljs-string">&quot;Bohemian Rhapsody&quot;</span>, <span class="hljs-literal">seconds:</span> <span class="hljs-number">354</span> },
+	{ <span class="hljs-literal">title:</span> <span class="hljs-string">&quot;Hotel California&quot;</span>, <span class="hljs-literal">seconds:</span> <span class="hljs-number">391</span> }
+])
+
+long_titles = playlist
+	.select { |song| song[<span class="hljs-literal">:seconds</span>] &gt;= <span class="hljs-number">300</span> }
+	.map { |song| song[<span class="hljs-literal">:title</span>] }
+
+long_titles.each <span class="hljs-keyword">do</span> |title|
+	<span class="hljs-built_in">puts</span> <span class="hljs-string">&quot;Long song: #{title}&quot;</span>
+<span class="hljs-keyword">end</span></code></pre></div>
+<p>In this example, <code>Playlist</code> only needs to implement <code>each</code>; the <code>Enumerable</code> mixin provides <code>select</code> and <code>map</code>. The expressions between braces and between <code>do</code> and <code>end</code> are blocks, while <code>#{title}</code> performs string interpolation. Methods return the value of their final expression automatically, so Ruby programs often avoid explicit <code>return</code> statements.</p>
+<p>Ruby is also unusually flexible. Classes are open and can be extended after their original definition, many operators are implemented as methods, and reflection and metaprogramming allow programs to create methods or alter behavior at runtime. These features make it possible to build readable domain-specific languages and expressive libraries. However, the same flexibility can obscure control flow, move errors to runtime, and make a heavily metaprogrammed codebase difficult to understand.</p>
+<p>For nearly a decade, Ruby was much better known in Japan than in the rest of the world. Its international breakthrough came through Ruby on Rails, a web framework created by the Danish programmer David Heinemeier Hansson and extracted from the Basecamp project. Rails was released as open source in 2004 and offered an integrated Model-View-Controller framework with database mapping, routing, templates, testing support, and code generation.</p>
+<p>Rails is strongly associated with two principles: <em>Convention over Configuration</em> and <em>Don&#039;t Repeat Yourself</em> (DRY). Instead of requiring developers to configure every relationship manually, Rails adopts consistent naming and project conventions. Its generators and scaffolding can quickly create the basic structure of a database-backed application, allowing a small team to build and revise a product rapidly. This approach made Rails especially attractive to startups and influenced many later web frameworks. Basecamp originated Rails, while GitHub also began as a Rails application and grew into a very large Rails codebase.</p>
+<p>Rails helped popularize productive full-stack web development, RESTful routing, database migrations, automated testing, and an agile style of rapid iteration. It showed that a framework could provide an opinionated, coherent development experience rather than merely a loose collection of libraries.</p>
+<p>Ruby and Rails also developed a reputation for performance and concurrency limitations. In the reference implementation, commonly called CRuby or MRI, a Global VM Lock traditionally allows only one thread in a process to execute Ruby code at a time. Threads can still be effective for I/O-bound work, while multiple processes, background jobs, native extensions, and alternative Ruby implementations provide other forms of concurrency and parallelism. Dynamic dispatch and extensive metaprogramming can also make Ruby harder to optimize than a statically compiled language.</p>
+<p>Twitter illustrates both sides of this tradeoff. Ruby on Rails allowed a very small early team to develop the service quickly, but Twitter eventually outgrew its monolithic architecture. As its traffic and engineering organization expanded, it moved many core services to a service-oriented architecture running primarily on the JVM, with Scala playing an important role. This transition reflected requirements for throughput, concurrency, fault tolerance, and independent service ownership; it was more complex than simply proving that &quot;Ruby cannot scale.&quot; Large Rails systems such as GitHub demonstrate that Ruby applications can scale when supported by careful database design, caching, background processing, horizontal scaling, and disciplined engineering.</p>
+<p>Ruby is no longer at the center of every new web project, but its influence is much greater than its current level of adoption might suggest. It made programmer happiness an explicit language-design goal, demonstrated the expressive power of blocks and internal domain-specific languages, and helped Rails redefine expectations for web-framework productivity. Ruby remains a practical language for web applications, automation, command-line tools, and projects that value concise and readable code.</p>
+<h3 id="command-prompt-cmd">Command Prompt (CMD)</h3>
+<p>In 1981, <code>COMMAND.COM</code> appeared as the default command interpreter of MS-DOS. It was also used in several DOS-compatible systems and early Windows environments.</p>
+<p>Batch processing refers to scripts composed of a series of CMD commands and control logic. Their file extension is typically <code>.bat</code> or <code>.cmd</code>. Similar to shell in Unix systems, CMD is a commonly used command-line interpreter in Windows systems, allowing operating system management and simple automation through batch scripts.</p>
+<p>Batch script syntax inherits some characteristics from early command-line systems and BASIC-like control flow. For example, many commands are short words such as <code>REN</code>, <code>DIR</code>, <code>DEL</code>, and <code>VOL</code>; variables are defined and assigned using the <code>SET</code> command; subroutines are called using the <code>CALL</code> command; and <code>REM</code> or <code>::</code> is often used for comments. Due to its ease of use, many Windows users and engineers have experience writing batch scripts. CMD was originally designed for compatibility with DOS-style command processing, so batch syntax has changed only slowly. Therefore, writing Windows batch scripts can feel like programming in the language of an older era.</p>
+<p>As operating systems evolved, the limitations of batch processing became increasingly apparent. To provide a more powerful and flexible command-line interpreter, Microsoft introduced PowerShell in the 2000s. PowerShell is a command-line shell and scripting language based on .NET, offering richer functionality and a more modern syntax. Starting with Windows 10 build 14971, released in November 2016, PowerShell replaced CMD as the default shell in the Win+X menu, although CMD remains available.</p>
+<h3 id="z-shell-zsh">Z shell (Zsh)</h3>
+<p>Z shell, normally invoked as <code>zsh</code>, was originally written by Paul Falstad while he was a student at Princeton University. Its first version appeared in 1990. Zsh was created after the major Unix shell families had already developed distinct strengths: Bourne-style shells provided a practical scripting language, KornShell added more powerful programming and editing facilities, and tcsh emphasized a rich interactive experience. Zsh brought many of these ideas together while adding its own expansion, completion, and customization systems.</p>
+<p>Among the traditional shells, Zsh most closely resembles KornShell. It supports Bourne-style pipelines, redirection, functions, parameter expansion, arithmetic, conditionals, and loops, while also providing arrays, associative arrays, floating-point arithmetic, autoloaded functions, coprocesses, and many advanced expansion operators. It can emulate <code>sh</code> or <code>ksh</code> through invocation modes or the <code>emulate</code> command, but its normal operating mode is neither completely POSIX-compatible nor identical to Bash or ksh.</p>
+<p>This distinction matters when writing scripts. A script that uses Zsh-specific syntax should begin with a Zsh shebang rather than <code>#!/bin/sh</code>. Conversely, a script intended to be portable should be tested by the shell named in its shebang instead of assuming that Zsh will behave exactly like another shell. For example, Zsh arrays are indexed from one by default, unquoted scalar expansion does not normally perform the implicit word splitting familiar from traditional <code>sh</code>, and an unmatched glob pattern normally produces an error instead of remaining unchanged.</p>
+<p>Zsh is especially well known for interactive use. Its Zsh Line Editor (ZLE) supports Emacs- and vi-style keymaps, user-defined editing widgets, multiline editing, history search, and configurable key bindings. The shell also provides spelling correction, directory stacks, named directories, sophisticated prompts, command timing, and extensive option controls. Many of these facilities are built into Zsh itself rather than requiring an external terminal emulator.</p>
+<p>Its programmable completion system is one of its most distinctive features. Completion can understand command options, subcommands, file types, process identifiers, host names, users, variables, archive contents, version-control references, and other command-specific contexts. The <code>compinit</code> function initializes this system, while <code>zstyle</code> rules control details such as grouping, descriptions, matching, colors, menus, and sorting. Completion definitions are written as shell functions, so users and software packages can extend the system without modifying the shell executable.</p>
+<p>Zsh also provides unusually powerful filename generation, commonly called globbing. Recursive patterns such as <code>**/*.md</code> can search an entire directory tree, while <em>glob qualifiers</em> can restrict matches by file type, permissions, ownership, size, modification time, or other metadata. The following script recursively finds regular Markdown files and separates each path into its directory and filename components:</p>
+<div class="code-block" data-code-block="55"><div class="code-toolbar"><span class="code-language">ZSH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-zsh" data-highlighted="local"><span class="hljs-comment">#!/bin/zsh</span>
+
+<span class="hljs-built_in">setopt</span> null_glob
+
+markdown_files=(**/*.md(.))
+
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;${markdown_files[@]}&quot;</span>; <span class="hljs-keyword">do</span>
+	<span class="hljs-built_in">print</span> -r -- <span class="hljs-string">&quot;Directory: ${file:h}&quot;</span>
+	<span class="hljs-built_in">print</span> -r -- <span class="hljs-string">&quot;File:      ${file:t}&quot;</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">print</span> -r -- <span class="hljs-string">&quot;${#markdown_files} Markdown file(s) found.&quot;</span></code></pre></div>
+<p>In the pattern <code>**/*.md(.)</code>, <code>**</code> performs recursive matching and the <code>.</code> qualifier keeps only regular files. The array assignment stores all matches without requiring an external <code>find</code> command. The modifiers <code>:h</code> and <code>:t</code> return the head and tail of a path, while <code>${#markdown_files}</code> returns the number of array elements. <code>null_glob</code> makes a pattern with no matches disappear instead of raising Zsh&#039;s normal unmatched-pattern error.</p>
+<p>Zsh uses several startup files with different responsibilities. <code>.zshenv</code> is read for every Zsh invocation and should contain only environment settings that truly apply everywhere. <code>.zprofile</code> and <code>.zlogin</code> are associated with login shells, <code>.zshrc</code> configures interactive shells, and <code>.zlogout</code> runs when a login shell exits. Interactive aliases, completion setup, prompts, and key bindings normally belong in <code>.zshrc</code> rather than <code>.zshenv</code>, because non-interactive scripts should not pay for or be affected by interactive configuration.</p>
+<p>The following is a small <code>.zshrc</code> example:</p>
+<div class="code-block" data-code-block="56"><div class="code-toolbar"><span class="code-language">ZSH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-zsh" data-highlighted="local">HISTFILE=<span class="hljs-string">&quot;$HOME/.zsh_history&quot;</span>
+HISTSIZE=<span class="hljs-number">10000</span>
+SAVEHIST=<span class="hljs-number">10000</span>
+
+<span class="hljs-built_in">setopt</span> hist_ignore_dups
+<span class="hljs-built_in">setopt</span> share_history
+<span class="hljs-built_in">setopt</span> auto_cd
+
+<span class="hljs-built_in">autoload</span> -Uz <span class="hljs-built_in">compinit</span>
+<span class="hljs-built_in">compinit</span>
+
+<span class="hljs-built_in">bindkey</span> -e
+PROMPT=<span class="hljs-string">&#039;%F{cyan}%n@%m%f:%F{blue}%~%f %# &#039;</span></code></pre></div>
+<p>This configuration saves command history, avoids immediately repeated entries, shares history among concurrent sessions, permits a directory name to be entered without explicitly typing <code>cd</code>, initializes programmable completion, selects Emacs-style key bindings, and defines a colored prompt. Zsh&#039;s option system makes such behavior explicit, although a large number of interacting options can also make two users&#039; Zsh environments behave quite differently.</p>
+<p>Zsh acquired a large ecosystem of themes, plugins, prompt engines, and configuration frameworks. These tools can make Git status, language environments, command suggestions, syntax highlighting, and other information available directly at the prompt. They also introduce tradeoffs: loading many plugins can slow shell startup, configuration frameworks may hide how the underlying shell works, and third-party plugins execute with the user&#039;s permissions and must therefore be treated as code rather than harmless decoration.</p>
+<p>Modern macOS uses Zsh as its default interactive shell, which significantly increased its visibility beyond its traditional Unix user base. Zsh is also available on Linux and other Unix-like systems, although Bash remains more common as a default shell on many of them. Because a login shell and a system script interpreter serve different roles, selecting Zsh for interactive use does not require rewriting portable <code>/bin/sh</code> scripts in Zsh.</p>
+<p>Zsh&#039;s main strength is the combination of a powerful interactive environment with a capable scripting language. Its completion engine, line editor, globbing language, parameter transformations, and prompt system reward users who spend substantial time in a terminal. The cost is a large feature set, complex documentation, and subtle incompatibilities with other shells. Historically, Zsh represents an attempt to unify the best ideas of the Bourne, Korn, Bash, and C-shell traditions without limiting itself to exact compatibility with any one of them.</p>
+<h3 id="haskell">Haskell</h3>
+<p>By the late 1980s, researchers had created more than a dozen non-strict, purely functional languages. Although these languages shared many ideas, their differences made it difficult to exchange research or build a common ecosystem. At the Functional Programming Languages and Computer Architecture conference in 1987, a committee was formed to design an open standard that could serve research, education, and practical software development. The result was Haskell, named after the American logician Haskell B. Curry. The first Haskell report appeared in 1990, followed later by the influential Haskell 98 and Haskell 2010 standards.</p>
+<p>Haskell is a general-purpose, statically typed, purely functional programming language. In ordinary Haskell code, a function cannot secretly change global state, modify its arguments, print output, or depend on an external value that is absent from its type. A pure function therefore produces the same result from the same input, provided that the computation terminates. This property is called <em>referential transparency</em>: an expression can be replaced by its value without changing the behavior of the program.</p>
+<p>Referential transparency makes programs easier to reason about, test, refactor, and use safely in concurrent or parallel settings. Since data is immutable by default, many bugs caused by unexpected changes to shared state cannot occur. However, purity does not mean that Haskell programs cannot read files, access networks, update databases, or display user interfaces. Instead, effectful computations are represented explicitly by types and kept separate from pure calculations.</p>
+<p>Like ML, Haskell has a strong static type system with type inference. Programmers often do not need to write every type because the compiler can infer it, but explicit type signatures are commonly used as readable documentation. Haskell also provides algebraic data types and pattern matching, which make it natural to describe data as a precise set of alternatives and then handle each alternative separately.</p>
+<p>Haskell&#039;s <em>type classes</em> provide principled function overloading. A type class describes a set of operations that a type must implement, while an instance supplies those operations for a particular type. For example, the <code>Eq</code> class represents types whose values can be compared for equality, and <code>Show</code> represents types that can be converted to readable text. Despite the similar name, a Haskell type class is not an object-oriented class: it is closer to an interface that can be implemented for existing types without changing their definitions.</p>
+<p>The following example demonstrates algebraic data types, pattern matching, higher-order functions, type-class constraints, and lazy lists:</p>
+<div class="code-block" data-code-block="57"><div class="code-toolbar"><span class="code-language">HASKELL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-haskell" data-highlighted="local"><span class="hljs-keyword">data</span> <span class="hljs-type">Shape</span> a
+	= <span class="hljs-type">Circle</span> a
+	<span class="hljs-keyword">|</span> <span class="hljs-type">Rectangle</span> a a
+	<span class="hljs-keyword">deriving</span> (<span class="hljs-type">Show</span>)
+
+area <span class="hljs-keyword">::</span> <span class="hljs-type">Floating</span> a <span class="hljs-keyword">=&gt;</span> <span class="hljs-type">Shape</span> a <span class="hljs-keyword">-&gt;</span> a
+area (<span class="hljs-type">Circle</span> radius) = <span class="hljs-built_in">pi</span> * radius ^ <span class="hljs-number">2</span>
+area (<span class="hljs-type">Rectangle</span> width height) = width * height
+
+totalArea <span class="hljs-keyword">::</span> <span class="hljs-type">Floating</span> a <span class="hljs-keyword">=&gt;</span> [<span class="hljs-type">Shape</span> a] <span class="hljs-keyword">-&gt;</span> a
+totalArea = <span class="hljs-built_in">sum</span> . <span class="hljs-built_in">map</span> area
+
+naturalNumbers <span class="hljs-keyword">::</span> [<span class="hljs-type">Integer</span>]
+naturalNumbers = [<span class="hljs-number">1</span> ..]
+
+firstTenEvenSquares <span class="hljs-keyword">::</span> [<span class="hljs-type">Integer</span>]
+firstTenEvenSquares = <span class="hljs-built_in">take</span> <span class="hljs-number">10</span>
+	[n ^ <span class="hljs-number">2</span> <span class="hljs-keyword">|</span> n <span class="hljs-keyword">&lt;-</span> naturalNumbers, <span class="hljs-built_in">even</span> n]
+
+main <span class="hljs-keyword">::</span> <span class="hljs-type">IO</span> ()
+main = <span class="hljs-keyword">do</span>
+	<span class="hljs-built_in">print</span> (totalArea [<span class="hljs-type">Circle</span> <span class="hljs-number">2</span>, <span class="hljs-type">Rectangle</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span>])
+	<span class="hljs-built_in">print</span> firstTenEvenSquares</code></pre></div>
+<p>The <code>Shape</code> declaration defines two possible constructors, and <code>area</code> uses pattern matching to handle them. The constraint <code>Floating a =&gt;</code> means that the function works with any type <code>a</code> that implements the <code>Floating</code> type class. The definition <code>totalArea = sum . map area</code> composes functions rather than updating an accumulator manually.</p>
+<p>The list <code>[1 ..]</code> is infinite, but the program does not attempt to construct it all at once. Haskell uses non-strict semantics and normally implements them through <em>lazy evaluation</em>, also called call by need. An expression is evaluated only when its value is required, and its result is then shared rather than recomputed. Because <code>take 10</code> requests only ten matching elements, the program evaluates only as much of <code>naturalNumbers</code> as it needs.</p>
+<p>Laziness makes infinite data structures, modular pipelines, and separation between data generation and consumption practical. It also allows short-circuiting computations to avoid unnecessary work. However, laziness can make time and memory behavior harder to predict. Unevaluated computations, called <em>thunks</em>, occupy memory and can retain data longer than expected, producing a space leak. Performance-sensitive Haskell programs therefore sometimes use strict data fields, strict folds, or explicit evaluation controls.</p>
+<p>The concept most famously associated with Haskell is the <em>monad</em>. A monad is an abstraction for composing computations in which each step carries some kind of context. The context might represent possible failure with <code>Maybe</code>, multiple possible results with lists, state transformation with <code>State</code>, or interaction with the outside world through <code>IO</code>. Monads are not limited to I/O, and it is misleading to describe every monad simply as a container for side effects.</p>
+<p>A monad provides an operation, commonly written <code>&gt;&gt;=</code>, that connects one contextual computation to the next. Haskell&#039;s <code>do</code> notation is readable syntactic sugar for such sequencing. For example, <code>Maybe</code> can stop a sequence automatically when a step returns <code>Nothing</code>:</p>
+<div class="code-block" data-code-block="58"><div class="code-toolbar"><span class="code-language">HASKELL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-haskell" data-highlighted="local">safeDivide <span class="hljs-keyword">::</span> <span class="hljs-type">Double</span> <span class="hljs-keyword">-&gt;</span> <span class="hljs-type">Double</span> <span class="hljs-keyword">-&gt;</span> <span class="hljs-type">Maybe</span> <span class="hljs-type">Double</span>
+safeDivide _ <span class="hljs-number">0</span> = <span class="hljs-literal">Nothing</span>
+safeDivide x y = <span class="hljs-type">Just</span> (x / y)
+
+calculateRatio <span class="hljs-keyword">::</span> <span class="hljs-type">Double</span> <span class="hljs-keyword">-&gt;</span> <span class="hljs-type">Double</span> <span class="hljs-keyword">-&gt;</span> <span class="hljs-type">Double</span> <span class="hljs-keyword">-&gt;</span> <span class="hljs-type">Maybe</span> <span class="hljs-type">Double</span>
+calculateRatio total count scale = <span class="hljs-keyword">do</span>
+	average <span class="hljs-keyword">&lt;-</span> safeDivide total count
+	safeDivide average scale</code></pre></div>
+<p>If either division fails, the entire result is <code>Nothing</code>; otherwise it is <code>Just</code> the calculated value. The same sequencing pattern can work with other monads while giving <code>&gt;&gt;=</code> a meaning appropriate to each context. This ability to separate the structure of a computation from its underlying plumbing is one reason monads are useful for parsers, stateful algorithms, error handling, concurrency libraries, and domain-specific languages.</p>
+<p>The <code>IO</code> type applies this idea to observable effects. A value of type <code>IO a</code> describes an action that may interact with the outside world and eventually produce a value of type <code>a</code>. The runtime executes the action assigned to <code>main</code>; evaluating an arbitrary pure expression does not perform I/O. In the first example, <code>main :: IO ()</code> clearly marks the effectful boundary, while <code>area</code>, <code>totalArea</code>, and the list transformations remain pure.</p>
+<p>The Glasgow Haskell Compiler (GHC) became the dominant Haskell implementation. In addition to compiling the standardized language, GHC has served as a platform for research features such as generalized algebraic data types, type families, advanced type-class extensions, software transactional memory, and sophisticated runtime parallelism. Some successful experiments later influenced other languages, while others remain primarily useful to specialists.</p>
+<p>Haskell has a particularly strong reputation in programming-language research, compiler construction, formal methods, and education. It is also used in production for financial systems, developer tools, backend services, data processing, and other domains where correctness and abstraction are valuable. Nevertheless, its industrial community is much smaller than those of Java, Python, or JavaScript. Its learning curve, unfamiliar abstractions, smaller library and hiring ecosystems, and the performance subtleties of laziness can make adoption difficult for ordinary product teams.</p>
+<p>Haskell&#039;s historical influence is much greater than its market share. It helped establish purely functional programming as a practical model, introduced type classes, and demonstrated how algebraic data types, pattern matching, explicit effects, and powerful type inference can work together in a general-purpose language. Ideas developed or popularized in Haskell can now be seen across languages such as Scala, Rust, Swift, and modern functional extensions to mainstream languages. Haskell remains both a useful programming language and a laboratory for exploring what future programming languages might become.</p>
+<h2 id="2000s">2000s</h2>
+<h3 id="cmake">CMake</h3>
+<p>CMake was created in 2000 by Bill Hoffman at Kitware for the Insight Toolkit project, which needed a portable way to build software across Unix, Windows, and Mac. It later became a widely used tool for configuring C and C++ projects. See the <a href="https://cmake.org/history/" target="_blank" rel="noopener noreferrer">CMake history</a> for its origins.</p>
+<p>For a project with several source files, CMake describes how to build the program in a <code>CMakeLists.txt</code> file. It configures and generates a build system for the chosen platform and compiler; the C compiler still compiles the <code>.c</code> files, and the linker combines their object files. To build the three-file example in the <a href="#c">C</a> section, place this <code>CMakeLists.txt</code> beside <code>math_utils.h</code>, <code>math_utils.c</code>, and <code>main.c</code>:</p>
+<div class="code-block" data-code-block="59"><div class="code-toolbar"><span class="code-language">CMAKE</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cmake" data-highlighted="local"><span class="hljs-built_in">cmake_minimum_required</span>(<span class="hljs-keyword">VERSION</span> <span class="hljs-number">3.20</span>)
+<span class="hljs-built_in">project</span>(MathExample <span class="hljs-keyword">LANGUAGES</span> C)
+
+<span class="hljs-built_in">add_executable</span>(math_example main.c math_utils.c)</code></pre></div>
+<p><code>add_executable</code> lists both implementation files because each must be compiled. The header is included from those files and does not need to be compiled separately. From the project directory, configure and build with:</p>
+<div class="code-block" data-code-block="60"><div class="code-toolbar"><span class="code-language">SH</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-bash" data-highlighted="local"><span class="hljs-built_in">cmake</span> <span class="hljs-meta">-S</span> . <span class="hljs-meta">-B</span> build
+<span class="hljs-built_in">cmake</span> <span class="hljs-meta">--build</span> build</code></pre></div>
+<p>The first command generates build files in <code>build</code>; the second compiles and links the executable. Later builds recompile changed source files, and CMake regenerates build rules when the project configuration changes. See the <a href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html" target="_blank" rel="noopener noreferrer">official CMake tutorial</a> for libraries, include directories, and larger projects.</p>
+<h3 id="csharp">C#</h3>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"1950s","level":1,"text":"1950s"},{"id":"fortran","level":2,"text":"FORTRAN"},{"id":"lisp","level":2,"text":"Lisp"},{"id":"algol","level":2,"text":"ALGOL"},{"id":"cobol","level":2,"text":"COBOL"},{"id":"1960s","level":1,"text":"1960s"},{"id":"cpl-bcpl","level":2,"text":"CPL/BCPL"},{"id":"basic","level":2,"text":"BASIC"},{"id":"simula","level":2,"text":"Simula"},{"id":"b","level":2,"text":"B"},{"id":"1970s","level":1,"text":"1970s"},{"id":"pascal","level":2,"text":"Pascal"},{"id":"smalltalk","level":2,"text":"Smalltalk"},{"id":"c","level":2,"text":"C"},{"id":"unix-shell-1","level":2,"text":"Unix Shell 1"},{"id":"ml","level":2,"text":"ML"},{"id":"modula","level":2,"text":"Modula"},{"id":"prolog","level":2,"text":"Prolog"},{"id":"sql","level":2,"text":"SQL"},{"id":"sas","level":2,"text":"SAS"},{"id":"scheme","level":2,"text":"Scheme"},{"id":"1980s","level":1,"text":"1980s"},{"id":"cplusplus","level":2,"text":"C++"},{"id":"objectivec","level":2,"text":"Objective-C"},{"id":"perl","level":2,"text":"Perl"},{"id":"unix-shell-2","level":2,"text":"Unix Shell 2"},{"id":"ada","level":2,"text":"Ada"},{"id":"matlab","level":2,"text":"MATLAB"},{"id":"abc","level":2,"text":"ABC"},{"id":"erlang","level":2,"text":"Erlang"},{"id":"1990s","level":1,"text":"1990s"},{"id":"python","level":2,"text":"Python"},{"id":"visual-basic","level":2,"text":"Visual Basic"},{"id":"vbscript","level":2,"text":"VBScript"},{"id":"r","level":2,"text":"R"},{"id":"java","level":2,"text":"Java"},{"id":"ruby","level":2,"text":"Ruby"},{"id":"command-prompt-cmd","level":2,"text":"Command Prompt (CMD)"},{"id":"z-shell-zsh","level":2,"text":"Z shell (Zsh)"},{"id":"haskell","level":2,"text":"Haskell"},{"id":"2000s","level":1,"text":"2000s"},{"id":"cmake","level":2,"text":"CMake"},{"id":"csharp","level":2,"text":"C#"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -1838,7 +3073,7 @@ The first command generates build files in `build`; the second compiles and link
         </nav>
     </footer>
 
-    <script src="../scripts/markdown-article.js?v=20260921-cmake-highlight-2"></script>
-    <script src="../scripts/comments.js"></script>
+    <script src="../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

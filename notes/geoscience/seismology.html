@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Seismology, with explanations, derivations, and examples.">
     <meta property="og:title" content="Seismology | Yang">
+    <meta property="og:description" content="Study notes by Yang on Seismology, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/geoscience/seismology.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Seismology | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Seismology, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Seismology | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../geoscience.html" class="article-back-link">&larr; Geoscience</a>
             <h1>Seismology</h1>
@@ -56,7 +61,87 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="the-core-questions">The Core Questions</h2>
+<ul>
+<li>How does a natural earthquake happen? How to conduct quantitative research in seismology?</li>
+<li>Why do earthquakes occur? What&#039;s the physics mechanism of a natural earthquake?</li>
+<li>What&#039;s the difference in behavior when the elastic wave spreads in the different media? How to research the tectonics of the Earth through elastic waves? What&#039;s Earth inside like?</li>
+<li>Could the natural earthquake be forecast? How to improve the resolution, precision, and accuracy of the Earth inside?</li>
+</ul>
+<ul>
+<li>Macroseismic Observation</li>
+<li>Seismometry</li>
+<li>Seismological Observation and Data Processing</li>
+<li>Seismicity</li>
+<li>Seismic Risk Evaluation</li>
+<li>Theory of Seismic Wave Propagation</li>
+<li>the Structure of the Earth&#039;s and Planetary Interior</li>
+<li>Seismic Source Theory</li>
+<li>Seismogenesis, Earth Mechanism, Physics of Earthquake Foci</li>
+<li>Model Seismology &amp; Field Test</li>
+<li>Earthquake Prediction and Forecasting</li>
+</ul>
+<p>Simple model of an earthquake:</p>
+<ul>
+<li>Epicentre, Epicentral distance</li>
+<li>Earthquake parameter:</li>
+<li>Origen time ($T_0$)</li>
+<li>Latitude and Longitude of the epicentre ($\lambda ,\varphi$)</li>
+<li>Focal depth ($h$)</li>
+<li>Magnitude ($M$)</li>
+</ul>
+<p>Ground vibration is a vector, so we need to describe it by three parameters. <img src="../attachments/Screenshot%202026-05-10%20at%2022.13.03-optimized.webp" alt="Screenshot 2026-05-10 at 22.13.03" loading="lazy" decoding="async" style="width: min(100%, 552px);"></p>
+<p>Chandler Wobble</p>
+<h2 id="macroseismic-observation">Macroseismic Observation</h2>
+<p><img src="../attachments/Screenshot%202026-05-12%20at%2013.33.42.png" alt="Screenshot 2026-05-12 at 13.33.42" loading="lazy" decoding="async" style="width: min(100%, 462px);"> $$-kz(t)-D\dot{z}(t)-mg=m[\ddot{z}(t)+\ddot{u}(t)]$$</p>
+<h3 id="earthquake-magnitude">Earthquake Magnitude</h3>
+<p>In 1935, Richter found that if we draw a diagram of the logarithm of the maximum amplitude, then we have$$\lg A_1-\lg A_2 \approx Const$$ It is virtually not related to the epicentral distance $\Delta$. <img src="../attachments/Screenshot%202026-05-10%20at%2023.39.43-optimized.webp" alt="Screenshot 2026-05-10 at 23.39.43" loading="lazy" decoding="async" style="width: min(100%, 450px);"> As a result, the magnitude can be defined as $$M_L=\lg A-\lg A_0,A_0=10^{-6}\text{m}$$It is called <span class="obsidian-red">local magnitude</span>.</p>
+<h3 id="seismic-moment">Seismic Moment</h3>
+<p>Relationship between the energy of the earthquake and the magnitude:$$\lg E=4.8+1.5M$$The unit of the energy is Joule</p>
+<p><span class="obsidian-red">Seismic Moment </span> $$M_0=\mu \bar{D} A$$where $\mu$ is the shear modulus, $\bar{D}$ is the average slip when it is broken, and $A$ is the area of the fracture surface</p>
+<p>Assume that $\sigma$ is the stress of the fracture surface, then$$\bar{\sigma}=\sigma/2$$As a result,$$\Delta W\approx \bar{\sigma}\bar{D}A=\frac{\sigma}{2}\bar{D} A=\frac{\Delta\sigma M_0}{2\mu}$$Estimate that,$$\Delta \sigma \approx 4 \times 10^6 Pa$$$$\mu \approx 4 \times 10^{10} Pa$$Therefore, we can solve the Moment magnitude$$M_W=\frac{2}{3}(\lg \Delta W-4.8)=\frac{2}{3}(\lg \frac{\Delta\sigma M_0}{2\mu}-4.8)=\frac{2}{3}\lg M_0-6.07$$</p>
+<h2 id="transportation-of-the-seismic-wave-and-tectonics-of-the-earth-inside">Transportation of the Seismic Wave and Tectonics of the Earth Inside</h2>
+<p><img src="../attachments/Screenshot%202026-05-12%20at%2013.13.07-optimized.webp" alt="Screenshot 2026-05-12 at 13.13.07" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>In <a href="../physics/mechanism.html#p-wave-and-s-wave">P Wave and S Wave</a>, we have$$v_p=\sqrt{\frac{\kappa +4\mu/3}{\rho}}$$$$v_s=\sqrt{\frac{\mu}{\rho}}$$ <span class="obsidian-red">Seismic rays</span> travel along great circles.</p>
+<p><img src="../attachments/Screenshot%202026-05-12%20at%2013.18.13-optimized.webp" alt="Screenshot 2026-05-12 at 13.18.13" loading="lazy" decoding="async" style="width: min(100%, 438px);"></p>
+<p><img src="../attachments/Screenshot%202026-05-12%20at%2013.19.10-optimized.webp" alt="Screenshot 2026-05-12 at 13.19.10" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p><a href="https://www.isc.ac.uk/standards/phases/" target="_blank" rel="noopener noreferrer">Seismic phase</a></p>
+<p>Scattering and finite-frequency effects</p>
+<h2 id="physical-property-and-chemical-composition-of-the-earth-inside">Physical Property and Chemical Composition of the Earth Inside</h2>
+<p>crust-mantle boundary / <span class="obsidian-red">Moho boundary</span> (Andrija Mohorovičić) <img src="../attachments/Screenshot%202026-05-12%20at%2013.29.03-optimized.webp" alt="Screenshot 2026-05-12 at 13.29.03" loading="lazy" decoding="async" style="width: min(100%, 450px);"> mantle-core boundary / <span class="obsidian-red">Gutenberg boundary</span> (Beno Gutenberg) <img src="../attachments/Screenshot%202026-05-12%20at%2013.30.20-optimized.webp" alt="Screenshot 2026-05-12 at 13.30.20" loading="lazy" decoding="async" style="width: min(100%, 343px);"></p>
+<p><img src="../attachments/Screenshot%202026-05-11%20at%2022.08.55-optimized.webp" alt="Screenshot 2026-05-11 at 22.08.55" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Seismic Discontinuities <img src="../attachments/Screenshot%202026-05-27%20at%2022.54.52-optimized.webp" alt="Screenshot 2026-05-27 at 22.54.52" loading="lazy" decoding="async" style="width: min(100%, 450px);">(Deuss &amp; Woodhouse, 2002)</p>
+<h2 id="seismic-wave-excitation-and-focal-mechanism">Seismic Wave Excitation and Focal Mechanism</h2>
+<h2 id="main-features-and-causal-hypothesis-of-the-earthquake">Main Features and Causal Hypothesis of the Earthquake</h2>
+<p>Guttenberg-Richter law$$\lg N=a-bM$$N is the number of earthquakes of magnitude over M.</p>
+<p>Beach ball representation of focal mechanism solution</p>
+<p>Earthquake Sequence:</p>
+<ul>
+<li>Mainshock (MS) - Aftershock</li>
+<li>Foreshock - Mainshock (MS) - Aftershock</li>
+<li>Swarm</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-11%20at%2023.09.26.png" alt="Screenshot 2026-05-11 at 23.09.26" loading="lazy" decoding="async" style="width: min(100%, 473px);"></p>
+<ul>
+<li>Why do foreshocks occur?</li>
+<li>Are foreshocks universal?</li>
+<li>What patterns do aftershocks follow?</li>
+<li>Can aftershocks be predicted?</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-11%20at%2023.12.55-optimized.webp" alt="Screenshot 2026-05-11 at 23.12.55" loading="lazy" decoding="async" style="width: min(100%, 450px);"> <span class="obsidian-red">Omori law</span>$$N(t)=\frac{k}{(t+c)^p}$$</p>
+<ul>
+<li>$N$: number of earthquakes in unit time</li>
+<li>$k$: efficiency of the aftershock</li>
+<li>$t$: time</li>
+<li>$p$: attenuation rate</li>
+<li>$c$: const</li>
+</ul>
+<p><span class="obsidian-red">Bath’s law</span>: The difference between the maximum magnitude of the aftershock and the mainshock is approximately $1.2$, which is unrelated to the mainshock magnitude.</p>
+<h2 id="prediction-of-the-earthquake">Prediction of the Earthquake</h2>
+<p><span class="obsidian-red">Elastic Rebound Theory</span> <img src="../attachments/Screenshot%202026-05-11%20at%2022.50.15-optimized.webp" alt="Screenshot 2026-05-11 at 22.50.15" loading="lazy" decoding="async" style="width: min(100%, 450px);"><img src="../attachments/Screenshot%202026-05-27%20at%2022.16.43-optimized.webp" alt="Screenshot 2026-05-27 at 22.16.43" loading="lazy" decoding="async" style="width: min(100%, 483px);"></p>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"the-core-questions","level":1,"text":"The Core Questions"},{"id":"macroseismic-observation","level":1,"text":"Macroseismic Observation"},{"id":"earthquake-magnitude","level":2,"text":"Earthquake Magnitude"},{"id":"seismic-moment","level":2,"text":"Seismic Moment"},{"id":"transportation-of-the-seismic-wave-and-tectonics-of-the-earth-inside","level":1,"text":"Transportation of the Seismic Wave and Tectonics of the Earth Inside"},{"id":"physical-property-and-chemical-composition-of-the-earth-inside","level":1,"text":"Physical Property and Chemical Composition of the Earth Inside"},{"id":"seismic-wave-excitation-and-focal-mechanism","level":1,"text":"Seismic Wave Excitation and Focal Mechanism"},{"id":"main-features-and-causal-hypothesis-of-the-earthquake","level":1,"text":"Main Features and Causal Hypothesis of the Earthquake"},{"id":"prediction-of-the-earthquake","level":1,"text":"Prediction of the Earthquake"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -98,7 +183,7 @@ Simple model of an earthquake:
 	- Magnitude ($M$)
 
 Ground vibration is a vector, so we need to describe it by three parameters.
-![Screenshot 2026-05-10 at 22.13.03](../attachments/Screenshot%202026-05-10%20at%2022.13.03.png){width=552}
+![Screenshot 2026-05-10 at 22.13.03](../attachments/Screenshot%202026-05-10%20at%2022.13.03-optimized.webp){width=552}
 
 Chandler Wobble
 # Macroseismic Observation
@@ -108,7 +193,7 @@ $$-kz(t)-D\dot{z}(t)-mg=m[\ddot{z}(t)+\ddot{u}(t)]$$
 
 In 1935, Richter found that if we draw a diagram of the logarithm of the maximum amplitude, then we have$$\lg A_1-\lg A_2 \approx Const$$
 It is virtually not related to the epicentral distance $\Delta$.
-![Screenshot 2026-05-10 at 23.39.43](../attachments/Screenshot%202026-05-10%20at%2023.39.43.png){width=450}
+![Screenshot 2026-05-10 at 23.39.43](../attachments/Screenshot%202026-05-10%20at%2023.39.43-optimized.webp){width=450}
 As a result, the magnitude can be defined as $$M_L=\lg A-\lg A_0,A_0=10^{-6}\text{m}$$It is called <span style="color: red;">local magnitude</span>.
 ## Seismic Moment
 
@@ -119,14 +204,14 @@ Relationship between the energy of the earthquake and the magnitude:$$\lg E=4.8+
 Assume that $\sigma$ is the stress of the fracture surface, then$$\bar{\sigma}=\sigma/2$$As a result,$$\Delta W\approx \bar{\sigma}\bar{D}A=\frac{\sigma}{2}\bar{D} A=\frac{\Delta\sigma M_0}{2\mu}$$Estimate that,$$\Delta \sigma \approx 4 \times 10^6 Pa$$$$\mu \approx 4 \times 10^{10} Pa$$Therefore, we can solve the Moment magnitude$$M_W=\frac{2}{3}(\lg \Delta W-4.8)=\frac{2}{3}(\lg \frac{\Delta\sigma M_0}{2\mu}-4.8)=\frac{2}{3}\lg M_0-6.07$$
 # Transportation of the Seismic Wave and Tectonics of the Earth Inside
 
-![Screenshot 2026-05-12 at 13.13.07](../attachments/Screenshot%202026-05-12%20at%2013.13.07.png){width=450}
+![Screenshot 2026-05-12 at 13.13.07](../attachments/Screenshot%202026-05-12%20at%2013.13.07-optimized.webp){width=450}
 
 In [P Wave and S Wave](../physics/mechanism.html#p-wave-and-s-wave), we have$$v_p=\sqrt{\frac{\kappa +4\mu/3}{\rho}}$$$$v_s=\sqrt{\frac{\mu}{\rho}}$$
 <span style="color: red;">Seismic rays</span> travel along great circles.
 
-![Screenshot 2026-05-12 at 13.18.13](../attachments/Screenshot%202026-05-12%20at%2013.18.13.png){width=438}
+![Screenshot 2026-05-12 at 13.18.13](../attachments/Screenshot%202026-05-12%20at%2013.18.13-optimized.webp){width=438}
 
-![Screenshot 2026-05-12 at 13.19.10](../attachments/Screenshot%202026-05-12%20at%2013.19.10.png){width=450}
+![Screenshot 2026-05-12 at 13.19.10](../attachments/Screenshot%202026-05-12%20at%2013.19.10-optimized.webp){width=450}
 
 [Seismic phase](https://www.isc.ac.uk/standards/phases/)
 
@@ -135,15 +220,15 @@ Scattering and finite-frequency effects
 # Physical Property and Chemical Composition of the Earth Inside
 
 crust-mantle boundary / <span style="color: red;">Moho boundary</span> (Andrija Mohorovičić)
-![Screenshot 2026-05-12 at 13.29.03](../attachments/Screenshot%202026-05-12%20at%2013.29.03.png){width=450}
+![Screenshot 2026-05-12 at 13.29.03](../attachments/Screenshot%202026-05-12%20at%2013.29.03-optimized.webp){width=450}
 mantle-core boundary / <span style="color: red;">Gutenberg boundary</span> (Beno Gutenberg)
-![Screenshot 2026-05-12 at 13.30.20](../attachments/Screenshot%202026-05-12%20at%2013.30.20.png){width=343}
+![Screenshot 2026-05-12 at 13.30.20](../attachments/Screenshot%202026-05-12%20at%2013.30.20-optimized.webp){width=343}
 
 
-![Screenshot 2026-05-11 at 22.08.55](../attachments/Screenshot%202026-05-11%20at%2022.08.55.png){width=450}
+![Screenshot 2026-05-11 at 22.08.55](../attachments/Screenshot%202026-05-11%20at%2022.08.55-optimized.webp){width=450}
 
 Seismic Discontinuities
-![Screenshot 2026-05-27 at 22.54.52](../attachments/Screenshot%202026-05-27%20at%2022.54.52.png){width=450}(Deuss & Woodhouse, 2002)
+![Screenshot 2026-05-27 at 22.54.52](../attachments/Screenshot%202026-05-27%20at%2022.54.52-optimized.webp){width=450}(Deuss & Woodhouse, 2002)
 
 
 
@@ -167,7 +252,7 @@ Earthquake Sequence:
 - What patterns do aftershocks follow?
 - Can aftershocks be predicted?
 
-![Screenshot 2026-05-11 at 23.12.55](../attachments/Screenshot%202026-05-11%20at%2023.12.55.png){width=450}
+![Screenshot 2026-05-11 at 23.12.55](../attachments/Screenshot%202026-05-11%20at%2023.12.55-optimized.webp){width=450}
 <span style="color: red;">Omori law</span>$$N(t)=\frac{k}{(t+c)^p}$$
 - $N$: number of earthquakes in unit time
 - $k$: efficiency of the aftershock
@@ -180,7 +265,7 @@ Earthquake Sequence:
 # Prediction of the Earthquake
 
 <span style="color: red;">Elastic Rebound Theory</span>
-![Screenshot 2026-05-11 at 22.50.15](../attachments/Screenshot%202026-05-11%20at%2022.50.15.png){width=450}![Screenshot 2026-05-27 at 22.16.43](../attachments/Screenshot%202026-05-27%20at%2022.16.43.png){width=483}
+![Screenshot 2026-05-11 at 22.50.15](../attachments/Screenshot%202026-05-11%20at%2022.50.15-optimized.webp){width=450}![Screenshot 2026-05-27 at 22.16.43](../attachments/Screenshot%202026-05-27%20at%2022.16.43-optimized.webp){width=483}
         </script>
     </main>
 
@@ -228,7 +313,7 @@ Earthquake Sequence:
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

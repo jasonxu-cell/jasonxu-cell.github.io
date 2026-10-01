@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Algebra, with explanations, derivations, and examples.">
     <meta property="og:title" content="Algebra | Yang">
+    <meta property="og:description" content="Study notes by Yang on Algebra, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/math/algebra.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Algebra | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Algebra, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Algebra | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../math.html" class="article-back-link">&larr; Mathematics</a>
             <h1>Algebra</h1>
@@ -53,7 +58,193 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="groups">Groups</h2>
+<p>A <span class="obsidian-red">group</span> is a set $G$ with a binary operation $\cdot$ satisfying:</p>
+<ol>
+<li>Associativity: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$;</li>
+<li>Identity: $\exists\, 1 \in G$ with $a \cdot 1 = 1 \cdot a = a$;</li>
+<li>Inverse: $\forall a$, $\exists\, a^{-1}$ with $a a^{-1} = a^{-1} a = 1$.</li>
+</ol>
+<p>The number of elements $|G|$ is the <span class="obsidian-red">order</span>. The identity and inverses are unique, and cancellation holds: $ab = ac \Rightarrow b = c$.</p>
+<p>Structures with fewer axioms: semigroup (1), monoid (1)+(2), group (1)–(3); adding commutativity $ab = ba$ gives an Abelian group. (In a monoid, if a left and right identity both exist they coincide; same for left/right inverses.)</p>
+<p>Direct product. If $G_1, \dots, G_k$ are groups, the Cartesian product $G = G_1 \times \cdots \times G_k$ with componentwise operation $(g_1, \dots, g_k)(h_1, \dots, h_k) = (g_1 h_1, \dots, g_k h_k)$ is a group.</p>
+<p>A nonempty subset $H \subseteq G$ closed under the operation and inverses is a <span class="obsidian-red">subgroup</span>, $H \le G$.</p>
+<h3 id="homomorphisms">Homomorphisms</h3>
+<p>A map $f : G \to G&#039;$ is a <span class="obsidian-red">group homomorphism</span> if $f(g k) = f(g) f(k)$. If $f$ is bijective it is an isomorphism ($G \cong G&#039;$); injective = monomorphism; surjective = epimorphism. Then $f(1) = 1&#039;$ and $f(g^{-1}) = f(g)^{-1}$. An isomorphism $G \to G$ is an automorphism; all automorphisms form $\operatorname{Aut}(G)$.</p>
+<ul>
+<li>Center: $Z(G) = \{z \in G \mid zg = gz\ \forall g\}$.</li>
+<li><span class="obsidian-red">Normal subgroup</span>: $H \trianglelefteq G$ if $gHg^{-1} = H$ for all $g \in G$. Every subgroup of an Abelian group is normal, and $Z(G) \trianglelefteq G$.</li>
+<li>Simple group: $G$ has no normal subgroups other than $\{1\}$ and $G$.</li>
+<li>Conjugate subgroups: $H, K$ with $K = gHg^{-1}$ for some $g$; then $H \cong K$.</li>
+<li>Normalizer: $N_G(H) = \{x \in G \mid xH = Hx\}$. Then $N_G(H) \le G$, $H \trianglelefteq N_G(H)$, and $N_G(H)$ is the largest subgroup in which $H$ is normal.</li>
+<li>Kernel and image: $\ker f = f^{-1}(1&#039;)$ and $\operatorname{im} f = \{f(g)\}$; $\ker f \trianglelefteq G$ and $\operatorname{im} f \le H$.</li>
+</ul>
+<h3 id="cyclic-groups">Cyclic Groups</h3>
+<p>For $g \in G$, $\langle g \rangle = \{g^n \mid n \in \mathbb{Z}\}$ is the <span class="obsidian-red">cyclic subgroup</span> generated by $g$. If $G = \langle g \rangle$, $G$ is cyclic with generator $g$. If $g$ has finite order $k$, then $g^n = 1 \iff k \mid n$ and $g^i = g^j \iff i \equiv j \pmod k$; the map $\mathbb{Z} \to G$, $n \mapsto g^n$ is a surjective homomorphism.</p>
+<p>For cyclic $G$: if infinite, $G \cong \mathbb{Z}$; if order $n$, the generators are $\{g^k \mid 0 \le k &lt; n,\ (k, n) = 1\}$, so there are $\varphi(n)$ of them. A homomorphic image of a cyclic group is cyclic.</p>
+<h3 id="cosets-and-lagrange-s-theorem">Cosets and Lagrange&#039;s Theorem</h3>
+<p>For $H \le G$, $a \in G$, the <span class="obsidian-red">left coset</span> is $aH = \{ah \mid h \in H\}$. Two cosets are equal or disjoint, so $G = \bigsqcup_a aH$. Also $aH = bH \iff a^{-1}b \in H$, and $aH = Ha \iff aHa^{-1} = H$, i.e. $H \trianglelefteq G \iff gH = Hg\ \forall g$.</p>
+<p>The map $aH \to bH$, $ah \mapsto bh$ is a bijection, so $|aH| = |H|$. Hence $|G| = [G : H]\,|H|$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Lagrange</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The order of any subgroup of a finite group divides the order of the group.</p></div></div>
+<ul>
+<li>Corollary 1. $\forall x \in G$, $x^{|G|} = 1$.</li>
+<li>Corollary 2. A group of prime order is cyclic and simple.</li>
+</ul>
+<h3 id="quotient-groups">Quotient Groups</h3>
+<p>For $H \trianglelefteq G$, the set of cosets $G/H = \{gH\}$ with $[aH][bH] = [ab]H$ is a well-defined group (well-definedness requires $H$ normal). By Lagrange, $|G/H| = [G : H] = |G|/|H|$. If $[G : H] = 2$ then $g^2 \in H$ for all $g$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">First Isomorphism Theorem (groups)</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f : G \to H$ is a surjective homomorphism, then $G / \ker f \cong \operatorname{im} f$.</p></div></div>
+<h3 id="symmetric-groups">Symmetric Groups</h3>
+<p>A bijection of $\{1, \dots, n\}$ is a permutation $\sigma$; they form the symmetric group $S_n$ with $|S_n| = n!$ (non-Abelian for $n &gt; 2$). A $k$-cycle $(i_1 i_2 \cdots i_k)$ sends $i_1 \to i_2 \to \cdots \to i_k \to i_1$ and fixes the rest; a $2$-cycle is a transposition. Disjoint cycles commute, and every permutation factors uniquely (up to order) into disjoint cycles.</p>
+<p>$S_n$ is generated by the transpositions $(12), (13), \dots, (1n)$. The sign $\operatorname{sgn}(\sigma) = (-1)^{n - \#\text{cycles}}$ is a homomorphism $S_n \to \{\pm 1\}$, with $\operatorname{sgn}$ of a $k$-cycle $= (-1)^{k-1}$. Even permutations (sign $+1$) form the alternating group $A_n$, and the even/odd permutations are equinumerous.</p>
+<p>A group of order $p^n$ ($p$ prime) is a $p$-group.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cayley</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A group $G$ of order $n$ is isomorphic to a subgroup of $S_n$. <em>Proof.</em> For $a \in G$, $f_a : g \mapsto ag$ is a bijection, so $f_a \in S_n$; $a \mapsto f_a$ is an injective homomorphism since $\ker = \{a : ag = g\ \forall g\} = \{1\}$. $\square$</p></div></div>
+<h3 id="group-actions">Group Actions</h3>
+<p>Let $G$ act on a set $S$. The <span class="obsidian-red">orbit</span> $\operatorname{Orb}(s) = \{s \cdot g \mid g \in G\}$ and stabilizer $\operatorname{Stab}(s) = \{g \mid g \cdot s = s\}$. Fixed points form $S^G$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Orbit–Stabilizer</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$|\operatorname{Orb}(s)| \cdot |\operatorname{Stab}(s)| = |G|$.</p></div></div>
+<p>For a $p$-group, every orbit size is a power of $p$, so $|S^G| \equiv |S| \pmod p$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cauchy</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If a prime $p$ divides $|G|$ (finite), then $G$ has an element of order $p$. <em>Proof.</em> Let $S = \{(x_1, \dots, x_p) \mid x_1 \cdots x_p = 1\}$, $|S| = |G|^{p-1}$. The cyclic shift $\sigma = (12\cdots p)$ acts on $S$; $|S^{\langle\sigma\rangle}| \equiv |S| \equiv 0 \pmod p$. Since $(1, \dots, 1)$ is fixed, there is another fixed point, giving $g^p = 1$. $\square$</p></div></div>
+<p>Class equation. $|G| = |Z(G)| + \sum [G : N_G(g)]$ (sum over non-central conjugacy class representatives). For a $p$-group, $|Z(G)| \equiv 0 \pmod p$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Sylow (first theorem)</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $|G| = p^n m$ with $p$ prime and $p \nmid m$, then for each $0 \le i \le n$, $G$ has a subgroup of order $p^i$ (a Sylow $p$-subgroup for $i = n$), and every $p$-subgroup is contained in some Sylow $p$-subgroup.</p></div></div>
+<h3 id="structural-consequences">Structural Consequences</h3>
+<ul>
+<li>If $G/Z(G)$ is cyclic, then $G$ is Abelian. (<em>Proof:</em> write $g = z^a g_0$; any two elements commute.)</li>
+<li>Every group of order $p^2$ is Abelian.</li>
+</ul>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Internal Direct Product Criterion</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $H \trianglelefteq G$, $K \trianglelefteq G$, $H \cap K = \{1\}$, and $HK = G$, then $G \cong H \times K$ via $(h, k) \mapsto hk$.</p></div></div>
+<h3 id="some-common-groups">Some Common Groups</h3>
+<ul>
+<li>Dihedral group $D_n$: $n$ rotations $1, r, \dots, r^{n-1}$ and reflections, with $srs = r^{-1}$; non-Abelian for $n \ge 3$. Note $D_2 \cong \mathbb{Z}_2 \times \mathbb{Z}_2$.</li>
+<li>Non-Abelian group of order $2p$ ($p$ odd prime) $\cong D_p$.</li>
+<li>Quaternion group $Q_n = \langle a, b \mid a^{2n} = 1,\ b^2 = a^n,\ bab^{-1} = a^{-1}\rangle$. For $n = 1$, $Q_1 = \{\pm 1, \pm i, \pm j, \pm k\}$ with $i^2 = j^2 = k^2 = -1$, $ijk = -1$; non-Abelian.</li>
+</ul>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$A_n$ is simple for $n \ge 5$, but $A_4$ is not simple (since the Klein four-group $K_4 \trianglelefteq A_4$).</p></div></div>
+<h2 id="rings-integral-domains-fields">Rings, Integral Domains, Fields</h2>
+<p>In a <span class="obsidian-red">ring</span>, $x \cdot 0 = 0 \cdot x = 0$. An element $a \neq 0$ is a <span class="obsidian-red">zero divisor</span> if $ab = 0$ for some $b \neq 0$. A ring without zero divisors is an <span class="obsidian-red">integral domain</span>; a commutative ring in which every nonzero element is invertible is a field.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every finite integral domain is a field. <em>Proof.</em> For $a \neq 0$, the map $x \mapsto ax$ is injective (no zero divisors), hence surjective on the finite set, so some $ax = 1$. $\square$</p></div></div>
+<p>Note: the direct product of nonzero integral domains is not an integral domain, since $(0, x)(y, 0) = (0, 0)$.</p>
+<p>A ring homomorphism $f : R \to R&#039;$ satisfies $f(1) = 1&#039;$, $f(a + b) = f(a) + f(b)$, $f(ab) = f(a)f(b)$; bijective gives a ring isomorphism. Then $f(0) = 0$, $f(-a) = -f(a)$.</p>
+<p>A subring $S \subseteq R$ is closed under $+, -, \times$ and contains $1$. An <span class="obsidian-red">ideal</span> $I \trianglelefteq R$ is an additive subgroup with $rx \in I$ for all $r \in R$, $x \in I$ (e.g. $xR$ is a right ideal).</p>
+<p>Ideals of $\mathbb{Z}$ are principal: every ideal $I \subseteq \mathbb{Z}$ equals $d\mathbb{Z}$ for the smallest positive $d \in I$. The kernel $\ker f = f^{-1}(0&#039;)$ of a ring homomorphism is an ideal, and $\operatorname{im} f$ is a subring.</p>
+<p>For an ideal $I \trianglelefteq R$, the <span class="obsidian-red">quotient ring</span> $R/I$ has elements $r + I = \{r + i \mid i \in I\}$ with $$(r_1 + I) + (r_2 + I) = (r_1 + r_2) + I, \qquad (r_1 + I)(r_2 + I) = r_1 r_2 + I$$ (multiplication well-defined precisely because $I$ is an ideal).</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">First Isomorphism Theorem (rings)</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f : R \to R&#039;$ is a surjective ring homomorphism, then $R / \ker f \cong \operatorname{im} f$.</p></div></div>
+<h2 id="polynomials">Polynomials</h2>
+<p>For a field $F$, the <span class="obsidian-red">polynomial ring</span> $F[x] = \{a_n x^n + \cdots + a_1 x + a_0 \mid a_i \in F\}$, with $\deg f = n$.</p>
+<p>Division algorithm. For $f, g \in F[x]$ with $g \neq 0$, there exist unique $q, r \in F[x]$ with $f = qg + r$, $\deg r &lt; \deg g$.</p>
+<p>gcd of polynomials is defined analogously; $F[x]$ ideals are principal, so for $f, g$ with $d = (f, g)$: $$\{f u + g v \mid u, v \in F[x]\} = \{d w \mid w \in F[x]\}$$ In particular $\exists\, u, v$ with $fu + gv = d = (f, g)$, and $f, g$ coprime $\iff \exists\, u, v$ with $fu + gv = 1$. Also $(f, g) = 1$ and $(f, h) = 1 \Rightarrow (f, gh) = 1$.</p>
+<p>A nonconstant $f \in F[x]$ is <span class="obsidian-red">irreducible</span> if it cannot be factored into lower-degree polynomials (its only divisors are constants and $cf$). Euclid&#039;s lemma and unique factorization hold for $F[x]$ as for $\mathbb{Z}$: $f = c\, p_1^{e_1}\cdots p_r^{e_r}$ uniquely, with gcd/lcm given by min/max of exponents.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Remainder / Factor Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$f(x) = q(x)(x - a) + f(a)$. Hence $f(a) = 0 \iff (x - a) \mid f(x)$ ($a$ is a root).</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Lagrange</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A polynomial of degree $n$ over a field has at most $n$ roots.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Vieta&#039;s Formulas</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f(x) = a_n(x - x_1)\cdots(x - x_n)$, then the elementary symmetric functions satisfy $$\sum_{i_1 &lt; \cdots &lt; i_k} x_{i_1}\cdots x_{i_k} = (-1)^k \frac{a_{n-k}}{a_n}$$</p></div></div>
+<p>Over $\mathbb{F}_p$: $x^p - x = \prod_{a \in \mathbb{F}_p}(x - a)$, whence $x^{p-1} - 1 \equiv (x-1)(x-2)\cdots(x-p+1) \pmod p$, giving Wilson&#039;s theorem $(p-1)! \equiv -1 \pmod p$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Wolstenholme</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For a prime $p &gt; 5$, $\;\dbinom{2p}{p} \equiv 2 \pmod{p^3}$ (equivalently the symmetric functions $S_1, S_{p-2}$ of $1, \dots, p-1$ vanish $\bmod p^2$).</p></div></div>
+<p>Polynomial congruences. $f \equiv g \pmod{m(x)}$ means $m(x) \mid (f - g)$; congruences add and multiply as usual. The quotient $F[x]/(m(x))$ has representatives $\{[r(x)] : \deg r &lt; \deg m\}$ with units $\{[a(x)] : (a, m) = 1\}$, and $$F[x]/(m(x)) \text{ is a field} \iff m(x) \text{ is irreducible}$$ For $m = m_1 \cdots m_r$ with $m_i$ pairwise coprime, the polynomial CRT gives $F[x]/(m) \cong \prod_i F[x]/(m_i)$.</p>
+<p>Irreducibility.</p>
+<ul>
+<li>Over $\mathbb{C}$: $f$ irreducible $\iff \deg f = 1$ (Fundamental Theorem of Algebra).</li>
+<li>Over $\mathbb{R}$: irreducible $\iff$ degree $1$, or degree $2$ with $\Delta &lt; 0$.</li>
+</ul>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Gauss&#039;s Lemma</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f \in \mathbb{Z}[x]$ factors over $\mathbb{Q}$, then it factors over $\mathbb{Z}$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Eisenstein&#039;s Criterion</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let $f(x) = a_n x^n + \cdots + a_0 \in \mathbb{Z}[x]$, $a_n \neq 0$. If a prime $p$ satisfies $p \mid a_i$ for $i = 0, \dots, n-1$, $p \nmid a_n$, and $p^2 \nmid a_0$, then $f$ is irreducible over $\mathbb{Q}$.</p></div></div>
+<p>Mod $p$ reduction. If $f \in \mathbb{Z}[x]$ is irreducible mod $p$, it is irreducible over $\mathbb{Z}$ (contrapositive: reducible over $\mathbb{Z} \Rightarrow$ reducible over $\mathbb{F}_p$).</p>
+<h3 id="symmetric-polynomials">Symmetric Polynomials</h3>
+<p>$f(x_1, \dots, x_n)$ is symmetric if $f(x_{\sigma(1)}, \dots, x_{\sigma(n)}) = f(x_1, \dots, x_n)$ for all $\sigma \in S_n$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Fundamental Theorem of Symmetric Polynomials</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every symmetric polynomial is a polynomial in the elementary symmetric polynomials $t_1, \dots, t_n$, and this expression is unique (the $t_i$ are algebraically independent).</p></div></div>
+<p>The <span class="obsidian-red">discriminant</span> of $f(x) = (x - X_1)\cdots(x - X_n)$ is $D_f = \prod_{i &lt; j}(X_i - X_j)^2$, a symmetric polynomial of degree $n(n-1)$. For $f = x^2 + bx + c$: $D_f = b^2 - 4c$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Newton&#039;s Identities</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>With power sums $t_k = \sum_i X_i^k$ and elementary symmetric $S_j$:</p>
+<ul>
+<li>For $k \le n - 1$: $\;t_k - S_1 t_{k-1} + \cdots + (-1)^{k-1}S_{k-1}t_1 + (-1)^k k\, S_k = 0$.</li>
+<li>For $k \ge n$: $\;t_k - S_1 t_{k-1} + \cdots + (-1)^n S_n t_{k-n} = 0$.</li>
+</ul></div></div>
+<h3 id="cyclotomic-polynomials">Cyclotomic Polynomials</h3>
+<p>$$\Phi_n(x) = \prod_{\substack{1 \le k \le n \\ (k, n) = 1}} (x - \zeta_n^k), \qquad \zeta_n = e^{2\pi i/n}$$ Properties. $\Phi_n$ is irreducible over $\mathbb{Z}[x]$, and $x^n - 1 = \prod_{d \mid n}\Phi_d(x)$. For prime $p$, $\Phi_p(x) = \frac{x^p - 1}{x - 1} = x^{p-1} + \cdots + 1$ is irreducible; for composite $m$, $x^{m-1} + \cdots + 1$ is reducible.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Mason–Stothers</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $a(x), b(x), c(x)$ are pairwise coprime polynomials with $a + b + c = 0$, then each has degree $\le N(abc) - 1$, where $N(abc)$ is the number of distinct roots of $a b c$. (Polynomial analogue of the $abc$ conjecture; implies the polynomial Fermat&#039;s Last Theorem.)</p></div></div>
+<p><em>Proof idea.</em> Set $p = a/c$, $q = b/c$, so $p + q + 1 = 0$ and $p&#039; = -q&#039;$; compare logarithmic derivatives $\frac{p&#039;}{p} = \sum \frac{a_i}{x - \alpha_i} - \sum \frac{c_i}{x - \gamma_i}$, etc.</p>
+<h2 id="solving-polynomial-equations-by-radicals">Solving Polynomial Equations by Radicals</h2>
+<ul>
+<li>Linear $ax + b = 0$: $x = -b/a$.</li>
+<li>Quadratic $ax^2 + bx + c = 0$: $x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.</li>
+<li>Cubic (Cardano): reduce $ax^3 + bx^2 + cx + d = 0$ to $x^3 + px + q = 0$, substitute $x = t - \frac{p}{3t}$ to get $t^3 + q - \frac{p^3}{27 t^3} = 0$, a quadratic in $t^3$.</li>
+<li>Quartic (Ferrari): reduce to $x^4 = ax^2 + bx + c$; write $x^4 + mx^2 + n = (a + m)x^2 + bx + (c + n)$ and choose $m, n$ so the right side is a perfect square ($\Delta = b^2 - 4(a+m)(c+n) = 0$), giving $x^2 + \frac{m}{2} = \pm\left(\sqrt{a+m}\,x + \frac{b}{2\sqrt{a+m}}\right)$.</li>
+</ul>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Planned section</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Field theory and Galois theory (heading only in the source).</p></div></div>
+<h2 id="modules-and-algebras">Modules and Algebras</h2>
+<p>A <span class="obsidian-red">module</span> over a field/ring $R$ is an Abelian group $M$ with a scalar action satisfying distributivity $(r + s)(m + n) = rm + rn + sm + sn$, compatibility $(rs)m = r(sm)$, and unitality $1 \cdot m = m$. An algebra is a module that is also a ring with bilinear (left/right distributive) multiplication.</p>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Planned section</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Structure theorem for finite Abelian groups (heading only in the source; e.g. groups of order $p^2$ are $\mathbb{Z}_{p^2}$ or $\mathbb{Z}_p \times \mathbb{Z}_p$).</p></div></div>
+<h2 id="introduction-to-linear-algebra">Introduction to Linear Algebra</h2>
+<h3 id="gaussian-elimination">Gaussian Elimination</h3>
+<h3 id="lu-decomposition">LU Decomposition</h3>
+<h4 id="doolittle-decomposition">Doolittle Decomposition</h4>
+<h4 id="crout-decomposition">Crout Decomposition</h4>
+<h3 id="rank">Rank</h3>
+<h3 id="determinant">Determinant</h3>
+<h3 id="inner-product-spaces-todo">Inner Product Spaces (TODO)</h3>
+<ul>
+<li>Inner product and the norm it induces; the Cauchy–Schwarz inequality in Hilbert space: $\langle\alpha|\alpha\rangle\langle\beta|\beta\rangle\ge|\langle\alpha|\beta\rangle|^2$.</li>
+</ul>
+<h2 id="eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</h2>
+<h3 id="power-method">Power Method</h3>
+<h3 id="inverse-power-method">Inverse Power Method</h3>
+<h3 id="qr-decomposition">QR Decomposition</h3>
+<p>Householder Matrix</p>
+<h3 id="hermitian-operators-todo">Hermitian Operators (TODO)</h3>
+<ul>
+<li>Eigenvalues of a Hermitian operator are real; eigenvectors belonging to distinct eigenvalues are orthogonal.</li>
+<li>Spectral theorem: a real symmetric (more generally, Hermitian) matrix is diagonalizable by an orthogonal (unitary) matrix.</li>
+<li>Commuting Hermitian operators share a common eigenbasis, i.e., they can be simultaneously diagonalized.</li>
+</ul>
+<h2 id="norm">Norm</h2>
+<h3 id="vector-norm">Vector Norm</h3>
+<p>For vector $X\in\mathbb{R}^n$, a vector norm $\left \| X \right \|$ should has the following properties:</p>
+<ol>
+<li>$\left \| X \right \|\ge 0$ and $\left \| X \right \|= 0$ iff $X=0$</li>
+<li>$\forall \alpha \in \mathbb{R}$, $\left \| \alpha X \right \|=\left | \alpha \right | \left \|  X \right \|$</li>
+<li>$\left \|  X+Y \right \|\le\left \|  X \right \|+\left \|  Y \right \|$</li>
+</ol>
+<p>A common norm is $L_p$ norm / Hölder norm, which is defined as$$\left \| X \right \|_p=\big(\sum_{i=1}^n \left | x_i \right |^p \big)^{\frac{1}{p}},1\le p\le+\infty$$ The three most commonly used $L_p$ vector norms are</p>
+<ul>
+<li>$p=1$ (<span class="obsidian-red">Manhattan Norm</span>) $$\left \| X \right \|_1=\sum_{i=1}^n \left | x_i \right |$$</li>
+<li>$p=2$ (<span class="obsidian-red">Euclidean Norm</span>) $$\left \| X \right \|_2=\sqrt{\sum_{i=1}^n  x_i^2}$$</li>
+<li>$p=+\infty$ (<span class="obsidian-red">Chebyshev Norm</span>) $$\left \| X \right \|_\infty=\lim_{p\to+\infty}\big(\sum_{i=1}^n  \left | x_i \right |^p\big)^{\frac{1}{p}}=\max\{\left | x_i \right |\}$$</li>
+</ul>
+<h3 id="matrix-norm">Matrix Norm</h3>
+<p>For matrix $A\in\mathbb{R}^{n\times n}$, a matrix norm $\left \| A \right \|$ should has the following properties:</p>
+<ol>
+<li>$\left \| A \right \|\ge 0$ and $\left \| A \right \|= 0$ iff $A=0$</li>
+<li>$\forall \lambda \in \mathbb{R}$, $\left \| \lambda X \right \|=\left | \lambda \right | \left \|  X \right \|$</li>
+<li>For any two matrices $A$ and $B$ of the same order, $\left \|  A+B \right \|\le\left \|  A \right \|+\left \|  B \right \|$</li>
+<li>For any two matrices $A$ and $B$ of the same order, $\left \|  AB \right \|\le\left \|  A \right \|\left \|  B \right \|$</li>
+<li>For any vertex $X\in \mathbb{R}^n$, $\left \|  AX \right \|\le\left \|  A \right \|\left \|  X \right \|$</li>
+</ol>
+<p>The matrix norm can be defined as:$$\left \|  A \right \|=\sup_{X\in\mathbb{R}^n,X\ne0}\frac{\left \|  AX \right \|}{\left \|  X \right \|}=\sup_{X\in\mathbb{R}^n,\left \|  X \right \|=1}\left \|  AX \right \|$$ Correspondingly, the common norm:</p>
+<ul>
+<li>$p=1$ $$\left \| A \right \|_1=\max_j\sum_{i=1}^n \left | a_{ij} \right |$$</li>
+<li>$p=2$ $$\left \| A \right \|_2=\sqrt{\lambda_1}$$where $\lambda_1=\max \left | \lambda_i \right |$, $\lambda_i$ is the eigenvalues of $A^{\top}A$</li>
+<li>$p=+\infty$ $$\left \| A \right \|_\infty=\max_i\sum_{j=1}^n \left | a_{ij} \right |$$</li>
+</ul>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<p>Another common norm is <span class="obsidian-red">Frobenius norm</span>: $$\left \|  A \right \|_F=\big(\sum_{i=1}^n\sum_{j=1}^n\left| a_{ij} \right |^2\big)^{\frac{1}{2}}$$ For eigenvalues $\lambda$ of the matrix $A$, $$\left | \lambda \right | \left \|  X \right \|= \left \|  \lambda X \right \|=\left \|  A X \right \|\le\left \|  A \right \|\left \|  X \right \|$$ As a result, $$\left | \lambda \right |\le\left \|  A \right \|$$ So we define the <span class="obsidian-red">spectral radius</span> $\rho (A)$ of the matrix $A$ as $$\rho (A)=\max \left | \lambda_i \right |$$ As a result,$$\left \| A \right \|_2=\sqrt{\rho (A^{\top}A)}$$ A <span class="obsidian-red">convergent matrix</span> $A$ is defined as $$\lim_{k\to +\infty}A^k=0$$</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A matrix $A$ is convergent matrix iff $\rho(A)&lt;1$</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-corollary"><div class="callout-title"><span class="callout-icon" aria-hidden="true">C</span><span class="callout-title-text">Corollary</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A matrix $A$ is convergent matrix iff $\left \|  A \right \|&lt;1$</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<h3 id="condition-number">Condition Number</h3>
+<p>For a system of equations$$Ax=b$$ If the constant term $b$ has a small disturbance, then$$A(x+\delta x)=b+\delta b$$ Then $$\delta x=A^{-1}(b+\delta b)-x=A^{-1}\delta b$$ Hence,$$\left \|  \delta x \right \|=\left \|  A^{-1}\delta b \right \|\le\left \|  A^{-1} \right \|\left \| \delta b \right \|$$ $$\left \|  b \right \|=\left \|  Ax \right \|\le \left \|  A \right \| \left \|  x \right \|$$ $$\frac{\left \|  \delta x \right \|}{\left \|x\right \|}\le\left \|  A^{-1} \right \|\left \|  A \right \|\frac{\left \|  \delta b \right \|}{\left \|b\right \|}$$ Define $\left \|  A^{-1} \right \|\left \|  A \right \|$ as the condition number $Cond(A)$ of the matrix $A$.</p>
+<p>We can find that $$Cond(A)=\left \|  A^{-1} \right \|\left \|  A \right \|\ge\left \|  I \right \|=1$$ If the matrix $A$ has a small disturbance $\delta A$, we can also find that $$\frac{\left \|  \delta x \right \|}{\left \|x\right \|}\le\frac{Cond(A)\frac{\left \|  \delta A \right \|}{\left \|A\right \|}}{1-Cond(A)\frac{\left \|  \delta A \right \|}{\left \|A\right \|}}$$</p>
+<h2 id="the-hierarchy-of-rings">The Hierarchy of Rings</h2>
+<p>$$\text{Field} \subsetneq \text{ED} \subsetneq \text{PID} \subsetneq \text{UFD} \subsetneq \text{GCD domain} \subsetneq \text{Integral domain}$$ (<span class="obsidian-red">Euclidean domain</span> $\subsetneq$ <span class="obsidian-red">principal ideal domain</span> $\subsetneq$ <span class="obsidian-red">unique factorization domain</span>.) Examples: $\mathbb{Z}[i]$ (Gaussian integers, a ED); $\mathbb{Z}\!\left[\frac{1 + \sqrt{-19}}{2}\right]$ (a PID that is not Euclidean); $\mathbb{Z}[x]$ (a UFD that is not a PID).</p>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Planned sections</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Linear algebra (Gaussian elimination / rank, similarity, congruence, determinant) and algebraic number theory (headings only in the source).</p></div></div>
+<h2 id="selected-exercises">Selected Exercises</h2>
+<ol>
+<li>A ring isomorphism $\varphi : \mathbb{R} \to \mathbb{R}$ is the identity ($\varphi^2 = \mathrm{id}$): order is preserved since squares (hence positivity) are preserved, and $\varphi$ fixes $\mathbb{Q}$ densely.</li>
+<li>If $x \mapsto x^2$ is a homomorphism on $G$, then $G$ is Abelian: $abab = aabb \Rightarrow ba = ab$.</li>
+<li>The Gaussian-type element $\frac{1}{2}(1 + i)$ has infinite multiplicative order (its coordinates satisfy a recurrence that is never $\equiv (1,0) \bmod 5$).</li>
+</ol>
+<h2 id="appendix">Appendix</h2>
+<h3 id="groups-of-order-1-15">Groups of Order 1–15</h3>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Order</th><th>Abelian</th><th>Non-Abelian</th></tr></thead><tbody><tr><td>1</td><td>$\{1\}$</td><td></td></tr><tr><td>2</td><td>$\mathbb{Z}_2$</td><td></td></tr><tr><td>3</td><td>$\mathbb{Z}_3$</td><td></td></tr><tr><td>4</td><td>$\mathbb{Z}_4,\ K_4$</td><td></td></tr><tr><td>5</td><td>$\mathbb{Z}_5$</td><td></td></tr><tr><td>6</td><td>$\mathbb{Z}_6$</td><td>$S_3$</td></tr><tr><td>7</td><td>$\mathbb{Z}_7$</td><td></td></tr><tr><td>8</td><td>$\mathbb{Z}_8,\ \mathbb{Z}_4 \times \mathbb{Z}_2,\ \mathbb{Z}_2^3$</td><td>$D_4,\ Q_8$</td></tr><tr><td>9</td><td>$\mathbb{Z}_9,\ \mathbb{Z}_3 \times \mathbb{Z}_3$</td><td></td></tr><tr><td>10</td><td>$\mathbb{Z}_{10}$</td><td>$D_5$</td></tr><tr><td>11</td><td>$\mathbb{Z}_{11}$</td><td></td></tr><tr><td>12</td><td>$\mathbb{Z}_{12},\ \mathbb{Z}_3 \times K_4$</td><td>$A_4,\ Q_{12},\ D_6$</td></tr><tr><td>13</td><td>$\mathbb{Z}_{13}$</td><td></td></tr><tr><td>14</td><td>$\mathbb{Z}_{14}$</td><td>$D_7$</td></tr><tr><td>15</td><td>$\mathbb{Z}_{15}$</td><td></td></tr></tbody></table></div>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"groups","level":1,"text":"Groups"},{"id":"homomorphisms","level":2,"text":"Homomorphisms"},{"id":"cyclic-groups","level":2,"text":"Cyclic Groups"},{"id":"cosets-and-lagrange-s-theorem","level":2,"text":"Cosets and Lagrange's Theorem"},{"id":"quotient-groups","level":2,"text":"Quotient Groups"},{"id":"symmetric-groups","level":2,"text":"Symmetric Groups"},{"id":"group-actions","level":2,"text":"Group Actions"},{"id":"structural-consequences","level":2,"text":"Structural Consequences"},{"id":"some-common-groups","level":2,"text":"Some Common Groups"},{"id":"rings-integral-domains-fields","level":1,"text":"Rings, Integral Domains, Fields"},{"id":"polynomials","level":1,"text":"Polynomials"},{"id":"symmetric-polynomials","level":2,"text":"Symmetric Polynomials"},{"id":"cyclotomic-polynomials","level":2,"text":"Cyclotomic Polynomials"},{"id":"solving-polynomial-equations-by-radicals","level":1,"text":"Solving Polynomial Equations by Radicals"},{"id":"modules-and-algebras","level":1,"text":"Modules and Algebras"},{"id":"introduction-to-linear-algebra","level":1,"text":"Introduction to Linear Algebra"},{"id":"gaussian-elimination","level":2,"text":"Gaussian Elimination"},{"id":"lu-decomposition","level":2,"text":"LU Decomposition"},{"id":"doolittle-decomposition","level":3,"text":"Doolittle Decomposition"},{"id":"crout-decomposition","level":3,"text":"Crout Decomposition"},{"id":"rank","level":2,"text":"Rank"},{"id":"determinant","level":2,"text":"Determinant"},{"id":"inner-product-spaces-todo","level":2,"text":"Inner Product Spaces (TODO)"},{"id":"eigenvalues-and-eigenvectors","level":1,"text":"Eigenvalues and Eigenvectors"},{"id":"power-method","level":2,"text":"Power Method"},{"id":"inverse-power-method","level":2,"text":"Inverse Power Method"},{"id":"qr-decomposition","level":2,"text":"QR Decomposition"},{"id":"hermitian-operators-todo","level":2,"text":"Hermitian Operators (TODO)"},{"id":"norm","level":1,"text":"Norm"},{"id":"vector-norm","level":2,"text":"Vector Norm"},{"id":"matrix-norm","level":2,"text":"Matrix Norm"},{"id":"condition-number","level":2,"text":"Condition Number"},{"id":"the-hierarchy-of-rings","level":1,"text":"The Hierarchy of Rings"},{"id":"selected-exercises","level":1,"text":"Selected Exercises"},{"id":"appendix","level":1,"text":"Appendix"},{"id":"groups-of-order-1-15","level":2,"text":"Groups of Order 1–15"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -450,7 +641,7 @@ $$\text{Field} \subsetneq \text{ED} \subsetneq \text{PID} \subsetneq \text{UFD} 
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

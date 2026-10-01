@@ -1,26 +1,40 @@
 #!/usr/bin/env python3
-"""Create smaller WebP variants for large referenced images and update their URLs."""
+"""Create WebP variants for large referenced images and point pages at them.
+
+Scans every HTML/CSS file for image references (<img src>, Markdown
+``![](...)``, LaTeX ``\\includegraphics{...}``, CSS ``url(...)``). Each local
+raster image >= 100 KB gets a ``<name>-optimized.webp`` sibling (max 2400 px)
+and the reference is rewritten to it, when the WebP is meaningfully smaller.
+
+Usage:
+    python3 scripts/optimize_site_images.py              # optimise + rewrite
+    python3 scripts/optimize_site_images.py --dry-run    # report only
+    python3 scripts/optimize_site_images.py --prune      # also delete originals
+        # and other files in notes/attachments that no page references
+        # (the Obsidian vault keeps every original)
+
+Afterwards run ``python3 scripts/update_site_metadata.py`` so pre-rendered
+pages pick up the new image URLs (the script does this automatically unless
+--no-rebuild is given).
+"""
 
 from __future__ import annotations
 
+import argparse
 import re
 import subprocess
+import sys
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
-from PIL import Image
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from site_images import SkipCache, optimize_into  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-MIN_BYTES = 100 * 1024
-MAX_DIMENSION = 2400
-SPECIAL_MAX_DIMENSIONS = {
-    "assets/background.jpg": 2560,
-    "assets/math.jpg": 1600,
-    "notes/attachments/Pasted image 20260615151911.png": 1600,
-}
-RASTER_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+SKIP_CACHE = ROOT / ".cache" / "image-optimization-skip.json"
+ATTACHMENTS = ROOT / "notes" / "attachments"
 
 
 def referenced_urls(source: str) -> list[str]:
@@ -31,99 +45,99 @@ def referenced_urls(source: str) -> list[str]:
     return values
 
 
-def new_url(raw_url: str) -> str:
-    stem, _separator, _suffix = raw_url.rpartition(".")
-    return f"{stem}-optimized.webp"
-
-
-def image_details(path: Path) -> tuple[int, int, bool, str | None]:
-    with Image.open(path) as image:
-        has_alpha = image.mode in {"RGBA", "LA"} or "transparency" in image.info
-        return image.width, image.height, has_alpha, image.format
-
-
-def compress(source: Path, output: Path) -> bool:
-    width, height, has_alpha, image_format = image_details(source)
-    # Some synced attachments have misleading extensions. cwebp cannot read GIF
-    # input, and the existing single-frame GIF is already smaller than a WebP
-    # conversion, so keep it untouched instead of emitting a noisy error.
-    if image_format == "GIF":
-        return False
-    quality = "88" if source.suffix.lower() == ".png" else "82"
-    relative = source.relative_to(ROOT).as_posix()
-    max_dimension = SPECIAL_MAX_DIMENSIONS.get(relative, MAX_DIMENSION)
-    command = [
-        "cwebp", "-quiet", "-q", quality, "-m", "6", "-mt",
-        "-metadata", "icc", "-sharp_yuv",
-    ]
-    if has_alpha:
-        command += ["-alpha_q", "100", "-exact"]
-    if max(width, height) > max_dimension:
-        if width >= height:
-            command += ["-resize", str(max_dimension), "0"]
-        else:
-            command += ["-resize", "0", str(max_dimension)]
-    command += [str(source), "-o", str(output)]
-
-    output.parent.mkdir(parents=True, exist_ok=True)
-    if output.exists():
-        output.unlink()
-    subprocess.run(command, check=True)
-    if output.stat().st_size >= source.stat().st_size * 0.93:
-        output.unlink()
-        return False
-    return True
-
-
-def main() -> None:
-    owners = sorted([*ROOT.rglob("*.html"), *ROOT.rglob("*.css")])
-    references: dict[Path, list[tuple[Path, str]]] = defaultdict(list)
-
-    for owner in owners:
-        source = owner.read_text(encoding="utf-8")
-        for raw_url in referenced_urls(source):
-            if raw_url.startswith(("http:", "https:", "data:", "#")):
-                continue
-            path = (owner.parent / unquote(raw_url)).resolve()
-            if (
-                path.exists()
-                and path.suffix.lower() in RASTER_SUFFIXES
-                and not path.name.endswith("-optimized.webp")
-                and path.stat().st_size >= MIN_BYTES
-            ):
-                references[path].append((owner, raw_url))
-
-    replacements: dict[Path, dict[str, str]] = defaultdict(dict)
-    original_bytes = 0
-    optimized_bytes = 0
-    optimized_count = 0
-
-    for source in sorted(references, key=lambda path: path.as_posix().lower()):
-        output = source.with_name(f"{source.stem}-optimized.webp")
-        try:
-            if compress(source, output):
-                if output.stat().st_size < source.stat().st_size * 0.93:
-                    original_bytes += source.stat().st_size
-                    optimized_bytes += output.stat().st_size
-                    optimized_count += 1
-                    for owner, raw_url in references[source]:
-                        replacements[owner][raw_url] = new_url(raw_url)
-        except (OSError, subprocess.CalledProcessError) as error:
-            print(f"Skipped {source.relative_to(ROOT)}: {error}")
-
-    for owner, mapping in replacements.items():
-        source = owner.read_text(encoding="utf-8")
-        for old, new in sorted(mapping.items(), key=lambda item: len(item[0]), reverse=True):
-            source = source.replace(old, new)
-        owner.write_text(source, encoding="utf-8")
-
-    saved_bytes = original_bytes - optimized_bytes
-    print(
-        f"Optimized {optimized_count} images; referenced payload "
-        f"{original_bytes / 1024 / 1024:.1f} MB -> {optimized_bytes / 1024 / 1024:.1f} MB "
-        f"({saved_bytes / max(original_bytes, 1):.0%} smaller)"
+def owner_files() -> list[Path]:
+    return sorted(
+        path
+        for pattern in ("*.html", "*.css")
+        for path in ROOT.rglob(pattern)
+        if not path.name.startswith("._")
+        and not path.relative_to(ROOT).as_posix().startswith((".git/", ".cache/", "scripts/"))
     )
 
 
+def rewritten_url(raw_url: str, webp_name: str) -> str:
+    directory, _slash, filename = raw_url.rpartition("/")
+    # Keep the same encoding style as the original reference.
+    name = quote(webp_name) if "%" in filename else webp_name
+    return f"{directory}/{name}" if directory else name
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--prune", action="store_true", help="Delete unreferenced files in notes/attachments.")
+    parser.add_argument("--no-rebuild", action="store_true", help="Do not run update_site_metadata.py afterwards.")
+    args = parser.parse_args(argv)
+
+    owners = owner_files()
+    references: dict[Path, list[tuple[Path, str]]] = defaultdict(list)
+    for owner in owners:
+        source = owner.read_text(encoding="utf-8")
+        for raw_url in referenced_urls(source):
+            if raw_url.startswith(("http:", "https:", "data:", "#", "$")):
+                continue
+            path = (owner.parent / unquote(raw_url)).resolve()
+            if path.is_file():
+                references[path].append((owner, raw_url))
+
+    skip_cache = SkipCache(SKIP_CACHE)
+    replacements: dict[Path, dict[str, str]] = defaultdict(dict)
+    before = after = 0
+    count = 0
+    for source in sorted(references, key=lambda item: item.as_posix().lower()):
+        webp_name = optimize_into(source, source.parent, skip_cache, dry_run=args.dry_run)
+        if not webp_name:
+            continue
+        webp = source.parent / webp_name
+        count += 1
+        before += source.stat().st_size
+        after += webp.stat().st_size if webp.exists() else 0
+        for owner, raw_url in references[source]:
+            replacements[owner][raw_url] = rewritten_url(raw_url, webp_name)
+
+    changed_owners = 0
+    for owner, mapping in replacements.items():
+        text = owner.read_text(encoding="utf-8")
+        updated = text
+        for old, new in sorted(mapping.items(), key=lambda item: len(item[0]), reverse=True):
+            # Only replace whole URL tokens, not substrings of longer names.
+            updated = re.sub(r'(?<=[("{\'])' + re.escape(old) + r'(?=[)"}\'\s])', new.replace("\\", "\\\\"), updated)
+        if updated != text:
+            changed_owners += 1
+            if not args.dry_run:
+                owner.write_text(updated, encoding="utf-8")
+    if not args.dry_run:
+        skip_cache.save()
+
+    verb = "Would use" if args.dry_run else "Using"
+    print(
+        f"{verb} WebP for {count} images in {changed_owners} files; payload "
+        f"{before / 1e6:.1f} MB -> {after / 1e6:.1f} MB"
+    )
+
+    if args.prune:
+        still_referenced: set[str] = set()
+        for owner in owners:
+            text = owner.read_text(encoding="utf-8")
+            for raw_url in referenced_urls(text):
+                path = (owner.parent / unquote(raw_url)).resolve()
+                if path.parent == ATTACHMENTS.resolve():
+                    still_referenced.add(path.name)
+        removed = [
+            path for path in sorted(ATTACHMENTS.iterdir())
+            if path.is_file() and path.name not in still_referenced
+        ]
+        size = sum(path.stat().st_size for path in removed)
+        verb = "Would remove" if args.dry_run else "Removed"
+        print(f"{verb} {len(removed)} unreferenced attachments ({size / 1e6:.1f} MB)")
+        if not args.dry_run:
+            for path in removed:
+                path.unlink()
+
+    if not args.dry_run and not args.no_rebuild:
+        subprocess.run([sys.executable, str(Path(__file__).with_name("update_site_metadata.py"))], check=True)
+    return 0
+
+
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

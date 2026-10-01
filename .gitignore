@@ -9,3 +9,6 @@ __pycache__/
 # Never publish CV LaTeX sources
 *.tex
 *.otf
+
+# Local build caches
+.cache/

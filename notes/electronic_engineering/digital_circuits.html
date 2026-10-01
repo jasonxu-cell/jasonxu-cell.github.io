@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Digital circuits notes by Yang on Boolean algebra, binary coding, logic gates, and combinational logic circuits.">
+    <meta property="og:title" content="Digital Circuits | Yang">
+    <meta property="og:description" content="Digital circuits notes by Yang on Boolean algebra, binary coding, logic gates, and combinational logic circuits.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/notes/electronic_engineering/digital_circuits.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
+    <meta property="og:image:width" content="1731">
+    <meta property="og:image:height" content="909">
+    <meta property="og:image:alt" content="Yang — Geophysics · USTC">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digital Circuits | Yang">
+    <meta name="twitter:description" content="Digital circuits notes by Yang on Boolean algebra, binary coding, logic gates, and combinational logic circuits.">
+    <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
+    <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
+    <title>Digital Circuits | Yang</title>
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
+        <div class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../notes.html" aria-current="page">Notes</a>
+            <a href="../../articles.html">Articles</a>
+            <a href="../../research.html">Research</a>
+            <a href="../../ask.html">Ask</a>
+        </div>
+    </nav>
+
+    <main id="main-content" class="article-detail-page">
+        <header class="article-detail-header">
+            <a href="../electronic_engineering.html" class="article-back-link">&larr; Electronic Technology</a>
+            <h1>Digital Circuits</h1>
+            <p>Note about Digital Circuits.</p>
+            <div class="essay-meta article-detail-meta">
+                <div class="essay-tags">
+                    <span>Circuits</span>
+                    <span>Logic</span>
+                    <span>Digital</span>
+                </div>
+                <time datetime="2026-09-22">Sep 22, 2026</time>
+            </div>
+        </header>
+
+        <div class="article-reader">
+            <aside class="article-toc-panel" aria-label="Article contents">
+                <p>Contents</p>
+                <ol id="article-toc"></ol>
+            </aside>
+
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="boolean-algebra">Boolean Algebra</h2>
+<h3 id="basic-operations-and-equations">Basic Operations and Equations</h3>
+<p>Computers use <span class="obsidian-red">binary code</span> to perform various operations. In Boolean algebra, each variable only has two possible values: 0 and 1.</p>
+<p>Some basic operations:</p>
+<ol>
+<li>BUFFER ($A$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$A$</th></tr></thead><tbody><tr><td>1</td><td>1</td></tr><tr><td>0</td><td>0</td></tr></tbody></table></div>
+<ol>
+<li>NOT ($\overline{A}$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$\overline{A}$</th></tr></thead><tbody><tr><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td></tr></tbody></table></div>
+<ol>
+<li>AND ($AB$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$AB$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<ol>
+<li>OR ($A+B$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$A+B$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr></tbody></table></div>
+<ol>
+<li>NAND ($\overline{AB}=\overline{A}+\overline{B}$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$\overline{AB}$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td></tr></tbody></table></div>
+<ol>
+<li>NOR ($\overline{A+B}=\overline{A}\cdot \overline{B}$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$\overline{A+B}$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<ol>
+<li>XOR ($A\oplus B=A\overline{B}+\overline{A}B$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$A\oplus B$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td></tr></tbody></table></div>
+<ol>
+<li>XNOR ($A\odot B=AB+\overline{A}\overline{B}$):</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$A$</th><th>$B$</th><th>$A\odot B$</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>Besides, $$A\oplus B=\overline{A\odot B}$$</p>
+<p>The logic gate symbols are shown in the figure below:</p>
+<p><img src="../attachments/images-12.jpg" alt="images-12" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>We can use <a href="analog_circuits.html">Analog Circuits</a> to achieve them: <img src="../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp" alt="e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56" loading="lazy" decoding="async"></p>
+<p>Basic equations in Boolean algebra:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Name</th><th>OR</th><th>AND</th></tr></thead><tbody><tr><td>Identity Law</td><td>$A+0=A$</td><td>$A\cdot 1=A$</td></tr><tr><td>Dominant Law</td><td>$A+1=1$</td><td>$A\cdot 0=0$</td></tr><tr><td>Idempotent Law</td><td>$A+A=A$</td><td>$A\cdot A=A$</td></tr><tr><td>Complement Law</td><td>$A+\overline{A}=1$</td><td>$A\cdot\overline{A}=0$</td></tr><tr><td>Involution Law</td><td>$\overline{\overline{A}}=A$</td><td></td></tr><tr><td>Commutative Law</td><td>$A+B=B+A$</td><td>$AB=BA$</td></tr><tr><td>Associative Law</td><td>$(A+B)+C=A+(B+C)$</td><td>$(AB)C=A(BC)$</td></tr><tr><td>Distributive Law</td><td>$A(B+C)=AB+AC$</td><td>$A+BC=(A+B)(A+C)$</td></tr><tr><td>Absorption Law</td><td>$A+AB=A$</td><td>$A(A+B)=A$</td></tr><tr><td>De Morgan&#039;s Laws</td><td>$\overline{AB}=\overline{A}+\overline{B}$</td><td>$\overline{A+B}=\overline{A}\cdot\overline{B}$</td></tr></tbody></table></div>
+<h3 id="minterms-and-maxterms">Minterms and Maxterms</h3>
+<p>For $n$ Boolean variables, a <span class="obsidian-red">minterm</span> is a product term in which every variable appears exactly once, either complemented or uncomplemented; a <span class="obsidian-red">maxterm</span> is the dual sum term with the same property. With $n$ variables there are $2^n$ minterms $m_0,m_1,\dots,m_{2^n-1}$ and $2^n$ maxterms $M_0,M_1,\dots,M_{2^n-1}$. The index is read from the term itself: in a minterm a complemented variable contributes 0 and an uncomplemented variable 1; in a maxterm the convention is reversed, so that the two are complementary:</p>
+<p>$$M_i=\overline{m_i}$$</p>
+<p>For three variables $A,B,C$:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$i$</th><th>$ABC$</th><th>Minterm $m_i$</th><th>Maxterm $M_i$</th></tr></thead><tbody><tr><td>0</td><td>000</td><td>$\overline{A}\overline{B}\overline{C}$</td><td>$A+B+C$</td></tr><tr><td>1</td><td>001</td><td>$\overline{A}\overline{B}C$</td><td>$A+B+\overline{C}$</td></tr><tr><td>2</td><td>010</td><td>$\overline{A}B\overline{C}$</td><td>$A+\overline{B}+C$</td></tr><tr><td>3</td><td>011</td><td>$\overline{A}BC$</td><td>$A+\overline{B}+\overline{C}$</td></tr><tr><td>4</td><td>100</td><td>$A\overline{B}\overline{C}$</td><td>$\overline{A}+B+C$</td></tr><tr><td>5</td><td>101</td><td>$A\overline{B}C$</td><td>$\overline{A}+B+\overline{C}$</td></tr><tr><td>6</td><td>110</td><td>$AB\overline{C}$</td><td>$\overline{A}+\overline{B}+C$</td></tr><tr><td>7</td><td>111</td><td>$ABC$</td><td>$\overline{A}+\overline{B}+\overline{C}$</td></tr></tbody></table></div>
+<p>Basic properties:</p>
+<ul>
+<li>Each minterm equals 1 for exactly one input combination; each maxterm equals 0 for exactly one.</li>
+<li>Distinct minterms are disjoint and together cover everything: $m_i\cdot m_j=0$ for $i\ne j$, and $\sum_{i=0}^{2^n-1}m_i=1$.</li>
+<li>Dually, $M_i+M_j=1$ for $i\ne j$, and $\prod_{i=0}^{2^n-1}M_i=0$.</li>
+</ul>
+<p>Since $m_i$ is 1 exactly where the input combination equals $i$, any Boolean function is the sum of the minterms where it takes the value 1, and dually the product of the maxterms where it takes the value 0:</p>
+<p>$$f=\sum_{i:\,f=1}m_i=\prod_{i:\,f=0}M_i$$</p>
+<p>These are the canonical SOP and canonical POS forms; the two index sets are complementary.</p>
+<h3 id="shannon-expansion-theorem">Shannon Expansion Theorem</h3>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Shannon Expansion Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every Boolean function $f(x_1,x_2,\dots,x_{i-1},x_i,x_{i+1},\dots,x_n)$ can be expanded about any variable $x_i$ as $$f=x_if(x_1,x_2,\dots,x_{i-1},1,x_{i+1},\dots,x_n)+\overline{x_i}f(x_1,x_2,\dots,x_{i-1},0,x_{i+1},\dots,x_n)$$</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The Boolean variable $x_i$ has only two possible values, so we check both cases:</p>
+<ul>
+<li>If $x_i=1$: the right-hand side equals $1\cdot f(x_1,\dots,1,\dots,x_n)+0\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,1,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=1$.</li>
+<li>If $x_i=0$: the right-hand side equals $0\cdot f(x_1,\dots,1,\dots,x_n)+1\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,0,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=0$.</li>
+</ul>
+<p>Since both sides agree for $x_i=0$ and $x_i=1$, and these are the only possible values of $x_i$, the identity holds for every input.</p></div></div>
+<p>The two subfunctions are called cofactors, written $f_{x_i}=f(x_1,\dots,x_{i-1},1,x_{i+1},\dots,x_n)$ and $f_{\overline{x_i}}=f(x_1,\dots,x_{i-1},0,x_{i+1},\dots,x_n)$, so the theorem reads compactly as</p>
+<p>$$f=x_if_{x_i}+\overline{x_i}f_{\overline{x_i}}$$</p>
+<p>Repeated application about all $n$ variables decomposes any function into a sum of <a href="#minterms-and-maxterms">minterms</a>, which is why a unique canonical SOP (sum of products) exists for every Boolean function.</p>
+<h2 id="computer-operations-and-coding">Computer Operations and Coding</h2>
+<h3 id="bcd-code">BCD Code</h3>
+<p><span class="obsidian-red">BCD (Binary-Coded Decimal)</span> encodes each decimal digit (0–9) separately with a group of 4 bits, instead of converting the whole number to pure binary. For example,</p>
+<p>$$159\ \rightarrow\ \underbrace{0001}_{1}\ \underbrace{0101}_{5}\ \underbrace{1001}_{9}\quad\text{(BCD)},\qquad 159=10011111_2\quad\text{(pure binary)}$$</p>
+<p>BCD trades storage efficiency for convenience: no binary–decimal conversion circuitry is needed when displaying or inputting decimal numbers, so it is widely used in digital instruments, calculators, and financial systems where exact decimal fractions matter.</p>
+<p>In a weighted BCD code, each of the 4 bits has a fixed weight, and the digit value is the sum of the weights where the bit is 1. Common BCD codes are as follows:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Dec</th><th>8421 Code</th><th>2421 Code</th><th>5421 Code</th><th>Excess-3 Code</th><th>Excess-3 Gray Code</th></tr></thead><tbody><tr><td>0</td><td>0000</td><td>0000</td><td>0000</td><td>0011</td><td>0010</td></tr><tr><td>1</td><td>0001</td><td>0001</td><td>0001</td><td>0100</td><td>0110</td></tr><tr><td>2</td><td>0010</td><td>0010</td><td>0010</td><td>0101</td><td>0111</td></tr><tr><td>3</td><td>0011</td><td>0011</td><td>0011</td><td>0110</td><td>0101</td></tr><tr><td>4</td><td>0100</td><td>0100</td><td>0100</td><td>0111</td><td>0100</td></tr><tr><td>5</td><td>0101</td><td>1011</td><td>1000</td><td>1000</td><td>1100</td></tr><tr><td>6</td><td>0110</td><td>1100</td><td>1001</td><td>1001</td><td>1101</td></tr><tr><td>7</td><td>0111</td><td>1101</td><td>1010</td><td>1010</td><td>1111</td></tr><tr><td>8</td><td>1000</td><td>1110</td><td>1011</td><td>1011</td><td>1110</td></tr><tr><td>9</td><td>1001</td><td>1111</td><td>1100</td><td>1100</td><td>1010</td></tr></tbody></table></div>
+<ul>
+<li>8421 code: the most common BCD code; its weights are the pure-binary place values $8,4,2,1$. The six patterns 1010–1111 are invalid (not used).</li>
+<li>2421 and 5421 codes: weighted codes with weights $2,4,2,1$ and $5,4,2,1$. Since some digits admit more than one valid combination (e.g. in 5421, digit 5 can be 0101 or 1000), each code fixes one canonical form per digit; the table lists the standard ones.</li>
+<li>Excess-3 code: the 8421 code plus $3$ ($0011$). It is unweighted, and being offset from zero it cannot be mistaken for the all-zero pattern.</li>
+<li>Excess-3 Gray code: a cyclic Gray code derived from the Gray code introduced in the next section; adjacent codes, including 9 back to 0, differ in exactly one bit.</li>
+</ul>
+<h3 id="gray-code">Gray Code</h3>
+<p><span class="obsidian-red">Gray code</span> (reflected binary code) is an ordering of binary codewords in which two successive codewords differ in exactly one bit. In a reflected Gray-code sequence, the last and first codewords also differ in one bit, making the sequence cyclic. Compared with pure binary counting, where multiple bits may flip at once (e.g. $0111\rightarrow 1000$) and momentarily appear as spurious values, Gray code reduces transition-related ambiguity by changing only one bit at a time. It does not eliminate all sampling errors. A decimal-digit variant, the Excess-3 Gray code, is listed in <a href="#bcd-code">BCD Code</a>.</p>
+<p>A 3-bit example:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Decimal</th><th>Binary $b_2b_1b_0$</th><th>Gray $g_2g_1g_0$</th></tr></thead><tbody><tr><td>0</td><td>000</td><td>000</td></tr><tr><td>1</td><td>001</td><td>001</td></tr><tr><td>2</td><td>010</td><td>011</td></tr><tr><td>3</td><td>011</td><td>010</td></tr><tr><td>4</td><td>100</td><td>110</td></tr><tr><td>5</td><td>101</td><td>111</td></tr><tr><td>6</td><td>110</td><td>101</td></tr><tr><td>7</td><td>111</td><td>100</td></tr></tbody></table></div>
+<p>Construction (reflect-and-prefix): to build the $n$-bit Gray code, take the $(n-1)$-bit Gray code in order, then append the same list in reverse order (reflection); prefix the first half with 0 and the second half with 1.</p>
+<p>Binary–Gray conversion, for an $n$-bit word with MSB index $n-1$:</p>
+<p>$$\begin{cases}g_{n-1}=b_{n-1}\\ g_i=b_{i+1}\oplus b_i\end{cases},\qquad \begin{cases}b_{n-1}=g_{n-1}\\ b_i=b_{i+1}\oplus g_i\end{cases}\quad(i=0,1,\dots,n-2)$$</p>
+<p>That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of all Gray bits above it. Example: $0101_2\rightarrow 0111_{\text{Gray}}$.</p>
+<p>Typical applications:</p>
+<ul>
+<li>Karnaugh maps: rows and columns are labeled in Gray code order so that physically adjacent cells differ in exactly one variable.</li>
+<li>Rotary encoders: a Gray-coded track reduces the chance of a large apparent jump when a sensor reads near a transition between positions.</li>
+<li>FIFO pointers crossing clock domains: Gray coding limits successive pointer changes to one bit. The receiving clock domain still needs synchronizers and suitable timing constraints.</li>
+</ul>
+<h3 id="addition-and-subtraction-of-signed-integers">Addition and Subtraction of Signed Integers</h3>
+<p>A signed integer takes the leading bit as a sign bit: 1 for negative, 0 for positive. This representation is called <span class="obsidian-red">sign-magnitude</span> (e.g. in 8-bit sign-magnitude, <code>0 0001101 = +13</code> and <code>1 0001101 = −13</code>, where the first bit is the sign bit).</p>
+<p>For a negative number, invert every value bit (sign bit excluded) of its sign-magnitude form; the result is called the <span class="obsidian-red">ones&#039; complement</span> (e.g. the 8-bit ones&#039; complement of −13 is <code>1 1110010</code>). The ones&#039; complement of a positive number equals its sign-magnitude form.</p>
+<p>We further define the <span class="obsidian-red">two&#039;s complement</span> as the ones&#039; complement plus 1 (e.g. the 8-bit two&#039;s complement of −13 is <code>1 1110011</code>). The two&#039;s complement of a negative number $-N$ in $n$ bits equals $2^n-N$.</p>
+<p>It is easy to build $a+b$ in hardware; computing $a-b$ is actually done as $a$ plus the two&#039;s complement of $b$, because</p>
+<p>$$Z=X+(2^n-Y)=2^n+(X-Y)$$</p>
+<p>and the term $2^n$ overflows beyond the $n$-bit range and is discarded automatically.</p>
+<p>Overflow detection: two&#039;s-complement addition overflows only when two numbers of the same sign are added and the result has the opposite sign, i.e.</p>
+<ul>
+<li>positive + positive = negative (result sign bit 1)</li>
+<li>negative + negative = positive (result sign bit 0)</li>
+</ul>
+<p>A positive plus a negative never overflows. Subtraction $a-b$ is converted to $a+(-b)$ and judged the same way.</p>
+<h3 id="ieee-floatingpoint-numbers">IEEE Floating-Point Numbers</h3>
+<p><a href="https://standards.ieee.org/ieee/754/6210/" target="_blank" rel="noopener noreferrer">IEEE 754-2019</a> defines floating-point formats, arithmetic operations, rounding, and exception handling. This section describes its common binary interchange formats.</p>
+<p>A 32-bit binary32 (single-precision) number is stored as the following bit string:</p>
+<p><code>S EEEEEEEE MMMMMMMMMMMMMMMMMMMMMMM</code></p>
+<p>where $S$ is the sign bit, $E$ is the 8-bit biased exponent, and $M$ is the 23-bit fraction; for normalized numbers the actual mantissa is the implicit leading $1$ followed by the fraction, $1.M$.</p>
+<p>To represent both large and small magnitudes with an unsigned stored exponent, the binary32 exponent bias is $B=(01111111)_2$, i.e. $B=2^{e-1}-1=127$ where $e$ is the number of exponent bits. For normal numbers ($1\le E\le254$), the actual exponent is $E-B$. The exponent-field values $E=0$ and $E=255$ are reserved for zeros/subnormal numbers and infinities/NaNs, respectively.</p>
+<p><span class="obsidian-red">NaN (Not a Number)</span> is an important IEEE 754 concept, representing the result of an invalid operation (such as $0/0$, $\infty-\infty$, or the square root of a negative number) that cannot be assigned a real value. Overflow is a different condition: its default result can be $\pm\infty$ or the largest finite value, depending on the rounding direction. The fraction field of a NaN can also carry extra diagnostic information.</p>
+<p>Three commonly discussed binary interchange formats are binary32 (single precision), binary64 (double precision), and binary128 (quadruple precision). IEEE 754 does not require programming languages to name these types <code>float</code> and <code>double</code>.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th></th><th>Single</th><th>Double</th><th>Quadruple</th></tr></thead><tbody><tr><td>$S$ = sign bits</td><td>1</td><td>1</td><td>1</td></tr><tr><td>$E$ = exponent bits</td><td>8</td><td>11</td><td>15</td></tr><tr><td>$L$ = leading bit</td><td>1 (implicit)</td><td>1 (implicit)</td><td>1 (implicit)</td></tr><tr><td>$F$ = fraction bits</td><td>23</td><td>52</td><td>112</td></tr><tr><td>total length</td><td>32</td><td>64</td><td>128</td></tr></tbody></table></div>
+<p>In floating-point addition and subtraction, the exponents of the two operands must be aligned first: if they differ, the number with the smaller exponent is shifted right until the exponents match, then the mantissas are added or subtracted, and finally the result is normalized.</p>
+<p>Floating-point multiplication adds the exponents and multiplies the mantissas; division subtracts the exponents and divides the mantissas.</p>
+<p>Floating-point operations can produce more significant bits than the destination format can store, so the result is rounded to the available precision. Whether to increment the retained bits depends on the rounding mode and the discarded bits, as described below.</p>
+<p>For finite operands under the same rounding mode, floating-point addition and multiplication are commutative, but they are not generally associative: $$\boxed{(a+b)+c\ne a+(b+c)\quad\text{and}\quad(ab)c\ne a(bc)\quad\text{in general}.}$$</p>
+<p>Floating-point operations can also overflow when the rounded result is beyond the finite range. Underflow concerns results tiny relative to the smallest normal value; subnormal numbers allow many such results to remain nonzero.</p>
+<p>Guard, round, and sticky bits: to reduce rounding error, floating-point units keep a few extra bits during mantissa shifts and intermediate computation. The rightmost three are the guard bit $G$, the round bit $R$, and the sticky bit $S$: $G$ and $R$ hold the first two shifted-out bits, while $S$ is the OR of all further shifted-out bits (it becomes 1 whenever any bit beyond $R$ is 1).</p>
+<p>Example: suppose the larger mantissa is <code>1.0110</code> and the smaller mantissa <code>1.1001</code> must be shifted right by 3 bits to align exponents:</p>
+<ul>
+<li>Before shifting: <code>1.1001</code></li>
+<li>After shifting right 3 bits: <code>0.0011</code>, and the shifted-out part is <code>001</code>.</li>
+</ul>
+<p>In the hardware registers, the shifted-out part is not discarded immediately but lands in the $G$, $R$, $S$ positions: $G=0$ (the discarded bit nearest the retained fraction), $R=0$ (the next bit), and $S=1$ (the OR of the remaining discarded bits).</p>
+<p>IEEE 754-2019 defines five rounding-direction attributes for binary arithmetic; the default is round-to-nearest with ties to even:</p>
+<ul>
+<li>If the discarded part $&gt;0.5$ (i.e. <code>G=1</code> and at least one of $R$, $S$ is 1), round up.</li>
+<li>If the discarded part $&lt;0.5$ (i.e. <code>G=0</code>), round down (truncate).</li>
+<li>If the discarded part is exactly $0.5$ (i.e. <code>G=1</code>, $R=0$, $S=0$), look at the least significant bit (LSB): round up if $\mathrm{LSB}=1$, round down if $\mathrm{LSB}=0$.</li>
+</ul>
+<h3 id="ascii-code">ASCII Code</h3>
+<p><span class="obsidian-red">ASCII</span> stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.</p>
+<p><img src="../attachments/ascii-table-alpharithms-scaled-1024x610-optimized.webp" alt="ascii-table-alpharithms-scaled-1024x610" loading="lazy" decoding="async" style="width: min(100%, 600px);"></p>
+<h2 id="combinational-logic-circuit">Combinational Logic Circuit</h2>
+<h3 id="race-and-hazard">Race and Hazard</h3>
+<p>In a real circuit, signals propagate through different paths with different delays. When the relative arrival times affect the output, this is a <span class="obsidian-red">race</span>. A circuit has a <span class="obsidian-red">hazard</span> if such delays can cause an unwanted temporary output change; the resulting pulse is a <span class="obsidian-red">glitch</span>. <img src="../attachments/Screenshot%202026-09-22%20at%2016.26.25.png" alt="Screenshot 2026-09-22 at 16.26.25" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>One way to remove a static-1 hazard in a sum-of-products circuit is to add a redundant consensus term that bridges adjacent 1-cells.</p>
+<p><img src="../attachments/Screenshot%202026-09-22%20at%2016.34.00.png" alt="Screenshot 2026-09-22 at 16.34.00" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Depending on the circuit, an equivalent form can also avoid a hazardous path. The following example uses the identity $C\overline{C}=0$ to rewrite the expression; the implementation must still be checked for hazards.</p>
+<p><img src="../attachments/Screenshot%202026-09-22%20at%2016.35.02.png" alt="Screenshot 2026-09-22 at 16.35.02" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="encoder">Encoder</h3>
+<p>An encoder converts multiple binary codes into a smaller number of codes. For example, the following truth table shows the encoder:</p>
+<p><img src="../attachments/Pasted%20image%2020260922163930.png" alt="Pasted image 20260922163930" loading="lazy" decoding="async" style="width: min(100%, 511px);"> And a common encoder can be shown as:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> encoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I3,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I2,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I1,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I0,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y1,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y0
+);
+
+    <span class="hljs-keyword">assign</span> Y1 = ~(I3 &amp; I2);
+    <span class="hljs-keyword">assign</span> Y0 = ~(I3 &amp; I1);
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>However, it has two disadvantages:</p>
+<ul>
+<li>Cannot distinguish between valid and invalid inputs.</li>
+<li>Cannot handle situations where multiple inputs are valid simultaneously.</li>
+</ul>
+<p>The revised circuit is a priority encoder. Its inputs are active low, as in the truth table above. If multiple inputs are low, it encodes the highest-numbered active input ($I_3$ has the highest priority). The active-low output <code>GS</code> indicates whether any input is valid.</p>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> priority_encoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I3,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I2,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I1,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> I0,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y1,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y0,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> GS
+);
+	
+    <span class="hljs-keyword">assign</span> GS = I3 &amp; I2 &amp; I1 &amp; I0;
+    <span class="hljs-keyword">assign</span> Y1 = ~I3 | (I3 &amp; ~I2);
+    <span class="hljs-keyword">assign</span> Y0 = ~I3 | (I3 &amp; I2 &amp; ~I1);
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Here, <code>GS=0</code> means at least one input is active. The same circuit can be described with <code>casez</code>; <code>?</code> matches either bit value:</p>
+<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> priority_encoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] I,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] Y,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>        GS
+);
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        Y  = <span class="hljs-number">2&#039;b00</span>;
+        GS = <span class="hljs-number">1&#039;b0</span>;
+        <span class="hljs-keyword">casez</span> (I)
+            <span class="hljs-number">4&#039;b0???</span>: Y = <span class="hljs-number">2&#039;b11</span>; <span class="hljs-comment">// I3 has highest priority</span>
+            <span class="hljs-number">4&#039;b10??</span>: Y = <span class="hljs-number">2&#039;b10</span>;
+            <span class="hljs-number">4&#039;b110?</span>: Y = <span class="hljs-number">2&#039;b01</span>;
+            <span class="hljs-number">4&#039;b1110</span>: Y = <span class="hljs-number">2&#039;b00</span>;
+            <span class="hljs-keyword">default</span>: GS = <span class="hljs-number">1&#039;b1</span>; <span class="hljs-comment">// no active input</span>
+        <span class="hljs-keyword">endcase</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<h3 id="decoder">Decoder</h3>
+<p>The decoder is the reverse process of the encoder. Like the following verilog code:</p>
+<div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> A0,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> A1,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y0,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y1,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y2,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y3
+);
+	
+	<span class="hljs-keyword">assign</span> Y0 = E &amp; ~ A0 &amp; ~ A1;
+    <span class="hljs-keyword">assign</span> Y1 = E &amp; A0 &amp; ~ A1;
+    <span class="hljs-keyword">assign</span> Y2 = E &amp; ~ A0 &amp; A1;
+    <span class="hljs-keyword">assign</span> Y3 = E &amp; A0 &amp; A1;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>It can also be described as:</p>
+<div class="code-block" data-code-block="4"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] A,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] Y
+);
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        Y = <span class="hljs-number">4&#039;b0000</span>;
+        <span class="hljs-keyword">if</span> (E)
+            Y[A] = <span class="hljs-number">1&#039;b1</span>;
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.</p>
+<p>A classic MSI implementation is the <span class="obsidian-red">74HC138</span>, a 3-to-8 line decoder of the 74HC (high-speed CMOS) family. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$G_1$</th><th>$\overline{G_{2A}}$, $\overline{G_{2B}}$</th><th>$A_2A_1A_0$</th><th>Outputs</th></tr></thead><tbody><tr><td>0</td><td>X</td><td>XXX</td><td>all 1</td></tr><tr><td>X</td><td>any 1</td><td>XXX</td><td>all 1</td></tr><tr><td>1</td><td>both 0</td><td>$i$</td><td>$\overline{Y_i}=0$</td></tr></tbody></table></div>
+<p><img src="../attachments/images.jpg" alt="images" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Writing $E$ for the overall enable condition and $m_i$ for minterm $i$ of $A_2A_1A_0$, each output is an active-low minterm:</p>
+<p>$$\overline{Y_i}=\overline{E\cdot m_i},\qquad i=0,1,\dots,7$$</p>
+<p>This structure makes the chip useful beyond plain decoding:</p>
+<ul>
+<li>Address decoding: high-order CPU address lines drive $A_2A_1A_0$, and each $\overline{Y_i}$ becomes the chip-select signal of one memory or I/O device, realizing the address mapping described above.</li>
+<li>Logic synthesis: since every output is an active-low minterm, any 3-variable function $f=\sum m_i$ is obtained by feeding the corresponding outputs into one NAND gate: $f=\overline{\overline{Y_{i_1}}\cdot\overline{Y_{i_2}}\cdot\ldots}$.</li>
+<li>Expansion: two chips form a 4-to-16 decoder by driving $G_1$ of the low half and $\overline{G_{2A}}$ of the high half with the fourth address bit.</li>
+</ul>
+<h3 id="multiplexer-mux">Multiplexer (MUX)</h3>
+<p>The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow: <img src="../attachments/Pasted%20image%2020260922174945.png" alt="Pasted image 20260922174945" loading="lazy" decoding="async" style="width: min(100%, 212px);"></p>
+<div class="code-block" data-code-block="5"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux2to1 (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D0,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D1,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Y
+);
+
+    <span class="hljs-keyword">assign</span> Y = S ? D1 : D0;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Generally, $k$ select bits choose one of $2^k$ data inputs. The same Verilog pattern can be parameterized:</p>
+<div class="code-block" data-code-block="6"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux_pow2_to_1 #(
+    <span class="hljs-keyword">parameter</span> <span class="hljs-type">integer</span> SELECT_BITS = <span class="hljs-number">2</span>
+) (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [(<span class="hljs-number">1</span> &lt;&lt; SELECT_BITS)-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] D,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [SELECT_BITS-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]        S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>                          Y
+);
+
+    <span class="hljs-keyword">assign</span> Y = D[S];
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>For <code>SELECT_BITS = 2</code>, this is a 4-to-1 MUX; for <code>SELECT_BITS = 3</code>, it is an 8-to-1 MUX.</p>
+<p>The classic MSI counterpart is the <span class="obsidian-red">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in <a href="#decoder">Decoder</a>. It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$\overline{E}$</th><th>$S_2S_1S_0$</th><th>$Y$</th><th>$\overline{Y}$</th></tr></thead><tbody><tr><td>1</td><td>XXX</td><td>0</td><td>1</td></tr><tr><td>0</td><td>$i$</td><td>$I_i$</td><td>$\overline{I_i}$</td></tr></tbody></table></div>
+<p><img src="../attachments/exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b-optimized.webp" alt="exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>When enabled ($\overline{E}=0$), with $m_i$ the minterms of the select inputs,</p>
+<p>$$Y=\sum_{i=0}^{7}m_iI_i$$</p>
+<h3 id="demultiplexer-demux">Demultiplexer (DEMUX)</h3>
+<p>A demultiplexer routes one data input to one of several outputs. In a 1-to-4 DEMUX, the two select bits $S_1S_0$ choose which output receives $D$; all other outputs are 0.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$S_1S_0$</th><th>$Y_0$</th><th>$Y_1$</th><th>$Y_2$</th><th>$Y_3$</th></tr></thead><tbody><tr><td>00</td><td>$D$</td><td>0</td><td>0</td><td>0</td></tr><tr><td>01</td><td>0</td><td>$D$</td><td>0</td><td>0</td></tr><tr><td>10</td><td>0</td><td>0</td><td>$D$</td><td>0</td></tr><tr><td>11</td><td>0</td><td>0</td><td>0</td><td>$D$</td></tr></tbody></table></div>
+<p>The output equations are</p>
+<p>$$\begin{aligned} Y_0&amp;=D\overline{S_1}\overline{S_0}, &amp;Y_1&amp;=D\overline{S_1}S_0,\\ Y_2&amp;=DS_1\overline{S_0}, &amp;Y_3&amp;=DS_1S_0. \end{aligned}$$</p>
+<div class="code-block" data-code-block="7"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux1to4 (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>       D,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] Y
+);
+
+    <span class="hljs-keyword">assign</span> Y[<span class="hljs-number">0</span>] = D &amp; ~S[<span class="hljs-number">1</span>] &amp; ~S[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">assign</span> Y[<span class="hljs-number">1</span>] = D &amp; ~S[<span class="hljs-number">1</span>] &amp;  S[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">assign</span> Y[<span class="hljs-number">2</span>] = D &amp;  S[<span class="hljs-number">1</span>] &amp; ~S[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">assign</span> Y[<span class="hljs-number">3</span>] = D &amp;  S[<span class="hljs-number">1</span>] &amp;  S[<span class="hljs-number">0</span>];
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>With $k$ select bits, the same idea extends to a 1-to-$2^k$ DEMUX: $Y[S]=D$, and every other output is 0.</p>
+<div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux_1_to_pow2 #(
+    <span class="hljs-keyword">parameter</span> <span class="hljs-type">integer</span> SELECT_BITS = <span class="hljs-number">2</span>
+) (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>                       D,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [SELECT_BITS-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]     S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [(<span class="hljs-number">1</span> &lt;&lt; SELECT_BITS)-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] Y
+);
+
+    <span class="hljs-keyword">localparam</span> <span class="hljs-type">integer</span> OUTPUTS = <span class="hljs-number">1</span> &lt;&lt; SELECT_BITS;
+
+    <span class="hljs-keyword">assign</span> Y = {{(OUTPUTS-<span class="hljs-number">1</span>){<span class="hljs-number">1&#039;b0</span>}}, D} &lt;&lt; S;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74HC138 (<a href="#decoder">Decoder</a>) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.</p>
+<h3 id="comparator">Comparator</h3>
+<p>A <span class="obsidian-red">magnitude comparator</span> compares two binary numbers $A$ and $B$ and outputs whether $A&gt;B$, $A=B$, or $A&lt;B$.</p>
+<p>We can easily build the 1-bit comparator:</p>
+<div class="code-block" data-code-block="9"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_1bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F1,  <span class="hljs-comment">// A &lt; B</span>
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F2,  <span class="hljs-comment">// A = B</span>
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F3   <span class="hljs-comment">// A &gt; B</span>
+);
+
+    <span class="hljs-keyword">assign</span> F1 = ~A &amp; B;
+    <span class="hljs-keyword">assign</span> F2 = A ~^ B;
+    <span class="hljs-keyword">assign</span> F3 = A &amp; ~B;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>And we can build the 2-bit comparator as follows:</p>
+<div class="code-block" data-code-block="10"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_2bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>    [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>    [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]B,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F1,  <span class="hljs-comment">// A &lt; B</span>
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F2,  <span class="hljs-comment">// A = B</span>
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F3   <span class="hljs-comment">// A &gt; B</span>
+);
+
+	<span class="hljs-type">wire</span> F01, F02, F03, F11, F12, F13;
+
+comparator_1bit c0(
+	.A(A[<span class="hljs-number">0</span>]),
+	.B(B[<span class="hljs-number">0</span>]),
+	.F1(F01),
+	.F2(F02),
+	.F3(F03)
+);
+
+comparator_1bit c1(
+	.A(A[<span class="hljs-number">1</span>]),
+	.B(B[<span class="hljs-number">1</span>]),
+	.F1(F11),
+	.F2(F12),
+	.F3(F13)
+);
+
+	<span class="hljs-keyword">assign</span> F1 = (F01 &amp; F12)| F11;
+	<span class="hljs-keyword">assign</span> F2 = F02 &amp; F12;
+	<span class="hljs-keyword">assign</span> F3 = (F03 &amp; F12)| F13;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Similarly, we can make a 4-bit comparator; the integrated 4-bit magnitude comparator chip is the 74x85:</p>
+<p><img src="../attachments/Pasted%20image%2020260929174231.png" alt="Pasted image 20260929174231" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The inputs $I_{A&gt;B},I_{A=B},I_{A&lt;B}$ are for facilitating the cascading of several comparators. When $A$ and $B$ differ in the 4 bits, the outputs depend only on $A$ and $B$, and the cascade inputs are ignored. Only when all 4 bits are equal do the outputs follow the cascade inputs: $F_{A&gt;B}=I_{A&gt;B},F_{A=B}=I_{A=B},F_{A&lt;B}=I_{A&lt;B}$. For standalone use, tie $I_{A=B}=1$ and $I_{A&gt;B}=I_{A&lt;B}=0$.</p>
+<p>We can use 74x85 to do the comparison for larger numbers. <img src="../attachments/Screenshot%202026-09-29%20at%2017.49.09-optimized.webp" alt="Screenshot 2026-09-29 at 17.49.09" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Although the serial (cascade) expansion approach is structurally intuitive, the result must be propagated stage by stage; the more stages involved, the greater the latency, resulting in relatively slow speeds. A better approach is to use parallel expansion.</p>
+<p><img src="../attachments/Pasted%20image%2020260929175017-optimized.webp" alt="Pasted image 20260929175017" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="adder">Adder</h3>
+<p><span class="obsidian-red">Half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.</p>
+<ul>
+<li>Inputs are two 1-bit binary addends $A$ and $B$.</li>
+<li>Outputs are a 1-bit sum $S$, and a 1-bit carry-out $C_O$.</li>
+</ul>
+<div class="code-block" data-code-block="11"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> half_adder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>     S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   C_O
+);
+
+    <span class="hljs-keyword">assign</span> S = A ^ B;
+    <span class="hljs-keyword">assign</span> C_O = A &amp; B;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Logical symbol: <img src="../attachments/Pasted%20image%2020260929175433.png" alt="Pasted image 20260929175433" loading="lazy" decoding="async" style="width: min(100%, 276px);"></p>
+<p><span class="obsidian-red">Full Adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.</p>
+<ul>
+<li>Inputs: Two 1-bit binary addends $A$ and $B$ and a 1-bit carry-in $C_I$.</li>
+<li>Outputs: A 1-bit sum $S$ and a 1-bit carry-out to the next higher-order bit $C_O$.</li>
+</ul>
+<div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> full_adder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   C_I,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>     S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   C_O
+);
+
+	<span class="hljs-type">wire</span> s, C_O1, C_O2;
+
+half_adder a0(
+	.A(A),
+	.B(B),
+	.S(s),
+	.C_O(C_O1)
+);
+
+half_adder a1(
+	.A(s),
+	.B(C_I),
+	.S(S),
+	.C_O(C_O2)
+);
+
+	<span class="hljs-keyword">assign</span> C_O = C_O1 | C_O2;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Logical symbol: <img src="../attachments/Pasted%20image%2020260929175510.png" alt="Pasted image 20260929175510" loading="lazy" decoding="async" style="width: min(100%, 238px);"></p>
+<p>Cascading full adders gives a ripple-carry adder, but the carry must propagate bit by bit, so it costs more time for larger numbers. A classic way to improve the performance is the <span class="obsidian-red">Carry Look-Ahead Adder (CLA)</span>.</p>
+<p>Firstly, calculate:$$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$ Then the carry and sum are $$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$ Expanding the carries recursively expresses every $C_{i+1}$ directly in terms of $P$, $G$, and $C_0$, which removes the ripple.</p>
+<div class="code-block" data-code-block="13"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> cla_4bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]B,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   C_I,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   C_O
+);
+
+	<span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] P, G;
+	<span class="hljs-type">wire</span> [<span class="hljs-number">4</span>:<span class="hljs-number">0</span>] C;
+
+	<span class="hljs-keyword">assign</span> P = A ^ B;
+	<span class="hljs-keyword">assign</span> G = A &amp; B;
+	<span class="hljs-keyword">assign</span> C[<span class="hljs-number">0</span>] = C_I;
+	<span class="hljs-keyword">assign</span> C[<span class="hljs-number">1</span>] = G[<span class="hljs-number">0</span>] | (P[<span class="hljs-number">0</span>] &amp; C[<span class="hljs-number">0</span>]);
+	<span class="hljs-keyword">assign</span> C[<span class="hljs-number">2</span>] = G[<span class="hljs-number">1</span>] | (P[<span class="hljs-number">1</span>] &amp; G[<span class="hljs-number">0</span>]) | (P[<span class="hljs-number">1</span>] &amp; P[<span class="hljs-number">0</span>] &amp; C[<span class="hljs-number">0</span>]);
+	<span class="hljs-keyword">assign</span> C[<span class="hljs-number">3</span>] = G[<span class="hljs-number">2</span>] | (P[<span class="hljs-number">2</span>] &amp; G[<span class="hljs-number">1</span>]) | (P[<span class="hljs-number">2</span>] &amp; P[<span class="hljs-number">1</span>] &amp; G[<span class="hljs-number">0</span>]) | (P[<span class="hljs-number">2</span>] &amp; P[<span class="hljs-number">1</span>] &amp; P[<span class="hljs-number">0</span>] &amp; C[<span class="hljs-number">0</span>]);
+	<span class="hljs-keyword">assign</span> C[<span class="hljs-number">4</span>] = G[<span class="hljs-number">3</span>] | (P[<span class="hljs-number">3</span>] &amp; G[<span class="hljs-number">2</span>]) | (P[<span class="hljs-number">3</span>] &amp; P[<span class="hljs-number">2</span>] &amp; G[<span class="hljs-number">1</span>]) | (P[<span class="hljs-number">3</span>] &amp; P[<span class="hljs-number">2</span>] &amp; P[<span class="hljs-number">1</span>] &amp; G[<span class="hljs-number">0</span>]) | (P[<span class="hljs-number">3</span>] &amp; P[<span class="hljs-number">2</span>] &amp; P[<span class="hljs-number">1</span>] &amp; P[<span class="hljs-number">0</span>] &amp; C[<span class="hljs-number">0</span>]);
+	<span class="hljs-keyword">assign</span> S = P ^ C[<span class="hljs-number">3</span>:<span class="hljs-number">0</span>];
+	<span class="hljs-keyword">assign</span> C_O = C[<span class="hljs-number">4</span>];
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>The integrated 4-bit CLA chip is called 74x283: <img src="../attachments/Pasted%20image%2020260929182843.png" alt="Pasted image 20260929182843" loading="lazy" decoding="async" style="width: min(100%, 237px);"></p>
+<p>We can also use 74x283 to do subtraction. Since $X-Y=X+\overline{Y}+1$, the first adder computes $X-Y$; a carry-out of 1 means no borrow, so $V=\overline{C_1}$ is the borrow (sign) flag ($V=1$ means $X&lt;Y$), not an overflow flag, and the second adder takes the two&#039;s complement of the result only when $V=1$, giving the magnitude $|X-Y|$.</p>
+<div class="code-block" data-code-block="14"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> subtractor_4bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]X,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]Y,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   V     <span class="hljs-comment">// borrow: V = 1 means X &lt; Y</span>
+);
+
+	<span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] S1;
+	<span class="hljs-type">wire</span> C1;
+
+cla_4bit a0(
+	.A(X),
+	.B(~Y),
+	.C_I(<span class="hljs-number">1&#039;b1</span>),
+	.S(S1),
+	.C_O(C1)
+);
+
+	<span class="hljs-keyword">assign</span> V = ~C1;
+
+cla_4bit a1(
+	.A(<span class="hljs-number">4&#039;b0000</span>),
+	.B(S1 ^ {<span class="hljs-number">4</span>{V}}),
+	.C_I(V),
+	.S(S),
+	.C_O()
+);
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<h3 id="multiplier">Multiplier</h3>
+<h3 id="divider">Divider</h3>
+<h2 id="sequential-logic-circuits">Sequential logic circuits</h2>
+<h3 id="latch">Latch</h3>
+<h4 id="sr-latch">SR Latch</h4>
+<h4 id="d-latch">D Latch</h4>
+<h3 id="flipflop-ff">Flip-Flop (FF)</h3>
+<h4 id="sr-ff">SR FF</h4>
+<h4 id="d-ff">D FF</h4>
+<h4 id="t-ff">T FF</h4>
+<h4 id="jk-ff">JK FF</h4>
+<h2 id="fieldprogrammable-gate-array-fpga">Field-Programmable Gate Array (FPGA)</h2>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider","level":2,"text":"Divider"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential logic circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff","level":2,"text":"Flip-Flop (FF)"},{"id":"sr-ff","level":3,"text":"SR FF"},{"id":"d-ff","level":3,"text":"D FF"},{"id":"t-ff","level":3,"text":"T FF"},{"id":"jk-ff","level":3,"text":"JK FF"},{"id":"fieldprogrammable-gate-array-fpga","level":1,"text":"Field-Programmable Gate Array (FPGA)"}]</script>
+        </div>
+
+        <section class="article-comments" aria-labelledby="comments-title">
+            <div class="article-comments-header">
+                <h2 id="comments-title">Comments</h2>
+                <p>Questions, corrections, and reading notes are welcome here.</p>
+            </div>
+            <div class="article-comments-widget" data-comments-repo="jasonxu-cell/jasonxu-cell.github.io"></div>
+            <p class="article-comments-status" hidden>Comments load on the published website.</p>
+            <noscript>Enable JavaScript to view comments.</noscript>
+        </section>
+
+        <script type="text/plain" id="article-markdown">
+# Boolean Algebra
+
+## Basic Operations and Equations
+
+Computers use <span style="color: red;">binary code</span> to perform various operations. In Boolean algebra, each variable only has two possible values: 0 and 1.
+
+Some basic operations:
+
+1. BUFFER ($A$):
+
+| $A$ | $A$ |
+| --- | --- |
+| 1   | 1   |
+| 0   | 0   |
+
+2. NOT ($\overline{A}$):
+
+| $A$ | $\overline{A}$ |
+| --- | -------------- |
+| 1   | 0              |
+| 0   | 1              |
+
+3. AND ($AB$):
+
+| $A$ | $B$ | $AB$ |
+| --- | --- | ---- |
+| 0   | 0   | 0    |
+| 0   | 1   | 0    |
+| 1   | 1   | 1    |
+| 1   | 0   | 0    |
+
+4. OR ($A+B$):
+
+| $A$ | $B$ | $A+B$ |
+| --- | --- | ----- |
+| 0   | 0   | 0     |
+| 0   | 1   | 1     |
+| 1   | 1   | 1     |
+| 1   | 0   | 1     |
+
+5. NAND ($\overline{AB}=\overline{A}+\overline{B}$):
+
+| $A$ | $B$ | $\overline{AB}$ |
+| --- | --- | --------------- |
+| 0   | 0   | 1               |
+| 0   | 1   | 1               |
+| 1   | 1   | 0               |
+| 1   | 0   | 1               |
+
+6. NOR ($\overline{A+B}=\overline{A}\cdot \overline{B}$):
+
+| $A$ | $B$ | $\overline{A+B}$ |
+| --- | --- | ---------------- |
+| 0   | 0   | 1                |
+| 0   | 1   | 0                |
+| 1   | 1   | 0                |
+| 1   | 0   | 0                |
+
+7. XOR ($A\oplus B=A\overline{B}+\overline{A}B$):
+
+| $A$ | $B$ | $A\oplus B$ |
+| --- | --- | ----------- |
+| 0   | 0   | 0           |
+| 0   | 1   | 1           |
+| 1   | 1   | 0           |
+| 1   | 0   | 1           |
+
+8. XNOR ($A\odot B=AB+\overline{A}\overline{B}$):
+
+| $A$ | $B$ | $A\odot B$ |
+| --- | --- | ---------- |
+| 0   | 0   | 1          |
+| 0   | 1   | 0          |
+| 1   | 1   | 1          |
+| 1   | 0   | 0          |
+
+Besides,
+$$A\oplus B=\overline{A\odot B}$$
+
+The logic gate symbols are shown in the figure below:
+
+![images-12](../attachments/images-12.jpg){width=450}
+
+We can use [Analog Circuits](analog_circuits.html) to achieve them:
+![e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56](../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp)
+
+Basic equations in Boolean algebra:
+
+| Name             | OR                                        | AND                                            |
+| ---------------- | ----------------------------------------- | ---------------------------------------------- |
+| Identity Law     | $A+0=A$                                   | $A\cdot 1=A$                                   |
+| Dominant Law     | $A+1=1$                                   | $A\cdot 0=0$                                   |
+| Idempotent Law   | $A+A=A$                                   | $A\cdot A=A$                                   |
+| Complement Law   | $A+\overline{A}=1$                        | $A\cdot\overline{A}=0$                         |
+| Involution Law   | $\overline{\overline{A}}=A$               |                                                |
+| Commutative Law  | $A+B=B+A$                                 | $AB=BA$                                        |
+| Associative Law  | $(A+B)+C=A+(B+C)$                         | $(AB)C=A(BC)$                                  |
+| Distributive Law | $A(B+C)=AB+AC$                            | $A+BC=(A+B)(A+C)$                              |
+| Absorption Law   | $A+AB=A$                                  | $A(A+B)=A$                                     |
+| De Morgan's Laws | $\overline{AB}=\overline{A}+\overline{B}$ | $\overline{A+B}=\overline{A}\cdot\overline{B}$ |
+
+## Minterms and Maxterms
+
+For $n$ Boolean variables, a <span style="color: red;">minterm</span> is a product term in which every variable appears exactly once, either complemented or uncomplemented; a <span style="color: red;">maxterm</span> is the dual sum term with the same property. With $n$ variables there are $2^n$ minterms $m_0,m_1,\dots,m_{2^n-1}$ and $2^n$ maxterms $M_0,M_1,\dots,M_{2^n-1}$. The index is read from the term itself: in a minterm a complemented variable contributes 0 and an uncomplemented variable 1; in a maxterm the convention is reversed, so that the two are complementary:
+
+$$M_i=\overline{m_i}$$
+
+For three variables $A,B,C$:
+
+| $i$ | $ABC$ | Minterm $m_i$                    | Maxterm $M_i$                        |
+| --- | ----- | -------------------------------- | ------------------------------------ |
+| 0   | 000   | $\overline{A}\overline{B}\overline{C}$ | $A+B+C$                        |
+| 1   | 001   | $\overline{A}\overline{B}C$      | $A+B+\overline{C}$                   |
+| 2   | 010   | $\overline{A}B\overline{C}$      | $A+\overline{B}+C$                   |
+| 3   | 011   | $\overline{A}BC$                 | $A+\overline{B}+\overline{C}$        |
+| 4   | 100   | $A\overline{B}\overline{C}$      | $\overline{A}+B+C$                   |
+| 5   | 101   | $A\overline{B}C$                 | $\overline{A}+B+\overline{C}$        |
+| 6   | 110   | $AB\overline{C}$                 | $\overline{A}+\overline{B}+C$        |
+| 7   | 111   | $ABC$                            | $\overline{A}+\overline{B}+\overline{C}$ |
+
+Basic properties:
+
+- Each minterm equals 1 for exactly one input combination; each maxterm equals 0 for exactly one.
+- Distinct minterms are disjoint and together cover everything: $m_i\cdot m_j=0$ for $i\ne j$, and $\sum_{i=0}^{2^n-1}m_i=1$.
+- Dually, $M_i+M_j=1$ for $i\ne j$, and $\prod_{i=0}^{2^n-1}M_i=0$.
+
+Since $m_i$ is 1 exactly where the input combination equals $i$, any Boolean function is the sum of the minterms where it takes the value 1, and dually the product of the maxterms where it takes the value 0:
+
+$$f=\sum_{i:\,f=1}m_i=\prod_{i:\,f=0}M_i$$
+
+These are the canonical SOP and canonical POS forms; the two index sets are complementary.
+
+## Shannon Expansion Theorem
+
+>[!THEOREM] Shannon Expansion Theorem
+>Every Boolean function $f(x_1,x_2,\dots,x_{i-1},x_i,x_{i+1},\dots,x_n)$ can be expanded about any variable $x_i$ as
+>$$f=x_if(x_1,x_2,\dots,x_{i-1},1,x_{i+1},\dots,x_n)+\overline{x_i}f(x_1,x_2,\dots,x_{i-1},0,x_{i+1},\dots,x_n)$$
+
+>[!PROOF]
+>The Boolean variable $x_i$ has only two possible values, so we check both cases:
+>- If $x_i=1$: the right-hand side equals $1\cdot f(x_1,\dots,1,\dots,x_n)+0\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,1,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=1$.
+>- If $x_i=0$: the right-hand side equals $0\cdot f(x_1,\dots,1,\dots,x_n)+1\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,0,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=0$.
+>
+>Since both sides agree for $x_i=0$ and $x_i=1$, and these are the only possible values of $x_i$, the identity holds for every input. 
+
+The two subfunctions are called cofactors, written $f_{x_i}=f(x_1,\dots,x_{i-1},1,x_{i+1},\dots,x_n)$ and $f_{\overline{x_i}}=f(x_1,\dots,x_{i-1},0,x_{i+1},\dots,x_n)$, so the theorem reads compactly as
+
+$$f=x_if_{x_i}+\overline{x_i}f_{\overline{x_i}}$$
+
+Repeated application about all $n$ variables decomposes any function into a sum of [minterms](#minterms-and-maxterms), which is why a unique canonical SOP (sum of products) exists for every Boolean function.
+# Computer Operations and Coding
+
+## BCD Code
+
+<span style="color: red;">BCD (Binary-Coded Decimal)</span> encodes each decimal digit (0–9) separately with a group of 4 bits, instead of converting the whole number to pure binary. For example,
+
+$$159\ \rightarrow\ \underbrace{0001}_{1}\ \underbrace{0101}_{5}\ \underbrace{1001}_{9}\quad\text{(BCD)},\qquad 159=10011111_2\quad\text{(pure binary)}$$
+
+BCD trades storage efficiency for convenience: no binary–decimal conversion circuitry is needed when displaying or inputting decimal numbers, so it is widely used in digital instruments, calculators, and financial systems where exact decimal fractions matter.
+
+In a weighted BCD code, each of the 4 bits has a fixed weight, and the digit value is the sum of the weights where the bit is 1. Common BCD codes are as follows:
+
+| Dec | 8421 Code | 2421 Code | 5421 Code | Excess-3 Code | Excess-3 Gray Code |
+| --- | --------- | --------- | --------- | ------------- | ------------------ |
+| 0   | 0000      | 0000      | 0000      | 0011          | 0010               |
+| 1   | 0001      | 0001      | 0001      | 0100          | 0110               |
+| 2   | 0010      | 0010      | 0010      | 0101          | 0111               |
+| 3   | 0011      | 0011      | 0011      | 0110          | 0101               |
+| 4   | 0100      | 0100      | 0100      | 0111          | 0100               |
+| 5   | 0101      | 1011      | 1000      | 1000          | 1100               |
+| 6   | 0110      | 1100      | 1001      | 1001          | 1101               |
+| 7   | 0111      | 1101      | 1010      | 1010          | 1111               |
+| 8   | 1000      | 1110      | 1011      | 1011          | 1110               |
+| 9   | 1001      | 1111      | 1100      | 1100          | 1010               |
+
+- 8421 code: the most common BCD code; its weights are the pure-binary place values $8,4,2,1$. The six patterns 1010–1111 are invalid (not used).
+- 2421 and 5421 codes: weighted codes with weights $2,4,2,1$ and $5,4,2,1$. Since some digits admit more than one valid combination (e.g. in 5421, digit 5 can be 0101 or 1000), each code fixes one canonical form per digit; the table lists the standard ones.
+- Excess-3 code: the 8421 code plus $3$ ($0011$). It is unweighted, and being offset from zero it cannot be mistaken for the all-zero pattern.
+- Excess-3 Gray code: a cyclic Gray code derived from the Gray code introduced in the next section; adjacent codes, including 9 back to 0, differ in exactly one bit.
+## Gray Code
+
+<span style="color: red;">Gray code</span> (reflected binary code) is an ordering of binary codewords in which two successive codewords differ in exactly one bit. In a reflected Gray-code sequence, the last and first codewords also differ in one bit, making the sequence cyclic. Compared with pure binary counting, where multiple bits may flip at once (e.g. $0111\rightarrow 1000$) and momentarily appear as spurious values, Gray code reduces transition-related ambiguity by changing only one bit at a time. It does not eliminate all sampling errors. A decimal-digit variant, the Excess-3 Gray code, is listed in [BCD Code](#bcd-code).
+
+A 3-bit example:
+
+| Decimal | Binary $b_2b_1b_0$ | Gray $g_2g_1g_0$ |
+| ------- | ------------------ | ---------------- |
+| 0       | 000                | 000              |
+| 1       | 001                | 001              |
+| 2       | 010                | 011              |
+| 3       | 011                | 010              |
+| 4       | 100                | 110              |
+| 5       | 101                | 111              |
+| 6       | 110                | 101              |
+| 7       | 111                | 100              |
+
+Construction (reflect-and-prefix): to build the $n$-bit Gray code, take the $(n-1)$-bit Gray code in order, then append the same list in reverse order (reflection); prefix the first half with 0 and the second half with 1.
+
+Binary–Gray conversion, for an $n$-bit word with MSB index $n-1$:
+
+$$\begin{cases}g_{n-1}=b_{n-1}\\ g_i=b_{i+1}\oplus b_i\end{cases},\qquad \begin{cases}b_{n-1}=g_{n-1}\\ b_i=b_{i+1}\oplus g_i\end{cases}\quad(i=0,1,\dots,n-2)$$
+
+That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of all Gray bits above it. Example: $0101_2\rightarrow 0111_{\text{Gray}}$.
+
+Typical applications:
+
+- Karnaugh maps: rows and columns are labeled in Gray code order so that physically adjacent cells differ in exactly one variable.
+- Rotary encoders: a Gray-coded track reduces the chance of a large apparent jump when a sensor reads near a transition between positions.
+- FIFO pointers crossing clock domains: Gray coding limits successive pointer changes to one bit. The receiving clock domain still needs synchronizers and suitable timing constraints.
+
+## Addition and Subtraction of Signed Integers
+
+A signed integer takes the leading bit as a sign bit: 1 for negative, 0 for positive. This representation is called <span style="color: red;">sign-magnitude</span> (e.g. in 8-bit sign-magnitude, `0 0001101 = +13` and `1 0001101 = −13`, where the first bit is the sign bit).
+
+For a negative number, invert every value bit (sign bit excluded) of its sign-magnitude form; the result is called the <span style="color: red;">ones' complement</span> (e.g. the 8-bit ones' complement of −13 is `1 1110010`). The ones' complement of a positive number equals its sign-magnitude form.
+
+We further define the <span style="color: red;">two's complement</span> as the ones' complement plus 1 (e.g. the 8-bit two's complement of −13 is `1 1110011`). The two's complement of a negative number $-N$ in $n$ bits equals $2^n-N$.
+
+It is easy to build $a+b$ in hardware; computing $a-b$ is actually done as $a$ plus the two's complement of $b$, because
+
+$$Z=X+(2^n-Y)=2^n+(X-Y)$$
+
+and the term $2^n$ overflows beyond the $n$-bit range and is discarded automatically.
+
+Overflow detection: two's-complement addition overflows only when two numbers of the same sign are added and the result has the opposite sign, i.e.
+
+- positive + positive = negative (result sign bit 1)
+- negative + negative = positive (result sign bit 0)
+
+A positive plus a negative never overflows. Subtraction $a-b$ is converted to $a+(-b)$ and judged the same way.
+## IEEE Floating-Point Numbers
+
+[IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) defines floating-point formats, arithmetic operations, rounding, and exception handling. This section describes its common binary interchange formats.
+
+A 32-bit binary32 (single-precision) number is stored as the following bit string:
+
+`S EEEEEEEE MMMMMMMMMMMMMMMMMMMMMMM`
+
+where $S$ is the sign bit, $E$ is the 8-bit biased exponent, and $M$ is the 23-bit fraction; for normalized numbers the actual mantissa is the implicit leading $1$ followed by the fraction, $1.M$.
+
+To represent both large and small magnitudes with an unsigned stored exponent, the binary32 exponent bias is $B=(01111111)_2$, i.e. $B=2^{e-1}-1=127$ where $e$ is the number of exponent bits. For normal numbers ($1\le E\le254$), the actual exponent is $E-B$. The exponent-field values $E=0$ and $E=255$ are reserved for zeros/subnormal numbers and infinities/NaNs, respectively.
+
+<span style="color: red;">NaN (Not a Number)</span> is an important IEEE 754 concept, representing the result of an invalid operation (such as $0/0$, $\infty-\infty$, or the square root of a negative number) that cannot be assigned a real value. Overflow is a different condition: its default result can be $\pm\infty$ or the largest finite value, depending on the rounding direction. The fraction field of a NaN can also carry extra diagnostic information.
+
+Three commonly discussed binary interchange formats are binary32 (single precision), binary64 (double precision), and binary128 (quadruple precision). IEEE 754 does not require programming languages to name these types `float` and `double`.
+
+|                     | Single       | Double       | Quadruple    |
+| ------------------- | ------------ | ------------ | ------------ |
+| $S$ = sign bits     | 1            | 1            | 1            |
+| $E$ = exponent bits | 8            | 11           | 15           |
+| $L$ = leading bit   | 1 (implicit) | 1 (implicit) | 1 (implicit) |
+| $F$ = fraction bits | 23           | 52           | 112          |
+| total length        | 32           | 64           | 128          |
+
+In floating-point addition and subtraction, the exponents of the two operands must be aligned first: if they differ, the number with the smaller exponent is shifted right until the exponents match, then the mantissas are added or subtracted, and finally the result is normalized.
+
+Floating-point multiplication adds the exponents and multiplies the mantissas; division subtracts the exponents and divides the mantissas.
+
+Floating-point operations can produce more significant bits than the destination format can store, so the result is rounded to the available precision. Whether to increment the retained bits depends on the rounding mode and the discarded bits, as described below.
+
+For finite operands under the same rounding mode, floating-point addition and multiplication are commutative, but they are not generally associative:
+$$\boxed{(a+b)+c\ne a+(b+c)\quad\text{and}\quad(ab)c\ne a(bc)\quad\text{in general}.}$$
+
+Floating-point operations can also overflow when the rounded result is beyond the finite range. Underflow concerns results tiny relative to the smallest normal value; subnormal numbers allow many such results to remain nonzero.
+
+Guard, round, and sticky bits: to reduce rounding error, floating-point units keep a few extra bits during mantissa shifts and intermediate computation. The rightmost three are the guard bit $G$, the round bit $R$, and the sticky bit $S$: $G$ and $R$ hold the first two shifted-out bits, while $S$ is the OR of all further shifted-out bits (it becomes 1 whenever any bit beyond $R$ is 1).
+
+Example: suppose the larger mantissa is `1.0110` and the smaller mantissa `1.1001` must be shifted right by 3 bits to align exponents:
+
+- Before shifting: `1.1001`
+- After shifting right 3 bits: `0.0011`, and the shifted-out part is `001`.
+
+In the hardware registers, the shifted-out part is not discarded immediately but lands in the $G$, $R$, $S$ positions: $G=0$ (the discarded bit nearest the retained fraction), $R=0$ (the next bit), and $S=1$ (the OR of the remaining discarded bits).
+
+IEEE 754-2019 defines five rounding-direction attributes for binary arithmetic; the default is round-to-nearest with ties to even:
+
+- If the discarded part $>0.5$ (i.e. `G=1` and at least one of $R$, $S$ is 1), round up.
+- If the discarded part $<0.5$ (i.e. `G=0`), round down (truncate).
+- If the discarded part is exactly $0.5$ (i.e. `G=1`, $R=0$, $S=0$), look at the least significant bit (LSB): round up if $\mathrm{LSB}=1$, round down if $\mathrm{LSB}=0$.
+
+## ASCII Code
+
+<span style="color: red;">ASCII</span> stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.
+
+![ascii-table-alpharithms-scaled-1024x610](../attachments/ascii-table-alpharithms-scaled-1024x610-optimized.webp){width=600}
+
+# Combinational Logic Circuit
+
+## Race and Hazard
+
+In a real circuit, signals propagate through different paths with different delays. When the relative arrival times affect the output, this is a <span style="color: red;">race</span>. A circuit has a <span style="color: red;">hazard</span> if such delays can cause an unwanted temporary output change; the resulting pulse is a <span style="color: red;">glitch</span>.
+![Screenshot 2026-09-22 at 16.26.25](../attachments/Screenshot%202026-09-22%20at%2016.26.25.png){width=450}
+
+One way to remove a static-1 hazard in a sum-of-products circuit is to add a redundant consensus term that bridges adjacent 1-cells.
+
+![Screenshot 2026-09-22 at 16.34.00](../attachments/Screenshot%202026-09-22%20at%2016.34.00.png){width=450}
+
+Depending on the circuit, an equivalent form can also avoid a hazardous path. The following example uses the identity $C\overline{C}=0$ to rewrite the expression; the implementation must still be checked for hazards.
+
+![Screenshot 2026-09-22 at 16.35.02](../attachments/Screenshot%202026-09-22%20at%2016.35.02.png){width=450}
+## Encoder
+
+An encoder converts multiple binary codes into a smaller number of codes. For example, the following truth table shows the encoder:
+
+![Pasted image 20260922163930](../attachments/Pasted%20image%2020260922163930.png){width=511}
+And a common encoder can be shown as:
+
+```verilog
+module encoder (
+    input  wire I3,
+    input  wire I2,
+    input  wire I1,
+    input  wire I0,
+    output wire Y1,
+    output wire Y0
+);
+
+    assign Y1 = ~(I3 & I2);
+    assign Y0 = ~(I3 & I1);
+
+endmodule
+```
+
+However, it has two disadvantages:
+- Cannot distinguish between valid and invalid inputs.
+- Cannot handle situations where multiple inputs are valid simultaneously.
+
+The revised circuit is a priority encoder. Its inputs are active low, as in the truth table above. If multiple inputs are low, it encodes the highest-numbered active input ($I_3$ has the highest priority). The active-low output `GS` indicates whether any input is valid.
+
+```verilog
+module priority_encoder (
+    input  wire I3,
+    input  wire I2,
+    input  wire I1,
+    input  wire I0,
+    output wire Y1,
+    output wire Y0,
+    output wire GS
+);
+	
+    assign GS = I3 & I2 & I1 & I0;
+    assign Y1 = ~I3 | (I3 & ~I2);
+    assign Y0 = ~I3 | (I3 & I2 & ~I1);
+
+endmodule
+```
+
+Here, `GS=0` means at least one input is active. The same circuit can be described with `casez`; `?` matches either bit value:
+
+```verilog
+module priority_encoder (
+    input  wire [3:0] I,
+    output reg  [1:0] Y,
+    output reg        GS
+);
+
+    always @(*) begin
+        Y  = 2'b00;
+        GS = 1'b0;
+        casez (I)
+            4'b0???: Y = 2'b11; // I3 has highest priority
+            4'b10??: Y = 2'b10;
+            4'b110?: Y = 2'b01;
+            4'b1110: Y = 2'b00;
+            default: GS = 1'b1; // no active input
+        endcase
+    end
+
+endmodule
+```
+## Decoder
+
+The decoder is the reverse process of the encoder. Like the following verilog code:
+
+```verilog
+module decoder (
+    input  wire E,
+    input  wire A0,
+    input  wire A1,
+    output wire Y0,
+    output wire Y1,
+    output wire Y2,
+    output wire Y3
+);
+	
+	assign Y0 = E & ~ A0 & ~ A1;
+    assign Y1 = E & A0 & ~ A1;
+    assign Y2 = E & ~ A0 & A1;
+    assign Y3 = E & A0 & A1;
+
+endmodule
+```
+
+It can also be described as:
+
+```verilog
+module decoder (
+    input  wire E,
+    input  wire [1:0] A,
+    output reg  [3:0] Y
+);
+
+    always @(*) begin
+        Y = 4'b0000;
+        if (E)
+            Y[A] = 1'b1;
+    end
+
+endmodule
+```
+
+In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.
+
+A classic MSI implementation is the <span style="color: red;">74HC138</span>, a 3-to-8 line decoder of the 74HC (high-speed CMOS) family. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:
+
+| $G_1$ | $\overline{G_{2A}}$, $\overline{G_{2B}}$ | $A_2A_1A_0$ | Outputs            |
+| ----- | ---------------------------------------- | ----------- | ------------------ |
+| 0     | X                                        | XXX         | all 1              |
+| X     | any 1                                    | XXX         | all 1              |
+| 1     | both 0                                   | $i$         | $\overline{Y_i}=0$ |
+![images](../attachments/images.jpg){width=450}
+
+Writing $E$ for the overall enable condition and $m_i$ for minterm $i$ of $A_2A_1A_0$, each output is an active-low minterm:
+
+$$\overline{Y_i}=\overline{E\cdot m_i},\qquad i=0,1,\dots,7$$
+
+This structure makes the chip useful beyond plain decoding:
+
+- Address decoding: high-order CPU address lines drive $A_2A_1A_0$, and each $\overline{Y_i}$ becomes the chip-select signal of one memory or I/O device, realizing the address mapping described above.
+- Logic synthesis: since every output is an active-low minterm, any 3-variable function $f=\sum m_i$ is obtained by feeding the corresponding outputs into one NAND gate: $f=\overline{\overline{Y_{i_1}}\cdot\overline{Y_{i_2}}\cdot\ldots}$.
+- Expansion: two chips form a 4-to-16 decoder by driving $G_1$ of the low half and $\overline{G_{2A}}$ of the high half with the fourth address bit.
+## Multiplexer (MUX)
+
+The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow:
+![Pasted image 20260922174945](../attachments/Pasted%20image%2020260922174945.png){width=212}
+
+```verilog
+module mux2to1 (
+    input  wire D0,
+    input  wire D1,
+    input  wire S,
+    output wire Y
+);
+
+    assign Y = S ? D1 : D0;
+
+endmodule
+```
+
+Generally, $k$ select bits choose one of $2^k$ data inputs. The same Verilog pattern can be parameterized:
+
+```verilog
+module mux_pow2_to_1 #(
+    parameter integer SELECT_BITS = 2
+) (
+    input  wire [(1 << SELECT_BITS)-1:0] D,
+    input  wire [SELECT_BITS-1:0]        S,
+    output wire                          Y
+);
+
+    assign Y = D[S];
+
+endmodule
+```
+
+For `SELECT_BITS = 2`, this is a 4-to-1 MUX; for `SELECT_BITS = 3`, it is an 8-to-1 MUX.
+
+The classic MSI counterpart is the <span style="color: red;">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in [Decoder](#decoder). It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:
+
+| $\overline{E}$ | $S_2S_1S_0$ | $Y$   | $\overline{Y}$   |
+| -------------- | ----------- | ----- | ---------------- |
+| 1              | XXX         | 0     | 1                |
+| 0              | $i$         | $I_i$ | $\overline{I_i}$ |
+![exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b](../attachments/exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b-optimized.webp){width=450}
+
+When enabled ($\overline{E}=0$), with $m_i$ the minterms of the select inputs,
+
+$$Y=\sum_{i=0}^{7}m_iI_i$$
+## Demultiplexer (DEMUX)
+
+A demultiplexer routes one data input to one of several outputs. In a 1-to-4 DEMUX, the two select bits $S_1S_0$ choose which output receives $D$; all other outputs are 0.
+
+| $S_1S_0$ | $Y_0$ | $Y_1$ | $Y_2$ | $Y_3$ |
+| -------- | ----- | ----- | ----- | ----- |
+| 00       | $D$   | 0     | 0     | 0     |
+| 01       | 0     | $D$   | 0     | 0     |
+| 10       | 0     | 0     | $D$   | 0     |
+| 11       | 0     | 0     | 0     | $D$   |
+
+The output equations are
+
+$$\begin{aligned}
+Y_0&=D\overline{S_1}\overline{S_0}, &Y_1&=D\overline{S_1}S_0,\\
+Y_2&=DS_1\overline{S_0}, &Y_3&=DS_1S_0.
+\end{aligned}$$
+
+```verilog
+module demux1to4 (
+    input  wire       D,
+    input  wire [1:0] S,
+    output wire [3:0] Y
+);
+
+    assign Y[0] = D & ~S[1] & ~S[0];
+    assign Y[1] = D & ~S[1] &  S[0];
+    assign Y[2] = D &  S[1] & ~S[0];
+    assign Y[3] = D &  S[1] &  S[0];
+
+endmodule
+```
+
+With $k$ select bits, the same idea extends to a 1-to-$2^k$ DEMUX: $Y[S]=D$, and every other output is 0.
+```verilog
+module demux_1_to_pow2 #(
+    parameter integer SELECT_BITS = 2
+) (
+    input  wire                       D,
+    input  wire [SELECT_BITS-1:0]     S,
+    output wire [(1 << SELECT_BITS)-1:0] Y
+);
+
+    localparam integer OUTPUTS = 1 << SELECT_BITS;
+
+    assign Y = {{(OUTPUTS-1){1'b0}}, D} << S;
+
+endmodule
+```
+
+A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74HC138 ([Decoder](#decoder)) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.
+## Comparator
+
+A <span style="color: red;">magnitude comparator</span> compares two binary numbers $A$ and $B$ and outputs whether $A>B$, $A=B$, or $A<B$.
+
+We can easily build the 1-bit comparator:
+
+```verilog
+module comparator_1bit (
+    input  wire     A,
+    input  wire     B,
+    output wire    F1,  // A < B
+    output wire    F2,  // A = B
+    output wire    F3   // A > B
+);
+
+    assign F1 = ~A & B;
+    assign F2 = A ~^ B;
+    assign F3 = A & ~B;
+
+endmodule
+```
+
+And we can build the 2-bit comparator as follows:
+```verilog
+module comparator_2bit (
+    input  wire    [1:0]A,
+    input  wire    [1:0]B,
+    output wire    F1,  // A < B
+    output wire    F2,  // A = B
+    output wire    F3   // A > B
+);
+
+	wire F01, F02, F03, F11, F12, F13;
+
+comparator_1bit c0(
+	.A(A[0]),
+	.B(B[0]),
+	.F1(F01),
+	.F2(F02),
+	.F3(F03)
+);
+
+comparator_1bit c1(
+	.A(A[1]),
+	.B(B[1]),
+	.F1(F11),
+	.F2(F12),
+	.F3(F13)
+);
+
+	assign F1 = (F01 & F12)| F11;
+	assign F2 = F02 & F12;
+	assign F3 = (F03 & F12)| F13;
+
+endmodule
+```
+
+Similarly, we can make a 4-bit comparator; the integrated 4-bit magnitude comparator chip is the 74x85:
+
+![Pasted image 20260929174231](../attachments/Pasted%20image%2020260929174231.png){width=450}
+The inputs $I_{A>B},I_{A=B},I_{A<B}$ are for facilitating the cascading of several comparators. When $A$ and $B$ differ in the 4 bits, the outputs depend only on $A$ and $B$, and the cascade inputs are ignored. Only when all 4 bits are equal do the outputs follow the cascade inputs: $F_{A>B}=I_{A>B},F_{A=B}=I_{A=B},F_{A<B}=I_{A<B}$. For standalone use, tie $I_{A=B}=1$ and $I_{A>B}=I_{A<B}=0$.
+
+We can use 74x85 to do the comparison for larger numbers.
+![Screenshot 2026-09-29 at 17.49.09](../attachments/Screenshot%202026-09-29%20at%2017.49.09-optimized.webp){width=450}
+
+Although the serial (cascade) expansion approach is structurally intuitive, the result must be propagated stage by stage; the more stages involved, the greater the latency, resulting in relatively slow speeds. A better approach is to use parallel expansion.
+
+![Pasted image 20260929175017](../attachments/Pasted%20image%2020260929175017-optimized.webp){width=450}
+## Adder
+
+<span style="color: red;">Half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.
+- Inputs are two 1-bit binary addends $A$ and $B$.
+- Outputs are a 1-bit sum $S$, and a 1-bit carry-out $C_O$.
+
+```verilog
+module half_adder (
+    input  wire     A,
+    input  wire     B,
+    output wire     S,
+    output wire   C_O
+);
+
+    assign S = A ^ B;
+    assign C_O = A & B;
+
+endmodule
+```
+
+Logical symbol:
+![Pasted image 20260929175433](../attachments/Pasted%20image%2020260929175433.png){width=276}
+
+<span style="color: red;">Full Adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.
+- Inputs: Two 1-bit binary addends $A$ and $B$ and a 1-bit carry-in $C_I$.
+- Outputs: A 1-bit sum $S$ and a 1-bit carry-out to the next higher-order bit $C_O$.
+
+```verilog
+module full_adder (
+    input  wire     A,
+    input  wire     B,
+    input  wire   C_I,
+    output wire     S,
+    output wire   C_O
+);
+
+	wire s, C_O1, C_O2;
+
+half_adder a0(
+	.A(A),
+	.B(B),
+	.S(s),
+	.C_O(C_O1)
+);
+
+half_adder a1(
+	.A(s),
+	.B(C_I),
+	.S(S),
+	.C_O(C_O2)
+);
+
+	assign C_O = C_O1 | C_O2;
+
+endmodule
+```
+
+Logical symbol:
+![Pasted image 20260929175510](../attachments/Pasted%20image%2020260929175510.png){width=238}
+
+Cascading full adders gives a ripple-carry adder, but the carry must propagate bit by bit, so it costs more time for larger numbers. A classic way to improve the performance is the <span style="color: red;">Carry Look-Ahead Adder (CLA)</span>.
+
+Firstly, calculate:$$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$
+Then the carry and sum are $$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$
+Expanding the carries recursively expresses every $C_{i+1}$ directly in terms of $P$, $G$, and $C_0$, which removes the ripple.
+```verilog
+module cla_4bit (
+    input  wire   [3:0]A,
+    input  wire   [3:0]B,
+    input  wire   C_I,
+    output wire   [3:0]S,
+    output wire   C_O
+);
+
+	wire [3:0] P, G;
+	wire [4:0] C;
+
+	assign P = A ^ B;
+	assign G = A & B;
+	assign C[0] = C_I;
+	assign C[1] = G[0] | (P[0] & C[0]);
+	assign C[2] = G[1] | (P[1] & G[0]) | (P[1] & P[0] & C[0]);
+	assign C[3] = G[2] | (P[2] & G[1]) | (P[2] & P[1] & G[0]) | (P[2] & P[1] & P[0] & C[0]);
+	assign C[4] = G[3] | (P[3] & G[2]) | (P[3] & P[2] & G[1]) | (P[3] & P[2] & P[1] & G[0]) | (P[3] & P[2] & P[1] & P[0] & C[0]);
+	assign S = P ^ C[3:0];
+	assign C_O = C[4];
+
+endmodule
+```
+
+The integrated 4-bit CLA chip is called 74x283:
+![Pasted image 20260929182843](../attachments/Pasted%20image%2020260929182843.png){width=237}
+
+We can also use 74x283 to do subtraction. Since $X-Y=X+\overline{Y}+1$, the first adder computes $X-Y$; a carry-out of 1 means no borrow, so $V=\overline{C_1}$ is the borrow (sign) flag ($V=1$ means $X<Y$), not an overflow flag, and the second adder takes the two's complement of the result only when $V=1$, giving the magnitude $|X-Y|$.
+
+```verilog
+module subtractor_4bit (
+    input  wire   [3:0]X,
+    input  wire   [3:0]Y,
+    output wire   [3:0]S,
+    output wire   V     // borrow: V = 1 means X < Y
+);
+
+	wire [3:0] S1;
+	wire C1;
+
+cla_4bit a0(
+	.A(X),
+	.B(~Y),
+	.C_I(1'b1),
+	.S(S1),
+	.C_O(C1)
+);
+
+	assign V = ~C1;
+
+cla_4bit a1(
+	.A(4'b0000),
+	.B(S1 ^ {4{V}}),
+	.C_I(V),
+	.S(S),
+	.C_O()
+);
+
+endmodule
+```
+
+## Multiplier
+
+## Divider
+
+# Sequential logic circuits
+
+## Latch
+
+### SR Latch
+### D Latch
+
+## Flip-Flop (FF)
+
+### SR FF
+### D FF
+
+### T FF
+### JK FF
+
+# Field-Programmable Gate Array (FPGA)
+        </script>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 Yang</p>
+        <nav class="footer-links footer-contact-icons" aria-label="Contact links">
+            <a
+                href="mailto:xu_ustc@mail.ustc.edu.cn"
+                class="footer-contact-icon"
+                aria-label="Email Yang"
+                title="Email"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg>
+            </a>
+            <a
+                href="https://github.com/jasonxu-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Yang on GitHub"
+                title="GitHub"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
+            </a>
+            <a
+                href="https://orcid.org/0009-0004-5519-0849"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="ORCID"
+                title="ORCID"
+            >
+                <svg class="footer-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+            </a>
+            <a
+                href="https://steamcommunity.com/profiles/76561199724275684/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-contact-icon"
+                aria-label="Steam"
+                title="Steam"
+            >
+                <svg class="footer-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.2 2.2 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.22 2.22 0 0 1-1.312-1.568L.33 10.333Z"/><path d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.7 1.7 0 0 0-1.263-.02l1.023.424a1.261 1.261 0 1 1-.97 2.33l-.99-.41a1.7 1.7 0 0 0 .882.84Zm3.726-6.687a2.03 2.03 0 0 0 2.027 2.029 2.03 2.03 0 0 0 2.027-2.029 2.03 2.03 0 0 0-2.027-2.027 2.03 2.03 0 0 0-2.027 2.027m2.03-1.527a1.524 1.524 0 1 1-.002 3.048 1.524 1.524 0 0 1 .002-3.048"/></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
+</body>
+</html>

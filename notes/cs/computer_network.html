@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Computer Network, with explanations, derivations, and examples.">
     <meta property="og:title" content="Computer Network | Yang">
+    <meta property="og:description" content="Study notes by Yang on Computer Network, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/cs/computer_network.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Computer Network | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Computer Network, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Computer Network | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../cs.html" class="article-back-link">&larr; Computer Science</a>
             <h1>Computer Network</h1>
@@ -55,7 +60,539 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="internet-overview">Internet Overview</h2>
+<h3 id="components">Components</h3>
+<p><img src="../attachments/Pasted%20image%2020260831081755-optimized.webp" alt="Pasted image 20260831081755" loading="lazy" decoding="async" style="width: min(100%, 399px);"></p>
+<ul>
+<li>End systems (hosts) run network applications, such as computers, phones, and servers.</li>
+<li>Communication links carry bits. Their key metric is the transmission rate $R$, measured in bits per second (bps).</li>
+<li>Packet switches, including routers and link-layer switches, forward packets.</li>
+<li>Internet Service Providers (ISPs) operate networks of links and switching equipment that provide Internet access. Independently operated ISPs interconnect to form a &quot;network of networks.&quot;</li>
+</ul>
+<p>A <span class="obsidian-red">protocol</span> defines:</p>
+<ol>
+<li>The types of messages exchanged;</li>
+<li>The syntax and meaning of message fields;</li>
+<li>When messages are sent;</li>
+<li>The actions taken when a message is received or another event occurs.</li>
+</ol>
+<p>Internet protocols are primarily standardized by the Internet Engineering Task Force (IETF) and published as Request for Comments (RFCs). Transmission Control Protocol (TCP) and Internet Protocol (IP) are two of the best-known protocols, so the collection of Internet protocols is commonly called the TCP/IP protocol suite.</p>
+<h3 id="two-views-of-the-internet">Two Views of the Internet</h3>
+<ul>
+<li>Structural view: The Internet is a network of networks that communicate using the TCP/IP protocol suite.</li>
+<li>Service view: The Internet is an infrastructure that provides communication services to distributed applications. Applications normally access these services through the socket API.</li>
+</ul>
+<p>The Internet has no single central management authority. Instead, standards organizations, regional Internet registries, ISPs, and other parties coordinate its operation.</p>
+<h3 id="network-edge-and-access-networks">Network Edge and Access Networks</h3>
+<p>An access network connects an end system to its edge router.</p>
+<h4 id="residential-access-digital-subscriber-line-dsl">Residential Access: Digital Subscriber Line (DSL)</h4>
+<p><img src="../attachments/Screenshot%202026-08-31%20at%2008.44.20-optimized.webp" alt="Screenshot 2026-08-31 at 08.44.20" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>DSL is commonly provided by telephone companies over existing copper telephone lines:</p>
+<ul>
+<li>A DSL modem modulates and demodulates data signals.</li>
+<li>A splitter separates voice and data signals at the customer premises.</li>
+<li>A DSLAM aggregates multiple DSL lines at the provider side.</li>
+</ul>
+<p>DSL is typically asymmetric: downstream rates are higher than upstream rates. Actual performance depends on the DSL technology, line length, and line quality.</p>
+<h4 id="residential-access-cable-networks-and-hfc">Residential Access: Cable Networks and HFC</h4>
+<p><img src="../attachments/Screenshot%202026-08-31%20at%2008.45.12-optimized.webp" alt="Screenshot 2026-08-31 at 08.45.12" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p><img src="../attachments/Screenshot%202026-08-31%20at%2008.47.32-optimized.webp" alt="Screenshot 2026-08-31 at 08.47.32" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>HFC (Hybrid Fiber Coax) combines a fiber backbone with coaxial cable at the network edge. Its main components include cable modems, splitters, and a Cable Modem Termination System (CMTS).</p>
+<p>Households on the same access segment share bandwidth, so actual performance depends on the number of active users and their traffic.</p>
+<h4 id="residential-access-fiber-to-the-home-ftth">Residential Access: Fiber to the Home (FTTH)</h4>
+<p>Fiber runs directly to the residence, providing high capacity and low signal attenuation. A Passive Optical Network (PON) commonly shares provider-side fiber infrastructure among several customers.</p>
+<h4 id="enterprise-and-campus-access-ethernet">Enterprise and Campus Access: Ethernet</h4>
+<p><img src="../attachments/Screenshot%202026-08-31%20at%2008.48.11-optimized.webp" alt="Screenshot 2026-08-31 at 08.48.11" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Ethernet switches and links form the local area network.</li>
+<li>Common link rates include 100 Mbps, 1 Gbps, 10 Gbps, and higher.</li>
+<li>End systems connect through switches and reach external networks through a router.</li>
+</ul>
+<h4 id="wireless-access">Wireless Access</h4>
+<ul>
+<li>Wi-Fi (wireless LAN): End systems connect to a wired network through an access point (AP). Its range is usually tens of meters, and multiple devices share the wireless channel.</li>
+<li>Cellular network: End systems connect through an operator&#039;s base stations. Cellular networks cover larger areas and support mobility management.</li>
+</ul>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Note</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A link&#039;s advertised rate is not the same as application throughput. Protocol overhead, signal quality, contention, congestion, and server performance all affect the observed rate.</p></div></div>
+<h3 id="network-core">Network Core</h3>
+<h4 id="forwarding-and-routing">Forwarding and Routing</h4>
+<p><img src="../attachments/Screenshot%202026-09-05%20at%2011.22.24-optimized.webp" alt="Screenshot 2026-09-05 at 11.22.24" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li><span class="obsidian-red">Forwarding</span> is a data-plane function. A router uses its forwarding table to move a packet from an input port to the appropriate output port.</li>
+<li><span class="obsidian-red">Routing</span> is a control-plane function. Routing algorithms and protocols compute paths and use them to build and update forwarding tables.</li>
+</ul>
+<p>Routing is like planning a route; forwarding is like choosing the correct exit at each intersection.</p>
+<h4 id="circuit-switching-and-packet-switching">Circuit Switching and Packet Switching</h4>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Property</th><th>Circuit switching</th><th>Packet switching</th></tr></thead><tbody><tr><td>Resources</td><td>Reserved end to end</td><td>Shared on demand</td></tr><tr><td>Typical use</td><td>Traditional telephone networks</td><td>The Internet</td></tr><tr><td>Advantage</td><td>Predictable performance</td><td>High utilization; efficient for bursty traffic</td></tr><tr><td>Cost</td><td>Reserved resources are wasted when idle</td><td>Queuing, loss, and jitter may occur</td></tr></tbody></table></div>
+<p><img src="../attachments/Screenshot%202026-09-14%20at%2010.53.20-optimized.webp" alt="Screenshot 2026-09-14 at 10.53.20" loading="lazy" decoding="async" style="width: min(100%, 461px);"></p>
+<p>Circuit switching establishes a dedicated end-to-end connection before data transfer. The network reserves transmission resources on every link along the path, rather than reserving an entire cable. In the illustrated example, if each link divides its capacity equally among four circuits, each circuit receives one quarter of that link&#039;s transmission rate.</p>
+<p>Packet switching divides an application message into packets. Routers usually use store-and-forward transmission: a router receives a complete packet before sending it over the next link.</p>
+<p>Let each packet contain $L$ bits and let the link transmission rate be $R$ bit/s:</p>
+<ul>
+<li>The transmission delay of one packet is $\frac{L}{R}$.</li>
+<li>If a path contains $N$ links, all with rate $R$, one packet takes $\frac{NL}{R}$ end to end when propagation, processing, and queuing delays are ignored.</li>
+<li>Sending $P$ equal-sized packets over the path with pipelining takes:</li>
+</ul>
+<p>$$ \boxed{\frac{(N+P-1)L}{R}} $$</p>
+<h4 id="network-of-networks">Network of Networks</h4>
+<p>The Internet interconnects many <span class="obsidian-red">autonomous systems (ASs)</span>. An AS is a network or group of networks under one administrative authority with a common routing policy. Many ISPs operate ASs, but an AS can also belong to an enterprise or another organization.</p>
+<p>If two ASs need to exchange traffic, the traffic may have to pass through an upstream transit provider. This can make the path longer, and the ASs may pay transit fees.</p>
+<p>An Internet Exchange Point (IXP) lets multiple ASs connect to a shared switching platform and establish peering arrangements. Direct peering can shorten paths and reduce reliance on paid transit.</p>
+<p><img src="../attachments/Screenshot%202026-09-15%20at%2014.10.01-optimized.webp" alt="Screenshot 2026-09-15 at 14.10.01" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="delay-packet-loss-and-throughput">Delay, Packet Loss, and Throughput</h4>
+<p>The total delay at one network node is:</p>
+<p>$$ \boxed{d_{nodal}=d_{proc}+d_{queue}+d_{trans}+d_{prop}} $$</p>
+<ul>
+<li><span class="obsidian-red">Processing delay</span> $d_{proc}$: Time to inspect the header, check for errors, and determine the output port.</li>
+<li><span class="obsidian-red">Queuing delay</span> $d_{queue}$: Time spent waiting in the output buffer; it varies with traffic load.</li>
+<li><span class="obsidian-red">Transmission delay</span> $d_{trans}=L/R$: Time required to push all packet bits onto the link.</li>
+<li><span class="obsidian-red">Propagation delay</span> $d_{prop}=d/s$: Link distance $d$ divided by propagation speed $s$.</li>
+</ul>
+<p>If a buffer is full, newly arriving packets are discarded, causing packet loss.</p>
+<p>If the average arrival rate is $a$ packets/s, the <span class="obsidian-red">traffic intensity</span> is:</p>
+<p>$$ \rho=\frac{La}{R} $$</p>
+<ul>
+<li>When $\rho$ is close to 0, queuing is usually minimal.</li>
+<li>As $\rho$ approaches 1, average queuing delay grows rapidly.</li>
+<li>If $\rho&gt;1$ for a sustained period, traffic arrives faster than the link can serve it, so the queue is unstable.</li>
+</ul>
+<p>End-to-end throughput is limited by the bottleneck link. In the scenario below, the throughput per connection is:</p>
+<p>$$ \min\left\{R_s,R_c,\frac{R}{N}\right\} $$</p>
+<p><img src="../attachments/Screenshot%202026-09-07%20at%2008.16.47-optimized.webp" alt="Screenshot 2026-09-07 at 08.16.47" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="layering-and-encapsulation">Layering and Encapsulation</h3>
+<p><img src="../attachments/Screenshot%202026-09-15%20at%2014.12.31-optimized.webp" alt="Screenshot 2026-09-15 at 14.12.31" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Layer</th><th>Main Function</th><th>Protocol or medium</th></tr></thead><tbody><tr><td>Application Layer</td><td>Provides network services to applications</td><td>HTTP, DNS, SMTP</td></tr><tr><td>Transport Layer</td><td>Handles process-to-process data transfer</td><td>TCP, UDP</td></tr><tr><td>Network Layer</td><td>Handles addressing and routing across networks</td><td>IP</td></tr><tr><td>Link Layer</td><td>Handles transmission over a single link</td><td>Ethernet, Wi-Fi</td></tr><tr><td>Physical Layer</td><td>Transmits the raw bits (0s and 1s)</td><td>Copper cable, optical fiber, radio</td></tr></tbody></table></div>
+<p>Each layer provides services to the layer above it. As data moves down the stack, each layer adds its own header to the data received from above; the link layer may also add a trailer. This process is called <span class="obsidian-red">encapsulation</span>.</p>
+<p>For example, data sent over TCP/IP and Ethernet is encapsulated as follows:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">Application data
+  ↓
+[TCP header | application data]                         TCP segment
+  ↓
+[IP header | TCP header | application data]             IP packet
+  ↓
+[Ethernet header | IP header | TCP header | application data | Ethernet trailer]  Ethernet frame
+  ↓
+010101010101...</code></pre></div>
+<h2 id="application-layer">Application Layer</h2>
+<h3 id="application-architectures">Application Architectures</h3>
+<h4 id="client-server">Client–Server</h4>
+<p><img src="../attachments/Screenshot%202026-09-16%20at%2014.12.14-optimized.webp" alt="Screenshot 2026-09-16 at 14.12.14" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Servers are generally always on and have stable addresses.</li>
+<li>Clients send requests to servers and do not communicate directly with one another.</li>
+<li>Large services commonly use data centers and load balancing to scale.</li>
+<li>Examples: search engines, social networks.</li>
+</ul>
+<h4 id="peertopeer-p2p">Peer-to-Peer (P2P)</h4>
+<p><img src="../attachments/Screenshot%202026-09-16%20at%2014.12.33-optimized.webp" alt="Screenshot 2026-09-16 at 14.12.33" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Peers communicate directly with one another.</li>
+<li>Each peer can both request and provide resources.</li>
+<li>Each new peer brings additional service capacity as well as new demand, giving the architecture self-scalability.</li>
+<li>Frequent peer churn, changing addresses, and security management increase complexity.</li>
+<li>Examples: BitTorrent, early Skype, PPLive.</li>
+</ul>
+<h3 id="processes-sockets-and-addressing">Processes, Sockets, and Addressing</h3>
+<p>The entities that communicate across a network are <span class="obsidian-red">processes</span>. Processes on different hosts communicate by exchanging messages. A process can be thought of as a program running on a host.</p>
+<p>A socket is the software interface between the application layer and the transport layer; it identifies the process to which arriving data should be delivered. It is the API through which an application uses network services. Delivering data to a specific process normally requires:</p>
+<ul>
+<li>An <span class="obsidian-red">IP address</span> to identify the host or network interface;</li>
+<li>A <span class="obsidian-red">port number</span> to identify the destination application process;</li>
+<li>A transport protocol, such as TCP or UDP.</li>
+</ul>
+<h3 id="transport-services-required-by-applications">Transport Services Required by Applications</h3>
+<ul>
+<li>Reliability: Whether loss, duplication, or reordering can be tolerated.</li>
+<li>Throughput: Whether a minimum delivery rate is required.</li>
+<li>Delay and jitter: Whether data must arrive promptly and at a stable rate.</li>
+<li>Security: Whether confidentiality, integrity, and authentication are required.</li>
+</ul>
+<p>The Internet provides two transport services, implemented by TCP and UDP. TCP establishes a connection before transferring data and provides a reliable, ordered byte stream. UDP sends data without first establishing a connection, and it does not guarantee that packets arrive, arrive in order, or arrive only once. The differences between them are as follows:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Protocol</th><th>Connection</th><th>Reliability and ordering</th><th>Flow/congestion control</th><th>Data abstraction</th><th>Typical uses</th></tr></thead><tbody><tr><td>TCP</td><td>Connection-oriented</td><td>Reliable, ordered, duplicate-free</td><td>Provided</td><td>Byte stream</td><td>HTTP/1.1–2, files, email</td></tr><tr><td>UDP</td><td>Connectionless</td><td>Best effort; packets may be lost or reordered</td><td>Not provided by UDP</td><td>Datagrams</td><td>DNS, QUIC/HTTP/3, real-time media, games</td></tr></tbody></table></div>
+<h3 id="web-and-http">Web and HTTP</h3>
+<h4 id="core-concepts">Core Concepts</h4>
+<ul>
+<li>Hypertext Markup Language (HTML) describes the structure and meaning of webpage content; CSS typically controls its presentation.</li>
+<li>A web page consists of a base HTML document and objects such as images, CSS, JavaScript, and video.</li>
+<li>Each object can be addressed by a Uniform Resource Locator (URL). For example:</li>
+</ul>
+<p>$$ \underbrace{\texttt{http://}}_{\text{scheme}} \underbrace{\texttt{www.someschool.edu}}_{\text{host name}} \underbrace{\texttt{/someDept/pic.gif}}_{\text{path name}} $$</p>
+<ul>
+<li>The default port for <code>http://</code> is 80; the default port for <code>https://</code> is 443.</li>
+<li><span class="obsidian-red">HyperText Transfer Protocol (HTTP)</span> defines the format and processing rules for requests and responses exchanged between clients and servers.</li>
+<li>HTTP/1.1 and HTTP/2 run over TCP; HTTP/3 runs over QUIC.</li>
+<li>HTTP is a stateless protocol: the protocol itself does not require a server to remember a client&#039;s previous requests.</li>
+</ul>
+<h4 id="connections-and-response-time">Connections and Response Time</h4>
+<p><span class="obsidian-red">Round-Trip Time (RTT)</span> is the time required for a small packet to travel from a client to a server and back. It includes propagation, queuing, and processing delays.</p>
+<p><img src="../attachments/Screenshot%202026-09-16%20at%2015.28.40.png" alt="Screenshot 2026-09-16 at 15.28.40" loading="lazy" decoding="async" style="width: min(100%, 383px);"></p>
+<p>In the simplified model of <span class="obsidian-red">non-persistent HTTP</span> over a new TCP connection, retrieving one object takes approximately:</p>
+<p>$$ 2RTT + \text{object transmission time} $$</p>
+<p>Under this simplified model, fetching 100 objects sequentially with non-persistent HTTP takes about $200RTT$ plus object transmission time: each object needs one RTT to establish a TCP connection and another RTT for the request and initial response. A <span class="obsidian-red">persistent HTTP</span> connection can be reused for subsequent requests to the same server, avoiding a new TCP handshake for each object. Parallel connections and multiplexing also affect the total elapsed time.</p>
+<p>Actual performance also depends on DNS lookups, the TLS handshake, connection reuse, and congestion control.</p>
+<ul>
+<li>HTTP/1.1 supports persistent connections by default. Browsers may also open several parallel TCP connections.</li>
+<li>HTTP/2 multiplexes streams over one TCP connection and interleaves data as frames. It can still suffer from head-of-line blocking at the TCP layer.</li>
+<li>HTTP/3 runs over QUIC. A lost packet affecting one stream does not block delivery on unrelated streams.</li>
+</ul>
+<h4 id="http-messages">HTTP Messages</h4>
+<p>Example request:</p>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">HTTP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-http" data-highlighted="local"><span class="hljs-keyword">GET</span> <span class="hljs-string">/somedir/page.html</span> <span class="hljs-meta">HTTP/1.1</span>
+<span class="hljs-type">Host</span>: www.someschool.edu
+<span class="hljs-type">Connection</span>: close
+<span class="hljs-type">User-Agent</span>: Mozilla/5.0
+<span class="hljs-type">Accept-language</span>: fr</code></pre></div>
+<p>The first line is the request line: method, request target, and HTTP version. Common methods include <code>GET</code>, <code>HEAD</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code>. Header fields follow. An empty line separates the headers from an optional message body; a <code>POST</code> request may have an empty body.</p>
+<p>Example response:</p>
+<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">HTTP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-http" data-highlighted="local"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK
+<span class="hljs-type">Connection</span>: close
+<span class="hljs-type">Date</span>: Tue, 18 Aug 2015 15:44:04 GMT
+<span class="hljs-type">Server</span>: Apache/2.2.3 (CentOS)
+<span class="hljs-type">Content-Type</span>: text/html; charset=utf-8
+
+&lt;html&gt;...&lt;/html&gt;</code></pre></div>
+<p>A response consists of a status line, header lines, and a message body. The status line contains the HTTP version, a status code, and a short status phrase.</p>
+<p>Common status-code classes:</p>
+<ul>
+<li><code>2xx</code>: Success, such as <code>200 OK</code>.</li>
+<li><code>3xx</code>: Redirection or cache-related responses, such as <code>301 Moved Permanently</code> and <code>304 Not Modified</code>.</li>
+<li><code>4xx</code>: Client errors, such as <code>400 Bad Request</code> and <code>404 Not Found</code>.</li>
+<li><code>5xx</code>: Server errors, such as <code>500 Internal Server Error</code>.</li>
+</ul>
+<h4 id="cookies">Cookies</h4>
+<p>Cookies allow applications to maintain session state over stateless HTTP:</p>
+<ol>
+<li>The server sends a <code>Set-Cookie</code> header in a response.</li>
+<li>The browser stores the cookie.</li>
+<li>Later requests that match the domain, path, and security rules include a <code>Cookie</code> header.</li>
+<li>The server associates the cookie with a session or user preferences.</li>
+</ol>
+<p>The following figure shows an example: <img src="../attachments/Screenshot%202026-09-16%20at%2015.13.24-optimized.webp" alt="Screenshot 2026-09-16 at 15.13.24" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Sensitive cookies should normally use <code>Secure</code>, <code>HttpOnly</code>, and an appropriate <code>SameSite</code> policy.</p>
+<h4 id="web-caching-and-conditional-requests">Web Caching and Conditional Requests</h4>
+<p>A web cache, or proxy cache, stores copies of recently requested objects:</p>
+<ul>
+<li>It acts as a server when responding to a browser.</li>
+<li>It acts as a client when retrieving content from the origin server.</li>
+<li>It can reduce response time for client requests, origin-server load, and traffic on institutional access links.</li>
+</ul>
+<p>The following figure shows how web caching works: <img src="../attachments/Screenshot%202026-09-16%20at%2015.19.55.png" alt="Screenshot 2026-09-16 at 15.19.55" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Web caches are typically installed by ISPs, and caches operated by different ISPs may form a multi-level hierarchy.</p>
+<p>Cached content can become stale. A client or cache can send a conditional request using <code>If-Modified-Since</code> or <code>If-None-Match</code>. If the content is unchanged, the server returns <code>304 Not Modified</code> without retransmitting the complete object.</p>
+<h3 id="file-transfer-protocol-ftp">File Transfer Protocol (FTP)</h3>
+<p>FTP uses separate TCP connections for control and data. The server normally listens on port 21 for the control connection, which carries commands and replies across a session. In default active mode, the server initiates a data connection from port 20 to a client port. In passive mode, the server listens on a negotiated data port instead. Data connections carry file contents or directory listings; a new data connection is typically opened for each transfer, although the protocol permits reuse in some cases.</p>
+<p><img src="../attachments/Screenshot%202026-09-16%20at%2015.38.56.png" alt="Screenshot 2026-09-16 at 15.38.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Keeping control and data on separate connections allows commands and replies to continue while data is transferred. Opening a new data connection for each transfer adds connection setup overhead.</p>
+<h3 id="email">Email</h3>
+<p>Protocols involved:</p>
+<ul>
+<li>Transport-layer protocol: TCP</li>
+<li>Application-layer mail transfer protocol: SMTP (port 25)</li>
+<li>Email access protocols: POP3 (port 110), IMAP (port 143), HTTP (port 80)</li>
+</ul>
+<p>SMTP stands for Simple Mail Transfer Protocol. IMAP stands for Internet Message Access Protocol.</p>
+<p>The main components of an Internet email system are:</p>
+<ul>
+<li>A user agent (UA) for composing, reading, and managing email.</li>
+<li>A mail server that maintains mailboxes and outgoing queues.</li>
+<li>SMTP for submitting mail and transferring it between mail servers.</li>
+<li>IMAP or HTTP for retrieving and managing messages on the server.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2017.02.55-optimized.webp" alt="Screenshot 2026-09-21 at 17.02.55" loading="lazy" decoding="async" style="width: min(100%, 317px);"></p>
+<p>A typical delivery path is:</p>
+<div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">Sender UA → Sender mail server → Receiver mail server → Receiver mailbox/UA
+            SMTP submission       SMTP relay             IMAP/HTTP access</code></pre></div>
+<p>An SMTP session proceeds as follows:</p>
+<ol>
+<li>Establish a connection</li>
+</ol>
+<div class="code-block" data-code-block="4"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">S: 220 hamburger.edu</code></pre></div>
+<ol>
+<li>The client introduces itself</li>
+</ol>
+<div class="code-block" data-code-block="5"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: HELO crepes.fr
+S: 250 Hello crepes.fr, pleased to meet you</code></pre></div>
+<ol>
+<li>Specify the sender</li>
+</ol>
+<div class="code-block" data-code-block="6"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: MAIL FROM: &lt;alice@crepes.fr&gt;
+S: 250 alice@crepes.fr ... Sender ok</code></pre></div>
+<ol>
+<li>Specify the recipient</li>
+</ol>
+<div class="code-block" data-code-block="7"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: RCPT TO: &lt;bob@hamburger.edu&gt;
+S: 250 bob@hamburger.edu ... Recipient ok</code></pre></div>
+<ol>
+<li>Begin sending the message content</li>
+</ol>
+<div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: DATA
+S: 354 Enter mail, end with &quot;.&quot; on a line by itself</code></pre></div>
+<ol>
+<li>Send the message headers and body, ending with a line containing only <code>.</code></li>
+</ol>
+<div class="code-block" data-code-block="9"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: From: alice@crepes.fr
+C: To: bob@hamburger.edu
+C: Subject: Hello
+C:
+C: Do you like ketchup?
+C: How about pickles?
+C: .
+S: 250 Message accepted for delivery</code></pre></div>
+<ol>
+<li>End the SMTP session</li>
+</ol>
+<div class="code-block" data-code-block="10"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">C: QUIT
+S: 221 hamburger.edu closing connection</code></pre></div>
+<p>If the receiving server is temporarily unavailable, the sending server keeps the message in a queue and retries later.</p>
+<p>Because the recipient&#039;s client is not always online, the mail server cannot be expected to open an SMTP connection to the client as soon as an email arrives. Moreover, SMTP is a &quot;push&quot; protocol, whereas message retrieval is a &quot;pull&quot; operation. The client therefore uses a separate protocol to retrieve mail; IMAP is a common choice.</p>
+<h3 id="domain-name-system-dns">Domain Name System (DNS)</h3>
+<h4 id="purpose-and-properties">Purpose and Properties</h4>
+<p>The Domain Name System (DNS) primarily maps hostnames to IP addresses. It is both a distributed database implemented by a hierarchy of DNS servers and an application-layer protocol.</p>
+<p>DNS uses port 53. Ordinary queries commonly use UDP because they are latency-sensitive and the messages are usually short. DNS falls back to TCP when a response is too large for UDP (the response is truncated), and it uses TCP for zone transfers.</p>
+<h4 id="resolution-process">Resolution Process</h4>
+<p>Conceptually, the Internet is divided into more than 1,000 top-level domains (the number grew rapidly after the new gTLD program launched in 2012); each top-level domain can be further subdivided into subdomains, and so on. Hostnames therefore follow a hierarchical naming scheme.</p>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2018.33.51-optimized.webp" alt="Screenshot 2026-09-21 at 18.33.51" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>There are 13 root server identities (A through M), operated by 12 organizations. Each identity is replicated as many anycast instances worldwide (well over 1,000 instances in total). The root servers know the IP addresses of all top-level domain servers.</p>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2017.40.59-optimized.webp" alt="Screenshot 2026-09-21 at 17.40.59" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Suppose a client wants the IP address of www.amazon.com:</p>
+<ol>
+<li>The DNS client queries the root server and obtains the address of the DNS server for the <code>.com</code> domain.</li>
+<li>The DNS client queries the <code>.com</code> domain&#039;s DNS server and obtains the address of the DNS server for the <code>amazon.com</code> domain.</li>
+<li>The DNS client queries the <code>amazon.com</code> domain&#039;s DNS server and obtains the IP address of www.amazon.com.</li>
+</ol>
+<p>This is called an iterative query.</p>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2018.42.51.png" alt="Screenshot 2026-09-21 at 18.42.51" loading="lazy" decoding="async" style="width: min(100%, 481px);"></p>
+<p>In practice, the client typically uses recursive queries to communicate with the local DNS resolver, whereas the resolver uses iterative queries to communicate with root, TLD, and authoritative DNS servers. With a recursive query, the client only needs to query the local DNS resolver and wait for the IP address. The following figure illustrates the process.</p>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2018.46.56.png" alt="Screenshot 2026-09-21 at 18.46.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="dns-caching">DNS Caching</h4>
+<p>To reduce latency and the volume of DNS messages traversing the Internet, DNS makes extensive use of caching. When a DNS server receives a DNS response, it can cache the mapping locally. If a later query for the same hostname reaches that server, the server can answer with the cached IP address. Because the mapping between a hostname and an IP address is not permanent, the DNS server discards cached entries after a set period.</p>
+<h4 id="common-resource-records">Common Resource Records</h4>
+<p>A DNS resource record can be represented as <code>(Name, Value, Type, TTL)</code>:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td><code>A</code></td><td>Domain name → IPv4 address</td></tr><tr><td><code>AAAA</code></td><td>Domain name → IPv6 address</td></tr><tr><td><code>CNAME</code></td><td>Alias → canonical domain name</td></tr><tr><td><code>NS</code></td><td>Domain → authoritative DNS server</td></tr><tr><td><code>MX</code></td><td>Domain → mail server</td></tr><tr><td><code>TXT</code></td><td>Text data, often used for domain validation and email security policies</td></tr></tbody></table></div>
+<p>DNS queries and responses use the same general message format, with a header and Question, Answer, Authority, and Additional sections.</p>
+<p><img src="../attachments/Screenshot%202026-09-21%20at%2018.52.22-optimized.webp" alt="Screenshot 2026-09-21 at 18.52.22" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="p2p-file-distribution-and-bittorrent">P2P File Distribution and BitTorrent</h3>
+<p>In the client-server architecture, let the server&#039;s upload rate be $u_s$, and let peer $i$ have upload rate $u_i$ and download rate $d_i$, as shown in the following figure.</p>
+<p><img src="../attachments/ae7cc755-bfe8-4ec8-950a-49a9e78f03df-optimized.webp" alt="ae7cc755-bfe8-4ec8-950a-49a9e78f03df" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Suppose the server wants to distribute one file of $F$ bits to $N$ peers, so that every peer obtains a copy of the same file (not $N$ different files). The server must therefore upload $NF$ bits in total, and the slowest peer, with download rate $d_{min}=\min_i d_i$, needs at least $F/d_{min}$. Then the minimum time is</p>
+<p>$$ \boxed{D_{cs}=\max\left\{\frac{NF}{u_s},\frac{F}{d_{min}}\right\}} $$</p>
+<p>For large $N$, the distribution time increases linearly with the number of peers $N$.</p>
+<p>For the P2P architecture:</p>
+<ul>
+<li>The server must upload at least one copy of the file, taking $\frac{F}{u_s}$.</li>
+<li>Each peer must download a full copy of the file, so the slowest peer needs at least $\frac{F}{d_{min}}$.</li>
+<li>Considering the system as a whole, a total of $NF$ bits must be delivered, and the total upload capacity of the system is at most $u_s+\sum_{i=1}^N u_i$. The distribution time is therefore at least $\frac{NF}{u_s+\sum_{i=1}^N u_i}$.</li>
+</ul>
+<p>Combining these bounds:</p>
+<p>$$ \boxed{D_{P2P}=\max\left\{\frac{F}{u_s},\frac{F}{d_{min}},\frac{NF}{u_s+\sum_{i=1}^N u_i}\right\}} $$</p>
+<p><img src="../attachments/Screenshot%202026-09-25%20at%2015.39.21.png" alt="Screenshot 2026-09-25 at 15.39.21" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The minimum distribution time of the P2P architecture is therefore always less than or equal to that of the client-server architecture; equality holds, e.g., when $N=1$ or when all peer upload rates are 0. Moreover, $D_{cs}$ grows linearly with $N$, whereas $D_{P2P}$ grows much more slowly: when peers have nonzero upload rates, it stays bounded as $N$ grows.</p>
+<p><img src="../attachments/2e52245b-edd2-4455-b9bc-74ff3a5a2f34-optimized.webp" alt="2e52245b-edd2-4455-b9bc-74ff3a5a2f34" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The core ideas of BitTorrent are as follows:</p>
+<ul>
+<li>A file is divided into pieces called chunks.</li>
+<li>Peers download different chunks from multiple peers simultaneously while uploading chunks they already have.</li>
+<li>With <span class="obsidian-red">rarest first</span>, a peer requests the scarcest chunks first, which improves their availability across the swarm.</li>
+<li>The <span class="obsidian-red">tit-for-tat</span> strategy favors peers that reciprocate by contributing upload bandwidth.</li>
+<li>Trackers or a Distributed Hash Table (DHT) can help peers discover one another.</li>
+<li>The tracker does not take part in transferring file data.</li>
+</ul>
+<h3 id="video-streaming-and-cdns">Video Streaming and CDNs</h3>
+<h4 id="dynamic-adaptive-streaming-over-http-dash">Dynamic, Adaptive Streaming over HTTP (DASH)</h4>
+<p>Dynamic Adaptive Streaming over HTTP (DASH) encodes a video at several bit rates and divides each version into short segments. The client chooses the quality of the next segment dynamically based on estimated bandwidth and buffer occupancy.</p>
+<h4 id="content-distribution-networks-cdns">Content Distribution Networks (CDNs)</h4>
+<p><img src="../attachments/Screenshot%202026-09-25%20at%2016.01.27-optimized.webp" alt="Screenshot 2026-09-25 at 16.01.27" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>A Content Distribution Network (CDN) deploys edge servers in many geographic locations, caches content, and directs each user to a suitable server. This can:</p>
+<ul>
+<li>Reduce user-perceived delay;</li>
+<li>Reduce load on the origin and backbone networks;</li>
+<li>Improve availability and scalability.</li>
+</ul>
+<p>A CDN may be operated by the content provider or by a third party.</p>
+<h3 id="socket-programming">Socket Programming</h3>
+<h4 id="udp-sockets">UDP Sockets</h4>
+<p>UDP preserves application message boundaries. A typical call sequence is:</p>
+<div class="code-block" data-code-block="11"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">Server: socket → bind → recvfrom ↔ sendto
+Client: socket → sendto ↔ recvfrom</code></pre></div>
+<h4 id="tcp-sockets">TCP Sockets</h4>
+<p>TCP provides a reliable, ordered, bidirectional byte stream. A typical call sequence is:</p>
+<div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">Server: socket → bind → listen → accept → recv/send → close
+Client: socket → connect ───────────→ send/recv → close</code></pre></div>
+<p><code>accept</code> normally returns a new connected socket for each connection, while the listening socket remains available for additional connection requests.</p>
+<h2 id="transport-layer">Transport Layer</h2>
+<h3 id="transportlayer-overview">Transport-Layer Overview</h3>
+<p>The network layer provides logical host-to-host communication. The transport layer extends this service to provide logical process-to-process communication.</p>
+<p>At the sender, the transport layer divides application messages as needed, adds transport headers, and passes the resulting units to the network layer for encapsulation in IP datagrams. The receiver performs the reverse process.</p>
+<h4 id="multiplexing-and-demultiplexing">Multiplexing and Demultiplexing</h4>
+<ul>
+<li><span class="obsidian-red">Multiplexing</span>: The sender gathers data from multiple sockets, adds header information, and passes the segments or datagrams to the network layer.</li>
+<li><span class="obsidian-red">Demultiplexing</span>: The receiver examines transport-layer header fields and delivers data to the correct socket.</li>
+</ul>
+<p>A port number is 16 bits long and ranges from 0 to 65535. Ports 0–1023 are commonly called well-known ports.</p>
+<ul>
+<li>UDP demultiplexing primarily uses the tuple <code>(destination IP, destination port)</code>. Datagrams from different sources can be delivered to the same destination socket.</li>
+<li>A TCP connection is identified by the four-tuple <code>(source IP, source port, destination IP, destination port)</code>. A server can therefore support many simultaneous connections on one listening port.</li>
+</ul>
+<h3 id="udp">UDP</h3>
+<p>UDP adds only basic multiplexing, demultiplexing, and error detection to IP. It is connectionless, has a small header, and does not guarantee delivery or ordering.</p>
+<h4 id="udp-datagram-structure">UDP Datagram Structure</h4>
+<p>The UDP header is 8 bytes long:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Field</th><th>Length</th><th>Purpose</th></tr></thead><tbody><tr><td>Source port</td><td>16 bits</td><td>Identifies the sending process; may be zero</td></tr><tr><td>Destination port</td><td>16 bits</td><td>Identifies the receiving process</td></tr><tr><td>Length</td><td>16 bits</td><td>Total length of the header and payload</td></tr><tr><td>Checksum</td><td>16 bits</td><td>Detects bit errors in the header and payload</td></tr></tbody></table></div>
+<p>The UDP checksum can detect many transmission errors, but it cannot recover lost, reordered, or corrupted data. Applications must implement retransmission, ordering, or other reliability mechanisms when needed.</p>
+<h3 id="principles-of-reliable-data-transfer">Principles of Reliable Data Transfer</h3>
+<p>Common reliability mechanisms include error detection, sequence numbers, acknowledgments, timeout-based retransmission, and pipelining.</p>
+<h4 id="evolution-of-the-rdt-protocols">Evolution of the rdt Protocols</h4>
+<ul>
+<li>rdt1.0: Assumes a completely reliable underlying channel.</li>
+<li>rdt2.0: Handles bit errors with checksums, ACK/NAK feedback, and retransmission, but does not handle corrupted ACK or NAK packets.</li>
+<li>rdt2.1: Adds sequence numbers so duplicate packets can be recognized.</li>
+<li>rdt2.2: Uses numbered ACKs and no longer requires NAKs.</li>
+<li>rdt3.0: Also handles lost data packets and ACKs by adding timers and timeout retransmission. Because its sequence number alternates between 0 and 1, it is also called the alternating-bit protocol.</li>
+</ul>
+<p>These are fundamentally <span class="obsidian-red">stop-and-wait</span> protocols: the sender transmits one packet and waits for an acknowledgment. If ACK transmission time is ignored, sender utilization is approximately:</p>
+<p>$$ \boxed{U_{sender}=\frac{L/R}{RTT+L/R}} $$</p>
+<p>Stop-and-wait performs poorly when RTT is large, which motivates <span class="obsidian-red">pipelined protocols</span>.</p>
+<h4 id="gbn-and-sr">GBN and SR</h4>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Property</th><th>Go-Back-N (GBN)</th><th>Selective Repeat (SR)</th></tr></thead><tbody><tr><td>Acknowledgment</td><td>Cumulative</td><td>Individual</td></tr><tr><td>Receiver behavior</td><td>Usually discards out-of-order packets</td><td>Buffers out-of-order packets</td></tr><tr><td>Timers</td><td>Usually one timer for the oldest unacknowledged packet</td><td>Usually one timer per unacknowledged packet</td></tr><tr><td>Retransmission</td><td>Retransmits all outstanding packets from the missing one onward</td><td>Retransmits only packets suspected to be missing</td></tr><tr><td>Complexity</td><td>Lower</td><td>Higher, but more efficient on lossy links</td></tr></tbody></table></div>
+<p>To avoid sequence-number ambiguity in SR, if the sequence-number space has size $K$, the window size should satisfy:</p>
+<p>$$ \boxed{N\le \frac{K}{2}} $$</p>
+<h3 id="tcp">TCP</h3>
+<h4 id="tcp-connections-and-data-transfer">TCP Connections and Data Transfer</h4>
+<p>TCP is a full-duplex, point-to-point, connection-oriented protocol that provides a reliable byte stream. Each endpoint maintains its own send and receive buffers.</p>
+<ul>
+<li><span class="obsidian-red">Maximum Segment Size (MSS)</span>: The maximum amount of application data in a TCP segment.</li>
+<li>Maximum Transmission Unit (MTU): The largest network-layer packet that a link-layer frame can carry.</li>
+<li>Ethernet commonly has a 1500-byte MTU. With IPv4 and TCP headers that contain no options, a typical MSS is 1460 bytes.</li>
+</ul>
+<h4 id="important-tcp-header-fields">Important TCP Header Fields</h4>
+<ul>
+<li>Source and destination ports;</li>
+<li>Sequence number;</li>
+<li>Acknowledgment number;</li>
+<li>Header length and flags such as <code>SYN</code>, <code>ACK</code>, <code>FIN</code>, and <code>RST</code>;</li>
+<li>Receive window;</li>
+<li>Checksum;</li>
+<li>Options such as MSS, window scaling, and timestamps.</li>
+</ul>
+<p>TCP sequence numbers count bytes. The acknowledgment number indicates the sequence number of the next byte the receiver expects.</p>
+<h4 id="rtt-estimation-and-timeout">RTT Estimation and Timeout</h4>
+<p>TCP smooths RTT measurements so that the retransmission timeout does not change dramatically after one sample:</p>
+<p>$$ EstimatedRTT=(1-\alpha)EstimatedRTT+\alpha SampleRTT $$</p>
+<p>$$ DevRTT=(1-\beta)DevRTT+\beta|SampleRTT-EstimatedRTT| $$</p>
+<p>$$ \boxed{TimeoutInterval=EstimatedRTT+4DevRTT} $$</p>
+<p>Textbook examples commonly use $\alpha=0.125$ and $\beta=0.25$.</p>
+<h4 id="reliable-transfer-and-fast-retransmit">Reliable Transfer and Fast Retransmit</h4>
+<p>TCP uses checksums, sequence numbers, cumulative acknowledgments, timers, and retransmission to provide reliable transfer. After receiving multiple duplicate ACKs, a sender can infer that a segment was probably lost and perform fast retransmit before the timer expires.</p>
+<h4 id="flow-control-and-congestion-control">Flow Control and Congestion Control</h4>
+<ul>
+<li><span class="obsidian-red">Flow control</span> protects the receiver. The receiver advertises <code>rwnd</code> so the sender does not overflow its receive buffer.</li>
+<li><span class="obsidian-red">Congestion control</span> protects the network. The sender uses the congestion window <code>cwnd</code> to regulate how much data it injects into the network.</li>
+</ul>
+<p>The sender&#039;s effective window is approximately constrained by:</p>
+<p>$$ SendWindow\le\min(rwnd,cwnd) $$</p>
+<p>Classic TCP congestion control includes:</p>
+<ul>
+<li><span class="obsidian-red">Slow start</span>: <code>cwnd</code> grows approximately exponentially per RTT.</li>
+<li>Congestion avoidance: Once <code>cwnd</code> reaches a threshold, it grows approximately linearly.</li>
+<li>Fast retransmit and fast recovery: Duplicate ACKs allow a faster response to loss.</li>
+<li>After a congestion signal, the sender reduces its rate, reflecting the <span class="obsidian-red">Additive Increase, Multiplicative Decrease (AIMD)</span> principle.</li>
+</ul>
+<h4 id="connection-management">Connection Management</h4>
+<p>A TCP connection is normally established with a <span class="obsidian-red">three-way handshake</span>:</p>
+<div class="code-block" data-code-block="13"><div class="code-toolbar"><span class="code-language">TEXT</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-plaintext" data-highlighted="local">Client                                          Server
+  | ------------ SYN=1, seq=x ------------------&gt; |
+  | &lt;------ SYN=1, ACK=1, seq=y, ack=x+1 -------- |
+  | --------- ACK=1, seq=x+1, ack=y+1 ----------&gt; |</code></pre></div>
+<p>The handshake synchronizes initial sequence numbers and confirms bidirectional communication. During connection termination, each direction normally sends a <code>FIN</code> and receives an <code>ACK</code>, so termination often uses four exchanges. Messages can also be combined, and both endpoints may close simultaneously.</p>
+<hr>
+<h2 id="network-layer-todo">Network Layer (TODO)</h2>
+<h3 id="networklayer-overview">Network-Layer Overview</h3>
+<p>The network layer delivers transport-layer segments from a source host to a destination host. Its core functions include:</p>
+<ul>
+<li>Forwarding: Processing an individual packet according to a forwarding table.</li>
+<li>Routing: Computing paths through the network.</li>
+<li>Logical addressing: Using IPv4 or IPv6 addresses to identify interfaces and network locations.</li>
+</ul>
+<h3 id="the-ip-service-model">The IP Service Model</h3>
+<p>IP provides <span class="obsidian-red">best-effort service</span>. It does not guarantee:</p>
+<ul>
+<li>Packet delivery;</li>
+<li>In-order delivery;</li>
+<li>An upper bound on delay or a minimum bandwidth;</li>
+<li>The absence of duplicate packets.</li>
+</ul>
+<h3 id="subnets-and-forwarding">Subnets and Forwarding</h3>
+<p>An IP address contains a network prefix and an interface identifier. <span class="obsidian-red">Classless Inter-Domain Routing (CIDR)</span> uses <code>/n</code> to represent the prefix length. Routers use <span class="obsidian-red">longest-prefix matching</span> to select the most specific matching route.</p>
+<p>IPv4 private addresses commonly share public addresses through <span class="obsidian-red">Network Address Translation (NAT)</span>. IPv6 provides a much larger address space and a simplified base header.</p>
+<h3 id="the-control-plane">The Control Plane</h3>
+<ul>
+<li><span class="obsidian-red">Link-state algorithms</span>: Each router obtains the network topology and computes routes, commonly with Dijkstra&#039;s algorithm.</li>
+<li><span class="obsidian-red">Distance-vector algorithms</span>: Neighboring routers iteratively exchange distance information using the Bellman–Ford principle.</li>
+<li>OSPF: A common link-state routing protocol within an autonomous system.</li>
+<li>BGP: The inter-domain routing protocol used between autonomous systems; it uses path-vector information and routing policy.</li>
+</ul>
+<hr>
+<h2 id="link-layer-and-local-area-networks-todo">Link Layer and Local Area Networks (TODO)</h2>
+<h3 id="linklayer-overview">Link-Layer Overview</h3>
+<p>The link layer transfers frames between adjacent nodes. Its services can include framing, medium access, error detection, and—in some protocols—reliable delivery.</p>
+<h3 id="mac-addresses-and-ethernet">MAC Addresses and Ethernet</h3>
+<ul>
+<li><span class="obsidian-red">MAC addresses</span> identify interfaces within a local network.</li>
+<li>An Ethernet switch forwards frames using a self-learned MAC address table.</li>
+<li>If the destination MAC address is unknown, the switch floods the frame through every port except the incoming port.</li>
+<li>Routers separate broadcast domains, while ordinary Layer 2 switches extend a broadcast domain.</li>
+<li>VLANs divide one physical switched network into logical broadcast domains.</li>
+</ul>
+<h3 id="arp">ARP</h3>
+<p>In IPv4 networks, the <span class="obsidian-red">Address Resolution Protocol (ARP)</span> maps a target IP address to a MAC address on the same link. A host first checks its ARP cache. On a cache miss, it broadcasts an ARP request, and the target normally sends an ARP reply.</p>
+<h3 id="error-detection">Error Detection</h3>
+<ul>
+<li>Parity checking: Simple but limited in detection capability.</li>
+<li>Checksums: Interpret data words as integers and combine them arithmetically.</li>
+<li><span class="obsidian-red">Cyclic Redundancy Check (CRC)</span>: Treats a bit string as a polynomial and performs modulo-2 division using a generator polynomial. CRC is widely used at the link layer.</li>
+</ul>
+<hr>
+<h2 id="wireless-networks-todo">Wireless Networks (TODO)</h2>
+<h3 id="wireless-networking-essentials">Wireless Networking Essentials</h3>
+<p>Wireless links are affected by path loss, multipath propagation, interference, and the <span class="obsidian-red">hidden-terminal problem</span>.</p>
+<p>Wi-Fi uses <span class="obsidian-red">CSMA/CA</span>: a device senses the channel before transmitting and performs randomized backoff when the channel is busy. Unlike classic shared Ethernet with CSMA/CD, a wireless sender normally cannot detect collisions reliably while it is transmitting.</p>
+<p>Mobile networks must also handle:</p>
+<ul>
+<li>User authentication;</li>
+<li>Mobility and location management;</li>
+<li>Handover between base stations;</li>
+<li>Radio resource allocation and power control.</li>
+</ul>
+<hr>
+<h2 id="network-security-todo">Network Security (TODO)</h2>
+<h3 id="security-goals-and-common-attacks">Security Goals and Common Attacks</h3>
+<p>Core security goals include:</p>
+<ul>
+<li>Confidentiality: Only authorized parties can read the information.</li>
+<li>Integrity: Information is not modified without authorization.</li>
+<li>Authentication: The identity of a communicating party can be verified.</li>
+<li>Availability: Legitimate users can obtain the service.</li>
+<li>Non-repudiation: An entity cannot easily deny an action it performed.</li>
+</ul>
+<p>Common attacks include:</p>
+<ul>
+<li>DoS/DDoS: Exhausting host, application, or network resources so legitimate users cannot obtain service.</li>
+<li>Sniffing: Capturing traffic from a network link; plaintext protocols are especially vulnerable.</li>
+<li>IP spoofing: Forging the source IP address in a packet.</li>
+<li>Replay attack: Capturing a valid message and transmitting it again to impersonate a user or repeat an operation.</li>
+<li>Man-in-the-middle (MITM) attack: Intercepting communication to observe or modify data exchanged by two parties.</li>
+</ul>
+<p>Common defenses include:</p>
+<ul>
+<li>Encrypting communication with TLS, VPNs, or similar mechanisms;</li>
+<li>Using Message Authentication Codes (MACs) or digital signatures to verify integrity and origin;</li>
+<li>Using nonces, timestamps, or sequence numbers to resist replay attacks;</li>
+<li>Applying least privilege, strong authentication, rate limiting, and traffic scrubbing;</li>
+<li>Keeping software updated and monitoring logs for anomalous behavior.</li>
+</ul>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"internet-overview","level":1,"text":"Internet Overview"},{"id":"components","level":2,"text":"Components"},{"id":"two-views-of-the-internet","level":2,"text":"Two Views of the Internet"},{"id":"network-edge-and-access-networks","level":2,"text":"Network Edge and Access Networks"},{"id":"residential-access-digital-subscriber-line-dsl","level":3,"text":"Residential Access: Digital Subscriber Line (DSL)"},{"id":"residential-access-cable-networks-and-hfc","level":3,"text":"Residential Access: Cable Networks and HFC"},{"id":"residential-access-fiber-to-the-home-ftth","level":3,"text":"Residential Access: Fiber to the Home (FTTH)"},{"id":"enterprise-and-campus-access-ethernet","level":3,"text":"Enterprise and Campus Access: Ethernet"},{"id":"wireless-access","level":3,"text":"Wireless Access"},{"id":"network-core","level":2,"text":"Network Core"},{"id":"forwarding-and-routing","level":3,"text":"Forwarding and Routing"},{"id":"circuit-switching-and-packet-switching","level":3,"text":"Circuit Switching and Packet Switching"},{"id":"network-of-networks","level":3,"text":"Network of Networks"},{"id":"delay-packet-loss-and-throughput","level":3,"text":"Delay, Packet Loss, and Throughput"},{"id":"layering-and-encapsulation","level":2,"text":"Layering and Encapsulation"},{"id":"application-layer","level":1,"text":"Application Layer"},{"id":"application-architectures","level":2,"text":"Application Architectures"},{"id":"client-server","level":3,"text":"Client–Server"},{"id":"peertopeer-p2p","level":3,"text":"Peer-to-Peer (P2P)"},{"id":"processes-sockets-and-addressing","level":2,"text":"Processes, Sockets, and Addressing"},{"id":"transport-services-required-by-applications","level":2,"text":"Transport Services Required by Applications"},{"id":"web-and-http","level":2,"text":"Web and HTTP"},{"id":"core-concepts","level":3,"text":"Core Concepts"},{"id":"connections-and-response-time","level":3,"text":"Connections and Response Time"},{"id":"http-messages","level":3,"text":"HTTP Messages"},{"id":"cookies","level":3,"text":"Cookies"},{"id":"web-caching-and-conditional-requests","level":3,"text":"Web Caching and Conditional Requests"},{"id":"file-transfer-protocol-ftp","level":2,"text":"File Transfer Protocol (FTP)"},{"id":"email","level":2,"text":"Email"},{"id":"domain-name-system-dns","level":2,"text":"Domain Name System (DNS)"},{"id":"purpose-and-properties","level":3,"text":"Purpose and Properties"},{"id":"resolution-process","level":3,"text":"Resolution Process"},{"id":"dns-caching","level":3,"text":"DNS Caching"},{"id":"common-resource-records","level":3,"text":"Common Resource Records"},{"id":"p2p-file-distribution-and-bittorrent","level":2,"text":"P2P File Distribution and BitTorrent"},{"id":"video-streaming-and-cdns","level":2,"text":"Video Streaming and CDNs"},{"id":"dynamic-adaptive-streaming-over-http-dash","level":3,"text":"Dynamic, Adaptive Streaming over HTTP (DASH)"},{"id":"content-distribution-networks-cdns","level":3,"text":"Content Distribution Networks (CDNs)"},{"id":"socket-programming","level":2,"text":"Socket Programming"},{"id":"udp-sockets","level":3,"text":"UDP Sockets"},{"id":"tcp-sockets","level":3,"text":"TCP Sockets"},{"id":"transport-layer","level":1,"text":"Transport Layer"},{"id":"transportlayer-overview","level":2,"text":"Transport-Layer Overview"},{"id":"multiplexing-and-demultiplexing","level":3,"text":"Multiplexing and Demultiplexing"},{"id":"udp","level":2,"text":"UDP"},{"id":"udp-datagram-structure","level":3,"text":"UDP Datagram Structure"},{"id":"principles-of-reliable-data-transfer","level":2,"text":"Principles of Reliable Data Transfer"},{"id":"evolution-of-the-rdt-protocols","level":3,"text":"Evolution of the rdt Protocols"},{"id":"gbn-and-sr","level":3,"text":"GBN and SR"},{"id":"tcp","level":2,"text":"TCP"},{"id":"tcp-connections-and-data-transfer","level":3,"text":"TCP Connections and Data Transfer"},{"id":"important-tcp-header-fields","level":3,"text":"Important TCP Header Fields"},{"id":"rtt-estimation-and-timeout","level":3,"text":"RTT Estimation and Timeout"},{"id":"reliable-transfer-and-fast-retransmit","level":3,"text":"Reliable Transfer and Fast Retransmit"},{"id":"flow-control-and-congestion-control","level":3,"text":"Flow Control and Congestion Control"},{"id":"connection-management","level":3,"text":"Connection Management"},{"id":"network-layer-todo","level":1,"text":"Network Layer (TODO)"},{"id":"networklayer-overview","level":2,"text":"Network-Layer Overview"},{"id":"the-ip-service-model","level":2,"text":"The IP Service Model"},{"id":"subnets-and-forwarding","level":2,"text":"Subnets and Forwarding"},{"id":"the-control-plane","level":2,"text":"The Control Plane"},{"id":"link-layer-and-local-area-networks-todo","level":1,"text":"Link Layer and Local Area Networks (TODO)"},{"id":"linklayer-overview","level":2,"text":"Link-Layer Overview"},{"id":"mac-addresses-and-ethernet","level":2,"text":"MAC Addresses and Ethernet"},{"id":"arp","level":2,"text":"ARP"},{"id":"error-detection","level":2,"text":"Error Detection"},{"id":"wireless-networks-todo","level":1,"text":"Wireless Networks (TODO)"},{"id":"wireless-networking-essentials","level":2,"text":"Wireless Networking Essentials"},{"id":"network-security-todo","level":1,"text":"Network Security (TODO)"},{"id":"security-goals-and-common-attacks","level":2,"text":"Security Goals and Common Attacks"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -73,7 +610,7 @@
 
 ## Components
 
-![Pasted image 20260831081755](../attachments/Pasted%20image%2020260831081755.png){width=399}
+![Pasted image 20260831081755](../attachments/Pasted%20image%2020260831081755-optimized.webp){width=399}
 
 - End systems (hosts) run network applications, such as computers, phones, and servers.
 - Communication links carry bits. Their key metric is the transmission rate $R$, measured in bits per second (bps).
@@ -102,7 +639,7 @@ An access network connects an end system to its edge router.
 
 ### Residential Access: Digital Subscriber Line (DSL)
 
-![Screenshot 2026-08-31 at 08.44.20](../attachments/Screenshot%202026-08-31%20at%2008.44.20.png){width=450}
+![Screenshot 2026-08-31 at 08.44.20](../attachments/Screenshot%202026-08-31%20at%2008.44.20-optimized.webp){width=450}
 
 DSL is commonly provided by telephone companies over existing copper telephone lines:
 
@@ -114,9 +651,9 @@ DSL is typically asymmetric: downstream rates are higher than upstream rates. Ac
 
 ### Residential Access: Cable Networks and HFC
 
-![Screenshot 2026-08-31 at 08.45.12](../attachments/Screenshot%202026-08-31%20at%2008.45.12.png){width=450}
+![Screenshot 2026-08-31 at 08.45.12](../attachments/Screenshot%202026-08-31%20at%2008.45.12-optimized.webp){width=450}
 
-![Screenshot 2026-08-31 at 08.47.32](../attachments/Screenshot%202026-08-31%20at%2008.47.32.png){width=450}
+![Screenshot 2026-08-31 at 08.47.32](../attachments/Screenshot%202026-08-31%20at%2008.47.32-optimized.webp){width=450}
 
 HFC (Hybrid Fiber Coax) combines a fiber backbone with coaxial cable at the network edge. Its main components include cable modems, splitters, and a Cable Modem Termination System (CMTS).
 
@@ -128,7 +665,7 @@ Fiber runs directly to the residence, providing high capacity and low signal att
 
 ### Enterprise and Campus Access: Ethernet
 
-![Screenshot 2026-08-31 at 08.48.11](../attachments/Screenshot%202026-08-31%20at%2008.48.11.png){width=450}
+![Screenshot 2026-08-31 at 08.48.11](../attachments/Screenshot%202026-08-31%20at%2008.48.11-optimized.webp){width=450}
 
 - Ethernet switches and links form the local area network.
 - Common link rates include 100 Mbps, 1 Gbps, 10 Gbps, and higher.
@@ -146,7 +683,7 @@ Fiber runs directly to the residence, providing high capacity and low signal att
 
 ### Forwarding and Routing
 
-![Screenshot 2026-09-05 at 11.22.24](../attachments/Screenshot%202026-09-05%20at%2011.22.24.png){width=450}
+![Screenshot 2026-09-05 at 11.22.24](../attachments/Screenshot%202026-09-05%20at%2011.22.24-optimized.webp){width=450}
 
 - <span style="color: red;">Forwarding</span> is a data-plane function. A router uses its forwarding table to move a packet from an input port to the appropriate output port.
 - <span style="color: red;">Routing</span> is a control-plane function. Routing algorithms and protocols compute paths and use them to build and update forwarding tables.
@@ -162,7 +699,7 @@ Routing is like planning a route; forwarding is like choosing the correct exit a
 | Advantage   | Predictable performance                 | High utilization; efficient for bursty traffic |
 | Cost        | Reserved resources are wasted when idle | Queuing, loss, and jitter may occur            |
 
-![Screenshot 2026-09-14 at 10.53.20](../attachments/Screenshot%202026-09-14%20at%2010.53.20.png){width=461}
+![Screenshot 2026-09-14 at 10.53.20](../attachments/Screenshot%202026-09-14%20at%2010.53.20-optimized.webp){width=461}
 
 Circuit switching establishes a dedicated end-to-end connection before data transfer. The network reserves transmission resources on every link along the path, rather than reserving an entire cable. In the illustrated example, if each link divides its capacity equally among four circuits, each circuit receives one quarter of that link's transmission rate.
 
@@ -186,7 +723,7 @@ If two ASs need to exchange traffic, the traffic may have to pass through an ups
 
 An Internet Exchange Point (IXP) lets multiple ASs connect to a shared switching platform and establish peering arrangements. Direct peering can shorten paths and reduce reliance on paid transit.
 
-![Screenshot 2026-09-15 at 14.10.01](../attachments/Screenshot%202026-09-15%20at%2014.10.01.png){width=450}
+![Screenshot 2026-09-15 at 14.10.01](../attachments/Screenshot%202026-09-15%20at%2014.10.01-optimized.webp){width=450}
 
 ### Delay, Packet Loss, and Throughput
 
@@ -219,11 +756,11 @@ $$
 \min\left\{R_s,R_c,\frac{R}{N}\right\}
 $$
 
-![Screenshot 2026-09-07 at 08.16.47](../attachments/Screenshot%202026-09-07%20at%2008.16.47.png){width=450}
+![Screenshot 2026-09-07 at 08.16.47](../attachments/Screenshot%202026-09-07%20at%2008.16.47-optimized.webp){width=450}
 
 ## Layering and Encapsulation
 
-![Screenshot 2026-09-15 at 14.12.31](../attachments/Screenshot%202026-09-15%20at%2014.12.31.png){width=450}
+![Screenshot 2026-09-15 at 14.12.31](../attachments/Screenshot%202026-09-15%20at%2014.12.31-optimized.webp){width=450}
 
 | Layer             | Main Function                                        | Protocol or medium                      |
 | ----------------- | ---------------------------------------------------- | --------------------------------------- |
@@ -255,7 +792,7 @@ Application data
 
 ### Client–Server
 
-![Screenshot 2026-09-16 at 14.12.14](../attachments/Screenshot%202026-09-16%20at%2014.12.14.png){width=450}
+![Screenshot 2026-09-16 at 14.12.14](../attachments/Screenshot%202026-09-16%20at%2014.12.14-optimized.webp){width=450}
 
 - Servers are generally always on and have stable addresses.
 - Clients send requests to servers and do not communicate directly with one another.
@@ -264,7 +801,7 @@ Application data
 
 ### Peer-to-Peer (P2P)
 
-![Screenshot 2026-09-16 at 14.12.33](../attachments/Screenshot%202026-09-16%20at%2014.12.33.png){width=450}
+![Screenshot 2026-09-16 at 14.12.33](../attachments/Screenshot%202026-09-16%20at%2014.12.33-optimized.webp){width=450}
 
 - Peers communicate directly with one another.
 - Each peer can both request and provide resources.
@@ -379,7 +916,7 @@ Cookies allow applications to maintain session state over stateless HTTP:
 4. The server associates the cookie with a session or user preferences.
 
 The following figure shows an example:
-![Screenshot 2026-09-16 at 15.13.24](../attachments/Screenshot%202026-09-16%20at%2015.13.24.png){width=450}
+![Screenshot 2026-09-16 at 15.13.24](../attachments/Screenshot%202026-09-16%20at%2015.13.24-optimized.webp){width=450}
 
 Sensitive cookies should normally use `Secure`, `HttpOnly`, and an appropriate `SameSite` policy.
 
@@ -423,7 +960,7 @@ The main components of an Internet email system are:
 - SMTP for submitting mail and transferring it between mail servers.
 - IMAP or HTTP for retrieving and managing messages on the server.
 
-![Screenshot 2026-09-21 at 17.02.55](../attachments/Screenshot%202026-09-21%20at%2017.02.55.png){width=317}
+![Screenshot 2026-09-21 at 17.02.55](../attachments/Screenshot%202026-09-21%20at%2017.02.55-optimized.webp){width=317}
 
 A typical delivery path is:
 
@@ -490,11 +1027,11 @@ DNS uses port 53. Ordinary queries commonly use UDP because they are latency-sen
 
 Conceptually, the Internet is divided into more than 1,000 top-level domains (the number grew rapidly after the new gTLD program launched in 2012); each top-level domain can be further subdivided into subdomains, and so on. Hostnames therefore follow a hierarchical naming scheme.
 
-![Screenshot 2026-09-21 at 18.33.51](../attachments/Screenshot%202026-09-21%20at%2018.33.51.png){width=450}
+![Screenshot 2026-09-21 at 18.33.51](../attachments/Screenshot%202026-09-21%20at%2018.33.51-optimized.webp){width=450}
 
 There are 13 root server identities (A through M), operated by 12 organizations. Each identity is replicated as many anycast instances worldwide (well over 1,000 instances in total). The root servers know the IP addresses of all top-level domain servers.
 
-![Screenshot 2026-09-21 at 17.40.59](../attachments/Screenshot%202026-09-21%20at%2017.40.59.png){width=450}
+![Screenshot 2026-09-21 at 17.40.59](../attachments/Screenshot%202026-09-21%20at%2017.40.59-optimized.webp){width=450}
 
 Suppose a client wants the IP address of www.amazon.com:
 1. The DNS client queries the root server and obtains the address of the DNS server for the `.com` domain.
@@ -528,13 +1065,13 @@ A DNS resource record can be represented as `(Name, Value, Type, TTL)`:
 
 DNS queries and responses use the same general message format, with a header and Question, Answer, Authority, and Additional sections.
 
-![Screenshot 2026-09-21 at 18.52.22](../attachments/Screenshot%202026-09-21%20at%2018.52.22.png){width=450}
+![Screenshot 2026-09-21 at 18.52.22](../attachments/Screenshot%202026-09-21%20at%2018.52.22-optimized.webp){width=450}
 
 ## P2P File Distribution and BitTorrent
 
 In the client-server architecture, let the server's upload rate be $u_s$, and let peer $i$ have upload rate $u_i$ and download rate $d_i$, as shown in the following figure.
 
-![ae7cc755-bfe8-4ec8-950a-49a9e78f03df](../attachments/ae7cc755-bfe8-4ec8-950a-49a9e78f03df.png){width=450}
+![ae7cc755-bfe8-4ec8-950a-49a9e78f03df](../attachments/ae7cc755-bfe8-4ec8-950a-49a9e78f03df-optimized.webp){width=450}
 
 Suppose the server wants to distribute one file of $F$ bits to $N$ peers, so that every peer obtains a copy of the same file (not $N$ different files). The server must therefore upload $NF$ bits in total, and the slowest peer, with download rate $d_{min}=\min_i d_i$, needs at least $F/d_{min}$. Then the minimum time is
 
@@ -559,7 +1096,7 @@ $$
 
 The minimum distribution time of the P2P architecture is therefore always less than or equal to that of the client-server architecture; equality holds, e.g., when $N=1$ or when all peer upload rates are 0. Moreover, $D_{cs}$ grows linearly with $N$, whereas $D_{P2P}$ grows much more slowly: when peers have nonzero upload rates, it stays bounded as $N$ grows.
 
-![2e52245b-edd2-4455-b9bc-74ff3a5a2f34](../attachments/2e52245b-edd2-4455-b9bc-74ff3a5a2f34.png){width=450}
+![2e52245b-edd2-4455-b9bc-74ff3a5a2f34](../attachments/2e52245b-edd2-4455-b9bc-74ff3a5a2f34-optimized.webp){width=450}
 
 The core ideas of BitTorrent are as follows:
 
@@ -578,7 +1115,7 @@ Dynamic Adaptive Streaming over HTTP (DASH) encodes a video at several bit rates
 
 ### Content Distribution Networks (CDNs)
 
-![Screenshot 2026-09-25 at 16.01.27](../attachments/Screenshot%202026-09-25%20at%2016.01.27.png){width=450}
+![Screenshot 2026-09-25 at 16.01.27](../attachments/Screenshot%202026-09-25%20at%2016.01.27-optimized.webp){width=450}
 
 A Content Distribution Network (CDN) deploys edge servers in many geographic locations, caches content, and directs each user to a suitable server. This can:
 
@@ -909,7 +1446,7 @@ Common defenses include:
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

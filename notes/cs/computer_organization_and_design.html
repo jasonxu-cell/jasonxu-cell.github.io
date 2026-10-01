@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="计算机组成与设计课程笔记，涵盖指令系统、处理器、存储层次结构与计算机体系结构。">
     <meta property="og:title" content="Computer Organization and Design | Yang">
+    <meta property="og:description" content="计算机组成与设计课程笔记，涵盖指令系统、处理器、存储层次结构与计算机体系结构。">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="zh_CN">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/cs/computer_organization_and_design.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Computer Organization and Design | Yang">
+    <meta name="twitter:description" content="计算机组成与设计课程笔记，涵盖指令系统、处理器、存储层次结构与计算机体系结构。">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Computer Organization and Design | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../cs.html" class="article-back-link">&larr; Computer Science</a>
             <h1>Computer Organization and Design</h1>
@@ -55,7 +60,877 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="computer-system-architecture">Computer System Architecture</h2>
+<p>A computer is a modern electronic machine designed for high-speed computation. It can perform both numerical and logical computation and can also store information. It is a modern intelligent electronic device that runs according to a program and processes massive amounts of data automatically and at high speed.</p>
+<p>Classification of computers (by performance and flexibility):</p>
+<ul>
+<li>Special-purpose computers (embedded systems)</li>
+<li>General-purpose computers (ordinary PCs), which can be further divided as follows:</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.53.47.png" alt="Screenshot 2026-06-09 at 17.53.47" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>A computer system consists of two major parts: the hardware system and the software system.</p>
+<ul>
+<li>Hardware: The physical part of the computer, consisting of tangible electronic components and optical, electrical, and mechanical devices.</li>
+<li>Software: Programs with various specific functions written in advance by people. Software is intangible and is usually stored on media such as optical discs and magnetic disks.</li>
+</ul>
+<p>Computer hardware and software are logically equivalent.</p>
+<p>A computer system can be viewed in terms of its computer architecture (external architecture) and its computer organization (internal architecture).</p>
+<ul>
+<li><span class="obsidian-red">Computer architecture</span> (external architecture): The attributes of a computer system as seen by the programmer, that is, its conceptual structure and functional behavior. Examples include the instruction set, addressing modes, and data types.</li>
+<li><span class="obsidian-red">Computer organization</span> (internal architecture): How the attributes specified by the architecture are implemented. Examples include which components the machine is built from and how they are interconnected (adders, control logic, etc.).</li>
+</ul>
+<h3 id="computer-hardware">Computer Hardware</h3>
+<p>The processing hierarchy of a modern computer: <img src="../attachments/Screenshot%202026-06-09%20at%2017.57.28-optimized.webp" alt="Screenshot 2026-06-09 at 17.57.28" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Here $M_0,M_1$ are hardware, and $M,M_2,M_3,M_4$ are software.</p>
+<p>The five major components of computer hardware:</p>
+<ul>
+<li>Arithmetic unit: Performs arithmetic and logical operations and temporarily stores intermediate results.</li>
+<li>Memory: Stores data and programs.</li>
+<li>Controller: Controls and directs the input and execution of programs and data and the handling of results.</li>
+<li>Input devices: Convert information from forms familiar to people into forms the machine can recognize.</li>
+<li>Output devices: Convert the machine&#039;s results into forms familiar to people and present them.</li>
+</ul>
+<p>In a computer, a continuous sequence of information is called a stream. Streams are generally divided into:</p>
+<ul>
+<li>Instruction stream (IS): The sequence of tasks (code) executed by the machine.</li>
+<li>Data stream (DS): The data (operands) processed by the instructions.</li>
+</ul>
+<p>Computer architectures can therefore be classified by their level of parallelism. This scheme is called <span class="obsidian-red">Flynn&#039;s taxonomy</span>.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Abbreviation</th><th>Full Name</th><th>Characteristics</th><th>Typical Examples</th></tr></thead><tbody><tr><td>SISD</td><td>Single Instruction stream, Single Data stream</td><td>The traditional von Neumann architecture; processes one instruction and one data item at a time.</td><td>Early personal computers; single-core processors.</td></tr><tr><td>SIMD</td><td>Single Instruction stream, Multiple Data streams</td><td>The same instruction operates on multiple different data items simultaneously; well suited to parallel computation.</td><td>Vector instruction sets of modern CPUs (e.g., SSE/AVX); GPUs (graphics processing units).</td></tr><tr><td>MISD</td><td>Multiple Instruction streams, Single Data stream</td><td>Multiple instructions process the same data item simultaneously; very rare in practice.</td><td>Fault-tolerant systems (e.g., space shuttle computers, where several systems process the same data and compare results).</td></tr><tr><td>MIMD</td><td>Multiple Instruction streams, Multiple Data streams</td><td>Multiple processors independently execute different instruction sequences on different data.</td><td>Multicore CPUs, distributed computing clusters, supercomputers.</td></tr></tbody></table></div>
+<p>The <span class="obsidian-red">von Neumann architecture</span>:</p>
+<ul>
+<li>Five major components; early machines were centered on the arithmetic unit.</li>
+<li>Data and instructions are represented in binary, stored with equal status in memory, and accessed by address.</li>
+<li>An instruction consists of an opcode and an address field, and instructions are stored sequentially in memory.</li>
+<li>Core idea: Instructions and data are treated alike and stored in the same memory, and the CPU executes instructions automatically by address.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.58.33.png" alt="Screenshot 2026-06-09 at 17.58.33" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="arithmetic-unit">Arithmetic Unit</h4>
+<p>The arithmetic unit is commonly called the Arithmetic Logic Unit (ALU). The number of bits it can process at once is called the machine word length.</p>
+<p>Operands are generally binary numbers, where 0 represents a low voltage or no pulse and 1 represents a high voltage or a pulse. Their length is generally a power of 2.</p>
+<p>The arithmetic unit usually contains at least three core registers: the accumulator (ACC), the multiplier-quotient register (MQ), and the operand register (X).</p>
+<h4 id="controller">Controller</h4>
+<p>The basic task of the controller is to repeat the following three phases over and over:</p>
+<ol>
+<li>Fetch: Retrieve an instruction from memory according to the instruction sequence arranged by the program.</li>
+<li>Decode: Analyze the instruction, determine the operation to perform (the opcode), and locate the operand addresses according to the addressing information.</li>
+<li>Execute: Perform the operation according to the operand addresses and the opcode.</li>
+</ol>
+<p>Components of the controller:</p>
+<ul>
+<li>Program Counter (PC): Holds the address of the next instruction to be executed. It increments automatically and can thus form the address of the next instruction by itself.</li>
+<li>Instruction Register (IR): Holds the instruction currently being executed by the CPU.</li>
+<li>Control Unit (CU): Analyzes the operation required by the current instruction and issues the corresponding sequence of micro-operation commands.</li>
+</ul>
+<p>We generally use <code>LDR r0,address</code> to denote loading the contents of the memory location at <code>address</code> into register r0. Taking the fetch of this instruction as an example, the RTL notation for the fetch (FETCH) phase is:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">RTL</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-rtl">FETCH [MAR] &lt;- [PC]     ;copy the PC into the memory address register
+      [PC] &lt;- [PC]+4    ;increment the PC to point to the next instruction
+      [MBR] &lt;- MAR  ;read the instruction at the address in MAR
+      [IR] &lt;- [MBR]     ;copy the instruction from the MBR to the IR</code></pre></div>
+<div class="markdown-callout markdown-callout-tip"><div class="callout-title"><span class="callout-icon" aria-hidden="true">i</span><span class="callout-title-text">Tip</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Registers are accessed by name rather than by address.</p></div></div>
+<div class="markdown-callout markdown-callout-tip"><div class="callout-title"><span class="callout-icon" aria-hidden="true">i</span><span class="callout-title-text">Tip</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The Memory Address Register (MAR) holds the address of the memory location being accessed by a read or write operation.</p></div></div>
+<div class="markdown-callout markdown-callout-tip"><div class="callout-title"><span class="callout-icon" aria-hidden="true">i</span><span class="callout-title-text">Tip</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The Memory Buffer Register (MBR) holds data just read from memory or data about to be written to memory. In modern computer architecture, the Memory Data Register (MDR) and the MBR refer to the same thing.</p></div></div>
+<div class="markdown-callout markdown-callout-tip"><div class="callout-title"><span class="callout-icon" aria-hidden="true">i</span><span class="callout-title-text">Tip</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>In modern CPU designs, the MAR and MDR (or MBR) are usually integrated inside the CPU to increase integration density, but logically they belong to the interface of main memory.</p></div></div>
+<h4 id="memory">Memory</h4>
+<p>Taking main memory as an example, it consists of the storage array, various logic components, and control circuitry.</p>
+<p>Storage array ← memory word ← memory location ← storage element</p>
+<ul>
+<li>Storage element (storage cell): Each can store one binary digit (bit).</li>
+<li>Memory location: Can store a string of binary digits called a memory word; the number of bits is the memory word length. It is the smallest unit the CPU accesses by address.</li>
+<li>Storage array: The whole formed by a large number of densely arranged memory locations.</li>
+<li>Memory address: Each memory location is numbered, and its number is called the address of that location.</li>
+</ul>
+<p>Writing and reading all bits of a memory word by the address of its memory location is called access by address (memory access).</p>
+<h4 id="performance-metrics">Performance Metrics</h4>
+<p>MOPS (Million Operations Per Second): Millions of operations per second (usually INT4 or INT8, with low precision requirements).</p>
+<p>MFLOPS (Million Floating-point Operations Per Second): Millions of floating-point operations per second (high precision requirements; mainly used to measure floating-point capability in high-performance and scientific computing).</p>
+<p>CPU performance:</p>
+<p>Almost all digital electronic circuits generate a continuous stream of electrical pulses at fixed intervals, called the clock. The <span class="obsidian-red">clock cycle</span> (tick) is the smallest unit of time in which a computer performs an operation, and its reciprocal is the clock rate $f$. Several clock cycles form a CPU cycle (machine cycle), which is usually defined as the shortest time needed to read one instruction word from memory.</p>
+<p>The relationship among program execution time (TCPU), clock rate ($f$), and the total number of clock cycles (CLK, Clock): $$TCPU=CLK/f=CLK∗TCLK$$ <span class="obsidian-red">CPI</span> (Cycles Per Instruction): The average number of clock cycles needed to execute one instruction. It reflects the computer&#039;s organization and the structure of its instruction set.</p>
+<p>MIPS (Million Instructions Per Second): The number of instructions executed per unit time, in millions per second.</p>
+<p>IC (Instruction Count): The number of instructions executed while running a program. It reflects the structure of the instruction set and compiler technology.</p>
+<p>$$CPI=CLK/IC$$</p>
+<p>Therefore</p>
+<p>$$\boxed{TCPU=CPI∗IC/f}$$</p>
+<p>Therefore, to shorten program execution time, we need to optimize the three parameters $CPI,IC,f$.</p>
+<p>Suppose the computer has $n$ instruction classes, where instructions of class $i$ take $CPI_i$ clock cycles each and occur $IC_i$ times in the program. Then</p>
+<p>$$TCPU=CLK/f=\sum_i(IC_i∗CPI_i)/f$$</p>
+<p>The overall $CPI=\sum_i(IC_i/IC)\times CPI_i$, that is, the average of the per-class CPIs weighted by their frequencies.</p>
+<p>Moreover, different factors affect different parameters: the algorithm, programming language, and compiler mainly affect $CPI$ and the instruction count IC, whereas the instruction set architecture (ISA) affects CPI, IC, and the clock rate $f$.</p>
+<h3 id="integrated-circuit-manufacturing">Integrated Circuit Manufacturing</h3>
+<p>Integrated circuit cost = (die cost + die testing cost + packaging cost) / final test yield</p>
+<p>Die cost = wafer cost / (dies per wafer × die yield)</p>
+<p>Dies per wafer = wafer area / die area − $\frac{\pi×\text{wafer diameter}}{\sqrt{2×\text{die area}}}$</p>
+<p>Die yield = $\text{wafer yield}×(1+\text{defect density}×\text{die area}/\alpha)^{−\alpha}$</p>
+<p>Here $\alpha$ is a constant, typically $3−4$.</p>
+<h3 id="computational-efficiency">Computational Efficiency</h3>
+<p><mark>Execution time is the only valid and unimpeachable measure of performance.</mark></p>
+<p>A natural question in the history of computing is whether computational efficiency can be improved without limit. Two laws address this question:</p>
+<ul>
+<li><span class="obsidian-red">Amdahl&#039;s law</span></li>
+</ul>
+<p>For a piece of code, let the fraction that can be accelerated by parallel computation be $p$ and the fraction that must run serially be $1−p$. If the accelerable part is made $n$ times faster, then</p>
+<p>the overall speedup, defined as the ratio of execution time before and after the optimization, is $$\boxed{S=\frac{1}{(1−p)+\frac{p}{n}}}$$</p>
+<p>It follows easily that $$\lim \limits_{n→+∞}S=\frac{1}{1−p}$$</p>
+<p>Therefore, for a fixed task, continually upgrading the hardware yields diminishing returns: the improvement in efficiency is bounded.</p>
+<ul>
+<li><span class="obsidian-red">Gustafson&#039;s law</span></li>
+</ul>
+<p>As the number of processors increases, the size of the parallel part grows accordingly, while the serial part stays relatively fixed.</p>
+<p>Let the number of processors be $n$, and during large-scale parallel execution let the serial fraction be $s$ and the parallel fraction be $1−s$.</p>
+<p>Then the scaled speedup is $$\boxed{S=n+(1−n)\times s=s+n \times (1−s)}$$</p>
+<p>Hence, within a fixed amount of time, the scaled speedup can keep increasing as processors are added.</p>
+<h3 id="power-wall">Power Wall</h3>
+<p>The dynamic power of CMOS circuits comes mainly from switching and is approximately</p>
+<p>$$P \propto \text{capacitive load} \times \text{voltage}^2 \times \text{switching frequency}$$</p>
+<p>Raising the clock rate increases power, so power can be reduced by lowering the capacitive load, the voltage, or the frequency. However, the voltage cannot be lowered much further (too low a voltage causes leakage current to rise sharply), and there is no effective way to remove more heat. Together these two factors form the <span class="obsidian-red">power wall</span>: it ended the path of improving performance simply by raising the clock rate and forced the industry to move from uniprocessors to multicore (multiprocessor) designs that continue to improve performance through parallelism.</p>
+<h3 id="computer-software">Computer Software</h3>
+<ul>
+<li>System software: Mainly used to manage the computer system, simplify programming and system use, improve the efficiency of computer use, and extend the functions and applications of the computer.</li>
+<li>Utility programs: diagnostic programs, debuggers, standard function libraries, etc.</li>
+<li>Language processors: assemblers, compilers, etc.</li>
+<li>Operating systems</li>
+<li>Database management systems</li>
+<li>Application software: Programs written by users to solve specific problems with the computer according to their needs.</li>
+</ul>
+<h3 id="program-compilation">Program Compilation</h3>
+<p>Computer languages are divided into high-level languages and low-level languages (machine language and assembly language).</p>
+<p>A language is generally implemented in one of two ways:</p>
+<ul>
+<li>Compilation: The source program is translated into a machine-language object program, which is then executed.</li>
+<li>Interpretation: An interpreter for the source language is implemented on the target machine, and it directly interprets and executes the source program.</li>
+</ul>
+<div class="markdown-callout markdown-callout-tip"><div class="callout-title"><span class="callout-icon" aria-hidden="true">i</span><span class="callout-title-text">Tip</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Language implementations are diverse; pure compilation and pure interpretation are merely two extremes:</p>
+<ul>
+<li>Common implementations of C and Fortran can be regarded as fairly pure compilation.</li>
+<li>Early BASIC, DOS batch (<code>.bat</code>) files, and some current scripting-language implementations use essentially pure interpretation.</li>
+<li>Java and similar languages sit in between (using intermediate forms such as bytecode or syntax trees).</li>
+</ul></div></div>
+<h4 id="gcc">GCC</h4>
+<p>The GNU Compiler Collection (GCC) is one of the most fundamental tools in programming. It is a suite of software that translates high-level languages into machine language. GCC currently supports many high-level languages, such as C, C++, Ada, Objective-C, Fortran, and Go (early versions also supported Java).</p>
+<p>In general, a C program is compiled as follows:</p>
+<ol>
+<li>Preprocessing: Process macro definitions (e.g., <code>#define</code>) and included header files (e.g., <code>#include</code>).</li>
+<li>Compilation into assembly code.</li>
+<li>Assembly into object code (binary).</li>
+<li>Linking: Produce the final executable file.</li>
+</ol>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Stage</th><th>Input File</th><th>GCC Option</th></tr></thead><tbody><tr><td>Preprocessing</td><td><code>.c(.cpp)</code></td><td>-E</td></tr><tr><td>Compilation</td><td><code>.i(.ii)</code></td><td>-S</td></tr><tr><td>Assembly</td><td><code>.s</code></td><td>-c</td></tr><tr><td>Linking</td><td><code>.o</code></td><td>No special option</td></tr></tbody></table></div>
+<p>Several common optimization levels:</p>
+<ul>
+<li>O0: No optimization.</li>
+<li>O1: Basic optimizations.</li>
+<li>Constant folding, e.g., <code>int x = 3 * 4;</code> → <code>int x = 12;</code></li>
+<li>Instruction reordering within basic blocks</li>
+<li>Dead-code elimination</li>
+<li>O2: More aggressive optimizations.</li>
+<li>Function inlining: small functions are expanded in place</li>
+<li>Loop optimizations: loop unrolling, loop-invariant code motion</li>
+<li>Instruction scheduling: reordering instructions to reduce pipeline stalls</li>
+<li>Common subexpression elimination</li>
+<li>O3: The most aggressive optimizations.</li>
+<li>Automatic vectorization: using SIMD instructions (SSE/AVX)</li>
+<li>More aggressive function inlining</li>
+<li>Loop transformations: loop interchange, loop tiling (blocking)</li>
+</ul>
+<h4 id="translating-and-starting-a-program">Translating and Starting a Program</h4>
+<p>Going from source code to a running program requires four cooperating tools:</p>
+<ul>
+<li>Compiler: Translates a high-level language such as C into assembly language.</li>
+<li>Assembler: Translates an assembly program into a machine-language object module. It handles pseudoinstructions and uses a symbol table, consisting of symbol–address pairs, to keep track of labels used in branches and data transfer instructions.</li>
+<li>Linker: Places the independently assembled code and data modules in memory according to their symbols, determines the addresses of labels, patches internal and external references, resolves all undefined labels, and finally produces an executable file.</li>
+<li>Loader: Loads the executable file into memory and starts it running.</li>
+</ul>
+<p>Dynamically linked libraries (DLLs): Libraries are linked and loaded only at run time. Compared with static linking, DLLs are easier to update and save space; static linking starts faster and is easier to understand but makes upgrades harder.</p>
+<h2 id="instruction-set-architecture">Instruction Set Architecture</h2>
+<p>Instruction: A command that directs the computer to perform a certain operation.</p>
+<p>Instructions can be classified as:</p>
+<ul>
+<li>Microinstructions</li>
+<li>Macroinstructions</li>
+<li>Machine instructions</li>
+</ul>
+<p>Instruction Set (IS): The set of all machine instructions a computer can execute.</p>
+<p><span class="obsidian-red">Instruction Set Architecture</span> (ISA): A complete architectural specification. It specifies not only which instructions exist but also how these instructions interact with the hardware; it is the external architecture of the computer.</p>
+<p>The format and functions of the instructions directly affect the machine&#039;s hardware structure, its system software, and its range of applications.</p>
+<p>Computer family: A series of computers with the same basic instruction set and the same basic architecture.</p>
+<p>Requirements of a well-designed instruction set:</p>
+<ul>
+<li>Completeness</li>
+<li>Efficiency</li>
+<li>Regularity</li>
+<li>Compatibility</li>
+</ul>
+<p>Key principles:</p>
+<ul>
+<li>Instructions are represented as numbers.</li>
+<li>Programs are stored in memory and read and written just like data.</li>
+</ul>
+<h3 id="instruction-formats">Instruction Formats</h3>
+<p>An instruction consists of an opcode (OP) and operand addresses (A), and instructions are stored sequentially in memory as binary codes.</p>
+<p><span class="obsidian-red">Opcode</span>: Specifies the operation the instruction performs. Address field: Specifies where the operands involved in the operation are stored. <img src="../attachments/Screenshot%202026-06-10%20at%2011.12.14.png" alt="Screenshot 2026-06-10 at 11.12.14" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Three-address instructions: (A1)OP(A2) → (A3)</li>
+<li>Two-address instructions: (A1)OP(A2) → (A1/A2)</li>
+<li>One-address instructions: (A1)OP(ACC) → (ACC)</li>
+<li>Zero-address instructions: e.g., no-operation (NOP), halt (HLT), return from function (RET), return from interrupt (IRET)</li>
+</ul>
+<p>Instruction word length: The number of bits in an instruction word, usually a multiple of 8.</p>
+<ul>
+<li>Single-word instructions: The instruction length equals the machine word length (common in early machines).</li>
+<li>Half-word instructions: The instruction length is half the machine word length.</li>
+<li>Double-word/multi-word instructions: The instruction length is two or more times the machine word length.</li>
+<li>They provide enough address bits to address any location in memory.</li>
+<li>Fetching a complete instruction requires multiple memory accesses, which slows the CPU and uses more storage.</li>
+</ul>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Suppose the instruction length is 16 bits, each operand address field is 6 bits, and there are three instruction formats: zero-address, one-address, and two-address.</p>
+<ol>
+<li>With a fixed-length opcode, a two-address instruction has $16-6-6=4$ opcode bits, so there are $2^4=16$ opcodes in total.</li>
+<li>With the <span class="obsidian-red">expanding opcode</span> technique, if there are X two-address instructions and Y one-address instructions, the maximum number Z of zero-address instructions satisfies $$2^{12}X+2^{6}Y+Z\le2^{16}$$</li>
+</ol></div></div>
+<h3 id="addressing-modes">Addressing Modes</h3>
+<p><span class="obsidian-red">Instruction addressing</span>: Locating the next instruction. It is generally divided into sequential addressing (the PC increments automatically) and jump addressing (branch and jump instructions modify the PC). <img src="../attachments/Screenshot%202026-06-10%20at%2011.15.43-optimized.webp" alt="Screenshot 2026-06-10 at 11.15.43" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p><span class="obsidian-red">Data addressing</span>: Determining the actual address of an operand.</p>
+<ul>
+<li>Immediate addressing: <code>MOV R0, #15</code></li>
+<li>Register addressing: <code>ADD R1, R2</code> (the operand is in a register)</li>
+<li>Register indirect addressing: <code>LOAD R1, (R2)</code> (R2 holds the memory address of the operand)</li>
+<li>Direct addressing: <code>LOAD R1, [1000H]</code></li>
+<li>Indirect addressing: <code>LOAD R1, @[1000H]</code></li>
+</ul>
+<h3 id="byte-ordering">Byte Ordering</h3>
+<p>With byte addressing, a word is 32 bits and a byte is 8 bits, so four bytes hold one word; consecutive word addresses therefore differ by 4.</p>
+<ul>
+<li><span class="obsidian-red">Big-endian</span>: The address of the leftmost (most significant) byte is used as the word address.</li>
+<li><span class="obsidian-red">Little-endian</span>: The address of the rightmost (least significant) byte is used as the word address.</li>
+<li>RISC-V is little-endian.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-18%20at%2020.53.21-optimized.webp" alt="Screenshot 2026-05-18 at 20.53.21" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Consider the following code:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">RISC-V</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-risc-v">ld x6, 0(x7)
+sd x6, 8(x7)</code></pre></div>
+<p>Suppose register <code>x7</code> contains the address <code>0x10000000</code> and the data at that address is <code>0x8877665544332211</code>. After <code>sd</code> executes, what (double)word is stored starting at <code>0x10000008</code>?</p>
+<ol>
+<li>On a big-endian machine, the doubleword <code>0x8877665544332211</code> is stored starting at <code>0x10000008</code>.</li>
+<li>On a little-endian machine, the doubleword <code>0x8877665544332211</code> is stored starting at <code>0x10000008</code>.</li>
+</ol>
+<p>(<code>ld</code> reads the whole doubleword into <code>x6</code> and <code>sd</code> writes it back unchanged, so the doubleword&#039;s value does not depend on byte order and is the same on both machines; only the order of the individual bytes in memory differs.)</p>
+<p>If <code>ld</code> is replaced by <code>lw</code> and <code>sd</code> by <code>sw</code>, i.e.,</p>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">RISC-V</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-risc-v">lw x6, 0(x7)
+sw x6, 8(x7)</code></pre></div>
+<ol>
+<li>On a big-endian machine, the word <code>0x88776655</code> is stored starting at <code>0x10000008</code>.</li>
+<li>On a little-endian machine, the word <code>0x44332211</code> is stored starting at <code>0x10000008</code>.</li>
+</ol>
+<p>The key difference between the two:</p>
+<ul>
+<li><code>lw</code> (Load Word): reads 32 bits (4 bytes) of data from memory.</li>
+<li><code>ld</code> (Load Doubleword): reads 64 bits (8 bytes) of data from memory.</li>
+</ul></div></div>
+<h3 id="cisc-and-risc">CISC and RISC</h3>
+<p><span class="obsidian-red">Complex Instruction Set Computer</span> (CISC)</p>
+<p>Representative: the x86 architecture of Intel and AMD.</p>
+<ul>
+<li>Instructions usually have two operands, one of which is a memory operand.</li>
+<li>Advantages: Arithmetic instructions can use memory locations directly as operands, so instructions are compact and space-efficient.</li>
+<li>Disadvantages: Instructions take many cycles to execute, memory operands occupy many bits in the instruction, and dependences between instructions are harder to determine.</li>
+</ul>
+<p><span class="obsidian-red">Reduced Instruction Set Computer</span> (RISC)</p>
+<p>Representatives: the ARM architecture and RISC-V.</p>
+<ul>
+<li>Instructions usually have three operands, all of which are registers.</li>
+<li>Each instruction completes in one machine cycle.</li>
+<li>Only load and store instructions access memory; all other operations are performed between registers.</li>
+<li>Implementations commonly use separate instruction and data <span class="obsidian-red">caches</span> (a Harvard-style cache organization) so that instructions and data can be fetched simultaneously.</li>
+<li>Advantages: Fixed-length instructions, simple hardware, few clock cycles per instruction, and easy to implement at high clock rates.</li>
+<li>Disadvantages: More instructions are needed to complete the same task, and fixed-length instructions waste space.</li>
+</ul>
+<h3 id="instruction-set-design-and-examples">Instruction Set Design and Examples</h3>
+<p>Simple instruction set architectures include stack, accumulator, register–memory, and register–register instruction sets.</p>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.18.04-optimized.webp" alt="Screenshot 2026-06-10 at 11.18.04" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The implementation of A+B in each of the four instruction sets is as follows:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Stack</th><th>Accumulator</th><th>Register–Memory</th><th>Register–Register</th></tr></thead><tbody><tr><td>PUSH A&lt;br&gt;&lt;br&gt;PUSH B&lt;br&gt;&lt;br&gt;ADD&lt;br&gt;&lt;br&gt;POP C</td><td>LOAD A&lt;br&gt;&lt;br&gt;ADD B&lt;br&gt;&lt;br&gt;Store C</td><td>LOAD R1,A&lt;br&gt;&lt;br&gt;ADD R3,R1,B&lt;br&gt;&lt;br&gt;Store R3,C</td><td>LOAD R1,A&lt;br&gt;&lt;br&gt;LOAD R2,B&lt;br&gt;&lt;br&gt;ADD R3,R1,R2&lt;br&gt;&lt;br&gt;Store R3,C</td></tr></tbody></table></div>
+<h4 id="simple-instruction-sets">Simple Instruction Sets</h4>
+<ol>
+<li>Stack instruction sets</li>
+</ol>
+<p>Instructions in a stack instruction set are generally zero-address instructions.</p>
+<ul>
+<li>Advantages: Very compact code (short instructions); simple compiler implementation.</li>
+<li>Disadvantages: The top of the stack easily becomes a performance bottleneck; data cannot be accessed randomly, so flexibility is poor.</li>
+<li>Typical examples: early Burroughs computers and the Java Virtual Machine (JVM).</li>
+</ul>
+<ol>
+<li>Accumulator instruction sets</li>
+</ol>
+<p>An accumulator instruction set generally has only one special register, the accumulator (ACC). Instructions are usually one-address instructions: one operand is implicitly in the accumulator, and the instruction specifies only the other operand (usually in memory). For example, <code>ADD X</code> means <code>ACC = ACC + Memory[X]</code>.</p>
+<ul>
+<li>Advantages: Extremely simple hardware; saves register resources.</li>
+<li>Disadvantages: Because there is only one accumulator, programs must frequently move data to and from memory (memory traffic), which lowers efficiency.</li>
+<li>Typical examples: EDSAC, the early 8051 microcontroller, and the MOS 6502.</li>
+</ul>
+<h4 id="the-x86-instruction-set-register-memory">The x86 Instruction Set (Register–Memory)</h4>
+<p>The x86 instruction set is the most mainstream CISC instruction set still in wide use today (mainframe ISAs such as IBM z/Architecture are also CISC). Its instructions are variable in length, from 1 to 15 bytes including optional prefixes.</p>
+<p>Its instruction format is as follows:</p>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.17.24.png" alt="Screenshot 2026-06-10 at 11.17.24" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="the-mips-instruction-set-register-register">The MIPS Instruction Set (Register–Register)</h4>
+<p>MIPS: Microprocessor without Interlocked Pipeline Stages.</p>
+<p>MIPS is a popular RISC instruction set. Its machine word length is 32 or 64 bits (the 16-bit MIPS16 is a compressed instruction encoding, not a machine word length); it has more than 100 instructions and 32 general-purpose registers.</p>
+<p>Its instruction formats are as follows:</p>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.17.02-optimized.webp" alt="Screenshot 2026-06-10 at 11.17.02" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The addressing modes of these instructions are as follows:</p>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.18.48-optimized.webp" alt="Screenshot 2026-06-10 at 11.18.48" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="the-riscv-instruction-set">The RISC-V Instruction Set</h3>
+<p>RISC-V is one of the best-known and most successful open, free, and modern instruction set architectures today (earlier open ISAs such as OpenRISC already existed, so it is not the &quot;first&quot;). It consists of a base integer instruction set (RV32I/RV64I) and several optional extensions.</p>
+<p>For the details of the RISC-V instruction set, see the <a href="https://docs.riscv.org/reference/isa/_attachments/riscv-unprivileged.pdf" target="_blank" rel="noopener noreferrer">official specification</a>.</p>
+<p>Examples of RISC-V instructions:</p>
+<p><code>add rd,rs1,rs2</code>: R-type instruction, opcode op=0110011, destination register <code>rd</code>, source registers <code>rs1</code> and <code>rs2</code>.</p>
+<p><code>addi rd,rs1,i</code>: I-type instruction, opcode op=0010011, destination register <code>rd</code>, source register <code>rs1</code>, immediate <code>i</code>.</p>
+<p><code>ld rd,offset(rs1)</code>: I-type instruction, opcode op=0000011, destination register <code>rd</code>, base register <code>rs1</code>, offset <code>offset</code>. It reads 8 bytes from the address given by the contents of <code>rs1</code> plus <code>offset</code> and places them in <code>rd</code> (memory → register).</p>
+<p><code>sd rs2,offset(rs1)</code>: S-type instruction, opcode op=0100011, source data register <code>rs2</code>, base register <code>rs1</code>, offset <code>offset</code>. It stores the 8 bytes in <code>rs2</code> to memory at address <code>rs1 + offset</code> (register → memory).</p>
+<p>Conditional branch instruction: <code>beq x1,x2,offset</code></p>
+<p>To make the decoding hardware as simple as possible, RISC-V makes a clever physical design choice: the positions of the source registers (rs1, rs2) and the destination register (rd) are exactly the same in all formats. As a result, the CPU can start reading the register file the instant it has the instruction, without first knowing which instruction it is.</p>
+<p>Compared with MIPS, RISC-V incorporates lessons learned over the past 30 years:</p>
+<ol>
+<li>No delay slots: For pipeline efficiency, MIPS requires the instruction after a jump or branch (the delay slot) to be executed. This makes life hard for compilers. RISC-V solves the problem with modern branch predictors and no longer needs delay slots.</li>
+<li>No condition codes: RISC-V conditional branches (e.g., <code>beq</code>) compare two registers directly, which simplifies the design of the state machine.</li>
+<li>Sign extension of immediates: The layout of RISC-V immediate bits looks messy (the fields are split up), but the design keeps the sign bit in the same position so that the circuit paths for sign extension are identical in length, which helps raise the clock rate.</li>
+</ol>
+<h4 id="riscv-instruction-format-fields">RISC-V Instruction Format Fields</h4>
+<p>Field layout of each format (32 bits in total):</p>
+<ul>
+<li>R-type (<code>add</code>, <code>sub</code>): <code>funct7(7) | rs2(5) | rs1(5) | funct3(3) | rd(5) | opcode(7)</code></li>
+<li>I-type (<code>lw</code>, <code>addi</code>): <code>imm[11:0](12) | rs1(5) | funct3(3) | rd(5) | opcode(7)</code>; the immediate is a 12-bit two&#039;s-complement number.</li>
+<li>S-type (<code>sw</code>; the immediate is split into two parts so that the positions of rs1/rs2 match the R-type): <code>imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode</code></li>
+</ul>
+<p>Design principles: simplicity favors regularity, smaller is faster, and good design demands good compromises. The two key principles of building computers are &quot;instructions are represented as numbers&quot; and &quot;programs are stored in memory to be read or written, just like data&quot; (the <span class="obsidian-red">stored-program concept</span>).</p>
+<p>RISC-V multiply and divide instructions:</p>
+<ul>
+<li>Multiply: <code>mul</code> (lower bits), <code>mulh</code> (upper bits, signed), <code>mulhu</code> (upper bits, unsigned), <code>mulhsu</code> (upper bits, one signed and one unsigned operand)</li>
+<li>Divide: <code>div</code>, <code>divu</code> (unsigned divide), <code>rem</code> (remainder), <code>remu</code> (unsigned remainder)</li>
+</ul>
+<h4 id="riscv-register-conventions">RISC-V Register Conventions</h4>
+<p>RISC-V has 32 general-purpose registers, whose roles are divided by the calling convention:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Register</th><th>Use</th><th>Preserved Across a Call?</th></tr></thead><tbody><tr><td><code>x0</code></td><td>Hardwired to 0</td><td>—</td></tr><tr><td><code>x1</code>(ra)</td><td>Return address</td><td>—</td></tr><tr><td><code>x2</code>(sp)</td><td>Stack pointer</td><td>Preserved</td></tr><tr><td><code>x8</code>(fp), <code>x9</code>, <code>x18~x27</code></td><td>Saved registers</td><td>Must be saved/restored</td></tr><tr><td><code>x5~x7</code>, <code>x28~x31</code></td><td>Temporary registers</td><td>Not preserved</td></tr><tr><td><code>x10~x17</code></td><td>Argument/return-value registers (8)</td><td>Not preserved</td></tr></tbody></table></div>
+<h4 id="logical-and-shift-operations">Logical and Shift Operations</h4>
+<ul>
+<li>Shifts: Logical shifts fill with 0; arithmetic right shifts fill with the most significant (sign) bit. Shifts by an immediate: <code>slli</code>/<code>srli</code>/<code>srai</code>; shifts by a register amount: <code>sll</code>/<code>srl</code>/<code>sra</code>.</li>
+<li>AND: Often used for masking, i.e., clearing certain bits to 0 (the other source operand serves as the mask).</li>
+<li>OR: Used to set certain bits to 1.</li>
+<li>XOR: Yields 0 for equal bits and 1 for different bits; XOR with all ones (<code>111…1</code>) implements bitwise NOT.</li>
+</ul>
+<h4 id="decisionmaking-and-branch-instructions">Decision-Making and Branch Instructions</h4>
+<p>Conditional branches: <code>beq</code> (equal), <code>bne</code> (not equal), <code>blt</code>/<code>bge</code> (signed less than / greater than or equal), and <code>bltu</code>/<code>bgeu</code> (unsigned). Set instructions: <code>slt</code>/<code>slti</code>/<code>sltu</code>/<code>sltiu</code> set <code>x[rd]=1</code> when the first operand is less than the second (<code>slt</code>/<code>sltu</code> compare <code>x[rs1]</code> with <code>x[rs2]</code>; <code>slti</code>/<code>sltiu</code> compare <code>x[rs1]</code> with an immediate). They are often combined with branches to implement complex conditions.</p>
+<p>Comparators are not necessarily used to perform subtraction; conversely, subtraction is often used to implement comparison.</p>
+<h4 id="hardware-support-for-procedures">Hardware Support for Procedures</h4>
+<ul>
+<li><code>jal rd, label</code> (jump and link): Jumps to the target and stores the return address PC+4 in <code>rd</code> (usually <code>x1</code>/ra). The encoded immediate field is 20 bits (the actual offset is 21 bits, with the lowest bit implicitly 0). It is used for procedure calls.</li>
+<li><code>jalr rd, offset(rs1)</code> (jump and link register): Jumps to <code>rs1+offset</code> with a 12-bit immediate. <code>jalr x0, 0(x1)</code> is commonly used to return from a function.</li>
+</ul>
+<p>During a procedure call, the stack is used to save the return address and the registers that must be preserved: before the call, <code>addi sp, sp, -k</code> allocates stack space and <code>sw</code> saves the registers; before returning, <code>lw</code> restores them and <code>addi sp, sp, k</code> pops the stack. Recursive and nested calls rely especially on the stack to save each level&#039;s context (e.g., implementations of recursive functions such as <code>fact</code> and <code>sum</code>). Characters are stored with <code>lb</code>/<code>sb</code> (C uses 8 bits and Java uses 16 bits to represent a character); <code>lb</code> sign-extends and <code>lbu</code> zero-extends.</p>
+<h4 id="large-immediates-and-addressing-modes">Large Immediates and Addressing Modes</h4>
+<p><code>lui rd, imm</code> (load upper immediate): Loads a 20-bit constant into bits 31–12 of the register and fills the lower 12 bits with 0; combined with <code>addi</code>, it can build a 32-bit constant.</p>
+<p>Addressing modes:</p>
+<ul>
+<li>Immediate addressing: The operand is a constant within the instruction.</li>
+<li>Register addressing: The operand is in a register.</li>
+<li>Base (displacement) addressing: Address = register value + constant in the instruction (e.g., <code>lw</code>/<code>sw</code>).</li>
+<li>PC-relative addressing: Address = PC + constant in the instruction. The branch immediate is 13 bits (with the lowest bit 0), giving a range of about PC−4096 to PC+4094 (±4 KiB); <code>jal</code> has an actual offset of 21 bits (a 20-bit encoded field), giving a range of about ±1 MiB.</li>
+</ul>
+<h2 id="cpu-design">CPU Design</h2>
+<p>CPU implementation approaches:</p>
+<ul>
+<li>Single-cycle: instruction cycle = machine cycle = clock cycle</li>
+<li>Multicycle: instruction cycle = $m$ machine cycles = $m$ clock cycles</li>
+</ul>
+<p>Regardless of the instruction, execution usually goes through these five logical steps:</p>
+<ol>
+<li>Instruction fetch (IF): Read the instruction from the Instruction Memory at the address in the PC (program counter).</li>
+<li>Instruction decode (ID): The Control unit generates control signals from the instruction&#039;s opcode (bits 6–0 in RISC-V), while data are read from the register file (Registers).</li>
+<li>Execute (EX): The ALU (arithmetic logic unit) performs addition, subtraction, logical operations, or address calculation.</li>
+<li>Memory access (MEM): Only <code>load</code> and <code>store</code> instructions use the Data Memory.</li>
+<li>Write-back (WB): Write the result back to the register file.</li>
+</ol>
+<h3 id="singlecycle-processor-design">Single-Cycle Processor Design</h3>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.24.59-optimized.webp" alt="Screenshot 2026-06-10 at 11.24.59" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>R/I-type instructions: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers; the ALU computes the result, and a Mux determines whether the result is written back to the register file.</li>
+<li>ld instruction: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers; the ALU computes the target memory address. The value at that address is read from memory, and finally a Mux determines whether the result is written back to the register file.</li>
+<li>sd instruction: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers; the ALU computes the target memory address, and finally the data are stored at that address in memory.</li>
+<li>beq instruction: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers. The ALU computes the difference of the two operands while a separate adder computes the branch target address; the ALU&#039;s Zero output is ANDed with the Branch control signal to drive the Mux that selects the next address, which is finally written into the PC.</li>
+</ul>
+<p>In a single-cycle processor, the clock cycle is determined by the critical path, i.e., the instruction with the longest execution time, which is usually the load instruction. However, this wastes part of the clock cycle for instructions that execute faster and prevents raising the clock rate. To overcome this, we implement a multicycle processor design.</p>
+<p>For a single-cycle processor, it is easy to see that $CPI=1$ for every instruction.</p>
+<h3 id="multicycle-processor-design">Multicycle Processor Design</h3>
+<p><img src="../attachments/Screenshot%202026-06-10%20at%2011.26.01-optimized.webp" alt="Screenshot 2026-06-10 at 11.26.01" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Because the different steps of each instruction are completed in separate clock cycles, a multicycle processor needs only one ALU.</p>
+<p>A multicycle processor needs a write control signal for the PC. In a single-cycle processor, one instruction is executed per cycle, so the PC can simply be incremented by 4 every cycle. In a multicycle processor, however, an instruction is not fetched every cycle, so the PC must be controlled to increment by 4 only when an instruction is fetched.</p>
+<p>Every instruction requires instruction fetch and decode (register read), which take two cycles.</p>
+<ul>
+<li>R/I-type instructions: The result is computed in the third clock cycle and written back in the fourth, $CPI=4$.</li>
+<li>ld instruction: The address is computed in the third clock cycle, memory is read in the fourth, and the value in the MDR is written back in the fifth, $CPI=5$.</li>
+<li>sd/sw instructions: The address is computed in the third clock cycle and memory is written in the fourth, $CPI=4$.</li>
+<li>beq/jump instructions: The two registers are compared and the PC is updated in the third clock cycle, $CPI=3$.</li>
+</ul>
+<h3 id="pipelining">Pipelining</h3>
+<p><span class="obsidian-red">Pipelining</span>: Modern CPUs divide instruction execution into many small stages. It is like an automobile assembly line: although building one car takes a long time, all stations work simultaneously, so a car comes off the line every clock cycle.</p>
+<p>Consider a pipeline processing $n$ tasks. Its performance can be analyzed as follows:</p>
+<ul>
+<li>Throughput $TP=\frac{n}{T_{\text{pipelined}}}$ (the number of tasks completed per unit time)</li>
+<li>The maximum throughput is determined by the time required by the slowest stage, which becomes the bottleneck of the pipeline.</li>
+<li>Ways to remove the bottleneck: subdivide the bottleneck stage, or replicate the bottleneck stage.</li>
+<li>Speedup $S=\frac{T_{\text{non-pipelined}}}{T_{\text{pipelined}}}$</li>
+<li>If the pipeline has $m$ stages, each taking $\Delta t_0$, then $\boxed{S=\frac{nm\Delta t_0}{m\Delta t_0+(n−1)\Delta t_0}=\frac{nm}{m+n−1}}$</li>
+<li>Efficiency E: The utilization of the pipeline hardware.</li>
+</ul>
+<p>For the RISC-V instruction set, each instruction needs at most five steps, so we design a five-stage pipeline and add four pipeline registers.</p>
+<p>In some cases, pipelining causes the current instruction to need the result of a previous instruction that has not yet finished; these are called dependences. They can lead to <span class="obsidian-red">hazards</span>.</p>
+<ul>
+<li><span class="obsidian-red">Structural dependence</span>: Multiple instructions need the same resource. When overlapping instructions require more hardware resources than are available, the resulting resource conflict produces a Structural Hazard.</li>
+<li><span class="obsidian-red">Data dependence</span>: An instruction needs the result of an earlier instruction. When these instructions overlap in the pipeline, a Data Hazard may occur.</li>
+<li><span class="obsidian-red">Control dependence</span>: A dependence caused by branch instructions (such as jumps and conditional tests): the execution of subsequent instructions depends on the outcome of the branch. A Control Hazard occurs when the pipeline encounters a branch or another instruction that changes the PC.</li>
+</ul>
+<h4 id="structural-hazards">Structural Hazards</h4>
+<p>If the CPU has only one memory that stores both instructions and data, the pipeline will suffer a structural hazard.</p>
+<p>There are two ways to resolve this hazard:</p>
+<ul>
+<li>Insert a bubble <img src="../attachments/Screenshot%202026-05-05%20at%2014.24.18-optimized.webp" alt="Screenshot 2026-05-05 at 14.24.18" loading="lazy" decoding="async" style="width: min(100%, 450px);"></li>
+<li>Harvard architecture: Unlike the von Neumann architecture, the Harvard architecture physically separates instruction storage and data storage, each with its own bus, so instructions and data can be read simultaneously. This also alleviates the von Neumann bottleneck. However, a pure Harvard architecture needs two buses and two memory systems, which increases board routing and hardware design costs.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-05%20at%2014.24.35-optimized.webp" alt="Screenshot 2026-05-05 at 14.24.35" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="data-hazards">Data Hazards</h4>
+<p>Classification of data dependences:</p>
+<ul>
+<li>Read After Write (RAW): A write followed by a read; this is a true data dependence.</li>
+<li>Write After Write (WAW)</li>
+<li>Write After Read (WAR)</li>
+</ul>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">RISC-V</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-risc-v">sub x2,x1,x3
+and x12,x2,x5
+or x13,x6,x2
+add x14,x2,x2
+sw x15,100(x2)</code></pre></div>
+<p>In a standard pipeline, the result in register <code>x2</code> is not available until the WB stage. However, subsequent instructions need this value as an input in their EX stage, which causes RAW hazards.</p>
+<p>To mitigate data hazards, we can implement a <span class="obsidian-red">forwarding unit</span> that passes the execution result directly to the inputs of the instruction that needs it, without waiting for the WB stage. <img src="../attachments/Screenshot%202026-05-05%20at%2014.46.06-optimized.webp" alt="Screenshot 2026-05-05 at 14.46.06" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The forwarding unit is very powerful, but it cannot resolve the <span class="obsidian-red">load-use</span> RAW data hazard.</p>
+<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">RISC-V</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-risc-v">ld  x2, 0(x3)
+addi x9, x2, -30</code></pre></div>
+<p>The first instruction obtains the data only at the end of its MEM stage, but the second instruction needs the value of register <code>x2</code> in its EX stage. Because of the timing of memory access, this particular hazard cannot be resolved by forwarding alone. We must therefore insert a bubble in the ID stage of the second instruction. This bubble is also called an interlock.</p>
+<p><img src="../attachments/Screenshot%202026-05-05%20at%2015.23.43.png" alt="Screenshot 2026-05-05 at 15.23.43" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p><img src="../attachments/Screenshot%202026-06-17%20at%2023.44.14-optimized.webp" alt="Screenshot 2026-06-17 at 23.44.14" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Hazard detection conditions (the forwarding unit uses them to decide whether forwarding is needed; the destination register number must be nonzero and the corresponding instruction must write a register):</p>
+<ul>
+<li>EX hazard (from the previous instruction): <code>EX/MEM.RegRd -&gt; ID/EX.RegRs</code></li>
+<li>MEM hazard (from the instruction two before): <code>MEM/WB.RegRd -&gt; ID/EX.RegRs</code></li>
+<li>Load-use hazard detection: <code>ID/EX.RegRd -&gt; IF/ID.RegRs</code> (and the instruction in ID/EX is a load); in this case the pipeline must stall for one cycle and then use forwarding.</li>
+</ul>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Consider the following assembly code:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">RISC-V</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-risc-v">SUB x1, x5, x4
+ADD x1, x1, x4
+BEQ x1, x4, Offset
+LW x1, 45(x3)
+ADD x1, x1, x4
+SW x1, 5(x3)</code></pre></div>
+<p>The forwarding paths are as follows: SUB -&gt; ADD: <code>EX/MEM.ALUOut -&gt; ID/EX.A</code> ADD -&gt; BEQ: <code>EX/MEM.ALUOut -&gt; ID/EX.A</code> LW -&gt; ADD: <code>MEM/WB.MDR -&gt; ID/EX.A</code> (note: accompanied by a one-cycle pipeline stall) ADD -&gt; SW: <code>EX/MEM.ALUOut -&gt; ID/EX.B</code></p></div></div>
+<p>This example shows well why the ID/EX register needs both A and B. The pipeline diagram of the last three instructions can be drawn as follows:</p>
+<p><img src="../attachments/Screenshot%202026-06-18%20at%2014.21.23.png" alt="Screenshot 2026-06-18 at 14.21.23" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The <code>ADD</code> instruction needs the values of both <code>x1</code> and <code>x4</code>, so two registers are required.</p>
+<h4 id="control-hazards">Control Hazards</h4>
+<p>In the basic pipeline, the outcome of a branch is not known until a late stage (around the MEM stage), so several instructions following the branch may be fetched into the pipeline incorrectly, causing stalls.</p>
+<p>Clearly, we can insert bubbles to resolve this hazard, but that wastes a lot of time. Another approach is <span class="obsidian-red">branch prediction</span>.</p>
+<p>Branch prediction aims for two goals: predictions should be as accurate as possible (a high prediction hit rate), and the recovery cost of a misprediction should be as small as possible (flushing wrong-path instructions as early as possible).</p>
+<p>Dynamic branch prediction: Hardware records the past behavior of branches to predict their future direction. The basic component is the branch history table (BHT/PHT), whose entries are commonly 2-bit saturating counters (the prediction direction changes only after two consecutive mispredictions, avoiding oscillation at loop boundaries). Depending on how history information is used, predictors can be classified as:</p>
+<ul>
+<li>Local prediction: Uses only the branch&#039;s own history. Each branch (indexed by the low-order bits of its PC) has a local branch history register (BHR) that records its most recent outcomes; this history pattern then indexes the saturating counters in the pattern history table (PHT). It is good at capturing the regular behavior of an individual branch (e.g., a loop pattern such as &quot;taken 3 times, not taken once&quot;).</li>
+<li>Global prediction: Uses a single global history register (GHR) shared by all branches, which records the combined outcomes of the most recently executed branches; this history (often XORed with the PC, as in gshare) indexes the PHT. It is good at capturing correlations between branches (the outcomes of earlier branches determine the direction of later ones).</li>
+<li>Tournament predictor: Maintains both a local and a global predictor, plus a selector (chooser/meta-predictor, also a table of 2-bit saturating counters) that records which predictor has historically been more accurate for each branch and dynamically selects its output. The selector moves one step toward whichever predictor was correct, so it automatically picks the more suitable prediction scheme for each branch. A typical implementation is the Alpha 21264.</li>
+</ul>
+<p>Differences between the MIPS pipeline and the RISC-V pipeline:</p>
+<p><img src="../attachments/Screenshot%202026-05-05%20at%2014.22.07-optimized.webp" alt="Screenshot 2026-05-05 at 14.22.07" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Unified PC computation and jump logic (marked in red in the figure): MIPS jumps distinguish absolute addressing (concatenating the low 26 bits of the instruction into a 32-bit address) from relative addressing, so the sources of the PC update are numerous and the MUX logic at the upper left of the IF (instruction fetch) stage is complex and intertwined. RISC-V branches and <code>jal</code> rely entirely on PC-relative address calculation (only <code>jalr</code> uses a register plus an offset).</li>
+<li>Handling of immediates (marked in green in the figure): MIPS immediates always sit neatly in the rightmost contiguous 16 bits <code>[15-0]</code> of the instruction. To keep register positions fixed, RISC-V chops the immediate into pieces and fits them into the gaps of the instruction, so a dedicated <code>Imm Gen</code> module must reassemble the scattered immediate bits like a jigsaw puzzle and extend them.</li>
+<li>Selection of the destination register (marked in blue in the figure): MIPS uses a multiplexer to select whether the destination register number comes from bits <code>[20-16]</code> (I-type instructions) or bits <code>[15-11]</code> (R-type instructions). RISC-V fixes the destination register at bits <code>[11-7]</code> in all instructions, so no selection hardware is needed at all.</li>
+</ul>
+<h3 id="instructionlevel-parallelism-ilp">Instruction-Level Parallelism (ILP)</h3>
+<p><span class="obsidian-red">Instruction-Level Parallelism</span> (ILP): Executing multiple mutually independent instructions simultaneously. The main approaches are deepening the pipeline and increasing the number of internal functional units. It is measured by IPC (instructions per cycle), the reciprocal of CPI. Multiple issue lets the CPU issue several instructions per cycle:</p>
+<ul>
+<li>Static multiple issue: The compiler decides at compile time how instructions are packaged and issued (e.g., VLIW).</li>
+<li>Dynamic multiple issue: The hardware decides and schedules instruction issue dynamically at run time (superscalar).</li>
+</ul>
+<p>For an ordinary (scalar) pipeline, ideally $$IPC=1$$</p>
+<p>Superscalar: A modern CPU has more than one pipeline. It has multiple execution units (ALUs, FPUs, etc.) and can issue and complete several instructions (e.g., 4–8) in one clock cycle.</p>
+<p><img src="../attachments/Screenshot%202026-05-05%20at%2016.09.47.png" alt="Screenshot 2026-05-05 at 16.09.47" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Very Long Instruction Word (VLIW) <img src="../attachments/Screenshot%202026-05-05%20at%2016.10.51.png" alt="Screenshot 2026-05-05 at 16.10.51" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Out-of-order execution: This is the soul of modern architectures. If instruction A must wait for data from memory, the CPU does not simply wait; it skips ahead to execute later instructions B and C that do not need to wait, and finally puts the results back in program order.</p>
+<h3 id="interrupts-and-exceptions">Interrupts and Exceptions</h3>
+<p><span class="obsidian-red">Interrupt</span>: Suspends the execution of the current process to execute another program. After that program finishes, the original program resumes execution from the point of interruption.</p>
+<p><img src="../attachments/Screenshot%202026-05-06%20at%2014.25.46.png" alt="Screenshot 2026-05-06 at 14.25.46" loading="lazy" decoding="async" style="width: min(100%, 334px);"></p>
+<p>Interrupts in RISC:</p>
+<ul>
+<li>External events (interrupts): I/O interrupts</li>
+<li><span class="obsidian-red">Exceptions</span>: Software (hardware) faults</li>
+<li>Traps: System calls (Syscall), breakpoints (Break), TEQ</li>
+</ul>
+<h4 id="methods-of-issuing-interrupt-requests">Methods of Issuing Interrupt Requests</h4>
+<ul>
+<li>CPU accepts/rejects interrupts: IF@PSW (PSW: Program Status Word)</li>
+<li>CPU interrupt request/acknowledge control: INTR, INTA</li>
+<li>Interrupt response/return: the implicit interrupt instruction</li>
+<li>Saving the breakpoint/context: MEM (stack)</li>
+<li>Identifying and prioritizing interrupt sources: the interrupt controller</li>
+<li>ISR entry: vectored or non-vectored</li>
+</ul>
+<p>Multiple INTR flip-flops form the interrupt request flag register. <img src="../attachments/Screenshot%202026-05-22%20at%2013.55.57.png" alt="Screenshot 2026-05-22 at 13.55.57" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>software: <img src="../attachments/Screenshot%202026-05-22%20at%2013.57.06.png" alt="Screenshot 2026-05-22 at 13.57.06" loading="lazy" decoding="async" style="width: min(100%, 470px);"> hardware:</p>
+<ul>
+<li>A daisy-chain priority circuit distributed among the interface circuits of the interrupt sources <img src="../attachments/Screenshot%202026-05-06%20at%2014.31.37-optimized.webp" alt="Screenshot 2026-05-06 at 14.31.37" loading="lazy" decoding="async" style="width: min(100%, 589px);"></li>
+<li>A daisy-chain priority circuit centralized in the CPU <img src="../attachments/Screenshot%202026-05-22%20at%2013.58.08.png" alt="Screenshot 2026-05-22 at 13.58.08" loading="lazy" decoding="async" style="width: min(100%, 450px);"></li>
+</ul>
+<p>Condition for responding to an interrupt: the interrupt enable flip-flop <code>EINT = 1</code> (or the IF flag in the PSW is set). <img src="../attachments/Screenshot%202026-05-22%20at%2013.58.43-optimized.webp" alt="Screenshot 2026-05-22 at 13.58.43" loading="lazy" decoding="async" style="width: min(100%, 429px);"> The main operations of the interrupt cycle are performed by the implicit interrupt instruction:</p>
+<ul>
+<li>EINT (interrupt enable flip-flop): 0</li>
+<li>INT (interrupt flag flip-flop): 1</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.00.46.png" alt="Screenshot 2026-05-22 at 14.00.46" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="saving-and-restoring-the-context">Saving and Restoring the Context</h4>
+<ul>
+<li>Breakpoint: saved by the implicit interrupt instruction</li>
+<li>Register contents: saved by the interrupt service routine (ISR)</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.03.24-optimized.webp" alt="Screenshot 2026-05-22 at 14.03.24" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="methods-of-locating-the-interrupt-address">Methods of Locating the Interrupt Address</h4>
+<ul>
+<li>Hardware vectoring: A hardware unit places the vector address directly into the PC.</li>
+<li>Software polling: Jump to the entry of an interrupt identification routine.</li>
+</ul>
+<h4 id="interrupt-nesting">Interrupt Nesting</h4>
+<p>To implement multiple (nested) interrupts, interrupts must be re-enabled in advance, and a higher-priority interrupt must be able to interrupt a lower-priority one. By setting a mask word in the ISR, the handling priority of each interrupt source can be changed dynamically.</p>
+<ul>
+<li>Save the PC at which the exception occurred in SEPC.</li>
+<li>Save the cause of the exception in SCAUSE.</li>
+<li>Jump to the exception handler.</li>
+</ul>
+<h4 id="pipelined-implementation">Pipelined Implementation</h4>
+<p><img src="../attachments/Screenshot%202026-06-17%20at%2016.30.17-optimized.webp" alt="Screenshot 2026-06-17 at 16.30.17" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>When the control unit (Control / exception detection logic) detects an exception, it asserts the <code>Flush</code> signals. <code>IF.Flush</code>, <code>ID.Flush</code>, and <code>EX.Flush</code> clear all instructions following the faulting instruction.</li>
+<li>EPC (Exception Program Counter): The hardware automatically writes the PC of the instruction that caused the exception (passed stage by stage along the blue line in the figure) into the EPC register. After the operating system has handled the exception, it reads the EPC to know where to return.</li>
+<li>Cause register: Based on the specific circuit that triggered the exception (for example, the ALU signaling overflow or the instruction decoder signaling an undefined instruction), the hardware generates an error code (such as the 0 or 1 mentioned in the earlier example in the figure) and stores it in the Cause register so that the operating system can determine what went wrong.</li>
+<li>When an exception occurs, the control logic forces this MUX to select <code>80000180</code> (the fixed exception entry address typical of the MIPS architecture) as the PC for the next clock cycle. Thus, at the next clock cycle, the CPU fetches instructions directly from address <code>80000180</code>, and control is instantly handed over to the operating system.</li>
+</ul>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Consider the following assembly code:</p>
+<div class="code-block" data-code-block="0"><div class="code-toolbar"><span class="code-language">MIPS</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-mips">sub $11,$2,$4
+and $12,$2,$5
+or $13,$2,$6
+add $1,$2,$1
+slt $15,$6,$7
+lw $16,50($7)</code></pre></div>
+<p>Suppose the <code>add</code> instruction overflows, and the exception handler begins with the following instructions:</p>
+<div class="code-block" data-code-block="1"><div class="code-toolbar"><span class="code-language">MIPS</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-mips">sw $16,1000($0)
+sw $27,1004($0)</code></pre></div>
+<p>The pipeline diagram can be drawn as follows: <img src="../attachments/Screenshot%202026-06-18%20at%2014.53.45.png" alt="Screenshot 2026-06-18 at 14.53.45" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p></div></div>
+<h2 id="memory-system">Memory System</h2>
+<p>In the von Neumann architecture, executing one instruction requires at least two memory accesses: the first reads the instruction, and the second either reads the data the instruction needs from memory or writes back data produced or modified by an earlier instruction. This limits the speed of the computer and is called the von Neumann bottleneck.</p>
+<p>To relieve this bottleneck, we can add a cache between the CPU and main memory, keeping frequently used instructions and data closest to the CPU and reducing the number of direct memory accesses.</p>
+<p>In real CPUs, we also use Dynamic Random Access Memory (DRAM) to bridge the cache and the disk. It is the core technology of what is commonly called &quot;memory&quot; (RAM) in our computers and phones.</p>
+<h3 id="the-principle-of-locality-and-the-memory-hierarchy">The Principle of Locality and the Memory Hierarchy</h3>
+<p>At any moment, a program accesses only a relatively small portion of its address space. This is the <span class="obsidian-red">principle of locality</span>:</p>
+<ul>
+<li>Temporal locality: If a data item is accessed, it is likely to be accessed again soon (e.g., in a loop body). Strategy: keep recently accessed data close to the processor.</li>
+<li>Spatial locality: If a data item is accessed, items with nearby addresses are likely to be accessed soon. Strategy: move data to the upper level in blocks consisting of several consecutive words.</li>
+</ul>
+<p>This principle runs through the entire design of the memory system.</p>
+<p>The resulting <span class="obsidian-red">memory hierarchy</span>: levels closer to the processor are faster, smaller, and more expensive (registers → cache → main memory → secondary storage). Two key timing metrics:</p>
+<ul>
+<li>Hit time: The time required to access the current level.</li>
+<li>Miss penalty: On a miss, the time required to move the corresponding block from the lower level to the upper level.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.13.23-optimized.webp" alt="Screenshot 2026-06-09 at 17.13.23" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="main-memory">Main Memory</h3>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.14.52.png" alt="Screenshot 2026-06-09 at 17.14.52" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Word addressing and byte addressing</p>
+<ul>
+<li>Word storage location: A memory location that holds one machine word.</li>
+<li>Byte storage location: A memory location that holds one byte.</li>
+<li>Word address: The address of a word storage location.</li>
+<li>Byte address: The address of a byte storage location.</li>
+<li>Word-addressable computer: The smallest addressable unit is a word storage location.</li>
+<li>Byte-addressable computer: The smallest addressable unit is a byte storage location.</li>
+</ul>
+<p>Technical specifications of main memory</p>
+<ul>
+<li>Storage capacity: The total number of storage locations in a memory, usually expressed in words (W) or bytes (B).</li>
+<li>Access time: The memory access time, i.e., the time from issuing a read command until the operation completes and the data are placed on the data bus.</li>
+<li>Memory cycle time: The minimum interval between two consecutive read/write operations.</li>
+<li>Memory bandwidth: The amount of information the memory can access per unit time, expressed in words/s, bytes/s, or bits/s.</li>
+</ul>
+<h4 id="static-random-access-memory-sram">Static Random Access Memory (SRAM)</h4>
+<p>SRAM stores information in bistable flip-flops (latches); a typical storage cell consists of six transistors. As long as power is applied, the information is retained without refreshing, and reads are nondestructive, so no rewrite is needed after a read. SRAM is therefore fast and its peripheral control circuitry is simple. The cost is many transistors per cell, which means low density, high power consumption, and high price, so SRAM is generally used only for caches, which are small but must be fast.</p>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.18.47.png" alt="Screenshot 2026-06-09 at 17.18.47" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="dynamic-random-access-memory-dram">Dynamic Random Access Memory (DRAM)</h4>
+<p>DRAM stores information as charge on a capacitor (charge represents 1, no charge represents 0). Because capacitors leak, DRAM must be refreshed periodically (typically row by row every few milliseconds). Each cell needs only one transistor and one capacitor, so density is high and cost is low; however, reads are destructive and must be followed by a rewrite, and DRAM is slower than SRAM. The address pins are usually multiplexed between row and column addresses (latched in turn by the RAS and CAS signals) to reduce the number of chip pins.</p>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.22.41-optimized.webp" alt="Screenshot 2026-06-09 at 17.22.41" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th></th><th>DRAM</th><th>SRAM</th></tr></thead><tbody><tr><td>Storage principle</td><td>Capacitor</td><td>Latch</td></tr><tr><td>Density</td><td>High</td><td>Low</td></tr><tr><td>Chip pins</td><td>Few</td><td>Many</td></tr><tr><td>Power consumption</td><td>Low</td><td>High</td></tr><tr><td>Price</td><td>Low</td><td>High</td></tr><tr><td>Speed</td><td>Slow</td><td>Fast</td></tr><tr><td>Refresh</td><td>Required</td><td>Not required</td></tr><tr><td>Application</td><td>Main memory</td><td>Cache</td></tr></tbody></table></div>
+<h4 id="readonly-memory-rom">Read-Only Memory (ROM)</h4>
+<p>In ROM, the stored information must be written before operation; during operation it can only be read, not written.</p>
+<p><img src="../attachments/Screenshot%202026-06-09%20at%2017.26.04.png" alt="Screenshot 2026-06-09 at 17.26.04" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="sequential-and-interleaved-memory">Sequential and Interleaved Memory</h4>
+<p>Sequential memory: Because programs usually have spatial locality (code and arrays are usually executed and read sequentially), consecutive read requests from the CPU &quot;pile up&quot; on the same memory bank. Since the same chip can serve only one access per cycle $T$, after reading address 0 the CPU must wait until time $T$ has elapsed before it can read address 1. $$t_{\text{total}} = n \times T$$ Interleaved memory: When the CPU reads addresses 0, 1, 2, 3 consecutively, the requests are sent to Bank 0, Bank 1, Bank 2, and Bank 3, respectively. The banks are independent hardware and can work in parallel. After sending a command to Bank 0, the CPU does not need to wait for Bank 0 to finish; after a short transfer time $t$, it can immediately send a command to Bank 1. This forms a pipeline-like structure. $$\boxed{t_{\text{total}} = T + (n - 1) \times t}$$</p>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A memory has a capacity of 32 words, a word length of 64 bits, and $n=4$ modules, organized either with high-order interleaving (i.e., sequentially) or with low-order interleaving. The memory cycle time is $T=200ns$, the data bus width is 64 bits, and the bus transfer cycle is $t=50ns$. Four words are read consecutively. $$q=4\times64=256b$$ $$t_1=T+(n-1)\times t=350ns$$ $$t_2=nT=800ns$$ $$W_1=q/t_1=91.43MB/s$$ $$W_2=q/t_2=40MB/s$$</p></div></div>
+<p>For how memory is connected to the CPU (connecting the address and data lines, and using a decoder to generate chip-select signals for address allocation), see the address decoding part of <a href="../electronic_engineering/digital_circuits.html#decoder">Decoder</a>.</p>
+<h3 id="fault-tolerance-and-error-detection">Fault Tolerance and Error Detection</h3>
+<ul>
+<li>MTTF (Mean Time To Failure): The average time a system operates normally; larger means more reliable.</li>
+<li>MTTR (Mean Time To Repair): The average time to repair the system after a failure.</li>
+<li>MTBF (Mean Time Between Failures): $MTBF = MTTF + MTTR$.</li>
+<li>Availability: $\boxed{\dfrac{MTTF}{MTTF+MTTR}}$.</li>
+</ul>
+<p>In a coding system, the number of bit positions in which two valid codes (codewords) differ is called the distance between the two codewords, also known as the Hamming distance, denoted $d$. For example, the codewords 10010 and 01110 differ in 3 positions, so $d=3$.</p>
+<p>The minimum distance between any two codewords in the whole coding system is the code distance of that system. Whether a code can detect or correct errors depends on its minimum distance.</p>
+<ul>
+<li>To detect $D$ bit errors within a codeword, the minimum distance must satisfy $L\ge D+1$.</li>
+<li>To correct $C$ bit errors within a codeword, the minimum distance must satisfy $L\ge 2C+1$.</li>
+</ul>
+<h4 id="parity-check-code">Parity Check Code</h4>
+<p>Core idea: Append one bit, <code>1</code> or <code>0</code>, so that the entire code contains an odd or even number of <code>1</code>s; these are called odd parity and even parity, respectively.</p>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Suppose the original data are <code>1011001</code>.</p>
+<ol>
+<li>Count the <code>1</code>s in the original data: there are 4 <code>1</code>s.</li>
+<li>Even parity: The number of <code>1</code>s is already even, so append <code>0</code>. The transmitted data are <code>10110010</code>.</li>
+<li>Odd parity: The number of <code>1</code>s must be made odd, so append <code>1</code>. The transmitted data are <code>10110011</code>.</li>
+</ol></div></div>
+<h4 id="hamming-code">Hamming Code</h4>
+<p>Parity checking can detect a single-bit error but cannot locate it. A <span class="obsidian-red">Hamming code</span> uses multiple check bits, each performing a parity check over a group of data bits, so that it can not only detect a single-bit error but also locate and correct it.</p>
+<p>Number of check bits: With $n$ data bits and $k$ check bits, we need $$\boxed{2^k \ge n+k+1}$$ (the combinations of the $k$ check bits must represent &quot;no error&quot; and also identify any of the $n+k$ possible error positions). For example, when $n=4$, take $k=3$ to form a $(7,4)$ Hamming code.</p>
+<p>Positions of check bits: Check bits are placed at positions $2^0,2^1,2^2,\dots$ (i.e., positions 1, 2, 4, 8, …), and the remaining positions hold data bits.</p>
+<p>Grouping rule: The $j$-th check bit $P_{2^{j-1}}$ covers all positions whose binary position number has a 1 in bit $j$ (including itself), using even parity:</p>
+<ul>
+<li>$P_1$ (position 1) → checks positions 1, 3, 5, 7, 9, …</li>
+<li>$P_2$ (position 2) → checks positions 2, 3, 6, 7, 10, 11, …</li>
+<li>$P_4$ (position 4) → checks positions 4, 5, 6, 7, 12, …</li>
+<li>$P_8$ (position 8) → checks positions 8–15, …</li>
+</ul>
+<p>Error correction (syndrome): The receiver recomputes even parity over the same groups to obtain a $k$-bit syndrome $S_k\cdots S_2S_1$. If it is all 0, there is no error; otherwise, the value of the syndrome is the position of the erroneous bit, and inverting that bit corrects the error.</p>
+<p>The minimum distance of a Hamming code is $d=3$, so it can correct a single-bit error or detect a double-bit error; adding one overall parity bit (the extended Hamming code, SEC-DED) enables &quot;correct 1, detect 2.&quot;</p>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Encode the 4-bit data $D_1D_2D_3D_4=1010$ with a $(7,4)$ Hamming code. The bit order is <code>P1 P2 D1 P4 D2 D3 D4</code> (positions 1–7), i.e., D1=1 (position 3), D2=0 (position 5), D3=1 (position 6), D4=0 (position 7). Using even parity:</p>
+<ul>
+<li>$P_1=D_1\oplus D_2\oplus D_4=1\oplus0\oplus0=1$ (group {1,3,5,7})</li>
+<li>$P_2=D_1\oplus D_3\oplus D_4=1\oplus1\oplus0=0$ (group {2,3,6,7})</li>
+<li>$P_4=D_2\oplus D_3\oplus D_4=0\oplus1\oplus0=1$ (group {4,5,6,7})</li>
+</ul>
+<p>The codeword is <code>1011010</code>. If position 5 is corrupted, giving <code>1011110</code>, the receiver recomputes the syndrome: $S_1=1,\ S_2=0,\ S_4=1$, i.e., $S_4S_2S_1=(101)_2=5$, which identifies position 5 as the erroneous bit; inverting it corrects the error.</p></div></div>
+<h4 id="cyclic-redundancy-check-crc">Cyclic Redundancy Check (CRC)</h4>
+<p><span class="obsidian-red">CRC</span> has far stronger error-detection capability than parity checking. Its mathematical basis is the generator polynomial $G(x)$ and modulo-2 division. Modulo-2 division is essentially addition and subtraction without carries or borrows, i.e., a bitwise exclusive OR (XOR) of corresponding bits.</p>
+<p>Computation steps:</p>
+<ol>
+<li>Choose the generator polynomial $G(x)$: The sender and receiver agree on a fixed binary string (e.g., the generator polynomial $x^3 + x + 1$ corresponds to the binary string <code>1011</code>). Suppose it has $K+1$ bits.</li>
+<li>Append zeros to the data: Append $K$ <code>0</code>s to the end of the original data ($K$ is the highest power of the generator polynomial, i.e., the length of the binary string minus 1).</li>
+<li>Modulo-2 division: Divide the zero-padded data by the generator polynomial.</li>
+</ol>
+<ul>
+<li>If the leading bit of the current dividend is 1, the quotient bit is 1; XOR bitwise.</li>
+<li>If the leading bit of the current dividend is 0, the quotient bit is 0; shift down (equivalent to dividing by 000...0).</li>
+</ul>
+<ol>
+<li>Obtain the CRC: At the end of the division, the remainder (always $K$ bits long, padded with leading 0s if shorter) is the CRC check code. Replace the appended zeros with this remainder, i.e., append it to the original data, and transmit.</li>
+</ol>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Generator polynomial $G(x)=x^8+x^5+x^4+1$ Original data <code>101100</code> <img src="../attachments/Screenshot%202026-06-17%20at%2014.17.37-optimized.webp" alt="Screenshot 2026-06-17 at 14.17.37" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Therefore, the CRC check code appended to the original data is <code>11111011</code>.</p></div></div>
+<h3 id="cache">Cache</h3>
+<p>Data can be mapped from main memory into the cache in the following ways:</p>
+<ul>
+<li><span class="obsidian-red">Direct mapping</span>: Each memory block can be placed in only one fixed location in the cache. The implementation is simple, but the conflict rate is high.</li>
+<li><span class="obsidian-red">Fully associative mapping</span>: Any memory block can be placed in any location in the cache. This is flexible and has a low conflict rate, but the lookup circuitry is extremely complex and costly.</li>
+<li><span class="obsidian-red">Set-associative mapping</span>: The cache is divided into several sets; each block can be placed only in one fixed set but in any location within that set. This compromise between the previous two is the most common choice in modern CPUs.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-06-17%20at%2017.37.41-optimized.webp" alt="Screenshot 2026-06-17 at 17.37.41" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Offset (block offset): The low-order address bits, which select the byte within a block; the number of offset bits is $\log_2$ (bytes per block).</li>
+<li>Index: The middle bits, which select the cache line (direct mapping) or the set (set-associative); a fully associative cache has no index bits (the address is entirely tag + offset).</li>
+<li>Tag: The high-order address bits, stored in the cache and compared to determine a hit; each line also needs a valid bit indicating whether it holds valid data.</li>
+</ul>
+<p>$$\text{Total cache size} = \text{number of lines }\times(\text{block size }+\text{ tag size} +\text{valid bit})$$ The &quot;capacity&quot; usually quoted refers only to the data blocks. In a set-associative cache, set number = block address mod number of sets.</p>
+<h4 id="classification-of-misses-the-3cs">Classification of Misses (the 3Cs)</h4>
+<ul>
+<li>Compulsory miss (cold-start miss): The first access to a block that has never been in the cache.</li>
+<li>Capacity miss: A block is evicted because the cache is too small and is then accessed again.</li>
+<li>Conflict miss (collision miss): A miss caused by multiple blocks competing for the same set. Fully associative caches have no conflict misses.</li>
+</ul>
+<h4 id="write-policies">Write Policies</h4>
+<ul>
+<li>Write-through: Every write to the cache is also written to main memory; usually paired with a write buffer so that the processor does not have to wait for the main-memory write to complete.</li>
+<li>Write-back: Each block has a dirty bit, and a modified block is written back to main memory only when it is replaced.</li>
+<li>Write allocate: On a write miss, the block is first brought into the cache and then written (usually paired with write-back); write-through usually uses &quot;no write allocate.&quot;</li>
+</ul>
+<h4 id="replacement-policies">Replacement Policies</h4>
+<ul>
+<li>LRU (Least Recently Used): Replaces the block that has gone unaccessed for the longest time; high hit rate but complex to implement.</li>
+<li>LFU (Least Frequently Used): Keeps a counter of accesses for each block and replaces the block with the fewest accesses; however, blocks that were hot in the past may linger for a long time, so it does not reflect recent locality well.</li>
+<li>Random: Chooses a block at random; simple to implement.</li>
+<li>FIFO (First In, First Out): Replaces the block that entered the cache earliest.</li>
+</ul>
+<h4 id="performance-evaluation">Performance Evaluation</h4>
+<p>Let $N_c$ be the total number of accesses completed in the cache and $N_m$ the total number of accesses completed in main memory. The hit rate $h$ is $$h=\frac{N_c}{N_c+N_m}$$ Let $t_c$ be the cache access time on a hit and $t_m$ the main-memory access time on a miss. The average cache/main-memory access time $t_a$ is $$\boxed{t_a =ht_c+(1-h)t_m}$$ and the access efficiency is $$e=\frac{t_c}{t_a}=\frac{t_c}{ht_c+(1-h)t_m}$$</p>
+<h3 id="virtual-memory">Virtual Memory</h3>
+<p>Problems that <span class="obsidian-red">virtual memory</span> is designed to solve:</p>
+<ul>
+<li>Insufficient main-memory capacity.</li>
+<li>In multiuser, multitasking systems, multiple users or tasks share memory and run concurrently; the actual memory each program occupies cannot be determined at programming time and must be allocated dynamically at run time.</li>
+</ul>
+<p>The virtual-memory solution is to build a <span class="obsidian-red">page table</span>, which establishes the correspondence between virtual addresses and physical addresses. Users can access only virtual memory, and the page table links virtual memory to physical memory.</p>
+<p>Because the page-table mapping can be arbitrary, when a program runs its pages can be loaded into any available frames without needing to be contiguous. This solves the memory contiguity problem.</p>
+<p><img src="../attachments/Screenshot%202026-06-17%20at%2021.51.12-optimized.webp" alt="Screenshot 2026-06-17 at 21.51.12" loading="lazy" decoding="async" style="width: min(100%, 483px);"></p>
+<p>If every access to a physical address also required an access to the page table, each operation would effectively require two memory reads, and this time cost is unacceptable. We therefore build a cache for the page table, called the <span class="obsidian-red">TLB</span> (Translation Lookaside Buffer).</p>
+<ul>
+<li>Cases during an access:</li>
+<li>TLB miss: The translation is not in the TLB and must be loaded from the page table into the TLB (TLB misses are far more frequent than page faults).</li>
+<li>Page in memory: The page table entry (PTE) holds the physical page number, and translation completes normally.</li>
+<li>Page not in memory: A true <span class="obsidian-red">page fault</span> occurs, triggering an operating-system exception handler that brings the page in from disk.</li>
+</ul>
+<p>Because page faults are extremely costly (disk access), virtual memory generally uses fully associative placement + write-back + approximate LRU to minimize the page-fault rate.</p>
+<p>The CPU has a dedicated module called the MMU (Memory Management Unit), which looks up the TLB and PTEs and intercepts unauthorized accesses.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Dimension</th><th>Cache</th><th>Virtual Memory</th></tr></thead><tbody><tr><td>Core problem addressed</td><td>Mismatch between CPU speed and main-memory speed</td><td>Insufficient main-memory capacity, plus memory isolation and protection among processes</td></tr><tr><td>Levels involved</td><td>CPU $\leftrightarrow$ Main Memory</td><td>Main Memory $\leftrightarrow$ Disk</td></tr><tr><td>Managed by</td><td>Hardware only (cache controller)</td><td>Hardware and operating system together (OS + MMU)</td></tr><tr><td>Basic unit of transfer</td><td>Block/line (Cache Line/Block), typically 32–128 bytes</td><td>Page, typically 4 KB, 2 MB, etc.</td></tr><tr><td>Miss penalty</td><td>Small (tens to hundreds of clock cycles, waiting for main memory)</td><td>Enormous (millions of clock cycles, involving disk I/O and process switching)</td></tr><tr><td>Transparency to programmers</td><td>Fully transparent (neither application nor system developers usually need or are able to manipulate it directly)</td><td>Partially transparent (transparent to application developers, but system/OS developers must implement page tables and fault handling)</td></tr></tbody></table></div>
+<h2 id="bus-system">Bus System</h2>
+<p>A <span class="obsidian-red">bus</span> connects two or more functional units of a computer and allows them to exchange data.</p>
+<p>For a bus, the number of parallel data paths is called the bus width; for example, a 64-bit-wide bus can transfer at most 64 bits (8 bytes) of information at a time. The rate at which data are transferred over the bus is called the bandwidth, and the interval from issuing a data transfer request to the actual transfer of data is called the latency.</p>
+<p>By connection, buses can be divided into internal buses, system buses, and I/O buses.</p>
+<p>By function, buses can be divided into data buses, address buses, and control buses.</p>
+<h3 id="bus-standards">Bus Standards</h3>
+<p>Bus performance metrics:</p>
+<ul>
+<li>Bus width: Usually the number of bits of the data bus.</li>
+<li>Bus frequency: 1 / (time for one data transfer).</li>
+<li>Bus bandwidth: The data transfer rate of the bus, i.e., the number of bits transferred per unit time, usually measured in bytes transferred per second.</li>
+<li>Bus multiplexing: Transmitting multiple signals over one signal line by time sharing.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.23.19-optimized.webp" alt="Screenshot 2026-05-22 at 14.23.19" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h3 id="bus-structure">Bus Structure</h3>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.24.40.png" alt="Screenshot 2026-05-22 at 14.24.40" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Data transfer bus: data, address, and control lines.</li>
+<li>Arbitration bus: includes bus request lines and bus grant lines.</li>
+<li>Interrupt and synchronization bus: handles prioritized interrupt operations; includes interrupt request lines and interrupt acknowledge lines.</li>
+<li>Common lines: include clock lines, power lines, ground lines, reset lines, and power-up/power-down timing signal lines.</li>
+</ul>
+<h3 id="bus-arbitration">Bus Arbitration</h3>
+<p>Devices connected to a bus are either <span class="obsidian-red">masters</span> or slaves, and the period during which a master continuously occupies the bus is called the bus tenure. A master can control the bus and initiate a bus cycle, such as the CPU; a slave can only respond to requests from a master, such as memory. In each bus operation, only one master can hold control of the bus, but one or more slaves may participate at the same time.</p>
+<h4 id="centralized-arbitration">Centralized Arbitration</h4>
+<p><span class="obsidian-red">Daisy chaining</span>: Polling proceeds step by step along the BG (bus grant) line.</p>
+<ul>
+<li>Advantages: simple to implement; easy to add devices.</li>
+<li>Disadvantages: sensitive to circuit faults; fixed polling priority.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.29.20-optimized.webp" alt="Screenshot 2026-05-22 at 14.29.20" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Counter-based polling: A counter records the arbitration count; if the count equals a device&#039;s interface number, that device is granted the bus; otherwise the counter is incremented and polling continues.</p>
+<ul>
+<li>Advantages: the priority order can be changed conveniently by changing the counter&#039;s initial value.</li>
+<li>Disadvantages: extra control lines are needed to transmit the interface number.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.32.16-optimized.webp" alt="Screenshot 2026-05-22 at 14.32.16" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Independent requests: Every interface can issue requests independently, and the bus controller arbitrates using an internal priority circuit.</p>
+<ul>
+<li>Advantages: fast response; relatively flexible.</li>
+<li>Disadvantages: too many control lines.</li>
+</ul>
+<p><img src="../attachments/Screenshot%202026-05-22%20at%2014.32.35-optimized.webp" alt="Screenshot 2026-05-22 at 14.32.35" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="distributed-arbitration">Distributed Arbitration</h4>
+<ul>
+<li>Self-selection distributed arbitration (each device independently determines whether it is the highest-priority requester. During arbitration, each device reads back and analyzes the combined signals on the request lines and determines from them whether it may take control of the bus).</li>
+<li>Collision-detection distributed arbitration (each device requests the bus independently; when several devices use the bus at the same time a collision occurs, which is detected, and one of the colliding devices is selected according to some policy (CSMA/CD, carrier sense multiple access with collision detection)).</li>
+<li>Parallel contention distributed arbitration</li>
+<li>When a device has a bus request, it places its unique arbitration number on the shared arbitration bus.</li>
+<li>Each arbiter compares the number on the arbitration bus with its own.</li>
+<li>If the number on the arbitration bus is larger, the device&#039;s bus request is not granted, and it withdraws its arbitration number.</li>
+<li>Finally, the winner&#039;s arbitration number remains on the arbitration bus.</li>
+</ul>
+<h3 id="bus-operations">Bus Operations</h3>
+<p>Read/write operations</p>
+<ul>
+<li>Read: data transfer from a slave to a master (address–command–data)</li>
+<li>Write: data transfer from a master to a slave (address–data–command)</li>
+</ul>
+<p>A write operation from one master to multiple slaves is called a broadcast. A read operation from multiple slaves to one master is called a broadcall.</p>
+<p>Bus cycle:</p>
+<ul>
+<li>Request and allocation phase: The master requests use of the bus, and the bus arbiter decides who gets the bus for the next transfer cycle.</li>
+<li>Addressing phase: The master that has obtained the bus sends the address of the slave to be accessed and the relevant commands, starting the slave involved in the transfer.</li>
+<li>Transfer phase: The master and slave exchange data.</li>
+<li>Completion phase: The master&#039;s information is removed from the bus, and the master relinquishes the bus.</li>
+</ul>
+<h3 id="bus-communication-methods">Bus Communication Methods</h3>
+<p>There are four main ways for a bus to coordinate the timing of the master and slave during a transfer:</p>
+<ul>
+<li><span class="obsidian-red">Synchronous communication</span>: All components work in fixed steps driven by a common clock. It is regular, simple to control, and has a high transfer rate, but it must be based on the slowest device, and bus length and flexibility are limited.</li>
+<li>Synchronous read <img src="../attachments/v2-4f3f34ae185207fb1076d2a7734eb53a_1440w-optimized.webp" alt="v2-4f3f34ae185207fb1076d2a7734eb53a_1440w" loading="lazy" decoding="async" style="width: min(100%, 450px);"></li>
+<li>Synchronous write <img src="../attachments/v2-714881ee6ef06b01929a97237624d776_1440w-optimized.webp" alt="v2-714881ee6ef06b01929a97237624d776_1440w" loading="lazy" decoding="async" style="width: min(100%, 450px);"></li>
+<li><span class="obsidian-red">Asynchronous communication</span>: There is no common clock; handshake (acknowledgment) signals coordinate the transfer. The master issues a Request, and the slave replies with an Acknowledge when ready; two handshake lines must be added. Depending on whether request and acknowledge constrain each other, there are three levels: non-interlocked (e.g., memory access), semi-interlocked (e.g., access to shared memory), and fully interlocked (e.g., network communication); fully interlocked is the most reliable but the slowest. It is flexible and can accommodate devices of different speeds, but control is complex and speed is relatively low.</li>
+</ul>
+<p><img src="../attachments/v2-0105c1ebea9317794c9313024b28a40f_1440w-optimized.webp" alt="v2-0105c1ebea9317794c9313024b28a40f_1440w" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Semi-synchronous communication: A compromise between synchronous and asynchronous: it keeps a common clock but allows a slow slave to assert a wait signal ($\overline{\text{WAIT}}$/READY) to insert several wait cycles, combining the simplicity of synchronous with the flexibility of asynchronous communication.</li>
+</ul>
+<p><img src="../attachments/v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w-optimized.webp" alt="v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Split-transaction communication: A bus cycle is split into a &quot;request subcycle&quot; and a &quot;reply subcycle,&quot; and the bus is released for other devices between the two (e.g., while memory prepares the data). Both subcycles use synchronous, one-way transfers without waiting for the other side to answer, so whenever the bus is occupied it is doing useful work with no idle waiting. It has the highest utilization but the most complex control and is mostly found in mainframes.</li>
+</ul>
+<p>Baud rate: The <mark>total number of bits</mark> transmitted per unit time (including overhead bits such as start, parity, and stop bits), in bps. Bit rate: The number of <mark>valid data</mark> bits transmitted per unit time (the effective information rate after excluding overhead bits), in bps. Relationship: bit rate = baud rate $\times\ \dfrac{\text{valid data bits}}{\text{total bits per character}}$</p>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>In an asynchronous serial transmission system, each character consists of 1 start bit, 8 data bits, 1 odd parity bit, and 1 stop bit. Suppose the baud rate is 1200 bps (all 11 bits counted). Since only 8 of every 11 bits are valid data, the bit rate (effective data rate) is $$1200\times\frac{8}{11}=872.73\text{ bps}$$</p></div></div>
+<h2 id="i-o-system">I/O System</h2>
+<p>As CPU performance has improved rapidly, I/O has gradually become the system bottleneck, especially for I/O-intensive applications.</p>
+<p>An I/O system consists of I/O software and I/O hardware.</p>
+<p>The main tasks of I/O software are to input user programs and data into the host, output results to the user, and coordinate the operation of the I/O system with the host. It relies on two kinds of instructions:</p>
+<ul>
+<li>I/O instructions: A class of machine instructions reflecting how the CPU exchanges information with I/O devices (e.g., <code>IN</code>/<code>OUT</code>).</li>
+<li>Channel instructions (Channel Command Words, CCW): Instructions designed specifically for I/O systems with channels. They are executed by the channel and are not part of the CPU instruction set. After the CPU executes the corresponding I/O instruction, the channel instructions take over the management of the I/O devices. They are generally long and specify the starting data address, the number of words to transfer, the device code, the command code, and so on. The command code specifies the particular operation of the I/O device, and the device code acts as the device address, used to select among multiple devices.</li>
+</ul>
+<p>I/O hardware: An I/O system with interfaces generally consists of interface modules and I/O devices. The interface circuitry contains data transfer paths, control signal paths, and the associated logic; more complex systems have a channel structure.</p>
+<h3 id="i-o-interfaces">I/O Interfaces</h3>
+<p>An <span class="obsidian-red">I/O interface</span>, also called an adapter, refers to the hardware circuitry and associated software control placed between the host and I/O devices. Interfaces are needed for device selection, data buffering (to smooth the speed difference between host and device), serial–parallel and voltage-level conversion, transmitting control commands, and monitoring and recording device status for the CPU to query.</p>
+<h4 id="functions-and-composition-of-i-o-interfaces">Functions and Composition of I/O Interfaces</h4>
+<p>An I/O interface circuit connected to a bus contains four kinds of signal lines: device select lines, data lines, command lines, and status lines. Its functions correspond to its components as follows:</p>
+<ul>
+<li>Address selection: implemented by the device selection circuit.</li>
+<li>Command transfer: provided by a command register and a command decoder.</li>
+<li>Data transfer: provided by a data buffer register (DBR) connected to the data lines.</li>
+<li>Device status reporting: provided by status flip-flops, such as the interrupt request flip-flop, the interrupt mask flip-flop, and operation flag flip-flops (the done flip-flop D and the busy flip-flop B).</li>
+</ul>
+<h4 id="types-of-i-o-interfaces">Types of I/O Interfaces</h4>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Classification Criterion</th><th>Types</th><th>Examples</th></tr></thead><tbody><tr><td>Data transfer mode</td><td>Parallel interface / serial interface</td><td>Intel 8255 / Intel 8251</td></tr><tr><td>Programmability</td><td>Programmable / non-programmable</td><td>8255, 8251 / Intel 8212</td></tr><tr><td>Generality</td><td>General-purpose / special-purpose</td><td>—</td></tr><tr><td>Transfer control mode</td><td>Program-controlled interface / DMA interface</td><td>Slow devices (interrupts) / high-speed devices</td></tr></tbody></table></div>
+<h3 id="i-o-data-exchange-methods">I/O Data Exchange Methods</h3>
+<p>The CPU exchanges information with I/O devices in four ways: programmed polling, program interrupts, DMA, and channels.</p>
+<h4 id="programmed-polling">Programmed Polling</h4>
+<p><span class="obsidian-red">Programmed polling</span> is the simplest input/output method. Data transfer is controlled entirely by the program and proceeds under the active control of the CPU: when an I/O operation is needed, the CPU suspends the main program and executes the device service routine.</p>
+<ul>
+<li>Advantages: CPU and peripheral operations can be synchronized; the hardware is simple.</li>
+<li>Disadvantages: The CPU polls in a loop, wasting CPU cycles and resources.</li>
+<li>Generally used in microcontrollers or digital signal processing (DSP).</li>
+</ul>
+<p>Polling is carried out by I/O instructions: setting bits of the interface control register to &quot;0&quot; or &quot;1&quot; to control the device, testing the device&#039;s &quot;busy/ready&quot; status to decide the next step, and transferring data.</p>
+<h4 id="dma">DMA</h4>
+<p><span class="obsidian-red">DMA</span> (Direct Memory Access) is an I/O method performed entirely by hardware, which can exchange blocks of data between main memory and I/O devices at high speed. Its basic idea is that a hardware DMA controller takes over control of the bus from the CPU, and data are exchanged directly between main memory and the I/O device without passing through the CPU. The preparation before and the processing after a transfer are handled by the CPU&#039;s management program (preprocessing and postprocessing via program control or interrupts); the DMA controller is responsible only for the data transfer.</p>
+<p>Basic components of a DMA controller:</p>
+<ul>
+<li>Memory address register (AR): Holds the main-memory address of the data to be exchanged; incremented by 1 after each transfer.</li>
+<li>Word counter (WC): Records the length of the data block to be transferred.</li>
+<li>Data buffer register (BR): Temporarily holds the data for each transfer.</li>
+<li>Device address register (DAR): Holds the I/O device code or the addressing information for secondary storage.</li>
+<li>Control/status logic: Manages the DMA transfer process.</li>
+<li>Interrupt mechanism: Raises an interrupt when the word counter overflows (a block of data has been transferred).</li>
+</ul>
+<p>Three ways for DMA to exchange data with main memory:</p>
+<ul>
+<li>Halting CPU memory access: The CPU relinquishes the bus and stays in a hold state. Control is simple, but the CPU&#039;s use of main memory is not fully exploited; suitable for high-speed block transfers.</li>
+<li><span class="obsidian-red">Cycle stealing</span>: Each DMA data transfer occupies (&quot;steals&quot;) one or more CPU cycles. If the CPU is not accessing memory, there is no conflict; if the CPU is accessing memory, it releases the bus when its access finishes; if both request at the same time, DMA has priority. This is the most commonly used method and suits cases where the I/O read/write cycle is longer than the main-memory cycle.</li>
+<li>Alternating DMA and CPU memory access: The CPU cycle is divided into two parts, dedicated to CPU access and DMA access respectively; there is no need to request and release the bus, so transfers are fast and efficient, but control is complex.</li>
+</ul>
+<p>A DMA transfer proceeds in three phases: preprocessing (the CPU presets the DMA controller with the transfer direction, device address, main-memory address, and word count), data transfer (in units of data blocks, implemented as a loop), and postprocessing (checking the data and deciding whether to continue, performed by the interrupt service routine).</p>
+<p>Comparison of DMA and interrupt-driven I/O:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Item</th><th>Interrupt</th><th>DMA</th></tr></thead><tbody><tr><td>Data transfer</td><td>By program</td><td>By hardware</td></tr><tr><td>Response time</td><td>End of instruction execution</td><td>End of memory access cycle</td></tr><tr><td>Handling exceptional cases</td><td>Yes</td><td>No</td></tr><tr><td>Purpose of interrupt request</td><td>Data transfer</td><td>Overflow, postprocessing</td></tr><tr><td>Priority</td><td>Low</td><td>High</td></tr></tbody></table></div>
+<h4 id="channels">Channels</h4>
+<p>A <span class="obsidian-red">channel</span> is an independent component of a computer system that manages and controls peripherals on behalf of the CPU and can execute a limited set of I/O instructions (channel commands). A host can connect multiple channels, and each channel can connect multiple devices of different speeds and types, increasing the parallelism between the host and the channels, among channels, and among devices on the same channel. A four-level connection is usually used: host–channel–device controller–I/O device. After the CPU starts a channel, the channel automatically fetches channel instructions from memory and executes them, interrupting the CPU only when the data exchange is complete.</p>
+<p>A further development of the channel is the I/O processor (IOP): a component of the computer system (not an independent computer) that can work in parallel with the CPU and provides high-speed DMA processing; some also provide data conversion, searching, and word assembly/disassembly (e.g., the Intel 8089).</p>
+<p>Overall, the evolution of I/O control methods is a process of progressively freeing the CPU from specific I/O operations: CPU directly controls peripherals → I/O controllers are added → interrupt mechanisms are added → DMA mechanisms are added → dedicated I/O processors → independent I/O processors.</p>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"computer-system-architecture","level":1,"text":"Computer System Architecture"},{"id":"computer-hardware","level":2,"text":"Computer Hardware"},{"id":"arithmetic-unit","level":3,"text":"Arithmetic Unit"},{"id":"controller","level":3,"text":"Controller"},{"id":"memory","level":3,"text":"Memory"},{"id":"performance-metrics","level":3,"text":"Performance Metrics"},{"id":"integrated-circuit-manufacturing","level":2,"text":"Integrated Circuit Manufacturing"},{"id":"computational-efficiency","level":2,"text":"Computational Efficiency"},{"id":"power-wall","level":2,"text":"Power Wall"},{"id":"computer-software","level":2,"text":"Computer Software"},{"id":"program-compilation","level":2,"text":"Program Compilation"},{"id":"gcc","level":3,"text":"GCC"},{"id":"translating-and-starting-a-program","level":3,"text":"Translating and Starting a Program"},{"id":"instruction-set-architecture","level":1,"text":"Instruction Set Architecture"},{"id":"instruction-formats","level":2,"text":"Instruction Formats"},{"id":"addressing-modes","level":2,"text":"Addressing Modes"},{"id":"byte-ordering","level":2,"text":"Byte Ordering"},{"id":"cisc-and-risc","level":2,"text":"CISC and RISC"},{"id":"instruction-set-design-and-examples","level":2,"text":"Instruction Set Design and Examples"},{"id":"simple-instruction-sets","level":3,"text":"Simple Instruction Sets"},{"id":"the-x86-instruction-set-register-memory","level":3,"text":"The x86 Instruction Set (Register–Memory)"},{"id":"the-mips-instruction-set-register-register","level":3,"text":"The MIPS Instruction Set (Register–Register)"},{"id":"the-riscv-instruction-set","level":2,"text":"The RISC-V Instruction Set"},{"id":"riscv-instruction-format-fields","level":3,"text":"RISC-V Instruction Format Fields"},{"id":"riscv-register-conventions","level":3,"text":"RISC-V Register Conventions"},{"id":"logical-and-shift-operations","level":3,"text":"Logical and Shift Operations"},{"id":"decisionmaking-and-branch-instructions","level":3,"text":"Decision-Making and Branch Instructions"},{"id":"hardware-support-for-procedures","level":3,"text":"Hardware Support for Procedures"},{"id":"large-immediates-and-addressing-modes","level":3,"text":"Large Immediates and Addressing Modes"},{"id":"cpu-design","level":1,"text":"CPU Design"},{"id":"singlecycle-processor-design","level":2,"text":"Single-Cycle Processor Design"},{"id":"multicycle-processor-design","level":2,"text":"Multicycle Processor Design"},{"id":"pipelining","level":2,"text":"Pipelining"},{"id":"structural-hazards","level":3,"text":"Structural Hazards"},{"id":"data-hazards","level":3,"text":"Data Hazards"},{"id":"control-hazards","level":3,"text":"Control Hazards"},{"id":"instructionlevel-parallelism-ilp","level":2,"text":"Instruction-Level Parallelism (ILP)"},{"id":"interrupts-and-exceptions","level":2,"text":"Interrupts and Exceptions"},{"id":"methods-of-issuing-interrupt-requests","level":3,"text":"Methods of Issuing Interrupt Requests"},{"id":"saving-and-restoring-the-context","level":3,"text":"Saving and Restoring the Context"},{"id":"methods-of-locating-the-interrupt-address","level":3,"text":"Methods of Locating the Interrupt Address"},{"id":"interrupt-nesting","level":3,"text":"Interrupt Nesting"},{"id":"pipelined-implementation","level":3,"text":"Pipelined Implementation"},{"id":"memory-system","level":1,"text":"Memory System"},{"id":"the-principle-of-locality-and-the-memory-hierarchy","level":2,"text":"The Principle of Locality and the Memory Hierarchy"},{"id":"main-memory","level":2,"text":"Main Memory"},{"id":"static-random-access-memory-sram","level":3,"text":"Static Random Access Memory (SRAM)"},{"id":"dynamic-random-access-memory-dram","level":3,"text":"Dynamic Random Access Memory (DRAM)"},{"id":"readonly-memory-rom","level":3,"text":"Read-Only Memory (ROM)"},{"id":"sequential-and-interleaved-memory","level":3,"text":"Sequential and Interleaved Memory"},{"id":"fault-tolerance-and-error-detection","level":2,"text":"Fault Tolerance and Error Detection"},{"id":"parity-check-code","level":3,"text":"Parity Check Code"},{"id":"hamming-code","level":3,"text":"Hamming Code"},{"id":"cyclic-redundancy-check-crc","level":3,"text":"Cyclic Redundancy Check (CRC)"},{"id":"cache","level":2,"text":"Cache"},{"id":"classification-of-misses-the-3cs","level":3,"text":"Classification of Misses (the 3Cs)"},{"id":"write-policies","level":3,"text":"Write Policies"},{"id":"replacement-policies","level":3,"text":"Replacement Policies"},{"id":"performance-evaluation","level":3,"text":"Performance Evaluation"},{"id":"virtual-memory","level":2,"text":"Virtual Memory"},{"id":"bus-system","level":1,"text":"Bus System"},{"id":"bus-standards","level":2,"text":"Bus Standards"},{"id":"bus-structure","level":2,"text":"Bus Structure"},{"id":"bus-arbitration","level":2,"text":"Bus Arbitration"},{"id":"centralized-arbitration","level":3,"text":"Centralized Arbitration"},{"id":"distributed-arbitration","level":3,"text":"Distributed Arbitration"},{"id":"bus-operations","level":2,"text":"Bus Operations"},{"id":"bus-communication-methods","level":2,"text":"Bus Communication Methods"},{"id":"i-o-system","level":1,"text":"I/O System"},{"id":"i-o-interfaces","level":2,"text":"I/O Interfaces"},{"id":"functions-and-composition-of-i-o-interfaces","level":3,"text":"Functions and Composition of I/O Interfaces"},{"id":"types-of-i-o-interfaces","level":3,"text":"Types of I/O Interfaces"},{"id":"i-o-data-exchange-methods","level":2,"text":"I/O Data Exchange Methods"},{"id":"programmed-polling","level":3,"text":"Programmed Polling"},{"id":"dma","level":3,"text":"DMA"},{"id":"channels","level":3,"text":"Channels"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -95,7 +970,7 @@ A computer system can be viewed in terms of its computer architecture (external 
 ## Computer Hardware
 
 The processing hierarchy of a modern computer:
-![Screenshot 2026-06-09 at 17.57.28](../attachments/Screenshot%202026-06-09%20at%2017.57.28.png){width=450}
+![Screenshot 2026-06-09 at 17.57.28](../attachments/Screenshot%202026-06-09%20at%2017.57.28-optimized.webp){width=450}
 
 Here $M_0,M_1$ are hardware, and $M,M_2,M_3,M_4$ are software.
 
@@ -393,7 +1268,7 @@ Instruction word length: The number of bits in an instruction word, usually a mu
 ## Addressing Modes
 
 <span style="color: red;">Instruction addressing</span>: Locating the next instruction. It is generally divided into sequential addressing (the PC increments automatically) and jump addressing (branch and jump instructions modify the PC).
-![Screenshot 2026-06-10 at 11.15.43](../attachments/Screenshot%202026-06-10%20at%2011.15.43.png){width=450}
+![Screenshot 2026-06-10 at 11.15.43](../attachments/Screenshot%202026-06-10%20at%2011.15.43-optimized.webp){width=450}
 
 <span style="color: red;">Data addressing</span>: Determining the actual address of an operand.
 - Immediate addressing: `MOV R0, #15`
@@ -409,7 +1284,7 @@ With byte addressing, a word is 32 bits and a byte is 8 bits, so four bytes hold
 - <span style="color: red;">Little-endian</span>: The address of the rightmost (least significant) byte is used as the word address.
 - RISC-V is little-endian.
 
-![Screenshot 2026-05-18 at 20.53.21](../attachments/Screenshot%202026-05-18%20at%2020.53.21.png){width=450}
+![Screenshot 2026-05-18 at 20.53.21](../attachments/Screenshot%202026-05-18%20at%2020.53.21-optimized.webp){width=450}
 >[!EXAMPLE]
 >Consider the following code:
 >```RISC-V
@@ -459,7 +1334,7 @@ Representatives: the ARM architecture and RISC-V.
 
 Simple instruction set architectures include stack, accumulator, register–memory, and register–register instruction sets.
 
-![Screenshot 2026-06-10 at 11.18.04](../attachments/Screenshot%202026-06-10%20at%2011.18.04.png){width=450}
+![Screenshot 2026-06-10 at 11.18.04](../attachments/Screenshot%202026-06-10%20at%2011.18.04-optimized.webp){width=450}
 
 The implementation of A+B in each of the four instruction sets is as follows:
 
@@ -501,11 +1376,11 @@ MIPS is a popular RISC instruction set. Its machine word length is 32 or 64 bits
 
 Its instruction formats are as follows:
 
-![Screenshot 2026-06-10 at 11.17.02](../attachments/Screenshot%202026-06-10%20at%2011.17.02.png){width=450}
+![Screenshot 2026-06-10 at 11.17.02](../attachments/Screenshot%202026-06-10%20at%2011.17.02-optimized.webp){width=450}
 
 The addressing modes of these instructions are as follows:
 
-![Screenshot 2026-06-10 at 11.18.48](../attachments/Screenshot%202026-06-10%20at%2011.18.48.png){width=450}
+![Screenshot 2026-06-10 at 11.18.48](../attachments/Screenshot%202026-06-10%20at%2011.18.48-optimized.webp){width=450}
 
 ## The RISC-V Instruction Set
 
@@ -572,6 +1447,8 @@ RISC-V has 32 general-purpose registers, whose roles are divided by the calling 
 
 Conditional branches: `beq` (equal), `bne` (not equal), `blt`/`bge` (signed less than / greater than or equal), and `bltu`/`bgeu` (unsigned). Set instructions: `slt`/`slti`/`sltu`/`sltiu` set `x[rd]=1` when the first operand is less than the second (`slt`/`sltu` compare `x[rs1]` with `x[rs2]`; `slti`/`sltiu` compare `x[rs1]` with an immediate). They are often combined with branches to implement complex conditions.
 
+Comparators are not necessarily used to perform subtraction; conversely, subtraction is often used to implement comparison.
+
 ### Hardware Support for Procedures
 
 - `jal rd, label` (jump and link): Jumps to the target and stores the return address PC+4 in `rd` (usually `x1`/ra). The encoded immediate field is 20 bits (the actual offset is 21 bits, with the lowest bit implicitly 0). It is used for procedure calls.
@@ -606,7 +1483,7 @@ Regardless of the instruction, execution usually goes through these five logical
 
 ## Single-Cycle Processor Design
 
-![Screenshot 2026-06-10 at 11.24.59](../attachments/Screenshot%202026-06-10%20at%2011.24.59.png){width=450}
+![Screenshot 2026-06-10 at 11.24.59](../attachments/Screenshot%202026-06-10%20at%2011.24.59-optimized.webp){width=450}
 
 - R/I-type instructions: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers; the ALU computes the result, and a Mux determines whether the result is written back to the register file.
 - ld instruction: Fetch the instruction and read the registers; a Mux selects whether the ALU operates on a register and an immediate or on two registers; the ALU computes the target memory address. The value at that address is read from memory, and finally a Mux determines whether the result is written back to the register file.
@@ -619,7 +1496,7 @@ For a single-cycle processor, it is easy to see that $CPI=1$ for every instructi
 
 ## Multicycle Processor Design
 
-![Screenshot 2026-06-10 at 11.26.01](../attachments/Screenshot%202026-06-10%20at%2011.26.01.png){width=450}
+![Screenshot 2026-06-10 at 11.26.01](../attachments/Screenshot%202026-06-10%20at%2011.26.01-optimized.webp){width=450}
 
 Because the different steps of each instruction are completed in separate clock cycles, a multicycle processor needs only one ALU.
 
@@ -659,9 +1536,9 @@ If the CPU has only one memory that stores both instructions and data, the pipel
 
 There are two ways to resolve this hazard:
 
-- Insert a bubble ![Screenshot 2026-05-05 at 14.24.18](../attachments/Screenshot%202026-05-05%20at%2014.24.18.png){width=450}
+- Insert a bubble ![Screenshot 2026-05-05 at 14.24.18](../attachments/Screenshot%202026-05-05%20at%2014.24.18-optimized.webp){width=450}
 - Harvard architecture: Unlike the von Neumann architecture, the Harvard architecture physically separates instruction storage and data storage, each with its own bus, so instructions and data can be read simultaneously. This also alleviates the von Neumann bottleneck. However, a pure Harvard architecture needs two buses and two memory systems, which increases board routing and hardware design costs.
-![Screenshot 2026-05-05 at 14.24.35](../attachments/Screenshot%202026-05-05%20at%2014.24.35.png){width=450}
+![Screenshot 2026-05-05 at 14.24.35](../attachments/Screenshot%202026-05-05%20at%2014.24.35-optimized.webp){width=450}
 ### Data Hazards
 
 Classification of data dependences:
@@ -681,7 +1558,7 @@ sw x15,100(x2)
 In a standard pipeline, the result in register `x2` is not available until the WB stage. However, subsequent instructions need this value as an input in their EX stage, which causes RAW hazards.
 
 To mitigate data hazards, we can implement a <span style="color: red;">forwarding unit</span> that passes the execution result directly to the inputs of the instruction that needs it, without waiting for the WB stage.
-![Screenshot 2026-05-05 at 14.46.06](../attachments/Screenshot%202026-05-05%20at%2014.46.06.png){width=450}
+![Screenshot 2026-05-05 at 14.46.06](../attachments/Screenshot%202026-05-05%20at%2014.46.06-optimized.webp){width=450}
 The forwarding unit is very powerful, but it cannot resolve the <span style="color: red;">load-use</span> RAW data hazard.
 
 ```RISC-V
@@ -693,7 +1570,7 @@ The first instruction obtains the data only at the end of its MEM stage, but the
 
 ![Screenshot 2026-05-05 at 15.23.43](../attachments/Screenshot%202026-05-05%20at%2015.23.43.png){width=450}
 
-![Screenshot 2026-06-17 at 23.44.14](../attachments/Screenshot%202026-06-17%20at%2023.44.14.png){width=450}
+![Screenshot 2026-06-17 at 23.44.14](../attachments/Screenshot%202026-06-17%20at%2023.44.14-optimized.webp){width=450}
 
 Hazard detection conditions (the forwarding unit uses them to decide whether forwarding is needed; the destination register number must be nonzero and the corresponding instruction must write a register):
 
@@ -739,7 +1616,7 @@ Dynamic branch prediction: Hardware records the past behavior of branches to pre
 
 Differences between the MIPS pipeline and the RISC-V pipeline:
 
-![Screenshot 2026-05-05 at 14.22.07](../attachments/Screenshot%202026-05-05%20at%2014.22.07.png){width=450}
+![Screenshot 2026-05-05 at 14.22.07](../attachments/Screenshot%202026-05-05%20at%2014.22.07-optimized.webp){width=450}
 
 - Unified PC computation and jump logic (marked in red in the figure): MIPS jumps distinguish absolute addressing (concatenating the low 26 bits of the instruction into a 32-bit address) from relative addressing, so the sources of the PC update are numerous and the MUX logic at the upper left of the IF (instruction fetch) stage is complex and intertwined. RISC-V branches and `jal` rely entirely on PC-relative address calculation (only `jalr` uses a register plus an offset).
 - Handling of immediates (marked in green in the figure): MIPS immediates always sit neatly in the rightmost contiguous 16 bits `[15-0]` of the instruction. To keep register positions fixed, RISC-V chops the immediate into pieces and fits them into the gaps of the instruction, so a dedicated `Imm Gen` module must reassemble the scattered immediate bits like a jigsaw puzzle and extend them.
@@ -791,10 +1668,10 @@ Multiple INTR flip-flops form the interrupt request flag register.
 software:
 ![Screenshot 2026-05-22 at 13.57.06](../attachments/Screenshot%202026-05-22%20at%2013.57.06.png){width=470}
 hardware:
-- A daisy-chain priority circuit distributed among the interface circuits of the interrupt sources ![Screenshot 2026-05-06 at 14.31.37](../attachments/Screenshot%202026-05-06%20at%2014.31.37.png){width=589}
+- A daisy-chain priority circuit distributed among the interface circuits of the interrupt sources ![Screenshot 2026-05-06 at 14.31.37](../attachments/Screenshot%202026-05-06%20at%2014.31.37-optimized.webp){width=589}
 - A daisy-chain priority circuit centralized in the CPU ![Screenshot 2026-05-22 at 13.58.08](../attachments/Screenshot%202026-05-22%20at%2013.58.08.png){width=450}
 Condition for responding to an interrupt: the interrupt enable flip-flop `EINT = 1` (or the IF flag in the PSW is set).
-![Screenshot 2026-05-22 at 13.58.43](../attachments/Screenshot%202026-05-22%20at%2013.58.43.png){width=429}
+![Screenshot 2026-05-22 at 13.58.43](../attachments/Screenshot%202026-05-22%20at%2013.58.43-optimized.webp){width=429}
 The main operations of the interrupt cycle are performed by the implicit interrupt instruction:
 
 - EINT (interrupt enable flip-flop): 0
@@ -806,7 +1683,7 @@ The main operations of the interrupt cycle are performed by the implicit interru
 - Breakpoint: saved by the implicit interrupt instruction
 - Register contents: saved by the interrupt service routine (ISR)
 
-![Screenshot 2026-05-22 at 14.03.24](../attachments/Screenshot%202026-05-22%20at%2014.03.24.png){width=450}
+![Screenshot 2026-05-22 at 14.03.24](../attachments/Screenshot%202026-05-22%20at%2014.03.24-optimized.webp){width=450}
 ### Methods of Locating the Interrupt Address
 
 - Hardware vectoring: A hardware unit places the vector address directly into the PC.
@@ -822,7 +1699,7 @@ To implement multiple (nested) interrupts, interrupts must be re-enabled in adva
 
 ### Pipelined Implementation
 
-![Screenshot 2026-06-17 at 16.30.17](../attachments/Screenshot%202026-06-17%20at%2016.30.17.png){width=450}
+![Screenshot 2026-06-17 at 16.30.17](../attachments/Screenshot%202026-06-17%20at%2016.30.17-optimized.webp){width=450}
 - When the control unit (Control / exception detection logic) detects an exception, it asserts the `Flush` signals. `IF.Flush`, `ID.Flush`, and `EX.Flush` clear all instructions following the faulting instruction.
 - EPC (Exception Program Counter): The hardware automatically writes the PC of the instruction that caused the exception (passed stage by stage along the blue line in the figure) into the EPC register. After the operating system has handled the exception, it reads the EPC to know where to return.
 - Cause register: Based on the specific circuit that triggered the exception (for example, the ALU signaling overflow or the instruction decoder signaling an undefined instruction), the hardware generates an error code (such as the 0 or 1 mentioned in the earlier example in the figure) and stores it in the Cause register so that the operating system can determine what went wrong.
@@ -866,7 +1743,7 @@ The resulting <span style="color: red;">memory hierarchy</span>: levels closer t
 - Hit time: The time required to access the current level.
 - Miss penalty: On a miss, the time required to move the corresponding block from the lower level to the upper level.
 
-![Screenshot 2026-06-09 at 17.13.23](../attachments/Screenshot%202026-06-09%20at%2017.13.23.png){width=450}
+![Screenshot 2026-06-09 at 17.13.23](../attachments/Screenshot%202026-06-09%20at%2017.13.23-optimized.webp){width=450}
 
 ## Main Memory
 
@@ -896,7 +1773,7 @@ SRAM stores information in bistable flip-flops (latches); a typical storage cell
 
 DRAM stores information as charge on a capacitor (charge represents 1, no charge represents 0). Because capacitors leak, DRAM must be refreshed periodically (typically row by row every few milliseconds). Each cell needs only one transistor and one capacitor, so density is high and cost is low; however, reads are destructive and must be followed by a rewrite, and DRAM is slower than SRAM. The address pins are usually multiplexed between row and column addresses (latched in turn by the RAS and CAS signals) to reduce the number of chip pins.
 
-![Screenshot 2026-06-09 at 17.22.41](../attachments/Screenshot%202026-06-09%20at%2017.22.41.png){width=450}
+![Screenshot 2026-06-09 at 17.22.41](../attachments/Screenshot%202026-06-09%20at%2017.22.41-optimized.webp){width=450}
 
 
 |                   | DRAM       | SRAM          |
@@ -930,7 +1807,7 @@ $$\boxed{t_{\text{total}} = T + (n - 1) \times t}$$
 >$$W_1=q/t_1=91.43MB/s$$
 >$$W_2=q/t_2=40MB/s$$
 
-For how memory is connected to the CPU (connecting the address and data lines, and using a decoder to generate chip-select signals for address allocation), see the address decoding part of [Decoder](../electronic_engineering/electronic_technology.html#decoder).
+For how memory is connected to the CPU (connecting the address and data lines, and using a decoder to generate chip-select signals for address allocation), see the address decoding part of [Decoder](../electronic_engineering/digital_circuits.html#decoder).
 
 ## Fault Tolerance and Error Detection
 
@@ -997,7 +1874,7 @@ Computation steps:
 >[!EXAMPLE]
 >Generator polynomial $G(x)=x^8+x^5+x^4+1$
 >Original data `101100`
->![Screenshot 2026-06-17 at 14.17.37](../attachments/Screenshot%202026-06-17%20at%2014.17.37.png){width=450}
+>![Screenshot 2026-06-17 at 14.17.37](../attachments/Screenshot%202026-06-17%20at%2014.17.37-optimized.webp){width=450}
 >Therefore, the CRC check code appended to the original data is `11111011`.
 
 ## Cache
@@ -1008,7 +1885,7 @@ Data can be mapped from main memory into the cache in the following ways:
 - <span style="color: red;">Fully associative mapping</span>: Any memory block can be placed in any location in the cache. This is flexible and has a low conflict rate, but the lookup circuitry is extremely complex and costly.
 - <span style="color: red;">Set-associative mapping</span>: The cache is divided into several sets; each block can be placed only in one fixed set but in any location within that set. This compromise between the previous two is the most common choice in modern CPUs.
 
-![Screenshot 2026-06-17 at 17.37.41](../attachments/Screenshot%202026-06-17%20at%2017.37.41.png){width=450}
+![Screenshot 2026-06-17 at 17.37.41](../attachments/Screenshot%202026-06-17%20at%2017.37.41-optimized.webp){width=450}
 
 - Offset (block offset): The low-order address bits, which select the byte within a block; the number of offset bits is $\log_2$ (bytes per block).
 - Index: The middle bits, which select the cache line (direct mapping) or the set (set-associative); a fully associative cache has no index bits (the address is entirely tag + offset).
@@ -1052,7 +1929,7 @@ The virtual-memory solution is to build a <span style="color: red;">page table</
 
 Because the page-table mapping can be arbitrary, when a program runs its pages can be loaded into any available frames without needing to be contiguous. This solves the memory contiguity problem.
 
-![Screenshot 2026-06-17 at 21.51.12](../attachments/Screenshot%202026-06-17%20at%2021.51.12.png){width=483}
+![Screenshot 2026-06-17 at 21.51.12](../attachments/Screenshot%202026-06-17%20at%2021.51.12-optimized.webp){width=483}
 
 If every access to a physical address also required an access to the page table, each operation would effectively require two memory reads, and this time cost is unacceptable. We therefore build a cache for the page table, called the <span style="color: red;">TLB</span> (Translation Lookaside Buffer).
 
@@ -1091,7 +1968,7 @@ Bus performance metrics:
 - Bus bandwidth: The data transfer rate of the bus, i.e., the number of bits transferred per unit time, usually measured in bytes transferred per second.
 - Bus multiplexing: Transmitting multiple signals over one signal line by time sharing.
 
-![Screenshot 2026-05-22 at 14.23.19](../attachments/Screenshot%202026-05-22%20at%2014.23.19.png){width=450}
+![Screenshot 2026-05-22 at 14.23.19](../attachments/Screenshot%202026-05-22%20at%2014.23.19-optimized.webp){width=450}
 
 ## Bus Structure
 
@@ -1110,17 +1987,17 @@ Devices connected to a bus are either <span style="color: red;">masters</span> o
 <span style="color: red;">Daisy chaining</span>: Polling proceeds step by step along the BG (bus grant) line.
 - Advantages: simple to implement; easy to add devices.
 - Disadvantages: sensitive to circuit faults; fixed polling priority.
-![Screenshot 2026-05-22 at 14.29.20](../attachments/Screenshot%202026-05-22%20at%2014.29.20.png){width=450}
+![Screenshot 2026-05-22 at 14.29.20](../attachments/Screenshot%202026-05-22%20at%2014.29.20-optimized.webp){width=450}
 
 Counter-based polling: A counter records the arbitration count; if the count equals a device's interface number, that device is granted the bus; otherwise the counter is incremented and polling continues.
 - Advantages: the priority order can be changed conveniently by changing the counter's initial value.
 - Disadvantages: extra control lines are needed to transmit the interface number.
-![Screenshot 2026-05-22 at 14.32.16](../attachments/Screenshot%202026-05-22%20at%2014.32.16.png){width=450}
+![Screenshot 2026-05-22 at 14.32.16](../attachments/Screenshot%202026-05-22%20at%2014.32.16-optimized.webp){width=450}
 
 Independent requests: Every interface can issue requests independently, and the bus controller arbitrates using an internal priority circuit.
 - Advantages: fast response; relatively flexible.
 - Disadvantages: too many control lines.
-![Screenshot 2026-05-22 at 14.32.35](../attachments/Screenshot%202026-05-22%20at%2014.32.35.png){width=450}
+![Screenshot 2026-05-22 at 14.32.35](../attachments/Screenshot%202026-05-22%20at%2014.32.35-optimized.webp){width=450}
 ### Distributed Arbitration
 
 - Self-selection distributed arbitration (each device independently determines whether it is the highest-priority requester. During arbitration, each device reads back and analyzes the combined signals on the request lines and determines from them whether it may take control of the bus).
@@ -1151,12 +2028,12 @@ Bus cycle:
 There are four main ways for a bus to coordinate the timing of the master and slave during a transfer:
 
 - <span style="color: red;">Synchronous communication</span>: All components work in fixed steps driven by a common clock. It is regular, simple to control, and has a high transfer rate, but it must be based on the slowest device, and bus length and flexibility are limited.
-	- Synchronous read ![v2-4f3f34ae185207fb1076d2a7734eb53a_1440w](../attachments/v2-4f3f34ae185207fb1076d2a7734eb53a_1440w.png){width=450}
-	- Synchronous write ![v2-714881ee6ef06b01929a97237624d776_1440w](../attachments/v2-714881ee6ef06b01929a97237624d776_1440w.png){width=450}
+	- Synchronous read ![v2-4f3f34ae185207fb1076d2a7734eb53a_1440w](../attachments/v2-4f3f34ae185207fb1076d2a7734eb53a_1440w-optimized.webp){width=450}
+	- Synchronous write ![v2-714881ee6ef06b01929a97237624d776_1440w](../attachments/v2-714881ee6ef06b01929a97237624d776_1440w-optimized.webp){width=450}
 - <span style="color: red;">Asynchronous communication</span>: There is no common clock; handshake (acknowledgment) signals coordinate the transfer. The master issues a Request, and the slave replies with an Acknowledge when ready; two handshake lines must be added. Depending on whether request and acknowledge constrain each other, there are three levels: non-interlocked (e.g., memory access), semi-interlocked (e.g., access to shared memory), and fully interlocked (e.g., network communication); fully interlocked is the most reliable but the slowest. It is flexible and can accommodate devices of different speeds, but control is complex and speed is relatively low.
-![v2-0105c1ebea9317794c9313024b28a40f_1440w](../attachments/v2-0105c1ebea9317794c9313024b28a40f_1440w.png){width=450}
+![v2-0105c1ebea9317794c9313024b28a40f_1440w](../attachments/v2-0105c1ebea9317794c9313024b28a40f_1440w-optimized.webp){width=450}
 - Semi-synchronous communication: A compromise between synchronous and asynchronous: it keeps a common clock but allows a slow slave to assert a wait signal ($\overline{\text{WAIT}}$/READY) to insert several wait cycles, combining the simplicity of synchronous with the flexibility of asynchronous communication.
-![v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w](../attachments/v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w.png){width=450}
+![v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w](../attachments/v2-b7364a0029a45c2ef8f84b58c07a2dac_1440w-optimized.webp){width=450}
 - Split-transaction communication: A bus cycle is split into a "request subcycle" and a "reply subcycle," and the bus is released for other devices between the two (e.g., while memory prepares the data). Both subcycles use synchronous, one-way transfers without waiting for the other side to answer, so whenever the bus is occupied it is doing useful work with no idle waiting. It has the highest utilization but the most complex control and is mostly found in mainframes.
 
 
@@ -1301,7 +2178,7 @@ Overall, the evolution of I/O control methods is a process of progressively free
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

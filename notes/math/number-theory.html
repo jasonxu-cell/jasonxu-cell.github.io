@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Number Theory, with explanations, derivations, and examples.">
     <meta property="og:title" content="Number Theory | Yang">
+    <meta property="og:description" content="Study notes by Yang on Number Theory, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/math/number-theory.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Number Theory | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Number Theory, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Number Theory | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../math.html" class="article-back-link">&larr; Mathematics</a>
             <h1>Number Theory</h1>
@@ -53,7 +58,155 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="divisibility">Divisibility</h2>
+<p>Let $a, b$ be integers with $b \neq 0$. If there exists an integer $c$ such that $a = bc$, we say $b$ <span class="obsidian-red">divides</span> $a$, written $b \mid a$; otherwise $b \nmid a$.</p>
+<p>Properties.</p>
+<ol>
+<li>Any nonzero integer $a$ divides $0$.</li>
+<li>If $a \mid b$ then $a \mid bc$ for every $c$; in particular $b \mid a \Rightarrow (\pm b) \mid (\pm a)$.</li>
+<li>If $a \mid b$ and $a \mid c$, then $a \mid (b \pm c)$.</li>
+<li>If $a \mid b$ and $a \mid c$, then $a \mid (bx + cy)$ for all integers $x, y$.</li>
+<li>(Divisibility chain) If $a \mid b$ and $b \mid a$, then $|a| = |b|$ and $b = \pm a$.</li>
+<li><span class="obsidian-red">Division algorithm</span>: for integers $a, b$ with $b \neq 0$, there exist unique integers $q, r$ such that $a = bq + r$ with $0 \le r &lt; |b|$.</li>
+</ol>
+<h3 id="greatest-common-divisor">Greatest Common Divisor</h3>
+<p>Let $a, b$ be integers, not both zero. An integer $d$ is a <span class="obsidian-red">greatest common divisor</span> (gcd) of $a, b$ if</p>
+<ol>
+<li>$d \mid a$ and $d \mid b$;</li>
+<li>if $d&#039; \mid a$ and $d&#039; \mid b$, then $d&#039; \mid d$.</li>
+</ol>
+<p>Denoted $(a, b)$ or $\gcd(a, b)$. If $(a, b) = 1$, then $a, b$ are <span class="obsidian-red">coprime</span>.</p>
+<p>Properties. $(\pm a, \pm b) = (a, b)$; $(a, b) = (b, a)$; if $a \neq 0$, $(a, a) = (a, 0) = |a|$.</p>
+<h3 id="b-zout-s-identity">Bézout&#039;s Identity</h3>
+<p>For $a, b$ not both zero with $g = (a, b)$, there exist $s, t \in \mathbb{Z}$ with $g = as + bt$.</p>
+<p><em>Proof.</em> Let $I = \{ax + by \mid x, y \in \mathbb{Z}\}$ and $d$ the smallest positive element of $I$. Then $d \mid a$ and $d \mid b$ (by the division algorithm), and any common divisor $c$ divides every element of $I$, hence $c \mid d$. So $d = (a, b)$. $\square$</p>
+<p>Consequences:</p>
+<ul>
+<li>$(a, b) = 1 \iff \exists\, s, t \in \mathbb{Z}$ with $as + bt = 1$.</li>
+<li>$\{a_1 x_1 + \cdots + a_n x_n \mid x_i \in \mathbb{Z}\} = d\mathbb{Z}$, where $d = (a_1, \dots, a_n)$.</li>
+<li>For $m &gt; 0$: $m(a, b) = (ma, mb)$; in particular $\left(\frac{a}{(a,b)}, \frac{b}{(a,b)}\right) = 1$.</li>
+<li>If $(a, m) = (b, m) = 1$, then $(ab, m) = 1$.</li>
+<li>If $c \mid ab$ and $(c, b) = 1$, then $c \mid a$.</li>
+<li>$ax \equiv b \pmod m$ has a solution $\iff (a, m) \mid b$.</li>
+</ul>
+<h3 id="euclidean-algorithm">Euclidean Algorithm</h3>
+<p>To compute $\gcd(a, b)$: set $r_0 = a$, $r_1 = b$, and iterate $r_{i+1} = r_{i-1} \bmod r_i$ until $r_{i+1} = 0$; the last nonzero remainder $r_i$ is the gcd.</p>
+<h3 id="least-common-multiple">Least Common Multiple</h3>
+<p>$[a, b]$ is the <span class="obsidian-red">least common multiple</span>: if $a \mid m&#039;$ and $b \mid m&#039;$, then $[a, b] \mid m&#039;$.</p>
+<ul>
+<li>$a \mid b \Rightarrow [a, b] = b$;</li>
+<li>$[ma, mb] = m[a, b]$;</li>
+<li>$|ab| = (a, b) \cdot [a, b]$.</li>
+</ul>
+<h2 id="fundamental-theorem-of-arithmetic">Fundamental Theorem of Arithmetic</h2>
+<p>$(a^n - 1, a^m - 1) = a^{(n,m)} - 1$. Hence if $p = a^n - 1$ is prime, then $a = 2$ and $n$ is prime. The <span class="obsidian-red">Mersenne numbers</span> $M_n = 2^n - 1$: whether infinitely many are prime is an open problem.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euclid&#039;s Lemma</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let $p$ be prime. If $p \mid ab$, then $p \mid a$ or $p \mid b$. <em>Proof.</em> If $p \nmid a$, then $(p, a) = 1$, so $p \mid b$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Fundamental Theorem of Arithmetic</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every integer greater than $1$ can be factored into a product of finitely many primes, and this factorization is unique up to order.</p></div></div>
+<p><em>Existence</em> by strong induction; <em>uniqueness</em> by <span class="obsidian-red">Euclid&#039;s lemma</span>. Hence every positive integer $n = \prod_p p^{v_p(n)}$ with $v_p(n) \in \mathbb{N}$, and every nonzero rational $r = \prod_p p^{v_p(r)}$ with $v_p(r) \in \mathbb{Z}$.</p>
+<p>A positive integer $d \mid n \iff d = \prod_p p^{v_p(d)}$ with $0 \le v_p(d) \le v_p(n)$. In terms of valuations, $$(a, b) = \prod_p p^{\min(v_p(a), v_p(b))}, \qquad [a, b] = \prod_p p^{\max(v_p(a), v_p(b))}$$</p>
+<h2 id="fast-exponentiation-and-perfect-numbers">Fast Exponentiation and Perfect Numbers</h2>
+<p><span class="obsidian-red">Fast exponentiation</span> (computing $a^n \bmod m$): write $n = \sum_i n_i 2^i$ in binary; with $a_0 = a$, repeatedly square $a_i = a_{i-1}^2 \bmod m$, accumulating the product over bits where $n_i = 1$. This takes $O(\log n)$ multiplications.</p>
+<p>A positive integer $n$ is <span class="obsidian-red">perfect</span> if $\sigma(n) = 2n$ (sum of divisors).</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euclid–Euler</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$n$ is an even perfect number $\iff n = 2^{k-1}(2^k - 1)$ where $P = 2^k - 1$ is a <span class="obsidian-red">Mersenne prime</span>.</p></div></div>
+<p><em>Proof sketch.</em> Write $n = 2^{k-1}X$ with $X$ odd. Then $\sigma(n) = (2^k - 1)\sigma(X) = 2n = 2^k X$, so $\sigma(X) = \frac{2^k X}{2^k - 1}$. Writing $X = (2^k - 1)Y$, the analysis forces $Y = 1$ and $2^k - 1$ prime. $\square$</p>
+<p>$$2^{P-1}(2^P - 1) = 1 + 2 + \cdots + 2^{P-1} + 2^P + \cdots + 2^{2P-1}$$</p>
+<p>Whether there are infinitely many even perfect numbers, and whether any odd perfect number exists, are open problems.</p>
+<h2 id="lifting-the-exponent-lte">Lifting the Exponent (LTE)</h2>
+<p>Let $p$ be a prime.</p>
+<ol>
+<li>For $n \in \mathbb{N}^+$, $x, y \in \mathbb{Z}$ with $(p, n) = 1$ and $p \mid (x - y)$: $\;v_p(x^n - y^n) = v_p(x - y)$.</li>
+<li>For an odd prime $p$ with $p \mid (x - y)$, $p \nmid x, y$: $\;v_p(x^n - y^n) = v_p(x - y) + v_p(n)$.</li>
+<li>For $x, y$ odd and $n$ a positive even integer: $\;v_2(x^n - y^n) = v_2(x - y) + v_2(x + y) + v_2(n) - 1$.</li>
+</ol>
+<h2 id="the-m-bius-function">The Möbius Function</h2>
+<p>For $n = p_1^{k_1}\cdots p_s^{k_s}$, $$\mu(n) = \begin{cases} 1 &amp; n = 1 \\ (-1)^s &amp; n = p_1 p_2 \cdots p_s \text{ (squarefree)} \\ 0 &amp; \text{otherwise} \end{cases}, \qquad \sum_{d \mid n} \mu(d) = [n = 1]$$</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Möbius Inversion</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For arithmetic functions $f, g$: $$g(n) = \sum_{d \mid n} f(d) \iff f(n) = \sum_{d \mid n} \mu(d)\, g\!\left(\frac{n}{d}\right)$$ Multiplicative form: $g(n) = \prod_{d \mid n} f(d) \iff f(n) = \prod_{d \mid n} g\!\left(\frac{n}{d}\right)^{\mu(d)}$.</p></div></div>
+<h2 id="diophantine-equations">Diophantine Equations</h2>
+<p>Linear $ax + by = c$. Let $d = (a, b)$. If $d \nmid c$, no solution; otherwise a particular solution $(x_0, y_0)$ exists, and the general solution is $$x = x_0 + \frac{b}{d}t, \qquad y = y_0 - \frac{a}{d}t, \quad t \in \mathbb{Z}$$</p>
+<p>Frobenius (Chicken McNugget). For coprime positive integers $a, b$, the largest integer not representable as $ax + by$ with $x, y \ge 0$ is $g = ab - a - b$, and exactly $\frac{(a-1)(b-1)}{2}$ non-negative integers are non-representable. The equation $a_1 x_1 + \cdots + a_n x_n = c$ has a non-negative solution $\iff (a_1, \dots, a_n) \mid c$ (the general Frobenius number for $n \ge 3$ is an open problem).</p>
+<p><span class="obsidian-red">Pythagorean equation</span> $x^2 + y^2 = z^2$. Primitive solutions (up to symmetry, $x$ odd, $y$ even): $$x = b^2 - a^2, \quad y = 2ab, \quad z = a^2 + b^2$$</p>
+<p>Related results.</p>
+<ul>
+<li>$x^4 + y^4 = z^2$ has no positive solution (Fermat descent); hence $x^4 + y^4 = z^4$ has none.</li>
+<li>Every integer (with $n \ge 3$ squares allowed) can be written as a sum of squares.</li>
+<li>$x^2 + y^2 + z^2 = w^2$ has infinitely many solutions, e.g. $(2n^2 + 5mn - 3m^2, \dots)$, $m, n \in \mathbb{Z}$.</li>
+<li>For $x^3 + y^3 + z^3 = n$: since $x^3 \equiv 0, \pm 1 \pmod 9$, we need $n \not\equiv \pm 4 \pmod 9$.</li>
+<li>$x^2 - 5y^2 = n$ factors as $(x + y\sqrt{5})(x - y\sqrt{5})$, solved by parity / divisor analysis of $n$.</li>
+</ul>
+<h2 id="modular-arithmetic">Modular Arithmetic</h2>
+<p>For a positive integer $m$, $a \equiv b \pmod m$ means $m \mid (a - b)$.</p>
+<p>Properties. If $a \equiv b \pmod m$: $na \equiv nb$; $ad \equiv bd \pmod{md}$; and $a \equiv b \pmod{m_i}$ for all $i$ $\Rightarrow a \equiv b \pmod{[m_1, \dots, m_n]}$. The congruence $ax \equiv b \pmod m$ is solvable $\iff (a, m) \mid b$; in particular $ax \equiv 1 \pmod m$ (an inverse $a^{-1}$) exists $\iff (a, m) = 1$, computable by the Euclidean algorithm.</p>
+<p>Additive group $\mathbb{Z}/n\mathbb{Z} = \{[0], [1], \dots, [n-1]\}$ (cyclic of order $n$).</p>
+<p>Multiplicative group $(\mathbb{Z}/n\mathbb{Z})^* = \{[a] \mid (a, n) = 1,\ 0 \le a &lt; n\}$ of order $\varphi(n)$ (<span class="obsidian-red">Euler&#039;s totient</span>). When $p$ is prime, $\mathbb{Z}/p\mathbb{Z}$ is the field $\mathbb{F}_p$ of $p$ elements.</p>
+<ul>
+<li>If $G$ is finite cyclic of order $n$: $G \cong \mathbb{Z}/n\mathbb{Z}$ and $\operatorname{Aut}(G) \cong (\mathbb{Z}/n\mathbb{Z})^*$.</li>
+<li>If $G$ is infinite cyclic: $G \cong \mathbb{Z}$, $\operatorname{Aut}(G) \cong \mathbb{Z}/2\mathbb{Z}$.</li>
+</ul>
+<p>A <span class="obsidian-red">complete residue system</span> is a set of representatives of $\mathbb{Z}/n\mathbb{Z}$; a <span class="obsidian-red">reduced residue system</span> represents $(\mathbb{Z}/n\mathbb{Z})^*$ ($\varphi(n)$ elements).</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euler / Fermat</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For $(a, n) = 1$: $\;a^{\varphi(n)} \equiv 1 \pmod n$. In particular (<span class="obsidian-red">Fermat&#039;s little theorem</span>), for prime $p$: $\;a^{p-1} \equiv 1 \pmod p$.</p></div></div>
+<p><em>(Proof via Lagrange&#039;s theorem applied to $(\mathbb{Z}/n\mathbb{Z})^*$.)</em></p>
+<p>Also $\displaystyle n = \sum_{d \mid n} \varphi(d)$ (classify $1, \dots, n$ by $\gcd$ with $n$).</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Extended Euler</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For positive integer $n$, integer $a$, and exponent $b$: $$a^b \equiv \begin{cases} a^b &amp; b &lt; \varphi(n) \\ a^{\,b \bmod \varphi(n) + \varphi(n)} &amp; b \ge \varphi(n) \end{cases} \pmod n$$</p></div></div>
+<p>Solving $x^k = a$ in a cyclic group $G = \langle g \rangle$ of order $n$ with $a = g^i$: solvable $\iff d := (k, n) \mid i$, in which case there are exactly $d$ solutions.</p>
+<h3 id="chinese-remainder-theorem">Chinese Remainder Theorem</h3>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">CRT</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $m, n$ are coprime, then $\mathbb{Z}/mn\mathbb{Z} \cong \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$ via $a \bmod mn \mapsto (a \bmod m,\ a \bmod n)$, and likewise $(\mathbb{Z}/mn\mathbb{Z})^* \cong (\mathbb{Z}/m\mathbb{Z})^* \times (\mathbb{Z}/n\mathbb{Z})^*$. More generally, for pairwise coprime $m_1, \dots, m_k$, the system $$x \equiv a_1 \pmod{m_1},\ \dots,\ x \equiv a_k \pmod{m_k}$$ has a unique solution modulo $n = m_1 \cdots m_k$.</p></div></div>
+<p>Consequences for $\varphi$. $\varphi$ is multiplicative: $(m, n) = 1 \Rightarrow \varphi(mn) = \varphi(m)\varphi(n)$; for $n = p_1^{k_1}\cdots p_r^{k_r}$, $$\varphi(n) = n\prod_{p \mid n}\left(1 - \frac{1}{p}\right)$$</p>
+<p>Solving two congruences $x \equiv x_1 \pmod{m_1}$, $x \equiv x_2 \pmod{m_2}$: with $d = (m_1, m_2)$ and Bézout $m_1 k_1 + m_2 k_2 = d$ (solvable iff $d \mid x_2 - x_1$), $$x \equiv \frac{m_1 k_1 x_2 + m_2 k_2 x_1}{d} \pmod{[m_1, m_2]}$$</p>
+<h2 id="primitive-roots">Primitive Roots</h2>
+<p>If $(\mathbb{Z}/m\mathbb{Z})^*$ is cyclic, a generator is a <span class="obsidian-red">primitive root</span> mod $m$. ($2$ has the primitive root $1$; $4$ has the primitive root $3$.)</p>
+<p>$2^k$ ($k \ge 3$) has no primitive root: for odd $a$, $a^{2^{k-2}} \equiv 1 \pmod{2^k}$ (induction on $k$), so the group is not cyclic.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Existence mod $p$</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>An odd prime $p$ has a primitive root; in fact there are $\varphi(p-1)$ of them. <em>Proof.</em> For $d \mid p - 1$ let $S(d) = \#\{a \in \mathbb{F}_p^* : \operatorname{ord}(a) = d\}$. If an element of order $d$ exists, its powers give all $d$ roots of $x^d - 1$, so $S(d) = \varphi(d)$; otherwise $S(d) = 0$, so $S(d) \le \varphi(d)$. Since $\sum_{d \mid p-1} S(d) = p - 1 = \sum_{d \mid p-1}\varphi(d)$, equality holds, so $S(p-1) = \varphi(p-1) \neq 0$. $\square$</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Classification</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A primitive root mod $m$ exists $\iff m = 2, 4, p^k,$ or $2p^k$ (with $p$ an odd prime, $k \ge 1$).</p></div></div>
+<p><span class="obsidian-red">Quadratic residues</span>. Since $p$ is odd, the squaring map $\mathbb{F}_p^* \to \mathbb{F}_p^*$, $a \mapsto a^2$ has kernel $\{\pm 1\}$, so $\mathbb{F}_p^*/\{\pm 1\} \cong (\mathbb{F}_p^*)^2$: exactly half of $\mathbb{F}_p^*$ are quadratic residues and half are non-residues.</p>
+<h2 id="quadratic-reciprocity">Quadratic Reciprocity</h2>
+<p>For $a \in \mathbb{F}_p^*$, the <span class="obsidian-red">Legendre symbol</span> $$\left(\frac{a}{p}\right) = \begin{cases} 1 &amp; a \text{ a quadratic residue} \\ 0 &amp; p \mid a \\ -1 &amp; a \text{ a non-residue} \end{cases}$$ The number of solutions of $x^2 \equiv a \pmod p$ is $1 + \left(\frac{a}{p}\right)$. The symbol is completely multiplicative: writing $a = (-1)^{e_\infty} p_1^{e_1}\cdots p_r^{e_r}$ reduces $\left(\frac{a}{p}\right)$ to the factors $\left(\frac{-1}{p}\right)$, $\left(\frac{2}{p}\right)$, $\left(\frac{p&#039;}{p}\right)$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euler&#039;s Criterion</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$\left(\dfrac{a}{p}\right) \equiv a^{(p-1)/2} \pmod p$. In particular $\left(\dfrac{-1}{p}\right) = (-1)^{(p-1)/2} = \begin{cases} 1 &amp; p \equiv 1 \pmod 4 \\ -1 &amp; p \equiv 3 \pmod 4 \end{cases}$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Gauss&#039;s Lemma</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For $(a, p) = 1$, with $r = \frac{p-1}{2}$, let $s$ be the number of residues of $a, 2a, \dots, ra \pmod p$ that fall in $(\frac{p}{2}, p)$. Then $\left(\frac{a}{p}\right) = (-1)^s$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$\left(\dfrac{2}{p}\right) = (-1)^{(p^2-1)/8} = \begin{cases} 1 &amp; p \equiv \pm 1 \pmod 8 \\ -1 &amp; p \equiv \pm 3 \pmod 8 \end{cases}$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Quadratic Reciprocity</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For distinct odd primes $p, p&#039;$: $$\left(\frac{p&#039;}{p}\right)\left(\frac{p}{p&#039;}\right) = (-1)^{\frac{p-1}{2}\cdot\frac{p&#039;-1}{2}}$$ <em>(Proved by counting lattice points below the line through the origin in a $\frac{p}{2} \times \frac{p&#039;}{2}$ box: above/below give $\sum[ja/p]$ and $\sum[jp/a]$.)</em></p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Planned sections (headings only in the source)</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Jacobi symbol; cubic and quartic reciprocity; Cipolla&#039;s algorithm (for $x^2 \equiv n \pmod p$ when $\left(\frac{n}{p}\right) = 1$); prime sieves; character sums.</p></div></div>
+<h2 id="sums-of-squares">Sums of Squares</h2>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Brahmagupta–Fibonacci identity</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$(a^2 + b^2)(c^2 + d^2) = (ac + bd)^2 + (ad - bc)^2 = (ac - bd)^2 + (ad + bc)^2$$</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Euler&#039;s four-square identity</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$(a_1^2 + a_2^2 + a_3^2 + a_4^2)(b_1^2 + b_2^2 + b_3^2 + b_4^2)$ is again a sum of four squares (bilinear in the $a_i, b_j$). Similarly Degen&#039;s eight-square identity holds for eight squares.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Lagrange&#039;s Four-Square Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every positive integer is a sum of four integer squares. <em>Proof sketch.</em> By Euler&#039;s identity it suffices to treat primes. There exist $a, b \in \{0, \dots, \frac{p-1}{2}\}$ with $a^2 + b^2 + 1 \equiv 0 \pmod p$, so some $np = \sum x_i^2$ with $1 \le n &lt; p$. If the minimal such $n &gt; 1$, reducing $x_i \bmod n$ to $y_i \in (-\frac{n}{2}, \frac{n}{2}]$ and applying Euler&#039;s identity produces a smaller multiple — contradiction. Hence $n = 1$. $\square$</p></div></div>
+<p>Related: Gauss&#039;s three-square theorem and Fermat&#039;s two-square theorem (a prime $p$ is a sum of two squares $\iff p = 2$ or $p \equiv 1 \pmod 4$), via the Hasse–Minkowski theorem on which integers a quadratic form $ax^2 + by^2 + cz^2 = 0$ represents.</p>
+<h2 id="pell-s-equation">Pell&#039;s Equation</h2>
+<p>Type I: $x^2 - Dy^2 = 1$ ($D \in \mathbb{Z}$, $D \neq 0$). For $D = -1$, only $(\pm 1, 0), (0, \pm 1)$; for $D &lt; -1$ or $D$ a perfect square, only the trivial $(\pm 1, 0)$. For $D &gt; 0$ non-square, factor $x^2 - Dy^2 = (x + y\sqrt{D})(x - y\sqrt{D}) = 1$, and call the nontrivial solution minimizing $x + y\sqrt{D}$ the <span class="obsidian-red">fundamental solution</span> $(x_1, y_1)$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>All positive solutions are given by $x_n + y_n\sqrt{D} = (x_1 + y_1\sqrt{D})^n$, equivalently $$x_n = \tfrac{1}{2}\big[(x_1 + y_1\sqrt{D})^n + (x_1 - y_1\sqrt{D})^n\big], \quad y_n = \tfrac{1}{2\sqrt{D}}\big[(x_1 + y_1\sqrt{D})^n - (x_1 - y_1\sqrt{D})^n\big]$$ with the linear recurrence $x_n = 2x_1 x_{n-1} - x_{n-2}$, $\;y_n = 2x_1 y_{n-1} - y_{n-2}$. <em>Proof.</em> If a solution $(x, y)$ were not a power, choose $n$ with $(x_1 + y_1\sqrt{D})^n &lt; x + y\sqrt{D} &lt; (x_1 + y_1\sqrt{D})^{n+1}$; then $(x + y\sqrt{D})(x_1 - y_1\sqrt{D})^n$ is a smaller nontrivial solution, contradicting minimality. $\square$</p></div></div>
+<p>Type II: $x^2 - Dy^2 = -1$. When solvable, with fundamental solution $(x_1, y_1)$, all positive solutions are $x_n + y_n\sqrt{D} = (x_1 + y_1\sqrt{D})^n$ for odd $n$.</p>
+<h2 id="fermat-s-last-theorem-n-3">Fermat&#039;s Last Theorem, $n = 3$</h2>
+<p>In the <span class="obsidian-red">Eisenstein integers</span> $\mathbb{Z}[\omega] = \{a + b\omega + c\omega^2 \mid a, b, c \in \mathbb{Z},\ \omega = e^{2\pi i/3}\}$, the equation $x^3 + y^3 + z^3 = 0$ has no nontrivial solution. Consequently $x^3 + y^3 = 3z^3$ has no integer solution, so $3$ is not a sum of two rational cubes.</p>
+<h2 id="the-riemann-zeta-function-and-the-prime-number-theorem">The Riemann Zeta Function and the Prime Number Theorem</h2>
+<p><span class="obsidian-red">Euler product</span>. $\displaystyle \zeta(s) = \sum_{n=1}^{\infty}\frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$ for $\operatorname{Re}(s) &gt; 1$. Taking logarithms and using $-\ln(1 - p^{-s}) = \sum_n \frac{1}{n}p^{-ns}$ and $\frac{1}{n}p^{-ns} = \int_{p^n}^{\infty}\frac{1}{n}s\, x^{-s-1}\,\mathrm{d}x$, $$\frac{1}{s}\ln\zeta(s) = \int_0^{\infty} J(x)\, x^{-s-1}\,\mathrm{d}x, \qquad J(x) = \sum_{p^n \le x}\frac{1}{n}$$ By Mellin inversion, $J(x) = \frac{1}{2\pi i}\int_{a - i\infty}^{a + i\infty}\frac{\ln\zeta(z)}{z}x^z\,\mathrm{d}z$. The completed function $\xi(s) = \Gamma\!\left(\frac{s}{2} + 1\right)(s-1)\pi^{-s/2}\zeta(s)$ is symmetric about $s = \tfrac12$ and has a Hadamard product over the nontrivial zeros. Möbius inversion of $J(x) = \sum_n \frac{1}{n}\pi(x^{1/n})$ gives $$\pi(x) = \sum_n \frac{\mu(n)}{n}J(x^{1/n}), \qquad J(x) = \operatorname{Li}(x) - \sum_\rho \operatorname{Li}(x^\rho) - \ln 2 + \int_x^{\infty}\frac{\mathrm{d}t}{t(t^2 - 1)\ln t}$$ Showing $\zeta$ has no zeros on $\operatorname{Re}(s) = 1$ yields the <span class="obsidian-red">Prime Number Theorem</span> (Hadamard, de la Vallée Poussin).</p>
+<h2 id="selected-exercises">Selected Exercises</h2>
+<ol>
+<li>If positive integers $\{a_i\}$ satisfy $(a_i, a_j) = (i, j)$ for all $i \neq j$, then $a_i = i$.</li>
+<li>For odd $m$: $(2^m - 1,\ 2^n + 1) = 1$ — via $(2^m - 1, 2^{2n} - 1) = 2^{(m, 2n)} - 1 = 2^{(m,n)} - 1$.</li>
+<li>For any $n$, there exist $n$ consecutive integers each divisible by a perfect square (CRT with distinct primes $p_k^2$).</li>
+<li>For an odd prime $p$ and $0 \le i \le p - 2$: $\sum_{x} x^i \equiv 0 \pmod p$ (use a primitive root: $\sum x^i \equiv \sum (gx)^i$).</li>
+<li>For coprime $n, a$: $n \mid \varphi(a^n - 1)$ — since $a$ has order $n$ in $(\mathbb{Z}/(a^n - 1)\mathbb{Z})^*$, apply Lagrange.</li>
+<li>Binomial congruences: $\binom{p-1}{i} \equiv (-1)^i \pmod p$, and $\sum_i \frac{1}{i}i^{p-1} \equiv \sum_i \frac{1}{i^p} \pmod p$.</li>
+<li>There are infinitely many primes of each form $8n + 1, 8n + 3, 8n + 5, 8n + 7$ (using $N = (2P_1\cdots P_k)^4 + 1$, $(P_1\cdots P_k)^2 + 2$, $+4$, $-2$ respectively, and quadratic residue analysis mod 8).</li>
+</ol>
+<h2 id="appendix">Appendix</h2>
+<h3 id="primitive-roots-of-small-odd-primes">Primitive Roots of Small Odd Primes</h3>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$p$</th><th>Primitive roots</th></tr></thead><tbody><tr><td>3</td><td>2</td></tr><tr><td>5</td><td>2, 3</td></tr><tr><td>7</td><td>3, 5</td></tr><tr><td>11</td><td>2, 6, 7, 8</td></tr><tr><td>13</td><td>2, 6, 7, 11</td></tr><tr><td>17</td><td>3, 5, 6, 7, 10, 11, 12, 14</td></tr><tr><td>19</td><td>2, 3, 10, 13, 14, 15</td></tr><tr><td>23</td><td>5, 7, 10, 11, 14, 15, 17, 19, 20, 21</td></tr></tbody></table></div>
+<h3 id="mersenne-primes-and-perfect-numbers">Mersenne Primes and Perfect Numbers</h3>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$P$</th><th>$2^P - 1$</th><th>$2^{P-1}(2^P - 1)$</th></tr></thead><tbody><tr><td>2</td><td>3</td><td>6</td></tr><tr><td>3</td><td>7</td><td>28</td></tr><tr><td>5</td><td>31</td><td>496</td></tr><tr><td>7</td><td>127</td><td>8128</td></tr><tr><td>13</td><td>8191</td><td>33 550 336</td></tr><tr><td>17</td><td>131 071</td><td>8 589 869 056</td></tr><tr><td>19</td><td>524 287</td><td>137 438 691 328</td></tr><tr><td>31</td><td>2 147 483 647</td><td>2 305 843 008 139 952 128</td></tr></tbody></table></div>
+<h3 id="open-problems">Open Problems</h3>
+<ul>
+<li>Does an odd perfect number exist?</li>
+<li>Twin prime conjecture: infinitely many primes $p$ with $p + 2$ prime.</li>
+<li>Goldbach&#039;s conjecture: every even integer $&gt; 2$ is a sum of two primes.</li>
+<li>Are there infinitely many Mersenne primes / even perfect numbers?</li>
+<li>Fermat numbers $F_n = 2^{2^n} + 1$: $F_0, \dots, F_4$ are prime ($3, 5, 17, 257, 65537$); are any $F_n$ ($n \ge 5$) prime? ($F_5 = 4294967297 = 641 \times 6700417$.) (Note: if $2^n + 1$ is prime then $n$ is a power of $2$.)</li>
+<li>Erdős–Straus conjecture: for every $n &gt; 1$, $\frac{4}{n} = \frac{1}{x} + \frac{1}{y} + \frac{1}{z}$ with positive integers $x, y, z$.</li>
+<li>Rational distance problem: is there a point in the unit square at rational distance from all four corners?</li>
+<li>Perfect cuboid: a box with integer edges, face diagonals, and space diagonal ($a^2 + b^2 = m^2$, $a^2 + c^2 = n^2$, $b^2 + c^2 = p^2$, $a^2 + b^2 + c^2 = q^2$). Dropping the space-diagonal condition gives an Euler brick; the smallest is $(a, b, c) = (44, 117, 240)$.</li>
+</ul>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"divisibility","level":1,"text":"Divisibility"},{"id":"greatest-common-divisor","level":2,"text":"Greatest Common Divisor"},{"id":"b-zout-s-identity","level":2,"text":"Bézout's Identity"},{"id":"euclidean-algorithm","level":2,"text":"Euclidean Algorithm"},{"id":"least-common-multiple","level":2,"text":"Least Common Multiple"},{"id":"fundamental-theorem-of-arithmetic","level":1,"text":"Fundamental Theorem of Arithmetic"},{"id":"fast-exponentiation-and-perfect-numbers","level":1,"text":"Fast Exponentiation and Perfect Numbers"},{"id":"lifting-the-exponent-lte","level":1,"text":"Lifting the Exponent (LTE)"},{"id":"the-m-bius-function","level":1,"text":"The Möbius Function"},{"id":"diophantine-equations","level":1,"text":"Diophantine Equations"},{"id":"modular-arithmetic","level":1,"text":"Modular Arithmetic"},{"id":"chinese-remainder-theorem","level":2,"text":"Chinese Remainder Theorem"},{"id":"primitive-roots","level":1,"text":"Primitive Roots"},{"id":"quadratic-reciprocity","level":1,"text":"Quadratic Reciprocity"},{"id":"sums-of-squares","level":1,"text":"Sums of Squares"},{"id":"pell-s-equation","level":1,"text":"Pell's Equation"},{"id":"fermat-s-last-theorem-n-3","level":1,"text":"Fermat's Last Theorem, $n = 3$"},{"id":"the-riemann-zeta-function-and-the-prime-number-theorem","level":1,"text":"The Riemann Zeta Function and the Prime Number Theorem"},{"id":"selected-exercises","level":1,"text":"Selected Exercises"},{"id":"appendix","level":1,"text":"Appendix"},{"id":"primitive-roots-of-small-odd-primes","level":2,"text":"Primitive Roots of Small Odd Primes"},{"id":"mersenne-primes-and-perfect-numbers","level":2,"text":"Mersenne Primes and Perfect Numbers"},{"id":"open-problems","level":2,"text":"Open Problems"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -391,7 +544,7 @@ Showing $\zeta$ has no zeros on $\operatorname{Re}(s) = 1$ yields the <span styl
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>

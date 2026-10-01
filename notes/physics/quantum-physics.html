@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study notes by Yang on Quantum Physics, with explanations, derivations, and examples.">
     <meta property="og:title" content="Quantum Physics | Yang">
+    <meta property="og:description" content="Study notes by Yang on Quantum Physics, with explanations, derivations, and examples.">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yang">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://jasonxu-cell.github.io/notes/physics/quantum-physics.html">
     <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta property="og:image:width" content="1731">
@@ -13,15 +16,17 @@
     <meta property="og:image:alt" content="Yang — Geophysics · USTC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Quantum Physics | Yang">
+    <meta name="twitter:description" content="Study notes by Yang on Quantum Physics, with explanations, derivations, and examples.">
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Quantum Physics | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=20260917-callout-controls-1">
+    <link rel="stylesheet" href="../../style.css?v=c63bdc8c16">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav aria-label="Primary navigation">
         <div class="nav-links">
             <a href="../../index.html">Home</a>
@@ -32,7 +37,7 @@
         </div>
     </nav>
 
-    <main class="article-detail-page">
+    <main id="main-content" class="article-detail-page">
         <header class="article-detail-header">
             <a href="../physics.html" class="article-back-link">&larr; Physics</a>
             <h1>Quantum Physics</h1>
@@ -56,7 +61,75 @@
                 <ol id="article-toc"></ol>
             </aside>
 
-            <article class="markdown-body" id="markdown-body" aria-live="polite"></article>
+            <article class="markdown-body" id="markdown-body" data-prerendered="true">
+<h2 id="historical-remarks">Historical Remarks</h2>
+<h3 id="two-clouds-over-classical-physics">Two Clouds over Classical Physics</h3>
+<p>In his 1900 lecture &quot;Nineteenth-Century Clouds over the Dynamical Theory of Heat and Light&quot;, Lord Kelvin pointed out two &quot;clouds&quot; over classical physics:</p>
+<ul>
+<li>The ether: the null result of the Michelson–Morley experiment.</li>
+<li>The Maxwell–Boltzmann doctrine of equipartition of energy: it fails to explain, e.g., the measured specific heats of gases, and it is closely related to the black-body radiation problem (classical equipartition cannot reproduce the black-body spectrum).</li>
+</ul>
+<p>Black-body radiation is introduced in <a href="thermodynamics-and-statistical-physics.html#black-body">Black Body</a>. In 1900, Planck explained the black-body spectrum by assuming that the energy of the oscillators is quantized, $E=nh\nu$; this is the idea of <span class="obsidian-red">energy quantization</span>. In 1905, Einstein went further and proposed that light itself consists of quanta with energy $E=h\nu$, which explains the <a href="optics.html#photoelectric-effect">Photoelectric Effect</a>. Millikan&#039;s photoelectric experiments later confirmed Einstein&#039;s equation and provided a measurement of the Planck constant $h$.</p>
+<h3 id="sterngerlach-experiment">Stern-Gerlach Experiment</h3>
+<p>Scientists wondered whether other physical quantities are also discrete. The <span class="obsidian-red">Stern–Gerlach experiment</span> is a classic experiment showing that the component of an atom&#039;s angular momentum (magnetic moment) along a given direction is not continuous but can only take certain discrete values.</p>
+<p>Ag: $[\mathrm{Kr}]\,4d^{10}5s^1$. The magnetic moment of a silver atom comes from the spin of its single unpaired $5s$ electron (the orbital angular momentum is $L=0$).</p>
+<p>$$H=-\mathbf{\mu}\cdot\mathbf{B}$$</p>
+<p>$$\mathbf{\mu}=-g\frac{e}{2m}\mathbf{S},\qquad e&gt;0,\ g\approx 2$$</p>
+<p>$$\mathbf{F}=\nabla(\mathbf{\mu}\cdot\mathbf{B}),\qquad F_z\approx\mu_z\frac{\partial B_z}{\partial z}$$</p>
+<p>S-G sequential experiment:</p>
+<p><img src="../attachments/S-G%20sequence%20experiment.jpg" alt="S-G sequence experiment" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Explanation: the first S-G apparatus along $z$ acts as a filter and selects $|z+\rangle$. A subsequent measurement along a perpendicular axis ($x$ or $y$) gives the two outcomes with probability $1/2$ each. Measuring $z$ again after that gives $z+$ and $z-$ with probability $1/2$ each again, because the perpendicular measurement destroys the earlier $z$ information.</p>
+<p>A general spin state is $$|\psi\rangle=c_1|z+\rangle+c_2|z-\rangle,\qquad c_1,c_2\in\mathbb{C},\qquad |c_1|^2+|c_2|^2=1$$ In the $z$ basis, $$\left | z+  \right \rangle = \begin{pmatrix} 1\\0\end{pmatrix},\left | z-  \right \rangle = \begin{pmatrix} 0\\1\end{pmatrix}$$ $$\left | x\pm  \right \rangle =\frac{1}{\sqrt{2}} \begin{pmatrix} 1\\\pm 1\end{pmatrix}$$ $$\left | y+  \right \rangle =\frac{1}{\sqrt{2}} \begin{pmatrix} 1\\i\end{pmatrix},\left | y-  \right \rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 1\\-i\end{pmatrix}$$</p>
+<h2 id="quantum-mechanics-postulates">Quantum Mechanics Postulates</h2>
+<h3 id="mathematical-notes">Mathematical Notes</h3>
+<p>The following discussion takes place in a Hilbert space (see <a href="../math/functional-analysis.html#hilbert-space">Hilbert Space</a>).</p>
+<p>In quantum mechanics, a state is written in two common forms: the ket $|\psi\rangle$ and the bra $\langle \psi|$.</p>
+<p>If</p>
+<p>$$ |\psi\rangle= \begin{pmatrix} a\\ b \end{pmatrix}, $$ then</p>
+<p>$$ \langle\psi| = \begin{pmatrix} a^* &amp; b^* \end{pmatrix}. $$</p>
+<p>That is,</p>
+<p>$$ \boxed{ \langle\psi|=(|\psi\rangle)^\dagger } $$</p>
+<p>Then we have two operations: the inner product $\langle \phi|\psi\rangle$ and the outer product $|\psi\rangle\langle \phi|$.</p>
+<p>If</p>
+<p>$$ |\psi\rangle= \begin{pmatrix} a\\ b \end{pmatrix}, \qquad \langle\phi|= \begin{pmatrix} c^* &amp; d^* \end{pmatrix}, $$</p>
+<p>then</p>
+<p>$$\langle \phi|\psi\rangle=ac^*+bd^*, \qquad |\psi\rangle\langle\phi| = \begin{pmatrix} ac^* &amp; ad^*\\ bc^* &amp; bd^* \end{pmatrix}. $$</p>
+<hr>
+<p>Here we list six postulates of quantum mechanics (different textbooks group and count them differently).</p>
+<h3 id="statespace-postulate">State-Space Postulate</h3>
+<p>The state of a quantum system is represented by a normalized state vector in a Hilbert space $\mathcal H$:$$|\psi\rangle \in\mathcal H,\qquad\langle \psi|\psi\rangle=1$$ Moreover, if $$ |\psi_1\rangle,\ |\psi_2\rangle $$ are allowed states, then $$ a|\psi_1\rangle+b|\psi_2\rangle,\qquad a,b\in\mathbb{C} $$ (after normalization) is also an allowed state. This is the <span class="obsidian-red">superposition principle</span>; it is a postulate rather than a theorem, and it is consistent with the fact that the Hilbert space is a linear space.</p>
+<h3 id="observable-postulate">Observable Postulate</h3>
+<p>Each observable physical quantity $A$ corresponds to a <span class="obsidian-red">Hermitian operator</span> on the Hilbert space, that is, $$A^\dagger=A$$ In <a href="../math/algebra.html#hermitian-operators-todo">Hermitian Operators (TODO)</a>, we can prove that the eigenvalues of a Hermitian operator are real numbers.</p>
+<p>We define the <span class="obsidian-red">commutator</span> $$[A,B]=AB-BA$$ and the anti-commutator $$\{A,B\}=AB+BA$$ Both are operators. For Hermitian $A$ and $B$, $[A,B]$ is anti-Hermitian, so its expectation values are purely imaginary, while $\{A,B\}$ is Hermitian, so its expectation values are real.</p>
+<p>If $[A,B]=0$, then $$AB=BA$$ In <a href="../math/algebra.html#hermitian-operators-todo">Hermitian Operators (TODO)</a>, for Hermitian operators this is equivalent to $A$ and $B$ having a common eigenbasis, i.e., they can be simultaneously diagonalized.</p>
+<h3 id="born-probability-postulate">Born Probability Postulate</h3>
+<p>Suppose the system is in the state $|\psi\rangle$ and we measure the observable $A$, whose eigenvalues and eigenstates satisfy$$A|a_n\rangle=a_n|a_n\rangle$$ Then the probability of obtaining $a_n$ is $$P(a_n)=|\langle a_n|\psi\rangle|^2$$ This is the <span class="obsidian-red">Born rule</span>.</p>
+<p>If $|\psi&#039;\rangle=e^{i\alpha}|\psi\rangle$, then$$P&#039;(a_n)=|\langle a_n|\psi&#039;\rangle|^2=|\langle a_n|\psi\rangle e^{i\alpha}|^2=|\langle a_n|\psi\rangle|^2=P(a_n)$$ As a result, all measurement probabilities are exactly the same. So physically, a state is not a specific vector but rather a &quot;ray&quot;: $$ |\psi\rangle \sim e^{i\alpha}|\psi\rangle $$ If$$ |\psi\rangle=\sum_n c_n|a_n\rangle$$ then the expectation value of $A$ is $$ \langle A\rangle = \sum_n a_n P(a_n)= \sum_n a_n |c_n|^2 $$ We can verify that $$\langle A\rangle=\langle \psi|A|\psi\rangle$$</p>
+<p>Define the operators $$\Delta A=A-\langle A\rangle, \qquad \Delta B=B-\langle B\rangle $$ and the standard deviations $$\sigma_A=\sqrt{\langle(\Delta A)^2\rangle}, \qquad \sigma_B=\sqrt{\langle(\Delta B)^2\rangle}. $$ Let $$ |\alpha\rangle = \Delta A|\psi\rangle, \qquad |\beta\rangle = \Delta B|\psi\rangle. $$ So we have $$\langle\alpha|\alpha\rangle = \langle\psi|(\Delta A)^2|\psi\rangle=\sigma_A^2, \qquad \langle\beta|\beta\rangle = \langle\psi|(\Delta B)^2|\psi\rangle=\sigma_B^2. $$ Then we use the Cauchy–Schwarz inequality in Hilbert space (see <a href="../math/algebra.html#inner-product-spaces-todo">Inner Product Spaces (TODO)</a>): $$\langle\alpha|\alpha\rangle\langle\beta|\beta\rangle\ge|\langle\alpha|\beta\rangle|^2= \left| \langle\psi| \Delta A\Delta B |\psi\rangle \right|^2$$ $$\sigma_A^2\sigma_B^2\ge|\langle\Delta A\Delta B\rangle|^2$$ Write $$\Delta A\Delta B=\frac{1}{2}[\Delta A,\Delta B]+\frac{1}{2}\{\Delta A,\Delta B\}$$ The expectation value of the first term is purely imaginary and that of the second term is real. Since $[\Delta A,\Delta B]=[A,B]$, dropping the real part gives the <span class="obsidian-red">Robertson uncertainty relation</span>: $$\sigma_A\,\sigma_B \ge \frac12 \left| \langle[A,B]\rangle \right|$$ Keeping both parts gives the <span class="obsidian-red">Schrödinger–Robertson inequality</span>: $$ \boxed{ \sigma_A^2\sigma_B^2 \ge \frac14 \left|\langle[A,B]\rangle\right|^2 + \frac14 \left| \left\langle \{\Delta A,\Delta B\} \right\rangle \right|^2 } $$</p>
+<p>If $[A,B]=0$, $A$ and $B$ share a common eigenbasis. In a common eigenstate, $$\sigma_A\,\sigma_B=0$$ so both $A$ and $B$ have definite values simultaneously (this does not mean every state gives zero). So in quantum mechanics, $[A,B]=0$ means that the two observables are &quot;compatible&quot;.</p>
+<h3 id="postmeasurement-state-postulate">Post-Measurement State Postulate</h3>
+<p>If a measurement of $A$ yields the result $a_n$, the state of the system collapses to the corresponding eigenstate: $$ |\psi\rangle \longrightarrow |a_n\rangle. $$ More generally, expressed using the projection operator $P_n$: $$ |\psi\rangle \longrightarrow \frac{P_n|\psi\rangle} {\sqrt{\langle\psi|P_n|\psi\rangle}}. $$</p>
+<h3 id="time-evolution-postulate">Time Evolution Postulate</h3>
+<p>A closed system evolves according to the <span class="obsidian-red">Schrödinger equation</span>: $$i\hbar\frac{\partial}{\partial t}|\psi(t)\rangle=H|\psi(t)\rangle$$ where $H$ is the Hamiltonian (the quantum counterpart of <a href="mechanism.html#the-hamiltonian-and-hamilton-s-canonical-equations">the classical Hamiltonian</a>), i.e., the energy operator of the system.</p>
+<p>The solution is $$|\psi(t)\rangle=U(t,t_0)|\psi(t_0)\rangle$$where $U$ is a unitary operator. For a time-independent $H$, $$U(t,t_0)=e^{-iH(t-t_0)/\hbar}$$</p>
+<p>Therefore, $$\boxed{\text{Without measurement, quantum time evolution is linear, deterministic, and unitary.}}$$</p>
+<h3 id="composite-system-postulate">Composite System Postulate</h3>
+<p>If the state space of quantum system A is $\mathcal H_A$ and the state space of quantum system B is $\mathcal H_B$, then the state space of the composite system is $$\mathcal H_{AB}=\mathcal H_A \otimes \mathcal H_B$$ where $\otimes$ is the tensor product: if $\{|i\rangle_A\}$ and $\{|j\rangle_B\}$ are bases of $\mathcal H_A$ and $\mathcal H_B$, then $\{|i\rangle_A\otimes|j\rangle_B\}$ is a basis of $\mathcal H_{AB}$, and $\dim\mathcal H_{AB}=\dim\mathcal H_A\cdot\dim\mathcal H_B$.</p>
+<h2 id="dynamics">Dynamics</h2>
+<p>Schrödinger Picture Heisenberg Picture Time-dependent Hamiltonian</p>
+<h2 id="one-dimensional-quantum-mechanics-models">One Dimensional Quantum Mechanics Models</h2>
+<p>Particle in 1-D Well 1-D Quantum Tunneling Orthonormal Basis of  Space Quantum Harmonic Oscillator</p>
+<h2 id="rotation-and-spin">Rotation and Spin</h2>
+<p>Rotation Group Representation Spherical Harmonics Addition of Angular Momentum</p>
+<h2 id="three-dimensional-models-in-quantum-mechanics">Three Dimensional Models in Quantum Mechanics</h2>
+<p>Spherical Potential Hydrogen Atom Motion in a Uniform Magnetic Field</p>
+<h2 id="approximations">Approximations</h2>
+<p>Stationary Perturbation Variation Method</p>
+<p>考试：期中考难度和计算量不大，但是考虑到内容比较杂，所以成绩两极分化严重 T1 两粒子波函数，计算x1-x2和(x1-x2)^2的期望 T2 证明某个矩阵是厄米的（套定义） T3 Heisenberg绘景演化和平均值 T4 两粒子纠缠态下计算力学量的Sx/Sz⊗(sqrt(3)/2Sx+Sz)期望 T5 通过测量区分纯态与混合态</p>
+<p>T1是期中前的内容，考了一个比较意想不到的背景（BB84），但是读明白背景材料了就能写，读不明白也能最前面的几分</p>
+<p>T2-5是期中后的内容，一维模型、角动量、三维模型、微扰论各考了一道题目。因为课时原因后面就没多少模型，猜也猜的到会考那些模型（）像群表示这一块显然不会考，这样基本上每章就是2-3个模型选一个。</p>
+            </article>
+            <script type="application/json" id="article-headings">[{"id":"historical-remarks","level":1,"text":"Historical Remarks"},{"id":"two-clouds-over-classical-physics","level":2,"text":"Two Clouds over Classical Physics"},{"id":"sterngerlach-experiment","level":2,"text":"Stern-Gerlach Experiment"},{"id":"quantum-mechanics-postulates","level":1,"text":"Quantum Mechanics Postulates"},{"id":"mathematical-notes","level":2,"text":"Mathematical Notes"},{"id":"statespace-postulate","level":2,"text":"State-Space Postulate"},{"id":"observable-postulate","level":2,"text":"Observable Postulate"},{"id":"born-probability-postulate","level":2,"text":"Born Probability Postulate"},{"id":"postmeasurement-state-postulate","level":2,"text":"Post-Measurement State Postulate"},{"id":"time-evolution-postulate","level":2,"text":"Time Evolution Postulate"},{"id":"composite-system-postulate","level":2,"text":"Composite System Postulate"},{"id":"dynamics","level":1,"text":"Dynamics"},{"id":"one-dimensional-quantum-mechanics-models","level":1,"text":"One Dimensional Quantum Mechanics Models"},{"id":"rotation-and-spin","level":1,"text":"Rotation and Spin"},{"id":"three-dimensional-models-in-quantum-mechanics","level":1,"text":"Three Dimensional Models in Quantum Mechanics"},{"id":"approximations","level":1,"text":"Approximations"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -314,7 +387,7 @@ T2-5是期中后的内容，一维模型、角动量、三维模型、微扰论�
         </nav>
     </footer>
 
-    <script src="../../scripts/markdown-article.js?v=20260927-verilog-1"></script>
-    <script src="../../scripts/comments.js"></script>
+    <script src="../../scripts/markdown-article.js?v=74d4d43139"></script>
+    <script src="../../scripts/comments.js?v=8bf3043e18"></script>
 </body>
 </html>
