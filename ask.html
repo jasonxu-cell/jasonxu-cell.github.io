@@ -20,8 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Ask Me Anything | Yang</title>
-    <link rel="stylesheet" href="style.css?v=c63bdc8c16">
-    <link rel="stylesheet" href="research.css?v=5de8fe369d">
+    <link rel="stylesheet" href="style.css?v=a1e16d2569">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -33,13 +32,28 @@
             margin: 72px auto 100px;
         }
 
-        .ask-intro {
-            width: min(100%, 620px);
-            margin: 18px auto 0;
-            color: rgba(0, 0, 0, 0.66);
-            font-size: 18px;
-            line-height: 1.65;
+        /* Page header (formerly shared with the research pages). */
+        .ask-header {
+            margin-bottom: clamp(36px, 4vw, 48px);
+            text-align: center;
         }
+
+        .ask-header > p:first-child {
+            margin: 0 0 10px;
+            color: rgba(0, 0, 0, 0.58);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .ask-header h1 {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: 54px;
+            font-weight: 400;
+        }
+
 
         .ask-panel {
             padding: 36px 45px;
@@ -285,9 +299,10 @@
                 margin-top: 22px;
             }
 
-            .ask-intro {
-                font-size: 16px;
+            .ask-header h1 {
+                font-size: 42px;
             }
+
 
             .ask-panel h2 {
                 font-size: 26px;
@@ -306,23 +321,21 @@
             <a href="index.html">Home</a>
             <a href="notes.html">Notes</a>
             <a href="articles.html">Articles</a>
-            <a href="research.html">Research</a>
             <a href="interactive.html">Interactive</a>
             <a href="ask.html" aria-current="page">Ask</a>
         </div>
     </nav>
 
     <main id="main-content" class="ask-page">
-        <header class="research-index-header">
+        <header class="ask-header">
             <p>Ask Me Anything</p>
             <h1>Question Box</h1>
-            <p class="ask-intro">Curious about geophysics, studying at USTC, my notes, or which anime I'm watching right now? Ask away.</p>
         </header>
 
         <section class="ask-panel" aria-labelledby="ask-form-title">
             <p class="ask-kicker">Anonymous</p>
             <h2 id="ask-form-title">Send a question</h2>
-            <p class="ask-lead">No name, no email, no login. Send me a question in English or Chinese. Questions arrive privately; I publish selected answers below.</p>
+            <p class="ask-lead">No name, no email, no login. Questions arrive privately; I publish selected answers below.</p>
             <p class="ask-soon" id="ask-soon" role="status" hidden>The question box is opening soon. Submissions are not available yet.</p>
 
             <form class="ask-form" id="ask-form" method="POST" novalidate>

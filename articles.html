@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Articles | Yang</title>
-    <link rel="stylesheet" href="style.css?v=a3389ce5a5">
+    <link rel="stylesheet" href="style.css?v=a1e16d2569">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -32,7 +32,6 @@
             <a href="index.html">Home</a>
             <a href="notes.html">Notes</a>
             <a href="articles.html" aria-current="page">Articles</a>
-            <a href="research.html">Research</a>
             <a href="interactive.html">Interactive</a>
             <a href="ask.html">Ask</a>
         </div>
@@ -42,6 +41,16 @@
         <header class="articles-header">
             <h1>Articles</h1>
         </header>
+
+        <form class="note-search" id="note-search" data-search-kind="article" role="search" aria-label="Search articles" hidden>
+            <label class="note-search-label" for="note-search-input">Search articles</label>
+            <div class="note-search-field">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+                <input class="note-search-input" id="note-search-input" type="search" placeholder="Search articles…" autocomplete="off" spellcheck="false" aria-describedby="note-search-status" aria-controls="note-search-results">
+            </div>
+            <p class="note-search-status" id="note-search-status" role="status" aria-live="polite"></p>
+            <ol class="note-search-results" id="note-search-results" aria-label="Search results" hidden></ol>
+        </form>
 
         <section class="articles-frame">
             <a href="articles/article_1.html" class="essay-row essay-row-reverse" lang="zh-CN">
@@ -71,7 +80,6 @@
                         </div>
                         <time datetime="2025-12-25">Dec 25, 2025</time>
                     </div>
-                    <span class="essay-link">Explore →</span>
                 </div>
             </a>
 
@@ -90,7 +98,6 @@
                     <div class="essay-meta">
                         <time datetime="2026-06-07">Jun 7, 2026</time>
                     </div>
-                    <span class="essay-link">Explore →</span>
                 </div>
             </a>
 
@@ -116,7 +123,6 @@
                         </div>
                         <time datetime="2026-09-01">Sep 1, 2026</time>
                     </div>
-                    <span class="essay-link">Explore →</span>
                 </div>
             </a>
 
@@ -166,5 +172,7 @@
             </a>
         </nav>
     </footer>
+
+    <script src="scripts/note-search.js?v=8e198aac56" defer></script>
 </body>
 </html>

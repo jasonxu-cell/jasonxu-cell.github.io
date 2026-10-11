@@ -247,13 +247,6 @@ section {
     line-height: 1.7;
 }
 
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 30px;
-}
-
 .button {
     display: inline-flex;
     align-items: center;
@@ -522,26 +515,9 @@ button:focus-visible {
 
     line-height: 1.6;
 
-    margin: 0 0 22px;
+    margin: 0;
 
     color: rgba(0, 0, 0, 0.7);
-}
-
-
-/* ---------- Explore ---------- */
-
-.explore {
-    font-size: 15px;
-
-    font-weight: 600;
-
-    opacity: 0.7;
-
-    transition: opacity 0.2s ease;
-}
-
-.note-card:hover .explore {
-    opacity: 1;
 }
 
 /* ==========================================
@@ -864,7 +840,7 @@ button:focus-visible {
     gap: 20px;
     align-items: center;
     justify-content: space-between;
-    margin: 0 0 24px;
+    margin: 0;
 }
 
 .essay-tags {
@@ -901,25 +877,10 @@ button:focus-visible {
     line-height: 1.55;
 }
 
-.essay-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 24px;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
-
 .essay-row:hover {
     transform: translateY(-8px);
     background: rgba(255, 255, 255, 0.62);
     box-shadow: none;
-}
-
-.essay-row:hover .essay-link {
-    opacity: 1;
 }
 
 @media (max-width: 900px) {
@@ -947,10 +908,6 @@ button:focus-visible {
 
     .essay-content h2 {
         font-size: 20px;
-    }
-
-    .essay-link {
-        font-size: 15px;
     }
 
     .essay-tags span {
@@ -985,9 +942,223 @@ button:focus-visible {
     .essay-content h2 {
         font-size: 19px;
     }
+}
 
-    .essay-link {
-        font-size: 15px;
+/* ==========================================
+   Site search (notes.html, articles.html)
+   ========================================== */
+
+.note-search {
+    width: min(100%, 760px);
+    margin: 0 auto clamp(32px, 4vw, 44px);
+}
+
+.note-search[hidden] {
+    display: none;
+}
+
+.note-search-field {
+    position: relative;
+}
+
+.note-search-field svg {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.note-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 56px 14px 50px;
+    color: var(--ink);
+    font: inherit;
+    font-size: 17px;
+    background: var(--surface);
+    backdrop-filter: blur(16px) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    border: 1px solid var(--surface-border);
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.note-search-input::placeholder {
+    color: rgba(20, 33, 38, 0.5);
+}
+
+.note-search-input:focus {
+    background: var(--surface-hover);
+    border-color: rgba(23, 95, 112, 0.45);
+    box-shadow: var(--shadow), 0 0 0 3px rgba(23, 95, 112, 0.16);
+}
+
+.note-search-input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+.note-search-key {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    padding: 1px 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.note-search.has-query .note-search-key,
+.note-search-input:focus + .note-search-key {
+    display: none;
+}
+
+.note-search-status {
+    margin: 12px 6px 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.note-search-status:empty {
+    display: none;
+}
+
+.note-search-status.is-empty {
+    padding: 18px 22px;
+    color: var(--muted);
+    font-size: 15px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 18px;
+}
+
+.note-search-results {
+    margin: 10px 0 0;
+    padding: 8px;
+    list-style: none;
+    background: var(--surface);
+    backdrop-filter: blur(16px) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    border: 1px solid var(--surface-border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+.note-search-results[hidden] {
+    display: none;
+}
+
+.note-search-results li + li {
+    border-top: 1px solid var(--line);
+}
+
+.note-search-result {
+    display: block;
+    padding: 14px 16px;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 14px;
+    transition: background 0.2s ease;
+}
+
+.note-search-result:hover,
+.note-search-result:focus-visible {
+    background: rgba(255, 255, 255, 0.72);
+    outline: none;
+}
+
+.note-search-result:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(23, 95, 112, 0.45);
+}
+
+.note-search-meta {
+    display: block;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.note-search-title {
+    display: block;
+    margin-top: 2px;
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.note-search-snippet {
+    margin: 6px 0 0;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14.5px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.note-search-section {
+    margin-right: 6px;
+    color: var(--accent-strong);
+    font-weight: 700;
+}
+
+.note-search-section::after {
+    content: " ›";
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.note-search-results mark {
+    padding: 0;
+    color: inherit;
+    background: rgba(250, 204, 21, 0.42);
+    border-radius: 3px;
+}
+
+.note-search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+    .note-search-input {
+        padding: 12px 18px 12px 44px;
+        font-size: 16px;
+    }
+
+    .note-search-field svg {
+        left: 16px;
+    }
+
+    .note-search-key {
+        display: none;
+    }
+
+    .note-search-result {
+        padding: 12px 10px;
+    }
+
+    .note-search-title {
+        font-size: 17px;
     }
 }
 
@@ -1922,13 +2093,6 @@ button:focus-visible {
     font-size: var(--type-summary);
     font-weight: var(--weight-regular);
     line-height: 1.65;
-}
-
-.note-page .explore,
-.essay-link {
-    font-size: var(--type-meta);
-    font-weight: var(--weight-semibold);
-    line-height: 1.2;
 }
 
 .tags span,

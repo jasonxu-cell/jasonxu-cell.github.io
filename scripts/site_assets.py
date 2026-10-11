@@ -18,11 +18,13 @@ ROOT = Path(__file__).resolve().parent.parent
 # Site-relative paths of assets that get a version query.
 VERSIONED_ASSETS = (
     "style.css",
-    "research.css",
+    "interactive.css",
     "scripts/markdown-article.js",
+    "scripts/archimedes.js",
     "scripts/note-search.js",
     "scripts/comments.js",
     "scripts/ask.js",
+    "scripts/site-status.js",
 )
 
 
@@ -49,7 +51,7 @@ def apply_asset_versions(source: str, root: Path = ROOT) -> str:
             continue
         version = asset_version(relative, root)
         pattern = re.compile(
-            r'((?:href|src)=")((?:\.\./)*)' + re.escape(relative) + r'(?:\?v=[^"]*)?(")'
+            r'((?:href|src)=")((?:\.\./)*|/|https://jasonxu-cell\.github\.io/)' + re.escape(relative) + r'(?:\?v=[^"]*)?(")'
         )
         source = pattern.sub(lambda m: f"{m.group(1)}{m.group(2)}{relative}?v={version}{m.group(3)}", source)
     return source

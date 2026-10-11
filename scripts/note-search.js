@@ -1,12 +1,15 @@
 /*
- * Client-side note search for notes.html.
+ * Client-side search for notes.html and articles.html.
  *
  * The index is built at runtime in the browser, so it stays in sync with the
  * Obsidian sync script without any changes to it:
- *   notes.html  -> subject pages (links in .note-card)
+ *   notes.html    -> subject pages (links in .note-card)
  *   subject pages -> note pages (links in .article-card)
- *   note pages  -> title, subject and the raw Markdown in #article-markdown
+ *   articles.html -> article pages (links in .essay-row)
+ *   each page     -> title, section label and the raw Markdown in #article-markdown
  * Pages are fetched lazily on first focus/typing and cached in sessionStorage.
+ * The form's data-search-kind ("note" or "article") picks the listing shape
+ * and the wording of the result count.
  */
 (function () {
     "use strict";
@@ -27,6 +30,10 @@
     }
 
     root.hidden = false;
+
+    // "note" (default): listing -> subject pages -> entries.
+    // "article": listing links to the entries directly.
+    const KIND = root.dataset.searchKind === "article" ? "article" : "note";
 
     let indexPromise = null;
     let debounceTimer = 0;
@@ -202,7 +209,7 @@
         return urls;
     }
 
-    async function buildIndex() {
+    async function listNotes() {
         const subjectCards = [...document.querySelectorAll(".note-grid a.note-card[href]")];
         const subjects = subjectCards.map((card) => ({
             url: new URL(card.getAttribute("href"), window.location.href).href,
@@ -220,8 +227,18 @@
                 notes.push({ url, subject: subjects[index].label });
             });
         });
+        return notes;
+    }
 
-        const cacheKey = CACHE_PREFIX + hashString(notes.map((note) => note.url).join("|"));
+    function listArticles() {
+        const rows = [...document.querySelectorAll(".articles-frame a.essay-row[href]")];
+        return uniqueUrls(rows, window.location.href).map((url) => ({ url, subject: "Article" }));
+    }
+
+    async function buildIndex() {
+        const notes = KIND === "article" ? listArticles() : await listNotes();
+
+        const cacheKey = CACHE_PREFIX + KIND + ":" + hashString(notes.map((note) => note.url).join("|"));
         try {
             const cached = sessionStorage.getItem(cacheKey);
             if (cached) return JSON.parse(cached);
@@ -245,6 +262,11 @@
         });
 
         const index = entries.filter(Boolean);
+        if (notes.length && !index.length) {
+            // Every fetch failed (e.g. the page was opened from file://, where
+            // browsers block fetch). Don't cache an empty index.
+            throw new Error("No pages could be loaded");
+        }
         try {
             Object.keys(sessionStorage)
                 .filter((key) => key.indexOf("noteSearch:") === 0 && key !== cacheKey)
@@ -359,7 +381,7 @@
         }
         status.classList.remove("is-empty");
         const total = matches.length;
-        status.textContent = total === 1 ? "1 note found." : total + " notes found.";
+        status.textContent = total + " " + KIND + (total === 1 ? "" : "s") + " found.";
         results.innerHTML = matches.slice(0, MAX_RESULTS).map((match) => {
             const href = match.note.url + (match.anchor ? "#" + encodeURIComponent(match.anchor) : "");
             const snippets = match.snippets.map((snippet) => {
@@ -396,10 +418,13 @@
         root.classList.add("has-query");
         let index;
         try {
-            if (!indexPromise) status.textContent = "Loading notes…";
+            if (!indexPromise) status.textContent = "Loading " + KIND + "s…";
             index = await ensureIndex();
         } catch (error) {
-            status.textContent = "Search is unavailable right now.";
+            status.textContent = window.location.protocol === "file:"
+                ? "Search needs the site to be served over HTTP (it fetches pages to build the index)."
+                : "Search is unavailable right now.";
+            status.classList.add("is-empty");
             return;
         }
         if (query !== lastQuery) return; // a newer query is in flight
