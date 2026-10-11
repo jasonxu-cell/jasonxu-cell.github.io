@@ -63,7 +63,6 @@ nav {
     box-shadow: 0 8px 30px rgba(33, 61, 72, 0.08);
 }
 
-
 .nav-links {
     display: flex;
     flex-wrap: wrap;
@@ -104,20 +103,9 @@ section {
 
 .hero {
     display: grid;
-    grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
-    gap: clamp(42px, 7vw, 96px);
-    align-items: center;
-    max-width: 1200px;
+    gap: clamp(36px, 5vw, 56px);
+    width: min(100%, 1180px);
     margin: clamp(44px, 8vh, 86px) auto 0;
-}
-
-.hero-text {
-    flex: 1;
-}
-
-.hero-subtitle {
-    margin-bottom: 5px;
-    font-size: 20px;
 }
 
 .hero h1 {
@@ -126,23 +114,6 @@ section {
     font-size: clamp(42px, 5vw, 60px);
     font-weight: 500;
     letter-spacing: -0.035em;
-}
-
-.hero h2 {
-    margin-top: 10px;
-    margin-bottom: 25px;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.hero-description {
-    max-width: 500px;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-.hero-image {
-    flex: 0 0 260px;
 }
 
 .profile {
@@ -165,16 +136,22 @@ section {
     margin-bottom: 16px;
 }
 
-.profile-subtitle {
-    max-width: 310px;
-    margin-top: 0;
-    margin-bottom: 18px;
+.profile-intro {
+    max-width: 720px;
+    margin: 0;
     color: var(--muted);
-    font-size: 17px;
-    line-height: 1.55;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-.profile-eyebrow,
+/* About Me and Site Status side by side under the profile. */
+.home-panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 32px);
+    align-items: stretch;
+}
+
 .resume-kicker {
     margin: 0 0 8px;
     color: var(--accent);
@@ -184,41 +161,9 @@ section {
     text-transform: uppercase;
 }
 
-.contact-icon {
-    display: inline-grid;
-    width: 44px;
-    height: 44px;
-    color: var(--ink);
-    font-size: 20px;
-    place-items: center;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease;
-}
-
-.contact-icon:visited {
-    color: #000000;
-    font-size: 20px;
-}
-
-.contact-icons {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-
-.contact-icon:hover {
-    color: var(--accent-strong);
-    background: var(--surface-hover);
-    transform: translateY(-2px);
-}
-
-.contact-icon i {
-    font-size: 22px;
-}
-
 .resume {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     background: var(--surface);
     backdrop-filter: blur(16px) saturate(115%);
@@ -237,14 +182,6 @@ section {
     font-weight: 500;
     line-height: 1.08;
     letter-spacing: -0.035em;
-}
-
-.resume-intro {
-    max-width: 720px;
-    margin: 24px 0 0;
-    color: var(--muted);
-    font-size: 18px;
-    line-height: 1.7;
 }
 
 .button {
@@ -288,7 +225,9 @@ section {
 
 .profile-facts {
     display: grid;
-    margin: 36px 0 0;
+    grid-auto-rows: 1fr;
+    flex: 1;
+    margin: 16px 0 0;
     border-top: 1px solid var(--line);
 }
 
@@ -296,7 +235,8 @@ section {
     display: grid;
     grid-template-columns: minmax(130px, 0.32fr) minmax(0, 1fr);
     gap: 20px;
-    padding: 17px 0;
+    align-items: center;
+    padding: 12px 0;
     border-bottom: 1px solid var(--line);
 }
 
@@ -328,9 +268,12 @@ button:focus-visible {
 
 @media (max-width: 900px) {
     .hero {
-        grid-template-columns: 1fr;
         gap: 34px;
         margin-top: 44px;
+    }
+
+    .home-panels {
+        grid-template-columns: 1fr;
     }
 
     .profile-photo {
@@ -367,7 +310,7 @@ button:focus-visible {
         padding: 26px 20px;
     }
 
-    .resume-intro {
+    .profile-intro {
         font-size: 16px;
     }
 
@@ -387,7 +330,6 @@ button:focus-visible {
 
     margin: 72px auto 0;
 }
-
 
 /* ---------- Header ---------- */
 
@@ -416,7 +358,6 @@ button:focus-visible {
     color: rgba(0, 0, 0, 0.7);
 }
 
-
 /* ---------- Grid ---------- */
 
 .note-grid {
@@ -437,7 +378,6 @@ button:focus-visible {
 .note-grid .note-card:nth-child(5) {
     grid-column: 4 / span 2;
 }
-
 
 /* ---------- Card ---------- */
 
@@ -463,7 +403,6 @@ button:focus-visible {
         box-shadow 0.25s ease;
 }
 
-
 /* ---------- Card hover ---------- */
 
 .note-card:hover {
@@ -473,7 +412,6 @@ button:focus-visible {
 
     box-shadow: none;
 }
-
 
 /* ---------- Image ---------- */
 
@@ -496,7 +434,6 @@ button:focus-visible {
 .note-card:hover .note-image img {
     transform: scale(1.04);
 }
-
 
 /* ---------- Text ---------- */
 
@@ -1901,7 +1838,6 @@ button:focus-visible {
     background: #ffffff;
 }
 
-
 .article-comments {
     margin-top: 24px;
     padding: 34px 42px;
@@ -2473,23 +2409,23 @@ main,
    ========================================== */
 
 .site-status {
-    width: 100%;
-    max-width: 310px;
-    margin-top: 6px;
-    padding: 18px 20px 14px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: clamp(30px, 5vw, 52px);
     text-align: left;
     background: var(--surface);
     backdrop-filter: blur(16px) saturate(115%);
     -webkit-backdrop-filter: blur(16px) saturate(115%);
     border: 1px solid var(--surface-border);
-    border-radius: 18px;
+    border-radius: 24px;
     box-shadow: var(--shadow);
 }
 
 .site-status-title {
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     color: var(--accent);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -2497,33 +2433,32 @@ main,
 
 .site-status-list {
     display: grid;
-    margin: 0;
+    grid-auto-rows: 1fr;
+    flex: 1;
+    margin: 16px 0 0;
+    border-top: 1px solid var(--line);
 }
 
 .site-status-list > div {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 7px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--line);
-}
-
-.site-status-list > div:last-child {
-    border-bottom: 0;
 }
 
 .site-status-list dt {
     flex: none;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
 }
 
 .site-status-list dd {
     min-width: 0;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     text-align: right;
     font-variant-numeric: tabular-nums;
@@ -2574,47 +2509,9 @@ main,
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 620px) {
     .site-status {
-        max-width: 340px;
-    }
-}
-
-/* Homepage desktop balance: left column (avatar, name, status panel) spans
-   the full height of the About Me card, everything on one centered axis. */
-@media (min-width: 901px) {
-    .home-page .hero {
-        grid-template-columns: 280px minmax(0, 1fr);
-        gap: clamp(48px, 5.5vw, 72px);
-        align-items: stretch;
-        width: min(100%, 1180px);
-        max-width: 1180px;
-    }
-
-    .home-page .profile {
-        justify-content: space-between;
-        gap: 18px;
-    }
-
-    .home-page .profile-photo {
-        width: 280px;
-        margin-bottom: 0;
-    }
-
-    .home-page .profile h1 {
-        margin: 0;
-    }
-
-    .home-page .site-status {
-        width: 280px;
-        max-width: 100%;
-        margin-top: 0;
-    }
-
-    .home-page .resume {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        padding: 26px 20px;
     }
 }
 
