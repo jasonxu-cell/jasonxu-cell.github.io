@@ -9,7 +9,8 @@ It updates every HTML page (including the note pages written by
 sync_obsidian_notes.py, which applies the same rules when it generates them):
 head metadata, primary navigation, skip link, footer, lazy images,
 content-hash ``?v=`` versions for shared CSS/JS, and static pre-rendering of
-Markdown pages (needs Node.js).
+Markdown pages (needs Node.js). It also regenerates ``sitemap.xml`` from the
+indexable pages.
 """
 
 from __future__ import annotations
@@ -71,10 +72,6 @@ DESCRIPTIONS = {
         "Essays by Yang on space technology, mathematics, computing, and the history "
         "of science and technology."
     ),
-    "research.html": (
-        "Research projects by Yang in seismology, earthquake mechanics, planetary "
-        "science, and data-driven geophysics."
-    ),
     "ask.html": (
         "Ask Yang anything, anonymously: questions about geophysics, studying at "
         "USTC, notes, or anything else. Selected answers are published here."
@@ -89,19 +86,8 @@ DESCRIPTIONS = {
         "A concise history of programming languages, their major lineages, milestones, "
         "and programming paradigms."
     ),
-    "research/gofar-transform-fault.html": (
-        "Yang's research on earthquake mechanics and focal-mechanism variation at "
-        "the Gofar transform fault."
-    ),
-    "research/lunar-water-content.html": (
-        "Yang's interdisciplinary study of lunar water using spectral, neutron, and "
-        "thermal remote-sensing observations."
-    ),
     "notes/cs/computer_organization_and_design.html": (
         "计算机组成与设计课程笔记，涵盖指令系统、处理器、存储层次结构与计算机体系结构。"
-    ),
-    "notes/electronic_engineering/electronic_technology.html": (
-        "电子技术课程笔记，整理电路、半导体器件、模拟电子技术与数字电子技术基础。"
     ),
     "notes/electronic_engineering/analog_circuits.html": (
         "Analog circuits notes by Yang on semiconductor devices, diodes, MOSFETs, "
@@ -122,7 +108,13 @@ ZH_CN_PAGES = {
     "articles/article_1.html",
     "articles/article_2.html",
     "notes/cs/computer_organization_and_design.html",
-    "notes/electronic_engineering/electronic_technology.html",
+}
+
+# Pages that exist in the repo but are not part of the public site.
+UNLISTED_PAGES = {
+    "404.html",
+    "publications.html",
+    "reading.html",
 }
 
 NOINDEX_PAGES = {
@@ -159,7 +151,6 @@ def replace_navigation(source: str, relative: str) -> str:
         "Home" if relative == "index.html" else
         "Notes" if relative.startswith("notes") else
         "Articles" if relative.startswith("articles") else
-        "Research" if relative.startswith("research") else
         "Interactive" if relative == "interactive.html" or relative.startswith("interactive/") else
         "Ask" if relative == "ask.html" else ""
     )
@@ -169,6 +160,8 @@ def replace_navigation(source: str, relative: str) -> str:
         return source
 
     nav = nav_match.group(0)
+    # The Research section was removed from the site.
+    nav = re.sub(r'\s*<a\b[^>]*href="(?:\.\./)*research\.html"[^>]*>[^<]*</a>', "", nav)
     if 'class="nav-links"' in nav and not re.search(r'<a\b[^>]*href="(?:\.\./)*ask\.html"', nav):
         nav = re.sub(
             r'(\s*</div>)',
@@ -205,9 +198,7 @@ def replace_navigation(source: str, relative: str) -> str:
 def update_head(source: str, relative: str) -> str:
     title = extract(r"<title>([\s\S]*?)</title>", source, "Yang").strip()
     if relative != "index.html":
-        if title.endswith(" | Research"):
-            title = f"{title} | Yang"
-        elif re.search(r"\s+\|\s+Yang\s*$", title):
+        if re.search(r"\s+\|\s+Yang\s*$", title):
             title = re.sub(r"\s+\|\s+Yang\s*$", " | Yang", title)
         elif not title.endswith(" | Yang"):
             title = f"{title} | Yang"
@@ -223,7 +214,7 @@ def update_head(source: str, relative: str) -> str:
     )
     description = description or page_description(relative, title)
     page_type = (
-        "article" if relative.startswith(("articles/", "notes/", "research/")) else
+        "article" if relative.startswith(("articles/", "notes/")) else
         "website"
     )
     locale = "zh_CN" if relative in ZH_CN_PAGES else "en_US"
@@ -366,6 +357,10 @@ def update_shell(source: str, relative: str) -> str:
 
 
 def transform(source: str, relative: str) -> str:
+    if relative == "404.html":
+        # Served at any depth by GitHub Pages, so it keeps its own root-relative
+        # head and navigation; only the asset versions are managed.
+        return apply_asset_versions(source, ROOT)
     updated = update_head(source, relative)
     updated = replace_navigation(updated, relative)
     updated = update_shell(updated, relative)
@@ -394,6 +389,40 @@ def prerender(pages: list[str]) -> list[str]:
     return json.loads(completed.stdout.decode("utf-8"))
 
 
+def page_lastmod(source: str) -> str:
+    """Date for <lastmod>: the newest <time datetime> on the page, if any.
+
+    Detail pages carry one date; listing pages carry one per entry, so the
+    newest entry is when the listing last changed."""
+    dates = re.findall(r'<time\b[^>]*datetime="(\d{4}-\d{2}-\d{2})', source)
+    return max(dates) if dates else ""
+
+
+def write_sitemap(pages: list[tuple[str, str]]) -> None:
+    entries = []
+    for relative, source in sorted(pages):
+        if relative in UNLISTED_PAGES or relative in NOINDEX_PAGES:
+            continue
+        loc = SITE_URL if relative == "index.html" else f"{SITE_URL}{relative}"
+        lastmod = page_lastmod(source)
+        entries.append(
+            "  <url>\n"
+            f"    <loc>{html.escape(loc, quote=True)}</loc>\n"
+            + (f"    <lastmod>{lastmod}</lastmod>\n" if lastmod else "")
+            + "  </url>"
+        )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries)
+        + "\n</urlset>\n"
+    )
+    target = ROOT / "sitemap.xml"
+    if not target.exists() or target.read_text(encoding="utf-8") != sitemap:
+        target.write_text(sitemap, encoding="utf-8")
+        print(f"Wrote sitemap.xml ({len(entries)} URLs)")
+
+
 def is_managed_page(path: Path) -> bool:
     """Skip macOS AppleDouble files and anything outside the published site."""
     relative = path.relative_to(ROOT).as_posix()
@@ -418,6 +447,7 @@ def main() -> None:
             path.write_text(page, encoding="utf-8")
             changed += 1
     print(f"Updated {changed} HTML files ({len(markdown_indexes)} Markdown pages pre-rendered)")
+    write_sitemap([(path.relative_to(ROOT).as_posix(), page) for path, page in zip(paths, updated)])
 
 
 if __name__ == "__main__":
