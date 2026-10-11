@@ -1,0 +1,20 @@
+Generated using the built-in image_gen tool.
+
+Analog Circuits
+
+Use case: photorealistic-natural
+Asset type: square cover photograph for an Analog Circuits study-note card on a personal academic website.
+Primary request: A beautifully composed, photorealistic macro photograph of a real analog electronics experiment. A tidy small circuit board with striped resistors, cylindrical capacitors, a black three-leg transistor and a diode, with a single oscilloscope screen in the background showing one clean continuous sine wave. Make the discrete semiconductor components and continuous waveform the recognizable subjects. Natural copper traces and realistic solder joints.
+Style/medium: refined editorial science photography, realistic materials, quiet academic mood, soft laboratory lighting, coherent restrained colors.
+Composition/framing: 1:1 square image, components occupy the lower foreground and waveform remains visible in the upper middle, centered focal composition that reads clearly at thumbnail size, moderate shallow depth of field but key components and waveform readable.
+Constraints: no people, no titles or labels, no logos, no watermark, no binary digits, no square waves, no fantasy glowing circuit traces, no collage.
+
+Digital Circuits
+
+Use case: photorealistic-natural
+Asset type: square cover photograph for a Digital Circuits study-note card on a personal academic website, part of a matching pair with an analog electronics laboratory photograph.
+Primary request: A beautifully composed, photorealistic macro photograph of a real digital electronics experiment. A tidy circuit board with a clearly recognizable central black integrated-circuit chip, two neat rows of silver pins, precise copper routing and a few small support components. A single logic analyzer or oscilloscope screen in the background shows two crisp stepped binary pulse traces with sharp right-angle transitions, distinguishing digital high and low levels. The central integrated circuit and discrete pulse waveforms are the recognizable subjects.
+Style/medium: refined editorial science photography, realistic materials, quiet academic mood, soft laboratory lighting, coherent restrained colors.
+Composition/framing: 1:1 square image, the chip occupies the lower foreground and stepped pulse traces remain visible in the upper middle, centered focal composition that reads clearly at thumbnail size, moderate shallow depth of field but the main chip and waveforms readable.
+Constraints: no people, no titles or labels, no logos, no watermark, no floating binary numbers, no sine waves, no fantasy glowing circuit traces, no collage.
+

@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -287,8 +288,9 @@
 <div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Suppose the instruction length is 16 bits, each operand address field is 6 bits, and there are three instruction formats: zero-address, one-address, and two-address.</p>
 <ol>
 <li>With a fixed-length opcode, a two-address instruction has $16-6-6=4$ opcode bits, so there are $2^4=16$ opcodes in total.</li>
-<li>With the <span class="obsidian-red">expanding opcode</span> technique, if there are X two-address instructions and Y one-address instructions, the maximum number Z of zero-address instructions satisfies $$2^{12}X+2^{6}Y+Z\le2^{16}$$</li>
-</ol></div></div>
+<li>With the <span class="obsidian-red">expanding opcode</span> technique, if there are X two-address instructions and Y one-address instructions, the maximum number Z of zero-address instructions satisfies</li>
+</ol>
+<p>$$2^{12}X+2^{6}Y+Z\le2^{16}$$</p></div></div>
 <h3 id="addressing-modes">Addressing Modes</h3>
 <p><span class="obsidian-red">Instruction addressing</span>: Locating the next instruction. It is generally divided into sequential addressing (the PC increments automatically) and jump addressing (branch and jump instructions modify the PC). <img src="../attachments/Screenshot%202026-06-10%20at%2011.15.43-optimized.webp" alt="Screenshot 2026-06-10 at 11.15.43" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p><span class="obsidian-red">Data addressing</span>: Determining the actual address of an operand.</p>
@@ -1264,7 +1266,8 @@ Instruction word length: The number of bits in an instruction word, usually a mu
 >[!EXAMPLE]
 >Suppose the instruction length is 16 bits, each operand address field is 6 bits, and there are three instruction formats: zero-address, one-address, and two-address.
 >1. With a fixed-length opcode, a two-address instruction has $16-6-6=4$ opcode bits, so there are $2^4=16$ opcodes in total.
->2. With the <span style="color: red;">expanding opcode</span> technique, if there are X two-address instructions and Y one-address instructions, the maximum number Z of zero-address instructions satisfies $$2^{12}X+2^{6}Y+Z\le2^{16}$$
+>2. With the <span style="color: red;">expanding opcode</span> technique, if there are X two-address instructions and Y one-address instructions, the maximum number Z of zero-address instructions satisfies 
+>   $$2^{12}X+2^{6}Y+Z\le2^{16}$$
 ## Addressing Modes
 
 <span style="color: red;">Instruction addressing</span>: Locating the next instruction. It is generally divided into sequential addressing (the PC increments automatically) and jump addressing (branch and jump instructions modify the PC).
@@ -1629,7 +1632,8 @@ Differences between the MIPS pipeline and the RISC-V pipeline:
 - Static multiple issue: The compiler decides at compile time how instructions are packaged and issued (e.g., VLIW).
 - Dynamic multiple issue: The hardware decides and schedules instruction issue dynamically at run time (superscalar).
 
-For an ordinary (scalar) pipeline, ideally $$IPC=1$$
+For an ordinary (scalar) pipeline, ideally 
+$$IPC=1$$
 
 Superscalar: A modern CPU has more than one pipeline. It has multiple execution units (ALUs, FPUs, etc.) and can issue and complete several instructions (e.g., 4–8) in one clock cycle.
 
@@ -1917,7 +1921,10 @@ The "capacity" usually quoted refers only to the data blocks. In a set-associati
 
 Let $N_c$ be the total number of accesses completed in the cache and $N_m$ the total number of accesses completed in main memory. The hit rate $h$ is
 $$h=\frac{N_c}{N_c+N_m}$$
-Let $t_c$ be the cache access time on a hit and $t_m$ the main-memory access time on a miss. The average cache/main-memory access time $t_a$ is $$\boxed{t_a =ht_c+(1-h)t_m}$$ and the access efficiency is $$e=\frac{t_c}{t_a}=\frac{t_c}{ht_c+(1-h)t_m}$$
+Let $t_c$ be the cache access time on a hit and $t_m$ the main-memory access time on a miss. The average cache/main-memory access time $t_a$ is 
+$$\boxed{t_a =ht_c+(1-h)t_m}$$
+ and the access efficiency is 
+$$e=\frac{t_c}{t_a}=\frac{t_c}{ht_c+(1-h)t_m}$$
 
 ## Virtual Memory
 
@@ -2042,7 +2049,8 @@ Bit rate: The number of ==valid data== bits transmitted per unit time (the effec
 Relationship: bit rate = baud rate $\times\ \dfrac{\text{valid data bits}}{\text{total bits per character}}$
 
 >[!EXAMPLE]
->In an asynchronous serial transmission system, each character consists of 1 start bit, 8 data bits, 1 odd parity bit, and 1 stop bit. Suppose the baud rate is 1200 bps (all 11 bits counted). Since only 8 of every 11 bits are valid data, the bit rate (effective data rate) is $$1200\times\frac{8}{11}=872.73\text{ bps}$$
+>In an asynchronous serial transmission system, each character consists of 1 start bit, 8 data bits, 1 odd parity bit, and 1 stop bit. Suppose the baud rate is 1200 bps (all 11 bits counted). Since only 8 of every 11 bits are valid data, the bit rate (effective data rate) is 
+>$$1200\times\frac{8}{11}=872.73\text{ bps}$$
 
 # I/O System
 

@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -129,16 +130,16 @@
 <p>In the interactive interface, select a function and press Enter, then choose Annotate: perf shows the source code directly, with the time percentage marked in front of each line.</p>
 <p>gprof&#039;s instrumentation counts every call exactly, so call counts are precise, but the inserted code perturbs the program: the overhead is large, and only user-space functions are visible. perf observes the program from outside with almost no overhead and can see kernel and hardware events, but its numbers are statistical: a function that runs very briefly may simply be missed by the sampler.</p>
 <h3 id="randomized-algorithms-vs-deterministic-algorithms">Randomized Algorithms vs. Deterministic Algorithms</h3>
-<p>Deterministic Algorithm <img src="../attachments/Screenshot%202026-05-19%20at%2021.28.46.png" alt="Screenshot 2026-05-19 at 21.28.46" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Definition: Given a deterministic algorithm $B$ and $n$ the longest running time of $B$ among all inputs of parameter $n$ $$T(n)=\max_{ \Phi:|\Phi|=n}Time(B(\Phi))$$ the average-case time denotes the average time of $B$ on all input of parameter $n$$$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}Time(B(\Phi))$$ Randomized Algorithm <img src="../attachments/Screenshot%202026-05-19%20at%2021.36.18.png" alt="Screenshot 2026-05-19 at 21.36.18" loading="lazy" decoding="async" style="width: min(100%, 457px);"></p>
+<p>Deterministic Algorithm <img src="../attachments/Screenshot%202026-05-19%20at%2021.28.46.png" alt="Screenshot 2026-05-19 at 21.28.46" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Definition: Given a deterministic algorithm $B$ and $n$ the longest running time of $B$ among all inputs of parameter $n$ $$T(n)=\max_{ \Phi:|\Phi|=n}Time(B(\Phi))$$ the average-case time denotes the average time of $B$ on all input of parameter $n $$$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}Time(B(\Phi))$$ Randomized Algorithm <img src="../attachments/Screenshot%202026-05-19%20at%2021.36.18.png" alt="Screenshot 2026-05-19 at 21.36.18" loading="lazy" decoding="async" style="width: min(100%, 457px);"></p>
 <p>Define: Given a randomized Algorithm with input $\Phi$ and random string $r$ The expected running time (also called running time in the worst case) of $A$ among all inputs of parameter $n$ $$T(n)=\max_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$ The average-case running time of $A$ among all inputs of parameter $n$ $$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$</p>
 <h3 id="amortized-analysis">Amortized Analysis</h3>
 <p>For an algorithm with lots of process, we can use amortized analysis to evaluate the average performance of the algorithm.</p>
 <ul>
 <li>Aggregate Method: Directly compute the total cost $T(n)$, then amortize it $T(n)/n$.</li>
 <li>Accounting Method: Pay extra for fast operations (deposit credit), and use the deposited money to offset slow operations when they occur.</li>
-<li>Potential Method: Define a potential function $\Phi$ and the amortized cost $\hat{c}$ as:$$\hat{c_i}=c_i+\Phi_i-\Phi_{i-1}$$If the potential function is non-negative and $\Phi_0=0$, then$$\sum_{i=1}^k \hat{c_i}=\sum_{i=1}^kc_i+\Phi_k-\Phi_0\ge\sum_{i=1}^kc_i$$</li>
+<li>Potential Method: Define a potential function $\Phi$ and the amortized cost $\hat{c}$ as:</li>
 </ul>
-<p>It will be used in Linear List &amp; Generalized List, Cartesian Tree, and Kruskal Algorithm &amp; Disjoint Sets.</p>
+<p>$$\hat{c_i}=c_i+\Phi_i-\Phi_{i-1}$$ If the potential function is non-negative and $\Phi_0=0$, then $$\sum_{i=1}^k \hat{c_i}=\sum_{i=1}^kc_i+\Phi_k-\Phi_0\ge\sum_{i=1}^kc_i$$ It will be used in Linear List &amp; Generalized List, Cartesian Tree, and Kruskal Algorithm &amp; Disjoint Sets.</p>
 <h3 id="turing-machine-tm">Turing Machine (TM)</h3>
 <p>Does every problem have an efficient algorithm? No. Some decidable problems are too expensive, and some problems are not decidable by any algorithm at all.</p>
 <p>Turing proposed the Turing Machine:</p>
@@ -149,9 +150,9 @@
 <li>A finite transition table</li>
 <li>Its input is all $\{0, 1\}$-strings, and its output is $\{0, 1\}$</li>
 <li>Unbounded memory space</li>
-<li>Transition function$$\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$$</li>
+<li>Transition function</li>
 </ol>
-<p>If $\delta(q, a) = (r, b, D)$, then we switch the machine&#039;s internal state to $r$, rewrite the symbol $a$ at the current position on the paper tape to $b$, and move the read/write head one unit in the direction $D$ ($L$ represents moving one unit to the left, $R$ represents moving one unit to the right).</p>
+<p>$$\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$$ If $\delta(q, a) = (r, b, D)$, then we switch the machine&#039;s internal state to $r$, rewrite the symbol $a$ at the current position on the paper tape to $b$, and move the read/write head one unit in the direction $D$ ($L$ represents moving one unit to the left, $R$ represents moving one unit to the right).</p>
 <p>We define some states as accept state $q_{accept}$ and reject state $q_{reject}$. Regulate: $q_{reject} \neq q_{accept}$. If the state is $q_{accept}$ or $q_{reject}$, the TM will halt.</p>
 <div class="markdown-callout markdown-callout-thesis"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Turing Thesis</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Any physical computation can be simulated by a Turing machine.</p>
 <p>Note: This is a thesis (an unprovable physical assumption), not a theorem.</p></div></div>
@@ -182,11 +183,11 @@
 <p>Replacing it with an immediate <code>return 0</code> is valid exactly when $P$ halts on $x$. Thus, even deciding whether this simple optimization preserves semantics would decide HALT. Practical compilers use provably safe transformations and conservative analysis, without guaranteeing a global optimum over all equivalent programs.</p>
 <p>Another classic problem is Domino Problem, also called TILE, which was proposed by Chinese mathematician Wang Hao.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TILE is undecidable.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h3 id="computational-complexity">Computational Complexity</h3>
 <p>A natural question: Given two problems A and B, how to compare their hardness?</p>
 <p>The answer is <span class="obsidian-red">reduction</span>: if problem $Q$ can be transformed into problem $L$ efficiently, then $L$ is at least as hard as $Q$. There are two common notions:</p>
-<p><span class="obsidian-red">Karp Reduction</span> (polynomial-time many-one reduction), denoted $Q \le_p L$: $\exists$ a poly-time computable function $f$ s.t. for every input $x$,$$x \in Q \iff f(x) \in L$$ i.e., we transform an instance of $Q$ into one instance of $L$ with the same yes/no answer, and call the solver of $L$ exactly once at the end.</p>
+<p><span class="obsidian-red">Karp Reduction</span> (polynomial-time many-one reduction), denoted $Q \le_p L$: $\exists$ a poly-time computable function $f$ s.t. for every input $x$, $$x \in Q \iff f(x) \in L$$ i.e., we transform an instance of $Q$ into one instance of $L$ with the same yes/no answer, and call the solver of $L$ exactly once at the end.</p>
 <p><span class="obsidian-red">P</span> is the class of decision problems (languages) solvable by a deterministic algorithm in polynomial time.</p>
 <p>A decision problem $L$ is in <span class="obsidian-red">NP</span> if and only if there exist a polynomial $p$ and a polynomial-time verifier $V$ s.t.</p>
 <ol>
@@ -204,7 +205,7 @@
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cook-Levin Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>SAT is NP-Complete. Boolean Satisfiability Problem (SAT): Determine whether a given logical formula—built using variables, parentheses, and the operators AND, OR, and NOT—can be made TRUE by assigning specific TRUE/FALSE values to its variables.</p></div></div>
 <p>The proof of the theorem can refer <a href="https://content.scirp.org/pdf/ojapps_2017042614010446.pdf#page=5.16" target="_blank" rel="noopener noreferrer">this article</a></p>
 <div class="markdown-callout markdown-callout-corollary"><div class="callout-title"><span class="callout-icon" aria-hidden="true">C</span><span class="callout-title-text">Corollary</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>3SAT is NP-Complete. $$\Phi=C_1 \land C_2 \land \dots \land C_m$$ $$C_j=(l_{j,1} \lor l_{j,2} \lor l_{j,3}),l_{j,k}\in\{x_1,\neg x_1,\dots,x_n,\neg x_n\}$$</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$k=1$:$$x_1\iff(x_1 \lor a \lor b) \land (x_1 \lor a \lor \neg b) \land (x_1 \lor \neg a \lor b) \land (x_1 \lor \neg a \lor \neg b)$$ $k=2$:$$x_1\lor x_2 \iff(x_1 \lor x_2 \lor a) \land (x_1 \lor x_2 \lor \neg a)$$ $k&gt;3$: Assume that the clause is $(l_1 \vee l_2 \vee \dots \vee l_k)$. Introduce $k-3$ new auxiliary variables $y_1, y_2, \dots, y_{k-3}$. The clause is equisatisfiable with (not logically equivalent to, since new variables are introduced): $$(l_1 \vee l_2 \vee y_1) \wedge (\neg y_1 \vee l_3 \vee y_2) \wedge (\neg y_2 \vee l_4 \vee y_3) \wedge \dots \wedge (\neg y_{k-3} \vee l_{k-1} \vee l_k)$$ So SAT problem can be transformed into 3SAT problem.</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$k=1$: $$x_1\iff(x_1 \lor a \lor b) \land (x_1 \lor a \lor \neg b) \land (x_1 \lor \neg a \lor b) \land (x_1 \lor \neg a \lor \neg b)$$ $k=2$: $$x_1\lor x_2 \iff(x_1 \lor x_2 \lor a) \land (x_1 \lor x_2 \lor \neg a)$$ $k&gt;3$: Assume that the clause is $(l_1 \vee l_2 \vee \dots \vee l_k)$. Introduce $k-3$ new auxiliary variables $y_1, y_2, \dots, y_{k-3}$. The clause is equisatisfiable with (not logically equivalent to, since new variables are introduced): $$(l_1 \vee l_2 \vee y_1) \wedge (\neg y_1 \vee l_3 \vee y_2) \wedge (\neg y_2 \vee l_4 \vee y_3) \wedge \dots \wedge (\neg y_{k-3} \vee l_{k-1} \vee l_k)$$ So SAT problem can be transformed into 3SAT problem.</p></div></div>
 <p>An interesting thing is: 3SAT is NP-Complete, while 2SAT is in P. We will prove it in Strongly Connected Components.</p>
 <p>This problem illustrates that the difference between problems in P and NP-Complete problems can be extremely subtle.</p>
 <p>Also, we can give similar problems: 3SAT-thrice: Each variable has at most three total occurrences across all clauses, counting both $x_i$ and $\neg x_i$, where clauses are allowed to have at most three literals.</p>
@@ -244,7 +245,7 @@
     }
 };</code></pre></div>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Aspect</th><th>Shallow copy</th><th>Deep copy</th></tr></thead><tbody><tr><td>What is duplicated</td><td>The object itself; pointer values are copied verbatim</td><td>The object plus everything reachable through its pointers</td></tr><tr><td>Cost</td><td>Constant, negligible</td><td>Proportional to the size of the data</td></tr><tr><td>Independence</td><td>Original and copy share pointed-to data</td><td>The two objects are fully independent</td></tr><tr><td>Main risk</td><td>Double free, dangling pointer, aliasing bugs</td><td>Extra time and memory</td></tr><tr><td>In C/C++</td><td>Default copy constructor / assignment; <code>memcpy</code></td><td>User-defined copy constructor / assignment</td></tr></tbody></table></div>
-<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Rule of three/five</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If a class defines a destructor, a copy constructor, or a copy assignment operator, it probably needs all three (the rule of three), plus a move constructor and a move assignment operator in modern C++ (the rule of five). Move semantics transfer the resource instead of copying it, avoiding the cost of a deep copy when the source object is about to die. In modern C++, the safest default is to hold resources through containers such as <code>std::vector</code> or smart pointers, which implement correct deep-copy or move behavior for you.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Rule of Three/Five</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If a class defines a destructor, a copy constructor, or a copy assignment operator, it probably needs all three (the rule of three), plus a move constructor and a move assignment operator in modern C++ (the rule of five). Move semantics transfer the resource instead of copying it, avoiding the cost of a deep copy when the source object is about to die. In modern C++, the safest default is to hold resources through containers such as <code>std::vector</code> or smart pointers, which implement correct deep-copy or move behavior for you.</p></div></div>
 <h3 id="branchless-swap">Branchless Swap</h3>
 <p>A conditional swap can be written as follows:</p>
 <div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-keyword">if</span> (a &gt; b) {
@@ -280,7 +281,7 @@
     <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
 }</code></pre></div>
 <p>The loop body now performs one comparison instead of two. When $n$ is large, this removes $n$ branch judgments, and since hard-to-predict branches stall the CPU pipeline and are expensive (see <a href="#branchless-swap">Branchless Swap</a>), the saving is real. The price is one extra element of space (or a restore step) and the requirement that the target be writable into the array.</p>
-<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Sentinels in disguise</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The dummy head node of a linked list is the same idea: by guaranteeing that every real node has a predecessor, the special-case checks for an empty list disappear. Knuth&#039;s sequential search with a sentinel is the classical reference for this technique.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Sentinels in Disguise</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The dummy head node of a linked list is the same idea: by guaranteeing that every real node has a predecessor, the special-case checks for an empty list disappear. Knuth&#039;s sequential search with a sentinel is the classical reference for this technique.</p></div></div>
 <h3 id="struct-memory-alignment">Struct Memory Alignment</h3>
 <p>Compilers do not lay struct members out back to back. Because of <span class="obsidian-red">memory alignment</span>, each member must start at an address that is a multiple of its alignment requirement (for primitive types, typically its size), and the compiler inserts invisible <span class="obsidian-red">padding</span> bytes to fill the gaps. The struct as a whole is padded so that its size is a multiple of the largest member&#039;s alignment.</p>
 <p>The two structs below contain exactly the same members in a different order, yet their sizes differ:</p>
@@ -291,11 +292,11 @@
 <li><code>_a</code>: <code>c1</code> sits at offset $0$; bytes $1$–$3$ are padding so that <code>i</code> can start at offset $4$; <code>c2</code> sits at offset $8$; bytes $9$–$11$ are trailing padding, because the size of the whole struct must be a multiple of $4$. Hence $\text{sizeof}(a)=12$.</li>
 <li><code>_b</code>: <code>c1</code> and <code>c2</code> sit at offsets $0$ and $1$; bytes $2$–$3$ are padding; <code>i</code> occupies offsets $4$–$7$. No trailing padding is needed, so $\text{sizeof}(b)=8$.</li>
 </ul>
-<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Why alignment exists, and how to exploit it</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Aligned accesses match the memory hardware: an unaligned word can split across two cache lines, and on architectures that require alignment it faults outright. To minimize padding, order struct members from largest to smallest — reordering <code>_a</code> into <code>_b</code> saves a third of the space with zero semantic change. If space matters more than access speed, <code>#pragma pack(1)</code> disables padding at the cost of unaligned accesses.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Why Alignment Exists, and How to Exploit It</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Aligned accesses match the memory hardware: an unaligned word can split across two cache lines, and on architectures that require alignment it faults outright. To minimize padding, order struct members from largest to smallest — reordering <code>_a</code> into <code>_b</code> saves a third of the space with zero semantic change. If space matters more than access speed, <code>#pragma pack(1)</code> disables padding at the cost of unaligned accesses.</p></div></div>
 <h3 id="process-and-thread">Process and Thread</h3>
 <p>A <span class="obsidian-red">process</span> is an independent unit of resource allocation: it owns its virtual address space, file descriptors, and other operating-system resources, and one process cannot read another&#039;s memory directly. A <span class="obsidian-red">thread</span> is the unit of CPU scheduling inside a process: threads of the same process share the code, the heap, and the file descriptors, while each thread has its own program counter, registers, and stack.</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Aspect</th><th>Process</th><th>Thread</th></tr></thead><tbody><tr><td>Resources</td><td>Own address space, file descriptors</td><td>Shares code, heap, and file descriptors with sibling threads; own stack and registers</td></tr><tr><td>Overhead</td><td>Heavy to create and switch (page tables, TLB/cache effects)</td><td>Light to create and switch (swap stacks and registers)</td></tr><tr><td>Communication</td><td>IPC: pipes, message queues, shared memory</td><td>Direct access to shared memory; needs synchronization (mutex, condition variables)</td></tr><tr><td>Failure isolation</td><td>A crash kills only that process</td><td>A fatal error in one thread kills the whole process</td></tr></tbody></table></div>
-<p>On Linux, threads are programmed with <span class="obsidian-red">POSIX threads (pthread)</span>. The essential calls are <code>pthread_create</code> (spawn a thread running a given function), <code>pthread_join</code> (wait for a thread to finish), and <code>pthread_exit</code> (terminate the calling thread); programs must be linked with <code>-lpthread</code>.</p>
+<p>On Linux, threads are programmed with POSIX threads (pthread). The essential calls are <code>pthread_create</code> (spawn a thread running a given function), <code>pthread_join</code> (wait for a thread to finish), and <code>pthread_exit</code> (terminate the calling thread); programs must be linked with <code>-lpthread</code>.</p>
 <div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">C</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-c" data-highlighted="local"><span class="hljs-meta">#include &lt;stdio.h&gt;</span>
 <span class="hljs-meta">#include &lt;pthread.h&gt;</span>
 <span class="hljs-meta">#include &lt;unistd.h&gt;  // for sleep()</span>
@@ -431,7 +432,7 @@ LNode* FloydCycleDetection(LinkList &amp;L){
 <p>$$\begin{align*}&amp;LOC(j_1,j_2,\dots,j_n)\\=&amp;LOC(0,0,\dots,0)+(b_2\times \dots \times b_n \times j_1+b_3\times \dots \times b_n \times j_2+\dots+b_n \times j_{n-1}+j_n)L\\=&amp;LOC(0,0,\dots,0)+(\sum_{i=1}^{n-1}j_i\prod _{k=i+1}^n b_k+j_n)L\end{align*}$$</p>
 <p>which can be recorded as</p>
 <p>$$LOC(j_1,j_2,\dots,j_n)=LOC(0,0,...,0)+\sum _{i=1}^nc_ij_i$$</p>
-<p>where$$ c_n=L,c_{i-1}=b_ic_i,1&lt;i\le n$$</p>
+<p>where $$ c_n=L,c_{i-1}=b_ic_i,1&lt;i\le n$$</p>
 <div class="code-block" data-code-block="20"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#define MAX_ARRAY_DIM 8</span>
 <span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> {
     ElemType *base;
@@ -501,7 +502,7 @@ SElemType top=st.top();
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Step</th><th>Frames from bottom to top</th></tr></thead><tbody><tr><td><code>main</code> calls <code>factorial(3)</code></td><td><code>main</code> → <code>factorial(3)</code></td></tr><tr><td><code>factorial(3)</code> calls <code>factorial(2)</code></td><td><code>main</code> → <code>factorial(3)</code> → <code>factorial(2)</code></td></tr><tr><td><code>factorial(2)</code> calls <code>factorial(1)</code></td><td><code>main</code> → <code>factorial(3)</code> → <code>factorial(2)</code> → <code>factorial(1)</code></td></tr><tr><td><code>factorial(1)</code> calls <code>factorial(0)</code></td><td><code>main</code> → <code>factorial(3)</code> → <code>factorial(2)</code> → <code>factorial(1)</code> → <code>factorial(0)</code></td></tr><tr><td><code>factorial(0)</code> returns</td><td><code>main</code> → <code>factorial(3)</code> → <code>factorial(2)</code> → <code>factorial(1)</code></td></tr><tr><td>the remaining returns propagate</td><td><code>main</code></td></tr></tbody></table></div>
 <p>The pure data structure and the call stack share the LIFO discipline, but they are not the same thing:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Aspect</th><th>Stack (data structure)</th><th>Call stack (program execution)</th></tr></thead><tbody><tr><td>Nature</td><td>An abstract data type defined by push/pop operations</td><td>A fixed region of the process&#039;s virtual address space</td></tr><tr><td>Element</td><td>A single data element</td><td>A stack frame: a block of memory holding return address, arguments, locals, saved registers</td></tr><tr><td>Access rule</td><td>Only the top element is accessible</td><td>Allocation and deallocation are strictly LIFO, but within the current frame the CPU can read and write at arbitrary offsets through the frame pointer</td></tr><tr><td>Management</td><td>Controlled explicitly by the programmer</td><td>Controlled automatically by the compiler and the CPU</td></tr><tr><td>Size</td><td>Flexible: fixed array, or linked structure that grows dynamically</td><td>Fixed at thread creation (e.g., 8 MiB per thread by default on Linux; check with <code>ulimit -s</code>)</td></tr><tr><td>Overflow</td><td>Pushing onto a full stack reports an error</td><td><span class="obsidian-red">stack overflow</span>: unbounded recursion or oversized local arrays crash the program</td></tr></tbody></table></div>
-<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">stack overflow and converting recursion to iteration</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Because the call stack has a fixed size, deep recursion exhausts it and the program crashes with a stack overflow. This motivates converting recursion into an explicit loop with a programmer-controlled stack: the nodes are then allocated dynamically with <code>new</code>, so the limit is the available memory rather than a fixed quota. A compiler may also perform tail-call optimization: when a recursive call is in tail position, i.e., nothing is left to do after it returns, the current frame can be reused and the call stack usage stays at $O(1)$.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Stack Overflow and Converting Recursion to Iteration</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Because the call stack has a fixed size, deep recursion exhausts it and the program crashes with a stack overflow. This motivates converting recursion into an explicit loop with a programmer-controlled stack: the nodes are then allocated dynamically with <code>new</code>, so the limit is the available memory rather than a fixed quota. A compiler may also perform tail-call optimization: when a recursive call is in tail position, i.e., nothing is left to do after it returns, the current frame can be reused and the call stack usage stays at $O(1)$.</p></div></div>
 <h2 id="queue">Queue</h2>
 <p>Unlike a stack, a queue is a first-in-first-out (FIFO) linear list. It only allows insertions at one end and deletions at the other. In a queue, the end where insertions are allowed is called the tail, and the end where deletions are allowed is called the head.</p>
 <p>If insertion and deletion operations on a linear list are allowed at both the head and the tail, this data structure is called a <span class="obsidian-red">deque</span> (double-ended queue).</p>
@@ -599,17 +600,17 @@ s.find_last_not_of(args);
 <p>Given text $T [1, \dots, n]$ and pattern $P[1, \dots ,m]$, find all shifts s such that$T [s + 1 ,\dots, s + m] = P[1 ,\dots, m]$ <img src="../attachments/Screenshot%202026-05-28%20at%2014.40.27.png" alt="Screenshot 2026-05-28 at 14.40.27" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The simplest method needs time $O(mn)$.</p>
 <h4 id="rabinkarp-algorithm">Rabin-Karp Algorithm</h4>
 <p>Basic idea: Instead of comparing the string, compare their hash values.</p>
-<p>Consider the pattern $P[1, \dots ,m]$ as a huge number in radix-26:$$h(P)=P[1]\cdot26^{m-1}+P[2]\cdot 26^{m-2}+\dots+P[m] \bmod q \text{ for prime }q&lt;2^{64}$$ Let $t_i$ denote the number $T [i+1, \dots, i+m]$, i.e.$$t_i=T[i+1]\cdot26^{m-1}+T[i+2]\cdot26^{m-2}+\dots+T[i+m]\bmod q$$ Observation:$$t_{i+1}=((t_i-T[i+1]\cdot26^{m-1})\cdot26+T[i+m+1])\bmod q$$ As a result, we can calculate the hash tags of $h(P)$ and $t_0,\dots,t_{n-m}$ in time $O(n + m)$.</p>
+<p>Consider the pattern $P[1, \dots ,m]$ as a huge number in radix-26: $$h(P)=P[1]\cdot26^{m-1}+P[2]\cdot 26^{m-2}+\dots+P[m] \bmod q \text{ for prime }q&lt;2^{64}$$ Let $t_i$ denote the number $T [i+1, \dots, i+m]$, i.e. $$t_i=T[i+1]\cdot26^{m-1}+T[i+2]\cdot26^{m-2}+\dots+T[i+m]\bmod q$$ Observation: $$t_{i+1}=((t_i-T[i+1]\cdot26^{m-1})\cdot26+T[i+m+1])\bmod q$$ As a result, we can calculate the hash tags of $h(P)$ and $t_0,\dots,t_{n-m}$ in time $O(n + m)$.</p>
 <p>One question is it is possible $T[s+1,\dots,s+m] \ne P$ but $t_s=h(P)$ (a hash collision). So we need to character-by-character compare when we meet the same hash value. With a random large prime $q$, collisions between unequal strings are rare, so the expected time is $O(n+m)$. However, the verification cost can still degenerate to $O(nm)$ in the worst case — e.g., when the text is <code>AAAAAAA</code> and the pattern is <code>AAA</code>, every shift is a true match, and each one must be verified character by character.</p>
 <h4 id="kmp-algorithm">KMP Algorithm</h4>
 <p>The <span class="obsidian-red">KMP algorithm</span> was invented by D.E. Knuth, V.R. Pratt, and J.H. Morris.</p>
 <p>Given text $T=&#039;t_1t_2\dots t_n&#039;$ and the pattern string $P=&#039;p_1p_2\dots p_m&#039;$. To implement the improved algorithm, we need to solve the following problem: when a mismatch occurs during the matching process (i.e., $t_i\ne p_j$), what is the feasible distance for the pattern string to &quot;slide to the right&quot;?</p>
-<p>If $t_i\ne p_j$, then$$&#039;t_{i-j+1}t_{i-j+2}\dots t_{i-1}&#039;=&#039;p_{1}p_{2}\dots p_{j-1}&#039;$$ Instead of restarting, we want the pattern to keep sliding. If after sliding we continue the comparison with $t_i$ against $p_d$ $(d&lt;j)$, the characters already matched must satisfy $$&#039;t_{i-d+1}t_{i-d+2}\dots t_{i-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ Therefore, the following equation can be obtained. $$&#039;p_{j-d+1}p_{j-d+2}\dots p_{j-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ Obviously, we want to get the maximum $d$. We can find that $d$ is related to $j$, so we first need to determine the value of $d$ for all $j$, and store them in the array $next$. <img src="../attachments/Screenshot%202026-05-29%20at%2014.06.58-optimized.webp" alt="Screenshot 2026-05-29 at 14.06.58" loading="lazy" decoding="async" style="width: min(100%, 215px);"> The following question is how to solve the array $next$. If $next[j]=d$, if we want to solve $next[j+1]$, there are two circumstances:</p>
+<p>If $t_i\ne p_j$, then $$&#039;t_{i-j+1}t_{i-j+2}\dots t_{i-1}&#039;=&#039;p_{1}p_{2}\dots p_{j-1}&#039;$$ Instead of restarting, we want the pattern to keep sliding. If after sliding we continue the comparison with $t_i$ against $p_d$ $(d&lt;j)$, the characters already matched must satisfy $$&#039;t_{i-d+1}t_{i-d+2}\dots t_{i-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ Therefore, the following equation can be obtained. $$&#039;p_{j-d+1}p_{j-d+2}\dots p_{j-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ Obviously, we want to get the maximum $d$. We can find that $d$ is related to $j$, so we first need to determine the value of $d$ for all $j$, and store them in the array $next$. <img src="../attachments/Screenshot%202026-05-29%20at%2014.06.58-optimized.webp" alt="Screenshot 2026-05-29 at 14.06.58" loading="lazy" decoding="async" style="width: min(100%, 215px);"> The following question is how to solve the array $next$. If $next[j]=d$, if we want to solve $next[j+1]$, there are two circumstances:</p>
 <ol>
 <li>$p_d=p_j$, obviously $next[j+1]=next[j]+1$</li>
 <li>$p_d\ne p_j$, let $next[j+1]=k$, then</li>
 </ol>
-<p>$$&#039;p_{j-d+1}p_{j-d+2}\dots p_{j-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ $$&#039;p_{j-k+2}p_{j-k+3}\dots p_{j}&#039;=&#039;p_{1}p_{2}\dots p_{k-1}&#039;$$ Therefore,$$&#039;p_{d-k+2}p_{d-k+3}\dots p_{d-1}&#039;=&#039;p_{1}p_{2}\dots p_{k-2}&#039; \text{ and } p_j=p_{k-1}$$ As a result, if $p_j=p_{k-1}$, then $k-1 = next[d]$. Otherwise, this process can be called recursively.</p>
+<p>$$&#039;p_{j-d+1}p_{j-d+2}\dots p_{j-1}&#039;=&#039;p_{1}p_{2}\dots p_{d-1}&#039;$$ $$&#039;p_{j-k+2}p_{j-k+3}\dots p_{j}&#039;=&#039;p_{1}p_{2}\dots p_{k-1}&#039;$$ Therefore, $$&#039;p_{d-k+2}p_{d-k+3}\dots p_{d-1}&#039;=&#039;p_{1}p_{2}\dots p_{k-2}&#039; \text{ and } p_j=p_{k-1}$$ As a result, if $p_j=p_{k-1}$, then $k-1 = next[d]$. Otherwise, this process can be called recursively.</p>
 <p>We can further optimize this algorithm, for example, if $P=&#039;aaaab&#039;$,  $T=&#039;aaabaaaab&#039;$. When $i=4,j=4$, we need $i=4,j=3;i=4,j=2;i=4,j=1$ three comparisons. In fact, since the first to third characters and the fourth character in the pattern are all equal, there is no need to compare them with the fourth character in the main string. Instead, the pattern can be slid four characters to the right to directly compare the characters when $i=5,j=1$. In other words, if we get $next[j] = k$ according to the above definition, and $p_j = p_k$ in the pattern, we can directly shift the pattern string to $next[k]$, i.e., $next[j] = next[k]$.</p>
 <div class="code-block" data-code-block="32"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-type">void</span> get_next(<span class="hljs-keyword">const</span> <span class="hljs-type">string</span>&amp; T, <span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nxt){
     <span class="hljs-type">int</span> m = (<span class="hljs-type">int</span>)T.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;
@@ -791,16 +792,23 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
 <h2 id="divide-and-conquer">Divide and Conquer</h2>
 <p><span class="obsidian-red">Divide and conquer</span> divides a large problem into smaller subproblems, solves them recursively, and combines their solutions into a solution to the original problem.</p>
 <h3 id="analysis-of-time-complexity">Analysis of Time Complexity</h3>
-<p>If we use a recurrence to analyze time complexity, assume that each problem of size $n$ is divided into $a$ subproblems of size $\frac{n}{b}$, and the divide/combine work costs $f(n)$, i.e.$$T(n)=aT(\frac{n}{b})+f(n)$$ We can use recursion-tree to get the time complexity of the problem.</p>
+<p>If we use a recurrence to analyze time complexity, assume that each problem of size $n$ is divided into $a$ subproblems of size $\frac{n}{b}$, and the divide/combine work costs $f(n)$, i.e. $$T(n)=aT(\frac{n}{b})+f(n)$$ We can use recursion-tree to get the time complexity of the problem.</p>
 <div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Example</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$T(n)=3T(\frac{n}{4})+O(n^2)$$ <img src="../attachments/Screenshot%202026-06-27%20at%2022.16.20-optimized.webp" alt="Screenshot 2026-06-27 at 22.16.20" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p></div></div>
 <p>Also, we can use recursion-tree to prove the following theorem.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Master Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let constant $a&gt;1,b&gt;1$, then:</p>
 <ol>
-<li>If $f(n)=\Theta (n^{\log _b a})$, then $$T(n)=\Theta(n^{ \log_b a} \log n)$$</li>
-<li>If $f(n)=O(n^{\log_b a-\Omega(1)})$, then $$T(n)=\Theta(n^{\log_b a})$$</li>
-<li>If $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, and for sufficiently large $n$, $$\exists \epsilon&gt;0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$then $$T(n)=\Theta(f(n))$$</li>
-</ol></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p><img src="../attachments/Screenshot%202026-06-27%20at%2022.20.16-optimized.webp" alt="Screenshot 2026-06-27 at 22.20.16" loading="lazy" decoding="async" style="width: min(100%, 450px);"> We can find that $$T(n)=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})$$ For circumstance 1, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;= \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^j\Theta((\frac{n}{b^j})^{\log_ba})\\&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}\Theta(n^{\log_ba})\\&amp;=\Theta(n^{\log_ba}\log n)\end{align*}$$ For circumstance 2, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;= \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jO((\frac{n}{b^j})^{\log_ba-\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}O(n^{\log_ba-\Omega(1)}b^{j\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\sum_{j=0}^{\lfloor \log_bn \rfloor}O(b^{j\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}\end{align*}$$ Given that $\Omega(1)&gt;0,b&gt;1$, hence $b^{\Omega(1)}&gt;1$, $1-b^{\Omega(1)}&lt;0$. We focus on the fastest-growing term in the numerator: $$\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}=O(b^{(\log_bn)\Omega(1)})=O(n^{\Omega(1)})$$ As a result,$$T(n)=\Theta(n^{\log_ba})$$ For circumstance 3, because for sufficiently large $n$, $$\exists \epsilon&gt;0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$ We can find that$$a^jf(\frac{n}{b^j})\le(1-\epsilon)^jf(n)$$ Hence, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;&lt; \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}(1-\epsilon)^jf(n)\\&amp;&lt;\Theta(n^{\log_b a})+\frac{1}{\epsilon} f(n)\end{align*}$$ Because $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, we can find that $$T(n)=\Theta(f(n))$$</p></div></div>
+<li>If $f(n)=\Theta (n^{\log _b a})$, then</li>
+</ol>
+<p>$$T(n)=\Theta(n^{ \log_b a} \log n)$$</p>
+<ol>
+<li>If $f(n)=O(n^{\log_b a-\Omega(1)})$, then</li>
+</ol>
+<p>$$T(n)=\Theta(n^{\log_b a})$$</p>
+<ol>
+<li>If $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, and for sufficiently large $n$,</li>
+</ol>
+<p>$$\exists \epsilon&gt;0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$ then $$T(n)=\Theta(f(n))$$</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p><img src="../attachments/Screenshot%202026-06-27%20at%2022.20.16-optimized.webp" alt="Screenshot 2026-06-27 at 22.20.16" loading="lazy" decoding="async" style="width: min(100%, 450px);"> We can find that $$T(n)=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})$$ For circumstance 1, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;= \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^j\Theta((\frac{n}{b^j})^{\log_ba})\\&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}\Theta(n^{\log_ba})\\&amp;=\Theta(n^{\log_ba}\log n)\end{align*}$$ For circumstance 2, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;= \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jO((\frac{n}{b^j})^{\log_ba-\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}O(n^{\log_ba-\Omega(1)}b^{j\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\sum_{j=0}^{\lfloor \log_bn \rfloor}O(b^{j\Omega(1)})\\&amp;=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}\end{align*}$$ Given that $\Omega(1)&gt;0,b&gt;1$, hence $b^{\Omega(1)}&gt;1$, $1-b^{\Omega(1)}&lt;0$. We focus on the fastest-growing term in the numerator: $$\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}=O(b^{(\log_bn)\Omega(1)})=O(n^{\Omega(1)})$$ As a result, $$T(n)=\Theta(n^{\log_ba})$$ For circumstance 3, because for sufficiently large $n$, $$\exists \epsilon&gt;0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$ We can find that $$a^jf(\frac{n}{b^j})\le(1-\epsilon)^jf(n)$$ Hence, $$\begin{align*}T(n)&amp;=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&amp;&lt; \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}(1-\epsilon)^jf(n)\\&amp;&lt;\Theta(n^{\log_b a})+\frac{1}{\epsilon} f(n)\end{align*}$$ Because $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, we can find that $$T(n)=\Theta(f(n))$$</p></div></div>
 <h3 id="tail-recursion-optimization">Tail Recursion Optimization</h3>
 <p>Consider the following code (assuming $n\ge 0$ and the result fits in an <code>int</code>):</p>
 <div class="code-block" data-code-block="34"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-type">int</span> factorial(<span class="hljs-type">int</span> n) {
@@ -842,9 +850,10 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
     <span class="hljs-keyword">if</span>(n%<span class="hljs-number">2</span>==<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span> fastpow(a*a,n/<span class="hljs-number">2</span>)*a;
     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> fastpow(a*a,n/<span class="hljs-number">2</span>);
 }</code></pre></div>
-<p>Under this circumstance, $$T(n)=T(\frac{n}{2})+O(1)$$$$T(n)=O(\log n)$$ We can also use this method to compute Fibonacci numbers, because:$$\begin{bmatrix} F_n\\F_{n-1}  \end{bmatrix}=\begin{bmatrix} 1 &amp;1 \\ 1&amp;0 \end{bmatrix}\begin{bmatrix} F_{n-1}\\F_{n-2}  \end{bmatrix}=\begin{bmatrix} 1 &amp;1 \\ 1&amp;0 \end{bmatrix}^{n-1}\begin{bmatrix} F_1\\F_{0}  \end{bmatrix}$$</p>
+<p>Under this circumstance, $$T(n)=T(\frac{n}{2})+O(1)$$</p>
+<p>$$T(n)=O(\log n)$$ We can also use this method to compute Fibonacci numbers, because: $$\begin{bmatrix} F_n\\F_{n-1}  \end{bmatrix}=\begin{bmatrix} 1 &amp;1 \\ 1&amp;0 \end{bmatrix}\begin{bmatrix} F_{n-1}\\F_{n-2}  \end{bmatrix}=\begin{bmatrix} 1 &amp;1 \\ 1&amp;0 \end{bmatrix}^{n-1}\begin{bmatrix} F_1\\F_{0}  \end{bmatrix}$$</p>
 <h3 id="strassen-algorithm">Strassen Algorithm</h3>
-<p>Generally, define the multiplication of two $n\times n$ matrices $A,B$ as $C$, where$$c_{i,j}=\sum_ka_{i,k}b_{k,j}$$ Define the exponent of matrix multiplication as $\omega$, so the time complexity is $O(n^\omega)$. We know $\omega \in [2,3]$.</p>
+<p>Generally, define the multiplication of two $n\times n$ matrices $A,B$ as $C$, where $$c_{i,j}=\sum_ka_{i,k}b_{k,j}$$ Define the exponent of matrix multiplication as $\omega$, so the time complexity is $O(n^\omega)$. We know $\omega \in [2,3]$.</p>
 <p>If we divide the matrix into blocks, i.e.</p>
 <p>$$\begin{bmatrix} A_{11} &amp; A_{12}\\ A_{21} &amp;A_{22} \end{bmatrix}\begin{bmatrix} B_{11} &amp; B_{12}\\ B_{21} &amp; B_{22} \end{bmatrix}=\begin{bmatrix} C_{11} &amp; C_{12}\\ C_{21} &amp;C_{22} \end{bmatrix}$$</p>
 <p>This time, $$T(n)=8T(\frac{n}{2})+O(n^2),T(n)=O(n^3)$$ Strassen&#039;s crucial observation is:</p>
@@ -888,11 +897,11 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
     <span class="hljs-keyword">if</span> (invert) <span class="hljs-keyword">for</span> (cd &amp; x : a) x /= n;
 }</code></pre></div>
 <p>This implementation assumes <code>a.size()</code> is a power of two. For convolution, pad both input sequences with zeros until the length is at least the required result length and is a power of two.</p>
-<p>The FFT has many applications. We can find that$$\mathcal{F}\{f*g\}=\mathcal{F}\{f\}\cdot\mathcal{F}\{g\}$$ As a result, the FFT can accelerate convolution. For example, multiplication can be treated as a convolution operation: let $f,g$ be polynomials and take the variable $x$ as $10$, then polynomial multiplication becomes fast integer multiplication, which has time $\tilde{O}(\log a+\log b)$ rather than $O(\log a\log b)$.</p>
+<p>The FFT has many applications. We can find that $$\mathcal{F}\{f*g\}=\mathcal{F}\{f\}\cdot\mathcal{F}\{g\}$$ As a result, the FFT can accelerate convolution. For example, multiplication can be treated as a convolution operation: let $f,g$ be polynomials and take the variable $x$ as $10$, then polynomial multiplication becomes fast integer multiplication, which has time $\tilde{O}(\log a+\log b)$ rather than $O(\log a\log b)$.</p>
 <blockquote><p>Tip The definition of notation $\tilde{O}$ The notation means the time complexity ignores times less than $O(\log n)$</p></blockquote>
 <p>Another interesting application is interpolation. The inverse problem of evaluation is: given values $y_0,y_1,\dots,y_{N-1}$, find the coefficients of $p(x)=\sum_{j=0}^{N-1}a_jx^j$ with $p(x_k)=y_k$ at the nodes $x_k=\omega_N^k$. This is the linear system $$V_NA=Y,$$ which Gaussian elimination solves in $O(N^3)$, and even exploiting the Vandermonde structure takes $O(N^2)$. The Fourier structure makes both directions cheap.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Invertibility of the Fourier Matrix</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$V_N^{-1}=\frac{1}{N}\overline{V_N},$$ i.e. the $(j,k)$ entry of $V_N^{-1}$ is $\frac{1}{N}\omega_N^{-jk}$.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The $(j,l)$ entry of $\overline{V_N}V_N$ is$$\sum_{k=0}^{N-1}\omega_N^{(l-j)k}=\begin{cases}N,&amp;j=l\\ \dfrac{\omega_N^{(l-j)N}-1}{\omega_N^{l-j}-1}=0,&amp;j\neq l\end{cases}\ =N\delta_{jl},$$since $\omega_N^{(l-j)N}=1$ and $\omega_N^{l-j}\neq 1$ when $j\neq l$.</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The $(j,l)$ entry of $\overline{V_N}V_N$ is $$\sum_{k=0}^{N-1}\omega_N^{(l-j)k}=\begin{cases}N,&amp;j=l\\ \dfrac{\omega_N^{(l-j)N}-1}{\omega_N^{l-j}-1}=0,&amp;j\neq l\end{cases}\ =N\delta_{jl},$$ since $\omega_N^{(l-j)N}=1$ and $\omega_N^{l-j}\neq 1$ when $j\neq l$.</p></div></div>
 <p>Hence $A=\frac{1}{N}\overline{V_N}Y$: the coefficient vector is exactly the inverse DFT of the value vector, and interpolation at the roots of unity is solved by the same butterflies with $\omega_N^{-1}$ plus the final division by $N$.</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Direction</th><th>Map</th><th>Transform</th><th>Cost</th></tr></thead><tbody><tr><td>Evaluation: coefficients $\to$ values</td><td>$A\mapsto V_NA$</td><td>DFT (forward FFT)</td><td>$O(N\log N)$</td></tr><tr><td>Interpolation: values $\to$ coefficients</td><td>$Y\mapsto V_N^{-1}Y$</td><td>inverse DFT (inverse FFT)</td><td>$O(N\log N)$</td></tr></tbody></table></div>
 <p>This evaluation–interpolation duality is exactly what fast polynomial multiplication exploits: evaluate both factors on the roots of unity, multiply pointwise, then interpolate back. The same identity read column by column yields trigonometric interpolation: given samples $v_k$ at the equally spaced points $x_k=\frac{2\pi k}{N}$, there is a unique trigonometric polynomial $$p(x)=\sum_{j=0}^{N-1}c_je^{ijx}$$ with $p(x_k)=v_k$, and this condition is precisely the DFT system $V_NC=V$, so the coefficients come from one inverse FFT. In other words, the FFT interpolates $N$ equally spaced samples in $O(N\log N)$ time, and the inverse FFT evaluates that interpolant back on the grid.</p>
@@ -911,7 +920,9 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
 <p>Moreover, only points whose $y$-coordinate differs by at most <code>min</code> can improve the current answer.</p>
 <p>Therefore, it is enough to inspect a <code>min</code> by <code>2min</code> rectangle. Divide it into $2\times4$ small cells of size $\frac{min}{2}\times\frac{min}{2}$. If two points lie in the same small cell, their distance is at most $\frac{\sqrt{2}}{2}min&lt;min$, which contradicts the definition of <code>min</code>.</p>
 <p>Thus each small cell contains at most one relevant point, so at most 8 points need to be considered.</p></div></div>
-<p>$$T(n)=2T(\frac{n}{2})+O(n\log n)$$$$T(n)=O(n\log^2 n)$$ We can also combine the divide and sort; that is, by adopting the divide-and-conquer sorting approach, we can sort the points while solving each subproblem. Then,$$T(n)=2T(\frac{n}{2})+O(n)$$$$T(n)=O(n\log n)$$</p>
+<p>$$T(n)=2T(\frac{n}{2})+O(n\log n)$$</p>
+<p>$$T(n)=O(n\log^2 n)$$ We can also combine the divide and sort; that is, by adopting the divide-and-conquer sorting approach, we can sort the points while solving each subproblem. Then, $$T(n)=2T(\frac{n}{2})+O(n)$$</p>
+<p>$$T(n)=O(n\log n)$$</p>
 <div class="code-block" data-code-block="40"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#include &lt;iostream&gt;</span>
 <span class="hljs-meta">#include &lt;algorithm&gt;</span>
 <span class="hljs-meta">#include &lt;climits&gt;</span>
@@ -1179,8 +1190,11 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
 <p>Radix sort is stable and its time complexity is $O(n(b+1))=O(nb)$, where $b=\lfloor\log_2\max_i a[i]\rfloor+1$ for nonzero non-negative keys.</p>
 <p>If $a[i]\le 2^{O(1)}$, then $T(n)=O(n)$.</p>
 <h2 id="linear-programming">Linear Programming</h2>
-<p><span class="obsidian-red">Linear programming</span> problem can be defined as: $$\max /\min z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le(\text{or} =,\ge)b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n\le(\text{or} =,\ge)b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n\le(\text{or} =,\ge)b_m\\x_1,x_2,\dots,x_t\ge0 \quad (t\le n) \end{matrix}\right.$$ It can be transformed into standard form. The usual transformations are: convert minimization to maximization by negating the objective, multiply constraints by $-1$ when needed to make the right-hand side non-negative, add slack or surplus variables to turn inequalities into equalities, and replace every free variable by the difference of two non-negative variables.</p>
-<p>The standard form can be written as: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n=b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n=b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n=b_m\\x_1,x_2,\dots,x_n\ge0 \end{matrix}\right.$$</p>
+<h3 id="standard-form-of-linear-programming">Standard Form of Linear Programming</h3>
+<p><span class="obsidian-red">Linear programming</span> problem can be defined as: $$\max /\min z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le(\text{or} =,\ge)b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n\le(\text{or} =,\ge)b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n\le(\text{or} =,\ge)b_m\\x_1,x_2,\dots,x_t\ge0 \quad (t\le n) \end{matrix}\right.$$ It can be transformed into standard form. The usual transformations are: convert minimization to maximization by negating the objective, multiply constraints by $-1$ when needed to make the right-hand side non-negative, add slack or surplus variables to turn inequalities into equalities, and replace every free variable by the difference of two non-negative variables.</p>
+<p>The standard form can be written as: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n=b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n=b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n=b_m\\x_1,x_2,\dots,x_n\ge0 \end{matrix}\right.$$</p>
 <h3 id="simplex-algorithm">Simplex Algorithm</h3>
 <p>The following discussion assumes an initial feasible basis has already been found. If no such basis is obvious, Phase I of the simplex method is needed to find one or prove infeasibility.</p>
 <p>We can first transform the system of equations into: $$\left\{\begin{matrix} x_1+a_{1(m+1)}x_{m+1}+\dots+a_{1n}x_n=b_1 \\x_2+a_{2(m+1)}x_{m+1}+\dots+a_{2n}x_n=b_2\\ \dots\\x_m+a_{m(m+1)}x_{m+1}+\dots+a_{mn}x_n=b_m \\x_1,x_2,\dots,x_n\ge0 \end{matrix}\right.$$ If the feasible region is non-empty and the optimum is finite, OPT is achieved at a vertex of the feasible region.</p>
@@ -1190,28 +1204,33 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
 <p>Note: if $a_{ki}\le 0$ for all $k=1,\dots,m$, then $x_i$ can increase without bound and the problem is unbounded.</p>
 <p>The analysis of time complexity of simplex algorithm is really complex. In theory, the worst-case time complexity of the algorithm is exponential, but in practice, the time complexity is linear.</p>
 <h3 id="dual-problem">Dual Problem</h3>
-<p>Consider a linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n \le  b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n \le  b_m\\x_1,x_2,\dots,x_n\ge0 \end{matrix}\right.$$</p>
-<p>Let $k$-th equation multiply $y_k$ and sum up: $$\sum_{i=1}^m\sum_{j=1}^n a_{ij}y_i x_j \le\sum_{i=1}^m b_iy_i$$ If $$\sum_{i=1}^m a_{ij}y_i\ge c_j$$ Then $$z=\sum_{j=1}^nc_j x_j \le\sum_{i=1}^m b_iy_i$$ This is another linear programing problem: $$\min w=b_1y_1+b_2y_2+\dots+b_my_m$$$$s.t.\left\{\begin{matrix} a_{11}y_1+a_{21}y_2+\dots+a_{m1}y_m\ge c_1\\a_{12}y_1+a_{22}y_2+\dots+a_{m2}y_m\ge c_2\\ \dots\\a_{1n}y_1+a_{2n}y_2+\dots+a_{mn}y_m\ge c_n\\y_1,y_2,\dots,y_m\ge0 \end{matrix}\right.$$ It is called <span class="obsidian-red">Dual Problem</span>.</p>
+<p>Consider a linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\left\{\begin{matrix} a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n \le  b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n \le  b_m\\x_1,x_2,\dots,x_n\ge0 \end{matrix}\right.$$</p>
+<p>Let $k$-th equation multiply $y_k$ and sum up: $$\sum_{i=1}^m\sum_{j=1}^n a_{ij}y_i x_j \le\sum_{i=1}^m b_iy_i$$ If $$\sum_{i=1}^m a_{ij}y_i\ge c_j$$ Then $$z=\sum_{j=1}^nc_j x_j \le\sum_{i=1}^m b_iy_i$$ This is another linear programing problem: $$\min w=b_1y_1+b_2y_2+\dots+b_my_m$$</p>
+<p>$$s.t.\left\{\begin{matrix} a_{11}y_1+a_{21}y_2+\dots+a_{m1}y_m\ge c_1\\a_{12}y_1+a_{22}y_2+\dots+a_{m2}y_m\ge c_2\\ \dots\\a_{1n}y_1+a_{2n}y_2+\dots+a_{mn}y_m\ge c_n\\y_1,y_2,\dots,y_m\ge0 \end{matrix}\right.$$ It is called <span class="obsidian-red">Dual Problem</span>.</p>
 <p>Easy to obtain</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Weak Duality Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$\min w\ge \max z$$</p></div></div>
 <p>We also have another stronger theorem:</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Strong Duality Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If the primal problem has an optimal solution, then the dual problem also has an optimal solution, and the objective function values of the two problems are equal.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
-<p>If the equality sign of the $k$-th inequality is not true, based on <span class="obsidian-red">Strong duality theorem</span>, we can find that $y_k=0$. Similarly, if the equality sign of the $k$-th dual inequality is not true, then $x_k=0$.</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Complementary Slackness Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Original slackness complement $$\mathbf{y}^{*\top} (\mathbf{b} - \mathbf{A}\mathbf{x}^*) = 0$$ Dual slackness complement $$(\mathbf{A}^\top \mathbf{y}^* - \mathbf{c})^\top \mathbf{x}^* = 0$$</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Strong Duality Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The <span class="obsidian-red">strong duality theorem</span> states that if the primal problem has an optimal solution, then the dual problem also has an optimal solution, and the objective function values of the two problems are equal.</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
+<p>If the equality sign of the $k$-th inequality is not true, based on the strong duality theorem, we can find that $y_k=0$. Similarly, if the equality sign of the $k$-th dual inequality is not true, then $x_k=0$.</p>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Complementary Slackness Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The <span class="obsidian-red">complementary slackness theorem</span> gives the following optimality conditions. Original slackness complement $$\mathbf{y}^{*\top} (\mathbf{b} - \mathbf{A}\mathbf{x}^*) = 0$$ Dual slackness complement $$(\mathbf{A}^\top \mathbf{y}^* - \mathbf{c})^\top \mathbf{x}^* = 0$$</p></div></div>
 <h3 id="integer-linear-programming-ilp">Integer Linear Programming (ILP)</h3>
 <p>If the variable $x_i$ is integer, we need to use another method to solve it.</p>
 <p>The basic idea is same: cut the non-integer part.</p>
 <h4 id="branch-and-bound">Branch and Bound</h4>
-<p>Given a linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b}$$ If $x_1^*$ in the optimal solution $(x_1^*,x_2^*,\dots,x_n^*)$ is not integer, then consider the following two linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\le\left \lfloor x_1^* \right \rfloor $$ and $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\ge\left \lceil x_1^*  \right \rceil$$</p>
+<p>Given a linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b}$$ If $x_1^*$ in the optimal solution $(x_1^*,x_2^*,\dots,x_n^*)$ is not integer, then consider the following two linear programming problem: $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\le\left \lfloor x_1^* \right \rfloor $$ and $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$</p>
+<p>$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\ge\left \lceil x_1^*  \right \rceil$$</p>
 <h4 id="gomory-cut">Gomory Cut</h4>
-<p>If$$x_i + \sum_{j =m+1}^n a_{ij} x_j = b_i$$ Then let</p>
+<p>If $$x_i + \sum_{j =m+1}^n a_{ij} x_j = b_i$$ Then let</p>
 <ul>
 <li>$b_i = \lfloor b_i \rfloor + f_i$, where $0 &lt; f_i &lt; 1$</li>
 <li>$a_{ij} = \lfloor a_{ij} \rfloor + f_{ij}$, where $0 \le f_{ij} &lt; 1$</li>
 </ul>
 <p>Therefore $$x_i + \sum_{j =m+1}^n (\lfloor a_{ij} \rfloor + f_{ij}) x_j = \lfloor b_i \rfloor + f_i$$ $$x_i + \sum_{j =m+1}^n \lfloor a_{ij} \rfloor x_j-\lfloor b_i \rfloor =  f_i-\sum_{j =m+1}^nf_{ij} x_j$$ It is easy to see that the left-hand side is an integer, so the right side is an integer. Because $f_i&lt;1$ and $f_{ij}x_j\ge0$, the right side is strictly less than $1$; being an integer, it is non-positive.</p>
-<p>So we can let$$f_i-\sum_{j =m+1}^nf_{ij} x_j=-s,s\in \mathbb{N}$$ Therefore, we introduce another integer variable, and the current non-integer optimal vertex has been excluded by this new constraint.</p>
+<p>So we can let $$f_i-\sum_{j =m+1}^nf_{ij} x_j=-s,s\in \mathbb{N}$$ Therefore, we introduce another integer variable, and the current non-integer optimal vertex has been excluded by this new constraint.</p>
 <h3 id="transportation-problem">Transportation Problem</h3>
 <p>Given $m$ origins, origin $A_i$ has supply $a_i$, and $n$ destinations, destination $B_j$ has demand $b_j$, and the cost from $A_i$ to $B_j$ is $c_{ij}$.  We need to get the optimal solution to minimize the cost from the origin to the destination.</p>
 <p>This is a linear programming problem: $$\min \sum_{i=1}^m \sum_{j=1}^n c_{ij} x_{ij}$$ $$s.t.\left\{\begin{matrix} \sum_{j=1}\limits^n x_{ij}=a_i\\\sum_{i=1}\limits^m x_{ij}=b_j\\x_{ij}\ge0 \end{matrix}\right.$$</p>
@@ -1227,7 +1246,7 @@ big bigmod(big a, big b) { <span class="hljs-comment">//High-Precision Modulo</s
 <p>This forward-looking approach effectively avoids high-cost allocations, yielding an excellent average-case performance.</p>
 <h4 id="the-method-of-potentials">The Method of Potentials</h4>
 <p>When we get an initial solution, we need to verify whether the solution is optimal.</p>
-<p>Observation: Considering the dual problem, we can define potential for every origin and destination as $u_i$ and $v_j$. Then $$u_i+v_j\le c_{ij}$$ According to <span class="obsidian-red">Complementary Slackness Theorem</span>, if $x_{ij}\ne 0$, then $u_i+v_j=c_{ij}$. We can find that the number of basic variables is $n+m-1$ (in the non-degenerate case). So if we want to solve the potential, only regulate a potential as $0$ and combine with $u_i+v_j=c_{ij}$ is enough.</p>
+<p>Observation: Considering the dual problem, we can define potential for every origin and destination as $u_i$ and $v_j$. Then $$u_i+v_j\le c_{ij}$$ According to the complementary slackness theorem, if $x_{ij}\ne 0$, then $u_i+v_j=c_{ij}$. We can find that the number of basic variables is $n+m-1$ (in the non-degenerate case). So if we want to solve the potential, only regulate a potential as $0$ and combine with $u_i+v_j=c_{ij}$ is enough.</p>
 <p>Then we only need to check whether $u_i+v_j\le c_{ij}$ for every $i=1,2,\dots,m;j=1,2,\dots,n$.</p>
 <p>If $\exists i,j,s.t.u_i+v_j&gt;c_{ij}$, we can use graph theory to adjust the plan. Imagine the origin and destination as a node, we connect the origin and destination if we have cargo transported from origin to destination. Obviously, it is a bipartite graph, and a tree. So when we add the edge $(u_i,v_j)$, the graph has only one cycle. Along this cycle, we label the newly added edge as &quot;positive (+)&quot;, and then alternately label the subsequent edges as &quot;negative (-)&quot;, &quot;positive (+)&quot;, and &quot;negative (-)&quot; along the cycle.</p>
 <p>Let adjustment amount $\theta$: $$\theta = \min \{x_{kl} \mid \text{edge} (k,l) \text{ is denoted as negative} \}$$</p>
@@ -1483,14 +1502,14 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <p>A typical layout of process virtual memory:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Region</th><th>Content</th><th>Size behavior</th></tr></thead><tbody><tr><td>Text segment</td><td>machine instructions of the program</td><td>fixed</td></tr><tr><td>Data segment</td><td>initialized global and static variables</td><td>fixed</td></tr><tr><td>BSS segment</td><td>zero-initialized global and static variables</td><td>fixed</td></tr><tr><td>Memory heap</td><td>dynamically allocated blocks (<code>malloc</code>/<code>new</code>)</td><td>grows upward on demand</td></tr><tr><td>Call stack</td><td>stack frames of function calls (see <a href="#the-call-stack-in-program-execution">The Call Stack in Program Execution</a>)</td><td>grows downward on demand</td></tr></tbody></table></div>
 <p>The heap and the stack are placed at opposite ends of the address space and grow toward each other, so the boundary between them needs no fixed commitment in advance.</p>
-<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">A historical misnomer</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Knuth remarked that the collision of names is unfortunate: the heap data structure would be a perfectly reasonable way to organize free memory, but the memory heap was named earlier, in the everyday sense of &quot;a heap of things&quot;. Some allocators do keep free blocks in tree- or heap-shaped structures, but a classical allocator (e.g., glibc malloc with its size-segregated bins and free lists) does not use the heap data structure at all.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">A Historical Misnomer</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Knuth remarked that the collision of names is unfortunate: the heap data structure would be a perfectly reasonable way to organize free memory, but the memory heap was named earlier, in the everyday sense of &quot;a heap of things&quot;. Some allocators do keep free blocks in tree- or heap-shaped structures, but a classical allocator (e.g., glibc malloc with its size-segregated bins and free lists) does not use the heap data structure at all.</p></div></div>
 <p>The heap data structure and the memory heap differ in almost every aspect:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Aspect</th><th>Heap (data structure)</th><th>Memory heap (program execution)</th></tr></thead><tbody><tr><td>Definition</td><td>A complete binary tree satisfying the heap-order property</td><td>A memory region administered by an allocator</td></tr><tr><td>Ordering</td><td>Every parent is at least as large as its children (max-heap)</td><td>No order relation between blocks</td></tr><tr><td>Purpose</td><td>Access the extremum in $O(1)$; priority queues and heap sort</td><td>Storage for objects with arbitrary lifetimes</td></tr><tr><td>Operations</td><td>Insert / delete, $O(\log n)$</td><td><code>malloc</code> / <code>free</code>, cost determined by the allocator and current fragmentation</td></tr><tr><td>Organization</td><td>Usually a contiguous array</td><td>Scattered blocks linked through the allocator&#039;s bookkeeping structures</td></tr><tr><td>Typical failures</td><td>Push beyond capacity</td><td>Memory leak, use-after-free, fragmentation, allocation failure</td></tr></tbody></table></div>
 <p>Despite the differences, the two do meet in practice. When a priority queue of unknown size is needed, its underlying array lives on the memory heap; conversely, an allocator may internally use a heap or other search structure to manage free blocks. In C++, both <code>vector</code> and <code>priority_queue</code> obtain their underlying storage from the memory heap, so the container interface of the data structure is built on top of the OS concept.</p>
 <h2 id="graph">Graph</h2>
 <h3 id="graph-storage-structures">Graph Storage Structures</h3>
 <h4 id="adjacency-matrix">Adjacency Matrix</h4>
-<p>The graph is stored in a two-dimensional array, where $AdjMatrix[i][j]$ records the adjacency (direction) and weight between vertex $i$ and vertex $j$.</p>
+<p>An <span class="obsidian-red">adjacency matrix</span> stores a graph in a two-dimensional array, where $AdjMatrix[i][j]$ records the adjacency (direction) and weight between vertex $i$ and vertex $j$.</p>
 <div class="code-block" data-code-block="62"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-comment">//Adjacency matrix  </span>
 <span class="hljs-meta">#define INFINITY INT_MAX                //Maximum value  </span>
 <span class="hljs-meta">#define MAX_VERTEX_NUM 20               //Maximum number of vertices  </span>
@@ -1506,7 +1525,7 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
     GraphKind kind;                     <span class="hljs-comment">//Kind of graph  </span>
 }MGraph;</code></pre></div>
 <h4 id="adjacency-list">Adjacency List</h4>
-<p>For each vertex vi, build a singly linked list that holds all vertices adjacent to vi.</p>
+<p>An <span class="obsidian-red">adjacency list</span> stores, for each vertex $v_i$, a singly linked list of all vertices adjacent to $v_i$.</p>
 <div class="code-block" data-code-block="63"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-comment">//Adjacency list  </span>
 <span class="hljs-meta">#define INFINITY INT_MAX                 //Maximum value  </span>
 <span class="hljs-meta">#define MAX_VERTEX_NUM 20                //Maximum number of vertices  </span>
@@ -1543,8 +1562,8 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
     <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> w = <span class="hljs-number">0</span>; w &lt; G.vexnum; w++)  
         <span class="hljs-keyword">if</span>(G.arcs[v][w] != <span class="hljs-number">0</span> &amp;&amp; !visited[w]) DFS(G, Visit, w);  
 }</code></pre></div>
-<p>With an <span class="obsidian-red">adjacency matrix</span>, finding the neighbors of every vertex in DFS takes $O(v^2)$ time.</p>
-<p>With an <span class="obsidian-red">adjacency list</span>, finding the neighbors of every vertex in DFS takes $O(v+e)$ time.</p>
+<p>With an adjacency matrix, finding the neighbors of every vertex in DFS takes $O(v^2)$ time.</p>
+<p>With an adjacency list, finding the neighbors of every vertex in DFS takes $O(v+e)$ time.</p>
 <h4 id="breadthfirst-search-bfs">Breadth-First Search (BFS)</h4>
 <p>Choose a starting vertex v as the current vertex, then:</p>
 <ol>
@@ -1749,7 +1768,7 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <h3 id="all-pairs-shortest-paths-apsp">All Pairs Shortest Paths (APSP)</h3>
 <h4 id="floydwarshall-algorithm">Floyd-Warshall Algorithm</h4>
 <p>Floyd-Warshall Algorithm is suitable to solve APSP in dense map.</p>
-<p>We will maintain two arrays: distance array $D$ and predecessor array $P$. $D[i][j]$ denotes the shortest distance between $i$ and $j$, and $P[i][j]$ denotes the predecessor of $j$ in the shortest path from $i$ to $j$. In $k$-th iteration, iterate through each vertex of $D[i][j]$ and compare $D[i][j]$ and $D[i][k]+D[k][j]$. If $$D[i][k]+D[k][j]&lt;D[i][j]$$let $$D[i][j]=D[i][k]+D[k][j], P[i][j]=P[k][j]$$</p>
+<p>We will maintain two arrays: distance array $D$ and predecessor array $P$. $D[i][j]$ denotes the shortest distance between $i$ and $j$, and $P[i][j]$ denotes the predecessor of $j$ in the shortest path from $i$ to $j$. In $k$-th iteration, iterate through each vertex of $D[i][j]$ and compare $D[i][j]$ and $D[i][k]+D[k][j]$. If $$D[i][k]+D[k][j]&lt;D[i][j]$$ let $$D[i][j]=D[i][k]+D[k][j], P[i][j]=P[k][j]$$</p>
 <div class="code-block" data-code-block="70"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-type">void</span> FloydWarshall(MGraph G, VRType D[], <span class="hljs-type">int</span> P[]) {
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; G.vexnum; i++) {
         <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; G.vexnum; j++) {
@@ -1779,7 +1798,7 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <p>We now want to find a function that can guarantee the following requirements $h$:</p>
 <p>$$\hat{w}(i,j)=w(i,j)+h(i)-h(j)\ge0,\forall i,j$$</p>
 <p>Johnson has a really brilliant observation: we can introduce a virtual vertex $S$. Connect it to every vertex and let the weight of edges as $0$. Then we use Bellman-Ford algorithm to get the shortest distance between $S$ and vertex $i$, which can be defined as $h(i)$.</p>
-<p>It is easy to prove that $$\text{dist}(S, v) \le \text{dist}(S, u) + w(u, v)$$ As a result,$$h(v) \le h(u) + w(u, v)$$ It is equivalent to$$\hat{w}(i,j)=w(u, v) + h(u) - h(v) \ge 0$$ In this way we design the algorithm with time complexity $O(ve\log v)$ successfully.</p>
+<p>It is easy to prove that $$\text{dist}(S, v) \le \text{dist}(S, u) + w(u, v)$$ As a result, $$h(v) \le h(u) + w(u, v)$$ It is equivalent to $$\hat{w}(i,j)=w(u, v) + h(u) - h(v) \ge 0$$ In this way we design the algorithm with time complexity $O(ve\log v)$ successfully.</p>
 <h3 id="topological-sort">Topological Sort</h3>
 <p>A graph is called an Activity on Vertex (AOV) Graph if vertices represent activity and edges represent the activity priority. It is readily apparent that an AOV graph is a directed acyclic graph. Define partial order relation $v_1&lt;v_2$ as $v_1$ point to $v_2$. The order is called <span class="obsidian-red">Topological Sort</span>.</p>
 <p>Topological sorting is implemented as follows:</p>
@@ -1788,13 +1807,13 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <li>Delete that vertex and all arcs leaving it from the graph.</li>
 </ol>
 <p>Time complexity $T(n)=O(v+e)$</p>
-<h3 id="critical-path">Critical Path</h3>
+<h3 id="critical-path-todo">Critical Path (TODO)</h3>
 <h3 id="strongly-connected-components">Strongly Connected Components</h3>
 <p>Tarjan Algorithm</p>
 <p>Lowest Common Ancestor (LCA)</p>
 <p>We can use Tarjan algorithm to prove the following theorem:</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>2SAT is P.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h3 id="cartesian-tree">Cartesian Tree</h3>
 <p>A Cartesian tree of an array needs to satisfy:</p>
 <ol>
@@ -1803,25 +1822,26 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 </ol>
 <p><img src="../attachments/Cartesian_tree.svg.webp" alt="Cartesian_tree.svg" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Amortized analysis of the time complexity.</p>
 <p>We can find that Cartesian tree can transform finding the minimum value of the interval to the lowest common ancestor of two nodes. And the fast algorithm will be introduced in Lowest Common Ancestor (LCA).</p>
-<h3 id="lowest-common-ancestor-lca">Lowest Common Ancestor (LCA)</h3>
+<h3 id="lowest-common-ancestor-lca-todo">Lowest Common Ancestor (LCA) (TODO)</h3>
 <h3 id="maxflow-and-mincut">Max-Flow and Min-Cut</h3>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Max-flow min-cut theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Max-flow problem: $$\max\sum_{(s,v)\in E} f_{sv}$$ $$s.t.\left\{\begin{matrix}f_e\le c_e,\forall e\\ \sum_{(i,v)\in E}f_{iv}-\sum_{(v,j)\in E}f_{vj}=0, \forall v \in V\setminus  \{s,t\}\\ f_e\ge 0 \end{matrix}\right.$$ Min-cut problem: $$\min \sum_e y_e\cdot c_e$$ $$s.t.\left\{\begin{matrix} y_e+z_v\ge1, \forall e=(s,v)\\ y_e-z_v\ge0, \forall e=(v,t)\\ y_e+z_v-z_u\ge0, \forall e=(u,v)\\ y_e\ge 0 \end{matrix}\right.$$ Obviously, they are dual problems.</p></div></div>
-<h4 id="fordfulkerson-algorithm">Ford-Fulkerson Algorithm</h4>
-<h4 id="edmondskarp-algorithm">Edmonds-Karp Algorithm</h4>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Max-Flow Min-Cut Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Max-flow problem: $$\max\sum_{(s,v)\in E} f_{sv}$$ $$s.t.\left\{\begin{matrix}f_e\le c_e,\forall e\\ \sum_{(i,v)\in E}f_{iv}-\sum_{(v,j)\in E}f_{vj}=0, \forall v \in V\setminus  \{s,t\}\\ f_e\ge 0 \end{matrix}\right.$$ Min-cut problem: $$\min \sum_e y_e\cdot c_e$$</p>
+<p>$$s.t.\left\{\begin{matrix} y_e+z_v\ge1, \forall e=(s,v)\\ y_e-z_v\ge0, \forall e=(v,t)\\ y_e+z_v-z_u\ge0, \forall e=(u,v)\\ y_e\ge 0 \end{matrix}\right.$$ Obviously, they are dual problems.</p></div></div>
+<h4 id="fordfulkerson-algorithm-todo">Ford-Fulkerson Algorithm (TODO)</h4>
+<h4 id="edmondskarp-algorithm-todo">Edmonds-Karp Algorithm (TODO)</h4>
 <h4 id="karger-s-mincut-algorithm">Karger&#039;s Min-Cut Algorithm</h4>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$P=\frac{2}{n(n-1)}$</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
-<h4 id="stoerwagner-algorithm">Stoer-Wagner Algorithm</h4>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
+<h4 id="stoerwagner-algorithm-todo">Stoer-Wagner Algorithm (TODO)</h4>
 <h4 id="maximum-weight-closure-problem">Maximum Weight Closure Problem</h4>
 <p>An interesting thing is: min-cut is P, but max-cut is NP-Hard.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Max-cut is NP-Hard.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h3 id="clique">Clique</h3>
 <p>We defined a subgraph as a <span class="obsidian-red">clique</span> if it is a complete graph.</p>
 <p>It is difficult to determine whether a graph has a k-clique. We will prove that it is NP-Complete.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Clique is NP-Complete.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h3 id="matching-and-vertex-cover">Matching and Vertex Cover</h3>
 <p>We define matching $M$ as the subset of $E(G)$, where every edge in $M$ do not has the same vertex.</p>
 <p>We define vertex cover $C$ as the subset of $V(G)$, where every edge in graph has at least an endpoint belongs to $C$.</p>
@@ -1838,19 +1858,19 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <p>Although for general graph, vertex cover is NP-Complete, in bipartite graph, we can find that max-matching is equal to min-cover, which can be reduced to max-flow. As a result, in bipartite graph, they are P.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Hall Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>3SAT-twice is always satisfiable.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Kőnig&#039;s Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>In bipartite graph, max-matching is equal to min-cover.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
-<h4 id="hungarian-algorithm">Hungarian Algorithm</h4>
-<h4 id="kuhnmunkres-algorithm">Kuhn-Munkres Algorithm</h4>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
+<h4 id="hungarian-algorithm-todo">Hungarian Algorithm (TODO)</h4>
+<h4 id="kuhnmunkres-algorithm-todo">Kuhn-Munkres Algorithm (TODO)</h4>
 <h4 id="edmonds-blossom-algorithm">Edmonds&#039; Blossom Algorithm</h4>
 <p>Hence, matching is P. However, if we change two matching to three matching, the problem is NP-Complete.</p>
 <p>Mathematically, three-dimension matching (3DM) problem is</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>3DM is NP-Complete.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <p>Exact 3-Cover (X3C)</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>X3C is NP-Complete.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h3 id="colorable">Colorable</h3>
 <p>Analysis of 2-colorable problem:</p>
 <p>Perform a Browsing Search (BFS) on the graph, coloring the starting point $s$ with color A, and its adjacent points with color B, and so on.</p>
@@ -1881,7 +1901,7 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <p>See Figure for what the resulting graph looks like. <img src="../attachments/Screenshot%202026-06-21%20at%2022.19.31-optimized.webp" alt="Screenshot 2026-06-21 at 22.19.31" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p></div></div>
 <p>We can also prove that undirected Hamilton path is NP-Complete.</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Directed Hamilton Path (U-HAM-PATH) is NP-Complete.</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>TODO: Complete the proof.</p></div></div>
 <h2 id="search-3">Search</h2>
 <h3 id="binary-search-tree-bst">Binary Search Tree (BST)</h3>
 <p>A <span class="obsidian-red">binary search tree</span> is either empty or a binary tree with the following properties:</p>
@@ -1992,7 +2012,7 @@ max_heap.pop(); <span class="hljs-comment">//remove the maximum value</span>
 <p>Rebalancing after deletion is similar to insertion, except that deletion must check every ancestor along the path for imbalance and fix it.</p>
 <h3 id="redblack-tree-todo">Red-Black Tree (TODO)</h3>
 <p>A <span class="obsidian-red">red-black tree</span> is a variant of the balanced binary search tree.</p>
-<h4 id="insertion-3">Insertion</h4>
+<h4 id="insertion-todo">Insertion (TODO)</h4>
 <h4 id="deletion-3">Deletion</h4>
 <p>In C++, <code>map</code> is implemented as a red-black tree.</p>
 <div class="code-block" data-code-block="74"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#include &lt;map&gt;</span>
@@ -2030,9 +2050,9 @@ m.count(key);
     <span class="hljs-keyword">struct</span> BTNode *ptr[m+<span class="hljs-number">1</span>]; <span class="hljs-comment">//Subtree pointer array</span>
     Record *recptr[m+<span class="hljs-number">1</span>];     <span class="hljs-comment">//Record pointer array; slot 0 unused</span>
 }BTNode,*BTree;</code></pre></div>
-<h4 id="search-5">Search</h4>
-<h4 id="insertion-4">Insertion</h4>
-<h4 id="deletion-4">Deletion</h4>
+<h4 id="search-todo">Search (TODO)</h4>
+<h4 id="insertion-todo-2">Insertion (TODO)</h4>
+<h4 id="deletion-todo">Deletion (TODO)</h4>
 <h3 id="hash-table">Hash Table</h3>
 <p>To reduce the time complexity of storing and looking up data, we can use a function that maps a key of arbitrary length to an array index (address) in a fixed range. This function is called a <span class="obsidian-red">hash function</span>, and the resulting table is a <span class="obsidian-red">hash table</span>. Storage and lookup then take close to $O(1)$ time on average.</p>
 <div class="code-block" data-code-block="76"><div class="code-toolbar"><span class="code-language">CPP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-cpp" data-highlighted="local"><span class="hljs-meta">#define m 20 </span>
@@ -2423,12 +2443,12 @@ myset.<span class="hljs-built_in">clear</span>();                  <span class="
 <p>Mathematicians have proven: unless $P=NP$, no polynomial-time algorithm which has an approximate ratio better than $(1-\epsilon)\log n$.</p>
 <h4 id="weighted-version">Weighted Version</h4>
 <p>If every set has cost $w_i$, and we want to get the least cost, we can adjust the algorithm to calculate the unit cost $c_i=\frac{w_i}{|S_i\cap R_i|}$ each time and select the set with the smallest cost.</p>
-<p>Similar proofs can be found$$\alpha \le \log n+1$$</p>
+<p>Similar proofs can be found $$\alpha \le \log n+1$$</p>
 <h3 id="makespan-minimization">Makespan Minimization</h3>
 <p>We are given $n$ tasks requiring times $t_1,t_2,\dots,t_n$ respectively, and $m$ machines. We need to assign the $n$ tasks to the $m$ machines so as to minimize the maximum running time among all machines.</p>
 <p>This problem is NP-Hard even when $m=2$. For the case $m=2$, it can be reduced to the <a href="#01-knapsack-problem">0-1 Knapsack Problem</a> and solved by dynamic programming, with time complexity $O(nT)$.</p>
 <p>In general, we can use a greedy algorithm to obtain an approximate solution. First sort all tasks in descending order of time, then assign each task in turn to the machine with the smallest current load. The time complexity is dominated by the sorting, i.e., $O(n\log n)$.</p>
-<p>We define the approximation ratio $$\alpha=\frac{M^*}{M}$$where $M^*$ is the result obtained by the greedy algorithm and $M$ is the optimal solution. Then we have the following theorem:</p>
+<p>We define the approximation ratio $$\alpha=\frac{M^*}{M}$$ where $M^*$ is the result obtained by the greedy algorithm and $M$ is the optimal solution. Then we have the following theorem:</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$\alpha\le\frac{4}{3}$</p></div></div>
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Consider the task that determines the greedy makespan (the last task placed on the busiest machine). If $\alpha&gt;\frac{4}{3}$, then this task must take more than $\frac{1}{3}M$.</p>
 <p>We may assume this is the smallest task (otherwise, removing it would leave a smaller counterexample). Hence every task takes more than $\frac{1}{3}M$, so in the optimal solution each machine handles at most two tasks.</p>
@@ -2495,8 +2515,8 @@ myset.<span class="hljs-built_in">clear</span>();                  <span class="
 }</code></pre></div>
 <p>As a result, the algorithm achieve every composite only marked once. So $$T(n)=O(n)$$</p>
 <h3 id="millerrabin-tester">Miller-Rabin Tester</h3>
-<p>Observation: Fermat’s Little Theorem, you can see its proof in <a href="../math/number-theory.html#modular-arithmetic">Modular Arithmetic</a>. You can get $a^{n-1}\mod n$ in time $O(\log n)$ by fast exponentiation (see <a href="#fast-exponentiation">Fast Exponentiation</a>).</p>
-<p>If $a^{n-1} \not\equiv 1\mod n$, $n$ is definitely not prime. However, if $a^{n-1} \equiv 1\mod n$, $n$ is only probably prime. Some composite numbers still pass this Fermat test, such as$$100^{560} \equiv 1\mod 561,561=3\times11\times17$$ This type of number is called <span class="obsidian-red">Carmichael Numbers</span>. In 1994, Andrew Granville and Carl Pomerance proved that the Carmichael numbers are infinite.</p>
+<p>Observation: Fermat’s Little Theorem, you can see its proof in <a href="../math/number-theory.html#euler-s-theorem-and-fermat-s-little-theorem">Euler&#039;s Theorem and Fermat&#039;s Little Theorem</a>. You can get $a^{n-1}\mod n$ in time $O(\log n)$ by fast exponentiation (see <a href="#fast-exponentiation">Fast Exponentiation</a>).</p>
+<p>If $a^{n-1} \not\equiv 1\mod n$, $n$ is definitely not prime. However, if $a^{n-1} \equiv 1\mod n$, $n$ is only probably prime. Some composite numbers still pass this Fermat test, such as $$100^{560} \equiv 1\mod 561,561=3\times11\times17$$ This type of number is called <span class="obsidian-red">Carmichael Numbers</span>. In 1994, Andrew Granville and Carl Pomerance proved that the Carmichael numbers are infinite.</p>
 <p>How to improve this algorithm?</p>
 <p>Observation: Write $n-1=2^sd$ where $d$ is odd. For base $a$, compute $$a^d,a^{2d},a^{2^2d},\dots,a^{2^{s-1}d}\pmod n.$$</p>
 <p>If $n$ is an odd prime, then either $a^d\equiv1\pmod n$, or one of these squared values must become $-1\pmod n$ before the final value becomes $1$. Therefore, if $a^d\not\equiv1\pmod n$ and none of $a^d,a^{2d},\dots,a^{2^{s-1}d}$ is congruent to $-1\pmod n$, then $a$ is a witness that $n$ is composite.</p>
@@ -2551,7 +2571,7 @@ ull pow_mod(ull a,ull b,ull m) {
 <p>The first proof of PRIMES is P is proposed by AKS algorithm. For more details, you can read <a href="https://annals.math.princeton.edu/wp-content/uploads/annals-v160-n2-p12.pdf" target="_blank" rel="noopener noreferrer">this article</a></p>
 <h3 id="shor-algorithm-todo">Shor Algorithm (TODO)</h3>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"theoretical-basis","level":1,"text":"Theoretical Basis"},{"id":"data-structure","level":2,"text":"Data Structure"},{"id":"algorithm-analysis","level":2,"text":"Algorithm Analysis"},{"id":"tools-to-analyze-the-performance-of-program","level":3,"text":"Tools to Analyze the Performance of Program"},{"id":"randomized-algorithms-vs-deterministic-algorithms","level":2,"text":"Randomized Algorithms vs. Deterministic Algorithms"},{"id":"amortized-analysis","level":2,"text":"Amortized Analysis"},{"id":"turing-machine-tm","level":2,"text":"Turing Machine (TM)"},{"id":"computational-complexity","level":2,"text":"Computational Complexity"},{"id":"system-program-optimization","level":1,"text":"System Program Optimization"},{"id":"shallow-copy-and-deep-copy","level":2,"text":"Shallow Copy and Deep Copy"},{"id":"branchless-swap","level":2,"text":"Branchless Swap"},{"id":"sentinel","level":2,"text":"Sentinel"},{"id":"struct-memory-alignment","level":2,"text":"Struct Memory Alignment"},{"id":"process-and-thread","level":2,"text":"Process and Thread"},{"id":"linear-list-and-generalized-list","level":1,"text":"Linear List and Generalized List"},{"id":"sequential-representation","level":2,"text":"Sequential Representation"},{"id":"chain-representation","level":2,"text":"Chain Representation"},{"id":"linear-linked-list","level":3,"text":"Linear Linked List"},{"id":"doubly-linked-list","level":3,"text":"Doubly Linked List"},{"id":"floyd-cycle-detection-algorithm-tortoise-and-hare-algorithm","level":3,"text":"Floyd Cycle Detection Algorithm (Tortoise and Hare Algorithm)"},{"id":"multidimensional-array","level":2,"text":"Multidimensional Array"},{"id":"generalized-list","level":2,"text":"Generalized List"},{"id":"stack","level":1,"text":"Stack"},{"id":"the-call-stack-in-program-execution","level":2,"text":"The Call Stack in Program Execution"},{"id":"queue","level":1,"text":"Queue"},{"id":"linked-queue-linked-representation","level":2,"text":"Linked Queue (Linked Representation)"},{"id":"circular-queue-sequential-order","level":2,"text":"Circular Queue (Sequential Order)"},{"id":"string","level":1,"text":"String"},{"id":"string-matching","level":2,"text":"String Matching"},{"id":"rabinkarp-algorithm","level":3,"text":"Rabin-Karp Algorithm"},{"id":"kmp-algorithm","level":3,"text":"KMP Algorithm"},{"id":"highprecision-simulation","level":1,"text":"High-Precision Simulation"},{"id":"divide-and-conquer","level":1,"text":"Divide and Conquer"},{"id":"analysis-of-time-complexity","level":2,"text":"Analysis of Time Complexity"},{"id":"tail-recursion-optimization","level":2,"text":"Tail Recursion Optimization"},{"id":"binary-search","level":2,"text":"Binary Search"},{"id":"fast-exponentiation","level":2,"text":"Fast Exponentiation"},{"id":"strassen-algorithm","level":2,"text":"Strassen Algorithm"},{"id":"fast-fourier-transform-fft","level":2,"text":"Fast Fourier Transform (FFT)"},{"id":"closest-pair-of-points","level":2,"text":"Closest Pair of Points"},{"id":"sort","level":1,"text":"Sort"},{"id":"bubble-sort","level":2,"text":"Bubble Sort"},{"id":"selection-sort","level":2,"text":"Selection Sort"},{"id":"insertion-sort","level":2,"text":"Insertion Sort"},{"id":"shell-sort","level":2,"text":"Shell Sort"},{"id":"merge-sort","level":2,"text":"Merge Sort"},{"id":"quick-sort","level":2,"text":"Quick Sort"},{"id":"quick-select","level":3,"text":"Quick Select"},{"id":"noncomparison-algorithms","level":2,"text":"Non-Comparison Algorithms"},{"id":"counting-sort","level":3,"text":"Counting Sort"},{"id":"radix-sort","level":3,"text":"Radix Sort"},{"id":"linear-programming","level":1,"text":"Linear Programming"},{"id":"simplex-algorithm","level":2,"text":"Simplex Algorithm"},{"id":"dual-problem","level":2,"text":"Dual Problem"},{"id":"integer-linear-programming-ilp","level":2,"text":"Integer Linear Programming (ILP)"},{"id":"branch-and-bound","level":3,"text":"Branch and Bound"},{"id":"gomory-cut","level":3,"text":"Gomory Cut"},{"id":"transportation-problem","level":2,"text":"Transportation Problem"},{"id":"vogel-s-approximation-method-vam","level":3,"text":"Vogel's Approximation Method (VAM)"},{"id":"the-method-of-potentials","level":3,"text":"The Method of Potentials"},{"id":"tree","level":1,"text":"Tree"},{"id":"binary-tree","level":2,"text":"Binary Tree"},{"id":"binary-tree-traversal","level":2,"text":"Binary Tree Traversal"},{"id":"threaded-binary-tree","level":2,"text":"Threaded Binary Tree"},{"id":"storage-structures-of-trees-and-forests","level":2,"text":"Storage Structures of Trees and Forests"},{"id":"parent-representation","level":3,"text":"Parent Representation"},{"id":"child-representation","level":3,"text":"Child Representation"},{"id":"firstchild-nextsibling-representation","level":3,"text":"First-Child Next-Sibling Representation"},{"id":"storage-structure-of-a-forest","level":3,"text":"Storage Structure of a Forest"},{"id":"traversal-of-trees-and-forests","level":2,"text":"Traversal of Trees and Forests"},{"id":"huffman-tree-and-huffman-coding","level":2,"text":"Huffman Tree and Huffman Coding"},{"id":"heap-and-heap-sort","level":2,"text":"Heap and Heap Sort"},{"id":"search","level":3,"text":"Search"},{"id":"insert","level":3,"text":"Insert"},{"id":"delete","level":3,"text":"Delete"},{"id":"heap-sort","level":3,"text":"Heap Sort"},{"id":"priority-queue","level":3,"text":"Priority Queue"},{"id":"the-memory-heap-in-program-execution","level":3,"text":"The Memory Heap in Program Execution"},{"id":"graph","level":1,"text":"Graph"},{"id":"graph-storage-structures","level":2,"text":"Graph Storage Structures"},{"id":"adjacency-matrix","level":3,"text":"Adjacency Matrix"},{"id":"adjacency-list","level":3,"text":"Adjacency List"},{"id":"search-2","level":2,"text":"Search"},{"id":"depthfirst-search-dfs","level":3,"text":"Depth-First Search (DFS)"},{"id":"breadthfirst-search-bfs","level":3,"text":"Breadth-First Search (BFS)"},{"id":"minimum-spanning-tree-mst","level":2,"text":"Minimum Spanning Tree (MST)"},{"id":"prim-algorithm","level":3,"text":"Prim Algorithm"},{"id":"kruskal-algorithm-and-disjoint-sets","level":3,"text":"Kruskal Algorithm and Disjoint Sets"},{"id":"maximum-branching","level":2,"text":"Maximum Branching"},{"id":"singlesource-shortest-path-algorithms","level":2,"text":"Single-Source Shortest Path Algorithms"},{"id":"dijkstra-algorithm","level":3,"text":"Dijkstra Algorithm"},{"id":"bellmanford-algorithm","level":3,"text":"Bellman-Ford Algorithm"},{"id":"all-pairs-shortest-paths-apsp","level":2,"text":"All Pairs Shortest Paths (APSP)"},{"id":"floydwarshall-algorithm","level":3,"text":"Floyd-Warshall Algorithm"},{"id":"johnson-algorithm","level":3,"text":"Johnson Algorithm"},{"id":"topological-sort","level":2,"text":"Topological Sort"},{"id":"critical-path","level":2,"text":"Critical Path"},{"id":"strongly-connected-components","level":2,"text":"Strongly Connected Components"},{"id":"cartesian-tree","level":2,"text":"Cartesian Tree"},{"id":"lowest-common-ancestor-lca","level":2,"text":"Lowest Common Ancestor (LCA)"},{"id":"maxflow-and-mincut","level":2,"text":"Max-Flow and Min-Cut"},{"id":"fordfulkerson-algorithm","level":3,"text":"Ford-Fulkerson Algorithm"},{"id":"edmondskarp-algorithm","level":3,"text":"Edmonds-Karp Algorithm"},{"id":"karger-s-mincut-algorithm","level":3,"text":"Karger's Min-Cut Algorithm"},{"id":"stoerwagner-algorithm","level":3,"text":"Stoer-Wagner Algorithm"},{"id":"maximum-weight-closure-problem","level":3,"text":"Maximum Weight Closure Problem"},{"id":"clique","level":2,"text":"Clique"},{"id":"matching-and-vertex-cover","level":2,"text":"Matching and Vertex Cover"},{"id":"bipartite-graph","level":3,"text":"Bipartite Graph"},{"id":"hungarian-algorithm","level":3,"text":"Hungarian Algorithm"},{"id":"kuhnmunkres-algorithm","level":3,"text":"Kuhn-Munkres Algorithm"},{"id":"edmonds-blossom-algorithm","level":3,"text":"Edmonds' Blossom Algorithm"},{"id":"colorable","level":2,"text":"Colorable"},{"id":"euler-circuit-and-hamilton-path","level":2,"text":"Euler Circuit and Hamilton Path"},{"id":"search-3","level":1,"text":"Search"},{"id":"binary-search-tree-bst","level":2,"text":"Binary Search Tree (BST)"},{"id":"search-4","level":3,"text":"Search"},{"id":"insertion","level":3,"text":"Insertion"},{"id":"deletion","level":3,"text":"Deletion"},{"id":"balanced-binary-tree-adelsonvelsky-and-landis-tree-avl-tree","level":2,"text":"Balanced Binary Tree (Adelson-Velsky and Landis Tree, AVL Tree)"},{"id":"insertion-2","level":3,"text":"Insertion"},{"id":"deletion-2","level":3,"text":"Deletion"},{"id":"redblack-tree-todo","level":2,"text":"Red-Black Tree (TODO)"},{"id":"insertion-3","level":3,"text":"Insertion"},{"id":"deletion-3","level":3,"text":"Deletion"},{"id":"btree-todo","level":2,"text":"B-Tree (TODO)"},{"id":"search-5","level":3,"text":"Search"},{"id":"insertion-4","level":3,"text":"Insertion"},{"id":"deletion-4","level":3,"text":"Deletion"},{"id":"hash-table","level":2,"text":"Hash Table"},{"id":"collisions","level":3,"text":"Collisions"},{"id":"prefix-sum-and-binary-index-tree-bit","level":2,"text":"Prefix Sum and Binary Index Tree (BIT)"},{"id":"dynamic-programming-dp","level":1,"text":"Dynamic Programming (DP)"},{"id":"maximum-subarray-sum-problem","level":2,"text":"Maximum Subarray Sum Problem"},{"id":"longest-increasing-subsequence-lis","level":2,"text":"Longest Increasing Subsequence (LIS)"},{"id":"longest-common-subsequence-lcs","level":2,"text":"Longest Common Subsequence (LCS)"},{"id":"optimal-binary-search-tree-obst","level":2,"text":"Optimal Binary Search Tree (OBST)"},{"id":"matrix-chain-multiplication","level":2,"text":"Matrix Chain Multiplication"},{"id":"weighted-interval-scheduling","level":2,"text":"Weighted Interval Scheduling"},{"id":"subset-sum-todo","level":2,"text":"Subset Sum (TODO)"},{"id":"knapsack-todo","level":2,"text":"Knapsack (TODO)"},{"id":"01-knapsack-problem","level":3,"text":"0-1 Knapsack Problem"},{"id":"unbounded-knapsack-problem","level":3,"text":"Unbounded Knapsack Problem"},{"id":"bounded-knapsack-problem","level":3,"text":"Bounded Knapsack Problem"},{"id":"greedy","level":1,"text":"Greedy"},{"id":"interval-scheduling","level":2,"text":"Interval Scheduling"},{"id":"set-covering","level":2,"text":"Set Covering"},{"id":"weighted-version","level":3,"text":"Weighted Version"},{"id":"makespan-minimization","level":2,"text":"Makespan Minimization"},{"id":"algorithm-related-to-number-theory","level":1,"text":"Algorithm Related to Number Theory"},{"id":"prime-number-sieve","level":2,"text":"Prime Number Sieve"},{"id":"sieve-of-eratosthenes","level":3,"text":"Sieve of Eratosthenes"},{"id":"sieve-of-euler","level":3,"text":"Sieve of Euler"},{"id":"millerrabin-tester","level":2,"text":"Miller-Rabin Tester"},{"id":"shor-algorithm-todo","level":2,"text":"Shor Algorithm (TODO)"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"theoretical-basis","level":1,"text":"Theoretical Basis"},{"id":"data-structure","level":2,"text":"Data Structure"},{"id":"algorithm-analysis","level":2,"text":"Algorithm Analysis"},{"id":"tools-to-analyze-the-performance-of-program","level":3,"text":"Tools to Analyze the Performance of Program"},{"id":"randomized-algorithms-vs-deterministic-algorithms","level":2,"text":"Randomized Algorithms vs. Deterministic Algorithms"},{"id":"amortized-analysis","level":2,"text":"Amortized Analysis"},{"id":"turing-machine-tm","level":2,"text":"Turing Machine (TM)"},{"id":"computational-complexity","level":2,"text":"Computational Complexity"},{"id":"system-program-optimization","level":1,"text":"System Program Optimization"},{"id":"shallow-copy-and-deep-copy","level":2,"text":"Shallow Copy and Deep Copy"},{"id":"branchless-swap","level":2,"text":"Branchless Swap"},{"id":"sentinel","level":2,"text":"Sentinel"},{"id":"struct-memory-alignment","level":2,"text":"Struct Memory Alignment"},{"id":"process-and-thread","level":2,"text":"Process and Thread"},{"id":"linear-list-and-generalized-list","level":1,"text":"Linear List and Generalized List"},{"id":"sequential-representation","level":2,"text":"Sequential Representation"},{"id":"chain-representation","level":2,"text":"Chain Representation"},{"id":"linear-linked-list","level":3,"text":"Linear Linked List"},{"id":"doubly-linked-list","level":3,"text":"Doubly Linked List"},{"id":"floyd-cycle-detection-algorithm-tortoise-and-hare-algorithm","level":3,"text":"Floyd Cycle Detection Algorithm (Tortoise and Hare Algorithm)"},{"id":"multidimensional-array","level":2,"text":"Multidimensional Array"},{"id":"generalized-list","level":2,"text":"Generalized List"},{"id":"stack","level":1,"text":"Stack"},{"id":"the-call-stack-in-program-execution","level":2,"text":"The Call Stack in Program Execution"},{"id":"queue","level":1,"text":"Queue"},{"id":"linked-queue-linked-representation","level":2,"text":"Linked Queue (Linked Representation)"},{"id":"circular-queue-sequential-order","level":2,"text":"Circular Queue (Sequential Order)"},{"id":"string","level":1,"text":"String"},{"id":"string-matching","level":2,"text":"String Matching"},{"id":"rabinkarp-algorithm","level":3,"text":"Rabin-Karp Algorithm"},{"id":"kmp-algorithm","level":3,"text":"KMP Algorithm"},{"id":"highprecision-simulation","level":1,"text":"High-Precision Simulation"},{"id":"divide-and-conquer","level":1,"text":"Divide and Conquer"},{"id":"analysis-of-time-complexity","level":2,"text":"Analysis of Time Complexity"},{"id":"tail-recursion-optimization","level":2,"text":"Tail Recursion Optimization"},{"id":"binary-search","level":2,"text":"Binary Search"},{"id":"fast-exponentiation","level":2,"text":"Fast Exponentiation"},{"id":"strassen-algorithm","level":2,"text":"Strassen Algorithm"},{"id":"fast-fourier-transform-fft","level":2,"text":"Fast Fourier Transform (FFT)"},{"id":"closest-pair-of-points","level":2,"text":"Closest Pair of Points"},{"id":"sort","level":1,"text":"Sort"},{"id":"bubble-sort","level":2,"text":"Bubble Sort"},{"id":"selection-sort","level":2,"text":"Selection Sort"},{"id":"insertion-sort","level":2,"text":"Insertion Sort"},{"id":"shell-sort","level":2,"text":"Shell Sort"},{"id":"merge-sort","level":2,"text":"Merge Sort"},{"id":"quick-sort","level":2,"text":"Quick Sort"},{"id":"quick-select","level":3,"text":"Quick Select"},{"id":"noncomparison-algorithms","level":2,"text":"Non-Comparison Algorithms"},{"id":"counting-sort","level":3,"text":"Counting Sort"},{"id":"radix-sort","level":3,"text":"Radix Sort"},{"id":"linear-programming","level":1,"text":"Linear Programming"},{"id":"standard-form-of-linear-programming","level":2,"text":"Standard Form of Linear Programming"},{"id":"simplex-algorithm","level":2,"text":"Simplex Algorithm"},{"id":"dual-problem","level":2,"text":"Dual Problem"},{"id":"integer-linear-programming-ilp","level":2,"text":"Integer Linear Programming (ILP)"},{"id":"branch-and-bound","level":3,"text":"Branch and Bound"},{"id":"gomory-cut","level":3,"text":"Gomory Cut"},{"id":"transportation-problem","level":2,"text":"Transportation Problem"},{"id":"vogel-s-approximation-method-vam","level":3,"text":"Vogel's Approximation Method (VAM)"},{"id":"the-method-of-potentials","level":3,"text":"The Method of Potentials"},{"id":"tree","level":1,"text":"Tree"},{"id":"binary-tree","level":2,"text":"Binary Tree"},{"id":"binary-tree-traversal","level":2,"text":"Binary Tree Traversal"},{"id":"threaded-binary-tree","level":2,"text":"Threaded Binary Tree"},{"id":"storage-structures-of-trees-and-forests","level":2,"text":"Storage Structures of Trees and Forests"},{"id":"parent-representation","level":3,"text":"Parent Representation"},{"id":"child-representation","level":3,"text":"Child Representation"},{"id":"firstchild-nextsibling-representation","level":3,"text":"First-Child Next-Sibling Representation"},{"id":"storage-structure-of-a-forest","level":3,"text":"Storage Structure of a Forest"},{"id":"traversal-of-trees-and-forests","level":2,"text":"Traversal of Trees and Forests"},{"id":"huffman-tree-and-huffman-coding","level":2,"text":"Huffman Tree and Huffman Coding"},{"id":"heap-and-heap-sort","level":2,"text":"Heap and Heap Sort"},{"id":"search","level":3,"text":"Search"},{"id":"insert","level":3,"text":"Insert"},{"id":"delete","level":3,"text":"Delete"},{"id":"heap-sort","level":3,"text":"Heap Sort"},{"id":"priority-queue","level":3,"text":"Priority Queue"},{"id":"the-memory-heap-in-program-execution","level":3,"text":"The Memory Heap in Program Execution"},{"id":"graph","level":1,"text":"Graph"},{"id":"graph-storage-structures","level":2,"text":"Graph Storage Structures"},{"id":"adjacency-matrix","level":3,"text":"Adjacency Matrix"},{"id":"adjacency-list","level":3,"text":"Adjacency List"},{"id":"search-2","level":2,"text":"Search"},{"id":"depthfirst-search-dfs","level":3,"text":"Depth-First Search (DFS)"},{"id":"breadthfirst-search-bfs","level":3,"text":"Breadth-First Search (BFS)"},{"id":"minimum-spanning-tree-mst","level":2,"text":"Minimum Spanning Tree (MST)"},{"id":"prim-algorithm","level":3,"text":"Prim Algorithm"},{"id":"kruskal-algorithm-and-disjoint-sets","level":3,"text":"Kruskal Algorithm and Disjoint Sets"},{"id":"maximum-branching","level":2,"text":"Maximum Branching"},{"id":"singlesource-shortest-path-algorithms","level":2,"text":"Single-Source Shortest Path Algorithms"},{"id":"dijkstra-algorithm","level":3,"text":"Dijkstra Algorithm"},{"id":"bellmanford-algorithm","level":3,"text":"Bellman-Ford Algorithm"},{"id":"all-pairs-shortest-paths-apsp","level":2,"text":"All Pairs Shortest Paths (APSP)"},{"id":"floydwarshall-algorithm","level":3,"text":"Floyd-Warshall Algorithm"},{"id":"johnson-algorithm","level":3,"text":"Johnson Algorithm"},{"id":"topological-sort","level":2,"text":"Topological Sort"},{"id":"critical-path-todo","level":2,"text":"Critical Path (TODO)"},{"id":"strongly-connected-components","level":2,"text":"Strongly Connected Components"},{"id":"cartesian-tree","level":2,"text":"Cartesian Tree"},{"id":"lowest-common-ancestor-lca-todo","level":2,"text":"Lowest Common Ancestor (LCA) (TODO)"},{"id":"maxflow-and-mincut","level":2,"text":"Max-Flow and Min-Cut"},{"id":"fordfulkerson-algorithm-todo","level":3,"text":"Ford-Fulkerson Algorithm (TODO)"},{"id":"edmondskarp-algorithm-todo","level":3,"text":"Edmonds-Karp Algorithm (TODO)"},{"id":"karger-s-mincut-algorithm","level":3,"text":"Karger's Min-Cut Algorithm"},{"id":"stoerwagner-algorithm-todo","level":3,"text":"Stoer-Wagner Algorithm (TODO)"},{"id":"maximum-weight-closure-problem","level":3,"text":"Maximum Weight Closure Problem"},{"id":"clique","level":2,"text":"Clique"},{"id":"matching-and-vertex-cover","level":2,"text":"Matching and Vertex Cover"},{"id":"bipartite-graph","level":3,"text":"Bipartite Graph"},{"id":"hungarian-algorithm-todo","level":3,"text":"Hungarian Algorithm (TODO)"},{"id":"kuhnmunkres-algorithm-todo","level":3,"text":"Kuhn-Munkres Algorithm (TODO)"},{"id":"edmonds-blossom-algorithm","level":3,"text":"Edmonds' Blossom Algorithm"},{"id":"colorable","level":2,"text":"Colorable"},{"id":"euler-circuit-and-hamilton-path","level":2,"text":"Euler Circuit and Hamilton Path"},{"id":"search-3","level":1,"text":"Search"},{"id":"binary-search-tree-bst","level":2,"text":"Binary Search Tree (BST)"},{"id":"search-4","level":3,"text":"Search"},{"id":"insertion","level":3,"text":"Insertion"},{"id":"deletion","level":3,"text":"Deletion"},{"id":"balanced-binary-tree-adelsonvelsky-and-landis-tree-avl-tree","level":2,"text":"Balanced Binary Tree (Adelson-Velsky and Landis Tree, AVL Tree)"},{"id":"insertion-2","level":3,"text":"Insertion"},{"id":"deletion-2","level":3,"text":"Deletion"},{"id":"redblack-tree-todo","level":2,"text":"Red-Black Tree (TODO)"},{"id":"insertion-todo","level":3,"text":"Insertion (TODO)"},{"id":"deletion-3","level":3,"text":"Deletion"},{"id":"btree-todo","level":2,"text":"B-Tree (TODO)"},{"id":"search-todo","level":3,"text":"Search (TODO)"},{"id":"insertion-todo-2","level":3,"text":"Insertion (TODO)"},{"id":"deletion-todo","level":3,"text":"Deletion (TODO)"},{"id":"hash-table","level":2,"text":"Hash Table"},{"id":"collisions","level":3,"text":"Collisions"},{"id":"prefix-sum-and-binary-index-tree-bit","level":2,"text":"Prefix Sum and Binary Index Tree (BIT)"},{"id":"dynamic-programming-dp","level":1,"text":"Dynamic Programming (DP)"},{"id":"maximum-subarray-sum-problem","level":2,"text":"Maximum Subarray Sum Problem"},{"id":"longest-increasing-subsequence-lis","level":2,"text":"Longest Increasing Subsequence (LIS)"},{"id":"longest-common-subsequence-lcs","level":2,"text":"Longest Common Subsequence (LCS)"},{"id":"optimal-binary-search-tree-obst","level":2,"text":"Optimal Binary Search Tree (OBST)"},{"id":"matrix-chain-multiplication","level":2,"text":"Matrix Chain Multiplication"},{"id":"weighted-interval-scheduling","level":2,"text":"Weighted Interval Scheduling"},{"id":"subset-sum-todo","level":2,"text":"Subset Sum (TODO)"},{"id":"knapsack-todo","level":2,"text":"Knapsack (TODO)"},{"id":"01-knapsack-problem","level":3,"text":"0-1 Knapsack Problem"},{"id":"unbounded-knapsack-problem","level":3,"text":"Unbounded Knapsack Problem"},{"id":"bounded-knapsack-problem","level":3,"text":"Bounded Knapsack Problem"},{"id":"greedy","level":1,"text":"Greedy"},{"id":"interval-scheduling","level":2,"text":"Interval Scheduling"},{"id":"set-covering","level":2,"text":"Set Covering"},{"id":"weighted-version","level":3,"text":"Weighted Version"},{"id":"makespan-minimization","level":2,"text":"Makespan Minimization"},{"id":"algorithm-related-to-number-theory","level":1,"text":"Algorithm Related to Number Theory"},{"id":"prime-number-sieve","level":2,"text":"Prime Number Sieve"},{"id":"sieve-of-eratosthenes","level":3,"text":"Sieve of Eratosthenes"},{"id":"sieve-of-euler","level":3,"text":"Sieve of Euler"},{"id":"millerrabin-tester","level":2,"text":"Miller-Rabin Tester"},{"id":"shor-algorithm-todo","level":2,"text":"Shor Algorithm (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -2671,21 +2691,28 @@ gprof's instrumentation counts every call exactly, so call counts are precise, b
 Deterministic Algorithm
 ![Screenshot 2026-05-19 at 21.28.46](../attachments/Screenshot%202026-05-19%20at%2021.28.46.png){width=450}
 Definition: Given a deterministic algorithm $B$ and $n$
-the longest running time of $B$ among all inputs of parameter $n$ $$T(n)=\max_{ \Phi:|\Phi|=n}Time(B(\Phi))$$
-the average-case time denotes the average time of $B$ on all input of parameter $n$$$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}Time(B(\Phi))$$
+the longest running time of $B$ among all inputs of parameter $n$ 
+$$T(n)=\max_{ \Phi:|\Phi|=n}Time(B(\Phi))$$
+the average-case time denotes the average time of $B$ on all input of parameter $n
+$$$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}Time(B(\Phi))$$
 Randomized Algorithm
 ![Screenshot 2026-05-19 at 21.36.18](../attachments/Screenshot%202026-05-19%20at%2021.36.18.png){width=457}
 
 Define: Given a randomized Algorithm with input $\Phi$ and random string $r$
-The expected running time (also called running time in the worst case) of $A$ among all inputs of parameter $n$ $$T(n)=\max_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$
-The average-case running time of $A$ among all inputs of parameter $n$ $$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$
+The expected running time (also called running time in the worst case) of $A$ among all inputs of parameter $n$ 
+$$T(n)=\max_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$
+The average-case running time of $A$ among all inputs of parameter $n$ 
+$$T(n)=\sideset{}{}{\mathbb{E}}_{ \Phi:|\Phi|=n}\{\sideset{}{}{\mathbb{E}}_{ r}[Time(A(\Phi,r))]\}$$
 ## Amortized Analysis
 
 For an algorithm with lots of process, we can use amortized analysis to evaluate the average performance of the algorithm.
 
 - Aggregate Method: Directly compute the total cost $T(n)$, then amortize it $T(n)/n$.
 - Accounting Method: Pay extra for fast operations (deposit credit), and use the deposited money to offset slow operations when they occur.
-- Potential Method: Define a potential function $\Phi$ and the amortized cost $\hat{c}$ as:$$\hat{c_i}=c_i+\Phi_i-\Phi_{i-1}$$If the potential function is non-negative and $\Phi_0=0$, then$$\sum_{i=1}^k \hat{c_i}=\sum_{i=1}^kc_i+\Phi_k-\Phi_0\ge\sum_{i=1}^kc_i$$
+- Potential Method: Define a potential function $\Phi$ and the amortized cost $\hat{c}$ as:
+  $$\hat{c_i}=c_i+\Phi_i-\Phi_{i-1}$$
+  If the potential function is non-negative and $\Phi_0=0$, then
+  $$\sum_{i=1}^k \hat{c_i}=\sum_{i=1}^kc_i+\Phi_k-\Phi_0\ge\sum_{i=1}^kc_i$$
 It will be used in Linear List & Generalized List, Cartesian Tree, and Kruskal Algorithm & Disjoint Sets.
 ## Turing Machine (TM)
 
@@ -2698,7 +2725,8 @@ Turing proposed the Turing Machine:
 4. A finite transition table
 5. Its input is all $\{0, 1\}$-strings, and its output is $\{0, 1\}$
 6. Unbounded memory space
-7. Transition function$$\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$$
+7. Transition function
+   $$\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$$
 If $\delta(q, a) = (r, b, D)$, then we switch the machine's internal state to $r$, rewrite the symbol $a$ at the current position on the paper tape to $b$, and move the read/write head one unit in the direction $D$ ($L$ represents moving one unit to the left, $R$ represents moving one unit to the right).
 
 We define some states as accept state $q_{accept}$ and reject state $q_{reject}$. Regulate: $q_{reject} \neq q_{accept}$. If the state is $q_{accept}$ or $q_{reject}$, the TM will halt.
@@ -2762,13 +2790,15 @@ Another classic problem is Domino Problem, also called TILE, which was proposed 
 >TILE is undecidable.
 
 >[!PROOF]
+> TODO: Complete the proof.
 ## Computational Complexity
 
 A natural question: Given two problems A and B, how to compare their hardness?
 
 The answer is <span style="color: red;">reduction</span>: if problem $Q$ can be transformed into problem $L$ efficiently, then $L$ is at least as hard as $Q$. There are two common notions:
 
-<span style="color: red;">Karp Reduction</span> (polynomial-time many-one reduction), denoted $Q \le_p L$: $\exists$ a poly-time computable function $f$ s.t. for every input $x$,$$x \in Q \iff f(x) \in L$$
+<span style="color: red;">Karp Reduction</span> (polynomial-time many-one reduction), denoted $Q \le_p L$: $\exists$ a poly-time computable function $f$ s.t. for every input $x$,
+$$x \in Q \iff f(x) \in L$$
 i.e., we transform an instance of $Q$ into one instance of $L$ with the same yes/no answer, and call the solver of $L$ exactly once at the end.
 
 <span style="color: red;">P</span> is the class of decision problems (languages) solvable by a deterministic algorithm in polynomial time.
@@ -2801,8 +2831,10 @@ The proof of the theorem can refer [this article](https://content.scirp.org/pdf/
 >$$C_j=(l_{j,1} \lor l_{j,2} \lor l_{j,3}),l_{j,k}\in\{x_1,\neg x_1,\dots,x_n,\neg x_n\}$$
 
 >[!PROOF]
->$k=1$:$$x_1\iff(x_1 \lor a \lor b) \land (x_1 \lor a \lor \neg b) \land (x_1 \lor \neg a \lor b) \land (x_1 \lor \neg a \lor \neg b)$$
->$k=2$:$$x_1\lor x_2 \iff(x_1 \lor x_2 \lor a) \land (x_1 \lor x_2 \lor \neg a)$$
+>$k=1$:
+>$$x_1\iff(x_1 \lor a \lor b) \land (x_1 \lor a \lor \neg b) \land (x_1 \lor \neg a \lor b) \land (x_1 \lor \neg a \lor \neg b)$$
+>$k=2$:
+>$$x_1\lor x_2 \iff(x_1 \lor x_2 \lor a) \land (x_1 \lor x_2 \lor \neg a)$$
 >$k>3$: Assume that the clause is $(l_1 \vee l_2 \vee \dots \vee l_k)$. Introduce $k-3$ new auxiliary variables $y_1, y_2, \dots, y_{k-3}$. The clause is equisatisfiable with (not logically equivalent to, since new variables are introduced):
 >$$(l_1 \vee l_2 \vee y_1) \wedge (\neg y_1 \vee l_3 \vee y_2) \wedge (\neg y_2 \vee l_4 \vee y_3) \wedge \dots \wedge (\neg y_{k-3} \vee l_{k-1} \vee l_k)$$
 >So SAT problem can be transformed into 3SAT problem.
@@ -2822,9 +2854,11 @@ Also, we can give similar problems:
 >
 >We will now prove that the 3SAT problem can be reduced to the 3SAT-thrice problem. For each variable $x$, let $k$ be the number of occurrences of $x$ and $\neg x$. If $k \le 3$, no action is needed.
 >
->If $k > 3$, we can add variables $x_1, x_2, \dots, x_{k}$ to replace the $k$ occurrences of $x$ and $\neg x$ in the boolean statement (the $i$-th occurrence of $x$ is replaced by $x_i$, and the $i$-th occurrence of $\neg x$ is replaced by $\neg x_i$). We need to ensure that $$x_1=x_2=\dots=x_{k}$$
+>If $k > 3$, we can add variables $x_1, x_2, \dots, x_{k}$ to replace the $k$ occurrences of $x$ and $\neg x$ in the boolean statement (the $i$-th occurrence of $x$ is replaced by $x_i$, and the $i$-th occurrence of $\neg x$ is replaced by $\neg x_i$). We need to ensure that 
+>$$x_1=x_2=\dots=x_{k}$$
 >
->This condition can be achieved by adding a cyclic chain of implications: $$(\neg x_1 \lor x_2) \land (\neg x_2 \lor x_3) \land \dots \land (\neg x_{k-1} \lor x_k) \land (\neg x_{k} \lor x_1)$$
+>This condition can be achieved by adding a cyclic chain of implications: 
+>$$(\neg x_1 \lor x_2) \land (\neg x_2 \lor x_3) \land \dots \land (\neg x_{k-1} \lor x_k) \land (\neg x_{k} \lor x_1)$$
 >
 >In this way, if all these variables are equal, every clause in the implication chain is true. Otherwise, if the variables contain both true and false values, then there must exist adjacent elements satisfying $x_i=true, x_{i+1}=false(i=1,\dots,k)$, where $x_{k+1}=x_1$. Therefore, this implication chain is false.
 >
@@ -2873,7 +2907,7 @@ public:
 | Main risk          | Double free, dangling pointer, aliasing bugs          | Extra time and memory                                     |
 | In C/C++           | Default copy constructor / assignment; `memcpy`       | User-defined copy constructor / assignment                |
 
-> [!NOTE] Rule of three/five
+> [!NOTE] Rule of Three/Five
 > If a class defines a destructor, a copy constructor, or a copy assignment operator, it probably needs all three (the rule of three), plus a move constructor and a move assignment operator in modern C++ (the rule of five). Move semantics transfer the resource instead of copying it, avoiding the cost of a deep copy when the source object is about to die. In modern C++, the safest default is to hold resources through containers such as `std::vector` or smart pointers, which implement correct deep-copy or move behavior for you.
 
 ## Branchless Swap
@@ -2931,7 +2965,7 @@ int find_optimized(int *arr, int n, int target) {
 
 The loop body now performs one comparison instead of two. When $n$ is large, this removes $n$ branch judgments, and since hard-to-predict branches stall the CPU pipeline and are expensive (see [Branchless Swap](#branchless-swap)), the saving is real. The price is one extra element of space (or a restore step) and the requirement that the target be writable into the array.
 
-> [!NOTE] Sentinels in disguise
+> [!NOTE] Sentinels in Disguise
 > The dummy head node of a linked list is the same idea: by guaranteeing that every real node has a predecessor, the special-case checks for an empty list disappear. Knuth's sequential search with a sentinel is the classical reference for this technique.
 
 ## Struct Memory Alignment
@@ -2949,7 +2983,7 @@ Assuming `char` is 1 byte and `long` is 4 bytes (the assumption of the figure; o
 - `_a`: `c1` sits at offset $0$; bytes $1$–$3$ are padding so that `i` can start at offset $4$; `c2` sits at offset $8$; bytes $9$–$11$ are trailing padding, because the size of the whole struct must be a multiple of $4$. Hence $\text{sizeof}(a)=12$.
 - `_b`: `c1` and `c2` sit at offsets $0$ and $1$; bytes $2$–$3$ are padding; `i` occupies offsets $4$–$7$. No trailing padding is needed, so $\text{sizeof}(b)=8$.
 
-> [!NOTE] Why alignment exists, and how to exploit it
+> [!NOTE] Why Alignment Exists, and How to Exploit It
 > Aligned accesses match the memory hardware: an unaligned word can split across two cache lines, and on architectures that require alignment it faults outright. To minimize padding, order struct members from largest to smallest — reordering `_a` into `_b` saves a third of the space with zero semantic change. If space matters more than access speed, `#pragma pack(1)` disables padding at the cost of unaligned accesses.
 
 ## Process and Thread
@@ -2963,7 +2997,7 @@ A <span style="color: red;">process</span> is an independent unit of resource al
 | Communication | IPC: pipes, message queues, shared memory | Direct access to shared memory; needs synchronization (mutex, condition variables) |
 | Failure isolation | A crash kills only that process | A fatal error in one thread kills the whole process |
 
-On Linux, threads are programmed with <span style="color: red;">POSIX threads (pthread)</span>. The essential calls are `pthread_create` (spawn a thread running a given function), `pthread_join` (wait for a thread to finish), and `pthread_exit` (terminate the calling thread); programs must be linked with `-lpthread`.
+On Linux, threads are programmed with POSIX threads (pthread). The essential calls are `pthread_create` (spawn a thread running a given function), `pthread_join` (wait for a thread to finish), and `pthread_exit` (terminate the calling thread); programs must be linked with `-lpthread`.
 
 ```c
 #include <stdio.h>
@@ -3038,7 +3072,8 @@ Another method is the potential method. For an insertion-only dynamic array, aft
 $$\Phi(n,m)=\max\{2n-m,0\}$$
 where $n$ is the number of elements in the array and $m$ is the array capacity. Under this invariant, $\Phi$ is non-negative.
 
-We can find that $$\hat{c_i}\le 3=O(1)$$
+We can find that 
+$$\hat{c_i}\le 3=O(1)$$
 ## Sequential Representation
 
 The <span style="color: red;">sequential representation</span> of a linear list refers to storing the data elements of the linear list sequentially in a set of contiguous memory locations.
@@ -3152,7 +3187,8 @@ which can be recorded as
 
 $$LOC(j_1,j_2,\dots,j_n)=LOC(0,0,...,0)+\sum _{i=1}^nc_ij_i$$
 
-where$$ c_n=L,c_{i-1}=b_ic_i,1<i\le n$$
+where
+$$ c_n=L,c_{i-1}=b_ic_i,1<i\le n$$
 
 ```cpp
 #define MAX_ARRAY_DIM 8
@@ -3271,7 +3307,7 @@ The pure data structure and the call stack share the LIFO discipline, but they a
 | Size | Flexible: fixed array, or linked structure that grows dynamically | Fixed at thread creation (e.g., 8 MiB per thread by default on Linux; check with `ulimit -s`) |
 | Overflow | Pushing onto a full stack reports an error | <span style="color: red;">stack overflow</span>: unbounded recursion or oversized local arrays crash the program |
 
-> [!NOTE] stack overflow and converting recursion to iteration
+> [!NOTE] Stack Overflow and Converting Recursion to Iteration
 > Because the call stack has a fixed size, deep recursion exhausts it and the program crashes with a stack overflow. This motivates converting recursion into an explicit loop with a programmer-controlled stack: the nodes are then allocated dynamically with `new`, so the limit is the available memory rather than a fixed quota. A compiler may also perform tail-call optimization: when a recursive call is in tail position, i.e., nothing is left to do after it returns, the current frame can be reused and the call stack usage stays at $O(1)$.
 
 # Queue
@@ -3405,9 +3441,12 @@ The simplest method needs time $O(mn)$.
 
 Basic idea: Instead of comparing the string, compare their hash values.
 
-Consider the pattern $P[1, \dots ,m]$ as a huge number in radix-26:$$h(P)=P[1]\cdot26^{m-1}+P[2]\cdot 26^{m-2}+\dots+P[m] \bmod q \text{ for prime }q<2^{64}$$
-Let $t_i$ denote the number $T [i+1, \dots, i+m]$, i.e.$$t_i=T[i+1]\cdot26^{m-1}+T[i+2]\cdot26^{m-2}+\dots+T[i+m]\bmod q$$
-Observation:$$t_{i+1}=((t_i-T[i+1]\cdot26^{m-1})\cdot26+T[i+m+1])\bmod q$$
+Consider the pattern $P[1, \dots ,m]$ as a huge number in radix-26:
+$$h(P)=P[1]\cdot26^{m-1}+P[2]\cdot 26^{m-2}+\dots+P[m] \bmod q \text{ for prime }q<2^{64}$$
+Let $t_i$ denote the number $T [i+1, \dots, i+m]$, i.e.
+$$t_i=T[i+1]\cdot26^{m-1}+T[i+2]\cdot26^{m-2}+\dots+T[i+m]\bmod q$$
+Observation:
+$$t_{i+1}=((t_i-T[i+1]\cdot26^{m-1})\cdot26+T[i+m+1])\bmod q$$
 As a result, we can calculate the hash tags of $h(P)$ and $t_0,\dots,t_{n-m}$ in time $O(n + m)$.
 
 One question is it is possible $T[s+1,\dots,s+m] \ne P$ but $t_s=h(P)$ (a hash collision). So we need to character-by-character compare when we meet the same hash value. With a random large prime $q$, collisions between unequal strings are rare, so the expected time is $O(n+m)$. However, the verification cost can still degenerate to $O(nm)$ in the worst case — e.g., when the text is `AAAAAAA` and the pattern is `AAA`, every shift is a true match, and each one must be verified character by character.
@@ -3417,7 +3456,8 @@ The <span style="color: red;">KMP algorithm</span> was invented by D.E. Knuth, V
 
 Given text $T='t_1t_2\dots t_n'$ and the pattern string $P='p_1p_2\dots p_m'$. To implement the improved algorithm, we need to solve the following problem: when a mismatch occurs during the matching process (i.e., $t_i\ne p_j$), what is the feasible distance for the pattern string to "slide to the right"?
 
-If $t_i\ne p_j$, then$$'t_{i-j+1}t_{i-j+2}\dots t_{i-1}'='p_{1}p_{2}\dots p_{j-1}'$$
+If $t_i\ne p_j$, then
+$$'t_{i-j+1}t_{i-j+2}\dots t_{i-1}'='p_{1}p_{2}\dots p_{j-1}'$$
 Instead of restarting, we want the pattern to keep sliding. If after sliding we continue the comparison with $t_i$ against $p_d$ $(d<j)$, the characters already matched must satisfy
 $$'t_{i-d+1}t_{i-d+2}\dots t_{i-1}'='p_{1}p_{2}\dots p_{d-1}'$$
 Therefore, the following equation can be obtained.
@@ -3429,7 +3469,8 @@ The following question is how to solve the array $next$. If $next[j]=d$, if we w
 2. $p_d\ne p_j$, let $next[j+1]=k$, then
 $$'p_{j-d+1}p_{j-d+2}\dots p_{j-1}'='p_{1}p_{2}\dots p_{d-1}'$$
 $$'p_{j-k+2}p_{j-k+3}\dots p_{j}'='p_{1}p_{2}\dots p_{k-1}'$$
-Therefore,$$'p_{d-k+2}p_{d-k+3}\dots p_{d-1}'='p_{1}p_{2}\dots p_{k-2}' \text{ and } p_j=p_{k-1}$$
+Therefore,
+$$'p_{d-k+2}p_{d-k+3}\dots p_{d-1}'='p_{1}p_{2}\dots p_{k-2}' \text{ and } p_j=p_{k-1}$$
 As a result, if $p_j=p_{k-1}$, then $k-1 = next[d]$. Otherwise, this process can be called recursively.
 
 We can further optimize this algorithm, for example, if $P='aaaab'$,  $T='aaabaaaab'$. When $i=4,j=4$, we need $i=4,j=3;i=4,j=2;i=4,j=1$ three comparisons. In fact, since the first to third characters and the fourth character in the pattern are all equal, there is no need to compare them with the fourth character in the main string. Instead, the pattern can be slid four characters to the right to directly compare the characters when $i=5,j=1$. In other words, if we get $next[j] = k$ according to the above definition, and $p_j = p_k$ in the pattern, we can directly shift the pattern string to $next[k]$, i.e., $next[j] = next[k]$.
@@ -3627,7 +3668,8 @@ For plus and minus, the time complexity is $O(\log a+\log b)$, and for multiple,
 
 ## Analysis of Time Complexity
 
-If we use a recurrence to analyze time complexity, assume that each problem of size $n$ is divided into $a$ subproblems of size $\frac{n}{b}$, and the divide/combine work costs $f(n)$, i.e.$$T(n)=aT(\frac{n}{b})+f(n)$$
+If we use a recurrence to analyze time complexity, assume that each problem of size $n$ is divided into $a$ subproblems of size $\frac{n}{b}$, and the divide/combine work costs $f(n)$, i.e.
+$$T(n)=aT(\frac{n}{b})+f(n)$$
 We can use recursion-tree to get the time complexity of the problem.
 
 >[!EXAMPLE]
@@ -3638,9 +3680,14 @@ Also, we can use recursion-tree to prove the following theorem.
 
 >[!THEOREM] Master Theorem
 >Let constant $a>1,b>1$, then:
->1. If $f(n)=\Theta (n^{\log _b a})$, then $$T(n)=\Theta(n^{ \log_b a} \log n)$$
->2. If $f(n)=O(n^{\log_b a-\Omega(1)})$, then $$T(n)=\Theta(n^{\log_b a})$$
->3. If $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, and for sufficiently large $n$, $$\exists \epsilon>0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$then $$T(n)=\Theta(f(n))$$
+>1. If $f(n)=\Theta (n^{\log _b a})$, then 
+>   $$T(n)=\Theta(n^{ \log_b a} \log n)$$
+>2. If $f(n)=O(n^{\log_b a-\Omega(1)})$, then 
+>   $$T(n)=\Theta(n^{\log_b a})$$
+>3. If $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, and for sufficiently large $n$, 
+>   $$\exists \epsilon>0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$
+>   then 
+>   $$T(n)=\Theta(f(n))$$
 
 >[!PROOF]
 >![Screenshot 2026-06-27 at 22.20.16](../attachments/Screenshot%202026-06-27%20at%2022.20.16-optimized.webp){width=450}
@@ -3652,9 +3699,12 @@ Also, we can use recursion-tree to prove the following theorem.
 >$$\begin{align*}T(n)&=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&= \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jO((\frac{n}{b^j})^{\log_ba-\Omega(1)})\\&=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}O(n^{\log_ba-\Omega(1)}b^{j\Omega(1)})\\&=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\sum_{j=0}^{\lfloor \log_bn \rfloor}O(b^{j\Omega(1)})\\&=\Theta(n^{\log_ba})+O(n^{\log_ba-\Omega(1)})\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}\end{align*}$$
 >Given that $\Omega(1)>0,b>1$, hence $b^{\Omega(1)}>1$, $1-b^{\Omega(1)}<0$. We focus on the fastest-growing term in the numerator:
 >$$\frac{1-b^{(\lfloor \log_bn \rfloor+1)\Omega(1))}}{1-b^{\Omega(1)}}=O(b^{(\log_bn)\Omega(1)})=O(n^{\Omega(1)})$$
->As a result,$$T(n)=\Theta(n^{\log_ba})$$
->For circumstance 3, because for sufficiently large $n$, $$\exists \epsilon>0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$
->We can find that$$a^jf(\frac{n}{b^j})\le(1-\epsilon)^jf(n)$$
+>As a result,
+>$$T(n)=\Theta(n^{\log_ba})$$
+>For circumstance 3, because for sufficiently large $n$, 
+>$$\exists \epsilon>0,af(\frac{n}{b})\le(1-\epsilon)f(n)$$
+>We can find that
+>$$a^jf(\frac{n}{b^j})\le(1-\epsilon)^jf(n)$$
 >Hence,
 >$$\begin{align*}T(n)&=\Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}a^jf(\frac{n}{b^j})\\&< \Theta(n^{\log_ba})+\sum_{j=0}^{\lfloor \log_bn \rfloor}(1-\epsilon)^jf(n)\\&<\Theta(n^{\log_b a})+\frac{1}{\epsilon} f(n)\end{align*}$$
 >Because $f(n)=\Omega(n^{\log_b a+\Omega(1)})$, we can find that
@@ -3714,7 +3764,8 @@ int Search_Bin(int max) {
 
 ## Fast Exponentiation
 
-Noted $$a^n=(a^2)^{\left \lfloor \frac{n}{2} \right \rfloor}\cdot a^{n \bmod2}$$
+Noted 
+$$a^n=(a^2)^{\left \lfloor \frac{n}{2} \right \rfloor}\cdot a^{n \bmod2}$$
 ```cpp
 int fastpow(int a,int n) {
     if(n==0)return 1;
@@ -3724,8 +3775,12 @@ int fastpow(int a,int n) {
 }
 ```
 
-Under this circumstance, $$T(n)=T(\frac{n}{2})+O(1)$$$$T(n)=O(\log n)$$
-We can also use this method to compute Fibonacci numbers, because:$$\begin{bmatrix}
+Under this circumstance, 
+$$T(n)=T(\frac{n}{2})+O(1)$$
+
+$$T(n)=O(\log n)$$
+We can also use this method to compute Fibonacci numbers, because:
+$$\begin{bmatrix}
  F_n\\F_{n-1}
 
 \end{bmatrix}=\begin{bmatrix}
@@ -3743,7 +3798,8 @@ We can also use this method to compute Fibonacci numbers, because:$$\begin{bmatr
 \end{bmatrix}$$
 ## Strassen Algorithm
 
-Generally, define the multiplication of two $n\times n$ matrices $A,B$ as $C$, where$$c_{i,j}=\sum_ka_{i,k}b_{k,j}$$
+Generally, define the multiplication of two $n\times n$ matrices $A,B$ as $C$, where
+$$c_{i,j}=\sum_ka_{i,k}b_{k,j}$$
 Define the exponent of matrix multiplication as $\omega$, so the time complexity is $O(n^\omega)$. We know $\omega \in [2,3]$.
 
 If we divide the matrix into blocks, i.e.
@@ -3759,7 +3815,8 @@ $$\begin{bmatrix}
  C_{21} &C_{22}
 \end{bmatrix}$$
 
-This time, $$T(n)=8T(\frac{n}{2})+O(n^2),T(n)=O(n^3)$$
+This time, 
+$$T(n)=8T(\frac{n}{2})+O(n^2),T(n)=O(n^3)$$
 Strassen's crucial observation is:
 
 $$P_1=(A_{11}+A_{22})(B_{11}+B_{22})$$
@@ -3847,7 +3904,8 @@ void fft(vector<cd>& a, bool invert) {
 
 This implementation assumes `a.size()` is a power of two. For convolution, pad both input sequences with zeros until the length is at least the required result length and is a power of two.
 
-The FFT has many applications. We can find that$$\mathcal{F}\{f*g\}=\mathcal{F}\{f\}\cdot\mathcal{F}\{g\}$$
+The FFT has many applications. We can find that
+$$\mathcal{F}\{f*g\}=\mathcal{F}\{f\}\cdot\mathcal{F}\{g\}$$
 As a result, the FFT can accelerate convolution. For example, multiplication can be treated as a convolution operation: let $f,g$ be polynomials and take the variable $x$ as $10$, then polynomial multiplication becomes fast integer multiplication, which has time $\tilde{O}(\log a+\log b)$ rather than $O(\log a\log b)$.
 
 >Tip The definition of notation $\tilde{O}$
@@ -3862,7 +3920,9 @@ which Gaussian elimination solves in $O(N^3)$, and even exploiting the Vandermon
 > i.e. the $(j,k)$ entry of $V_N^{-1}$ is $\frac{1}{N}\omega_N^{-jk}$.
 
 >[!PROOF]
->The $(j,l)$ entry of $\overline{V_N}V_N$ is$$\sum_{k=0}^{N-1}\omega_N^{(l-j)k}=\begin{cases}N,&j=l\\ \dfrac{\omega_N^{(l-j)N}-1}{\omega_N^{l-j}-1}=0,&j\neq l\end{cases}\ =N\delta_{jl},$$since $\omega_N^{(l-j)N}=1$ and $\omega_N^{l-j}\neq 1$ when $j\neq l$.
+>The $(j,l)$ entry of $\overline{V_N}V_N$ is
+>$$\sum_{k=0}^{N-1}\omega_N^{(l-j)k}=\begin{cases}N,&j=l\\ \dfrac{\omega_N^{(l-j)N}-1}{\omega_N^{l-j}-1}=0,&j\neq l\end{cases}\ =N\delta_{jl},$$
+>since $\omega_N^{(l-j)N}=1$ and $\omega_N^{l-j}\neq 1$ when $j\neq l$.
 
 Hence $A=\frac{1}{N}\overline{V_N}Y$: the coefficient vector is exactly the inverse DFT of the value vector, and interpolation at the roots of unity is solved by the same butterflies with $\omega_N^{-1}$ plus the final division by $N$.
 
@@ -3907,8 +3967,13 @@ Now we can prove the following theorem, which reduces the double loop over the s
 >
 >Thus each small cell contains at most one relevant point, so at most 8 points need to be considered.
 
-$$T(n)=2T(\frac{n}{2})+O(n\log n)$$$$T(n)=O(n\log^2 n)$$
-We can also combine the divide and sort; that is, by adopting the divide-and-conquer sorting approach, we can sort the points while solving each subproblem. Then,$$T(n)=2T(\frac{n}{2})+O(n)$$$$T(n)=O(n\log n)$$
+$$T(n)=2T(\frac{n}{2})+O(n\log n)$$
+
+$$T(n)=O(n\log^2 n)$$
+We can also combine the divide and sort; that is, by adopting the divide-and-conquer sorting approach, we can sort the points while solving each subproblem. Then,
+$$T(n)=2T(\frac{n}{2})+O(n)$$
+
+$$T(n)=O(n\log n)$$
 ```cpp
 #include <iostream>
 #include <algorithm>
@@ -4112,7 +4177,8 @@ void MergeSort(int a[],int p,int q) {
 }
 ```
 
-We can find that $$T(n)=2T(\frac{n}{2})+O(n)$$
+We can find that 
+$$T(n)=2T(\frac{n}{2})+O(n)$$
 As a result, the time complexity of merge sort is $O(n\log n)$. It is stable, but it needs $O(n)$ extra space.
 
 ## Quick Sort
@@ -4308,14 +4374,20 @@ If $a[i]\le 2^{O(1)}$, then $T(n)=O(n)$.
 
 # Linear Programming
 
+## Standard Form of Linear Programming
+
 <span style="color: red;">Linear programming</span> problem can be defined as:
-$$\max /\min z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix}
+$$\max /\min z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\left\{\begin{matrix}
 a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le(\text{or} =,\ge)b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n\le(\text{or} =,\ge)b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n\le(\text{or} =,\ge)b_m\\x_1,x_2,\dots,x_t\ge0 \quad (t\le n)
 \end{matrix}\right.$$
 It can be transformed into standard form. The usual transformations are: convert minimization to maximization by negating the objective, multiply constraints by $-1$ when needed to make the right-hand side non-negative, add slack or surplus variables to turn inequalities into equalities, and replace every free variable by the difference of two non-negative variables.
 
 The standard form can be written as:
-$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix}
+$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\left\{\begin{matrix}
 a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n=b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n=b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n=b_m\\x_1,x_2,\dots,x_n\ge0
 \end{matrix}\right.$$
 ## Simplex Algorithm
@@ -4335,15 +4407,18 @@ $$\left\{\begin{matrix}
 x_1=b_1
 \\x_2=b_2\\ \dots\\x_m=b_m
 \end{matrix}\right.$$
-So we need $$b_i\ge 0,\forall i=1,2,\dots,m$$
+So we need 
+$$b_i\ge 0,\forall i=1,2,\dots,m$$
 The <span style="color: red;">simplex algorithm</span> gets the optimal solution through adjusting the vertex.
 $$\begin{align*}\max z=&c_1x_1+c_2x_2+\dots+c_nx_n\\=&\sum_{i=1}^mc_i(b_i-\sum_{j=m+1}^na_{ij}x_j)+\sum_{i=m+1}^n c_ix_i\\=&\sum_{i=1}^mc_ib_i+\sum_{i=m+1}^n(c_i-\sum_{j=1}^mc_j a_{ji})x_i\end{align*}$$
-If $$c_i-\sum_{j=1}^mc_j a_{ji}\le0,\forall i=m+1,\dots,n$$
+If 
+$$c_i-\sum_{j=1}^mc_j a_{ji}\le0,\forall i=m+1,\dots,n$$
 then the solution is the optimal solution.
 
 Otherwise, we need to adjust the variable values. A method is let $x_i$ bigger when ensuring every variable is non-negative. 
 
-Therefore, let $$x_i=\min_{1\le k\le m,a_{ki}>0}{\frac{b_k}{a_{ki}}}$$
+Therefore, let 
+$$x_i=\min_{1\le k\le m,a_{ki}>0}{\frac{b_k}{a_{ki}}}$$
 and the basic variable $x_{k^*}$ achieving this minimum ratio becomes $0$ and leaves the basis. This operation will change the basic variable and make the objective bigger.
 
 Note: if $a_{ki}\le 0$ for all $k=1,\dots,m$, then $x_i$ can increase without bound and the problem is unbounded.
@@ -4352,16 +4427,22 @@ The analysis of time complexity of simplex algorithm is really complex. In theor
 ## Dual Problem
 
 Consider a linear programming problem:
-$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\left\{\begin{matrix}
+$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\left\{\begin{matrix}
 a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n\le b_1\\a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n \le  b_2\\ \dots\\a_{m1}x_1+a_{m2}x_2+\dots+a_{mn}x_n \le  b_m\\x_1,x_2,\dots,x_n\ge0
 \end{matrix}\right.$$
 
 Let $k$-th equation multiply $y_k$ and sum up:
 $$\sum_{i=1}^m\sum_{j=1}^n a_{ij}y_i x_j \le\sum_{i=1}^m b_iy_i$$
-If $$\sum_{i=1}^m a_{ij}y_i\ge c_j$$
-Then $$z=\sum_{j=1}^nc_j x_j \le\sum_{i=1}^m b_iy_i$$
+If 
+$$\sum_{i=1}^m a_{ij}y_i\ge c_j$$
+Then 
+$$z=\sum_{j=1}^nc_j x_j \le\sum_{i=1}^m b_iy_i$$
 This is another linear programing problem:
-$$\min w=b_1y_1+b_2y_2+\dots+b_my_m$$$$s.t.\left\{\begin{matrix}
+$$\min w=b_1y_1+b_2y_2+\dots+b_my_m$$
+
+$$s.t.\left\{\begin{matrix}
 a_{11}y_1+a_{21}y_2+\dots+a_{m1}y_m\ge c_1\\a_{12}y_1+a_{22}y_2+\dots+a_{m2}y_m\ge c_2\\ \dots\\a_{1n}y_1+a_{2n}y_2+\dots+a_{mn}y_m\ge c_n\\y_1,y_2,\dots,y_m\ge0
 \end{matrix}\right.$$
 It is called <span style="color: red;">Dual Problem</span>.
@@ -4373,13 +4454,15 @@ Easy to obtain
 We also have another stronger theorem:
 
 >[!THEOREM] Strong Duality Theorem
->If the primal problem has an optimal solution, then the dual problem also has an optimal solution, and the objective function values of the two problems are equal.
+>The <span style="color: red;">strong duality theorem</span> states that if the primal problem has an optimal solution, then the dual problem also has an optimal solution, and the objective function values of the two problems are equal.
 
 >[!PROOF]
+> TODO: Complete the proof.
 
-If the equality sign of the $k$-th inequality is not true, based on <span style="color: red;">Strong duality theorem</span>, we can find that $y_k=0$. Similarly, if the equality sign of the $k$-th dual inequality is not true, then $x_k=0$.
+If the equality sign of the $k$-th inequality is not true, based on the strong duality theorem, we can find that $y_k=0$. Similarly, if the equality sign of the $k$-th dual inequality is not true, then $x_k=0$.
 
 >[!THEOREM] Complementary Slackness Theorem
+>The <span style="color: red;">complementary slackness theorem</span> gives the following optimality conditions.
 >Original slackness complement
 >$$\mathbf{y}^{*\top} (\mathbf{b} - \mathbf{A}\mathbf{x}^*) = 0$$
 >Dual slackness complement
@@ -4393,13 +4476,21 @@ The basic idea is same: cut the non-integer part.
 ### Branch and Bound
 
 Given a linear programming problem:
-$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b}$$
+$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b}$$
 If $x_1^*$ in the optimal solution $(x_1^*,x_2^*,\dots,x_n^*)$ is not integer, then consider the following two linear programming problem:
-$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\le\left \lfloor x_1^* \right \rfloor $$
-and $$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\ge\left \lceil x_1^*  \right \rceil$$
+$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\le\left \lfloor x_1^* \right \rfloor $$
+and 
+$$\max z=c_1x_1+c_2x_2+\dots+c_nx_n$$
+
+$$s.t.\mathbf{A}\mathbf{x}=\mathbf{b},x_1\ge\left \lceil x_1^*  \right \rceil$$
 ### Gomory Cut
 
-If$$x_i + \sum_{j =m+1}^n a_{ij} x_j = b_i$$
+If
+$$x_i + \sum_{j =m+1}^n a_{ij} x_j = b_i$$
 Then let
 - $b_i = \lfloor b_i \rfloor + f_i$, where $0 < f_i < 1$ 
 - $a_{ij} = \lfloor a_{ij} \rfloor + f_{ij}$, where $0 \le f_{ij} < 1$
@@ -4409,7 +4500,8 @@ $$x_i + \sum_{j =m+1}^n (\lfloor a_{ij} \rfloor + f_{ij}) x_j = \lfloor b_i \rfl
 $$x_i + \sum_{j =m+1}^n \lfloor a_{ij} \rfloor x_j-\lfloor b_i \rfloor =  f_i-\sum_{j =m+1}^nf_{ij} x_j$$
 It is easy to see that the left-hand side is an integer, so the right side is an integer. Because $f_i<1$ and $f_{ij}x_j\ge0$, the right side is strictly less than $1$; being an integer, it is non-positive.
 
-So we can let$$f_i-\sum_{j =m+1}^nf_{ij} x_j=-s,s\in \mathbb{N}$$
+So we can let
+$$f_i-\sum_{j =m+1}^nf_{ij} x_j=-s,s\in \mathbb{N}$$
 Therefore, we introduce another integer variable, and the current non-integer optimal vertex has been excluded by this new constraint.
 
 ## Transportation Problem
@@ -4438,8 +4530,9 @@ This forward-looking approach effectively avoids high-cost allocations, yielding
 
 When we get an initial solution, we need to verify whether the solution is optimal. 
 
-Observation: Considering the dual problem, we can define potential for every origin and destination as $u_i$ and $v_j$. Then $$u_i+v_j\le c_{ij}$$
-According to <span style="color: red;">Complementary Slackness Theorem</span>, if $x_{ij}\ne 0$, then $u_i+v_j=c_{ij}$. We can find that the number of basic variables is $n+m-1$ (in the non-degenerate case). So if we want to solve the potential, only regulate a potential as $0$ and combine with $u_i+v_j=c_{ij}$ is enough.
+Observation: Considering the dual problem, we can define potential for every origin and destination as $u_i$ and $v_j$. Then 
+$$u_i+v_j\le c_{ij}$$
+According to the complementary slackness theorem, if $x_{ij}\ne 0$, then $u_i+v_j=c_{ij}$. We can find that the number of basic variables is $n+m-1$ (in the non-degenerate case). So if we want to solve the potential, only regulate a potential as $0$ and combine with $u_i+v_j=c_{ij}$ is enough.
 
 Then we only need to check whether $u_i+v_j\le c_{ij}$ for every $i=1,2,\dots,m;j=1,2,\dots,n$.
 
@@ -4713,7 +4806,8 @@ If the heap contains $n$ elements and has $N$ levels, then $2^{N-1}\le n\le 2^N-
 
 For bottom-up heap construction, the total adjustment cost is:
 $$T(n)=1\cdot(N-1)+2\cdot(N-2)+\dots+2^{N-2}\cdot1=-(N-1)+2^N-2<2^N-2\le2n-2$$
-As a result, $$T(n)=O(n)$$
+As a result, 
+$$T(n)=O(n)$$
 
 ### Delete
 
@@ -4808,7 +4902,7 @@ A typical layout of process virtual memory:
 
 The heap and the stack are placed at opposite ends of the address space and grow toward each other, so the boundary between them needs no fixed commitment in advance.
 
-> [!NOTE] A historical misnomer
+> [!NOTE] A Historical Misnomer
 > Knuth remarked that the collision of names is unfortunate: the heap data structure would be a perfectly reasonable way to organize free memory, but the memory heap was named earlier, in the everyday sense of "a heap of things". Some allocators do keep free blocks in tree- or heap-shaped structures, but a classical allocator (e.g., glibc malloc with its size-segregated bins and free lists) does not use the heap data structure at all.
 
 The heap data structure and the memory heap differ in almost every aspect:
@@ -4830,7 +4924,7 @@ Despite the differences, the two do meet in practice. When a priority queue of u
 
 ### Adjacency Matrix
 
-The graph is stored in a two-dimensional array, where $AdjMatrix[i][j]$ records the adjacency (direction) and weight between vertex $i$ and vertex $j$.
+An <span style="color: red;">adjacency matrix</span> stores a graph in a two-dimensional array, where $AdjMatrix[i][j]$ records the adjacency (direction) and weight between vertex $i$ and vertex $j$.
 
 ```cpp
 //Adjacency matrix  
@@ -4851,7 +4945,7 @@ typedef struct{
 
 ### Adjacency List
 
-For each vertex vi, build a singly linked list that holds all vertices adjacent to vi.
+An <span style="color: red;">adjacency list</span> stores, for each vertex $v_i$, a singly linked list of all vertices adjacent to $v_i$.
 
 ```cpp
 //Adjacency list  
@@ -4898,9 +4992,9 @@ void DFS(MGraph G, Status(*Visit)(int v), int v) {
 }
 ```
 
-With an <span style="color: red;">adjacency matrix</span>, finding the neighbors of every vertex in DFS takes $O(v^2)$ time.
+With an adjacency matrix, finding the neighbors of every vertex in DFS takes $O(v^2)$ time.
 
-With an <span style="color: red;">adjacency list</span>, finding the neighbors of every vertex in DFS takes $O(v+e)$ time.
+With an adjacency list, finding the neighbors of every vertex in DFS takes $O(v+e)$ time.
 
 ### Breadth-First Search (BFS)
 
@@ -5165,7 +5259,10 @@ bool BellmanFord(int n,int m,int s,int t,edge edges[]){//number of vertices, edg
 
 Floyd-Warshall Algorithm is suitable to solve APSP in dense map.
 
-We will maintain two arrays: distance array $D$ and predecessor array $P$. $D[i][j]$ denotes the shortest distance between $i$ and $j$, and $P[i][j]$ denotes the predecessor of $j$ in the shortest path from $i$ to $j$. In $k$-th iteration, iterate through each vertex of $D[i][j]$ and compare $D[i][j]$ and $D[i][k]+D[k][j]$. If $$D[i][k]+D[k][j]<D[i][j]$$let $$D[i][j]=D[i][k]+D[k][j], P[i][j]=P[k][j]$$
+We will maintain two arrays: distance array $D$ and predecessor array $P$. $D[i][j]$ denotes the shortest distance between $i$ and $j$, and $P[i][j]$ denotes the predecessor of $j$ in the shortest path from $i$ to $j$. In $k$-th iteration, iterate through each vertex of $D[i][j]$ and compare $D[i][j]$ and $D[i][k]+D[k][j]$. If 
+$$D[i][k]+D[k][j]<D[i][j]$$
+let 
+$$D[i][j]=D[i][k]+D[k][j], P[i][j]=P[k][j]$$
 ```cpp
 void FloydWarshall(MGraph G, VRType D[], int P[]) {
     for (int i = 0; i < G.vexnum; i++) {
@@ -5208,8 +5305,10 @@ Johnson has a really brilliant observation: we can introduce a virtual vertex $S
 
 It is easy to prove that
 $$\text{dist}(S, v) \le \text{dist}(S, u) + w(u, v)$$
-As a result,$$h(v) \le h(u) + w(u, v)$$
-It is equivalent to$$\hat{w}(i,j)=w(u, v) + h(u) - h(v) \ge 0$$
+As a result,
+$$h(v) \le h(u) + w(u, v)$$
+It is equivalent to
+$$\hat{w}(i,j)=w(u, v) + h(u) - h(v) \ge 0$$
 In this way we design the algorithm with time complexity $O(ve\log v)$ successfully.
 ## Topological Sort
 
@@ -5222,7 +5321,7 @@ Topological sorting is implemented as follows:
 
 Time complexity $T(n)=O(v+e)$
 
-## Critical Path
+## Critical Path (TODO)
 
 ## Strongly Connected Components
 
@@ -5236,6 +5335,7 @@ We can use Tarjan algorithm to prove the following theorem:
 > 2SAT is P.
 
 > [!PROOF]
+> TODO: Complete the proof.
 
 ## Cartesian Tree
 
@@ -5247,10 +5347,10 @@ Amortized analysis of the time complexity.
 
 We can find that Cartesian tree can transform finding the minimum value of the interval to the lowest common ancestor of two nodes. And the fast algorithm will be introduced in Lowest Common Ancestor (LCA).
 
-## Lowest Common Ancestor (LCA)
+## Lowest Common Ancestor (LCA) (TODO)
 ## Max-Flow and Min-Cut
 
-> [!THEOREM] Max-flow min-cut theorem
+> [!THEOREM] Max-Flow Min-Cut Theorem
 
 > [!PROOF]
 > Max-flow problem:
@@ -5260,7 +5360,9 @@ We can find that Cartesian tree can transform finding the minimum value of the i
  f_e\ge 0
  \end{matrix}\right.$$
  >Min-cut problem:
- >$$\min \sum_e y_e\cdot c_e$$ $$s.t.\left\{\begin{matrix}
+ >$$\min \sum_e y_e\cdot c_e$$
+ > 
+ >$$s.t.\left\{\begin{matrix}
  y_e+z_v\ge1, \forall e=(s,v)\\
  y_e-z_v\ge0, \forall e=(v,t)\\
  y_e+z_v-z_u\ge0, \forall e=(u,v)\\
@@ -5268,9 +5370,9 @@ We can find that Cartesian tree can transform finding the minimum value of the i
  \end{matrix}\right.$$
  >Obviously, they are dual problems.
 
-### Ford-Fulkerson Algorithm
+### Ford-Fulkerson Algorithm (TODO)
 
-### Edmonds-Karp Algorithm
+### Edmonds-Karp Algorithm (TODO)
 
 ### Karger's Min-Cut Algorithm
 
@@ -5278,7 +5380,8 @@ We can find that Cartesian tree can transform finding the minimum value of the i
 >$P=\frac{2}{n(n-1)}$
 
 >[!PROOF]
-### Stoer-Wagner Algorithm
+> TODO: Complete the proof.
+### Stoer-Wagner Algorithm (TODO)
 
 ### Maximum Weight Closure Problem
 
@@ -5288,6 +5391,7 @@ An interesting thing is: min-cut is P, but max-cut is NP-Hard.
 >Max-cut is NP-Hard.
 
 >[!PROOF]
+> TODO: Complete the proof.
 
 ## Clique
 
@@ -5295,10 +5399,11 @@ We defined a subgraph as a <span style="color: red;">clique</span> if it is a co
 
 It is difficult to determine whether a graph has a k-clique. We will prove that it is NP-Complete.
 
-> [!THEOREM] 
+> [!THEOREM]
 > Clique is NP-Complete.
 
 >[!PROOF]
+> TODO: Complete the proof.
 >
 
 ## Matching and Vertex Cover
@@ -5315,7 +5420,7 @@ Independent set: the subset of $V(G)$, where each vertex in the set is not linke
 
 Independent Set Problem is: given $k$ and a graph $G$, we want to find an independent set has $k$ vertices.
 
-> [!THEOREM] 
+> [!THEOREM]
 > Independent Set (IS) is NP-Complete.
 
 >[!PROOF]
@@ -5323,7 +5428,7 @@ Independent Set Problem is: given $k$ and a graph $G$, we want to find an indepe
 
 Vertex Cover Problem is: given $k$ and a graph $G$, we want to find a vertex cover has $k$ vertices.
 
-> [!THEOREM] 
+> [!THEOREM]
 > Vertex Cover (VC) is NP-Complete.
 
 >[!PROOF]
@@ -5338,16 +5443,18 @@ Although for general graph, vertex cover is NP-Complete, in bipartite graph, we 
 >3SAT-twice is always satisfiable.
 
 >[!PROOF]
+> TODO: Complete the proof.
 >
 
 > [!THEOREM] Kőnig's Theorem
 > In bipartite graph, max-matching is equal to min-cover.
 
 >[!PROOF]
+> TODO: Complete the proof.
 
-### Hungarian Algorithm
+### Hungarian Algorithm (TODO)
 
-### Kuhn-Munkres Algorithm
+### Kuhn-Munkres Algorithm (TODO)
 
 ### Edmonds' Blossom Algorithm
 
@@ -5355,19 +5462,21 @@ Hence, matching is P. However, if we change two matching to three matching, the 
 
 Mathematically, three-dimension matching (3DM) problem is 
 
-> [!THEOREM] 
+> [!THEOREM]
 > 3DM is NP-Complete.
 
 >[!PROOF]
+> TODO: Complete the proof.
 >
 
 
 Exact 3-Cover (X3C)
 
-> [!THEOREM] 
+> [!THEOREM]
 > X3C is NP-Complete.
 
 >[!PROOF]
+> TODO: Complete the proof.
 >
 ## Colorable
 
@@ -5383,7 +5492,7 @@ As a result, 2-colorable is P.
 
 However, when we discuss 3-colorable, we have the following theorem.
 
-> [!THEOREM] 
+> [!THEOREM]
 > 3-colorable is NP-Complete.
 
 >[!PROOF]
@@ -5407,7 +5516,7 @@ In compilation, <span style="color: red;">register allocation</span> is closely 
 
 Euler Circuit is P.
 
-> [!THEOREM] 
+> [!THEOREM]
 > Directed Hamilton Path (D-HAM-PATH) is NP-Complete.
 
 >[!PROOF]
@@ -5425,10 +5534,11 @@ Euler Circuit is P.
 
 We can also prove that undirected Hamilton path is NP-Complete. 
 
-> [!THEOREM] 
+> [!THEOREM]
 > Directed Hamilton Path (U-HAM-PATH) is NP-Complete.
 
 >[!PROOF]
+> TODO: Complete the proof.
 
 # Search
 
@@ -5526,21 +5636,25 @@ Theorem: the expected height of a randomly built binary search tree with $n$ ele
 
 Proof:
 
-It is easy to obtain the recurrence $$E[h_n]=E\left[\sum_{i=0}^{n-1}\frac{1}{n}\max\{h_i,h_{n-1-i}\}+1\right],\qquad h_0=0$$
+It is easy to obtain the recurrence 
+$$E[h_n]=E\left[\sum_{i=0}^{n-1}\frac{1}{n}\max\{h_i,h_{n-1-i}\}+1\right],\qquad h_0=0$$
 
-By linearity of expectation, $$E[h_n]=\sum_{i=0}^{n-1}\frac{1}{n}E[\max\{h_i,h_{n-1-i}\}]+1$$
+By linearity of expectation, 
+$$E[h_n]=\sum_{i=0}^{n-1}\frac{1}{n}E[\max\{h_i,h_{n-1-i}\}]+1$$
 
 Let $Y_n=2^{h_n}$. Then
 
 $$E[Y_n]=E\left[\frac{1}{n}\sum_{i=0}^{n-1}2^{\max\{h_i,h_{n-1-i}\}+1}\right]=\frac{2}{n}\sum_{i=0}^{n-1}E\left[2^{\max\{h_i,h_{n-1-i}\}}\right]\le\frac{2}{n}\sum_{i=0}^{n-1}E\left[2^{h_i}+2^{h_{n-1-i}}\right]=\frac{4}{n}\sum_{i=0}^{n-1}E[Y_i]$$
 
-If $E[Y_i]\le (i+1)^3$ for all $i<n$ (true for $i=0$, since $Y_0=2^0=1$), then $$E[Y_n]\le\frac{4}{n}\sum_{i=0}^{n-1}(i+1)^3=\frac{4}{n}\cdot\frac{n^2(n+1)^2}{4}=n(n+1)^2\le(n+1)^3$$
+If $E[Y_i]\le (i+1)^3$ for all $i<n$ (true for $i=0$, since $Y_0=2^0=1$), then 
+$$E[Y_n]\le\frac{4}{n}\sum_{i=0}^{n-1}(i+1)^3=\frac{4}{n}\cdot\frac{n^2(n+1)^2}{4}=n(n+1)^2\le(n+1)^3$$
 
 Hence, by induction, $E[Y_n]=O(n^3)$ for all $n\in\mathbb{N}$.
 
 By Jensen's inequality, for a convex function $f$, $f(E[X])\le E[f(X)]$.
 
-Therefore $2^{E[h_n]}\le E[2^{h_n}]=E[Y_n]=O(n^3)$, so $$\boxed{E[h_n]\le 3\log_2 n+O(1)=O(\log n)}$$
+Therefore $2^{E[h_n]}\le E[2^{h_n}]=E[Y_n]=O(n^3)$, so 
+$$\boxed{E[h_n]\le 3\log_2 n+O(1)=O(\log n)}$$
 
 ■
 
@@ -5584,7 +5698,7 @@ Rebalancing after deletion is similar to insertion, except that deletion must ch
 
 A <span style="color: red;">red-black tree</span> is a variant of the balanced binary search tree.
 
-### Insertion
+### Insertion (TODO)
 
 ### Deletion
 
@@ -5634,11 +5748,11 @@ typedef struct BTNode{
 }BTNode,*BTree;
 ```
 
-### Search
+### Search (TODO)
 
-### Insertion
+### Insertion (TODO)
 
-### Deletion
+### Deletion (TODO)
 
 ## Hash Table
 
@@ -5661,11 +5775,14 @@ When $H(key1)==H(key2)$ but $key1\ne key2$, the hash function has a collision.
 The following theorem shows that collisions in a hash table are almost unavoidable.
 
 >[!THEOREM]
->If the hash function maps values to indices uniformly at random, then $$\Pr_h[h(x_1),\dots,h(x_k)\text{ have no collision}]\le e^{-\binom{k}{2}/m}$$
+>If the hash function maps values to indices uniformly at random, then 
+>$$\Pr_h[h(x_1),\dots,h(x_k)\text{ have no collision}]\le e^{-\binom{k}{2}/m}$$
 
 >[!PROOF]
->The probability that none of the $k$ elements collide is $$P=\prod_{i=1}^{k-1}\left(1-\frac{i}{m}\right)$$
->Since $1-x\le e^{-x}$, $$P\le e^{-1/m}\cdot e^{-2/m}\cdots e^{-(k-1)/m}=e^{-\frac{1}{m}\sum_{i=1}^{k-1}i}=e^{-\binom{k}{2}/m}$$
+>The probability that none of the $k$ elements collide is 
+>$$P=\prod_{i=1}^{k-1}\left(1-\frac{i}{m}\right)$$
+>Since $1-x\le e^{-x}$, 
+>$$P\le e^{-1/m}\cdot e^{-2/m}\cdots e^{-(k-1)/m}=e^{-\frac{1}{m}\sum_{i=1}^{k-1}i}=e^{-\binom{k}{2}/m}$$
 
 There are many ways to resolve collisions; the most common are linear probing, separate chaining and cuckoo hashing.
 
@@ -5735,7 +5852,8 @@ Thus the binary indexed tree balances both summation and modification at $O(\log
 
 With it we can count increasing subsequences of an array, i.e. the number of $j$-tuples satisfying $i_1<i_2<\dots<i_j$, $a[i_1]<a[i_2]<\dots<a[i_j]$.
 
-Let $c[k][i]$ be the number of increasing $k$-tuples ending at $a[i]$. Then $$c[k][i]=\sum_{t=0,\ a[t]<a[i]}^{i-1}c[k-1][t]$$
+Let $c[k][i]$ be the number of increasing $k$-tuples ending at $a[i]$. Then 
+$$c[k][i]=\sum_{t=0,\ a[t]<a[i]}^{i-1}c[k-1][t]$$
 
 We can use the idea of counting sort: while scanning, put the number of increasing $(k-1)$-tuples ending at elements before $a[i]$, i.e. $\sum_{j=0}^{a[i]-1}cnt[k-1][j]$, into $cnt[k][a[i]]$, and finally sum them up. Since the elements after $a[i]$ have not been scanned yet, all counted $k$-tuples satisfy the condition.
 
@@ -5953,16 +6071,19 @@ Here the optimal BST is not necessarily an AVL tree, because every node now carr
 
 The left and right subtrees of an optimal solution are themselves optimal, so the problem can be solved by dynamic programming with the state transition equation
 
-Define $$w(i,j)=\sum_{l=i}^{j}p_l+\sum_{l=i-1}^{j}q_l$$
+Define 
+$$w(i,j)=\sum_{l=i}^{j}p_l+\sum_{l=i-1}^{j}q_l$$
 
-Then $$T(i,j)=\min_{r=i,i+1,\dots,j}\{w(i,j)+T(i,r-1)+T(r+1,j)\},\qquad T(i,i-1)=q_{i-1}$$
+Then 
+$$T(i,j)=\min_{r=i,i+1,\dots,j}\{w(i,j)+T(i,r-1)+T(r+1,j)\},\qquad T(i,i-1)=q_{i-1}$$
 
 This idea gives an algorithm with time complexity $O(n^3)$.
 
 Remarkably, the algorithm can be improved further, based on a theorem due to Knuth:
 
 >[!THEOREM]
->Let $r(i,j)$ be the value of $r$ at which $w(i,j)+T(i,r-1)+T(r+1,j)$ attains its minimum when computing $T(i,j)$. Then $$r(i,j-1)\le r(i,j)\le r(i+1,j)$$
+>Let $r(i,j)$ be the value of $r$ at which $w(i,j)+T(i,r-1)+T(r+1,j)$ attains its minimum when computing $T(i,j)$. Then 
+>$$r(i,j-1)\le r(i,j)\le r(i+1,j)$$
 
 So when computing $T(i,j)$, we only need to scan $r$ over the interval $[r(i,j-1),r(i+1,j)]$.
 
@@ -6080,7 +6201,7 @@ Given the integral set $S = \{a_1, a_2, \dots, a_n\}$ and objective $T$. We want
 
 It is noted that the dynamic programming cannot give a polynomial algorithm. We will prove that the problem is NP-Complete.
 
->[!THEOREM] 
+>[!THEOREM]
 >Subset Sum is NP-Complete.
 
 >[!PROOF]
@@ -6094,7 +6215,7 @@ It is noted that the dynamic programming cannot give a polynomial algorithm. We 
 
 ### 0-1 Knapsack Problem
 
->[!THEOREM] 
+>[!THEOREM]
 >0-1 Knapsack is NP-Hard.
 
 >[!PROOF]
@@ -6189,7 +6310,7 @@ $$\alpha=\frac{|C|}{|OPT|}$$
 
 where $C$  is solution given by greedy, $OPT$ is the optimal solution
 
->[!THEOREM] 
+>[!THEOREM]
 >$\alpha \le \log n +1$
 
 >[!PROOF]
@@ -6225,7 +6346,8 @@ Mathematicians have proven: unless $P=NP$, no polynomial-time algorithm which ha
 
 If every set has cost $w_i$, and we want to get the least cost, we can adjust the algorithm to calculate the unit cost $c_i=\frac{w_i}{|S_i\cap R_i|}$ each time and select the set with the smallest cost.
 
-Similar proofs can be found$$\alpha \le \log n+1$$
+Similar proofs can be found
+$$\alpha \le \log n+1$$
 ## Makespan Minimization
 
 We are given $n$ tasks requiring times $t_1,t_2,\dots,t_n$ respectively, and $m$ machines. We need to assign the $n$ tasks to the $m$ machines so as to minimize the maximum running time among all machines.
@@ -6234,7 +6356,9 @@ This problem is NP-Hard even when $m=2$. For the case $m=2$, it can be reduced t
 
 In general, we can use a greedy algorithm to obtain an approximate solution. First sort all tasks in descending order of time, then assign each task in turn to the machine with the smallest current load. The time complexity is dominated by the sorting, i.e., $O(n\log n)$.
 
-We define the approximation ratio $$\alpha=\frac{M^*}{M}$$where $M^*$ is the result obtained by the greedy algorithm and $M$ is the optimal solution. Then we have the following theorem:
+We define the approximation ratio 
+$$\alpha=\frac{M^*}{M}$$
+where $M^*$ is the result obtained by the greedy algorithm and $M$ is the optimal solution. Then we have the following theorem:
 
 >[!THEOREM]
 >$\alpha\le\frac{4}{3}$
@@ -6288,8 +6412,10 @@ vector<bool> sieve(int n){
 }
 ```
 
-The approximate number of operations is $$\frac{n}{2} + \frac{n}{3} + \frac{n}{5} + \frac{n}{7} + \dots=n \sum_{p \le \sqrt{n}} \frac{1}{p}$$
-As a result, $$T(n)=O(n\log \log n)$$
+The approximate number of operations is 
+$$\frac{n}{2} + \frac{n}{3} + \frac{n}{5} + \frac{n}{7} + \dots=n \sum_{p \le \sqrt{n}} \frac{1}{p}$$
+As a result, 
+$$T(n)=O(n\log \log n)$$
 ### Sieve of Euler
 
 <span style="color: red;">Sieve of Eratosthenes</span> has a drawback: the same composite number may be repeatedly labeled by multiple prime factors. And <span style="color: red;">sieve of Euler</span> want to solve this problem.
@@ -6323,12 +6449,14 @@ vector<int> sieve(int n){
 ```
 
 
-As a result, the algorithm achieve every composite only marked once. So $$T(n)=O(n)$$
+As a result, the algorithm achieve every composite only marked once. So 
+$$T(n)=O(n)$$
 ## Miller-Rabin Tester
 
-Observation: Fermat’s Little Theorem, you can see its proof in [Modular Arithmetic](../math/number-theory.html#modular-arithmetic). You can get $a^{n-1}\mod n$ in time $O(\log n)$ by fast exponentiation (see [Fast Exponentiation](#fast-exponentiation)).
+Observation: Fermat’s Little Theorem, you can see its proof in [Euler's Theorem and Fermat's Little Theorem](../math/number-theory.html#euler-s-theorem-and-fermat-s-little-theorem). You can get $a^{n-1}\mod n$ in time $O(\log n)$ by fast exponentiation (see [Fast Exponentiation](#fast-exponentiation)).
 
-If $a^{n-1} \not\equiv 1\mod n$, $n$ is definitely not prime. However, if $a^{n-1} \equiv 1\mod n$, $n$ is only probably prime. Some composite numbers still pass this Fermat test, such as$$100^{560} \equiv 1\mod 561,561=3\times11\times17$$
+If $a^{n-1} \not\equiv 1\mod n$, $n$ is definitely not prime. However, if $a^{n-1} \equiv 1\mod n$, $n$ is only probably prime. Some composite numbers still pass this Fermat test, such as
+$$100^{560} \equiv 1\mod 561,561=3\times11\times17$$
 This type of number is called <span style="color: red;">Carmichael Numbers</span>. In 1994, Andrew Granville and Carl Pomerance proved that the Carmichael numbers are infinite.
 
 How to improve this algorithm?

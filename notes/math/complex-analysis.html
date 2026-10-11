@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -99,7 +100,7 @@
 <p>The path independence of these integrals follows from the harmonicity assumptions on a simply connected domain.</p>
 <h2 id="elementary-complex-functions">Elementary Complex Functions</h2>
 <h3 id="exponential-trigonometric-and-hyperbolic-functions">Exponential, Trigonometric, and Hyperbolic Functions</h3>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euler&#039;s formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$e^{i\theta}=\cos\theta+i\sin\theta$$</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euler&#039;s Formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$e^{i\theta}=\cos\theta+i\sin\theta$$</p></div></div>
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>We can use Taylor expansion: $$e^{i\theta}=1+i\theta-\frac{\theta^2}{2!}-i\frac{\theta^3}{3!}+...$$ $$\sin\theta=\theta-\frac{\theta^3}{3!}+...$$ $$\cos\theta=1-\frac{\theta^2}{2!}+...$$ Substituting the equations, we get the original expression to hold.</p></div></div>
 <p>Hence</p>
 <p>$$ \sin z=\frac{e^{iz}-e^{-iz}}{2i}, \qquad \cos z=\frac{e^{iz}+e^{-iz}}{2}. $$</p>
@@ -141,20 +142,20 @@
 <p>$$ \int_C f(z)\,\mathrm{d}z =\int_C(u\,\mathrm{d}x-v\,\mathrm{d}y) +i\int_C(v\,\mathrm{d}x+u\,\mathrm{d}y). $$</p>
 <p>For a parametrization $z=z(t)=x(t)+iy(t)$, $a\le t\le b$,</p>
 <p>$$ \boxed{ \int_C f(z)\,\mathrm{d}z =\int_a^b f(z(t))z&#039;(t)\,\mathrm{d}t } $$</p>
-<div class="markdown-callout markdown-callout-lemma"><div class="callout-title"><span class="callout-icon" aria-hidden="true">L</span><span class="callout-title-text">The estimation lemma</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $|f(z)|\le M$ on a curve $C$ of length $L$, then $$ \boxed{ \left|\int_C f(z)\,\mathrm{d}z\right| \le \int_C|f(z)|\,|\mathrm{d}z| \le ML }$$</p></div></div>
+<div class="markdown-callout markdown-callout-lemma"><div class="callout-title"><span class="callout-icon" aria-hidden="true">L</span><span class="callout-title-text">The Estimation Lemma</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $|f(z)|\le M$ on a curve $C$ of length $L$, then $$ \boxed{ \left|\int_C f(z)\,\mathrm{d}z\right| \le \int_C|f(z)|\,\,|\mathrm{d}z| \le ML }$$</p></div></div>
 <p>The following theorem is a really important theorem:</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cauchy&#039;s integral theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let $C$ be a positively oriented simple closed contour bounding a domain $D$. If $f$ is holomorphic on an open set containing $D\cup C$, then$$\int_C f(z)\,\mathrm{d}z=0.$$</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cauchy&#039;s Integral Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let $C$ be a positively oriented simple closed contour bounding a domain $D$. If $f$ is holomorphic on an open set containing $D\cup C$, then $$\int_C f(z)\,\mathrm{d}z=0.$$</p></div></div>
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For $f=u+iv$, Green&#039;s theorem gives $$ \begin{aligned} \int_C f(z)\,\mathrm{d}z &amp;=\int_C(u\,\mathrm{d}x-v\,\mathrm{d}y) +i\int_C(v\,\mathrm{d}x+u\,\mathrm{d}y)\\ &amp;=-\iint_D(v_x+u_y)\,\mathrm{d}x\,\mathrm{d}y +i\iint_D(u_x-v_y)\,\mathrm{d}x\,\mathrm{d}y\\ &amp;=0 \end{aligned}$$ by the Cauchy-Riemann equations.</p></div></div>
 <p>One consequence is <span class="obsidian-red">path independence</span>: in a simply connected domain,</p>
 <p>$$ \int_{z_0}^{z}f(\zeta)\,\mathrm{d}\zeta $$</p>
 <p>depends only on the endpoints. Therefore</p>
 <p>$$ F(z)=\int_{z_0}^{z}f(\zeta)\,\mathrm{d}\zeta $$</p>
 <p>is a <span class="obsidian-red">primitive</span> of $f$ and satisfies $F&#039;(z)=f(z)$.</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cauchy&#039;s integral formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f$ is holomorphic on and inside a positively oriented closed contour $C$, and $z$ lies inside $C$, then $$f(z)=\frac{1}{2\pi i}\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta$$</p></div></div>
-<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>To prove this, choose a small circle $\Gamma:|\zeta-z|=\rho$ inside $C$. By contour deformation,$$\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta=\int_\Gamma\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.$$ Split the latter integral as$$f(z)\int_\Gamma\frac{\mathrm{d}\zeta}{\zeta-z}+\int_\Gamma\frac{f(\zeta)-f(z)}{\zeta-z}\,\mathrm{d}\zeta.$$ The first term equals $2\pi i f(z)$. Continuity of $f$ and the estimation lemma show that the second tends to $0$ as $\rho\to0$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Cauchy&#039;s Integral Formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f$ is holomorphic on and inside a positively oriented closed contour $C$, and $z$ lies inside $C$, then $$f(z)=\frac{1}{2\pi i}\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta$$</p></div></div>
+<div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>To prove this, choose a small circle $\Gamma:|\zeta-z|=\rho$ inside $C$. By contour deformation, $$\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta=\int_\Gamma\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.$$ Split the latter integral as $$f(z)\int_\Gamma\frac{\mathrm{d}\zeta}{\zeta-z}+\int_\Gamma\frac{f(\zeta)-f(z)}{\zeta-z}\,\mathrm{d}\zeta.$$ The first term equals $2\pi i f(z)$. Continuity of $f$ and the estimation lemma show that the second tends to $0$ as $\rho\to0$.</p></div></div>
 <p>Holomorphic functions are infinitely differentiable. Differentiating under the integral gives</p>
 <p>$$ \boxed{ f^{(n)}(z)=\frac{n!}{2\pi i} \int_C\frac{f(\zeta)}{(\zeta-z)^{n+1}}\,\mathrm{d}\zeta } $$</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Morera&#039;s theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f$ is continuous on a domain $D$ and $$\int_C f(z)\,\mathrm{d}z=0$$ for every closed contour $C$ in $D$, then $f$ is holomorphic on $D$. Indeed, the integral from a fixed point to $z$ is path independent and defines a holomorphic primitive $F$ with $F&#039;=f$.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Morera&#039;s Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>If $f$ is continuous on a domain $D$ and $$\int_C f(z)\,\mathrm{d}z=0$$ for every closed contour $C$ in $D$, then $f$ is holomorphic on $D$. Indeed, the integral from a fixed point to $z$ is path independent and defines a holomorphic primitive $F$ with $F&#039;=f$.</p></div></div>
 <p>Thus, on a simply connected domain,</p>
 <p>$$ f\text{ holomorphic} \quad\Longleftrightarrow\quad f\text{ continuous and }\int_C f(z)\,\mathrm{d}z=0 \text{ for every closed }C. $$</p>
 <h2 id="power-series-and-fundamental-consequences">Power Series and Fundamental Consequences</h2>
@@ -699,7 +700,7 @@ The path independence of these integrals follows from the harmonicity assumption
 
 ## Exponential, Trigonometric, and Hyperbolic Functions
 
->[!THEOREM] Euler's formula
+>[!THEOREM] Euler's Formula
 > $$e^{i\theta}=\cos\theta+i\sin\theta$$
 
 >[!PROOF]
@@ -843,19 +844,20 @@ $$
 }
 $$
 
->[!LEMMA] The estimation lemma
+>[!LEMMA] The Estimation Lemma
 > If $|f(z)|\le M$ on a curve $C$ of length $L$, then
 > $$
 \boxed{
 \left|\int_C f(z)\,\mathrm{d}z\right|
-\le \int_C|f(z)|\,|\mathrm{d}z|
+\le \int_C|f(z)|\,\,|\mathrm{d}z|
 \le ML
 }$$
 
 The following theorem is a really important theorem:
 
-> [!THEOREM] Cauchy's integral theorem
-> Let $C$ be a positively oriented simple closed contour bounding a domain $D$. If $f$ is holomorphic on an open set containing $D\cup C$, then$$\int_C f(z)\,\mathrm{d}z=0.$$
+> [!THEOREM] Cauchy's Integral Theorem
+> Let $C$ be a positively oriented simple closed contour bounding a domain $D$. If $f$ is holomorphic on an open set containing $D\cup C$, then
+> $$\int_C f(z)\,\mathrm{d}z=0.$$
 
 >[!PROOF]
 >For $f=u+iv$, Green's theorem gives
@@ -884,13 +886,15 @@ $$
 
 is a <span style="color: red;">primitive</span> of $f$ and satisfies $F'(z)=f(z)$.
 
-> [!THEOREM] Cauchy's integral formula
+> [!THEOREM] Cauchy's Integral Formula
 > If $f$ is holomorphic on and inside a positively oriented closed contour $C$, and $z$ lies inside $C$, then
 > $$f(z)=\frac{1}{2\pi i}\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta$$
 
 >[!PROOF]
->To prove this, choose a small circle $\Gamma:|\zeta-z|=\rho$ inside $C$. By contour deformation,$$\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta=\int_\Gamma\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.$$
->Split the latter integral as$$f(z)\int_\Gamma\frac{\mathrm{d}\zeta}{\zeta-z}+\int_\Gamma\frac{f(\zeta)-f(z)}{\zeta-z}\,\mathrm{d}\zeta.$$
+>To prove this, choose a small circle $\Gamma:|\zeta-z|=\rho$ inside $C$. By contour deformation,
+>$$\int_C\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta=\int_\Gamma\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.$$
+>Split the latter integral as
+>$$f(z)\int_\Gamma\frac{\mathrm{d}\zeta}{\zeta-z}+\int_\Gamma\frac{f(\zeta)-f(z)}{\zeta-z}\,\mathrm{d}\zeta.$$
 >The first term equals $2\pi i f(z)$. Continuity of $f$ and the estimation lemma show that the second tends to $0$ as $\rho\to0$.
 
 Holomorphic functions are infinitely differentiable. Differentiating under the integral gives
@@ -902,7 +906,7 @@ f^{(n)}(z)=\frac{n!}{2\pi i}
 }
 $$
 
-> [!THEOREM]  Morera's theorem
+> [!THEOREM]  Morera's Theorem
 > If $f$ is continuous on a domain $D$ and
 > $$\int_C f(z)\,\mathrm{d}z=0$$
 > for every closed contour $C$ in $D$, then $f$ is holomorphic on $D$. Indeed, the integral from a fixed point to $z$ is path independent and defines a holomorphic primitive $F$ with $F'=f$.

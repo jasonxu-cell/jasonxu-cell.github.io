@@ -37,6 +37,8 @@ OG_IMAGE = {
 }
 
 DESCRIPTIONS = {
+    "interactive.html": "Interactive math and science experiments by Yang. Explore abstract ideas through hands-on visual demonstrations.",
+    "interactive/archimedes.html": "Vary the number of polygon sides from 3 to 1000 and watch inscribed and circumscribed perimeters squeeze toward π from below and above.",
     "index.html": (
         "Yang is a geophysics undergraduate at USTC interested in seismology, "
         "earthquake mechanics, planetary science, and data-driven geophysics."
@@ -158,6 +160,7 @@ def replace_navigation(source: str, relative: str) -> str:
         "Notes" if relative.startswith("notes") else
         "Articles" if relative.startswith("articles") else
         "Research" if relative.startswith("research") else
+        "Interactive" if relative == "interactive.html" or relative.startswith("interactive/") else
         "Ask" if relative == "ask.html" else ""
     )
 
@@ -170,6 +173,13 @@ def replace_navigation(source: str, relative: str) -> str:
         nav = re.sub(
             r'(\s*</div>)',
             f'\n            <a href="{prefix}ask.html">Ask</a>' + r'\1',
+            nav,
+            count=1,
+        )
+    if 'class="nav-links"' in nav and not re.search(r'<a\b[^>]*href="(?:\.\./)*interactive\.html"', nav):
+        nav = re.sub(
+            r'(\s*<a\b[^>]*href="(?:\.\./)*ask\.html")',
+            f'\n            <a href="{prefix}interactive.html">Interactive</a>' + r'\1',
             nav,
             count=1,
         )

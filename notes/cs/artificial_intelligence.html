@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -71,11 +72,11 @@
 <p>Data Set can be divided as:</p>
 <ul>
 <li><span class="obsidian-red">Training Set</span>: The set from which the model directly learns to discern patterns.</li>
-<li><span class="obsidian-red">Validation Set</span>: The set used to tune <span class="obsidian-red">hyperparameters</span> and prevent <span class="obsidian-red">overfitting</span>.</li>
+<li><span class="obsidian-red">Validation Set</span>: The set used to tune hyperparameters and prevent overfitting.</li>
 <li><span class="obsidian-red">Testing Set</span>: The set used to objectively evaluate the model after training.</li>
 </ul>
-<blockquote><p>Tip Difference between parameter and hyperparameter: Parameters are learned by the model, while hyperparameters are set by you.</p></blockquote>
-<blockquote><p>Tip Overfitting occurs when the model performs exceptionally well on the training set, but fails to generalize to the testing set. This is because the model memorizes the noise and unnecessary details of the training data rather than learning the actual underlying patterns.</p></blockquote>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Parameters and Hyperparameters</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Parameters are learned by the model, while <span class="obsidian-red">hyperparameters</span> are set by you.</p></div></div>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Note</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p><span class="obsidian-red">Overfitting</span> occurs when the model performs exceptionally well on the training set, but fails to generalize to the testing set. This is because the model memorizes the noise and unnecessary details of the training data rather than learning the actual underlying patterns.</p></div></div>
 <p>For the evaluation to be statistically valid, the training, validation, and testing sets must be representative of the same underlying distribution.</p>
 <p>For a supervised learning task in prediction (where you only need to answer yes or no), we define a <span class="obsidian-red">Confusion Matrix</span>:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Actuality / Prediction</th><th>0</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>TN</td><td>FP</td></tr><tr><td>1</td><td>FN</td><td>TP</td></tr></tbody></table></div>
@@ -170,21 +171,21 @@
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Let $W_t$ be the total weight of all experts in round $t$. Initially, $W_0 = n$ (each expert has a weight of $1$).</p>
 <p>When the algorithm runs randomized prediction in round $t$, the probability $P_t$ of the algorithm making an error is equal to the weight proportion of the experts who make incorrect predictions: $$P_t =\frac{ \sum_{i\in Wrong}w_i^{(t)}}{W_t}$$</p>
 <p>In each update round, the weights of experts who predict incorrectly are multiplied by $a$, and the weights of experts who predict correctly are multiplied by $b$.</p>
-<p>The updated total weights $W_{t+1}$ are:$$W_{t+1}=b\sum_{i\in Right}w_i^{(t)}+a\sum_{i\in Wrong}w_i^{(t)}$$</p>
+<p>The updated total weights $W_{t+1}$ are: $$W_{t+1}=b\sum_{i\in Right}w_i^{(t)}+a\sum_{i\in Wrong}w_i^{(t)}$$</p>
 <p>Let $b=1+\epsilon_1,a=1-\epsilon_2$, then $$W_{t+1}=W_t+\epsilon_1\sum_{i\in Right}w_i^{(t)}-\epsilon_2\sum_{i\in Wrong}w_i^{(t)}$$</p>
-<p>Using the previously defined $P_t$, we can write:$$W_{t+1}=W_t(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)$$</p>
-<p>After $T$ rounds, the final upper bound of the total weight is:$$W_T=n\prod_{t=1}^{T}(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)\le n \cdot\exp\{\epsilon_1 \sum_{t=1}^T (1-P_t) -\epsilon_2 \sum_{t=1}^T P_t\}$$</p>
+<p>Using the previously defined $P_t$, we can write: $$W_{t+1}=W_t(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)$$</p>
+<p>After $T$ rounds, the final upper bound of the total weight is: $$W_T=n\prod_{t=1}^{T}(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)\le n \cdot\exp\{\epsilon_1 \sum_{t=1}^T (1-P_t) -\epsilon_2 \sum_{t=1}^T P_t\}$$</p>
 <p>Note that $\sum_{t=1}^T P_t$ is the expected total error of the algorithm, denoted as $\mathbb{E}[M]$. Therefore: $$W_T\le n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}$$</p>
-<p>For an expert $i$, let $m_i^{(T)}$ be the number of mistakes he makes in the first $T$ round. Since the total weight is always greater than or equal to the weight of any single expert, we have:$$W_T\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$</p>
-<p>As a result,$$ n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$ $$\mathbb{E}[M]\le\frac{-(T-m_i^{(T)})\log(1+\epsilon_1)-m_i^{(T)}\log(1-\epsilon_2)+\log n+\epsilon_1 T}{\epsilon_1+\epsilon_2}$$ Let $\epsilon_1=0$, then$$\mathbb{E}[M] \le \frac{\log n - m_i^{(T)}\log(1-\epsilon_2)}{\epsilon_2}$$</p>
+<p>For an expert $i$, let $m_i^{(T)}$ be the number of mistakes he makes in the first $T$ round. Since the total weight is always greater than or equal to the weight of any single expert, we have: $$W_T\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$</p>
+<p>As a result, $$ n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$ $$\mathbb{E}[M]\le\frac{-(T-m_i^{(T)})\log(1+\epsilon_1)-m_i^{(T)}\log(1-\epsilon_2)+\log n+\epsilon_1 T}{\epsilon_1+\epsilon_2}$$ Let $\epsilon_1=0$, then $$\mathbb{E}[M] \le \frac{\log n - m_i^{(T)}\log(1-\epsilon_2)}{\epsilon_2}$$</p>
 <p>For $\epsilon_2 \in (0, 1/2]$, we know that $-\log(1-\epsilon_2) \le \epsilon_2 + \epsilon_2^2$. $$\mathbb{E}[M] \le \frac{\log n + m_i^{(T)}(\epsilon_2 + \epsilon_2^2)}{\epsilon_2}=\frac{\log n}{\epsilon_2} + (1+\epsilon_2)m_i^{(T)}$$ $$\frac{\mathbb{E}[M] }{T}\le\frac{\log n}{\epsilon_2 T} + (1+\epsilon_2)\frac{m_i^{(T)}}{T}$$ Therefore, in the RWM algorithm, As $T \to \infty, \epsilon_2 \to 0$, the average error rate $\frac{\mathbb{E}[M]}{T}$ will converge to $\frac{m_i^{(T)}}{T}$, which is the best expert&#039;s error rate, thus approaching the minimum expert error rate.</p></div></div>
 <h2 id="linear-neural-networks">Linear Neural Networks</h2>
 <h3 id="linear-neural-networks-for-regression">Linear Neural Networks for Regression</h3>
 <p>Difference between classification and regression: classification outputs discrete values, while regression outputs continuous values.</p>
 <p>Assume that regression model is linear, i.e. $$\hat{y}=w_1x_1+w_2x_2+\dots+w_nx_n+b=\mathbf{w}^\top \mathbf{x}+b,y=\hat{y}+\epsilon,\mathbb{E}[\epsilon]=0$$ Assume that $\epsilon$ follows a Gaussian distribution, because this guarantees that Maximum Likelihood Estimate (MLE) is completely equivalent to Minimizing the Squared Error.</p>
-<p>To find effective coefficients, we define $$L(w,b)=\frac{1}{n}\sum_{i=1}^n l^{(i)}(w,b)=\frac{1}{n}\sum_{i=1}^n (y^{(i)}-\hat{y}^{(i)})^2$$ For a linear problem, we can get the analytical solution$$\mathbf{w}^∗=(\mathbf{x}^\top \mathbf{x})^{-1}\mathbf{x}^\top \mathbf{y}$$ Generally, we can use <span class="obsidian-red">Gradient Descent</span> (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the <span class="obsidian-red">learning rate</span> $\eta$, i.e. $$w \leftarrow w−\eta \nabla L(w)$$ The learning rate must be neither too large nor too small.</p>
+<p>To find effective coefficients, we define the <span class="obsidian-red">loss function</span> $$L(w,b)=\frac{1}{n}\sum_{i=1}^n l^{(i)}(w,b)=\frac{1}{n}\sum_{i=1}^n (y^{(i)}-\hat{y}^{(i)})^2$$ For a linear problem, we can get the analytical solution $$\mathbf{w}^∗=(\mathbf{x}^\top \mathbf{x})^{-1}\mathbf{x}^\top \mathbf{y}$$ Generally, we can use <span class="obsidian-red">Gradient Descent</span> (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the <span class="obsidian-red">learning rate</span> $\eta$, i.e. $$w \leftarrow w−\eta \nabla L(w)$$ The learning rate must be neither too large nor too small.</p>
 <p><img src="../attachments/Screenshot%202026-05-17%20at%2015.15.10-optimized.webp" alt="Screenshot 2026-05-17 at 15.15.10" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>To avoid overfitting, we can <span class="obsidian-red">regularize</span> the <span class="obsidian-red">loss function</span> by adding $\lambda$ times the model complexity to the prediction loss.</p>
+<p>To avoid overfitting, we can <span class="obsidian-red">regularize</span> the loss function by adding $\lambda$ times the model complexity to the prediction loss.</p>
 <ul>
 <li>L1 regularization</li>
 </ul>
@@ -222,10 +223,20 @@
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Universal Approximation Theorem</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Even with a single-hidden-layer network, given enough nodes (possibly absurdly many), the right set of weights, and the activation function is nonlinear, we can model any function.</p></div></div>
 <p>Some common activation functions:</p>
 <ul>
-<li>ReLU Function$$ReLU(x)=\max(x,0)$$ $$ReLU&#039;(x)=\left\{\begin{matrix}0,\text{if }x\le0\\1,\text{if }x&gt;0\end{matrix}\right.$$ (the derivative is undefined at $x=0$; in practice it is conventionally set to $0$.)</li>
-<li>Sigmoid Function$$Sigmoid(x)=\frac{1}{1+e^{-x}}$$ $$Sigmoid&#039;(x)=\frac{e^{-x}}{(1+e^{-x})^2}=Sigmoid(x)(1-Sigmoid(x))$$</li>
-<li>Tanh Function$$\tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$$ $$\tanh&#039;(x)=1-\tanh^2 (x)$$</li>
+<li>ReLU Function</li>
 </ul>
+<p>$$ReLU(x)=\max(x,0)$$</p>
+<p>$$ReLU&#039;(x)=\left\{\begin{matrix}0,\text{if }x\le0\\1,\text{if }x&gt;0\end{matrix}\right.$$ (the derivative is undefined at $x=0$; in practice it is conventionally set to $0$.)</p>
+<ul>
+<li>Sigmoid Function</li>
+</ul>
+<p>$$Sigmoid(x)=\frac{1}{1+e^{-x}}$$</p>
+<p>$$Sigmoid&#039;(x)=\frac{e^{-x}}{(1+e^{-x})^2}=Sigmoid(x)(1-Sigmoid(x))$$</p>
+<ul>
+<li>Tanh Function</li>
+</ul>
+<p>$$\tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$$</p>
+<p>$$\tanh&#039;(x)=1-\tanh^2 (x)$$</p>
 <h3 id="backpropagation-bp">Backpropagation (BP)</h3>
 <p><span class="obsidian-red">Backpropagation</span> refers to the method of calculating the gradient of neural network parameters. Assuming that we have $\mathbf{Y}=f(\mathbf{X})$ and $\mathbf{Z}=g(\mathbf{Y})$, by using the chain rule, we can compute the derivative of $\mathbf{Z}$ with respect to $\mathbf{X}$ via $$\frac{\partial \mathbf{Z}}{\partial \mathbf{X}} = \frac{\partial \mathbf{Z}}{\partial \mathbf{Y}}\cdot\frac{\partial \mathbf{Y}}{\partial \mathbf{X}}$$</p>
 <p>So we only need to calculate the gradient in every layer, and then we can get the gradient of the neural networks.</p>
@@ -236,7 +247,7 @@
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Initialization Method</th><th>Activation Function</th><th>Uniform Distribution$[-r,r]$</th><th>Gaussian Distribution$N(0,\sigma^2)$</th></tr></thead><tbody><tr><td>Xavier Initialization</td><td>Sigmoid</td><td>$r=4\sqrt{\frac{6}{M_{l-1}+M_l}}$</td><td>$\sigma^2=16\times\frac{2}{M_{l-1}+M_l}$</td></tr><tr><td>Xavier Initialization</td><td>Tanh</td><td>$r=\sqrt{\frac{6}{M_{l-1}+M_l}}$</td><td>$\sigma^2=\frac{2}{M_{l-1}+M_l}$</td></tr><tr><td>He Initialization</td><td>ReLU</td><td>$r=\sqrt{\frac{6}{M_{l-1}}}$</td><td>$\sigma^2=\frac{2}{M_{l-1}}$</td></tr></tbody></table></div>
 <p>where $M_i$ is the dimension of the layer $i$ of nerves.</p>
 <h3 id="normalization">Normalization</h3>
-<p>Generally,$$y=\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}\gamma+\beta$$ Define $B,C,H,W,L,D$ as batch, channel, height, width, sequence length, dimension We have lots of methods to normalize:</p>
+<p>Generally, $$y=\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}\gamma+\beta$$ Define $B,C,H,W,L,D$ as batch, channel, height, width, sequence length, dimension We have lots of methods to normalize:</p>
 <ul>
 <li><span class="obsidian-red">Batch Normalization (BN)</span></li>
 </ul>
@@ -321,7 +332,8 @@
 </ul>
 <h3 id="longshort-term-memory-lstm">Long-Short Term Memory (LSTM)</h3>
 <p>To solve the problem in RNN, we can optionally forget the information, so we introduce the <span class="obsidian-red">Long-Short Term Memory (LSTM)</span>.</p>
-<p>Its mathematical formulation is:$$\begin{pmatrix} i\\f\\o\\g \end{pmatrix}=\begin{pmatrix} \sigma\\ \sigma\\ \sigma\\ \tanh \end{pmatrix}W\begin{pmatrix} h_{t-1}\\x_t\\ \end{pmatrix} $$$$c_t=f \odot c_{t-1}+i \odot g$$ $$h_t=o\odot \tanh(c_t)$$ where</p>
+<p>Its mathematical formulation is: $$\begin{pmatrix} i\\f\\o\\g \end{pmatrix}=\begin{pmatrix} \sigma\\ \sigma\\ \sigma\\ \tanh \end{pmatrix}W\begin{pmatrix} h_{t-1}\\x_t\\ \end{pmatrix} $$</p>
+<p>$$c_t=f \odot c_{t-1}+i \odot g$$ $$h_t=o\odot \tanh(c_t)$$ where</p>
 <ul>
 <li>$i$ is input gate</li>
 <li>$f$ is forget gate</li>
@@ -332,14 +344,14 @@
 <h3 id="gated-recurrent-unit-gru-todo">Gated Recurrent Unit(GRU) (TODO)</h3>
 <h2 id="attention-mechanisms-and-transformers">Attention Mechanisms and Transformers</h2>
 <p>So far, all the networks we have reviewed crucially relied on the input being of a well-defined size. This approach can lead to significant problems when the input is truly of varying size with varying information content. In particular, for long sequences, it becomes quite difficult to keep track of everything that has already been generated or even viewed by the network.</p>
-<p>This leads to one of the most exciting concepts introduced in deep learning in the past decade: the <span class="obsidian-red">attention mechanism</span>. For now, simply consider the following: denote by $\mathcal{D} = \{(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)\}$ a database of $m$ tuples of _keys_ and _values_. Moreover, denote by $\mathbf{q}$ a _query_. Then we can define the _attention_ over $\mathcal{D}$ as $$\textrm{Attention}(\mathbf{q}, \mathcal{D}) =\sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i$$ A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via$$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function.</p>
-<p>A mainstream attention scoring function is$$a(\mathbf{q}, \mathbf{k}_i) = \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{d_k}}$$where $d_k$ is the dimension of the vector.</p>
+<p>This leads to one of the most exciting concepts introduced in deep learning in the past decade: the <span class="obsidian-red">attention mechanism</span>. For now, simply consider the following: denote by $\mathcal{D} = \{(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)\}$ a database of $m$ tuples of _keys_ and _values_. Moreover, denote by $\mathbf{q}$ a _query_. Then we can define the _attention_ over $\mathcal{D}$ as $$\textrm{Attention}(\mathbf{q}, \mathcal{D}) =\sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i$$ A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via $$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$ where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function.</p>
+<p>A mainstream attention scoring function is $$a(\mathbf{q}, \mathbf{k}_i) = \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{d_k}}$$ where $d_k$ is the dimension of the vector.</p>
 <p>If we have many query vectors, arranging them as rows of $Q$ and keys as rows of $K$, the scaled dot-product attention scores are computed by $$\frac{QK^\top}{\sqrt{d_k}}$$</p>
-<p>Another one is the _additive attention_ scoring function given by$$a(\mathbf q, \mathbf k) = \mathbf w_v^\top \textrm{tanh}(\mathbf W_q\mathbf q + \mathbf W_k \mathbf k)$$where $\mathbf W_q\in\mathbb R^{h\times q}$, $\mathbf W_k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$ are the learnable parameters.</p>
+<p>Another one is the _additive attention_ scoring function given by $$a(\mathbf{q}, \mathbf{k}) = \mathbf{w}_v^\top \textrm{tanh}(\mathbf{W}_q\mathbf{q} + \mathbf{W}_k \mathbf{k})$$ where $\mathbf{W}_q\in\mathbb R^{h\times q}$, $\mathbf{W}_k\in\mathbb R^{h\times k}$, and $\mathbf{w}_v\in\mathbb R^{h}$ are the learnable parameters.</p>
 <p><img src="../attachments/qkv.svg" alt="qkv" loading="lazy" decoding="async" style="width: min(100%, 478px);"></p>
 <p>If the query, key, and value sequences all come from the same input sequence, the mechanism is called a <span class="obsidian-red">self-attention mechanism</span>. This does not mean $Q=K=V$ after projection: typically $Q=XW_Q$, $K=XW_K$, and $V=XW_V$ are learned projections of the same token representations $X$. Separate projections let the model learn different roles for querying, matching, and carrying information.</p>
 <h3 id="multihead-attention">Multi-Head Attention</h3>
-<p>Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values, and queries, It is beneficial to linearly project the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions, respectively, where$$d_k=d_v=d_{model}/h$$On each of these projected versions of queries, keys, and values, we then perform the attention function in parallel, yielding a $d_v$-dimensional output values. These are concatenated and once again projected, resulting in the final values. <img src="../attachments/Screenshot%202026-05-21%20at%2015.17.56-optimized.webp" alt="Screenshot 2026-05-21 at 15.17.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. $$MultiHead(Q,K,V)=Concat(head_1,\dots,head_h)W^O$$where$$head_i=\textrm{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$ $W_i^Q\in\mathbb{R}^{d_{model}\times d_k},W_i^K\in\mathbb{R}^{d_{model}\times d_k},W_i^V\in\mathbb{R}^{d_{model}\times d_v},W_i^O\in\mathbb{R}^{hd_v\times d_{model}}$</p>
+<p>Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values, and queries, It is beneficial to linearly project the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions, respectively, where $$d_k=d_v=d_{model}/h$$ On each of these projected versions of queries, keys, and values, we then perform the attention function in parallel, yielding a $d_v$-dimensional output values. These are concatenated and once again projected, resulting in the final values. <img src="../attachments/Screenshot%202026-05-21%20at%2015.17.56-optimized.webp" alt="Screenshot 2026-05-21 at 15.17.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"> Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this. $$MultiHead(Q,K,V)=Concat(head_1,\dots,head_h)W^O$$ where $$head_i=\textrm{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$ $W_i^Q\in\mathbb{R}^{d_{model}\times d_k},W_i^K\in\mathbb{R}^{d_{model}\times d_k},W_i^V\in\mathbb{R}^{d_{model}\times d_v},W_i^O\in\mathbb{R}^{hd_v\times d_{model}}$</p>
 <p>When we compute query $q_t$, we cannot get the value of $k_{t+1},\cdots$ To prevent future information leaks, we need to let $k_{t+1},\cdots$ be a very small number (like $-1\times10^{9}$), then the attention of it will be really small. This process is called <span class="obsidian-red">mask</span>.</p>
 <p>Compared with single-head attention, multi-head attention has lots of advantages:</p>
 <ol>
@@ -400,20 +412,26 @@
 </ul>
 <p>The function of the graph can be classified as:</p>
 <ul>
-<li>Permutation Invariance $$f(A,X)=f(PAP^\top,PX)$$</li>
-<li>Permutation Equivariance $$Pf(A,X)=f(PAP^\top,PX)$$</li>
+<li>Permutation Invariance</li>
 </ul>
-<p>We hope the GNN is permutation equivariant, because in a graph, swapping columns cannot change the structure of the graph.</p>
+<p>$$f(A,X)=f(PAP^\top,PX)$$</p>
+<ul>
+<li>Permutation Equivariance</li>
+</ul>
+<p>$$Pf(A,X)=f(PAP^\top,PX)$$ We hope the GNN is permutation equivariant, because in a graph, swapping columns cannot change the structure of the graph.</p>
 <h3 id="graph-representation-learning">Graph Representation Learning</h3>
 <p>We want to map nodes to an embedding space ($u \rightarrow \mathbb{R}^n$). It is also a method to encode the nodes. We hope the similarity in the embedding space can approximately reflect the similarity of the graph.</p>
 <p>Use the following steps to get the similarity of the nodes:</p>
 <ol>
-<li>Encoder map the node $$ENC(v)=\mathbf{z}_v \in \mathbb{R}^d$$</li>
+<li>Encoder map the node</li>
+</ol>
+<p>$$ENC(v)=\mathbf{z}_v \in \mathbb{R}^d$$</p>
+<ol>
 <li>Define the similarity function</li>
 <li>The decoder recovers the similarity score from the embedding.</li>
-<li>Optimize the parameters in the encoder, so that$$similarity(u,v)=z_u^\top z_v$$</li>
+<li>Optimize the parameters in the encoder, so that</li>
 </ol>
-<p>It is noted that</p>
+<p>$$similarity(u,v)=z_u^\top z_v$$ It is noted that</p>
 <ul>
 <li>This is an unsupervised learning. We don&#039;t need the label of the nodes.</li>
 <li>These embeddings are task-agnostic: they are not trained for a specific task, but can be used for a variety of tasks.</li>
@@ -450,7 +468,7 @@
 <li>We can study propagating and transforming information on the graph to compute the node embedding.</li>
 </ul>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2013.02.15-optimized.webp" alt="Screenshot 2026-05-18 at 13.02.15" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>$$m_A^{(l)}=f^{(l)}(h_A^{(l)},h_u^{(l)}:u\in \mathcal{N}(A))=f^{(l)}(h_A^{(l)},h_B^{(l)},h_C^{(l)},h_D^{(l)})$$ $$h_A^{(l+1)} = g^{(l)}(m_A^{(l)})$$where</p>
+<p>$$m_A^{(l)}=f^{(l)}(h_A^{(l)},h_u^{(l)}:u\in \mathcal{N}(A))=f^{(l)}(h_A^{(l)},h_B^{(l)},h_C^{(l)},h_D^{(l)})$$ $$h_A^{(l+1)} = g^{(l)}(m_A^{(l)})$$ where</p>
 <ul>
 <li>$h_A^{(l)}$ is the embedding of the node $A$ in the $l$-th layer.</li>
 <li>$\mathcal{N}(A)$ is the neighbors of the node $A$.</li>
@@ -462,17 +480,20 @@
 <p>This network is called <span class="obsidian-red">Graph Convolutional Network (GCN)</span>, which is perfectly permutation equivariant.</p>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2013.14.39-optimized.webp" alt="Screenshot 2026-05-18 at 13.14.39" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The problem of neighborhood aggregation is: the message of node $v$ itself may be lost. This is because the computation of $m_v^{(l)}$ is not related to $h_v^{(l-1)}$. The solution to it is as easy as the following:</p>
 <ul>
-<li>Message $$m_u^{(l)}=W^{(l)}h_u^{(l-1)},m_v^{(l)}=B^{(l)}h_v^{(l-1)}$$</li>
-<li>Aggregation $$h_v^{(l)}=concat(AGG(\{m_u^{(l)},u\in \mathcal{N}(v) \}),m_v^{(l)})$$</li>
+<li>Message</li>
 </ul>
-<p>As the number of network layers increases, the feature representations of all nodes in the graph gradually converge and become indistinguishable, leading to a precipitous decline in the model&#039;s performance on downstream tasks such as node classification.It is called the <span class="obsidian-red">over-smoothing problem</span>.</p>
+<p>$$m_u^{(l)}=W^{(l)}h_u^{(l-1)},m_v^{(l)}=B^{(l)}h_v^{(l-1)}$$</p>
+<ul>
+<li>Aggregation</li>
+</ul>
+<p>$$h_v^{(l)}=concat(AGG(\{m_u^{(l)},u\in \mathcal{N}(v) \}),m_v^{(l)})$$ As the number of network layers increases, the feature representations of all nodes in the graph gradually converge and become indistinguishable, leading to a precipitous decline in the model&#039;s performance on downstream tasks such as node classification.It is called the <span class="obsidian-red">over-smoothing problem</span>.</p>
 <p>This is because if the network is really deep, the &quot;raw input range&quot; that determines the output of a specific node within a particular layer, which is called <span class="obsidian-red">receptive field</span> officially, is highly overlap. <img src="../attachments/Screenshot%202026-05-18%20at%2013.28.14-optimized.webp" alt="Screenshot 2026-05-18 at 13.28.14" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The simplest solution is adding virtual node, which alleviates oversmoothing because it shortens the distance between any two nodes in the graph, preventing the receptive field of deep networks from expanding indefinitely and thus preserving the local characteristics of the nodes. <img src="../attachments/Screenshot%202026-05-18%20at%2013.33.21-optimized.webp" alt="Screenshot 2026-05-18 at 13.33.21" loading="lazy" decoding="async" style="width: min(100%, 264px);"></p>
 <p>Another solution is <span class="obsidian-red">skip connection</span>. Since nodes at different positions within the image require varying contextual ranges—nodes situated at the periphery may necessitate a larger receptive field, whereas a smaller receptive field suffices for those located at the center—outputs from different layers can be combined using skip connections. Consequently, even in deep networks, nodes are able to preserve the local features derived from the shallower layers. <img src="../attachments/Screenshot%202026-05-18%20at%2013.30.03-optimized.webp" alt="Screenshot 2026-05-18 at 13.30.03" loading="lazy" decoding="async" style="width: min(100%, 391px);"> Instead of choosing every neighbor of the nodes, we can randomly choose the neighbors of the nodes. It will significantly reduce computing costs and have excellent results in practical applications.</p>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2014.23.34-optimized.webp" alt="Screenshot 2026-05-18 at 14.23.34" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <h3 id="feature-augmentation">Feature Augmentation</h3>
 <p>The computational graph cannot represent all of the features of the graph. As shown in the following figure, if we want to count the number of cycles, we cannot only use the computational graph.</p>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2013.31.31-optimized.webp" alt="Screenshot 2026-05-18 at 13.31.31" loading="lazy" decoding="async" style="width: min(100%, 450px);"> In this scenario, we need to artificially &quot;augment&quot; the nodes with features—either to address the lack of features in the original graph or to help the GNN overcome the inherent bottlenecks in its expressive power. <img src="../attachments/Screenshot%202026-05-18%20at%2013.32.02-optimized.webp" alt="Screenshot 2026-05-18 at 13.32.02" loading="lazy" decoding="async" style="width: min(100%, 450px);"> We can use lots of graph algorithms (e.g. <a href="data_structure_and_algorithm.html#depthfirst-search-dfs">DFS</a>) to augment node feature.</p>
-<h2 id="computer-vision-todo">Computer Vision(TODO)</h2>
+<h2 id="computer-vision-todo">Computer Vision (TODO)</h2>
 <h3 id="you-only-look-once-yolo-image-processing">You Only Look Once (YOLO) Image Processing</h3>
 <p>Two-stage detectors (e.g., the R-CNN family) divide image processing into two stages:</p>
 <ul>
@@ -488,17 +509,17 @@
 <p>Compared to local observation, YOLO utilizes the surrounding contextual information of the object, significantly reducing the background error rate, and maintaining robust performance even with non-realistic images such as paintings and sketches.</p>
 <h2 id="reinforcement-learning-rl">Reinforcement Learning (RL)</h2>
 <p><span class="obsidian-red">Reinforcement Learning</span> is a suite of techniques that allows us to take the appropriate action at each stage of a sequential decision making problem in order to maximize some utility eventually.</p>
-<p>Given a state set $S$ and an action set $A$, we can define an event trajectory as $$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, s_2, a_2, r_2, \ldots)$$where $s_i \in S,a_i \in A$ and $r_i$ is the result of the action $a_i$.</p>
+<p>Given a state set $S$ and an action set $A$, we can define an event trajectory as $$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, s_2, a_2, r_2, \ldots)$$ where $s_i \in S,a_i \in A$ and $r_i$ is the result of the action $a_i$.</p>
 <p>The _return_ of a trajectory is the total reward obtained by the robot along such a trajectory: $$R(\tau) = r_0 + r_1 + r_2 + \cdots$$ A more common return is as following: $$R(\tau) = r_0 + \gamma r_1 + \gamma^2 r_2 + \cdots = \sum_{t=0}^\infty \gamma^t r_t,\gamma&lt;1$$ We call a system a <span class="obsidian-red">Markov system</span> if the next state $s_{t+1}$ is only a function of the current state $s_t$ and the action $a_t$ taken at the current state. In Markov systems, the next state does not depend on which actions were taken in the past or the states that the robot was at in the past.</p>
 <p>It is noted that the reward in reinforcement learning can be sparse or delayed. In some tasks, the agent only receives a clear reward at the end of an episode, such as after winning or losing a game.</p>
 <h3 id="value-iteration">Value Iteration</h3>
-<p>Given a stochastic policy denoted as $a_t \sim \pi(s_t)$, then we have$$V^\pi(s_0) = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ R(\tau) \Big] = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=0}^\infty \gamma^t r(s_t, a_t) \Big]$$ We next break down the trajectory into two stages:</p>
+<p>Given a stochastic policy denoted as $a_t \sim \pi(s_t)$, then we have $$V^\pi(s_0) = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ R(\tau) \Big] = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=0}^\infty \gamma^t r(s_t, a_t) \Big]$$ We next break down the trajectory into two stages:</p>
 <ol>
 <li>the first stage which corresponds to $s_0 \to s_1$ upon taking the action $a_0$</li>
 <li>a second stage which is the trajectory $\tau&#039; = (s_1, a_1, r_1, \ldots)$ thereafter.</li>
 </ol>
-<p>Mathematically, we write the two stages as $$V^\pi(s_0) =   \mathbb{E}_{a_0 \sim \pi(s_0)} \Big[r(s_0, a_0) + \gamma  \ \mathbb{E}_{s_1 \sim P(s_1 \mid s_0, a_0)} \Big[ V^\pi(s_1) \Big] \Big]$$ We can write using the transition probabilities in the Markov decision process (MDP) as$$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^\pi(s&#039;) \Big],\forall s \in S$$ In implementations, it is often useful to maintain a quantity called the &quot;action value&quot; function which is a closely related quantity to the value function. This is defined to be the average _return_ of a trajectory that begins at $s_0$ but when the action of the first stage is _fixed_ to be $a_0$: $$Q^\pi(s_0, a_0) = r(s_0, a_0) + \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=1}^\infty \gamma^t r(s_t, a_t) \Big]$$</p>
-<p>We will next think of the &quot;optimal policy&quot; that achieves the maximal average return $$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore:$$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^*(s&#039;) \Big],\ \forall  s \in S$$For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write$$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^*(s&#039;) \Big\}$$It is called<span class="obsidian-red">Bellman Optimality Equation</span>, which can give the optimal policy$$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s&#039;\in S} P(s&#039;|s,a)V^*(s&#039;)\}$$ We can also get Bellman Optimally Equation for $Q$:$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a&#039;} Q^*(S_{t+1}, a&#039;) \mid S_t=s, A_t=a \right]$$ We can turn the principle of dynamic programming into an algorithm for finding the optimal value function called <span class="obsidian-red">value iteration</span>. The key idea behind value iteration is to think of this identity as a set of constraints that tie together $V^*(s)$ at different states $s$. We initialize the value function to some arbitrary values $V_0(s)$ for all states $s$. At the $k^{\textrm{th}}$ iteration, the Value Iteration algorithm updates the value function as $$V_{k+1}(s) = \max_{a \in A} \Big\{ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V_k(s&#039;) \Big\},\ \forall s \in S$$ It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$.$$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$ The same Value Iteration algorithm can be equivalently written using the action-value function as</p>
+<p>Mathematically, we write the two stages as $$V^\pi(s_0) =   \mathbb{E}_{a_0 \sim \pi(s_0)} \Big[r(s_0, a_0) + \gamma  \ \mathbb{E}_{s_1 \sim P(s_1 \mid s_0, a_0)} \Big[ V^\pi(s_1) \Big] \Big]$$ We can write using the transition probabilities in the Markov decision process (MDP) as $$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^\pi(s&#039;) \Big],\forall s \in S$$ In implementations, it is often useful to maintain a quantity called the &quot;action value&quot; function which is a closely related quantity to the value function. This is defined to be the average _return_ of a trajectory that begins at $s_0$ but when the action of the first stage is _fixed_ to be $a_0$: $$Q^\pi(s_0, a_0) = r(s_0, a_0) + \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=1}^\infty \gamma^t r(s_t, a_t) \Big]$$</p>
+<p>We will next think of the &quot;optimal policy&quot; that achieves the maximal average return $$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$ We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore: $$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^*(s&#039;) \Big],\ \forall  s \in S$$ For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write $$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s&#039; \in S} P(s&#039; \mid s, a) V^*(s&#039;) \Big\}$$ It is called<span class="obsidian-red">Bellman Optimality Equation</span>, which can give the optimal policy $$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s&#039;\in S} P(s&#039;|s,a)V^*(s&#039;)\}$$ We can also get Bellman Optimally Equation for $Q$: $$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a&#039;} Q^*(S_{t+1}, a&#039;) \mid S_t=s, A_t=a \right]$$ We can turn the principle of dynamic programming into an algorithm for finding the optimal value function called <span class="obsidian-red">value iteration</span>. The key idea behind value iteration is to think of this identity as a set of constraints that tie together $V^*(s)$ at different states $s$. We initialize the value function to some arbitrary values $V_0(s)$ for all states $s$. At the $k^{\textrm{th}}$ iteration, the Value Iteration algorithm updates the value function as $$V_{k+1}(s) = \max_{a \in A} \Big\{ r(s,  a) + \gamma\  \sum_{s&#039; \in S} P(s&#039; \mid s, a) V_k(s&#039;) \Big\},\ \forall s \in S$$ It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$. $$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$ The same Value Iteration algorithm can be equivalently written using the action-value function as</p>
 <p>$$Q_{k+1}(s, a) = r(s, a) + \gamma \sum_{s&#039; \in S} P(s&#039; \mid s, a) \max_{a&#039; \in A} Q_k (s&#039;, a&#039;),\forall s \in S, a \in A$$ $$Q^*(s,a) = \lim_{k \to \infty} Q_k(s,a),\forall s \in S, a \in A$$</p>
 <h3 id="qlearning-and-deep-qnetwork-dqn">Q-Learning and Deep Q-Network (DQN)</h3>
 <p>As we discussed, implementing this algorithm requires knowing the MDP, specifically the transition function $P(s&#039; \mid s, a)$. The key idea behind Q-Learning is to replace the summation over all $s&#039; \in S$ in the above expression by a summation over the states visited by the robot. This allows us to subvert the need to know the transition function.</p>
@@ -509,14 +530,14 @@
 <li>$\sum_{t=1}^{\infty} \alpha_t = \infty$ (ensuring sufficient update step size to explore the entire state space)</li>
 <li>$\sum_{t=1}^{\infty} \alpha_t^2 &lt; \infty$ (ensuring that the update magnitude gradually decreases and tends to stabilize over time)</li>
 </ol>
-<p>We can find that Q-learning is a value-based algorithm. It doesn&#039;t try to understand the environment, which is called model free algorithm. It tries to optimize value function to indirectly derive a strategy</p>
+<p>We can find that Q-learning is a <span class="obsidian-red">value-based</span> algorithm. It doesn&#039;t try to understand the environment, which is called model free algorithm. It tries to optimize value function to indirectly derive a strategy</p>
 <p>Tabular Q-Learning stores one entry per $(s,a)$ pair, which is infeasible when the state space is huge (e.g. raw game pixels). DQN (Mnih et al., 2015) approximates the action-value function with a neural network $Q(s,a;\theta)$ and minimizes the temporal-difference error $$L(\theta) = \mathbb{E}\Big[\big(\underbrace{R_{t+1} + \gamma \max_{a&#039;} Q(s_{t+1}, a&#039;;\theta^-)}_{\text{target}} - Q(s_t, a_t;\theta)\big)^2\Big]$$ Two key tricks stabilize training:</p>
 <ul>
 <li><span class="obsidian-red">Experience Replay</span>: store transitions $(s,a,r,s&#039;)$ in a buffer and sample random mini-batches, breaking the temporal correlation between consecutive samples.</li>
 <li><span class="obsidian-red">Target Network</span>: compute the target with a separate, slowly-updated copy of the parameters $\theta^-$, preventing the &quot;chasing a moving target&quot; instability.</li>
 </ul>
 <h3 id="policy-gradient-methods">Policy Gradient Methods</h3>
-<p>The methods above are <span class="obsidian-red">value-based</span>: they learn $Q$ and derive the policy implicitly via $\mathrm{argmax}$. <span class="obsidian-red">Policy-based</span> methods instead parameterize the policy $\pi_\theta(a\mid s)$ directly and optimize its parameters by gradient ascent on the expected return. This is essential for continuous action spaces (where $\mathrm{argmax}_a$ is intractable) and naturally produces stochastic policies.</p>
+<p>The methods above are value-based: they learn $Q$ and derive the policy implicitly via $\mathrm{argmax}$. <span class="obsidian-red">Policy-based</span> methods instead parameterize the policy $\pi_\theta(a\mid s)$ directly and optimize its parameters by gradient ascent on the expected return. This is essential for continuous action spaces (where $\mathrm{argmax}_a$ is intractable) and naturally produces stochastic policies.</p>
 <p>The objective is $J(\theta) = \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)]$. The <span class="obsidian-red">Policy Gradient Theorem</span> gives its gradient without needing to differentiate the environment dynamics: $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau\sim\pi_\theta}\Big[\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, R(\tau)\Big]$$</p>
 <h4 id="reinforce">REINFORCE</h4>
 <p>REINFORCE is the basic Monte-Carlo policy gradient algorithm: run a full episode, then for each step push up the log-probability of actions in proportion to the (discounted) return that followed them. $$\theta \leftarrow \theta + \eta\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, G_t,\qquad G_t = \sum_{k=t}^{T}\gamma^{k-t} r_k$$ Its main weakness is high variance, since $G_t$ depends on the entire random trajectory. A common fix is to subtract a <span class="obsidian-red">baseline</span> $b(s_t)$ (often an estimate of the state value $V(s_t)$), which reduces variance without introducing bias: $$\theta \leftarrow \theta + \eta\, \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, (G_t - b(s_t))$$</p>
@@ -576,11 +597,11 @@
 <h3 id="the-skipgram-model">The Skip-Gram Model</h3>
 <p>The _skip-gram_ model assumes that a word can be used to generate its surrounding words in a text sequence.</p>
 <p><img src="../attachments/skip-gram.svg" alt="skip-gram" loading="lazy" decoding="async" style="width: min(100%, 348px);"> The conditional probability of generating any context word $w_o$ (with index $o$ in the dictionary) given the center word $w_c$ (with index $c$ in the dictionary) can be modeled by a softmax operation on vector dot products: $$P(w_o \mid w_c) = \frac{\exp(\mathbf{u}_o^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}$$ Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the skip-gram model is the probability of generating all context words given any center word: $$\prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w^{(t+j)} \mid w^{(t)})$$</p>
-<p>In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:$$- \sum_{t=1}^{T} \sum_{-m \leq j \leq m,\ j \neq 0} \textrm{log}\, P(w^{(t+j)} \mid w^{(t)})$$where$$\log P(w_o \mid w_c) =\mathbf{u}_o^\top \mathbf{v}_c - \log\left(\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)\right)$$ Through differentiation, we can obtain its gradient with respect to the center word vector $\mathbf{v}_c$ as $$\begin{split}\begin{aligned}\frac{\partial \textrm{log}\, P(w_o \mid w_c)}{\partial \mathbf{v}_c}&amp;= \mathbf{u}_o - \frac{\sum_{j \in V} \exp(\mathbf{u}_j^\top \mathbf{v}_c)\mathbf{u}_j}{\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\\&amp;= \mathbf{u}_o - \sum_{j \in V} \left(\frac{\exp(\mathbf{u}_j^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\right) \mathbf{u}_j\\&amp;= \mathbf{u}_o - \sum_{j \in V} P(w_j \mid w_c) \mathbf{u}_j\end{aligned}\end{split}$$</p>
+<p>In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function: $$- \sum_{t=1}^{T} \sum_{-m \leq j \leq m,\ j \neq 0} \textrm{log}\, P(w^{(t+j)} \mid w^{(t)})$$ where $$\log P(w_o \mid w_c) =\mathbf{u}_o^\top \mathbf{v}_c - \log\left(\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)\right)$$ Through differentiation, we can obtain its gradient with respect to the center word vector $\mathbf{v}_c$ as $$\begin{split}\begin{aligned}\frac{\partial \textrm{log}\, P(w_o \mid w_c)}{\partial \mathbf{v}_c}&amp;= \mathbf{u}_o - \frac{\sum_{j \in V} \exp(\mathbf{u}_j^\top \mathbf{v}_c)\mathbf{u}_j}{\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\\&amp;= \mathbf{u}_o - \sum_{j \in V} \left(\frac{\exp(\mathbf{u}_j^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\right) \mathbf{u}_j\\&amp;= \mathbf{u}_o - \sum_{j \in V} P(w_j \mid w_c) \mathbf{u}_j\end{aligned}\end{split}$$</p>
 <h3 id="the-continuous-bag-of-words-cbow-model">The Continuous Bag of Words (CBOW) Model</h3>
 <p>The _continuous bag of words_ (CBOW) model is similar to the skip-gram model. The major difference from the skip-gram model is that the continuous bag of words model assumes that a center word is generated based on its surrounding context words in the text sequence. <img src="../attachments/cbow.svg" alt="cbow" loading="lazy" decoding="async" style="width: min(100%, 338px);"> Since there are multiple context words in the continuous bag of words model, these context word vectors are averaged in the calculation of the conditional probability. Specifically, for any word with index $i$ in the dictionary, denote by $\mathbf{v}_i\in\mathbb{R}^d$ and $\mathbf{u}_i\in\mathbb{R}^d$ its two vectors when used as a context word and a center word (meanings are switched in the skip-gram model), respectively.</p>
 <p>The conditional probability of generating any center word $w_c$ (with index $c$ in the dictionary) given its surrounding context words $W_o=\{w_{o_1}, \ldots, w_{o_{2m}}\}$ (with index $o_1, \ldots, o_{2m}$ in the dictionary) and $\bar{\mathbf{v}}_o = \left(\mathbf{v}_{o_1} + \ldots + \mathbf{v}_{o_{2m}} \right)/(2m)$ can be modeled by</p>
-<p>$$P(w_c \mid W_o) = \frac{\exp\left(\mathbf{u}_c^\top \bar{\mathbf{v}}_o\right)}{\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)}$$ Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the CBOW model is the probability of generating all context words given any center word: $$\prod_{t=1}^{T}  P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$ In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function: $$-\sum_{t=1}^T  \textrm{log}\, P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$ Notice that$$\log\,P(w_c \mid W_o) = \mathbf{u}_c^\top \bar{\mathbf{v}}_o - \log\,\left(\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)\right)$$ Through differentiation, we can obtain its gradient with respect to any context word vector $\mathbf{v}_{o_i}$ ($i = 1, \ldots, 2m$) as $$\frac{\partial \log\, P(w_c \mid \mathcal{W}_o)}{\partial \mathbf{v}_{o_i}} = \frac{1}{2m} \left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} \frac{\exp(\mathbf{u}_j^\top \bar{\mathbf{v}}_o)\mathbf{u}_j}{ \sum_{i \in \mathcal{V}} \exp(\mathbf{u}_i^\top \bar{\mathbf{v}}_o)} \right) = \frac{1}{2m}\left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} P(w_j \mid \mathcal{W}_o) \mathbf{u}_j \right)$$</p>
+<p>$$P(w_c \mid W_o) = \frac{\exp\left(\mathbf{u}_c^\top \bar{\mathbf{v}}_o\right)}{\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)}$$ Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the CBOW model is the probability of generating all context words given any center word: $$\prod_{t=1}^{T}  P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$ In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function: $$-\sum_{t=1}^T  \textrm{log}\, P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$ Notice that $$\log\,P(w_c \mid W_o) = \mathbf{u}_c^\top \bar{\mathbf{v}}_o - \log\,\left(\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)\right)$$ Through differentiation, we can obtain its gradient with respect to any context word vector $\mathbf{v}_{o_i}$ ($i = 1, \ldots, 2m$) as $$\frac{\partial \log\, P(w_c \mid \mathcal{W}_o)}{\partial \mathbf{v}_{o_i}} = \frac{1}{2m} \left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} \frac{\exp(\mathbf{u}_j^\top \bar{\mathbf{v}}_o)\mathbf{u}_j}{ \sum_{i \in \mathcal{V}} \exp(\mathbf{u}_i^\top \bar{\mathbf{v}}_o)} \right) = \frac{1}{2m}\left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} P(w_j \mid \mathcal{W}_o) \mathbf{u}_j \right)$$</p>
 <h3 id="approximate-training">Approximate Training</h3>
 <p>There is a serious computational problem hiding in both models. The softmax denominator $\sum_{i \in V}\exp(\mathbf{u}_i^\top \mathbf{v}_c)$ sums over the entire vocabulary $V$, and the gradients above contain a term $\sum_{j\in V}P(w_j\mid w_c)\mathbf{u}_j$. Since $|V|$ can be in the millions, computing this for every training step is prohibitively expensive. Two approximate training methods make word2vec tractable.</p>
 <h4 id="negative-sampling">Negative Sampling</h4>
@@ -694,7 +715,7 @@
 <h2 id="generative-adversarial-networks-todo">Generative Adversarial Networks (TODO)</h2>
 <h2 id="recommender-systems-todo">Recommender Systems (TODO)</h2>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"machine-learning","level":1,"text":"Machine Learning"},{"id":"weighted-majority-algorithm","level":1,"text":"Weighted Majority Algorithm"},{"id":"deterministic-version","level":2,"text":"Deterministic Version"},{"id":"random-weighted-majority-rwm-algorithm","level":2,"text":"Random Weighted Majority (RWM) Algorithm"},{"id":"linear-neural-networks","level":1,"text":"Linear Neural Networks"},{"id":"linear-neural-networks-for-regression","level":2,"text":"Linear Neural Networks for Regression"},{"id":"linear-neural-networks-for-classification","level":2,"text":"Linear Neural Networks for Classification"},{"id":"multilayer-perceptrons","level":1,"text":"Multilayer Perceptrons"},{"id":"backpropagation-bp","level":2,"text":"Backpropagation (BP)"},{"id":"parameter-initialization","level":2,"text":"Parameter Initialization"},{"id":"normalization","level":2,"text":"Normalization"},{"id":"dropout","level":2,"text":"Dropout"},{"id":"stochastic-gradient-descent-sgd","level":2,"text":"Stochastic Gradient Descent (SGD)"},{"id":"optimizers","level":3,"text":"Optimizers"},{"id":"momentum","level":3,"text":"Momentum"},{"id":"adagrad","level":3,"text":"AdaGrad"},{"id":"rmsprop","level":3,"text":"RMSProp"},{"id":"adam","level":3,"text":"Adam"},{"id":"adamw","level":3,"text":"AdamW"},{"id":"residual-networks-resnet","level":2,"text":"Residual Networks (ResNet)"},{"id":"convolutional-neural-networks-cnn","level":1,"text":"Convolutional Neural Networks (CNN)"},{"id":"introduction","level":2,"text":"Introduction"},{"id":"padding-and-stride","level":2,"text":"Padding and Stride"},{"id":"pooling","level":2,"text":"Pooling"},{"id":"recurrent-neural-network-rnn","level":1,"text":"Recurrent Neural Network (RNN)"},{"id":"longshort-term-memory-lstm","level":2,"text":"Long-Short Term Memory (LSTM)"},{"id":"gated-recurrent-unit-gru-todo","level":2,"text":"Gated Recurrent Unit(GRU) (TODO)"},{"id":"attention-mechanisms-and-transformers","level":1,"text":"Attention Mechanisms and Transformers"},{"id":"multihead-attention","level":2,"text":"Multi-Head Attention"},{"id":"transformer","level":2,"text":"Transformer"},{"id":"positional-encoding","level":3,"text":"Positional Encoding"},{"id":"positionwise-feedforward-network","level":3,"text":"Position-Wise Feed-Forward Network"},{"id":"encoderonly","level":3,"text":"Encoder-Only"},{"id":"decoderonly","level":3,"text":"Decoder-Only"},{"id":"encoderdecoder","level":3,"text":"Encoder-Decoder"},{"id":"graph-neural-network-gnn","level":1,"text":"Graph Neural Network (GNN)"},{"id":"graph-representation-learning","level":2,"text":"Graph Representation Learning"},{"id":"neighborhood-aggregation","level":2,"text":"Neighborhood Aggregation"},{"id":"feature-augmentation","level":2,"text":"Feature Augmentation"},{"id":"computer-vision-todo","level":1,"text":"Computer Vision(TODO)"},{"id":"you-only-look-once-yolo-image-processing","level":2,"text":"You Only Look Once (YOLO) Image Processing"},{"id":"reinforcement-learning-rl","level":1,"text":"Reinforcement Learning (RL)"},{"id":"value-iteration","level":2,"text":"Value Iteration"},{"id":"qlearning-and-deep-qnetwork-dqn","level":2,"text":"Q-Learning and Deep Q-Network (DQN)"},{"id":"policy-gradient-methods","level":2,"text":"Policy Gradient Methods"},{"id":"reinforce","level":3,"text":"REINFORCE"},{"id":"actorcritic","level":3,"text":"Actor-Critic"},{"id":"natural-language-processing-nlp","level":1,"text":"Natural Language Processing (NLP)"},{"id":"tokenization","level":2,"text":"Tokenization"},{"id":"onehot-vector","level":2,"text":"One-Hot Vector"},{"id":"contrastive-learning","level":2,"text":"Contrastive Learning"},{"id":"positive-and-negative-pairs","level":3,"text":"Positive and Negative Pairs"},{"id":"contrastive-loss","level":3,"text":"Contrastive Loss"},{"id":"the-skipgram-model","level":2,"text":"The Skip-Gram Model"},{"id":"the-continuous-bag-of-words-cbow-model","level":2,"text":"The Continuous Bag of Words (CBOW) Model"},{"id":"approximate-training","level":2,"text":"Approximate Training"},{"id":"negative-sampling","level":3,"text":"Negative Sampling"},{"id":"hierarchical-softmax","level":3,"text":"Hierarchical Softmax"},{"id":"bidirectional-encoder-representations-from-transformers-bert","level":2,"text":"Bidirectional Encoder Representations from Transformers (BERT)"},{"id":"ngram-language-model","level":2,"text":"N-Gram Language Model"},{"id":"large-language-model-llm","level":2,"text":"Large Language Model (LLM)"},{"id":"scaling-law","level":3,"text":"Scaling Law"},{"id":"emergent-abilities","level":3,"text":"Emergent Abilities"},{"id":"construction-method","level":3,"text":"Construction Method"},{"id":"gaussian-process-todo","level":1,"text":"Gaussian Process (TODO)"},{"id":"hyperparameter-optimization-todo","level":1,"text":"Hyperparameter Optimization (TODO)"},{"id":"generative-adversarial-networks-todo","level":1,"text":"Generative Adversarial Networks (TODO)"},{"id":"recommender-systems-todo","level":1,"text":"Recommender Systems (TODO)"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"machine-learning","level":1,"text":"Machine Learning"},{"id":"weighted-majority-algorithm","level":1,"text":"Weighted Majority Algorithm"},{"id":"deterministic-version","level":2,"text":"Deterministic Version"},{"id":"random-weighted-majority-rwm-algorithm","level":2,"text":"Random Weighted Majority (RWM) Algorithm"},{"id":"linear-neural-networks","level":1,"text":"Linear Neural Networks"},{"id":"linear-neural-networks-for-regression","level":2,"text":"Linear Neural Networks for Regression"},{"id":"linear-neural-networks-for-classification","level":2,"text":"Linear Neural Networks for Classification"},{"id":"multilayer-perceptrons","level":1,"text":"Multilayer Perceptrons"},{"id":"backpropagation-bp","level":2,"text":"Backpropagation (BP)"},{"id":"parameter-initialization","level":2,"text":"Parameter Initialization"},{"id":"normalization","level":2,"text":"Normalization"},{"id":"dropout","level":2,"text":"Dropout"},{"id":"stochastic-gradient-descent-sgd","level":2,"text":"Stochastic Gradient Descent (SGD)"},{"id":"optimizers","level":3,"text":"Optimizers"},{"id":"momentum","level":3,"text":"Momentum"},{"id":"adagrad","level":3,"text":"AdaGrad"},{"id":"rmsprop","level":3,"text":"RMSProp"},{"id":"adam","level":3,"text":"Adam"},{"id":"adamw","level":3,"text":"AdamW"},{"id":"residual-networks-resnet","level":2,"text":"Residual Networks (ResNet)"},{"id":"convolutional-neural-networks-cnn","level":1,"text":"Convolutional Neural Networks (CNN)"},{"id":"introduction","level":2,"text":"Introduction"},{"id":"padding-and-stride","level":2,"text":"Padding and Stride"},{"id":"pooling","level":2,"text":"Pooling"},{"id":"recurrent-neural-network-rnn","level":1,"text":"Recurrent Neural Network (RNN)"},{"id":"longshort-term-memory-lstm","level":2,"text":"Long-Short Term Memory (LSTM)"},{"id":"gated-recurrent-unit-gru-todo","level":2,"text":"Gated Recurrent Unit(GRU) (TODO)"},{"id":"attention-mechanisms-and-transformers","level":1,"text":"Attention Mechanisms and Transformers"},{"id":"multihead-attention","level":2,"text":"Multi-Head Attention"},{"id":"transformer","level":2,"text":"Transformer"},{"id":"positional-encoding","level":3,"text":"Positional Encoding"},{"id":"positionwise-feedforward-network","level":3,"text":"Position-Wise Feed-Forward Network"},{"id":"encoderonly","level":3,"text":"Encoder-Only"},{"id":"decoderonly","level":3,"text":"Decoder-Only"},{"id":"encoderdecoder","level":3,"text":"Encoder-Decoder"},{"id":"graph-neural-network-gnn","level":1,"text":"Graph Neural Network (GNN)"},{"id":"graph-representation-learning","level":2,"text":"Graph Representation Learning"},{"id":"neighborhood-aggregation","level":2,"text":"Neighborhood Aggregation"},{"id":"feature-augmentation","level":2,"text":"Feature Augmentation"},{"id":"computer-vision-todo","level":1,"text":"Computer Vision (TODO)"},{"id":"you-only-look-once-yolo-image-processing","level":2,"text":"You Only Look Once (YOLO) Image Processing"},{"id":"reinforcement-learning-rl","level":1,"text":"Reinforcement Learning (RL)"},{"id":"value-iteration","level":2,"text":"Value Iteration"},{"id":"qlearning-and-deep-qnetwork-dqn","level":2,"text":"Q-Learning and Deep Q-Network (DQN)"},{"id":"policy-gradient-methods","level":2,"text":"Policy Gradient Methods"},{"id":"reinforce","level":3,"text":"REINFORCE"},{"id":"actorcritic","level":3,"text":"Actor-Critic"},{"id":"natural-language-processing-nlp","level":1,"text":"Natural Language Processing (NLP)"},{"id":"tokenization","level":2,"text":"Tokenization"},{"id":"onehot-vector","level":2,"text":"One-Hot Vector"},{"id":"contrastive-learning","level":2,"text":"Contrastive Learning"},{"id":"positive-and-negative-pairs","level":3,"text":"Positive and Negative Pairs"},{"id":"contrastive-loss","level":3,"text":"Contrastive Loss"},{"id":"the-skipgram-model","level":2,"text":"The Skip-Gram Model"},{"id":"the-continuous-bag-of-words-cbow-model","level":2,"text":"The Continuous Bag of Words (CBOW) Model"},{"id":"approximate-training","level":2,"text":"Approximate Training"},{"id":"negative-sampling","level":3,"text":"Negative Sampling"},{"id":"hierarchical-softmax","level":3,"text":"Hierarchical Softmax"},{"id":"bidirectional-encoder-representations-from-transformers-bert","level":2,"text":"Bidirectional Encoder Representations from Transformers (BERT)"},{"id":"ngram-language-model","level":2,"text":"N-Gram Language Model"},{"id":"large-language-model-llm","level":2,"text":"Large Language Model (LLM)"},{"id":"scaling-law","level":3,"text":"Scaling Law"},{"id":"emergent-abilities","level":3,"text":"Emergent Abilities"},{"id":"construction-method","level":3,"text":"Construction Method"},{"id":"gaussian-process-todo","level":1,"text":"Gaussian Process (TODO)"},{"id":"hyperparameter-optimization-todo","level":1,"text":"Hyperparameter Optimization (TODO)"},{"id":"generative-adversarial-networks-todo","level":1,"text":"Generative Adversarial Networks (TODO)"},{"id":"recommender-systems-todo","level":1,"text":"Recommender Systems (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -720,13 +741,14 @@ Generally, machine learning can be divided into the following two categories:
 Data Set can be divided as:
 
 - <span style="color: red;">Training Set</span>: The set from which the model directly learns to discern patterns.
-- <span style="color: red;">Validation Set</span>: The set used to tune <span style="color: red;">hyperparameters</span> and prevent <span style="color: red;">overfitting</span>.
+- <span style="color: red;">Validation Set</span>: The set used to tune hyperparameters and prevent overfitting.
 - <span style="color: red;">Testing Set</span>: The set used to objectively evaluate the model after training.
 
->Tip Difference between parameter and hyperparameter:
->Parameters are learned by the model, while hyperparameters are set by you.
+>[!NOTE] Parameters and Hyperparameters
+>Parameters are learned by the model, while <span style="color: red;">hyperparameters</span> are set by you.
 
->Tip Overfitting occurs when the model performs exceptionally well on the training set, but fails to generalize to the testing set. This is because the model memorizes the noise and unnecessary details of the training data rather than learning the actual underlying patterns.
+>[!NOTE]
+><span style="color: red;">Overfitting</span> occurs when the model performs exceptionally well on the training set, but fails to generalize to the testing set. This is because the model memorizes the noise and unnecessary details of the training data rather than learning the actual underlying patterns.
 
 For the evaluation to be statistically valid, the training, validation, and testing sets must be representative of the same underlying distribution.
 
@@ -852,27 +874,34 @@ class WeightedMajority:
 >[!PROOF] Proof
 >Let $W_t$ be the total weight of all experts in round $t$. Initially, $W_0 = n$ (each expert has a weight of $1$).
 >
->When the algorithm runs randomized prediction in round $t$, the probability $P_t$ of the algorithm making an error is equal to the weight proportion of the experts who make incorrect predictions: $$P_t =\frac{ \sum_{i\in Wrong}w_i^{(t)}}{W_t}$$
+>When the algorithm runs randomized prediction in round $t$, the probability $P_t$ of the algorithm making an error is equal to the weight proportion of the experts who make incorrect predictions: 
+>$$P_t =\frac{ \sum_{i\in Wrong}w_i^{(t)}}{W_t}$$
 >
 >In each update round, the weights of experts who predict incorrectly are multiplied by $a$, and the weights of experts who predict correctly are multiplied by $b$.
 >
->The updated total weights $W_{t+1}$ are:$$W_{t+1}=b\sum_{i\in Right}w_i^{(t)}+a\sum_{i\in Wrong}w_i^{(t)}$$
+>The updated total weights $W_{t+1}$ are:
+>$$W_{t+1}=b\sum_{i\in Right}w_i^{(t)}+a\sum_{i\in Wrong}w_i^{(t)}$$
 >
 >Let $b=1+\epsilon_1,a=1-\epsilon_2$, then
 >$$W_{t+1}=W_t+\epsilon_1\sum_{i\in Right}w_i^{(t)}-\epsilon_2\sum_{i\in Wrong}w_i^{(t)}$$
 >
->Using the previously defined $P_t$, we can write:$$W_{t+1}=W_t(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)$$
+>Using the previously defined $P_t$, we can write:
+>$$W_{t+1}=W_t(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)$$
 >
->After $T$ rounds, the final upper bound of the total weight is:$$W_T=n\prod_{t=1}^{T}(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)\le n \cdot\exp\{\epsilon_1 \sum_{t=1}^T (1-P_t) -\epsilon_2 \sum_{t=1}^T P_t\}$$
+>After $T$ rounds, the final upper bound of the total weight is:
+>$$W_T=n\prod_{t=1}^{T}(1+\epsilon_1 (1-P_t)-\epsilon_2 P_t)\le n \cdot\exp\{\epsilon_1 \sum_{t=1}^T (1-P_t) -\epsilon_2 \sum_{t=1}^T P_t\}$$
 >
 >Note that $\sum_{t=1}^T P_t$ is the expected total error of the algorithm, denoted as $\mathbb{E}[M]$. Therefore:
 >$$W_T\le n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}$$
 >
->For an expert $i$, let $m_i^{(T)}$ be the number of mistakes he makes in the first $T$ round. Since the total weight is always greater than or equal to the weight of any single expert, we have:$$W_T\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$
+>For an expert $i$, let $m_i^{(T)}$ be the number of mistakes he makes in the first $T$ round. Since the total weight is always greater than or equal to the weight of any single expert, we have:
+>$$W_T\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$
 >
->As a result,$$ n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$
+>As a result,
+>$$ n e^{\epsilon_1 T} \cdot\exp\{-(\epsilon_1+\epsilon_2)\mathbb{E}[M]\}\ge (1+\epsilon_1)^{T-m_i^{(T)}}(1-\epsilon_2)^{m_i^{(T)}}$$
 >$$\mathbb{E}[M]\le\frac{-(T-m_i^{(T)})\log(1+\epsilon_1)-m_i^{(T)}\log(1-\epsilon_2)+\log n+\epsilon_1 T}{\epsilon_1+\epsilon_2}$$
->Let $\epsilon_1=0$, then$$\mathbb{E}[M] \le \frac{\log n - m_i^{(T)}\log(1-\epsilon_2)}{\epsilon_2}$$
+>Let $\epsilon_1=0$, then
+>$$\mathbb{E}[M] \le \frac{\log n - m_i^{(T)}\log(1-\epsilon_2)}{\epsilon_2}$$
 >
 >For $\epsilon_2 \in (0, 1/2]$, we know that $-\log(1-\epsilon_2) \le \epsilon_2 + \epsilon_2^2$.
 >$$\mathbb{E}[M] \le \frac{\log n + m_i^{(T)}(\epsilon_2 + \epsilon_2^2)}{\epsilon_2}=\frac{\log n}{\epsilon_2} + (1+\epsilon_2)m_i^{(T)}$$
@@ -889,15 +918,17 @@ Assume that regression model is linear, i.e.
 $$\hat{y}=w_1x_1+w_2x_2+\dots+w_nx_n+b=\mathbf{w}^\top \mathbf{x}+b,y=\hat{y}+\epsilon,\mathbb{E}[\epsilon]=0$$
 Assume that $\epsilon$ follows a Gaussian distribution, because this guarantees that Maximum Likelihood Estimate (MLE) is completely equivalent to Minimizing the Squared Error.
 
-To find effective coefficients, we define
+To find effective coefficients, we define the <span style="color: red;">loss function</span>
 $$L(w,b)=\frac{1}{n}\sum_{i=1}^n l^{(i)}(w,b)=\frac{1}{n}\sum_{i=1}^n (y^{(i)}-\hat{y}^{(i)})^2$$
-For a linear problem, we can get the analytical solution$$\mathbf{w}^∗=(\mathbf{x}^\top \mathbf{x})^{-1}\mathbf{x}^\top \mathbf{y}$$
-Generally, we can use <span style="color: red;">Gradient Descent</span> (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the <span style="color: red;">learning rate</span> $\eta$, i.e. $$w \leftarrow w−\eta \nabla L(w)$$
+For a linear problem, we can get the analytical solution
+$$\mathbf{w}^∗=(\mathbf{x}^\top \mathbf{x})^{-1}\mathbf{x}^\top \mathbf{y}$$
+Generally, we can use <span style="color: red;">Gradient Descent</span> (GD), which is based on the fact that the direction of steepest descent is the negative gradient. The algorithm iteratively updates the parameter $w$ by subtracting gradient times the <span style="color: red;">learning rate</span> $\eta$, i.e. 
+$$w \leftarrow w−\eta \nabla L(w)$$
 The learning rate must be neither too large nor too small.
 
 ![Screenshot 2026-05-17 at 15.15.10](../attachments/Screenshot%202026-05-17%20at%2015.15.10-optimized.webp){width=450}
 
-To avoid overfitting, we can <span style="color: red;">regularize</span> the <span style="color: red;">loss function</span> by adding $\lambda$ times the model complexity to the prediction loss.
+To avoid overfitting, we can <span style="color: red;">regularize</span> the loss function by adding $\lambda$ times the model complexity to the prediction loss.
 
 - L1 regularization
 
@@ -964,9 +995,19 @@ The power of multilayer neural networks can be seen from the following theorem:
 >  Even with a single-hidden-layer network, given enough nodes (possibly absurdly many), the right set of weights, and the activation function is nonlinear, we can model any function.
 
 Some common activation functions:
-- ReLU Function$$ReLU(x)=\max(x,0)$$ $$ReLU'(x)=\left\{\begin{matrix}0,\text{if }x\le0\\1,\text{if }x>0\end{matrix}\right.$$ (the derivative is undefined at $x=0$; in practice it is conventionally set to $0$.)
-- Sigmoid Function$$Sigmoid(x)=\frac{1}{1+e^{-x}}$$ $$Sigmoid'(x)=\frac{e^{-x}}{(1+e^{-x})^2}=Sigmoid(x)(1-Sigmoid(x))$$
-- Tanh Function$$\tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$$ $$\tanh'(x)=1-\tanh^2 (x)$$
+- ReLU Function
+  $$ReLU(x)=\max(x,0)$$
+   
+  $$ReLU'(x)=\left\{\begin{matrix}0,\text{if }x\le0\\1,\text{if }x>0\end{matrix}\right.$$
+   (the derivative is undefined at $x=0$; in practice it is conventionally set to $0$.)
+- Sigmoid Function
+  $$Sigmoid(x)=\frac{1}{1+e^{-x}}$$
+   
+  $$Sigmoid'(x)=\frac{e^{-x}}{(1+e^{-x})^2}=Sigmoid(x)(1-Sigmoid(x))$$
+- Tanh Function
+  $$\tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$$
+   
+  $$\tanh'(x)=1-\tanh^2 (x)$$
 ## Backpropagation (BP)
 
 <span style="color: red;">Backpropagation</span> refers to the method of calculating the gradient of neural network parameters. Assuming that we have $\mathbf{Y}=f(\mathbf{X})$ and $\mathbf{Z}=g(\mathbf{Y})$, by using the chain rule, we can compute the derivative of $\mathbf{Z}$ with respect to $\mathbf{X}$ via
@@ -989,7 +1030,8 @@ The followings are the common initialization methods:
 where $M_i$ is the dimension of the layer $i$ of nerves.
 ## Normalization
 
-Generally,$$y=\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}\gamma+\beta$$
+Generally,
+$$y=\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}\gamma+\beta$$
 Define $B,C,H,W,L,D$ as batch, channel, height, width, sequence length, dimension
 We have lots of methods to normalize:
 - <span style="color: red;">Batch Normalization (BN)</span>
@@ -1150,14 +1192,17 @@ However, it is not perfect:
 
 To solve the problem in RNN, we can optionally forget the information, so we introduce the <span style="color: red;">Long-Short Term Memory (LSTM)</span>.
 
-Its mathematical formulation is:$$\begin{pmatrix}
+Its mathematical formulation is:
+$$\begin{pmatrix}
  i\\f\\o\\g
 \end{pmatrix}=\begin{pmatrix}
  \sigma\\ \sigma\\ \sigma\\ \tanh
 \end{pmatrix}W\begin{pmatrix}
  h_{t-1}\\x_t\\
 \end{pmatrix}
-$$$$c_t=f \odot c_{t-1}+i \odot g$$
+$$
+
+$$c_t=f \odot c_{t-1}+i \odot g$$
 $$h_t=o\odot \tanh(c_t)$$
 where
 - $i$ is input gate
@@ -1176,23 +1221,34 @@ So far, all the networks we have reviewed crucially relied on the input being of
 
 This leads to one of the most exciting concepts introduced in deep learning in the past decade: the <span style="color: red;">attention mechanism</span>. For now, simply consider the following: denote by $\mathcal{D} = \{(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)\}$ a database of $m$ tuples of _keys_ and _values_. Moreover, denote by $\mathbf{q}$ a _query_. Then we can define the _attention_ over $\mathcal{D}$ as
 $$\textrm{Attention}(\mathbf{q}, \mathcal{D}) =\sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i$$
-A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via$$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function. 
+A common strategy for ensuring that the weights sum up to $1$ and are nonnegative is to normalize them via
+$$\alpha(\mathbf{q}, \mathbf{k}_i)=\frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$
+where $a(\mathbf{q}, \mathbf{k}_j)$ is an attention scoring function. 
 
-A mainstream attention scoring function is$$a(\mathbf{q}, \mathbf{k}_i) = \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{d_k}}$$where $d_k$ is the dimension of the vector.
+A mainstream attention scoring function is
+$$a(\mathbf{q}, \mathbf{k}_i) = \frac{\mathbf{q}^\top \mathbf{k}_i}{\sqrt{d_k}}$$
+where $d_k$ is the dimension of the vector.
 
-If we have many query vectors, arranging them as rows of $Q$ and keys as rows of $K$, the scaled dot-product attention scores are computed by $$\frac{QK^\top}{\sqrt{d_k}}$$
+If we have many query vectors, arranging them as rows of $Q$ and keys as rows of $K$, the scaled dot-product attention scores are computed by 
+$$\frac{QK^\top}{\sqrt{d_k}}$$
 
-Another one is the _additive attention_ scoring function given by$$a(\mathbf q, \mathbf k) = \mathbf w_v^\top \textrm{tanh}(\mathbf W_q\mathbf q + \mathbf W_k \mathbf k)$$where $\mathbf W_q\in\mathbb R^{h\times q}$, $\mathbf W_k\in\mathbb R^{h\times k}$, and $\mathbf w_v\in\mathbb R^{h}$ are the learnable parameters.
+Another one is the _additive attention_ scoring function given by
+$$a(\mathbf{q}, \mathbf{k}) = \mathbf{w}_v^\top \textrm{tanh}(\mathbf{W}_q\mathbf{q} + \mathbf{W}_k \mathbf{k})$$
+where $\mathbf{W}_q\in\mathbb R^{h\times q}$, $\mathbf{W}_k\in\mathbb R^{h\times k}$, and $\mathbf{w}_v\in\mathbb R^{h}$ are the learnable parameters.
 
 ![qkv](../attachments/qkv.svg){width=478}
 
 If the query, key, and value sequences all come from the same input sequence, the mechanism is called a <span style="color: red;">self-attention mechanism</span>. This does not mean $Q=K=V$ after projection: typically $Q=XW_Q$, $K=XW_K$, and $V=XW_V$ are learned projections of the same token representations $X$. Separate projections let the model learn different roles for querying, matching, and carrying information.
 ## Multi-Head Attention
 
-Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values, and queries, It is beneficial to linearly project the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions, respectively, where$$d_k=d_v=d_{model}/h$$On each of these projected versions of queries, keys, and values, we then perform the attention function in parallel, yielding a $d_v$-dimensional output values. These are concatenated and once again projected, resulting in the final values.
+Instead of performing a single attention function with $d_{\text{model}}$-dimensional keys, values, and queries, It is beneficial to linearly project the queries, keys, and values $h$ times with different, learned linear projections to $d_k$, $d_k$, and $d_v$ dimensions, respectively, where
+$$d_k=d_v=d_{model}/h$$
+On each of these projected versions of queries, keys, and values, we then perform the attention function in parallel, yielding a $d_v$-dimensional output values. These are concatenated and once again projected, resulting in the final values.
 ![Screenshot 2026-05-21 at 15.17.56](../attachments/Screenshot%202026-05-21%20at%2015.17.56-optimized.webp){width=450}
 Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.
-$$MultiHead(Q,K,V)=Concat(head_1,\dots,head_h)W^O$$where$$head_i=\textrm{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$
+$$MultiHead(Q,K,V)=Concat(head_1,\dots,head_h)W^O$$
+where
+$$head_i=\textrm{Attention}(QW_i^Q,KW_i^K,VW_i^V)$$
 $W_i^Q\in\mathbb{R}^{d_{model}\times d_k},W_i^K\in\mathbb{R}^{d_{model}\times d_k},W_i^V\in\mathbb{R}^{d_{model}\times d_v},W_i^O\in\mathbb{R}^{hd_v\times d_{model}}$
 
 When we compute query $q_t$, we cannot get the value of $k_{t+1},\cdots$ To prevent future information leaks, we need to let $k_{t+1},\cdots$ be a very small number (like $-1\times10^{9}$), then the attention of it will be really small. This process is called <span style="color: red;">mask</span>.
@@ -1276,8 +1332,10 @@ The Learning Objectives of Graph Neural Networks:
 - Graph-level Prediction
 
 The function of the graph can be classified as:
-- Permutation Invariance $$f(A,X)=f(PAP^\top,PX)$$
-- Permutation Equivariance $$Pf(A,X)=f(PAP^\top,PX)$$
+- Permutation Invariance 
+  $$f(A,X)=f(PAP^\top,PX)$$
+- Permutation Equivariance 
+  $$Pf(A,X)=f(PAP^\top,PX)$$
 We hope the GNN is permutation equivariant, because in a graph, swapping columns cannot change the structure of the graph.
 
 ## Graph Representation Learning
@@ -1285,10 +1343,12 @@ We hope the GNN is permutation equivariant, because in a graph, swapping columns
 We want to map nodes to an embedding space ($u \rightarrow \mathbb{R}^n$). It is also a method to encode the nodes. We hope the similarity in the embedding space can approximately reflect the similarity of the graph.
 
 Use the following steps to get the similarity of the nodes:
-1. Encoder map the node $$ENC(v)=\mathbf{z}_v \in \mathbb{R}^d$$
+1. Encoder map the node 
+   $$ENC(v)=\mathbf{z}_v \in \mathbb{R}^d$$
 2. Define the similarity function
 3. The decoder recovers the similarity score from the embedding.
-4. Optimize the parameters in the encoder, so that$$similarity(u,v)=z_u^\top z_v$$
+4. Optimize the parameters in the encoder, so that
+   $$similarity(u,v)=z_u^\top z_v$$
 It is noted that
 - This is an unsupervised learning. We don't need the label of the nodes.
 - These embeddings are task-agnostic: they are not trained for a specific task, but can be used for a variety of tasks.
@@ -1324,22 +1384,26 @@ Observation:
 ![Screenshot 2026-05-18 at 13.02.15](../attachments/Screenshot%202026-05-18%20at%2013.02.15-optimized.webp){width=450}
 
 $$m_A^{(l)}=f^{(l)}(h_A^{(l)},h_u^{(l)}:u\in \mathcal{N}(A))=f^{(l)}(h_A^{(l)},h_B^{(l)},h_C^{(l)},h_D^{(l)})$$
-$$h_A^{(l+1)} = g^{(l)}(m_A^{(l)})$$where
+$$h_A^{(l+1)} = g^{(l)}(m_A^{(l)})$$
+where
 - $h_A^{(l)}$ is the embedding of the node $A$ in the $l$-th layer.
 - $\mathcal{N}(A)$ is the neighbors of the node $A$.
 - $f^{(l)}$ is the aggregation function in the $l$-th layer.
 - $g^{(l)}$ is the transformation function in the $l$-th layer.
 - $m_A^{(l)}$ is the message vector of the node $A$ in the $l$-th layer.
 
-Generally, $$m_v^{(l)} = \frac{1}{|\mathcal{N}(v)|} \sum_{u \in \mathcal{N}(v)} h_u^{(l)}$$
+Generally, 
+$$m_v^{(l)} = \frac{1}{|\mathcal{N}(v)|} \sum_{u \in \mathcal{N}(v)} h_u^{(l)}$$
 $$h_v^{(l+1)} = \sigma(W^{(l)} \cdot m_v^{(l)})$$
 
 This network is called <span style="color: red;">Graph Convolutional Network (GCN)</span>, which is perfectly permutation equivariant.
 
 ![Screenshot 2026-05-18 at 13.14.39](../attachments/Screenshot%202026-05-18%20at%2013.14.39-optimized.webp){width=450}
 The problem of neighborhood aggregation is: the message of node $v$ itself may be lost. This is because the computation of $m_v^{(l)}$ is not related to $h_v^{(l-1)}$. The solution to it is as easy as the following:
-- Message $$m_u^{(l)}=W^{(l)}h_u^{(l-1)},m_v^{(l)}=B^{(l)}h_v^{(l-1)}$$
-- Aggregation $$h_v^{(l)}=concat(AGG(\{m_u^{(l)},u\in \mathcal{N}(v) \}),m_v^{(l)})$$
+- Message 
+  $$m_u^{(l)}=W^{(l)}h_u^{(l-1)},m_v^{(l)}=B^{(l)}h_v^{(l-1)}$$
+- Aggregation 
+  $$h_v^{(l)}=concat(AGG(\{m_u^{(l)},u\in \mathcal{N}(v) \}),m_v^{(l)})$$
 As the number of network layers increases, the feature representations of all nodes in the graph gradually converge and become indistinguishable, leading to a precipitous decline in the model's performance on downstream tasks such as node classification.It is called the <span style="color: red;">over-smoothing problem</span>.
 
 This is because if the network is really deep, the "raw input range" that determines the output of a specific node within a particular layer, which is called <span style="color: red;">receptive field</span> officially, is highly overlap.
@@ -1361,7 +1425,7 @@ The computational graph cannot represent all of the features of the graph. As sh
 In this scenario, we need to artificially "augment" the nodes with features—either to address the lack of features in the original graph or to help the GNN overcome the inherent bottlenecks in its expressive power.
 ![Screenshot 2026-05-18 at 13.32.02](../attachments/Screenshot%202026-05-18%20at%2013.32.02-optimized.webp){width=450}
 We can use lots of graph algorithms (e.g. [DFS](data_structure_and_algorithm.html#depthfirst-search-dfs)) to augment node feature.
-# Computer Vision(TODO)
+# Computer Vision (TODO)
 
 ## You Only Look Once (YOLO) Image Processing
 
@@ -1383,7 +1447,9 @@ Compared to local observation, YOLO utilizes the surrounding contextual informat
 
 <span style="color: red;">Reinforcement Learning</span> is a suite of techniques that allows us to take the appropriate action at each stage of a sequential decision making problem in order to maximize some utility eventually.
 
-Given a state set $S$ and an action set $A$, we can define an event trajectory as $$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, s_2, a_2, r_2, \ldots)$$where $s_i \in S,a_i \in A$ and $r_i$ is the result of the action $a_i$.
+Given a state set $S$ and an action set $A$, we can define an event trajectory as 
+$$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, s_2, a_2, r_2, \ldots)$$
+where $s_i \in S,a_i \in A$ and $r_i$ is the result of the action $a_i$.
 
 The _return_ of a trajectory is the total reward obtained by the robot along such a trajectory:
 $$R(\tau) = r_0 + r_1 + r_2 + \cdots$$
@@ -1394,21 +1460,32 @@ We call a system a <span style="color: red;">Markov system</span> if the next st
 It is noted that the reward in reinforcement learning can be sparse or delayed. In some tasks, the agent only receives a clear reward at the end of an episode, such as after winning or losing a game.
 ## Value Iteration
 
-Given a stochastic policy denoted as $a_t \sim \pi(s_t)$, then we have$$V^\pi(s_0) = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ R(\tau) \Big] = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=0}^\infty \gamma^t r(s_t, a_t) \Big]$$
+Given a stochastic policy denoted as $a_t \sim \pi(s_t)$, then we have
+$$V^\pi(s_0) = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ R(\tau) \Big] = \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=0}^\infty \gamma^t r(s_t, a_t) \Big]$$
 We next break down the trajectory into two stages:
 1. the first stage which corresponds to $s_0 \to s_1$ upon taking the action $a_0$
 2. a second stage which is the trajectory $\tau' = (s_1, a_1, r_1, \ldots)$ thereafter.
 Mathematically, we write the two stages as
 $$V^\pi(s_0) =   \mathbb{E}_{a_0 \sim \pi(s_0)} \Big[r(s_0, a_0) + \gamma  \ \mathbb{E}_{s_1 \sim P(s_1 \mid s_0, a_0)} \Big[ V^\pi(s_1) \Big] \Big]$$
-We can write using the transition probabilities in the Markov decision process (MDP) as$$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^\pi(s') \Big],\forall s \in S$$
+We can write using the transition probabilities in the Markov decision process (MDP) as
+$$V^\pi(s) = \sum_{a \in A} \pi(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^\pi(s') \Big],\forall s \in S$$
 In implementations, it is often useful to maintain a quantity called the "action value" function which is a closely related quantity to the value function. This is defined to be the average _return_ of a trajectory that begins at $s_0$ but when the action of the first stage is _fixed_ to be $a_0$:
 $$Q^\pi(s_0, a_0) = r(s_0, a_0) + \mathbb{E}_{a_t \sim \pi(s_t)} \Big[ \sum_{t=1}^\infty \gamma^t r(s_t, a_t) \Big]$$
 
-We will next think of the "optimal policy" that achieves the maximal average return $$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore:$$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big],\ \forall  s \in S$$For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write$$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big\}$$It is called<span style="color: red;">Bellman Optimality Equation</span>, which can give the optimal policy$$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s'\in S} P(s'|s,a)V^*(s')\}$$
-We can also get Bellman Optimally Equation for $Q$:$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q^*(S_{t+1}, a') \mid S_t=s, A_t=a \right]$$
+We will next think of the "optimal policy" that achieves the maximal average return 
+$$\pi^* = \underset{\pi}{\mathrm{argmax}} V^\pi(s_0)$$
+We can use dynamic programming to solve the problem. It is noted that the remainder of an optimal trajectory is also optimal, therefore:
+$$V^*(s) = \sum_{a \in A} \pi^*(a \mid s) \Big[ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big],\ \forall  s \in S$$
+For a deterministic optimal policy $\pi^*$, since there is only one action that can be taken at state $s$, we can also write
+$$ V^*(s) = \max_{a \in A} \Big\{ r(s,a) + \gamma \sum_{s' \in S} P(s' \mid s, a) V^*(s') \Big\}$$
+It is called<span style="color: red;">Bellman Optimality Equation</span>, which can give the optimal policy
+$$\pi^*(s) = \text{argmax}_{a\in A}\{r(s,a) + \gamma \sum_{s'\in S} P(s'|s,a)V^*(s')\}$$
+We can also get Bellman Optimally Equation for $Q$:
+$$Q^*(s, a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q^*(S_{t+1}, a') \mid S_t=s, A_t=a \right]$$
 We can turn the principle of dynamic programming into an algorithm for finding the optimal value function called <span style="color: red;">value iteration</span>. The key idea behind value iteration is to think of this identity as a set of constraints that tie together $V^*(s)$ at different states $s$. We initialize the value function to some arbitrary values $V_0(s)$ for all states $s$. At the $k^{\textrm{th}}$ iteration, the Value Iteration algorithm updates the value function as
 $$V_{k+1}(s) = \max_{a \in A} \Big\{ r(s,  a) + \gamma\  \sum_{s' \in S} P(s' \mid s, a) V_k(s') \Big\},\ \forall s \in S$$
-It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$.$$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$
+It turns out that as $k \to \infty$ the value function estimated by the Value Iteration algorithm converges to the optimal value function irrespective of the initialization $V_0$.
+$$V^*(s) = \lim_{k \to \infty} V_k(s),\forall s \in S$$
 The same Value Iteration algorithm can be equivalently written using the action-value function as
 
 $$Q_{k+1}(s, a) = r(s, a) + \gamma \sum_{s' \in S} P(s' \mid s, a) \max_{a' \in A} Q_k (s', a'),\forall s \in S, a \in A$$
@@ -1427,7 +1504,7 @@ In academia, the convergence of Q-Learning was rigorously proven by Christopher 
 1. $\sum_{t=1}^{\infty} \alpha_t = \infty$ (ensuring sufficient update step size to explore the entire state space) 
 2. $\sum_{t=1}^{\infty} \alpha_t^2 < \infty$ (ensuring that the update magnitude gradually decreases and tends to stabilize over time)
 
-We can find that Q-learning is a value-based algorithm. It doesn't try to understand the environment, which is called model free algorithm. It tries to optimize value function to indirectly derive a strategy
+We can find that Q-learning is a <span style="color: red;">value-based</span> algorithm. It doesn't try to understand the environment, which is called model free algorithm. It tries to optimize value function to indirectly derive a strategy
 
 Tabular Q-Learning stores one entry per $(s,a)$ pair, which is infeasible when the state space is huge (e.g. raw game pixels). DQN (Mnih et al., 2015) approximates the action-value function with a neural network $Q(s,a;\theta)$ and minimizes the temporal-difference error
 $$L(\theta) = \mathbb{E}\Big[\big(\underbrace{R_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a';\theta^-)}_{\text{target}} - Q(s_t, a_t;\theta)\big)^2\Big]$$
@@ -1437,7 +1514,7 @@ Two key tricks stabilize training:
 
 ## Policy Gradient Methods
 
-The methods above are <span style="color: red;">value-based</span>: they learn $Q$ and derive the policy implicitly via $\mathrm{argmax}$. <span style="color: red;">Policy-based</span> methods instead parameterize the policy $\pi_\theta(a\mid s)$ directly and optimize its parameters by gradient ascent on the expected return. This is essential for continuous action spaces (where $\mathrm{argmax}_a$ is intractable) and naturally produces stochastic policies.
+The methods above are value-based: they learn $Q$ and derive the policy implicitly via $\mathrm{argmax}$. <span style="color: red;">Policy-based</span> methods instead parameterize the policy $\pi_\theta(a\mid s)$ directly and optimize its parameters by gradient ascent on the expected return. This is essential for continuous action spaces (where $\mathrm{argmax}_a$ is intractable) and naturally produces stochastic policies.
 
 The objective is $J(\theta) = \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)]$. The <span style="color: red;">Policy Gradient Theorem</span> gives its gradient without needing to differentiate the environment dynamics:
 $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau\sim\pi_\theta}\Big[\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t\mid s_t)\, R(\tau)\Big]$$
@@ -1533,7 +1610,10 @@ $$P(w_o \mid w_c) = \frac{\exp(\mathbf{u}_o^\top \mathbf{v}_c)}{ \sum_{i \in V} 
 Given a text sequence of length $T$, where the word at time step $t$ is denoted as $w^{(t)}$. Assume that context words are independently generated given any center word. For context window size $m$, the likelihood function of the skip-gram model is the probability of generating all context words given any center word:
 $$\prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w^{(t+j)} \mid w^{(t)})$$
 
-In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:$$- \sum_{t=1}^{T} \sum_{-m \leq j \leq m,\ j \neq 0} \textrm{log}\, P(w^{(t+j)} \mid w^{(t)})$$where$$\log P(w_o \mid w_c) =\mathbf{u}_o^\top \mathbf{v}_c - \log\left(\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)\right)$$
+In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:
+$$- \sum_{t=1}^{T} \sum_{-m \leq j \leq m,\ j \neq 0} \textrm{log}\, P(w^{(t+j)} \mid w^{(t)})$$
+where
+$$\log P(w_o \mid w_c) =\mathbf{u}_o^\top \mathbf{v}_c - \log\left(\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)\right)$$
 Through differentiation, we can obtain its gradient with respect to the center word vector $\mathbf{v}_c$ as
 $$\begin{split}\begin{aligned}\frac{\partial \textrm{log}\, P(w_o \mid w_c)}{\partial \mathbf{v}_c}&= \mathbf{u}_o - \frac{\sum_{j \in V} \exp(\mathbf{u}_j^\top \mathbf{v}_c)\mathbf{u}_j}{\sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\\&= \mathbf{u}_o - \sum_{j \in V} \left(\frac{\exp(\mathbf{u}_j^\top \mathbf{v}_c)}{ \sum_{i \in V} \exp(\mathbf{u}_i^\top \mathbf{v}_c)}\right) \mathbf{u}_j\\&= \mathbf{u}_o - \sum_{j \in V} P(w_j \mid w_c) \mathbf{u}_j\end{aligned}\end{split}$$
 ## The Continuous Bag of Words (CBOW) Model
@@ -1549,7 +1629,8 @@ Given a text sequence of length $T$, where the word at time step $t$ is denoted 
 $$\prod_{t=1}^{T}  P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$
 In training, we learn the model parameters by maximizing the likelihood function. This is equivalent to minimizing the following loss function:
 $$-\sum_{t=1}^T  \textrm{log}\, P(w^{(t)} \mid  w^{(t-m)}, \ldots, w^{(t-1)}, w^{(t+1)}, \ldots, w^{(t+m)})$$
-Notice that$$\log\,P(w_c \mid W_o) = \mathbf{u}_c^\top \bar{\mathbf{v}}_o - \log\,\left(\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)\right)$$
+Notice that
+$$\log\,P(w_c \mid W_o) = \mathbf{u}_c^\top \bar{\mathbf{v}}_o - \log\,\left(\sum_{i \in V} \exp\left(\mathbf{u}_i^\top \bar{\mathbf{v}}_o\right)\right)$$
 Through differentiation, we can obtain its gradient with respect to any context word vector $\mathbf{v}_{o_i}$ ($i = 1, \ldots, 2m$) as
 $$\frac{\partial \log\, P(w_c \mid \mathcal{W}_o)}{\partial \mathbf{v}_{o_i}} = \frac{1}{2m} \left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} \frac{\exp(\mathbf{u}_j^\top \bar{\mathbf{v}}_o)\mathbf{u}_j}{ \sum_{i \in \mathcal{V}} \exp(\mathbf{u}_i^\top \bar{\mathbf{v}}_o)} \right) = \frac{1}{2m}\left(\mathbf{u}_c - \sum_{j \in \mathcal{V}} P(w_j \mid \mathcal{W}_o) \mathbf{u}_j \right)$$
 

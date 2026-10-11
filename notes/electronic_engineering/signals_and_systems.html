@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -90,17 +91,17 @@
 <h3 id="sifting-property">Sifting Property</h3>
 <p>$$x(t)\,\delta(t-t_0) = x(t_0)\,\delta(t-t_0), \qquad \int_{-\infty}^{\infty}x(t)\,\delta(t-t_0)\,\mathrm{d}t = x(t_0)$$ (provided $x(t)$ is continuous at $t=t_0$).</p>
 <p>$$x[n]\,\delta[n-n_0] = x[n_0]\,\delta[n-n_0], \qquad \sum_{n=-\infty}^{\infty}x[n]\,\delta[n-n_0] = x[n_0].$$</p>
-<p>Scaling $$\int_{-\infty}^{\infty}\delta(kx)g(x)\,\mathrm{d}x = \frac{1}{|k|}\int_{-\infty}^{\infty}\delta(x)g\!\left(\frac{x}{k}\right)\mathrm{d}x = \frac{1}{|k|}g(0).$$ Since $$\int_{-\infty}^{\infty}\delta(x)g(x)\,\mathrm{d}x = g(0),$$ we get $$\delta(kx) = \frac{\delta(x)}{|k|}.$$</p>
+<p>Scaling $$\int_{-\infty}^{\infty}\delta(kx)g(x)\,\mathrm{d}x = \frac{1}{|k|}\int_{-\infty}^{\infty}\delta(x)g\!\left(\frac{x}{k}\right)\,\mathrm{d}x = \frac{1}{|k|}g(0).$$ Since $$\int_{-\infty}^{\infty}\delta(x)g(x)\,\mathrm{d}x = g(0),$$ we get $$\delta(kx) = \frac{\delta(x)}{|k|}.$$</p>
 <p>Derivative relations. $$x\delta(x) = 0.$$ From $$(x\delta(x))&#039; = \delta(x) + x\delta&#039;(x) = 0,$$ we get $$x\delta&#039;(x) = -\delta(x).$$ Composition. If $g(x)$ has only simple zeros $x_i$, then $$\delta[g(x)] = \sum_i\frac{\delta(x - x_i)}{|g&#039;(x_i)|}$$</p>
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Near a simple zero, $$g(x)\approx g&#039;(x_i)(x - x_i),$$ so $$\delta[g(x)] = \delta(g&#039;(x_i)(x - x_i)) = \dfrac{\delta(x - x_i)}{|g&#039;(x_i)|}.$$ Summing over zeros gives the result.</p></div></div>
 <p>Hence $$\delta(\sin x) = \sum_{k=-\infty}^{\infty}\delta(x - k\pi),\qquad \delta(\cos x) = \sum_{k=-\infty}^{\infty}\delta\!\left(x - (k+\tfrac12)\pi\right)$$</p>
-<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Plemelj formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$\lim_{\varepsilon\to 0^+}\frac{1}{x\pm i\varepsilon} = \mp i\pi\,\delta(x) + \mathcal{P}\!\left(\frac{1}{x}\right)$$ where $\mathcal{P}$ denotes the Cauchy principal value.</p></div></div>
+<div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Plemelj Formula</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$$\lim_{\varepsilon\to 0^+}\frac{1}{x\pm i\varepsilon} = \mp i\pi\,\delta(x) + \mathcal{P}\!\left(\frac{1}{x}\right)$$ where $\mathcal{P}$ denotes the Cauchy principal value.</p></div></div>
 <div class="markdown-callout markdown-callout-proof"><div class="callout-title"><span class="callout-icon" aria-hidden="true">P</span><span class="callout-title-text">Proof</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>For a smooth test function $f$, $$\begin{align*}\lim_{\varepsilon\to0^+}\int_{-\infty}^{\infty}\frac{f(x)}{x\pm i\varepsilon}\,\mathrm{d}x &amp;=\lim_{\varepsilon\to0^+}\int_{-\infty}^{\infty}\frac{x\,f(x)}{x^2+\varepsilon^2}\,\mathrm{d}x \mp i\lim_{\varepsilon\to0^+}\int_{-\infty}^{\infty}\frac{\varepsilon f(x)}{x^2+\varepsilon^2}\,\mathrm{d}x\\ &amp;=\mathcal{P}\int_{-\infty}^{\infty}\frac{f(x)}{x}\,\mathrm{d}x \mp i\pi f(0). \end{align*}$$</p></div></div>
 <h3 id="periodicity">Periodicity</h3>
 <p>$$\tilde{x}(t) = \tilde{x}(t\pm T),\ T\in\mathbb{R}; \qquad \tilde{x}[n] = \tilde{x}[n\pm N],\ N\in\mathbb{Z}.$$</p>
 <p>Denote one period interval by $\langle T\rangle$ and $\langle N\rangle$, and let $$x_0(t) = \begin{cases} \tilde{x}(t), &amp; t\in\langle T\rangle \\ 0, &amp; t\notin\langle T\rangle \end{cases} \qquad x_0[n] = \begin{cases} \tilde{x}[n], &amp; n\in\langle N\rangle \\ 0, &amp; n\notin\langle N\rangle \end{cases}$$</p>
 <p>Then $$\tilde{x}(t) = \sum_{\ell=-\infty}^{\infty}x_0(t-\ell T), \qquad \tilde{x}[n] = \sum_{\ell=-\infty}^{\infty}x_0[n-\ell N].$$</p>
-<p>Frequency $$f = \frac{1}{T}, \quad F = \frac{1}{N}$$ <span class="obsidian-red">Angular Frequency</span>$$\qquad \omega = 2\pi f, \quad \Omega = 2\pi F.$$</p>
+<p>Frequency $$f = \frac{1}{T}, \quad F = \frac{1}{N}$$ <span class="obsidian-red">Angular Frequency</span> $$\qquad \omega = 2\pi f, \quad \Omega = 2\pi F.$$</p>
 <h3 id="even-odd-signals">Even / Odd Signals</h3>
 <ul>
 <li>Even signal: $x(-t) = x(t)$ and $x[-n] = x[n]$;</li>
@@ -152,11 +153,12 @@
 </ul>
 <p>$$x_1(t)+x_2(t)\to y_1(t)+y_2(t), \qquad x_1[n]+x_2[n]\to y_1[n]+y_2[n],$$ and $c\,x_1(t)\to c\,y_1(t)$, $c\,x_1[n]\to c\,y_1[n]$.</p>
 <h2 id="lti-linear-timeinvariant-systems">LTI (Linear Time-Invariant) Systems</h2>
-<p>Using the representations $$x[n] = \sum_{k=-\infty}^{\infty}x[k]\,\delta[n-k], \qquad x(t) = \int_{-\infty}^{\infty}x(\tau)\,\delta(t-\tau)\,\mathrm{d}\tau,$$ we only need the response to $\delta[n]$ and $\delta(t)$, denoted $h[n]$ and $h(t)$, the <span class="obsidian-red">unit impulse response</span>. Then $$x[n]\to y[n] = \sum_{k=-\infty}^{\infty}x[k]\,h[n-k] = x[n]*h[n],$$ $$x(t)\to y(t) = \int_{-\infty}^{\infty}x(\tau)\,h(t-\tau)\,\mathrm{d}\tau = x(t)*h(t).$$</p>
+<h3 id="convolution-and-the-unit-impulse-response">Convolution and the Unit Impulse Response</h3>
+<p>Using the representations $$x[n] = \sum_{k=-\infty}^{\infty}x[k]\,\delta[n-k], \qquad x(t) = \int_{-\infty}^{\infty}x(\tau)\,\delta(t-\tau)\,\mathrm{d}\tau,$$ we only need the response to $\delta[n]$ and $\delta(t)$, denoted $h[n]$ and $h(t)$, the <span class="obsidian-red">unit impulse response</span>. The <span class="obsidian-red">convolution</span> of the input with this response gives the output: $$x[n]\to y[n] = \sum_{k=-\infty}^{\infty}x[k]\,h[n-k] = x[n]*h[n],$$ $$x(t)\to y(t) = \int_{-\infty}^{\infty}x(\tau)\,h(t-\tau)\,\mathrm{d}\tau = x(t)*h(t).$$</p>
 <p>Matched filter: $$R_{xg}(t) = x(t)*g^{*}(-t), \qquad R_{xg}[n] = x[n]*g^{*}[-n].$$</p>
 <h3 id="timeshift-property-of-convolution">Time-Shift Property of Convolution</h3>
 <p>If $x(t)*h(t) = y(t)$ and $x[n]*h[n] = y[n]$, then $$x(t-t_0)*h(t) = x(t)*h(t-t_0) = y(t-t_0),$$ $$x[n-n_0]*h[n] = x[n]*h[n-n_0] = y[n-n_0].$$</p>
-<p>Differentiation/difference and integration/accumulation of <span class="obsidian-red">convolution</span></p>
+<p>Differentiation/difference and integration/accumulation of convolution</p>
 <p>$$\frac{\mathrm{d}}{\mathrm{d}t}\big[x(t)*h(t)\big] = x(t)*\Big[\tfrac{\mathrm{d}}{\mathrm{d}t}h(t)\Big] = \Big[\tfrac{\mathrm{d}}{\mathrm{d}t}x(t)\Big]*h(t),$$ $$\Delta\big[x[n]*h[n]\big] = x[n]*(\Delta h[n]) = (\Delta x[n])*h[n],$$ $$\int_{-\infty}^{t}\big[x(\tau)*h(\tau)\big]\,\mathrm{d}\tau = x(t)*\Big[\int_{-\infty}^{t}h(\tau)\,\mathrm{d}\tau\Big] = \Big[\int_{-\infty}^{t}x(\tau)\,\mathrm{d}\tau\Big]*h(t),$$ $$\sum_{k=-\infty}^{n}\big(x[k]*h[k]\big) = x[n]*\Big(\sum_{k=-\infty}^{n}h[k]\Big) = \Big(\sum_{k=-\infty}^{n}x[k]\Big)*h[n].$$</p>
 <h3 id="periodic-convolution-circledast">Periodic Convolution $\circledast$</h3>
 <p>$$\tilde{y}(t) = \tilde{x}_1(t)\circledast\tilde{x}_2(t) = \int_{\langle T\rangle}\tilde{x}_1(\tau)\,\tilde{x}_2(t-\tau)\,\mathrm{d}\tau,$$ $$\tilde{y}[n] = \tilde{x}_1[n]\circledast\tilde{x}_2[n] = \sum_{k\in\langle N\rangle}\tilde{x}_1[k]\,\tilde{x}_2[n-k].$$ Note: the integration/accumulation properties of periodic convolution hold only when $\displaystyle\int_{\langle T\rangle}\tilde{x}_1(t)\,\mathrm{d}t = 0$ and $\displaystyle\int_{\langle T\rangle}\tilde{x}_2(t)\,\mathrm{d}t = 0$ (or $\displaystyle\sum_{n\in\langle N\rangle}\tilde{x}_1[n] = 0$ and $\displaystyle\sum_{n\in\langle N\rangle}\tilde{x}_2[n] = 0$).</p>
@@ -243,14 +245,14 @@
 <p>We can verify that $$y(t) = x(t)*h(t) \xrightarrow{\ \mathcal{F}\ } Y(\omega) = X(\omega)\cdot H(\omega),$$ $$y[n] = x[n]*h[n] \xrightarrow{\ \mathcal{F}\ } \tilde{Y}(\Omega) = \tilde{X}(\Omega)\cdot \tilde{H}(\Omega).$$ We can also find that $$y(t) = x(t)\cdot h(t) \xrightarrow{\ \mathcal{F}\ } Y(\omega) =\frac{1}{2\pi} X(\omega) * H(\omega),$$ $$y[n] = x[n]\cdot h[n] \xrightarrow{\ \mathcal{F}\ } \tilde{Y}(\Omega) = \frac{1}{2\pi}\tilde{X}(\Omega)* \tilde{H}(\Omega).$$</p>
 <p>High-pass filter $$\delta&#039;(t)\xrightarrow{\ \mathcal{F}\ }\int_{-\infty}^{\infty}\delta&#039;(t)\,e^{-j\omega t}\,\mathrm{d}t = \int_{-\infty}^{\infty}e^{-j\omega t}\,\mathrm{d}\delta(t) = e^{-j\omega t}\delta(t)\Big|_{-\infty}^{\infty} - \int_{-\infty}^{\infty}\delta(t)\,\mathrm{d} e^{-j\omega t} = -\frac{\mathrm{d} e^{-j\omega t}}{\mathrm{d}t}\Big|_{t=0} = j\omega$$</p>
 <p><img src="../attachments/Screenshot%202026-06-15%20at%2023.26.49.png" alt="Screenshot 2026-06-15 at 23.26.49" loading="lazy" decoding="async" style="width: min(100%, 401px);"></p>
-<p>We can find that $$x(t)*\delta&#039;(t)=x&#039;(t)$$ Hence$$x&#039;(t)\xrightarrow{\ \mathcal{F}\ }j\omega X(\omega)$$ $$t\,x(t)\xrightarrow{\ \mathcal{F}\ } jX&#039;(\omega), \qquad -j\,t\,x(t)\xrightarrow{\ \mathcal{F}\ } X&#039;(\omega).$$</p>
+<p>We can find that $$x(t)*\delta&#039;(t)=x&#039;(t)$$ Hence $$x&#039;(t)\xrightarrow{\ \mathcal{F}\ }j\omega X(\omega)$$ $$t\,x(t)\xrightarrow{\ \mathcal{F}\ } jX&#039;(\omega), \qquad -j\,t\,x(t)\xrightarrow{\ \mathcal{F}\ } X&#039;(\omega).$$</p>
 <p>Discrete analogue: $$\delta[n]-\delta[n-1]\xrightarrow{\ \mathcal{F}\ }1-e^{-j\Omega} = 2j\sin\tfrac{\Omega}{2}\,e^{-j\frac{\Omega}{2}}$$ <img src="../attachments/Screenshot%202026-06-15%20at%2023.27.27-optimized.webp" alt="Screenshot 2026-06-15 at 23.27.27" loading="lazy" decoding="async" style="width: min(100%, 401px);"></p>
 <p>Low-pass filter. $$e^{-a\lvert t\rvert}\operatorname{sgn}(t) = e^{-at}u(t) - e^{at}u(-t)\xrightarrow{\ \mathcal{F}\ }\int_{0}^{\infty}e^{-at}e^{-j\omega t}\,\mathrm{d}t - \int_{-\infty}^{0}e^{at}e^{-j\omega t}\,\mathrm{d}t = \frac{-2j\omega}{a^2+\omega^2}$$ Taking $a\to 0$: $$\operatorname{sgn}(t)\xrightarrow{\ \mathcal{F}\ }\frac{2}{j\omega}, \qquad u(t) = \tfrac{1}{2} + \tfrac{1}{2}\operatorname{sgn}(t)\xrightarrow{\ \mathcal{F}\ }\pi\,\delta(\omega) + \frac{1}{j\omega}$$</p>
 <blockquote><p>Tip $\tfrac{\pi}{2}$ phase shifter: $\dfrac{1}{\pi t}\xrightarrow{\ \mathcal{F}\ }-j\operatorname{sgn}(\omega)$</p></blockquote>
 <p><img src="../attachments/Screenshot%202026-06-15%20at%2023.29.40.png" alt="Screenshot 2026-06-15 at 23.29.40" loading="lazy" decoding="async" style="width: min(100%, 401px);"> Discrete analogue (with $0&lt;a&lt;1$): $$\begin{align*}a^{\lvert n\rvert}\operatorname{sgn}[n] = a^{n}u[n] - a^{-n}u[-n]\xrightarrow{\ \mathcal{F}\ }\sum_{n=0}^{\infty}a^{n}e^{-j\Omega n} - \sum_{n=-\infty}^{0}a^{-n}e^{-j\Omega n}\\ = \frac{1}{1-ae^{-j\Omega}} - \frac{1}{1-ae^{j\Omega}} = \frac{-ae^{j\Omega}+ae^{-j\Omega}}{1+a^2-2a\cos\Omega} = \frac{-2aj\sin\Omega}{1+a^2-2a\cos\Omega}\end{align*}$$ Taking $a\to 1$: $$\operatorname{sgn}[n]\xrightarrow{\ \mathcal{F}\ }\frac{-j\sin\Omega}{1-\cos\Omega}$$ And $$u[n] = \tfrac{1}{2} + \tfrac{1}{2}\operatorname{sgn}[n] + \tfrac{1}{2}\delta[n]\xrightarrow{\ \mathcal{F}\ } \pi\sum_{\ell=-\infty}^{\infty}\delta(\Omega-2\pi\ell) + \frac{1}{1-e^{-j\Omega}}$$ <img src="../attachments/Screenshot%202026-06-15%20at%2023.30.07-optimized.webp" alt="Screenshot 2026-06-15 at 23.30.07" loading="lazy" decoding="async" style="width: min(100%, 401px);"></p>
 <p><span class="obsidian-red">Ideal low-pass filter</span>. $$\frac{\sin\omega_0 t}{\pi t} = \frac{\omega_0}{\pi}\operatorname{Sa}(\omega_0 t)\xrightarrow{\ \text{CFT}\ }u(\omega+\omega_0) - u(\omega-\omega_0),$$ $$u(t+t_0) - u(t-t_0)\xrightarrow{\ \text{CFT}\ }\frac{2\sin\omega t_0}{\omega}.$$ <img src="../attachments/Screenshot%202026-06-15%20at%2023.30.26.png" alt="Screenshot 2026-06-15 at 23.30.26" loading="lazy" decoding="async" style="width: min(100%, 401px);"></p>
 <h2 id="sampling-theorem">Sampling Theorem</h2>
-<p><span class="obsidian-red">Sampling function</span>:$$\tilde{p}(t)=\sum_{n=-\infty}^\infty \delta(t-nT_s)$$ $$\tilde{F}_k = \frac{1}{T_s}\int_{-\frac{T_s}{2}}^{\frac{T_s}{2}}\tilde{p}(t)\,e^{-jk\frac{2\pi}{T_s}t}\,\mathrm{d}t=\frac{1}{T_s}$$</p>
+<p><span class="obsidian-red">Sampling function</span>: $$\tilde{p}(t)=\sum_{n=-\infty}^\infty \delta(t-nT_s)$$ $$\tilde{F}_k = \frac{1}{T_s}\int_{-\frac{T_s}{2}}^{\frac{T_s}{2}}\tilde{p}(t)\,e^{-jk\frac{2\pi}{T_s}t}\,\mathrm{d}t=\frac{1}{T_s}$$</p>
 <p>$$P(\omega) =\frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega-\frac{2\pi k}{T_s})=\frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega-k\omega_s)$$ We can see that the CFT of the sampling function is also a sampling function.</p>
 <p>Sampling: $x_p(t) = x(t)\,\tilde{p}(t)$, where $\tilde{p}(t)$ is an <span class="obsidian-red">impulse train</span> with spacing $T_s$.</p>
 <p><img src="../attachments/Screenshot%202026-06-15%20at%2023.31.51-optimized.webp" alt="Screenshot 2026-06-15 at 23.31.51" loading="lazy" decoding="async" style="width: min(100%, 401px);"> This is clearly a non-invertible operation. To recover $x(t)$ without loss, we require $x(t)$ to be band-limited, i.e. the frequency content of $x(t)$ does not exceed $\omega_M$, and $$T_s \le \frac{\pi}{\omega_M}.$$ <img src="../attachments/Screenshot%202026-06-15%20at%2023.32.24-optimized.webp" alt="Screenshot 2026-06-15 at 23.32.24" loading="lazy" decoding="async" style="width: min(100%, 401px);"> In the frequency domain, with $\omega_s = \dfrac{2\pi}{T_s}$, sampling produces periodic replicas of $X(\omega)$ centered at multiples of $\omega_s$. To avoid overlap (aliasing), a low-pass filter is then applied to recover the signal. The condition is the Nyquist frequency condition: $$\boxed{\ \omega_s \ge 2\omega_M\ }$$</p>
@@ -335,7 +337,7 @@
 <h3 id="ztransform">Z-Transform</h3>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$x[n]$</th><th>$\mathcal{Z}\{x[n]\}$</th><th>ROC</th></tr></thead><tbody><tr><td>$a^{n}u[n]$</td><td>$\dfrac{1}{1-az^{-1}}$</td><td>$\lvert z\rvert&gt;\lvert a\rvert$</td></tr><tr><td>$-a^{n}u[-n-1]$</td><td>$\dfrac{1}{1-az^{-1}}$</td><td>$\lvert z\rvert&lt;\lvert a\rvert$</td></tr><tr><td>$n\,a^{n}u[n]$</td><td>$\dfrac{az^{-1}}{(1-az^{-1})^{2}}$</td><td>$\lvert z\rvert&gt;\lvert a\rvert$</td></tr><tr><td>$\dfrac{(-1)^{n+1}a^{n}}{n}u[n-1]$</td><td>$\ln(1+az^{-1})$</td><td>$\lvert z\rvert&gt;\lvert a\rvert$</td></tr></tbody></table></div>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"classification-of-signals","level":1,"text":"Classification of Signals"},{"id":"operations-on-signals","level":1,"text":"Operations on Signals"},{"id":"elementary-signals-and-their-properties","level":1,"text":"Elementary Signals and Their Properties"},{"id":"sifting-property","level":2,"text":"Sifting Property"},{"id":"periodicity","level":2,"text":"Periodicity"},{"id":"even-odd-signals","level":2,"text":"Even / Odd Signals"},{"id":"real-imaginary-decomposition-of-a-complex-signal","level":2,"text":"Real / Imaginary Decomposition of a Complex Signal"},{"id":"norms-energy-and-power-signals","level":2,"text":"Norms, Energy and Power Signals"},{"id":"inner-product-and-correlation","level":1,"text":"Inner Product and Correlation"},{"id":"leastsquares-approximation","level":2,"text":"Least-Squares Approximation"},{"id":"crosscorrelation-and-autocorrelation","level":2,"text":"Cross-Correlation and Autocorrelation"},{"id":"basic-system-interconnections","level":1,"text":"Basic System Interconnections"},{"id":"system-properties","level":1,"text":"System Properties"},{"id":"lti-linear-timeinvariant-systems","level":1,"text":"LTI (Linear Time-Invariant) Systems"},{"id":"timeshift-property-of-convolution","level":2,"text":"Time-Shift Property of Convolution"},{"id":"periodic-convolution-circledast","level":2,"text":"Periodic Convolution $\\circledast$"},{"id":"properties-of-lti-systems-via-the-impulse-response","level":2,"text":"Properties of LTI Systems via the Impulse Response"},{"id":"stability","level":2,"text":"Stability"},{"id":"systems-described-by-differential-difference-equations","level":1,"text":"Systems Described by Differential / Difference Equations"},{"id":"impulse-response","level":2,"text":"Impulse Response"},{"id":"free-forced-and-transient-steadystate-response","level":2,"text":"Free / Forced and Transient / Steady-State Response"},{"id":"blockdiagram-realizations","level":2,"text":"Block-Diagram Realizations"},{"id":"eigenfunctions-of-lti-systems","level":1,"text":"Eigenfunctions of LTI Systems"},{"id":"fourier-series","level":1,"text":"Fourier Series"},{"id":"cfs-continuous-fourier-series","level":2,"text":"CFS — Continuous Fourier Series"},{"id":"dfs-discrete-fourier-series","level":2,"text":"DFS — Discrete Fourier Series"},{"id":"fourier-transform","level":1,"text":"Fourier Transform"},{"id":"cft-continuous-fourier-transform","level":2,"text":"CFT — Continuous Fourier Transform"},{"id":"dtft-discretetime-fourier-transform","level":2,"text":"DTFT — Discrete-Time Fourier Transform"},{"id":"dft-discrete-fourier-transform","level":2,"text":"DFT — Discrete Fourier Transform"},{"id":"symmetry-properties","level":2,"text":"Symmetry Properties"},{"id":"timeshift-properties","level":2,"text":"Time-Shift Properties"},{"id":"filtering-with-lti-systems","level":1,"text":"Filtering with LTI Systems"},{"id":"sampling-theorem","level":1,"text":"Sampling Theorem"},{"id":"laplace-transform-and-ztransform","level":1,"text":"Laplace Transform and Z-Transform"},{"id":"relationship-to-the-fourier-transform-and-inverse-transforms","level":2,"text":"Relationship to the Fourier Transform (and Inverse Transforms)"},{"id":"inverse-systems","level":2,"text":"Inverse Systems"},{"id":"roc-of-h-s","level":2,"text":"ROC of $H(s)$"},{"id":"initialvalue-theorem","level":2,"text":"Initial-Value Theorem"},{"id":"finalvalue-theorem","level":2,"text":"Final-Value Theorem"},{"id":"parseval-s-relation","level":1,"text":"Parseval's Relation"},{"id":"hilbert-transform","level":1,"text":"Hilbert Transform"},{"id":"complex-frequency-domain-analysis-of-systems-described-by-differential-difference-equations","level":1,"text":"Complex Frequency Domain Analysis of Systems Described by Differential/Difference Equations"},{"id":"solving-a-differential-equation","level":2,"text":"Solving a Differential Equation"},{"id":"solving-a-difference-equation","level":2,"text":"Solving a Difference Equation"},{"id":"allpass-and-minimumphase-system","level":2,"text":"All-Pass and Minimum-Phase System"},{"id":"allpass-system","level":3,"text":"All-Pass System"},{"id":"minimumphase-system","level":3,"text":"Minimum-Phase System"},{"id":"blockdiagram-realizations-of-system-functions","level":2,"text":"Block-Diagram Realizations of System Functions"},{"id":"transform-tables","level":1,"text":"Transform Tables"},{"id":"fourier-transform-pairs","level":2,"text":"Fourier Transform Pairs"},{"id":"laplace-transform","level":2,"text":"Laplace Transform"},{"id":"ztransform","level":2,"text":"Z-Transform"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"classification-of-signals","level":1,"text":"Classification of Signals"},{"id":"operations-on-signals","level":1,"text":"Operations on Signals"},{"id":"elementary-signals-and-their-properties","level":1,"text":"Elementary Signals and Their Properties"},{"id":"sifting-property","level":2,"text":"Sifting Property"},{"id":"periodicity","level":2,"text":"Periodicity"},{"id":"even-odd-signals","level":2,"text":"Even / Odd Signals"},{"id":"real-imaginary-decomposition-of-a-complex-signal","level":2,"text":"Real / Imaginary Decomposition of a Complex Signal"},{"id":"norms-energy-and-power-signals","level":2,"text":"Norms, Energy and Power Signals"},{"id":"inner-product-and-correlation","level":1,"text":"Inner Product and Correlation"},{"id":"leastsquares-approximation","level":2,"text":"Least-Squares Approximation"},{"id":"crosscorrelation-and-autocorrelation","level":2,"text":"Cross-Correlation and Autocorrelation"},{"id":"basic-system-interconnections","level":1,"text":"Basic System Interconnections"},{"id":"system-properties","level":1,"text":"System Properties"},{"id":"lti-linear-timeinvariant-systems","level":1,"text":"LTI (Linear Time-Invariant) Systems"},{"id":"convolution-and-the-unit-impulse-response","level":2,"text":"Convolution and the Unit Impulse Response"},{"id":"timeshift-property-of-convolution","level":2,"text":"Time-Shift Property of Convolution"},{"id":"periodic-convolution-circledast","level":2,"text":"Periodic Convolution $\\circledast$"},{"id":"properties-of-lti-systems-via-the-impulse-response","level":2,"text":"Properties of LTI Systems via the Impulse Response"},{"id":"stability","level":2,"text":"Stability"},{"id":"systems-described-by-differential-difference-equations","level":1,"text":"Systems Described by Differential / Difference Equations"},{"id":"impulse-response","level":2,"text":"Impulse Response"},{"id":"free-forced-and-transient-steadystate-response","level":2,"text":"Free / Forced and Transient / Steady-State Response"},{"id":"blockdiagram-realizations","level":2,"text":"Block-Diagram Realizations"},{"id":"eigenfunctions-of-lti-systems","level":1,"text":"Eigenfunctions of LTI Systems"},{"id":"fourier-series","level":1,"text":"Fourier Series"},{"id":"cfs-continuous-fourier-series","level":2,"text":"CFS — Continuous Fourier Series"},{"id":"dfs-discrete-fourier-series","level":2,"text":"DFS — Discrete Fourier Series"},{"id":"fourier-transform","level":1,"text":"Fourier Transform"},{"id":"cft-continuous-fourier-transform","level":2,"text":"CFT — Continuous Fourier Transform"},{"id":"dtft-discretetime-fourier-transform","level":2,"text":"DTFT — Discrete-Time Fourier Transform"},{"id":"dft-discrete-fourier-transform","level":2,"text":"DFT — Discrete Fourier Transform"},{"id":"symmetry-properties","level":2,"text":"Symmetry Properties"},{"id":"timeshift-properties","level":2,"text":"Time-Shift Properties"},{"id":"filtering-with-lti-systems","level":1,"text":"Filtering with LTI Systems"},{"id":"sampling-theorem","level":1,"text":"Sampling Theorem"},{"id":"laplace-transform-and-ztransform","level":1,"text":"Laplace Transform and Z-Transform"},{"id":"relationship-to-the-fourier-transform-and-inverse-transforms","level":2,"text":"Relationship to the Fourier Transform (and Inverse Transforms)"},{"id":"inverse-systems","level":2,"text":"Inverse Systems"},{"id":"roc-of-h-s","level":2,"text":"ROC of $H(s)$"},{"id":"initialvalue-theorem","level":2,"text":"Initial-Value Theorem"},{"id":"finalvalue-theorem","level":2,"text":"Final-Value Theorem"},{"id":"parseval-s-relation","level":1,"text":"Parseval's Relation"},{"id":"hilbert-transform","level":1,"text":"Hilbert Transform"},{"id":"complex-frequency-domain-analysis-of-systems-described-by-differential-difference-equations","level":1,"text":"Complex Frequency Domain Analysis of Systems Described by Differential/Difference Equations"},{"id":"solving-a-differential-equation","level":2,"text":"Solving a Differential Equation"},{"id":"solving-a-difference-equation","level":2,"text":"Solving a Difference Equation"},{"id":"allpass-and-minimumphase-system","level":2,"text":"All-Pass and Minimum-Phase System"},{"id":"allpass-system","level":3,"text":"All-Pass System"},{"id":"minimumphase-system","level":3,"text":"Minimum-Phase System"},{"id":"blockdiagram-realizations-of-system-functions","level":2,"text":"Block-Diagram Realizations of System Functions"},{"id":"transform-tables","level":1,"text":"Transform Tables"},{"id":"fourier-transform-pairs","level":2,"text":"Fourier Transform Pairs"},{"id":"laplace-transform","level":2,"text":"Laplace Transform"},{"id":"ztransform","level":2,"text":"Z-Transform"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -407,21 +409,31 @@ $$x(t)\,\delta(t-t_0) = x(t_0)\,\delta(t-t_0), \qquad \int_{-\infty}^{\infty}x(t
 $$x[n]\,\delta[n-n_0] = x[n_0]\,\delta[n-n_0], \qquad \sum_{n=-\infty}^{\infty}x[n]\,\delta[n-n_0] = x[n_0].$$
 
 Scaling
-$$\int_{-\infty}^{\infty}\delta(kx)g(x)\,\mathrm{d}x = \frac{1}{|k|}\int_{-\infty}^{\infty}\delta(x)g\!\left(\frac{x}{k}\right)\mathrm{d}x = \frac{1}{|k|}g(0).$$
-Since $$\int_{-\infty}^{\infty}\delta(x)g(x)\,\mathrm{d}x = g(0),$$
-we get $$\delta(kx) = \frac{\delta(x)}{|k|}.$$
+$$\int_{-\infty}^{\infty}\delta(kx)g(x)\,\mathrm{d}x = \frac{1}{|k|}\int_{-\infty}^{\infty}\delta(x)g\!\left(\frac{x}{k}\right)\,\mathrm{d}x = \frac{1}{|k|}g(0).$$
+Since 
+$$\int_{-\infty}^{\infty}\delta(x)g(x)\,\mathrm{d}x = g(0),$$
+we get 
+$$\delta(kx) = \frac{\delta(x)}{|k|}.$$
 
-Derivative relations. $$x\delta(x) = 0.$$
-From $$(x\delta(x))' = \delta(x) + x\delta'(x) = 0,$$ we get $$x\delta'(x) = -\delta(x).$$
+Derivative relations. 
+$$x\delta(x) = 0.$$
+From 
+$$(x\delta(x))' = \delta(x) + x\delta'(x) = 0,$$
+ we get 
+$$x\delta'(x) = -\delta(x).$$
 Composition. If $g(x)$ has only simple zeros $x_i$, then
 $$\delta[g(x)] = \sum_i\frac{\delta(x - x_i)}{|g'(x_i)|}$$
->[!PROOF] 
->Near a simple zero, $$g(x)\approx g'(x_i)(x - x_i),$$ so $$\delta[g(x)] = \delta(g'(x_i)(x - x_i)) = \dfrac{\delta(x - x_i)}{|g'(x_i)|}.$$ Summing over zeros gives the result. 
+>[!PROOF]
+>Near a simple zero, 
+>$$g(x)\approx g'(x_i)(x - x_i),$$
+> so 
+>$$\delta[g(x)] = \delta(g'(x_i)(x - x_i)) = \dfrac{\delta(x - x_i)}{|g'(x_i)|}.$$
+> Summing over zeros gives the result. 
 
 Hence
 $$\delta(\sin x) = \sum_{k=-\infty}^{\infty}\delta(x - k\pi),\qquad \delta(\cos x) = \sum_{k=-\infty}^{\infty}\delta\!\left(x - (k+\tfrac12)\pi\right)$$
 
->[!THEOREM] Plemelj formula
+>[!THEOREM] Plemelj Formula
 > $$\lim_{\varepsilon\to 0^+}\frac{1}{x\pm i\varepsilon} = \mp i\pi\,\delta(x) + \mathcal{P}\!\left(\frac{1}{x}\right)$$
 > where $\mathcal{P}$ denotes the Cauchy principal value.
 
@@ -444,7 +456,8 @@ $$\tilde{x}(t) = \sum_{\ell=-\infty}^{\infty}x_0(t-\ell T), \qquad \tilde{x}[n] 
 
 Frequency
 $$f = \frac{1}{T}, \quad F = \frac{1}{N}$$
-<span style="color: red;">Angular Frequency</span>$$\qquad \omega = 2\pi f, \quad \Omega = 2\pi F.$$
+<span style="color: red;">Angular Frequency</span>
+$$\qquad \omega = 2\pi f, \quad \Omega = 2\pi F.$$
 
 ## Even / Odd Signals
 
@@ -551,9 +564,11 @@ and $c\,x_1(t)\to c\,y_1(t)$, $c\,x_1[n]\to c\,y_1[n]$.
 
 # LTI (Linear Time-Invariant) Systems
 
+## Convolution and the Unit Impulse Response
+
 Using the representations
 $$x[n] = \sum_{k=-\infty}^{\infty}x[k]\,\delta[n-k], \qquad x(t) = \int_{-\infty}^{\infty}x(\tau)\,\delta(t-\tau)\,\mathrm{d}\tau,$$
-we only need the response to $\delta[n]$ and $\delta(t)$, denoted $h[n]$ and $h(t)$, the <span style="color: red;">unit impulse response</span>. Then
+we only need the response to $\delta[n]$ and $\delta(t)$, denoted $h[n]$ and $h(t)$, the <span style="color: red;">unit impulse response</span>. The <span style="color: red;">convolution</span> of the input with this response gives the output:
 $$x[n]\to y[n] = \sum_{k=-\infty}^{\infty}x[k]\,h[n-k] = x[n]*h[n],$$
 $$x(t)\to y(t) = \int_{-\infty}^{\infty}x(\tau)\,h(t-\tau)\,\mathrm{d}\tau = x(t)*h(t).$$
 
@@ -566,7 +581,7 @@ If $x(t)*h(t) = y(t)$ and $x[n]*h[n] = y[n]$, then
 $$x(t-t_0)*h(t) = x(t)*h(t-t_0) = y(t-t_0),$$
 $$x[n-n_0]*h[n] = x[n]*h[n-n_0] = y[n-n_0].$$
 
-Differentiation/difference and integration/accumulation of <span style="color: red;">convolution</span>
+Differentiation/difference and integration/accumulation of convolution
 
 $$\frac{\mathrm{d}}{\mathrm{d}t}\big[x(t)*h(t)\big] = x(t)*\Big[\tfrac{\mathrm{d}}{\mathrm{d}t}h(t)\Big] = \Big[\tfrac{\mathrm{d}}{\mathrm{d}t}x(t)\Big]*h(t),$$
 $$\Delta\big[x[n]*h[n]\big] = x[n]*(\Delta h[n]) = (\Delta x[n])*h[n],$$
@@ -717,8 +732,10 @@ We can calculate it by FFT algorithm, which is introduced in [Fast Fourier Trans
 
 $$\mathcal{F}\{x(t)\} = X(\omega) = \int_{-\infty}^{\infty}x(t)\,e^{-j\omega t}\,\mathrm{d}t \qquad x(t)\xrightarrow{\ \mathcal{F}\ }X(\omega),$$
 $$\mathcal{F}^{-1}\{X(\omega)\} = x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)\,e^{j\omega t}\,\mathrm{d}\omega \qquad X(t)\xrightarrow{\ \mathcal{F}\ }2\pi\,x(-\omega).$$
-Clearly, $$\delta(t)\xrightarrow{\ \mathcal{F}\ }1.$$
-Also, $$1\xrightarrow{\ \mathcal{F}\ }2\pi\delta(\omega).$$
+Clearly, 
+$$\delta(t)\xrightarrow{\ \mathcal{F}\ }1.$$
+Also, 
+$$1\xrightarrow{\ \mathcal{F}\ }2\pi\delta(\omega).$$
 Consider the CFS:
 $$\tilde{x}(t) = \sum_{k=-\infty}^{\infty}\tilde{F}_k\,e^{jk\frac{2\pi}{T}t}$$
 $$\mathcal{F}\{\tilde{x}(t)\} = \sum_{k=-\infty}^{\infty}\tilde{F}_k\,\mathcal{F}\{e^{jk\frac{2\pi}{T}t}\}=2\pi\sum_{k=-\infty}^{\infty}\tilde{F}_k\delta\!\left(\omega-\frac{2\pi k}{T}\right).$$
@@ -778,8 +795,10 @@ $$\delta'(t)\xrightarrow{\ \mathcal{F}\ }\int_{-\infty}^{\infty}\delta'(t)\,e^{-
 
 ![Screenshot 2026-06-15 at 23.26.49](../attachments/Screenshot%202026-06-15%20at%2023.26.49.png){width=401}
 
-We can find that $$x(t)*\delta'(t)=x'(t)$$
-Hence$$x'(t)\xrightarrow{\ \mathcal{F}\ }j\omega X(\omega)$$
+We can find that 
+$$x(t)*\delta'(t)=x'(t)$$
+Hence
+$$x'(t)\xrightarrow{\ \mathcal{F}\ }j\omega X(\omega)$$
 $$t\,x(t)\xrightarrow{\ \mathcal{F}\ } jX'(\omega), \qquad -j\,t\,x(t)\xrightarrow{\ \mathcal{F}\ } X'(\omega).$$
 
 Discrete analogue:
@@ -809,7 +828,8 @@ $$u(t+t_0) - u(t-t_0)\xrightarrow{\ \text{CFT}\ }\frac{2\sin\omega t_0}{\omega}.
 
 # Sampling Theorem
 
-<span style="color: red;">Sampling function</span>:$$\tilde{p}(t)=\sum_{n=-\infty}^\infty \delta(t-nT_s)$$
+<span style="color: red;">Sampling function</span>:
+$$\tilde{p}(t)=\sum_{n=-\infty}^\infty \delta(t-nT_s)$$
 $$\tilde{F}_k = \frac{1}{T_s}\int_{-\frac{T_s}{2}}^{\frac{T_s}{2}}\tilde{p}(t)\,e^{-jk\frac{2\pi}{T_s}t}\,\mathrm{d}t=\frac{1}{T_s}$$
 
 $$P(\omega) =\frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega-\frac{2\pi k}{T_s})=\frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega-k\omega_s)$$
@@ -922,10 +942,12 @@ $$\displaystyle\lim_{s\to 0} s F(s) = f(\infty)$$
 Z-Transform
 $$\lim_{n\to\infty}x[n] = \lim_{z\to 1}(1-z^{-1})X(z) = \lim_{z\to 1}(z-1)X(z).$$
 
->[!PROOF] 
+>[!PROOF]
 >$$\displaystyle\sum_{n=0}^{\infty}\big(x[n]-x[n-1]\big)z^{-n} = (1-z^{-1})X(z)-x[-1].$$
->As $z\to 1$, $$\displaystyle\lim_{n\to\infty}x[n] - x[-1] = \lim_{z\to 1}\big((1-z^{-1})X(z)-x[-1]\big).$$
->By causality, $$\displaystyle\lim_{n\to\infty}x[n] = \lim_{z\to 1}(1-z^{-1})X(z)$$
+>As $z\to 1$, 
+>$$\displaystyle\lim_{n\to\infty}x[n] - x[-1] = \lim_{z\to 1}\big((1-z^{-1})X(z)-x[-1]\big).$$
+>By causality, 
+>$$\displaystyle\lim_{n\to\infty}x[n] = \lim_{z\to 1}(1-z^{-1})X(z)$$
 
 If the final-value theorem conditions fail, $f(\infty)$ and $\lim_{n\to\infty}x[n]$ may not exist. Before using the theorem, verify the pole conditions (for example, no unstable or non-decaying oscillatory modes).
 
@@ -940,7 +962,8 @@ $$\lim_{N\to\infty}\frac{1}{2N+1}\sum_{n=-N}^{N}\lvert x[n]\rvert^2 = \frac{1}{2
 
 # Hilbert Transform
 
-For a causal signal, $$f(t) = f(t)\,u(t)\xrightarrow{\ \mathcal{F}\ }F(\omega) = \frac{1}{2\pi}F(\omega)*U(\omega).$$
+For a causal signal, 
+$$f(t) = f(t)\,u(t)\xrightarrow{\ \mathcal{F}\ }F(\omega) = \frac{1}{2\pi}F(\omega)*U(\omega).$$
 Since $U(\omega) = \pi\,\delta(\omega) + \dfrac{1}{j\omega}$,
 $$F(\omega) = \frac{1}{2\pi}\operatorname{PV}\!\int_{-\infty}^{\infty}F(\theta)\Big(\pi\,\delta(\omega-\theta) + \frac{1}{j(\omega-\theta)}\Big)\,\mathrm{d}\theta = \frac{F(\omega)}{2} + \frac{1}{2\pi}\operatorname{PV}\!\int_{-\infty}^{\infty}\frac{F(\theta)}{j(\omega-\theta)}\,\mathrm{d}\theta,$$
 hence

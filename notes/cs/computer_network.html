@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -215,6 +216,7 @@
 <ul>
 <li>Hypertext Markup Language (HTML) describes the structure and meaning of webpage content; CSS typically controls its presentation.</li>
 <li>A web page consists of a base HTML document and objects such as images, CSS, JavaScript, and video.</li>
+<li>In principle, HTTP requires sending an HTTP request for each object retrieved.</li>
 <li>Each object can be addressed by a Uniform Resource Locator (URL). For example:</li>
 </ul>
 <p>$$ \underbrace{\texttt{http://}}_{\text{scheme}} \underbrace{\texttt{www.someschool.edu}}_{\text{host name}} \underbrace{\texttt{/someDept/pic.gif}}_{\text{path name}} $$</p>
@@ -248,11 +250,13 @@
 <div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">HTTP</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-http" data-highlighted="local"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK
 <span class="hljs-type">Connection</span>: close
 <span class="hljs-type">Date</span>: Tue, 18 Aug 2015 15:44:04 GMT
+<span class="hljs-type">Last-Modified</span>: Mon, 17 Aug 2015 10:20:00 GMT
 <span class="hljs-type">Server</span>: Apache/2.2.3 (CentOS)
 <span class="hljs-type">Content-Type</span>: text/html; charset=utf-8
 
 &lt;html&gt;...&lt;/html&gt;</code></pre></div>
 <p>A response consists of a status line, header lines, and a message body. The status line contains the HTTP version, a status code, and a short status phrase.</p>
+<p>A client or cache can save this value and include it in a later conditional <code>GET</code> request as <code>If-Modified-Since: Mon, 17 Aug 2015 10:20:00 GMT</code>. When the server evaluates this condition, a modification time no later than the supplied timestamp normally leads to <code>304 Not Modified</code> with no message body, allowing reuse of the cached copy; a later modification normally leads to <code>200 OK</code> with the updated content.</p>
 <p>Common status-code classes:</p>
 <ul>
 <li><code>2xx</code>: Success, such as <code>200 OK</code>.</li>
@@ -839,6 +843,7 @@ The Internet provides two transport services, implemented by TCP and UDP. TCP es
 
 - Hypertext Markup Language (HTML) describes the structure and meaning of webpage content; CSS typically controls its presentation.
 - A web page consists of a base HTML document and objects such as images, CSS, JavaScript, and video.
+- In principle, HTTP requires sending an HTTP request for each object retrieved.
 - Each object can be addressed by a Uniform Resource Locator (URL). For example:
 
 $$
@@ -891,6 +896,7 @@ Example response:
 HTTP/1.1 200 OK
 Connection: close
 Date: Tue, 18 Aug 2015 15:44:04 GMT
+Last-Modified: Mon, 17 Aug 2015 10:20:00 GMT
 Server: Apache/2.2.3 (CentOS)
 Content-Type: text/html; charset=utf-8
 
@@ -898,6 +904,8 @@ Content-Type: text/html; charset=utf-8
 ```
 
 A response consists of a status line, header lines, and a message body. The status line contains the HTTP version, a status code, and a short status phrase.
+
+A client or cache can save this value and include it in a later conditional `GET` request as `If-Modified-Since: Mon, 17 Aug 2015 10:20:00 GMT`. When the server evaluates this condition, a modification time no later than the supplied timestamp normally leads to `304 Not Modified` with no message body, allowing reuse of the cached copy; a later modification normally leads to `200 OK` with the updated content.
 
 Common status-code classes:
 

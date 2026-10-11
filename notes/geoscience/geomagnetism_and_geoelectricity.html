@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -64,14 +65,14 @@
             <article class="markdown-body" id="markdown-body" data-prerendered="true">
 <h2 id="geomagnetic-field">Geomagnetic Field</h2>
 <h3 id="formation-of-the-geomagnetic-field">Formation of the Geomagnetic Field</h3>
-<p>The first self-consistent model to explain the formation of the geomagnetic field:</p>
+<p>The geomagnetic field is sustained by a self-exciting geodynamo:</p>
 <p><img src="../attachments/Screenshot%202026-05-12%20at%2013.39.43-optimized.webp" alt="Screenshot 2026-05-12 at 13.39.43" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>The geodynamo is mainly caused by the convection of the liquid outer core.</p>
-<p>The electromagnetic torque that the outer core exerts on the inner core drives the differential rotation of the inner core.</p>
+<p>Convection of electrically conducting liquid in the outer core, organized by Earth&#039;s rotation, generates currents that maintain the magnetic field against Ohmic decay.</p>
+<p>Electromagnetic coupling with the outer core and gravitational coupling with the mantle influence the differential rotation of the inner core.</p>
 <ul>
-<li>The differential rotation of the Earth&#039;s core nearly stopped in 2009 and began to slowly reverse.</li>
-<li>The reversal cycle is approximately 60-70 years.</li>
-<li>The cycle of changes in geomagnetic field strength and Earth&#039;s day length is also approximately 60-70 years.</li>
+<li><a href="https://www.nature.com/articles/s41561-022-01112-z" target="_blank" rel="noopener noreferrer">Yang and Song (2023)</a> inferred a near-zero differential rotation around 2009 and proposed an approximately 70-year oscillation. <a href="https://www.nature.com/articles/s41586-024-07536-4" target="_blank" rel="noopener noreferrer">Wang et al. (2024)</a> also found evidence of backtracking relative to the mantle.</li>
+<li>A reversal here means a change in the sign of rotation relative to the mantle; the inner core does not stop rotating in an inertial frame. This is distinct from a reversal of geomagnetic polarity.</li>
+<li>Similar multidecadal variations in geomagnetism and length of day suggest coupling between Earth&#039;s layers; they do not establish one universal period for all geomagnetic changes.</li>
 </ul>
 <h3 id="properties">Properties</h3>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2016.28.15-optimized.webp" alt="Screenshot 2026-05-18 at 16.28.15" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
@@ -85,37 +86,38 @@
 <li>Horizontal X component (northward) $X$</li>
 <li>Horizontal Y component (eastward) $Y$</li>
 </ul>
+<p>$$H=\sqrt{X^2+Y^2},\qquad F=\sqrt{H^2+Z^2},\qquad D=\operatorname{atan2}(Y,X),\qquad I=\operatorname{atan2}(Z,H)$$ Here $Z$ is positive downward, and $D$ is positive east of geographic north. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.</p>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2019.04.27-optimized.webp" alt="Screenshot 2026-05-18 at 19.04.27" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p><img src="../attachments/Pasted%20image%2020260518163913-optimized.webp" alt="Pasted image 20260518163913" loading="lazy" decoding="async" style="width: min(100%, 450px);"> <img src="../attachments/Pasted%20image%2020260518163921-optimized.webp" alt="Pasted image 20260518163921" loading="lazy" decoding="async" style="width: min(100%, 450px);"> <img src="../attachments/Pasted%20image%2020260518164109-optimized.webp" alt="Pasted image 20260518164109" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <ul>
-<li>The horizontal intensity $H$ contour lines are roughly a cluster of curves arranged along the latitude lines, with the maximum value near the magnetic equator and the $H$ value gradually decreasing towards the poles and approaching zero.</li>
-<li>The vertical intensity $Z$ is almost parallel to the latitude line. At the magnetic equator, $Z=0$. From there, the absolute value gradually increases towards the poles. North of the magnetic equator, $Z&gt;0$, indicating that the vertical component is downward. South of the magnetic equator, $Z&lt;0$, indicating that the vertical component is upward.</li>
+<li>In a centered dipole approximation, $H$ is largest at the dipole equator and decreases toward zero at the dipole poles. The actual contour lines deviate from latitude circles because of dipole tilt and non-dipole contributions.</li>
+<li>The magnetic dip equator is defined by $I=0$, hence $Z=0$. For Earth&#039;s present polarity, $Z$ is generally positive in the northern magnetic hemisphere and negative in the southern magnetic hemisphere. In a dipole model, $|Z|$ increases toward the poles.</li>
 <li>The intensity is generally stronger in high latitudes than near the equator.</li>
-<li>The intensity is especially low over the South Atlantic, where it is about $20\,\mu\text{T}$ weaker than expected. Orbiting satellites note increased impacts of extra-terrestrial particles over this region.</li>
+<li>The total field is unusually weak over South America and the South Atlantic. In this South Atlantic Anomaly (SAA), trapped radiation-belt particles reach lower altitudes and affect satellite instruments. A numerical field deficit requires a specified reference model, altitude, and epoch. See <a href="https://science.nasa.gov/science-research/earth-science/earths-magnetosphere-protecting-our-planet-from-harmful-space-energy/" target="_blank" rel="noopener noreferrer">NASA&#039;s description of the SAA</a>.</li>
 </ul>
 <p>isoclinic lines (inclination $I$) <img src="../attachments/Screenshot%202026-09-07%20at%2010.36.56-optimized.webp" alt="Screenshot 2026-09-07 at 10.36.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>isogonic lines (declination $D$) <img src="../attachments/Screenshot%202026-09-07%20at%2010.37.20-optimized.webp" alt="Screenshot 2026-09-07 at 10.37.20" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>The geomagnetic field consists of three parts:</p>
 <ol>
-<li>fundamental magnetic field: It consists of the central dipole magnetic field and the continental magnetic field, originating from the Earth&#039;s interior, and constitutes the main part (over 98%) of the Earth&#039;s magnetic field.</li>
+<li>Main field: Generated in the outer core, with both dipole and non-dipole components. It dominates the field at Earth&#039;s surface and changes slowly through secular variation.</li>
+<li>Crustal field: Produced by induced and remanent magnetization in the lithosphere. It causes local magnetic anomalies and is approximately steady over ordinary survey time scales.</li>
+<li>Disturbance field: Produced by currents in the ionosphere and magnetosphere, together with the currents they induce in the oceans and solid Earth. Its relative magnitude depends strongly on location and magnetic activity.</li>
 </ol>
-<p><img src="../attachments/Screenshot%202026-05-18%20at%2016.47.57-optimized.webp" alt="Screenshot 2026-05-18 at 16.47.57" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<ol>
-<li>changing magnetic field: This mainly refers to short-term changing magnetic fields, originating from outside the Earth, and accounting for less than 1% of the Earth&#039;s magnetic field.</li>
-<li>magnetic anomalies: This mainly refers to the local magnetic field caused by magnetic rocks or ores in the shallow part of the Earth&#039;s crust. It is superimposed on the basic magnetic field and is actually a secondary magnetic field formed in the surrounding space after underground rocks, minerals, or geological structures are magnetized by the Earth&#039;s magnetic field. It belongs to the endogenous magnetic field and accounts for a very small part of it.</li>
-</ol>
-<p>Three positive non-dipole magnetic field centers:</p>
+<p>This source-based decomposition follows the <a href="https://www.ncei.noaa.gov/products/world-magnetic-model" target="_blank" rel="noopener noreferrer">NOAA World Magnetic Model description</a>. Fixed percentages are only rough estimates, rather than universal bounds. <img src="../attachments/Screenshot%202026-05-18%20at%2016.47.57-optimized.webp" alt="Screenshot 2026-05-18 at 16.47.57" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Historical regional centers of the non-dipole field in the 1965 illustration below, with approximate central values quoted in the course notes:</p>
+<p>Three positive centers:</p>
 <ol>
 <li>South Atlantic Magnetic Anomaly (SAT), central intensity 22000 nT</li>
 <li>Eurasian Magnetic Anomaly (EA), central intensity 20000 nT</li>
 <li>North American Magnetic Anomaly (NAM), central intensity 6000 nT</li>
 </ol>
-<p>Two negative non-dipole magnetic field centers:</p>
+<p>Two negative centers:</p>
 <ol>
 <li>North African Magnetic Anomaly (AF), with a central intensity of -18000 nT</li>
 <li>Oceania Magnetic Anomaly (AUS), with a central intensity of -12000 nT</li>
 </ol>
 <p>Non-dipole magnetic field in 1965 <img src="../attachments/Pasted%20image%2020260907104332-optimized.webp" alt="Pasted image 20260907104332" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Note</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>These historical center labels and signed values describe a non-dipole-field map, not the total field strength or a present-day global model. The positive SAT center must not be identified with the weak-total-field SAA. The original map source and the exact plotted component still need verification.</p></div></div>
 <p>Magnetization of the rock:</p>
 <ul>
 <li><span class="obsidian-red">Induced magnetization</span>: The magnetization of a geological body located in the lithosphere due to magnetization by the modern Earth&#039;s magnetic field.</li>
@@ -123,22 +125,24 @@
 </ul>
 <p>Thermoremanent Magnetization</p>
 <ul>
-<li>An important property of many magnetizable materials is that, as they cool below the Curie point (≈580 °C for magnetite, ≈680 °C for hematite), they become magnetized in the direction of the surrounding magnetic field. This happens because groups of atoms of the material align themselves in the direction of the magnetic field when the material is hot. When the material has cooled, these atoms are locked in place.</li>
+<li>Magnetic minerals can acquire remanence while cooling through their blocking temperatures in an ambient field. Thermal fluctuations allow magnetic moments to respond to the field at higher temperatures; cooling makes their relaxation times long enough to preserve the magnetization. Blocking temperatures depend on grain properties and cooling rate and need not equal the Curie temperature (approximately $580\,{}^\circ\mathrm{C}$ for magnetite). Hematite loses antiferromagnetic order near its Neel temperature, approximately $675$–$690\,{}^\circ\mathrm{C}$; see <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006JB004495" target="_blank" rel="noopener noreferrer">Schmidt et al. (2007)</a>. Examples of distinct blocking and ordering temperatures are discussed by <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GC007435" target="_blank" rel="noopener noreferrer">Bowles et al. (2018)</a>.</li>
 </ul>
-<p><img src="../attachments/Screenshot%202026-05-18%20at%2017.14.19-optimized.webp" alt="Screenshot 2026-05-18 at 17.14.19" loading="lazy" decoding="async" style="width: min(100%, 630px);"></p>
+<p><img src="../attachments/Screenshot%202026-05-18%20at%2017.14.19-optimized.webp" alt="Screenshot 2026-05-18 at 17.14.19" loading="lazy" decoding="async" style="width: min(100%, 630px);"> The sketch illustrates preserved past magnetization in a changed ambient field. Its illustrative age label should not be used to date a global geomagnetic polarity reversal.</p>
 <p>Seafloor magnetic band <img src="../attachments/Pasted%20image%2020260518171456-optimized.webp" alt="Pasted image 20260518171456" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>paleomagnetic stratigraphy <img src="../attachments/Pasted%20image%2020260518171527.png" alt="Pasted image 20260518171527" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <h3 id="gauss-s-spherical-harmonic-analysis">Gauss&#039;s Spherical Harmonic Analysis</h3>
-<p>In <a href="../math/equations-of-mathematical-physics.html#spherical-harmonics">Spherical Harmonics</a>, we have the common solution of the magnetic field: $$w(r,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n[(\frac{R}{r})^{n+1}(g_n^m\cos m\lambda+h_n^m\sin m\lambda)+(\frac{r}{R})^n(j_n^m\cos m\lambda+k_n^m\sin m\lambda)]P_n^m(\cos \theta)$$ Here $P_n^m$ are the Schmidt quasi-normalized associated Legendre functions, the standard convention in geomagnetism (e.g., in the IGRF). It can be divided into two parts: internal magnetic field ($r^{-(n+1)}$) and external magnetic field ($r^n$).</p>
-<p>In the formula, we have four coefficients: $g_n^m,h_n^m,j_n^m,k_n^m$. They are called as <span class="obsidian-red">Gauss coefficients</span>, where $g_n^m,h_n^m$ are called as Gauss coefficients of the intrinsic field, and $j_n^m,k_n^m$ are called Gauss coefficients of the extrinsic field.</p>
-<p>In the surface, we have $$w(r,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n(p_n^m\cos m\lambda+q_n^m\sin m\lambda)P_n^m(\cos \theta)$$ where$$\left\{\begin{matrix} p_n^m= g_n^m+ j_n^m\\ q_n^m= h_n^m+ k_n^m \end{matrix}\right.$$ We can find that $$Z=\mu_0\frac{\partial w}{\partial r}|_{r=R}=-\sum_{n=1}^\infty\sum_{m=0}^n \{[(n+1)g_n^m-nj_n^m]\cos m\lambda+[(n+1)h_n^m-nk_n^m]\sin m\lambda\}P_n^m(\cos\theta)$$ So introduce two new coefficients:$$\left\{\begin{matrix} p_n^{&#039;m}= (n+1)g_n^m-nj_n^m\\ q_n^{&#039;m}= (n+1)h_n^m-nk_n^m \end{matrix}\right.$$ They can be solved from the measured vertical field $Z$:$$\left\{\begin{matrix} p_n^{&#039;m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda\\ q_n^{&#039;m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda \end{matrix}\right.$$ We can apply the method into the horizontal magnetic field strength: $$X=\frac{\mu_0}{r}\frac{\partial w}{\partial \theta}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\cos m\lambda+q_n^m\sin m\lambda)\frac{\mathrm{d}P_n^m(\cos\theta)}{\mathrm{d}\theta} $$ $$Y=-\frac{\mu_0}{r\sin\theta}\frac{\partial w}{\partial \lambda}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\sin m\lambda-q_n^m\cos m\lambda)\frac{m}{\sin\theta}P_n^m(\cos\theta) $$ Therefore,$$\left\{\begin{matrix} p_n^{m}= \frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin^2 \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda\\ q_n^{m}= -\frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin^2 \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda \end{matrix}\right.$$ Note that this inversion is singular for $m=0$ because of the $1/m$ factor. The zonal coefficient $p_n^0=g_n^0+j_n^0$ is obtained from the $Z$ inversion above instead, and $q_n^0\equiv 0$ since the $\sin m\lambda$ terms vanish for $m=0$. The results of Gaussian spherical harmonic analysis of the geomagnetic field show that: $$|g_n^m|\gg|j_n^m|,|h_n^m|\gg|k_n^m|$$ We can find the Gauss coefficients in <a href="https://wdc.kugi.kyoto-u.ac.jp/igrf/" target="_blank" rel="noopener noreferrer">this website</a>.</p>
+<h4 id="scalar-potential-and-gauss-coefficients">Scalar Potential and Gauss Coefficients</h4>
+<p>In a current-free region with uniform permeability $\mu_0$, $\mathbf{B}=-\mu_0\nabla w$ and $\nabla^2w=0$. Using <a href="../math/equations-of-mathematical-physics.html#spherical-harmonics">Spherical Harmonics</a>, the magnetic scalar potential can be written as $$w(r,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n[(\frac{R}{r})^{n+1}(g_n^m\cos m\lambda+h_n^m\sin m\lambda)+(\frac{r}{R})^n(j_n^m\cos m\lambda+k_n^m\sin m\lambda)]P_n^m(\cos \theta)$$ Here $R$ is the reference Earth radius, $\theta$ is geocentric colatitude, and $\lambda$ is east longitude. $P_n^m$ are Schmidt quasi-normalized associated Legendre functions without the Condon-Shortley phase, so $P_1^0=\cos\theta$ and $P_1^1=\sin\theta$. This normalization differs from the unnormalized functions in the linked mathematical-physics section. For each nonzero real harmonic, $$\int_0^\pi\int_0^{2\pi}[P_n^m(\cos\theta)\cos m\lambda]^2\sin\theta\,\mathrm{d}\lambda\,\mathrm{d}\theta=\frac{4\pi}{2n+1},$$ with the same norm for the sine harmonics when $m\ge1$. The two radial powers belong to the potential: $r^{-(n+1)}$ for internal sources and $r^n$ for external sources. Differentiation gives field amplitudes proportional to $r^{-(n+2)}$ and $r^{n-1}$, respectively. The expansion excludes a magnetic-monopole term; an arbitrary constant in $w$ has no effect on the field.</p>
+<p>The <span class="obsidian-red">Gauss coefficients</span> $g_n^m,h_n^m$ describe the internal field, while $j_n^m,k_n^m$ describe the external field. The sine coefficients $h_n^0,k_n^0$ are conventionally set to zero because $\sin0\lambda=0$.</p>
+<p>At the surface $r=R$, we have $$w(R,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n(p_n^m\cos m\lambda+q_n^m\sin m\lambda)P_n^m(\cos \theta)$$ where $$\left\{\begin{matrix} p_n^m= g_n^m+ j_n^m\\ q_n^m= h_n^m+ k_n^m \end{matrix}\right.$$ We can find that $$Z=\mu_0\frac{\partial w}{\partial r}|_{r=R}=-\sum_{n=1}^\infty\sum_{m=0}^n \{[(n+1)g_n^m-nj_n^m]\cos m\lambda+[(n+1)h_n^m-nk_n^m]\sin m\lambda\}P_n^m(\cos\theta)$$ So introduce two new coefficients: $$\left\{\begin{matrix} p_n^{&#039;m}= (n+1)g_n^m-nj_n^m\\ q_n^{&#039;m}= (n+1)h_n^m-nk_n^m \end{matrix}\right.$$ They can be solved from the measured vertical field $Z$: $$\left\{\begin{matrix} p_n^{&#039;m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta\\ q_n^{&#039;m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta \end{matrix}\right.$$ We can apply the method into the horizontal magnetic field strength: $$X=\frac{\mu_0}{r}\frac{\partial w}{\partial \theta}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\cos m\lambda+q_n^m\sin m\lambda)\frac{\mathrm{d}P_n^m(\cos\theta)}{\mathrm{d}\theta} $$ $$Y=-\frac{\mu_0}{r\sin\theta}\frac{\partial w}{\partial \lambda}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\sin m\lambda-q_n^m\cos m\lambda)\frac{m}{\sin\theta}P_n^m(\cos\theta) $$ Therefore, $$\left\{\begin{matrix} p_n^{m}= \frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin^2 \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta\\ q_n^{m}= -\frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin^2 \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta \end{matrix}\right.$$ This $Y$ inversion applies only to $m\ge1$. Zonal harmonics have $Y=0$, so their coefficients $p_n^0$ must instead be obtained from $X$. Let $$\overline{X}(\theta)=\frac{1}{2\pi}\int_0^{2\pi}X(R,\theta,\lambda)\,\mathrm{d}\lambda.$$ Derivative orthogonality of the zonal Legendre polynomials gives $$\boxed{p_n^0=\frac{2n+1}{2n(n+1)}\int_0^\pi\overline{X}(\theta)\frac{\mathrm{d}P_n^0(\cos\theta)}{\mathrm{d}\theta}\sin\theta\,\mathrm{d}\theta},\qquad q_n^0\equiv0.$$ The vertical inversion yields $p_n^{&#039;0}$, rather than $p_n^0$; $Z$ alone cannot separate internal and external sources at one radius. Once both horizontal and vertical coefficients are known, $$\begin{aligned} g_n^m&amp;=\frac{np_n^m+p_n^{&#039;m}}{2n+1},&amp;j_n^m&amp;=\frac{(n+1)p_n^m-p_n^{&#039;m}}{2n+1},\\ h_n^m&amp;=\frac{nq_n^m+q_n^{&#039;m}}{2n+1},&amp;k_n^m&amp;=\frac{(n+1)q_n^m-q_n^{&#039;m}}{2n+1}. \end{aligned}$$ These integral formulas assume global coverage. Discrete observations are normally fitted by weighted least squares. The internal main field dominates the total field under ordinary conditions, but this does not imply an inequality for every individual coefficient or for the time-varying field.</p>
+<p>The <a href="https://wdc.kugi.kyoto-u.ac.jp/igrf/" target="_blank" rel="noopener noreferrer">IGRF coefficients</a> describe the internal main-field coefficients $g_n^m,h_n^m$; they do not supply the external coefficients $j_n^m,k_n^m$.</p>
 <h4 id="dipole-field-n-1">Dipole Field ($n=1$)</h4>
-<p>$n=1$ is the <span class="obsidian-red">dipole field</span> and accounts for the 80-85% of the whole magnetic field. $$w_1=\frac{R}{\mu_0}(\frac{R}{r})^2[g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda]$$</p>
-<p>As a result, $$\left\{\begin{matrix} X= -g_1^0\sin\theta+(g_1^1\cos\lambda+h_1^1\sin\lambda)\cos\theta\\ Y= g_1^1\sin\lambda-h_1^1\cos\lambda\\ Z=-2g_1^0\cos\theta-2(g_1^1\cos\lambda+h_1^1\sin\lambda)\sin\theta \end{matrix}\right.$$ If geomagnetic axis coincides with geographic axis, then $$Y=0,Z|_{\theta=\frac{\pi}{2}}=0$$ Therefore,$$g_1^1=0,h_1^1=0$$ So we have $$\left\{\begin{matrix} X=H= -g_1^0\sin\theta=\frac{\mu_0M}{4\pi R^3}\sin\theta\\ Y= 0\\ Z=-2g_1^0\cos\theta=\frac{\mu_0M}{2\pi R^3}\cos\theta \end{matrix}\right.$$</p>
-<p>In the data set, we can find that $$g_1^0\gg g_1^1,h_1^1$$</p>
+<p>$n=1$ is the <span class="obsidian-red">dipole field</span> and is the dominant large-scale part of Earth&#039;s main field. A numerical percentage depends on the epoch and on how the field contribution is measured. $$w_1=\frac{R}{\mu_0}(\frac{R}{r})^2[g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda]$$</p>
+<p>At the surface $r=R$, $$\left\{\begin{matrix} X= -g_1^0\sin\theta+(g_1^1\cos\lambda+h_1^1\sin\lambda)\cos\theta\\ Y= g_1^1\sin\lambda-h_1^1\cos\lambda\\ Z=-2g_1^0\cos\theta-2(g_1^1\cos\lambda+h_1^1\sin\lambda)\sin\theta \end{matrix}\right.$$ If geomagnetic axis coincides with geographic axis, then $$Y=0,Z|_{\theta=\frac{\pi}{2}}=0$$ Therefore, $$g_1^1=0,h_1^1=0$$ For the aligned dipole with Earth&#039;s present polarity ($g_1^0&lt;0$), let $M=-4\pi R^3g_1^0/\mu_0&gt;0$ be the magnitude of its magnetic moment. Then $$\left\{\begin{matrix} X=H= -g_1^0\sin\theta=\frac{\mu_0M}{4\pi R^3}\sin\theta\\ Y= 0\\ Z=-2g_1^0\cos\theta=\frac{\mu_0M}{2\pi R^3}\cos\theta \end{matrix}\right.$$</p>
+<p>For the present main field, the axial coefficient dominates in magnitude: $$|g_1^0|\gg|g_1^1|,|h_1^1|.$$</p>
 <h4 id="eccentric-dipole-model">Eccentric Dipole Model</h4>
-<p>The model considers that the centre of the magnetic dipole does not coincide with Earth&#039;s centre.</p>
-<p>Under this circumstance, we have$$\begin{align*}w&#039;&amp;=\frac{1}{\mu_0}(\frac{R}{r&#039;})^3(g_1^0z&#039;+g_1^1x&#039;+h_1^1y&#039;)\\&amp;=\frac{1}{\mu_0}(\frac{R}{r&#039;})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)]\\&amp;=\frac{1}{\mu_0}(\frac{R}{r})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)](\frac{r}{(r_0^2+r^2-2r_0r\cos\varphi)^{1/2}})^3\\&amp;=w_1+w_2&#039;+O(n\ge3)\end{align*}$$ where$$w_2&#039;=\frac{1}{\mu_0}(\frac{R}{r})^3[(-g_1^0z_0-g_1^1x_0-h_1^1y_0)+3r_0\cos\varphi(g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda)]$$ Combining with law of cosines:$$r_0\cos\varphi=z_0\cos\theta+x_0\sin\theta\cos\lambda+y_0\sin\theta\sin\lambda$$ We have $$\begin{align*}w_2&#039;&amp;=\frac{R}{\mu_0}(\frac{R}{r})^3[g_2^{&#039;0}P_2^0(\cos\theta)+g_2^{&#039;1}\cos\lambda P_2^1(\cos\theta)\\&amp;+h_2^{&#039;1}\sin\lambda P_2^1(\cos\theta)+g_2^{&#039;2}\cos2\lambda P_2^2(\cos\theta)+h_2^{&#039;2}\sin2\lambda P_2^2(\cos\theta)]\end{align*}$$ where$$\left\{\begin{matrix} g_2^{&#039;0}=\frac{2}{R}g_1^0z_0-\frac{1}{R}g_1^1x_0-\frac{1}{R}h_1^1y_0\\ g_2^{&#039;1}=\frac{\sqrt{3}}{R}(g_1^0x_0+g_1^1z_0)\\ g_2^{&#039;2}=\frac{\sqrt{3}}{R}(g_1^1x_0+h_1^1y_0)\\ h_2^{&#039;1}=\frac{\sqrt{3}}{R}(g_1^0y_0+h_1^1z_0)\\ h_2^{&#039;2}=\frac{\sqrt{3}}{R}(g_1^1y_0+h_1^1x_0)\\ \end{matrix}\right.$$</p>
+<p>The model considers that the centre of the magnetic dipole does not coincide with Earth&#039;s centre. Let its displacement be $(x_0,y_0,z_0)$, with magnitude $r_0$, and let $(x&#039;,y&#039;,z&#039;)=(x-x_0,y-y_0,z-z_0)$. The $z$ axis points north, and $\varphi$ is the angle between the displacement and the observation position vector. For $r_0/r\ll1$, the expansion below retains terms through first order in the displacement.</p>
+<p>Under this circumstance, we have $$\begin{align*}w&#039;&amp;=\frac{1}{\mu_0}(\frac{R}{r&#039;})^3(g_1^0z&#039;+g_1^1x&#039;+h_1^1y&#039;)\\&amp;=\frac{1}{\mu_0}(\frac{R}{r&#039;})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)]\\&amp;=\frac{1}{\mu_0}(\frac{R}{r})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)](\frac{r}{(r_0^2+r^2-2r_0r\cos\varphi)^{1/2}})^3\\&amp;=w_1+w_2&#039;+w_{\ge3}\end{align*}$$ where $$w_2&#039;=\frac{1}{\mu_0}(\frac{R}{r})^3[(-g_1^0z_0-g_1^1x_0-h_1^1y_0)+3r_0\cos\varphi(g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda)]$$ Here $w_{\ge3}$ contains degree $n\ge3$ terms, which are second and higher order in $r_0/r$ relative to the centered dipole potential. Combining with the law of cosines: $$r_0\cos\varphi=z_0\cos\theta+x_0\sin\theta\cos\lambda+y_0\sin\theta\sin\lambda$$ We have $$\begin{align*}w_2&#039;&amp;=\frac{R}{\mu_0}(\frac{R}{r})^3[g_2^{&#039;0}P_2^0(\cos\theta)+g_2^{&#039;1}\cos\lambda P_2^1(\cos\theta)\\&amp;+h_2^{&#039;1}\sin\lambda P_2^1(\cos\theta)+g_2^{&#039;2}\cos2\lambda P_2^2(\cos\theta)+h_2^{&#039;2}\sin2\lambda P_2^2(\cos\theta)]\end{align*}$$ where $$\left\{\begin{matrix} g_2^{&#039;0}=\frac{2}{R}g_1^0z_0-\frac{1}{R}g_1^1x_0-\frac{1}{R}h_1^1y_0\\ g_2^{&#039;1}=\frac{\sqrt{3}}{R}(g_1^0x_0+g_1^1z_0)\\ g_2^{&#039;2}=\frac{\sqrt{3}}{R}(g_1^1x_0-h_1^1y_0)\\ h_2^{&#039;1}=\frac{\sqrt{3}}{R}(g_1^0y_0+h_1^1z_0)\\ h_2^{&#039;2}=\frac{\sqrt{3}}{R}(g_1^1y_0+h_1^1x_0)\\ \end{matrix}\right.$$</p>
 <h3 id="timevarying-magnetic-field">Time-Varying Magnetic Field</h3>
 <h4 id="introduction-to-timevariation">Introduction to Time-Variation</h4>
 <p>Variations in the Earth&#039;s magnetic field fall into two basic categories:</p>
@@ -149,13 +153,17 @@
 <p>To evaluate the variation, we use the following empirical indices:</p>
 <ul>
 <li>Daily Magnetic Activity Level $C,C_i$: $C$ only has three values $0,1,2$ and $C_i$ has $21$ values $0.0-2.0$.</li>
-<li>$K,K_p$: A disturbance level is assigned every $3$ hours, resulting in eight $K$ values per day. Because background magnetic fields and disturbance responses vary with latitude and location, $K$ from different stations cannot be directly compared. So we introduce $K_p$:$$ K \rightarrow \text{Standardization} \rightarrow K_s \rightarrow \text{Combine multiple standard stations} \rightarrow K_p $$</li>
+<li>$K,K_p$: A disturbance level is assigned every $3$ hours, resulting in eight $K$ values per day. Because background magnetic fields and disturbance responses vary with latitude and location, $K$ from different stations cannot be directly compared. So we introduce $K_p$:</li>
+</ul>
+<p>$$ K \rightarrow \text{Standardization} \rightarrow K_s \rightarrow \text{Combine multiple standard stations} \rightarrow K_p $$</p>
+<ul>
+<li>$K$ is a local, quasi-logarithmic index with integer levels $0$–$9$, computed after removing the regular daily variation. $K_p$ is the planetary index with 28 levels, conventionally expressed in thirds between $0$ and $9$.</li>
 <li>$A_k,A_p$: $K$ is not linear, so we introduce the linear index $a_k,a_p$, corresponding respectively to $K,K_p$. $A_k,A_p$ are the daily averages of $a_k,a_p$.</li>
 <li>$C_p$: $A_p$ is the average equivalent amplitude, and $C_p$ is a classification derived by further compressing the global daily disturbance intensity.</li>
 <li>$u,u_1$: Statistics of global magnetic disturbances on monthly and annual scales</li>
 <li>$AU,AL,AE$: Among multiple auroral-zone stations:</li>
 </ul>
-<p>$$ AU=\max(\Delta H), AL=\min(\Delta H), AE=AU-AL $$</p>
+<p>$$ AU=\max(\Delta H), AL=\min(\Delta H), AE=AU-AL $$ Here $\Delta H$ is measured relative to station baselines. $AU$ and $AL$ are the upper and lower envelopes of auroral-zone horizontal disturbances, rather than absolute magnetic-field strengths. Definitions of $K_p$ and its derived indices are provided by <a href="https://kp.gfz.de/en/about-kp" target="_blank" rel="noopener noreferrer">GFZ</a>.</p>
 <p>The variations in the Earth&#039;s magnetic field are significantly influenced by solar activity.</p>
 <p>The relationship between the geomagnetic index $u$ and the sunspot number $R$. <img src="../attachments/Screenshot%202026-09-28%20at%2016.44.16-optimized.webp" alt="Screenshot 2026-09-28 at 16.44.16" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>Annual variation of geomagnetic activity <img src="../attachments/Screenshot%202026-09-28%20at%2016.52.44-optimized.webp" alt="Screenshot 2026-09-28 at 16.52.44" loading="lazy" decoding="async" style="width: min(100%, 570px);"></p>
@@ -164,11 +172,11 @@
 <li>Average variation ranges from a few $\mathrm{nT}$ to tens of $\mathrm{nT}$.</li>
 <li>A cycle of 24 hours.</li>
 <li>Greater variation during the day, smaller variation at night.</li>
-<li>Largest variation in summer, smallest variation in winter, with spring and autumn showing intermediate variations.</li>
-<li>The amplitude of the horizontal component is greatest near the magnetic equator; near magnetic latitudes of approximately $\pm 30^\circ$, that amplitude approaches zero and a phase reversal occurs.</li>
-<li>Equatorial anomaly exists: the daily variation amplitudes of the horizontal and vertical components of geomagnetic quiet-day variations are significantly enhanced within a range of approximately $15^\circ$ north and south of the magnetic equator; the horizontal component, in particular, can reach approximately $200\,\mathrm{nT}$.</li>
+<li>The amplitude depends on season, solar activity, latitude, and longitude; a summer maximum and winter minimum are common in some regions but are not a universal seasonal ordering.</li>
+<li>The northward component can become small and reverse its daily pattern near the $S_q$ current foci, often near magnetic latitudes of $\pm30^\circ$. The exact latitude varies, and the eastward component need not vanish there.</li>
+<li>The equatorial electrojet enhances the northward and horizontal daily variation within a few degrees of the dip equator. The horizontal variation can approach $200\,\mathrm{nT}$ in favorable conditions. Its vertical-field signature changes sign across the electrojet and is not a uniform enhancement over $\pm15^\circ$. <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2002JA009656" target="_blank" rel="noopener noreferrer">CHAMP observations</a> found a current-density full width at half maximum of about $4^\circ$ in latitude.</li>
 </ol>
-<p>Variation of geomagnetic activity with the solar rotation cycle (Chree curve): <img src="../attachments/Screenshot%202026-09-28%20at%2016.54.44.png" alt="Screenshot 2026-09-28 at 16.54.44" loading="lazy" decoding="async" style="width: min(100%, 450px);"> In the figure, we define the day the magnetic activity index $C_i$ reaches its peak as the reference day $n$.</p>
+<p>Variation of geomagnetic activity with the solar rotation cycle (Chree curve): <img src="../attachments/Screenshot%202026-09-28%20at%2016.54.44.png" alt="Screenshot 2026-09-28 at 16.54.44" loading="lazy" decoding="async" style="width: min(100%, 450px);"> In the figure, enhanced-activity days are aligned at the reference day $n$ and averaged. The secondary peak near $n+27$ reflects recurrence over the approximately 27-day solar rotation as seen from Earth; it is not the 11-year solar activity cycle.</p>
 <h4 id="principle-of-periodic-superposition">Principle of Periodic Superposition</h4>
 <p>If we have two types of cyclical changes and random, accidental changes: $$f(t)=f_0(t)+A(t)+A_1\sin(\frac{2\pi}{T_1}t+\varphi_1)+A_2\sin(\frac{2\pi}{T_2}t+\varphi_2)$$ where</p>
 <ul>
@@ -176,90 +184,110 @@
 <li>$f_0(t)$ is the background (basic) geomagnetic field as a function of time.</li>
 <li>$A(t)$ is the random (accidental) variation as a function of time.</li>
 </ul>
-<p>Let $t_k=kT_1+t_i$, the average of geomagnetism is $$\overline{f}=\frac{1}{N}\sum_{k=0}^{N-1}f(t_k)$$ To analyze the long-term changes, let $N\to+\infty$, then $$\begin{align*}\overline{f}&amp;=\frac{1}{N}\sum_{k=0}^{N-1}(f_0(t_k)+A(t_k)+A_1\sin(\frac{2\pi}{T_1}t_k+\varphi_1)+A_2\sin(\frac{2\pi}{T_2}t_k+\varphi_2))\\&amp;=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)+\frac{A_2}{N}\sum_{k=0}^{N-1}\sin(\frac{2\pi}{T_2}t_i+\varphi_2+2k\pi\frac{T_1}{T_2})\\&amp;=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)+\frac{A_2}{N}\frac{\sin N\pi\frac{T_1}{T_2}}{\sin \pi\frac{T_1}{T_2}}\sin(\frac{2\pi}{T_2}t_i+\varphi_2+(N-1)\pi\frac{T_1}{T_2})\\&amp;=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)\end{align*}$$ So we can find that$$\delta f_i=\overline{f}-\overline{f_0}=A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)$$ Here the random term $A(t)$ averages to zero as $N\to\infty$, and the $T_2$ term vanishes when $T_1/T_2$ is not an integer. This is a tool for improving the signal-to-noise ratio of periodic signals once the period is already roughly known.</p>
+<p>Sample at the same phase of the $T_1$ cycle, $t_k=kT_1+t_i$, and form $$\overline{f}=\frac{1}{N}\sum_{k=0}^{N-1}f(t_k).$$ The background $f_0$ should be approximately steady over the averaging interval, or its secular trend should first be removed. Define $$\alpha=\frac{2\pi t_i}{T_2}+\varphi_2,\qquad \beta=\pi\frac{T_1}{T_2}.$$ For $\sin\beta\ne0$, the finite trigonometric sum is $$\sum_{k=0}^{N-1}\sin(\alpha+2k\beta)=\frac{\sin N\beta}{\sin\beta}\sin[\alpha+(N-1)\beta].$$ Therefore $$\overline{f}=\overline{f_0}+\overline{A}+A_1\sin\left(\frac{2\pi t_i}{T_1}+\varphi_1\right)+\frac{A_2}{N}\frac{\sin N\beta}{\sin\beta}\sin[\alpha+(N-1)\beta],$$ where $\overline{A}=N^{-1}\sum_k A(t_k)$. If the sampled random term has zero mean and sufficiently weak correlations for its sample mean to converge to zero, and $T_1/T_2\notin\mathbb{Z}$, then $$\boxed{\delta f_i=\lim_{N\to\infty}(\overline{f}-\overline{f_0})=A_1\sin\left(\frac{2\pi t_i}{T_1}+\varphi_1\right)}.$$ If $T_1/T_2$ is an integer, the $T_2$ signal is also sampled at a fixed phase and survives the averaging. For a ratio close to an integer, a long averaging window is needed; the residual amplitude is bounded by $|A_2|/(N|\sin\beta|)$.</p>
+<p>This method improves the signal-to-noise ratio of a periodic signal with a roughly known period; it does not remove correlated disturbances or background drift automatically.</p>
 <h4 id="analysis-of-sq">Analysis of $S_q$</h4>
 <p>In actual measurements, we usually use Fourier Series to analyze the period: $$ f(t)=\frac{a_0}{2} +\sum_{m=1}^{\infty} \left( a_m\cos mt+b_m\sin mt \right)$$ where $$ a_m=\frac1\pi\int_0^{2\pi} f(t)\cos mt\,\mathrm{d}t, b_m=\frac1\pi\int_0^{2\pi} f(t)\sin mt\,\mathrm{d}t$$ Then $$\begin{align*} \delta f(t)&amp; = f(t)-\frac{a_0}{2} = \sum_{m=1}^{\infty} \left( a_m\cos mt+b_m\sin mt \right)\\&amp;= \sum_{m=1}^{\infty} A_m\sin(mt+\phi_m)\end{align*}$$ Here, we let $t=2\pi$ correspond to $24$ hours. So $m=1,2,3,4$ respectively correspond to $T=24\,\mathrm{h},12\,\mathrm{h},8\,\mathrm{h},6\,\mathrm{h}$.</p>
-<p>In this way we can analyze the importance of every period wave. Generally, taking just four terms is sufficient to yield a result very close to the actual situation. <img src="../attachments/Screenshot%202026-09-28%20at%2019.01.56.png" alt="Screenshot 2026-09-28 at 19.01.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>And we can use spherical harmonic analysis to analyze the space.</p>
-<p>Endogenous geomagnetic field:</p>
+<p>In this way we can analyze the importance of every period wave. For a smooth quiet-day curve, the first four harmonics often provide a useful approximation; the required truncation should be checked against the data. <img src="../attachments/Screenshot%202026-09-28%20at%2019.01.56.png" alt="Screenshot 2026-09-28 at 19.01.56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Spatial variation can be analyzed with spherical harmonics. The following formulas apply at $r=R$ to an idealized pattern described in angular local time $t$, with $1\le m\le n$. At fixed universal time, local-time angle and longitude differ only by a phase shift. An arbitrary evolving spatial field would instead use longitude harmonics with coefficients that depend separately on time.</p>
+<p>Internal time-varying field (mainly the induced Earth response for $S_q$):</p>
 <p>$$ \left\{ \begin{aligned} \delta X_i &amp;= \sum_{n,m} \frac{\mathrm{d}P_n^m(\cos\theta)}{\mathrm{d}\theta} \left( g_n^m\cos mt+h_n^m\sin mt \right),\\[2mm] \delta Y_i &amp;= \sum_{n,m} \frac{mP_n^m(\cos\theta)}{\sin\theta} \left( g_n^m\sin mt-h_n^m\cos mt \right),\\[2mm] \delta Z_i &amp;= -\sum_{n,m} (n+1) \left( g_n^m\cos mt+h_n^m\sin mt \right) P_n^m(\cos\theta). \end{aligned} \right. $$</p>
 <p>External geomagnetic field: $$ \left\{ \begin{aligned} \delta X_e &amp;= \sum_{n,m} \frac{\mathrm{d}P_n^m(\cos\theta)}{\mathrm{d}\theta} \left( j_n^m\cos mt+k_n^m\sin mt \right),\\[2mm] \delta Y_e &amp;= \sum_{n,m} \frac{mP_n^m(\cos\theta)}{\sin\theta} \left( j_n^m\sin mt-k_n^m\cos mt \right),\\[2mm] \delta Z_e &amp;= \sum_{n,m} n \left( j_n^m\cos mt+k_n^m\sin mt \right) P_n^m(\cos\theta). \end{aligned} \right. $$</p>
 <h4 id="ionosphere-and-atmospheric-dynamo-theory">Ionosphere and Atmospheric Dynamo Theory</h4>
-<p>Solar radiation ionizes neutral atoms and molecules in the upper atmosphere, producing free electrons and positive ions, thereby forming the <span class="obsidian-red">ionosphere</span>, which possesses significant electrical conductivity. For example:$$ \mathrm O + h\nu \rightarrow \mathrm O^+ + e^-, \qquad \mathrm{N_2}+h\nu \rightarrow \mathrm{N_2^+}+e^-$$ The electron concentration $n_e$ exhibits local maxima at certain altitudes $h$; these regions are designated as the D layer ($60\,\mathrm{km}$), E layer ($120\,\mathrm{km}$), and F layer ($200-400\,\mathrm{km}$). <img src="../attachments/Pasted%20image%2020260928193107.png" alt="Pasted image 20260928193107" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>The motion of the electrically conductive ionosphere within the geomagnetic field generates a specific current distribution. This external current system constitutes the source of the external field.</p>
-<p>For ionospheric currents, if we restrict them to a two-dimensional surface current on a thin spherical shell of known altitude, we can derive analytical relationships.</p>
+<p>Solar radiation ionizes neutral atoms and molecules in the upper atmosphere, producing free electrons and positive ions, thereby forming the <span class="obsidian-red">ionosphere</span>, which possesses significant electrical conductivity. For example: $$ \mathrm O + h\nu \rightarrow \mathrm O^+ + e^-, \qquad \mathrm{N_2}+h\nu \rightarrow \mathrm{N_2^+}+e^-$$ The altitude dependence of electron concentration $n_e$ defines the D, E, and F regions. Their boundaries and peak heights depend on local time and solar conditions: the D region is roughly $60$–$95\,\mathrm{km}$, the E region about $90$–$150\,\mathrm{km}$ with a typical daytime peak near $110$–$120\,\mathrm{km}$, and the F region lies above about $150\,\mathrm{km}$, often with F1 and F2 layers. The F2 peak commonly occurs around $200$–$400\,\mathrm{km}$. These are altitude ranges, not three fixed peak heights. <img src="../attachments/Pasted%20image%2020260928193107.png" alt="Pasted image 20260928193107" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Solar heating excites atmospheric tides and neutral winds. Collisions between neutrals and charged particles couple these winds to the ionospheric plasma. In the Earth-fixed frame, the effective field driving conduction is $$\mathbf{E}&#039;=\mathbf{E}+\mathbf{v}\times\mathbf{B},\qquad \mathbf{j}=\overleftrightarrow{\sigma}\cdot\mathbf{E}&#039;,$$ where $\mathbf{v}$ is the neutral wind, $\mathbf{E}$ includes the polarization field, and $\overleftrightarrow{\sigma}$ is the conductivity tensor. In particular, perpendicular to $\mathbf{B}$, $$\mathbf{j}_\perp=\sigma_P\mathbf{E}&#039;_\perp+\sigma_H\hat{b}\times\mathbf{E}&#039;_\perp,\qquad \hat{b}=\frac{\mathbf{B}}{|\mathbf{B}|},$$ with Pedersen and Hall conductivities $\sigma_P,\sigma_H$. The electrostatic field adjusts to satisfy current continuity; the total field cannot generally be set equal to $\mathbf{v}\times\mathbf{B}$.</p>
+<p>The solar-driven currents, mainly in the E-region dynamo layer, produce the external $S_q$ field and an induced response in the Earth. Lunar atmospheric tides also drive a smaller geomagnetic daily variation, conventionally denoted $L$, which is distinct from $S_q$.</p>
+<p>For ionospheric currents, if we restrict them to a two-dimensional surface current on a thin spherical shell of known altitude, we can derive analytical relationships. <img src="../attachments/Screenshot%202026-10-01%20at%2020.11.13-optimized.webp" alt="Screenshot 2026-10-01 at 20.11.13" loading="lazy" decoding="async" style="width: min(100%, 650px);"></p>
+<p>Let $R$ be Earth&#039;s radius and $r=R+h$ the fixed radius of the current shell. Use $\rho$ for the variable radial coordinate, so that $\rho=R$ is the ground and $\rho=r$ is the ionosphere. Assume a quasi-static, divergence-free horizontal sheet current, with permeability $\mu_0$ on both sides. The inversion gives an equivalent current system producing the observed external $S_q$ field; it does not uniquely recover the full three-dimensional current system. Any external contribution from magnetospheric currents must also be excluded or modeled before interpreting the result as ionospheric currents.</p>
+<p>The scalar-potential convention in <a href="#scalar-potential-and-gauss-coefficients">Scalar Potential and Gauss Coefficients</a> is $$ \mathbf{H}=-\nabla w,\qquad \mathbf{B}=-\mu_0\nabla w. $$ First derive the spatial relation using longitude $\lambda$. In the local-time representation of $S_q$, $t$ is an angular local solar time ($2\pi=24\,\mathrm{h}$), rather than time in seconds. At fixed universal time, $t$ differs from $\lambda$ by a constant, so the same spatial derivation applies after replacing $\lambda$ with $t$ and absorbing the phase shift into the coefficients.</p>
+<p>The <span class="obsidian-red">equivalent current function</span> $I_e$ is defined by $$ \mathbf{K}=-\hat{r}\times\nabla_s I_e, \qquad \nabla_s=\hat{\theta}\frac{1}{r}\frac{\partial}{\partial\theta} +\hat{\lambda}\frac{1}{r\sin\theta}\frac{\partial}{\partial\lambda}, $$ where $\mathbf{K}$ is the height-integrated current density in $\mathrm{A\,m^{-1}}$. Thus $$ K_\theta=\frac{1}{r\sin\theta}\frac{\partial I_e}{\partial\lambda}, \qquad K_\lambda=-\frac{1}{r}\frac{\partial I_e}{\partial\theta}. $$ $K_\theta$ is southward and $K_\lambda$ is eastward. The current follows contours of $I_e$, and the difference between two contours gives the signed current crossing a curve between them. Therefore $I_e$ has units of amperes; it is not a local current density. This sign convention determines the minus sign in the inversion formula.</p>
+<p>From the coefficients defined in <a href="#scalar-potential-and-gauss-coefficients">Scalar Potential and Gauss Coefficients</a>, $$p_n^m=g_n^m+j_n^m,\qquad p_n^{&#039;m}=(n+1)g_n^m-nj_n^m,$$ and similarly for $q_n^m,q_n^{&#039;m}$. Solving these equations gives $$ j_n^m=\frac{(n+1)p_n^m-p_n^{&#039;m}}{2n+1}, \qquad k_n^m=\frac{(n+1)q_n^m-q_n^{&#039;m}}{2n+1}. $$ The ionospheric inversion uses these external coefficients, with the internal contribution from induced Earth currents separated out.</p>
+<p>Define $$F_n^m(\theta,\lambda)=(j_n^m\cos m\lambda+k_n^m\sin m\lambda)P_n^m(\cos\theta).$$ For the field generated by the shell alone, the potential is regular inside and decays at infinity outside. The corresponding solutions of Laplace&#039;s equation are $$w_{nm}^-(\rho)=\frac{R}{\mu_0}\left(\frac{\rho}{R}\right)^n F_n^m,\qquad w_{nm}^+(\rho)=b_n\left(\frac{r}{\rho}\right)^{n+1}F_n^m,$$ where $-$ and $+$ denote the inner and outer sides. Since $\nabla\cdot\mathbf{B}=0$, the normal magnetic field is continuous across the current sheet: $$\left.\frac{\partial w_{nm}^-}{\partial\rho}\right|_{\rho=r}=\left.\frac{\partial w_{nm}^+}{\partial\rho}\right|_{\rho=r}.$$ Hence, equating the harmonic coefficients, $$\frac{n}{r}\frac{R}{\mu_0}\left(\frac{r}{R}\right)^n=-\frac{n+1}{r}b_n,\qquad b_n=-\frac{n}{n+1}\frac{R}{\mu_0}\left(\frac{r}{R}\right)^n.$$ At the shell, this means $$w_{nm}^+(r)=-\frac{n}{n+1}w_{nm}^-(r),\qquad w_{nm}^+(r)-w_{nm}^-(r)=-\frac{2n+1}{n+1}w_{nm}^-(r).$$ The same ionospheric source is external relative to the ground, but internal relative to points above the shell; this explains the two different radial powers.</p>
+<p>Ampere&#039;s boundary condition, with $\hat{r}$ pointing outward, is $$\hat{r}\times(\mathbf{H}^+-\mathbf{H}^-)=\mathbf{K}.$$ Substituting $\mathbf{H}=-\nabla w$ gives $$\mathbf{K}=-\hat{r}\times\nabla_s(w^+-w^-).$$ Comparing this with the definition of $I_e$, we obtain $$I_e=w^+(r)-w^-(r)+C.$$ The additive constant $C$ does not affect the current and may be set to zero. Summing the harmonics and using the angular local-time coordinate gives the stated formula: $$\boxed{I_e(t,\theta)=-\frac{R}{\mu_0}\sum_{n=1}^{\infty}\sum_{m=1}^{n}\frac{2n+1}{n+1}\left(\frac{r}{R}\right)^n(j_n^m\cos mt+k_n^m\sin mt)P_n^m(\cos\theta)}$$</p>
+<p>The factor $(r/R)^n$ continues the ground potential upward to the current shell, while $(2n+1)/(n+1)$ comes from the potential jump fixed by normal-field continuity. In SI units, $R,r$ are in metres and $j_n^m,k_n^m$ are in teslas, so $Rj_n^m/\mu_0$ has units of amperes. The sum starts at $m=1$ here because it describes the nonzero daily harmonics; a general spatial current function can also include zonal terms with $m=0$.</p>
 <h4 id="magnetic-storm">Magnetic Storm</h4>
-<p>A <span class="obsidian-red">magnetic storm</span> is a global, intense geomagnetic disturbance caused by solar activity. Solar phenomena such as flares generate enhanced particle streams and solar wind that interact with Earth&#039;s magnetosphere and ionosphere, altering their current systems. The storm-time variations primarily consist of the disturbance field from particle streams ($DCF$) and the disturbance field from the ring current ($DR$); $DCF$ mainly enhances the horizontal magnetic field, while $DR$ primarily weakens it, and together they constitute the $D_{st}$ storm-time variation. $$\boxed{ DCF+DR\longrightarrow D_{st} }$$</p>
+<p>A <span class="obsidian-red">magnetic storm</span> is a large-scale geomagnetic disturbance caused by enhanced solar-wind energy input to the magnetosphere. Coronal mass ejections and high-speed solar-wind streams are common drivers; a solar flare by itself is not a sufficient explanation of a storm.</p>
+<ul>
+<li>$D_{CF}$: The Chapman-Ferraro field from magnetopause currents. Increased solar-wind dynamic pressure compresses the magnetosphere and usually gives a positive low-latitude horizontal-field perturbation, often seen at storm commencement.</li>
+<li>$D_R$: The disturbance from the enhanced westward ring current, usually giving a negative low-latitude horizontal-field perturbation during the storm main phase.</li>
+</ul>
+<p>The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields. See <a href="https://wdc.kugi.kyoto-u.ac.jp/dstdir/dst2/onDstindex.html" target="_blank" rel="noopener noreferrer">WDC Kyoto&#039;s derivation and interpretation of $D_{st}$</a>.</p>
 <h2 id="resistivity-and-permittivity">Resistivity and Permittivity</h2>
-<p>Given that the rock anisotropy, we define: <span class="obsidian-red">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering). <span class="obsidian-red">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding. (Current flows more easily along the layers, so $\rho_n &gt; \rho_t$ and $\lambda \ge 1$.) <span class="obsidian-red">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$ <span class="obsidian-red">mean macroscopic resistivity</span> / <span class="obsidian-red">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$</p>
-<p>The following picture shows resistivity in different layers within the Earth&#039;s interior. <img src="../attachments/Screenshot%202026-05-15%20at%2017.20.29-optimized.webp" alt="Screenshot 2026-05-15 at 17.20.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>Conduction Mode of the crust:</p>
+<p>For an effective medium made of thin, isotropic layers, we define: <span class="obsidian-red">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering). <span class="obsidian-red">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding. (For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.) <span class="obsidian-red">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$ <span class="obsidian-red">mean macroscopic resistivity</span> / <span class="obsidian-red">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$</p>
+<p>For layers with resistivities $\rho_i$, thicknesses $h_i$, and total thickness $d=\sum_i h_i$, $$\rho_t=\frac{d}{\sum_i h_i/\rho_i},\qquad \rho_n=\frac{\sum_i h_i\rho_i}{d}.$$ The longitudinal and transverse resistivities are the thickness-weighted harmonic and arithmetic means. The geometric mean $\rho_m$ is a useful effective parameter, rather than a replacement for the full anisotropic resistivity tensor in every geometry.</p>
+<p>The following picture illustrates approximate resistivity ranges (in $\Omega\,\mathrm{m}$) for a continental crust-mantle model. Both layer depths and resistivities vary between regions. <img src="../attachments/Screenshot%202026-05-15%20at%2017.20.29-optimized.webp" alt="Screenshot 2026-05-15 at 17.20.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Conduction mechanisms in crustal materials:</p>
 <ol>
-<li>conductive through electrons: metal, graphite (low resistivity)</li>
-<li>conductive through semiconductors: most of metal sulfides/oxides (low resistivity)</li>
-<li>conductive through crystalline ionic: most rock-forming minerals—such as quartz, mica, and calcite, etc. (high resistivity)</li>
-<li>conductive through ionic: hydrous minerals (low resistivity)</li>
+<li>Electronic conduction: Important in connected metallic minerals and graphite; bulk conductivity also depends on whether the conducting phase forms a connected network.</li>
+<li>Semiconducting conduction: Occurs in some sulfides and oxides and depends on temperature and mineral composition.</li>
+<li>Electrolytic conduction: Motion of dissolved ions in connected pore water and fractures; commonly the dominant mechanism in fluid-bearing rocks.</li>
+<li>Surface conduction: Associated with charged mineral-fluid interfaces, especially clay-rich rocks. Solid-state ionic conduction may also contribute, particularly at high temperatures; dry quartz, mica, and calcite are generally resistive.</li>
 </ol>
 <p>Based on the different resistivity of various rocks, we can use electrical exploration to detect the variety of rocks. However, due to the overlapping of the scope of resistivity of various rocks, electrical exploration has its limitations.</p>
-<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Mineral</th><th>$\epsilon_r$</th><th>Rock</th><th>$\epsilon_r$</th></tr></thead><tbody><tr><td>Quartz</td><td>4.2-5.5</td><td>Igneous rock</td><td>7-15</td></tr><tr><td>Feldspar</td><td>4-10</td><td>Metamorphic rock</td><td>5-13</td></tr><tr><td>Mica</td><td>5-8</td><td>Sedimentary rock</td><td>4-15</td></tr><tr><td>Chlorite</td><td>5-6</td><td>Limestone</td><td>8-12</td></tr><tr><td>Sulfide</td><td>8-17</td><td>Sandstone</td><td>5-11</td></tr><tr><td>Petroleum</td><td>10-30</td><td>Sand</td><td>3-25</td></tr><tr><td>Water</td><td>80</td><td>Mudstone</td><td>4-30</td></tr></tbody></table></div>
+<p>The following relative-permittivity values are approximate reference values. The original course table does not specify its sources or measurement frequencies, so the mineral and rock ranges require verification before quantitative use. Frequency, water content, temperature, and mineral composition affect these values; conducting materials require a complex, frequency-dependent permittivity.</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Mineral</th><th>$\epsilon_r$</th><th>Rock</th><th>$\epsilon_r$</th></tr></thead><tbody><tr><td>Quartz</td><td>4.2-5.5</td><td>Igneous rock</td><td>7-15</td></tr><tr><td>Feldspar</td><td>4-10</td><td>Metamorphic rock</td><td>5-13</td></tr><tr><td>Mica</td><td>5-8</td><td>Sedimentary rock</td><td>4-15</td></tr><tr><td>Chlorite</td><td>5-6</td><td>Limestone</td><td>8-12</td></tr><tr><td>Sulfide</td><td>8-17</td><td>Sandstone</td><td>5-11</td></tr><tr><td>Water-free petroleum</td><td>about 2-3</td><td>Sand</td><td>3-25</td></tr><tr><td>Water near room temperature, low frequency</td><td>about 80</td><td>Mudstone</td><td>4-30</td></tr></tbody></table></div>
+<p>Water-free petroleum normally has a relative permittivity near $2$, rather than the original table&#039;s $10$–$30$; water-bearing emulsions can be much higher. <a href="https://nfogm.no/wp-content/uploads/2019/02/1984-14-Continuous-On-Line-Water-Measurement-Wilson-BP.pdf" target="_blank" rel="noopener noreferrer">Wilson (1984), Sect. 1.2.4</a> reports measured dry-oil values around $2.24$–$2.48$ at $20\,{}^\circ\mathrm{C}$ for the crude oils studied.</p>
 <h2 id="methods-for-measuring-resistivity">Methods for Measuring Resistivity</h2>
 <h3 id="direct-current-dc-resistivity-method">Direct Current (DC) Resistivity Method</h3>
-<p>We can use direct method to measuring the resistivity of the ground. <img src="../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp" alt="Screenshot 2026-05-15 at 17.29.04" loading="lazy" decoding="async" style="width: min(100%, 475px);"></p>
-<p>$$j=\frac{I}{2\pi r^2}$$ $$E=\rho j=\frac{\rho I}{2\pi r^2}$$ $$U=-\int_{\infty} ^M E\,\mathrm{d}r=-\int_{\infty} ^M \frac{\rho I}{2\pi r^2}\,\mathrm{d}r=\frac{\rho I}{2\pi r_M}$$ $$U_M=U_M^A+U_M^B=\frac{\rho I}{2\pi |AM|}+\frac{-\rho I}{2\pi |BM|}=\frac{\rho I}{2\pi}(\frac{1}{|AM|}-\frac{1}{|BM|})$$ $$U_{MN}=U_M-U_N=\frac{\rho I}{2\pi}(\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|})$$ Let <span class="obsidian-red">Geometric Factor</span>$$K=\frac{2\pi}{\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|}}$$ Then$$\rho=K\frac{U_{MN}}{I}$$</p>
+<p>In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces, giving <img src="../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp" alt="Screenshot 2026-05-15 at 17.29.04" loading="lazy" decoding="async" style="width: min(100%, 475px);"></p>
+<p>$$j=\frac{I}{2\pi r^2}$$ $$E=\rho j=\frac{\rho I}{2\pi r^2}$$ $$U(r_M)=-\int_{\infty}^{r_M}E(r)\,\mathrm{d}r=-\int_{\infty}^{r_M}\frac{\rho I}{2\pi r^2}\,\mathrm{d}r=\frac{\rho I}{2\pi r_M}$$ For current injection at $A$ and withdrawal at $B$, superposition gives $$U_M=U_M^A+U_M^B=\frac{\rho I}{2\pi |AM|}+\frac{-\rho I}{2\pi |BM|}=\frac{\rho I}{2\pi}(\frac{1}{|AM|}-\frac{1}{|BM|})$$ $$U_{MN}=U_M-U_N=\frac{\rho I}{2\pi}(\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|})$$ Let <span class="obsidian-red">Geometric Factor</span> $$K=\frac{2\pi}{\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|}}$$ For a homogeneous half-space, $\rho=KU_{MN}/I$. For an inhomogeneous or anisotropic Earth, the same operation defines the <span class="obsidian-red">apparent resistivity</span>: $$\boxed{\rho_a=K\frac{U_{MN}}{I}}.$$ Recovering the true subsurface resistivity distribution requires inversion. The voltage sign must follow the electrode ordering used in $K$; a negative signed geometric factor is possible when the potential electrodes are reversed. See <a href="https://data.usgs.gov/datacatalog/data/USGS%3A5cb7785ae4b0c3b0065d7d37" target="_blank" rel="noopener noreferrer">USGS&#039;s description of ERT measurements</a>.</p>
 <h4 id="wenner">Wenner</h4>
-<p><img src="../attachments/Screenshot%202026-05-15%20at%2020.59.33.png" alt="Screenshot 2026-05-15 at 20.59.33" loading="lazy" decoding="async" style="width: min(100%, 580px);"> $$\rho=\frac{2\pi a V}{I}$$ It has the most stable signal and has a highly vertical resolution.</p>
+<p><img src="../attachments/Screenshot%202026-05-15%20at%2020.59.33.png" alt="Screenshot 2026-05-15 at 20.59.33" loading="lazy" decoding="async" style="width: min(100%, 580px);"> The electrode order is $A,C,D,B$ with equal adjacent spacings $a$, and $V=U_C-U_D$. $$\rho_a=\frac{2\pi a V}{I}$$ The Wenner array generally gives a strong voltage signal and is useful for detecting vertical changes in resistivity, such as horizontal layering. Its resolution still depends on electrode spacing, survey coverage, and the inversion.</p>
 <p>This method can be used to find the layering inside the Earth and detect its depth.</p>
 <h4 id="schlumberger">Schlumberger</h4>
-<p><img src="../attachments/Screenshot%202026-05-15%20at%2021.01.11.png" alt="Screenshot 2026-05-15 at 21.01.11" loading="lazy" decoding="async" style="width: min(100%, 554px);"> $$\rho=\frac{\pi (L^2-a^2) V}{4Ia}$$</p>
-<p>It offers strong interference suppression and has the highest vertical resolution.</p>
+<p><img src="../attachments/Screenshot%202026-05-15%20at%2021.01.11.png" alt="Screenshot 2026-05-15 at 21.01.11" loading="lazy" decoding="async" style="width: min(100%, 554px);"> Here $L=AB$ and $a=CD$ are full electrode separations, the two pairs have the same center, and $V=U_C-U_D$. $$\rho_a=\frac{\pi (L^2-a^2) V}{4Ia}$$</p>
+<p>Usually $a\ll L$. Increasing $L$ while keeping the potential electrodes fixed over part of the sounding makes this array efficient for vertical electrical sounding. Resolution and noise performance depend on survey geometry, the subsurface structure, and data quality.</p>
 <p>This method can be utilized for analyzing stratigraphic sequences.</p>
 <h4 id="dipoledipole">Dipole-Dipole</h4>
-<p><img src="../attachments/Screenshot%202026-05-15%20at%2021.06.53.png" alt="Screenshot 2026-05-15 at 21.06.53" loading="lazy" decoding="async" style="width: min(100%, 450px);"> $$\rho=\frac{\pi V L(L^2-a^2)}{Ia^2}$$ $\rho=O(L^3)$, so it has a highly lateral resolution.</p>
-<p>This method can be used to find mineral and faults, because it is a transversely inhomogeneous body.</p>
+<p><img src="../attachments/Screenshot%202026-05-15%20at%2021.06.53.png" alt="Screenshot 2026-05-15 at 21.06.53" loading="lazy" decoding="async" style="width: min(100%, 450px);"> In the illustrated collinear geometry, $AB=CD=a$, $L$ is the distance between the dipole centers, and $V=U_C-U_D$; the potential-electrode order is $D,C$ from left to right. $$\rho_a=\frac{\pi V L(L^2-a^2)}{Ia^2}$$ For $L\gg a$, the geometric factor is $K\sim\pi L^3/a^2$. In a homogeneous medium with fixed $I$ and $a$, the voltage consequently decays as $L^{-3}$; the true resistivity does not grow as $L^3$. This array is sensitive to lateral resistivity changes and is useful for locating steep structures, but large dipole separations reduce the signal-to-noise ratio.</p>
+<p>For the common spacing convention $BD=na$, $L=(n+1)a$ and $K=\pi a n(n+1)(n+2)$, with the voltage polarity used in the figure. Mineralized zones and faults may be detected through their resistivity contrast with the surrounding rocks.</p>
 <h4 id="multiple-electrode">Multiple Electrode</h4>
-<p><img src="../attachments/Screenshot%202026-05-15%20at%2020.23.30-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.30" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>An array of many installed electrodes is connected to a switching unit, which selects successive current and potential pairs. Multiple configurations and spacings provide a set of apparent-resistivity measurements for two- or three-dimensional electrical resistivity tomography. The installed electrodes do not all inject current simultaneously in a standard four-electrode measurement.</p>
 <h3 id="magnetotelluric-method-mt">Magnetotelluric Method (MT)</h3>
-<p><img src="../attachments/Screenshot%202026-05-15%20at%2018.52.17-optimized.webp" alt="Screenshot 2026-05-15 at 18.52.17" loading="lazy" decoding="async" style="width: min(100%, 488px);"> Incident electromagnetic waves can induce electric and magnetic fields in underground media.</p>
+<p>The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.</p>
 <ul>
 <li>natural signal source</li>
-<li><span class="obsidian-red">Magnetotelluric Method (MT)</span>: electromagnetic field generated by the interaction between the solar wind and Earth&#039;s magnetic field. The frequency of the field ($&lt;8\,\text{Hz}$) is low. The exploration depth can reach tens to hundreds of kilometers.</li>
-<li><span class="obsidian-red">Audio Magnetotelluric Method (AMT)</span>: global thunderstorm activity. The frequency of the field ($&gt;8\,\text{Hz}$) is high. It has obvious temporal and spatial differences. The exploration depth can reach hundreds to thousands of meters.</li>
-<li>manual signal source</li>
-<li><span class="obsidian-red">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span> The exploration depth can reach hundreds of meters to a few kilometers.</li>
-<li>Fixed-wing electromagnetic (EM) system geometry typically features a large transmitter loop draped around the aircraft&#039;s nose, wingtips, and tail, while a receiver coil is towed in a &quot;bird&quot; behind and below (e.g., ~120m behind, ~40m below) to minimize primary field interference.</li>
+<li><span class="obsidian-red">Magnetotelluric Method (MT)</span>: Low-frequency natural signals mainly originate from ionospheric and magnetospheric currents influenced by the solar wind. Long-period measurements can probe crustal and mantle structures.</li>
+<li><span class="obsidian-red">Audio Magnetotelluric Method (AMT)</span>: The audio-frequency extension of MT, typically using frequencies from a few hertz to tens of kilohertz, mainly supplied by distant lightning. It is often used for shallower structures. MT and AMT bands overlap; $8\,\mathrm{Hz}$ is not a universal boundary between them.</li>
+<li>controlled signal source</li>
+<li><span class="obsidian-red">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span>: Uses an artificial transmitter. Applying a plane-wave MT interpretation requires a suitable far-field configuration; near-field effects must otherwise be modeled. Investigation depth depends on frequency, conductivity, and transmitter-receiver geometry.</li>
 </ul>
-<p>Skin depth (derived in <a href="../physics/electromagnetism.html#waves-in-good-conductors">Waves in Good Conductors</a>):$$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$ The MT method relies on the skin effect, where higher frequencies penetrate less deeply than lower frequencies.</p>
-<p>MT has lots of distinct advantages, such as:</p>
+<p>The change between solar-wind-related and lightning-dominated sources is gradual and includes weak-signal bands. See <a href="https://www.usgs.gov/publications/a-practical-low-noise-coil-system-magnetotellurics" target="_blank" rel="noopener noreferrer">Stanley and Tinkler (1983)</a>.</p>
+<p>In the frequency domain, the horizontal fields are related by an impedance tensor: $$\begin{pmatrix}E_x\\E_y\end{pmatrix}=\begin{pmatrix}Z_{xx}&amp;Z_{xy}\\Z_{yx}&amp;Z_{yy}\end{pmatrix}\begin{pmatrix}H_x\\H_y\end{pmatrix}.$$ For a nonmagnetic Earth, each impedance element gives an apparent resistivity $\rho_{a,ij}=|Z_{ij}|^2/(\mu_0\omega)$ and a phase $\phi_{ij}=\arg Z_{ij}$, with a stated Fourier sign convention. Here $\mathbf{H}$ is in $\mathrm{A\,m^{-1}}$. If a transfer tensor $\overleftrightarrow{W}$ is instead estimated from the measured $\mathbf{B}$ through $\mathbf{E}_h=\overleftrightarrow{W}\cdot\mathbf{B}_h$, then $Z_{ij}=\mu_0W_{ij}$ and $\rho_{a,ij}=\mu_0|W_{ij}|^2/\omega$.</p>
+<p>Skin depth (derived in <a href="../physics/electromagnetism.html#waves-in-good-conductors">Waves in Good Conductors</a>): $$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$ The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.</p>
+<p>Advantages and interpretation conditions:</p>
 <ul>
 <li>Omitting the power supply equipment</li>
-<li>It has a broader spectrum: natural MT signals span roughly $10^{-4}\,\text{Hz}$ to $10^4\,\text{Hz}$ (periods from sub-millisecond to about $10^4\,\text{s}$). The meaningful survey band is about 0.001-100 Hz.</li>
-<li>When observations are conducted during magnetic storms—thereby capturing very low-frequency information</li>
-<li>Capable of penetrating high-resistivity layers and offers strong resolution for low-resistivity structures.</li>
-<li>Small contour interval.</li>
-<li>The field source consists of vertically incident plane waves, which significantly simplifies the analysis of the electromagnetic field.</li>
+<li>Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.</li>
+<li>Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.</li>
+<li>Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.</li>
+<li>A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.</li>
 </ul>
 <h3 id="transient-electromagnetic-method-tem">Transient Electromagnetic Method (TEM)</h3>
 <p><img src="../attachments/Screenshot%202026-05-15%20at%2020.14.32-optimized.webp" alt="Screenshot 2026-05-15 at 20.14.32" loading="lazy" decoding="async" style="width: min(100%, 541px);"></p>
-<p>Unlike the DC resistivity method, which uses a continuous current, the <span class="obsidian-red">Transient Electromagnetic Method (TEM)</span> uses a pulsed primary magnetic field. It will make a conductive layer inside the Earth generate a time-varying electromagnetic field, which will also generate a secondary magnetic field in the receiver.</p>
+<p>The <span class="obsidian-red">Transient Electromagnetic Method (TEM)</span> uses a controlled time-varying transmitter current, commonly with a rapid turn-off. The changing primary magnetic field induces subsurface eddy currents. After turn-off, their decay produces a secondary field, measured as a magnetic field or an induced receiver voltage proportional to its time derivative.</p>
+<p><img src="../attachments/Screenshot%202026-05-15%20at%2018.52.17-optimized.webp" alt="Screenshot 2026-05-15 at 18.52.17" loading="lazy" decoding="async" style="width: min(100%, 488px);"> This transmitter-receiver sketch illustrates controlled-source electromagnetic induction. Some airborne TEM systems use a large transmitter loop on the aircraft and a towed receiver, with the geometry depending on the instrument.</p>
 <ul>
-<li>If the signal attenuates slowly, there may be a good conductor (e.g., valuable conductive mineral or water) under the ground.</li>
-<li>If the signal attenuates rapidly, there may be a high-resistivity dielectric (e.g., solid bedrock) under the ground.</li>
+<li>A slowly decaying response may indicate a conductive body, such as connected sulfides, clay-rich material, or saline groundwater.</li>
+<li>A rapidly decaying or weak response may indicate relatively resistive material. Decay also depends on body size, depth, geometry, and coupling; conductivity alone does not identify an ore body or groundwater.</li>
 </ul>
 <p>key advantages:</p>
 <ul>
 <li>High Resolution: Excellent at detecting highly conductive bodies (e.g., massive sulfides).</li>
-<li>No Galvanic Contact: Unlike DC methods, TEM does not require grounding electrodes, making it highly effective in areas with high-resistivity surface layers (e.g., dry sand or permafrost).</li>
-<li>Depth Sensitivity: The depth of investigation is controlled by the time elapsed after the current turn-off (late times correspond to greater depths).</li>
+<li>No Galvanic Contact: Loop-source TEM does not require grounded electrodes, which is useful where electrode contact is poor, such as dry sand or permafrost.</li>
+<li>Depth Sensitivity: Later time windows generally emphasize deeper or more slowly decaying current systems. Investigation depth also depends on conductivity, transmitter moment, geometry, and noise.</li>
 </ul>
 <h3 id="self-potential">Self Potential</h3>
+<p>Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets.</p>
 <ul>
-<li>Redox natural electric fields generated by electrochemical activity</li>
-<li>Streaming potentials resulting from groundwater seepage or filtration</li>
-<li>Diffusion electric fields</li>
+<li>Electrochemical potentials: Associated with redox reactions, including current systems around some mineralized bodies.</li>
+<li>Streaming potentials: Associated with fluid motion through charged pore surfaces during groundwater flow.</li>
+<li>Diffusion potentials: Associated with ionic concentration gradients and different ionic mobilities.</li>
 </ul>
-<p>It also can be used to determine the radius of influence of groundwater pumping. <img src="../attachments/Screenshot%202026-05-15%20at%2020.23.47-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.47" loading="lazy" decoding="async" style="width: min(100%, 456px);"></p>
+<p><img src="../attachments/Screenshot%202026-05-15%20at%2020.23.30-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.30" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The gradient method measures voltage differences between successive nearby stations; the fixed-base method measures each station relative to a common reference.</p>
+<p>SP measurements can help map groundwater-flow changes associated with pumping. Estimating a pumping influence radius requires hydrogeological constraints and an electrokinetic model; a voltage anomaly alone does not determine it uniquely. See <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2004jb003049" target="_blank" rel="noopener noreferrer">Rizzo et al. (2004)</a> for pumping experiments and their interpretation. <img src="../attachments/Screenshot%202026-05-15%20at%2020.23.47-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.47" loading="lazy" decoding="async" style="width: min(100%, 456px);"></p>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"geomagnetic-field","level":1,"text":"Geomagnetic Field"},{"id":"formation-of-the-geomagnetic-field","level":2,"text":"Formation of the Geomagnetic Field"},{"id":"properties","level":2,"text":"Properties"},{"id":"gauss-s-spherical-harmonic-analysis","level":2,"text":"Gauss's Spherical Harmonic Analysis"},{"id":"dipole-field-n-1","level":3,"text":"Dipole Field ($n=1$)"},{"id":"eccentric-dipole-model","level":3,"text":"Eccentric Dipole Model"},{"id":"timevarying-magnetic-field","level":2,"text":"Time-Varying Magnetic Field"},{"id":"introduction-to-timevariation","level":3,"text":"Introduction to Time-Variation"},{"id":"principle-of-periodic-superposition","level":3,"text":"Principle of Periodic Superposition"},{"id":"analysis-of-sq","level":3,"text":"Analysis of $Sq$"},{"id":"ionosphere-and-atmospheric-dynamo-theory","level":3,"text":"Ionosphere and Atmospheric Dynamo Theory"},{"id":"magnetic-storm","level":3,"text":"Magnetic Storm"},{"id":"resistivity-and-permittivity","level":1,"text":"Resistivity and Permittivity"},{"id":"methods-for-measuring-resistivity","level":1,"text":"Methods for Measuring Resistivity"},{"id":"direct-current-dc-resistivity-method","level":2,"text":"Direct Current (DC) Resistivity Method"},{"id":"wenner","level":3,"text":"Wenner"},{"id":"schlumberger","level":3,"text":"Schlumberger"},{"id":"dipoledipole","level":3,"text":"Dipole-Dipole"},{"id":"multiple-electrode","level":3,"text":"Multiple Electrode"},{"id":"magnetotelluric-method-mt","level":2,"text":"Magnetotelluric Method (MT)"},{"id":"transient-electromagnetic-method-tem","level":2,"text":"Transient Electromagnetic Method (TEM)"},{"id":"self-potential","level":2,"text":"Self Potential"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"geomagnetic-field","level":1,"text":"Geomagnetic Field"},{"id":"formation-of-the-geomagnetic-field","level":2,"text":"Formation of the Geomagnetic Field"},{"id":"properties","level":2,"text":"Properties"},{"id":"gauss-s-spherical-harmonic-analysis","level":2,"text":"Gauss's Spherical Harmonic Analysis"},{"id":"scalar-potential-and-gauss-coefficients","level":3,"text":"Scalar Potential and Gauss Coefficients"},{"id":"dipole-field-n-1","level":3,"text":"Dipole Field ($n=1$)"},{"id":"eccentric-dipole-model","level":3,"text":"Eccentric Dipole Model"},{"id":"timevarying-magnetic-field","level":2,"text":"Time-Varying Magnetic Field"},{"id":"introduction-to-timevariation","level":3,"text":"Introduction to Time-Variation"},{"id":"principle-of-periodic-superposition","level":3,"text":"Principle of Periodic Superposition"},{"id":"analysis-of-sq","level":3,"text":"Analysis of $Sq$"},{"id":"ionosphere-and-atmospheric-dynamo-theory","level":3,"text":"Ionosphere and Atmospheric Dynamo Theory"},{"id":"magnetic-storm","level":3,"text":"Magnetic Storm"},{"id":"resistivity-and-permittivity","level":1,"text":"Resistivity and Permittivity"},{"id":"methods-for-measuring-resistivity","level":1,"text":"Methods for Measuring Resistivity"},{"id":"direct-current-dc-resistivity-method","level":2,"text":"Direct Current (DC) Resistivity Method"},{"id":"wenner","level":3,"text":"Wenner"},{"id":"schlumberger","level":3,"text":"Schlumberger"},{"id":"dipoledipole","level":3,"text":"Dipole-Dipole"},{"id":"multiple-electrode","level":3,"text":"Multiple Electrode"},{"id":"magnetotelluric-method-mt","level":2,"text":"Magnetotelluric Method (MT)"},{"id":"transient-electromagnetic-method-tem","level":2,"text":"Transient Electromagnetic Method (TEM)"},{"id":"self-potential","level":2,"text":"Self Potential"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -277,17 +305,17 @@
 
 ## Formation of the Geomagnetic Field
 
-The first self-consistent model to explain the formation of the geomagnetic field:
+The geomagnetic field is sustained by a self-exciting geodynamo:
 
 ![Screenshot 2026-05-12 at 13.39.43](../attachments/Screenshot%202026-05-12%20at%2013.39.43-optimized.webp){width=450}
 
-The geodynamo is mainly caused by the convection of the liquid outer core.
+Convection of electrically conducting liquid in the outer core, organized by Earth's rotation, generates currents that maintain the magnetic field against Ohmic decay.
 
-The electromagnetic torque that the outer core exerts on the inner core drives the differential rotation of the inner core.
+Electromagnetic coupling with the outer core and gravitational coupling with the mantle influence the differential rotation of the inner core.
 
-- The differential rotation of the Earth's core nearly stopped in 2009 and began to slowly reverse.
-- The reversal cycle is approximately 60-70 years.
-- The cycle of changes in geomagnetic field strength and Earth's day length is also approximately 60-70 years.
+- [Yang and Song (2023)](https://www.nature.com/articles/s41561-022-01112-z) inferred a near-zero differential rotation around 2009 and proposed an approximately 70-year oscillation. [Wang et al. (2024)](https://www.nature.com/articles/s41586-024-07536-4) also found evidence of backtracking relative to the mantle.
+- A reversal here means a change in the sign of rotation relative to the mantle; the inner core does not stop rotating in an inertial frame. This is distinct from a reversal of geomagnetic polarity.
+- Similar multidecadal variations in geomagnetism and length of day suggest coupling between Earth's layers; they do not establish one universal period for all geomagnetic changes.
 
 ## Properties
 ![Screenshot 2026-05-18 at 16.28.15](../attachments/Screenshot%202026-05-18%20at%2016.28.15-optimized.webp){width=450}
@@ -301,6 +329,9 @@ The electromagnetic torque that the outer core exerts on the inner core drives t
 - Horizontal X component (northward) $X$
 - Horizontal Y component (eastward) $Y$
 
+$$H=\sqrt{X^2+Y^2},\qquad F=\sqrt{H^2+Z^2},\qquad D=\operatorname{atan2}(Y,X),\qquad I=\operatorname{atan2}(Z,H)$$
+Here $Z$ is positive downward, and $D$ is positive east of geographic north. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.
+
 ![Screenshot 2026-05-18 at 19.04.27](../attachments/Screenshot%202026-05-18%20at%2019.04.27-optimized.webp){width=450}
 
 
@@ -308,10 +339,10 @@ The electromagnetic torque that the outer core exerts on the inner core drives t
 ![Pasted image 20260518163921](../attachments/Pasted%20image%2020260518163921-optimized.webp){width=450}
 ![Pasted image 20260518164109](../attachments/Pasted%20image%2020260518164109-optimized.webp){width=450}
 
-- The horizontal intensity $H$ contour lines are roughly a cluster of curves arranged along the latitude lines, with the maximum value near the magnetic equator and the $H$ value gradually decreasing towards the poles and approaching zero.
-- The vertical intensity $Z$ is almost parallel to the latitude line. At the magnetic equator, $Z=0$. From there, the absolute value gradually increases towards the poles. North of the magnetic equator, $Z>0$, indicating that the vertical component is downward. South of the magnetic equator, $Z<0$, indicating that the vertical component is upward.
+- In a centered dipole approximation, $H$ is largest at the dipole equator and decreases toward zero at the dipole poles. The actual contour lines deviate from latitude circles because of dipole tilt and non-dipole contributions.
+- The magnetic dip equator is defined by $I=0$, hence $Z=0$. For Earth's present polarity, $Z$ is generally positive in the northern magnetic hemisphere and negative in the southern magnetic hemisphere. In a dipole model, $|Z|$ increases toward the poles.
 - The intensity is generally stronger in high latitudes than near the equator.
-- The intensity is especially low over the South Atlantic, where it is about $20\,\mu\text{T}$ weaker than expected. Orbiting satellites note increased impacts of extra-terrestrial particles over this region.
+- The total field is unusually weak over South America and the South Atlantic. In this South Atlantic Anomaly (SAA), trapped radiation-belt particles reach lower altitudes and affect satellite instruments. A numerical field deficit requires a specified reference model, altitude, and epoch. See [NASA's description of the SAA](https://science.nasa.gov/science-research/earth-science/earths-magnetosphere-protecting-our-planet-from-harmful-space-energy/).
 
 isoclinic lines (inclination $I$)
 ![Screenshot 2026-09-07 at 10.36.56](../attachments/Screenshot%202026-09-07%20at%2010.36.56-optimized.webp){width=450}
@@ -320,30 +351,41 @@ isogonic lines (declination $D$)
 ![Screenshot 2026-09-07 at 10.37.20](../attachments/Screenshot%202026-09-07%20at%2010.37.20-optimized.webp){width=450}
 
 The geomagnetic field consists of three parts:
-1. fundamental magnetic field: It consists of the central dipole magnetic field and the continental magnetic field, originating from the Earth's interior, and constitutes the main part (over 98%) of the Earth's magnetic field.
-![Screenshot 2026-05-18 at 16.47.57](../attachments/Screenshot%202026-05-18%20at%2016.47.57-optimized.webp){width=450}
-2. changing magnetic field: This mainly refers to short-term changing magnetic fields, originating from outside the Earth, and accounting for less than 1% of the Earth's magnetic field.
-3. magnetic anomalies: This mainly refers to the local magnetic field caused by magnetic rocks or ores in the shallow part of the Earth's crust. It is superimposed on the basic magnetic field and is actually a secondary magnetic field formed in the surrounding space after underground rocks, minerals, or geological structures are magnetized by the Earth's magnetic field. It belongs to the endogenous magnetic field and accounts for a very small part of it.
 
-Three positive non-dipole magnetic field centers:
+1. Main field: Generated in the outer core, with both dipole and non-dipole components. It dominates the field at Earth's surface and changes slowly through secular variation.
+2. Crustal field: Produced by induced and remanent magnetization in the lithosphere. It causes local magnetic anomalies and is approximately steady over ordinary survey time scales.
+3. Disturbance field: Produced by currents in the ionosphere and magnetosphere, together with the currents they induce in the oceans and solid Earth. Its relative magnitude depends strongly on location and magnetic activity.
+
+This source-based decomposition follows the [NOAA World Magnetic Model description](https://www.ncei.noaa.gov/products/world-magnetic-model). Fixed percentages are only rough estimates, rather than universal bounds.
+![Screenshot 2026-05-18 at 16.47.57](../attachments/Screenshot%202026-05-18%20at%2016.47.57-optimized.webp){width=450}
+
+Historical regional centers of the non-dipole field in the 1965 illustration below, with approximate central values quoted in the course notes:
+
+Three positive centers:
+
 1. South Atlantic Magnetic Anomaly (SAT), central intensity 22000 nT
 2. Eurasian Magnetic Anomaly (EA), central intensity 20000 nT
 3. North American Magnetic Anomaly (NAM), central intensity 6000 nT
 
-Two negative non-dipole magnetic field centers:
+Two negative centers:
+
 1. North African Magnetic Anomaly (AF), with a central intensity of -18000 nT
 2. Oceania Magnetic Anomaly (AUS), with a central intensity of -12000 nT
 
 Non-dipole magnetic field in 1965
 ![Pasted image 20260907104332](../attachments/Pasted%20image%2020260907104332-optimized.webp){width=450}
 
+>[!NOTE]
+>These historical center labels and signed values describe a non-dipole-field map, not the total field strength or a present-day global model. The positive SAT center must not be identified with the weak-total-field SAA. The original map source and the exact plotted component still need verification.
+
 Magnetization of the rock:
 - <span style="color: red;">Induced magnetization</span>: The magnetization of a geological body located in the lithosphere due to magnetization by the modern Earth's magnetic field.
 - <span style="color: red;">Remanent magnetization</span>: The magnetization retained by rocks and minerals formed under specific conditions, magnetized by the Earth's magnetic field at that time, and after a long geological period.
 
 Thermoremanent Magnetization
-- An important property of many magnetizable materials is that, as they cool below the Curie point (≈580 °C for magnetite, ≈680 °C for hematite), they become magnetized in the direction of the surrounding magnetic field. This happens because groups of atoms of the material align themselves in the direction of the magnetic field when the material is hot. When the material has cooled, these atoms are locked in place.
+- Magnetic minerals can acquire remanence while cooling through their blocking temperatures in an ambient field. Thermal fluctuations allow magnetic moments to respond to the field at higher temperatures; cooling makes their relaxation times long enough to preserve the magnetization. Blocking temperatures depend on grain properties and cooling rate and need not equal the Curie temperature (approximately $580\,{}^\circ\mathrm{C}$ for magnetite). Hematite loses antiferromagnetic order near its Neel temperature, approximately $675$–$690\,{}^\circ\mathrm{C}$; see [Schmidt et al. (2007)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006JB004495). Examples of distinct blocking and ordering temperatures are discussed by [Bowles et al. (2018)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GC007435).
 ![Screenshot 2026-05-18 at 17.14.19](../attachments/Screenshot%202026-05-18%20at%2017.14.19-optimized.webp){width=630}
+The sketch illustrates preserved past magnetization in a changed ambient field. Its illustrative age label should not be used to date a global geomagnetic polarity reversal.
 
 Seafloor magnetic band
 ![Pasted image 20260518171456](../attachments/Pasted%20image%2020260518171456-optimized.webp){width=450}
@@ -353,75 +395,102 @@ paleomagnetic stratigraphy
 
 ## Gauss's Spherical Harmonic Analysis
 
-In [Spherical Harmonics](../math/equations-of-mathematical-physics.html#spherical-harmonics), we have the common solution of the magnetic field:
+### Scalar Potential and Gauss Coefficients
+
+In a current-free region with uniform permeability $\mu_0$, $\mathbf{B}=-\mu_0\nabla w$ and $\nabla^2w=0$. Using [Spherical Harmonics](../math/equations-of-mathematical-physics.html#spherical-harmonics), the magnetic scalar potential can be written as
 $$w(r,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n[(\frac{R}{r})^{n+1}(g_n^m\cos m\lambda+h_n^m\sin m\lambda)+(\frac{r}{R})^n(j_n^m\cos m\lambda+k_n^m\sin m\lambda)]P_n^m(\cos \theta)$$
-Here $P_n^m$ are the Schmidt quasi-normalized associated Legendre functions, the standard convention in geomagnetism (e.g., in the IGRF). It can be divided into two parts: internal magnetic field ($r^{-(n+1)}$) and external magnetic field ($r^n$).
+Here $R$ is the reference Earth radius, $\theta$ is geocentric colatitude, and $\lambda$ is east longitude. $P_n^m$ are Schmidt quasi-normalized associated Legendre functions without the Condon-Shortley phase, so $P_1^0=\cos\theta$ and $P_1^1=\sin\theta$. This normalization differs from the unnormalized functions in the linked mathematical-physics section. For each nonzero real harmonic,
+$$\int_0^\pi\int_0^{2\pi}[P_n^m(\cos\theta)\cos m\lambda]^2\sin\theta\,\mathrm{d}\lambda\,\mathrm{d}\theta=\frac{4\pi}{2n+1},$$
+with the same norm for the sine harmonics when $m\ge1$. The two radial powers belong to the potential: $r^{-(n+1)}$ for internal sources and $r^n$ for external sources. Differentiation gives field amplitudes proportional to $r^{-(n+2)}$ and $r^{n-1}$, respectively. The expansion excludes a magnetic-monopole term; an arbitrary constant in $w$ has no effect on the field.
 
-In the formula, we have four coefficients: $g_n^m,h_n^m,j_n^m,k_n^m$. They are called as <span style="color: red;">Gauss coefficients</span>, where $g_n^m,h_n^m$ are called as Gauss coefficients of the intrinsic field, and $j_n^m,k_n^m$ are called Gauss coefficients of the extrinsic field.
+The <span style="color: red;">Gauss coefficients</span> $g_n^m,h_n^m$ describe the internal field, while $j_n^m,k_n^m$ describe the external field. The sine coefficients $h_n^0,k_n^0$ are conventionally set to zero because $\sin0\lambda=0$.
 
-In the surface, we have $$w(r,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n(p_n^m\cos m\lambda+q_n^m\sin m\lambda)P_n^m(\cos \theta)$$
-where$$\left\{\begin{matrix}
+At the surface $r=R$, we have 
+$$w(R,\theta,\lambda)=\frac{R}{\mu_0}\sum_{n=1}^\infty\sum_{m=0}^n(p_n^m\cos m\lambda+q_n^m\sin m\lambda)P_n^m(\cos \theta)$$
+where
+$$\left\{\begin{matrix}
  p_n^m= g_n^m+ j_n^m\\
  q_n^m= h_n^m+ k_n^m
 \end{matrix}\right.$$
-We can find that $$Z=\mu_0\frac{\partial w}{\partial r}|_{r=R}=-\sum_{n=1}^\infty\sum_{m=0}^n \{[(n+1)g_n^m-nj_n^m]\cos m\lambda+[(n+1)h_n^m-nk_n^m]\sin m\lambda\}P_n^m(\cos\theta)$$
-So introduce two new coefficients:$$\left\{\begin{matrix}
+We can find that 
+$$Z=\mu_0\frac{\partial w}{\partial r}|_{r=R}=-\sum_{n=1}^\infty\sum_{m=0}^n \{[(n+1)g_n^m-nj_n^m]\cos m\lambda+[(n+1)h_n^m-nk_n^m]\sin m\lambda\}P_n^m(\cos\theta)$$
+So introduce two new coefficients:
+$$\left\{\begin{matrix}
  p_n^{'m}= (n+1)g_n^m-nj_n^m\\
  q_n^{'m}= (n+1)h_n^m-nk_n^m
 \end{matrix}\right.$$
-They can be solved from the measured vertical field $Z$:$$\left\{\begin{matrix}
- p_n^{'m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda\\
- q_n^{'m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda
+They can be solved from the measured vertical field $Z$:
+$$\left\{\begin{matrix}
+ p_n^{'m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta\\
+ q_n^{'m}= -\frac{2n+1}{4\pi} \int_{0}^{\pi} \int_{0}^{2\pi} Z(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta
 \end{matrix}\right.$$
 We can apply the method into the horizontal magnetic field strength:
 $$X=\frac{\mu_0}{r}\frac{\partial w}{\partial \theta}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\cos m\lambda+q_n^m\sin m\lambda)\frac{\mathrm{d}P_n^m(\cos\theta)}{\mathrm{d}\theta} $$
 $$Y=-\frac{\mu_0}{r\sin\theta}\frac{\partial w}{\partial \lambda}|_{r=R}=\sum_{n=1}^\infty\sum_{m=0}^n (p_n^m\sin m\lambda-q_n^m\cos m\lambda)\frac{m}{\sin\theta}P_n^m(\cos\theta) $$
-Therefore,$$\left\{\begin{matrix}
- p_n^{m}= \frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin^2 \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda\\
- q_n^{m}= -\frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin^2 \theta \,\mathrm{d}\theta\,\mathrm{d}\lambda
+Therefore,
+$$\left\{\begin{matrix}
+ p_n^{m}= \frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\sin m\lambda \sin^2 \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta\\
+ q_n^{m}= -\frac{2n+1}{4\pi m} \int_{0}^{\pi} \int_{0}^{2\pi} Y(R,\theta,\lambda)P_n^m(\cos\theta)\cos m\lambda \sin^2 \theta \,\mathrm{d}\lambda\,\mathrm{d}\theta
 \end{matrix}\right.$$
-Note that this inversion is singular for $m=0$ because of the $1/m$ factor. The zonal coefficient $p_n^0=g_n^0+j_n^0$ is obtained from the $Z$ inversion above instead, and $q_n^0\equiv 0$ since the $\sin m\lambda$ terms vanish for $m=0$.
-The results of Gaussian spherical harmonic analysis of the geomagnetic field show that:
-$$|g_n^m|\gg|j_n^m|,|h_n^m|\gg|k_n^m|$$
-We can find the Gauss coefficients in [this website](https://wdc.kugi.kyoto-u.ac.jp/igrf/).
+This $Y$ inversion applies only to $m\ge1$. Zonal harmonics have $Y=0$, so their coefficients $p_n^0$ must instead be obtained from $X$. Let
+$$\overline{X}(\theta)=\frac{1}{2\pi}\int_0^{2\pi}X(R,\theta,\lambda)\,\mathrm{d}\lambda.$$
+Derivative orthogonality of the zonal Legendre polynomials gives
+$$\boxed{p_n^0=\frac{2n+1}{2n(n+1)}\int_0^\pi\overline{X}(\theta)\frac{\mathrm{d}P_n^0(\cos\theta)}{\mathrm{d}\theta}\sin\theta\,\mathrm{d}\theta},\qquad q_n^0\equiv0.$$
+The vertical inversion yields $p_n^{'0}$, rather than $p_n^0$; $Z$ alone cannot separate internal and external sources at one radius. Once both horizontal and vertical coefficients are known,
+$$\begin{aligned}
+g_n^m&=\frac{np_n^m+p_n^{'m}}{2n+1},&j_n^m&=\frac{(n+1)p_n^m-p_n^{'m}}{2n+1},\\
+h_n^m&=\frac{nq_n^m+q_n^{'m}}{2n+1},&k_n^m&=\frac{(n+1)q_n^m-q_n^{'m}}{2n+1}.
+\end{aligned}$$
+These integral formulas assume global coverage. Discrete observations are normally fitted by weighted least squares. The internal main field dominates the total field under ordinary conditions, but this does not imply an inequality for every individual coefficient or for the time-varying field.
+
+The [IGRF coefficients](https://wdc.kugi.kyoto-u.ac.jp/igrf/) describe the internal main-field coefficients $g_n^m,h_n^m$; they do not supply the external coefficients $j_n^m,k_n^m$.
 
 ### Dipole Field ($n=1$)
 
-$n=1$ is the <span style="color: red;">dipole field</span> and accounts for the 80-85% of the whole magnetic field.
+$n=1$ is the <span style="color: red;">dipole field</span> and is the dominant large-scale part of Earth's main field. A numerical percentage depends on the epoch and on how the field contribution is measured.
 $$w_1=\frac{R}{\mu_0}(\frac{R}{r})^2[g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda]$$
 
-As a result,
+At the surface $r=R$,
 $$\left\{\begin{matrix}
  X= -g_1^0\sin\theta+(g_1^1\cos\lambda+h_1^1\sin\lambda)\cos\theta\\
  Y= g_1^1\sin\lambda-h_1^1\cos\lambda\\
  Z=-2g_1^0\cos\theta-2(g_1^1\cos\lambda+h_1^1\sin\lambda)\sin\theta
 \end{matrix}\right.$$
-If geomagnetic axis coincides with geographic axis, then $$Y=0,Z|_{\theta=\frac{\pi}{2}}=0$$
-Therefore,$$g_1^1=0,h_1^1=0$$
-So we have
+If geomagnetic axis coincides with geographic axis, then 
+$$Y=0,Z|_{\theta=\frac{\pi}{2}}=0$$
+Therefore,
+$$g_1^1=0,h_1^1=0$$
+For the aligned dipole with Earth's present polarity ($g_1^0<0$), let $M=-4\pi R^3g_1^0/\mu_0>0$ be the magnitude of its magnetic moment. Then
 $$\left\{\begin{matrix}
  X=H= -g_1^0\sin\theta=\frac{\mu_0M}{4\pi R^3}\sin\theta\\
  Y= 0\\
  Z=-2g_1^0\cos\theta=\frac{\mu_0M}{2\pi R^3}\cos\theta
 \end{matrix}\right.$$
 
-In the data set, we can find that $$g_1^0\gg g_1^1,h_1^1$$
+For the present main field, the axial coefficient dominates in magnitude: 
+$$|g_1^0|\gg|g_1^1|,|h_1^1|.$$
+
 ### Eccentric Dipole Model
 
-The model considers that the centre of the magnetic dipole does not coincide with Earth's centre.
+The model considers that the centre of the magnetic dipole does not coincide with Earth's centre. Let its displacement be $(x_0,y_0,z_0)$, with magnitude $r_0$, and let $(x',y',z')=(x-x_0,y-y_0,z-z_0)$. The $z$ axis points north, and $\varphi$ is the angle between the displacement and the observation position vector. For $r_0/r\ll1$, the expansion below retains terms through first order in the displacement.
 
-Under this circumstance, we have$$\begin{align*}w'&=\frac{1}{\mu_0}(\frac{R}{r'})^3(g_1^0z'+g_1^1x'+h_1^1y')\\&=\frac{1}{\mu_0}(\frac{R}{r'})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)]\\&=\frac{1}{\mu_0}(\frac{R}{r})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)](\frac{r}{(r_0^2+r^2-2r_0r\cos\varphi)^{1/2}})^3\\&=w_1+w_2'+O(n\ge3)\end{align*}$$
-where$$w_2'=\frac{1}{\mu_0}(\frac{R}{r})^3[(-g_1^0z_0-g_1^1x_0-h_1^1y_0)+3r_0\cos\varphi(g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda)]$$
-Combining with law of cosines:$$r_0\cos\varphi=z_0\cos\theta+x_0\sin\theta\cos\lambda+y_0\sin\theta\sin\lambda$$
+Under this circumstance, we have
+$$\begin{align*}w'&=\frac{1}{\mu_0}(\frac{R}{r'})^3(g_1^0z'+g_1^1x'+h_1^1y')\\&=\frac{1}{\mu_0}(\frac{R}{r'})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)]\\&=\frac{1}{\mu_0}(\frac{R}{r})^3[(g_1^0z+g_1^1x+h_1^1y)-(g_1^0z_0+g_1^1x_0+h_1^1y_0)](\frac{r}{(r_0^2+r^2-2r_0r\cos\varphi)^{1/2}})^3\\&=w_1+w_2'+w_{\ge3}\end{align*}$$
+where
+$$w_2'=\frac{1}{\mu_0}(\frac{R}{r})^3[(-g_1^0z_0-g_1^1x_0-h_1^1y_0)+3r_0\cos\varphi(g_1^0\cos\theta+g_1^1\sin\theta\cos\lambda+h_1^1\sin\theta\sin\lambda)]$$
+Here $w_{\ge3}$ contains degree $n\ge3$ terms, which are second and higher order in $r_0/r$ relative to the centered dipole potential. Combining with the law of cosines:
+$$r_0\cos\varphi=z_0\cos\theta+x_0\sin\theta\cos\lambda+y_0\sin\theta\sin\lambda$$
 We have
 $$\begin{align*}w_2'&=\frac{R}{\mu_0}(\frac{R}{r})^3[g_2^{'0}P_2^0(\cos\theta)+g_2^{'1}\cos\lambda P_2^1(\cos\theta)\\&+h_2^{'1}\sin\lambda P_2^1(\cos\theta)+g_2^{'2}\cos2\lambda P_2^2(\cos\theta)+h_2^{'2}\sin2\lambda P_2^2(\cos\theta)]\end{align*}$$
-where$$\left\{\begin{matrix}
+where
+$$\left\{\begin{matrix}
  g_2^{'0}=\frac{2}{R}g_1^0z_0-\frac{1}{R}g_1^1x_0-\frac{1}{R}h_1^1y_0\\
  g_2^{'1}=\frac{\sqrt{3}}{R}(g_1^0x_0+g_1^1z_0)\\
- g_2^{'2}=\frac{\sqrt{3}}{R}(g_1^1x_0+h_1^1y_0)\\
+ g_2^{'2}=\frac{\sqrt{3}}{R}(g_1^1x_0-h_1^1y_0)\\
  h_2^{'1}=\frac{\sqrt{3}}{R}(g_1^0y_0+h_1^1z_0)\\
  h_2^{'2}=\frac{\sqrt{3}}{R}(g_1^1y_0+h_1^1x_0)\\
 \end{matrix}\right.$$
+
 ## Time-Varying Magnetic Field
 
 ### Introduction to Time-Variation
@@ -432,7 +501,8 @@ Variations in the Earth's magnetic field fall into two basic categories:
 
 To evaluate the variation, we use the following empirical indices:
 - Daily Magnetic Activity Level $C,C_i$: $C$ only has three values $0,1,2$ and $C_i$ has $21$ values $0.0-2.0$.
-- $K,K_p$: A disturbance level is assigned every $3$ hours, resulting in eight $K$ values per day. Because background magnetic fields and disturbance responses vary with latitude and location, $K$ from different stations cannot be directly compared. So we introduce $K_p$:$$
+- $K,K_p$: A disturbance level is assigned every $3$ hours, resulting in eight $K$ values per day. Because background magnetic fields and disturbance responses vary with latitude and location, $K$ from different stations cannot be directly compared. So we introduce $K_p$:
+  $$
 K
 \rightarrow
 \text{Standardization}
@@ -443,6 +513,7 @@ K_s
 \rightarrow
 K_p
 $$
+- $K$ is a local, quasi-logarithmic index with integer levels $0$–$9$, computed after removing the regular daily variation. $K_p$ is the planetary index with 28 levels, conventionally expressed in thirds between $0$ and $9$.
 - $A_k,A_p$: $K$ is not linear, so we introduce the linear index $a_k,a_p$, corresponding respectively to $K,K_p$. $A_k,A_p$ are the daily averages of $a_k,a_p$.
 - $C_p$: $A_p$ is the average equivalent amplitude, and $C_p$ is a classification derived by further compressing the global daily disturbance intensity.
 - $u,u_1$: Statistics of global magnetic disturbances on monthly and annual scales
@@ -452,6 +523,7 @@ AU=\max(\Delta H),
 AL=\min(\Delta H),
 AE=AU-AL
 $$
+Here $\Delta H$ is measured relative to station baselines. $AU$ and $AL$ are the upper and lower envelopes of auroral-zone horizontal disturbances, rather than absolute magnetic-field strengths. Definitions of $K_p$ and its derived indices are provided by [GFZ](https://kp.gfz.de/en/about-kp).
 
 The variations in the Earth's magnetic field are significantly influenced by solar activity.
 
@@ -464,16 +536,17 @@ Annual variation of geomagnetic activity
 The following figure shows the geomagnetic diurnal variation. The horizontal axis represents local time.
 ![Pasted image 20260518165414](../attachments/Pasted%20image%2020260518165414-optimized.webp){width=450}
 <span style="color: red;">Solar quiet daily variation</span> ($S_q$):
+
 1. Average variation ranges from a few $\mathrm{nT}$ to tens of $\mathrm{nT}$.
 2. A cycle of 24 hours.
 3. Greater variation during the day, smaller variation at night.
-4. Largest variation in summer, smallest variation in winter, with spring and autumn showing intermediate variations.
-5. The amplitude of the horizontal component is greatest near the magnetic equator; near magnetic latitudes of approximately $\pm 30^\circ$, that amplitude approaches zero and a phase reversal occurs.
-6. Equatorial anomaly exists: the daily variation amplitudes of the horizontal and vertical components of geomagnetic quiet-day variations are significantly enhanced within a range of approximately $15^\circ$ north and south of the magnetic equator; the horizontal component, in particular, can reach approximately $200\,\mathrm{nT}$.
+4. The amplitude depends on season, solar activity, latitude, and longitude; a summer maximum and winter minimum are common in some regions but are not a universal seasonal ordering.
+5. The northward component can become small and reverse its daily pattern near the $S_q$ current foci, often near magnetic latitudes of $\pm30^\circ$. The exact latitude varies, and the eastward component need not vanish there.
+6. The equatorial electrojet enhances the northward and horizontal daily variation within a few degrees of the dip equator. The horizontal variation can approach $200\,\mathrm{nT}$ in favorable conditions. Its vertical-field signature changes sign across the electrojet and is not a uniform enhancement over $\pm15^\circ$. [CHAMP observations](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2002JA009656) found a current-density full width at half maximum of about $4^\circ$ in latitude.
 
 Variation of geomagnetic activity with the solar rotation cycle (Chree curve):
 ![Screenshot 2026-09-28 at 16.54.44](../attachments/Screenshot%202026-09-28%20at%2016.54.44.png){width=450}
-In the figure, we define the day the magnetic activity index $C_i$ reaches its peak as the reference day $n$.
+In the figure, enhanced-activity days are aligned at the reference day $n$ and averaged. The secondary peak near $n+27$ reflects recurrence over the approximately 27-day solar rotation as seen from Earth; it is not the 11-year solar activity cycle.
 
 ### Principle of Periodic Superposition
 
@@ -484,12 +557,20 @@ where
 - $f_0(t)$ is the background (basic) geomagnetic field as a function of time.
 - $A(t)$ is the random (accidental) variation as a function of time.
 
-Let $t_k=kT_1+t_i$, the average of geomagnetism is $$\overline{f}=\frac{1}{N}\sum_{k=0}^{N-1}f(t_k)$$
-To analyze the long-term changes, let $N\to+\infty$, then
-$$\begin{align*}\overline{f}&=\frac{1}{N}\sum_{k=0}^{N-1}(f_0(t_k)+A(t_k)+A_1\sin(\frac{2\pi}{T_1}t_k+\varphi_1)+A_2\sin(\frac{2\pi}{T_2}t_k+\varphi_2))\\&=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)+\frac{A_2}{N}\sum_{k=0}^{N-1}\sin(\frac{2\pi}{T_2}t_i+\varphi_2+2k\pi\frac{T_1}{T_2})\\&=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)+\frac{A_2}{N}\frac{\sin N\pi\frac{T_1}{T_2}}{\sin \pi\frac{T_1}{T_2}}\sin(\frac{2\pi}{T_2}t_i+\varphi_2+(N-1)\pi\frac{T_1}{T_2})\\&=\overline{f_0}+A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)\end{align*}$$
-So we can find that$$\delta f_i=\overline{f}-\overline{f_0}=A_1\sin(\frac{2\pi}{T_1}t_i+\varphi_1)$$
-Here the random term $A(t)$ averages to zero as $N\to\infty$, and the $T_2$ term vanishes when $T_1/T_2$ is not an integer.
-This is a tool for improving the signal-to-noise ratio of periodic signals once the period is already roughly known.
+Sample at the same phase of the $T_1$ cycle, $t_k=kT_1+t_i$, and form
+$$\overline{f}=\frac{1}{N}\sum_{k=0}^{N-1}f(t_k).$$
+The background $f_0$ should be approximately steady over the averaging interval, or its secular trend should first be removed. Define
+$$\alpha=\frac{2\pi t_i}{T_2}+\varphi_2,\qquad \beta=\pi\frac{T_1}{T_2}.$$
+For $\sin\beta\ne0$, the finite trigonometric sum is
+$$\sum_{k=0}^{N-1}\sin(\alpha+2k\beta)=\frac{\sin N\beta}{\sin\beta}\sin[\alpha+(N-1)\beta].$$
+Therefore
+$$\overline{f}=\overline{f_0}+\overline{A}+A_1\sin\left(\frac{2\pi t_i}{T_1}+\varphi_1\right)+\frac{A_2}{N}\frac{\sin N\beta}{\sin\beta}\sin[\alpha+(N-1)\beta],$$
+where $\overline{A}=N^{-1}\sum_k A(t_k)$. If the sampled random term has zero mean and sufficiently weak correlations for its sample mean to converge to zero, and $T_1/T_2\notin\mathbb{Z}$, then
+$$\boxed{\delta f_i=\lim_{N\to\infty}(\overline{f}-\overline{f_0})=A_1\sin\left(\frac{2\pi t_i}{T_1}+\varphi_1\right)}.$$
+If $T_1/T_2$ is an integer, the $T_2$ signal is also sampled at a fixed phase and survives the averaging. For a ratio close to an integer, a long averaging window is needed; the residual amplitude is bounded by $|A_2|/(N|\sin\beta|)$.
+
+This method improves the signal-to-noise ratio of a periodic signal with a roughly known period; it does not remove correlated disturbances or background drift automatically.
+
 ### Analysis of $S_q$
 
 In actual measurements, we usually use Fourier Series to analyze the period:
@@ -502,12 +583,12 @@ $$\begin{align*} \delta f(t)& = f(t)-\frac{a_0}{2} = \sum_{m=1}^{\infty} \left( 
 A_m\sin(mt+\phi_m)\end{align*}$$
 Here, we let $t=2\pi$ correspond to $24$ hours. So $m=1,2,3,4$ respectively correspond to $T=24\,\mathrm{h},12\,\mathrm{h},8\,\mathrm{h},6\,\mathrm{h}$.
 
-In this way we can analyze the importance of every period wave. Generally, taking just four terms is sufficient to yield a result very close to the actual situation.
+In this way we can analyze the importance of every period wave. For a smooth quiet-day curve, the first four harmonics often provide a useful approximation; the required truncation should be checked against the data.
 ![Screenshot 2026-09-28 at 19.01.56](../attachments/Screenshot%202026-09-28%20at%2019.01.56.png){width=450}
 
-And we can use spherical harmonic analysis to analyze the space.
+Spatial variation can be analyzed with spherical harmonics. The following formulas apply at $r=R$ to an idealized pattern described in angular local time $t$, with $1\le m\le n$. At fixed universal time, local-time angle and longitude differ only by a phase shift. An arbitrary evolving spatial field would instead use longitude harmonics with coefficients that depend separately on time.
 
-Endogenous geomagnetic field:
+Internal time-varying field (mainly the induced Earth response for $S_q$):
 
 $$
 \left\{
@@ -570,39 +651,113 @@ $$
 
 ### Ionosphere and Atmospheric Dynamo Theory
 
-Solar radiation ionizes neutral atoms and molecules in the upper atmosphere, producing free electrons and positive ions, thereby forming the <span style="color: red;">ionosphere</span>, which possesses significant electrical conductivity. For example:$$ \mathrm O + h\nu \rightarrow \mathrm O^+ + e^-, \qquad \mathrm{N_2}+h\nu \rightarrow \mathrm{N_2^+}+e^-$$
-The electron concentration $n_e$ exhibits local maxima at certain altitudes $h$; these regions are designated as the D layer ($60\,\mathrm{km}$), E layer ($120\,\mathrm{km}$), and F layer ($200-400\,\mathrm{km}$).
+Solar radiation ionizes neutral atoms and molecules in the upper atmosphere, producing free electrons and positive ions, thereby forming the <span style="color: red;">ionosphere</span>, which possesses significant electrical conductivity. For example:
+$$ \mathrm O + h\nu \rightarrow \mathrm O^+ + e^-, \qquad \mathrm{N_2}+h\nu \rightarrow \mathrm{N_2^+}+e^-$$
+The altitude dependence of electron concentration $n_e$ defines the D, E, and F regions. Their boundaries and peak heights depend on local time and solar conditions: the D region is roughly $60$–$95\,\mathrm{km}$, the E region about $90$–$150\,\mathrm{km}$ with a typical daytime peak near $110$–$120\,\mathrm{km}$, and the F region lies above about $150\,\mathrm{km}$, often with F1 and F2 layers. The F2 peak commonly occurs around $200$–$400\,\mathrm{km}$. These are altitude ranges, not three fixed peak heights.
 ![Pasted image 20260928193107](../attachments/Pasted%20image%2020260928193107.png){width=450}
 
-The motion of the electrically conductive ionosphere within the geomagnetic field generates a specific current distribution. This external current system constitutes the source of the external field.
+Solar heating excites atmospheric tides and neutral winds. Collisions between neutrals and charged particles couple these winds to the ionospheric plasma. In the Earth-fixed frame, the effective field driving conduction is
+$$\mathbf{E}'=\mathbf{E}+\mathbf{v}\times\mathbf{B},\qquad \mathbf{j}=\overleftrightarrow{\sigma}\cdot\mathbf{E}',$$
+where $\mathbf{v}$ is the neutral wind, $\mathbf{E}$ includes the polarization field, and $\overleftrightarrow{\sigma}$ is the conductivity tensor. In particular, perpendicular to $\mathbf{B}$,
+$$\mathbf{j}_\perp=\sigma_P\mathbf{E}'_\perp+\sigma_H\hat{b}\times\mathbf{E}'_\perp,\qquad \hat{b}=\frac{\mathbf{B}}{|\mathbf{B}|},$$
+with Pedersen and Hall conductivities $\sigma_P,\sigma_H$. The electrostatic field adjusts to satisfy current continuity; the total field cannot generally be set equal to $\mathbf{v}\times\mathbf{B}$.
+
+The solar-driven currents, mainly in the E-region dynamo layer, produce the external $S_q$ field and an induced response in the Earth. Lunar atmospheric tides also drive a smaller geomagnetic daily variation, conventionally denoted $L$, which is distinct from $S_q$.
 
 For ionospheric currents, if we restrict them to a two-dimensional surface current on a thin spherical shell of known altitude, we can derive analytical relationships.
+![Screenshot 2026-10-01 at 20.11.13](../attachments/Screenshot%202026-10-01%20at%2020.11.13-optimized.webp){width=650}
+
+Let $R$ be Earth's radius and $r=R+h$ the fixed radius of the current shell. Use $\rho$ for the variable radial coordinate, so that $\rho=R$ is the ground and $\rho=r$ is the ionosphere. Assume a quasi-static, divergence-free horizontal sheet current, with permeability $\mu_0$ on both sides. The inversion gives an equivalent current system producing the observed external $S_q$ field; it does not uniquely recover the full three-dimensional current system. Any external contribution from magnetospheric currents must also be excluded or modeled before interpreting the result as ionospheric currents.
+
+The scalar-potential convention in [Scalar Potential and Gauss Coefficients](#scalar-potential-and-gauss-coefficients) is
+$$
+\mathbf{H}=-\nabla w,\qquad \mathbf{B}=-\mu_0\nabla w.
+$$
+First derive the spatial relation using longitude $\lambda$. In the local-time representation of $S_q$, $t$ is an angular local solar time ($2\pi=24\,\mathrm{h}$), rather than time in seconds. At fixed universal time, $t$ differs from $\lambda$ by a constant, so the same spatial derivation applies after replacing $\lambda$ with $t$ and absorbing the phase shift into the coefficients.
+
+The <span style="color: red;">equivalent current function</span> $I_e$ is defined by
+$$
+\mathbf{K}=-\hat{r}\times\nabla_s I_e,
+\qquad
+\nabla_s=\hat{\theta}\frac{1}{r}\frac{\partial}{\partial\theta}
++\hat{\lambda}\frac{1}{r\sin\theta}\frac{\partial}{\partial\lambda},
+$$
+where $\mathbf{K}$ is the height-integrated current density in $\mathrm{A\,m^{-1}}$. Thus
+$$
+K_\theta=\frac{1}{r\sin\theta}\frac{\partial I_e}{\partial\lambda},
+\qquad
+K_\lambda=-\frac{1}{r}\frac{\partial I_e}{\partial\theta}.
+$$
+$K_\theta$ is southward and $K_\lambda$ is eastward. The current follows contours of $I_e$, and the difference between two contours gives the signed current crossing a curve between them. Therefore $I_e$ has units of amperes; it is not a local current density. This sign convention determines the minus sign in the inversion formula.
+
+From the coefficients defined in [Scalar Potential and Gauss Coefficients](#scalar-potential-and-gauss-coefficients),
+$$p_n^m=g_n^m+j_n^m,\qquad p_n^{'m}=(n+1)g_n^m-nj_n^m,$$
+and similarly for $q_n^m,q_n^{'m}$. Solving these equations gives
+$$
+j_n^m=\frac{(n+1)p_n^m-p_n^{'m}}{2n+1},
+\qquad
+k_n^m=\frac{(n+1)q_n^m-q_n^{'m}}{2n+1}.
+$$
+The ionospheric inversion uses these external coefficients, with the internal contribution from induced Earth currents separated out.
+
+Define
+$$F_n^m(\theta,\lambda)=(j_n^m\cos m\lambda+k_n^m\sin m\lambda)P_n^m(\cos\theta).$$
+For the field generated by the shell alone, the potential is regular inside and decays at infinity outside. The corresponding solutions of Laplace's equation are
+$$w_{nm}^-(\rho)=\frac{R}{\mu_0}\left(\frac{\rho}{R}\right)^n F_n^m,\qquad w_{nm}^+(\rho)=b_n\left(\frac{r}{\rho}\right)^{n+1}F_n^m,$$
+where $-$ and $+$ denote the inner and outer sides. Since $\nabla\cdot\mathbf{B}=0$, the normal magnetic field is continuous across the current sheet:
+$$\left.\frac{\partial w_{nm}^-}{\partial\rho}\right|_{\rho=r}=\left.\frac{\partial w_{nm}^+}{\partial\rho}\right|_{\rho=r}.$$
+Hence, equating the harmonic coefficients,
+$$\frac{n}{r}\frac{R}{\mu_0}\left(\frac{r}{R}\right)^n=-\frac{n+1}{r}b_n,\qquad b_n=-\frac{n}{n+1}\frac{R}{\mu_0}\left(\frac{r}{R}\right)^n.$$
+At the shell, this means
+$$w_{nm}^+(r)=-\frac{n}{n+1}w_{nm}^-(r),\qquad w_{nm}^+(r)-w_{nm}^-(r)=-\frac{2n+1}{n+1}w_{nm}^-(r).$$
+The same ionospheric source is external relative to the ground, but internal relative to points above the shell; this explains the two different radial powers.
+
+Ampere's boundary condition, with $\hat{r}$ pointing outward, is
+$$\hat{r}\times(\mathbf{H}^+-\mathbf{H}^-)=\mathbf{K}.$$
+Substituting $\mathbf{H}=-\nabla w$ gives
+$$\mathbf{K}=-\hat{r}\times\nabla_s(w^+-w^-).$$
+Comparing this with the definition of $I_e$, we obtain
+$$I_e=w^+(r)-w^-(r)+C.$$
+The additive constant $C$ does not affect the current and may be set to zero. Summing the harmonics and using the angular local-time coordinate gives the stated formula:
+$$\boxed{I_e(t,\theta)=-\frac{R}{\mu_0}\sum_{n=1}^{\infty}\sum_{m=1}^{n}\frac{2n+1}{n+1}\left(\frac{r}{R}\right)^n(j_n^m\cos mt+k_n^m\sin mt)P_n^m(\cos\theta)}$$
+
+The factor $(r/R)^n$ continues the ground potential upward to the current shell, while $(2n+1)/(n+1)$ comes from the potential jump fixed by normal-field continuity. In SI units, $R,r$ are in metres and $j_n^m,k_n^m$ are in teslas, so $Rj_n^m/\mu_0$ has units of amperes. The sum starts at $m=1$ here because it describes the nonzero daily harmonics; a general spatial current function can also include zonal terms with $m=0$.
 
 ### Magnetic Storm
 
-A <span style="color: red;">magnetic storm</span> is a global, intense geomagnetic disturbance caused by solar activity. Solar phenomena such as flares generate enhanced particle streams and solar wind that interact with Earth's magnetosphere and ionosphere, altering their current systems. The storm-time variations primarily consist of the disturbance field from particle streams ($DCF$) and the disturbance field from the ring current ($DR$); $DCF$ mainly enhances the horizontal magnetic field, while $DR$ primarily weakens it, and together they constitute the $D_{st}$ storm-time variation.
-$$\boxed{
-DCF+DR\longrightarrow D_{st}
-}$$
+A <span style="color: red;">magnetic storm</span> is a large-scale geomagnetic disturbance caused by enhanced solar-wind energy input to the magnetosphere. Coronal mass ejections and high-speed solar-wind streams are common drivers; a solar flare by itself is not a sufficient explanation of a storm.
+
+- $D_{CF}$: The Chapman-Ferraro field from magnetopause currents. Increased solar-wind dynamic pressure compresses the magnetosphere and usually gives a positive low-latitude horizontal-field perturbation, often seen at storm commencement.
+- $D_R$: The disturbance from the enhanced westward ring current, usually giving a negative low-latitude horizontal-field perturbation during the storm main phase.
+
+The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields. See [WDC Kyoto's derivation and interpretation of $D_{st}$](https://wdc.kugi.kyoto-u.ac.jp/dstdir/dst2/onDstindex.html).
+
 # Resistivity and Permittivity
 
-Given that the rock anisotropy, we define:
+For an effective medium made of thin, isotropic layers, we define:
 <span style="color: red;">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering).
 <span style="color: red;">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding.
-(Current flows more easily along the layers, so $\rho_n > \rho_t$ and $\lambda \ge 1$.)
+(For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.)
 <span style="color: red;">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$
 <span style="color: red;">mean macroscopic resistivity</span> / <span style="color: red;">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$
 
-The following picture shows resistivity in different layers within the Earth's interior.
+For layers with resistivities $\rho_i$, thicknesses $h_i$, and total thickness $d=\sum_i h_i$,
+$$\rho_t=\frac{d}{\sum_i h_i/\rho_i},\qquad \rho_n=\frac{\sum_i h_i\rho_i}{d}.$$
+The longitudinal and transverse resistivities are the thickness-weighted harmonic and arithmetic means. The geometric mean $\rho_m$ is a useful effective parameter, rather than a replacement for the full anisotropic resistivity tensor in every geometry.
+
+The following picture illustrates approximate resistivity ranges (in $\Omega\,\mathrm{m}$) for a continental crust-mantle model. Both layer depths and resistivities vary between regions.
 ![Screenshot 2026-05-15 at 17.20.29](../attachments/Screenshot%202026-05-15%20at%2017.20.29-optimized.webp){width=450}
 
-Conduction Mode of the crust:
-1. conductive through electrons: metal, graphite (low resistivity)
-2. conductive through semiconductors: most of metal sulfides/oxides (low resistivity)
-3. conductive through crystalline ionic: most rock-forming minerals—such as quartz, mica, and calcite, etc. (high resistivity)
-4. conductive through ionic: hydrous minerals (low resistivity)
+Conduction mechanisms in crustal materials:
+
+1. Electronic conduction: Important in connected metallic minerals and graphite; bulk conductivity also depends on whether the conducting phase forms a connected network.
+2. Semiconducting conduction: Occurs in some sulfides and oxides and depends on temperature and mineral composition.
+3. Electrolytic conduction: Motion of dissolved ions in connected pore water and fractures; commonly the dominant mechanism in fluid-bearing rocks.
+4. Surface conduction: Associated with charged mineral-fluid interfaces, especially clay-rich rocks. Solid-state ionic conduction may also contribute, particularly at high temperatures; dry quartz, mica, and calcite are generally resistive.
 
 Based on the different resistivity of various rocks, we can use electrical exploration to detect the variety of rocks. However, due to the overlapping of the scope of resistivity of various rocks, electrical exploration has its limitations.
+
+The following relative-permittivity values are approximate reference values. The original course table does not specify its sources or measurement frequencies, so the mineral and rock ranges require verification before quantitative use. Frequency, water content, temperature, and mineral composition affect these values; conducting materials require a complex, frequency-dependent permittivity.
 
 | Mineral   | $\epsilon_r$ | Rock             | $\epsilon_r$ |
 | --------- | ------------ | ---------------- | ------------ |
@@ -611,87 +766,115 @@ Based on the different resistivity of various rocks, we can use electrical explo
 | Mica      | 5-8          | Sedimentary rock | 4-15         |
 | Chlorite  | 5-6          | Limestone        | 8-12         |
 | Sulfide   | 8-17         | Sandstone        | 5-11         |
-| Petroleum | 10-30        | Sand             | 3-25         |
-| Water     | 80           | Mudstone         | 4-30         |
+| Water-free petroleum | about 2-3 | Sand             | 3-25         |
+| Water near room temperature, low frequency | about 80 | Mudstone         | 4-30         |
+
+Water-free petroleum normally has a relative permittivity near $2$, rather than the original table's $10$–$30$; water-bearing emulsions can be much higher. [Wilson (1984), Sect. 1.2.4](https://nfogm.no/wp-content/uploads/2019/02/1984-14-Continuous-On-Line-Water-Measurement-Wilson-BP.pdf) reports measured dry-oil values around $2.24$–$2.48$ at $20\,{}^\circ\mathrm{C}$ for the crude oils studied.
 
 # Methods for Measuring Resistivity
 
 ## Direct Current (DC) Resistivity Method
 
-We can use direct method to measuring the resistivity of the ground.
+In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces, giving
 ![Screenshot 2026-05-15 at 17.29.04](../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp){width=475}
 
 $$j=\frac{I}{2\pi r^2}$$
 $$E=\rho j=\frac{\rho I}{2\pi r^2}$$
-$$U=-\int_{\infty} ^M E\,\mathrm{d}r=-\int_{\infty} ^M \frac{\rho I}{2\pi r^2}\,\mathrm{d}r=\frac{\rho I}{2\pi r_M}$$
+$$U(r_M)=-\int_{\infty}^{r_M}E(r)\,\mathrm{d}r=-\int_{\infty}^{r_M}\frac{\rho I}{2\pi r^2}\,\mathrm{d}r=\frac{\rho I}{2\pi r_M}$$
+For current injection at $A$ and withdrawal at $B$, superposition gives
 $$U_M=U_M^A+U_M^B=\frac{\rho I}{2\pi |AM|}+\frac{-\rho I}{2\pi |BM|}=\frac{\rho I}{2\pi}(\frac{1}{|AM|}-\frac{1}{|BM|})$$
 $$U_{MN}=U_M-U_N=\frac{\rho I}{2\pi}(\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|})$$
-Let <span style="color: red;">Geometric Factor</span>$$K=\frac{2\pi}{\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|}}$$
-Then$$\rho=K\frac{U_{MN}}{I}$$
+Let <span style="color: red;">Geometric Factor</span>
+$$K=\frac{2\pi}{\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|}}$$
+For a homogeneous half-space, $\rho=KU_{MN}/I$. For an inhomogeneous or anisotropic Earth, the same operation defines the <span style="color: red;">apparent resistivity</span>:
+$$\boxed{\rho_a=K\frac{U_{MN}}{I}}.$$
+Recovering the true subsurface resistivity distribution requires inversion. The voltage sign must follow the electrode ordering used in $K$; a negative signed geometric factor is possible when the potential electrodes are reversed. See [USGS's description of ERT measurements](https://data.usgs.gov/datacatalog/data/USGS%3A5cb7785ae4b0c3b0065d7d37).
+
 ### Wenner
 ![Screenshot 2026-05-15 at 20.59.33](../attachments/Screenshot%202026-05-15%20at%2020.59.33.png){width=580}
-$$\rho=\frac{2\pi a V}{I}$$
-It has the most stable signal and has a highly vertical resolution.
+The electrode order is $A,C,D,B$ with equal adjacent spacings $a$, and $V=U_C-U_D$.
+$$\rho_a=\frac{2\pi a V}{I}$$
+The Wenner array generally gives a strong voltage signal and is useful for detecting vertical changes in resistivity, such as horizontal layering. Its resolution still depends on electrode spacing, survey coverage, and the inversion.
 
 This method can be used to find the layering inside the Earth and detect its depth.
+
 ### Schlumberger
 ![Screenshot 2026-05-15 at 21.01.11](../attachments/Screenshot%202026-05-15%20at%2021.01.11.png){width=554}
-$$\rho=\frac{\pi (L^2-a^2) V}{4Ia}$$
+Here $L=AB$ and $a=CD$ are full electrode separations, the two pairs have the same center, and $V=U_C-U_D$.
+$$\rho_a=\frac{\pi (L^2-a^2) V}{4Ia}$$
 
-It offers strong interference suppression and has the highest vertical resolution.
+Usually $a\ll L$. Increasing $L$ while keeping the potential electrodes fixed over part of the sounding makes this array efficient for vertical electrical sounding. Resolution and noise performance depend on survey geometry, the subsurface structure, and data quality.
 
 This method can be utilized for analyzing stratigraphic sequences.
+
 ### Dipole-Dipole
 ![Screenshot 2026-05-15 at 21.06.53](../attachments/Screenshot%202026-05-15%20at%2021.06.53.png){width=450}
-$$\rho=\frac{\pi V L(L^2-a^2)}{Ia^2}$$
-$\rho=O(L^3)$, so it has a highly lateral resolution.
+In the illustrated collinear geometry, $AB=CD=a$, $L$ is the distance between the dipole centers, and $V=U_C-U_D$; the potential-electrode order is $D,C$ from left to right.
+$$\rho_a=\frac{\pi V L(L^2-a^2)}{Ia^2}$$
+For $L\gg a$, the geometric factor is $K\sim\pi L^3/a^2$. In a homogeneous medium with fixed $I$ and $a$, the voltage consequently decays as $L^{-3}$; the true resistivity does not grow as $L^3$. This array is sensitive to lateral resistivity changes and is useful for locating steep structures, but large dipole separations reduce the signal-to-noise ratio.
 
-This method can be used to find mineral and faults, because it is a transversely inhomogeneous body.
+For the common spacing convention $BD=na$, $L=(n+1)a$ and $K=\pi a n(n+1)(n+2)$, with the voltage polarity used in the figure. Mineralized zones and faults may be detected through their resistivity contrast with the surrounding rocks.
 
 ### Multiple Electrode
-![Screenshot 2026-05-15 at 20.23.30](../attachments/Screenshot%202026-05-15%20at%2020.23.30-optimized.webp){width=450}
+
+An array of many installed electrodes is connected to a switching unit, which selects successive current and potential pairs. Multiple configurations and spacings provide a set of apparent-resistivity measurements for two- or three-dimensional electrical resistivity tomography. The installed electrodes do not all inject current simultaneously in a standard four-electrode measurement.
+
 ## Magnetotelluric Method (MT)
-![Screenshot 2026-05-15 at 18.52.17](../attachments/Screenshot%202026-05-15%20at%2018.52.17-optimized.webp){width=488}
-Incident electromagnetic waves can induce electric and magnetic fields in underground media.
+
+The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.
 
 - natural signal source
-	- <span style="color: red;">Magnetotelluric Method (MT)</span>: electromagnetic field generated by the interaction between the solar wind and Earth's magnetic field. The frequency of the field ($<8\,\text{Hz}$) is low. The exploration depth can reach tens to hundreds of kilometers.
-	- <span style="color: red;">Audio Magnetotelluric Method (AMT)</span>: global thunderstorm activity. The frequency of the field ($>8\,\text{Hz}$) is high. It has obvious temporal and spatial differences. The exploration depth can reach hundreds to thousands of meters.
-- manual signal source
-	- <span style="color: red;">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span> The exploration depth can reach hundreds of meters to a few kilometers.
-	- Fixed-wing electromagnetic (EM) system geometry typically features a large transmitter loop draped around the aircraft's nose, wingtips, and tail, while a receiver coil is towed in a "bird" behind and below (e.g., ~120m behind, ~40m below) to minimize primary field interference.
+	- <span style="color: red;">Magnetotelluric Method (MT)</span>: Low-frequency natural signals mainly originate from ionospheric and magnetospheric currents influenced by the solar wind. Long-period measurements can probe crustal and mantle structures.
+	- <span style="color: red;">Audio Magnetotelluric Method (AMT)</span>: The audio-frequency extension of MT, typically using frequencies from a few hertz to tens of kilohertz, mainly supplied by distant lightning. It is often used for shallower structures. MT and AMT bands overlap; $8\,\mathrm{Hz}$ is not a universal boundary between them.
+- controlled signal source
+	- <span style="color: red;">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span>: Uses an artificial transmitter. Applying a plane-wave MT interpretation requires a suitable far-field configuration; near-field effects must otherwise be modeled. Investigation depth depends on frequency, conductivity, and transmitter-receiver geometry.
 
-Skin depth (derived in [Waves in Good Conductors](../physics/electromagnetism.html#waves-in-good-conductors)):$$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$
-The MT method relies on the skin effect, where higher frequencies penetrate less deeply than lower frequencies.
+The change between solar-wind-related and lightning-dominated sources is gradual and includes weak-signal bands. See [Stanley and Tinkler (1983)](https://www.usgs.gov/publications/a-practical-low-noise-coil-system-magnetotellurics).
 
-MT has lots of distinct advantages, such as:
+In the frequency domain, the horizontal fields are related by an impedance tensor:
+$$\begin{pmatrix}E_x\\E_y\end{pmatrix}=\begin{pmatrix}Z_{xx}&Z_{xy}\\Z_{yx}&Z_{yy}\end{pmatrix}\begin{pmatrix}H_x\\H_y\end{pmatrix}.$$
+For a nonmagnetic Earth, each impedance element gives an apparent resistivity $\rho_{a,ij}=|Z_{ij}|^2/(\mu_0\omega)$ and a phase $\phi_{ij}=\arg Z_{ij}$, with a stated Fourier sign convention. Here $\mathbf{H}$ is in $\mathrm{A\,m^{-1}}$. If a transfer tensor $\overleftrightarrow{W}$ is instead estimated from the measured $\mathbf{B}$ through $\mathbf{E}_h=\overleftrightarrow{W}\cdot\mathbf{B}_h$, then $Z_{ij}=\mu_0W_{ij}$ and $\rho_{a,ij}=\mu_0|W_{ij}|^2/\omega$.
+
+Skin depth (derived in [Waves in Good Conductors](../physics/electromagnetism.html#waves-in-good-conductors)):
+$$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$
+The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.
+
+Advantages and interpretation conditions:
 - Omitting the power supply equipment
-- It has a broader spectrum: natural MT signals span roughly $10^{-4}\,\text{Hz}$ to $10^4\,\text{Hz}$ (periods from sub-millisecond to about $10^4\,\text{s}$). The meaningful survey band is about 0.001-100 Hz.
-- When observations are conducted during magnetic storms—thereby capturing very low-frequency information
-- Capable of penetrating high-resistivity layers and offers strong resolution for low-resistivity structures.
-- Small contour interval.
-- The field source consists of vertically incident plane waves, which significantly simplifies the analysis of the electromagnetic field.
-## Transient Electromagnetic Method (TEM)
+- Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.
+- Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.
+- Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.
+- A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.
 
+## Transient Electromagnetic Method (TEM)
 
 ![Screenshot 2026-05-15 at 20.14.32](../attachments/Screenshot%202026-05-15%20at%2020.14.32-optimized.webp){width=541}
 
-Unlike the DC resistivity method, which uses a continuous current, the <span style="color: red;">Transient Electromagnetic Method (TEM)</span> uses a pulsed primary magnetic field. It will make a conductive layer inside the Earth generate a time-varying electromagnetic field, which will also generate a secondary magnetic field in the receiver.
+The <span style="color: red;">Transient Electromagnetic Method (TEM)</span> uses a controlled time-varying transmitter current, commonly with a rapid turn-off. The changing primary magnetic field induces subsurface eddy currents. After turn-off, their decay produces a secondary field, measured as a magnetic field or an induced receiver voltage proportional to its time derivative.
 
-- If the signal attenuates slowly, there may be a good conductor (e.g., valuable conductive mineral or water) under the ground.
-- If the signal attenuates rapidly, there may be a high-resistivity dielectric (e.g., solid bedrock) under the ground.
+![Screenshot 2026-05-15 at 18.52.17](../attachments/Screenshot%202026-05-15%20at%2018.52.17-optimized.webp){width=488}
+This transmitter-receiver sketch illustrates controlled-source electromagnetic induction. Some airborne TEM systems use a large transmitter loop on the aircraft and a towed receiver, with the geometry depending on the instrument.
+
+- A slowly decaying response may indicate a conductive body, such as connected sulfides, clay-rich material, or saline groundwater.
+- A rapidly decaying or weak response may indicate relatively resistive material. Decay also depends on body size, depth, geometry, and coupling; conductivity alone does not identify an ore body or groundwater.
 
 key advantages:
 - High Resolution: Excellent at detecting highly conductive bodies (e.g., massive sulfides).
-- No Galvanic Contact: Unlike DC methods, TEM does not require grounding electrodes, making it highly effective in areas with high-resistivity surface layers (e.g., dry sand or permafrost).
-- Depth Sensitivity: The depth of investigation is controlled by the time elapsed after the current turn-off (late times correspond to greater depths).
+- No Galvanic Contact: Loop-source TEM does not require grounded electrodes, which is useful where electrode contact is poor, such as dry sand or permafrost.
+- Depth Sensitivity: Later time windows generally emphasize deeper or more slowly decaying current systems. Investigation depth also depends on conductivity, transmitter moment, geometry, and noise.
+
 ## Self Potential
 
-- Redox natural electric fields generated by electrochemical activity
-- Streaming potentials resulting from groundwater seepage or filtration
-- Diffusion electric fields
+Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets.
 
-It also can be used to determine the radius of influence of groundwater pumping.
+- Electrochemical potentials: Associated with redox reactions, including current systems around some mineralized bodies.
+- Streaming potentials: Associated with fluid motion through charged pore surfaces during groundwater flow.
+- Diffusion potentials: Associated with ionic concentration gradients and different ionic mobilities.
+
+![Screenshot 2026-05-15 at 20.23.30](../attachments/Screenshot%202026-05-15%20at%2020.23.30-optimized.webp){width=450}
+The gradient method measures voltage differences between successive nearby stations; the fixed-base method measures each station relative to a common reference.
+
+SP measurements can help map groundwater-flow changes associated with pumping. Estimating a pumping influence radius requires hydrogeological constraints and an electrokinetic model; a voltage anomaly alone does not determine it uniquely. See [Rizzo et al. (2004)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2004jb003049) for pumping experiments and their interpretation.
 ![Screenshot 2026-05-15 at 20.23.47](../attachments/Screenshot%202026-05-15%20at%2020.23.47-optimized.webp){width=456}
         </script>
     </main>

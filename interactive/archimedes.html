@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vary the number of polygon sides from 3 to 1000 and watch inscribed and circumscribed perimeters squeeze toward π from below and above.">
+    <meta property="og:title" content="Archimedes’ Method of Exhaustion | Yang">
+    <meta property="og:description" content="A hands-on experiment in bounding π, with linked polygons, perimeter bounds, and convergence curves.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasonxu-cell.github.io/interactive/archimedes.html">
+    <meta property="og:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
+    <title>Archimedes’ Method of Exhaustion | Yang</title>
+    <link rel="stylesheet" href="../style.css?v=a3389ce5a5">
+    <link rel="stylesheet" href="../interactive.css?v=20261007-5">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <script src="../scripts/archimedes.js?v=20261007-4" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav aria-label="Primary navigation">
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../notes.html">Notes</a>
+            <a href="../articles.html">Articles</a>
+            <a href="../research.html">Research</a>
+            <a href="../interactive.html" aria-current="page">Interactive</a>
+            <a href="../ask.html">Ask</a>
+        </div>
+    </nav>
+    <main id="main-content" class="interactive-page">
+        <header class="lab-header">
+            <a class="lab-back" href="../interactive.html">← Interactive</a>
+            <p class="lab-eyebrow">Experiment 01 / Geometry &amp; Limits</p>
+            <h1>Archimedes’ Method of Exhaustion</h1>
+            <p>Approximate π one straight edge at a time. Drag the number of sides n and watch inscribed and circumscribed polygons approach the circle as the two bounds close in.</p>
+        </header>
+        <section class="lab-shell" aria-label="Bounding π with polygons">
+            <div class="lab-toolbar">
+                <p><span>From polygons to π</span>3 → 96 → 1000</p>
+                <button id="play-demo" class="lab-button" type="button" aria-pressed="false">▶ Play demo</button>
+            </div>
+            <noscript><p class="lab-noscript">Enable JavaScript to adjust the number of sides. For regular hexagons, the inscribed perimeter ÷ diameter is 3 and the circumscribed perimeter ÷ diameter is approximately 3.464101615, so 3 &lt; π &lt; 3.464101615.</p></noscript>
+            <div class="lab-stage">
+                <div class="geometry-panel">
+                    <div class="panel-heading"><h2>Inside &amp; outside the circle</h2><span id="geometry-sides">n = 6</span></div>
+                    <svg class="geometry-svg" viewBox="0 0 440 430" role="img" aria-labelledby="geometry-title geometry-description">
+                        <title id="geometry-title">Inscribed and circumscribed regular polygons</title>
+                        <desc id="geometry-description">A circle of radius 1 with inscribed and circumscribed regular hexagons.</desc>
+                        <path d="M25 215H415 M220 25V405" stroke="#e4ecee" stroke-width="1"/>
+                        <polygon id="outer-polygon" class="outer" points="274.270,121 328.540,215 274.270,309 165.730,309 111.460,215 165.730,121"/>
+                        <polygon id="inner-polygon" class="inner" points="220,121 301.406,168 301.406,262 220,309 138.594,262 138.594,168"/>
+                        <circle class="circle" cx="220" cy="215" r="94"/>
+                        <path d="M220 215H314" stroke="#81969e" stroke-width="1"/>
+                        <circle cx="220" cy="215" r="3" fill="#263e47"/>
+                        <text x="258" y="204">r = 1</text>
+                    </svg>
+                    <div class="lab-legend">
+                        <span class="lower-color"><i></i>Inscribed polygon</span>
+                        <span class="upper-color"><i></i>Circumscribed polygon</span>
+                        <span><i class="circle-key"></i>Unit circle</span>
+                    </div>
+                </div>
+                <div class="convergence-panel">
+                    <div class="panel-heading"><h2>Closing in on π</h2></div>
+                    <div class="bound-values">
+                        <div class="bound-value lower-color"><span>Lower · inscribed perimeter ÷ 2</span><output id="lower-value" for="sides-slider sides-number">3.000000000</output></div>
+                        <div class="bound-value upper-color"><span>Upper · circumscribed perimeter ÷ 2</span><output id="upper-value" for="sides-slider sides-number">3.464101615</output></div>
+                    </div>
+                    <p class="pi-reference">Lower &lt; π = 3.141592654… &lt; Upper</p>
+                    <svg class="chart-svg" viewBox="0 0 500 280" role="img" aria-labelledby="chart-title chart-description">
+                        <title id="chart-title">Convergence of inscribed and circumscribed perimeters</title>
+                        <desc id="chart-description">As the number of sides increases, the teal lower bound rises and the orange upper bound falls. Both curves approach π.</desc>
+                        <defs><clipPath id="chart-clip"><rect x="48" y="26" width="420" height="206"/></clipPath></defs>
+                        <g id="chart-grid"></g>
+                        <g clip-path="url(#chart-clip)">
+                            <path id="lower-full" class="curve lower-curve" opacity=".18"/>
+                            <path id="upper-full" class="curve upper-curve" opacity=".18"/>
+                            <line id="pi-line" class="reference" x1="48" x2="468"/>
+                            <path id="lower-progress" class="curve lower-curve"/>
+                            <path id="upper-progress" class="curve upper-curve"/>
+                            <line id="chart-cursor" class="cursor" y1="26" y2="232"/>
+                            <circle id="lower-dot" r="4.5" fill="#137d89" stroke="white" stroke-width="1.5"/>
+                            <circle id="upper-dot" r="4.5" fill="#bc6539" stroke="white" stroke-width="1.5"/>
+                        </g>
+                        <text id="pi-chart-label" x="474">π</text>
+                        <path d="M48 26V232H468" stroke="#b5c7cc" fill="none"/>
+                        <text class="axis-label" x="12" y="129" text-anchor="middle" transform="rotate(-90 12 129)">Perimeter / diameter</text>
+                        <g text-anchor="middle"><text x="48" y="250">3</text><text x="98.1" y="250">6</text><text x="148.2" y="250">12</text><text x="198.3" y="250">24</text><text x="248.5" y="250">48</text><text x="298.6" y="250">96</text><text x="468" y="250">1000</text></g>
+                        <text class="axis-label" x="258" y="273" text-anchor="middle">n (log scale)</text>
+                        <text id="chart-n-label" y="17" text-anchor="middle">n = 6</text>
+                    </svg>
+                    <div class="gap-readout"><span>Upper − Lower =</span><output id="gap-value" for="sides-slider sides-number">0.464101615</output></div>
+                </div>
+            </div>
+            <div class="lab-controls">
+                <div class="slider-heading">
+                    <label for="sides-slider">Number of sides n</label>
+                    <div class="number-control"><label for="sides-number">n =</label><input id="sides-number" type="number" min="3" max="1000" step="1" value="6" aria-label="Enter the number of polygon sides n"></div>
+                </div>
+                <input id="sides-slider" class="lab-range" type="range" min="3" max="1000" step="1" value="6" aria-describedby="slider-help">
+                <div class="slider-scale" id="slider-help"><span>3 · triangle</span><span>1000 · approaching a circle</span></div>
+                <div class="preset-row" aria-label="Preset side counts">
+                    <span>Try</span>
+                    <button class="lab-button" type="button" data-sides="3" aria-pressed="false">3</button>
+                    <button class="lab-button is-active" type="button" data-sides="6" aria-pressed="true">6</button>
+                    <button class="lab-button" type="button" data-sides="12" aria-pressed="false">12</button>
+                    <button class="lab-button" type="button" data-sides="24" aria-pressed="false">24</button>
+                    <button class="lab-button" type="button" data-sides="48" aria-pressed="false">48</button>
+                    <button class="lab-button" type="button" data-sides="96" aria-pressed="false">96 sides</button>
+                    <button class="lab-button" type="button" data-sides="1000" aria-pressed="false">1000 sides</button>
+                </div>
+            </div>
+        </section>
+        <p id="demo-status" class="lab-sr-only" aria-live="polite"></p>
+        <section class="lab-explanation" aria-label="How the method of exhaustion works">
+            <div>
+                <h2>Why is π between the bounds?</h2>
+                <p>The unit circle has diameter 2 and circumference 2π. The inscribed polygon uses chords, so its perimeter is shorter than the circumference. The circumscribed polygon uses tangent edges, so its perimeter is longer. Divide each perimeter by 2 to obtain a lower and an upper bound for π.</p>
+                <p>As the number of sides grows, the chords and tangent edges approach the circle and the gap narrows.</p>
+            </div>
+            <div>
+                <h2>From geometry to a formula</h2>
+                <div class="lab-formula"><span class="lower-color">n sin(π/n)</span> &lt; π &lt; <span class="upper-color">n tan(π/n)</span></div>
+                <p class="formula-caption">Angles are in radians. This demonstration uses modern trigonometry to calculate polygon perimeters and illustrate the geometry behind the method of exhaustion.</p>
+                <p>As n → ∞, both bounds converge to π. The gap decreases approximately as 1/n²: doubling the number of sides reduces it to about one quarter.</p>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer"><p>© 2026 Yang</p><nav class="footer-links" aria-label="Footer navigation"><a href="../interactive.html">Interactive</a><a href="https://github.com/jasonxu-cell" target="_blank" rel="noopener noreferrer">GitHub</a></nav></footer>
+</body>
+</html>

@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -64,9 +65,9 @@
             <article class="markdown-body" id="markdown-body" data-prerendered="true">
 <h2 id="crystallography-todo">Crystallography (TODO)</h2>
 <h2 id="rock-todo">Rock (TODO)</h2>
-<h3 id="igneous-rock">Igneous Rock</h3>
-<h3 id="sedimentary-rock">Sedimentary Rock</h3>
-<h3 id="metamorphic-rock">Metamorphic Rock</h3>
+<h3 id="igneous-rock-todo">Igneous Rock (TODO)</h3>
+<h3 id="sedimentary-rock-todo">Sedimentary Rock (TODO)</h3>
+<h3 id="metamorphic-rock-todo">Metamorphic Rock (TODO)</h3>
 <h2 id="earth-s-age">Earth&#039;s Age</h2>
 <p>What is the age of the Earth? This is an important problem in geoscience. The first answer based on geoscience was made by Lord Kelvin, who estimated that Earth&#039;s age ranged from 400 million to 20 million years. He assumed that its origin was by cooling from a molten state.</p>
 <p>In 1894, Henri Becquerel reported evidence for radioactivity by showing that photographic film became exposed when adjacent to uranium minerals. Then, Marie Curie and Pierre Curie identified two new radioactive elements – radium and polonium, which came to be recognized as intermediate elements formed from the radioactive decay of uranium.</p>
@@ -76,7 +77,7 @@
 <li>How accurate is radiometric dating?</li>
 <li>Can we place confidence in radiometric dating?</li>
 </ul>
-<p>Radioactive source decay equations$$N=N_0 e^{-\lambda t}$$where $\lambda$ is called as <span class="obsidian-red">decay constant </span> <span class="obsidian-red">half time </span>$$T_{\frac{1}{2}}=\frac{\ln 2}{\lambda}$$ Some common radioactive elements in the Earth:</p>
+<p>Radioactive source decay equations $$N=N_0 e^{-\lambda t}$$ where $\lambda$ is called as <span class="obsidian-red">decay constant </span> <span class="obsidian-red">half time </span> $$T_{\frac{1}{2}}=\frac{\ln 2}{\lambda}$$ Some common radioactive elements in the Earth:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Parent</th><th>Half-life ($10^9$yrs)</th><th>Daughter</th><th>Materials Dated</th></tr></thead><tbody><tr><td>$^{235}U$</td><td>0.704</td><td>$^{207}Pb$</td><td>zircon, uraninite, pitchblende</td></tr><tr><td>$^{40}K$</td><td>1.251</td><td>$^{40}Ar$</td><td>muscovite, biotite, hornblende, volcanic rock, glauconite, K-feldspar</td></tr><tr><td>$^{238}U$</td><td>4.468</td><td>$^{206}Pb$</td><td>zircon, uraninite, pitchblende</td></tr><tr><td>$^{87}Rb$</td><td>48.8</td><td>$^{87}Sr$</td><td>K-micas, K-feldspar, biotite, metamorphic rock, glauconite</td></tr></tbody></table></div>
 <p>If the model is a closed system <img src="../attachments/Screenshot%202026-05-16%20at%2014.03.18.png" alt="Screenshot 2026-05-16 at 14.03.18" loading="lazy" decoding="async" style="width: min(100%, 370px);"> In this picture, the yellow column represents the daughter atom ($d$), and the blue one represents the parent atom ($P$). $$P_t=P_0 e^{-\lambda t}$$ $$P_0+d_0=P_t+d_t$$ We cannot accurately measure $d_0,d_t$ and $P_0,P_t$, but we can accurately measure $d_0/P_0$ and $d_t/P_t$, denoted as $R_0$ and $R_t$.</p>
 <p>$$1+\frac{d_0}{P_0}=\frac{P_0+d_0}{P_0}=\frac{P_t+d_t}{P_0}=\frac{P_t+d_t}{P_t e^{\lambda t}}=e^{-\lambda t}(1+\frac{d_t}{P_t})$$ $$t=\frac{1}{\lambda}\ln \frac{1+R_t}{1+R_0}$$</p>
@@ -87,7 +88,7 @@
 <li>Initial daughter isotope $d_0$</li>
 <li>Stable reference isotope $D$</li>
 </ul>
-<p><img src="../attachments/Screenshot%202026-05-16%20at%2014.44.13.png" alt="Screenshot 2026-05-16 at 14.44.13" loading="lazy" decoding="async" style="width: min(100%, 372px);"> $d$ and $d_0$ is hard to distinguish. We can only measure $\frac{d+d_0}{D}$ $$\frac{d+d_0}{D}=\frac{P_0-P+d_0}{D}=\frac{P}{D}(e^{\lambda t}-1)+\frac{d_0}{D}$$ This is linear equation. By measuring lots of radioactive elements, we can draw an <span class="obsidian-red">Isochron</span>. <img src="../attachments/Screenshot%202026-05-16%20at%2015.02.24.png" alt="Screenshot 2026-05-16 at 15.02.24" loading="lazy" decoding="async" style="width: min(100%, 410px);"> Then$$m=e^{\lambda t}-1$$ $$t=\frac{1}{\lambda}\ln (m+1)$$ We can choose zircons to measure the age of the Earth.</p>
+<p><img src="../attachments/Screenshot%202026-05-16%20at%2014.44.13.png" alt="Screenshot 2026-05-16 at 14.44.13" loading="lazy" decoding="async" style="width: min(100%, 372px);"> $d$ and $d_0$ is hard to distinguish. We can only measure $\frac{d+d_0}{D}$ $$\frac{d+d_0}{D}=\frac{P_0-P+d_0}{D}=\frac{P}{D}(e^{\lambda t}-1)+\frac{d_0}{D}$$ This is linear equation. By measuring lots of radioactive elements, we can draw an <span class="obsidian-red">Isochron</span>. <img src="../attachments/Screenshot%202026-05-16%20at%2015.02.24.png" alt="Screenshot 2026-05-16 at 15.02.24" loading="lazy" decoding="async" style="width: min(100%, 410px);"> Then $$m=e^{\lambda t}-1$$ $$t=\frac{1}{\lambda}\ln (m+1)$$ We can choose zircons to measure the age of the Earth.</p>
 <ul>
 <li>Zircons are everywhere</li>
 <li>They form in igneous and metamorphic rocks and then erode and are incorporated into sedimentary rocks</li>
@@ -125,11 +126,11 @@
 <p>Most of observed mantle material is not primary, but has a liquid (basalt) fraction removed by partial melting. Ringwood coined the term <span class="obsidian-red">“pyrolite”</span> for primitive fertile mantle. <img src="../attachments/Screenshot%202026-05-27%20at%2022.49.31-optimized.webp" alt="Screenshot 2026-05-27 at 22.49.31" loading="lazy" decoding="async" style="width: min(100%, 532px);"></p>
 <p>The following figure illustrates the high-pressure phase transitions of the Earth&#039;s mantle minerals as pressure (depth) increases. <img src="../attachments/Screenshot%202026-05-27%20at%2022.56.51-optimized.webp" alt="Screenshot 2026-05-27 at 22.56.51" loading="lazy" decoding="async" style="width: min(100%, 532px);"> Due to the different phase of olivine under different pressure, mantle has three discontinuities.</p>
 <p><img src="../attachments/Screenshot%202026-05-27%20at%2023.36.38-optimized.webp" alt="Screenshot 2026-05-27 at 23.36.38" loading="lazy" decoding="async" style="width: min(100%, 532px);"> If the temperature conditions and mineral composition of the upper and lower boundaries of the Earth&#039;s mantle transition zone are different, the morphology of the transition zone will also change accordingly. <img src="../attachments/Screenshot%202026-05-27%20at%2023.26.27-optimized.webp" alt="Screenshot 2026-05-27 at 23.26.27" loading="lazy" decoding="async" style="width: min(100%, 532px);"> The following figure can intuitively illustrate this property. <img src="../attachments/Screenshot%202026-05-27%20at%2023.27.17-optimized.webp" alt="Screenshot 2026-05-27 at 23.27.17" loading="lazy" decoding="async" style="width: min(100%, 532px);">Agius et al. (2021)</p>
-<h4 id="410-km">410 km</h4>
+<h4 id="km">km</h4>
 <p>The main process involves the transformation of Olivine into the more compact Wadsleyite. <img src="../attachments/Screenshot%202026-05-27%20at%2023.04.15-optimized.webp" alt="Screenshot 2026-05-27 at 23.04.15" loading="lazy" decoding="async" style="width: min(100%, 532px);">Chambers et al. (2005)</p>
-<h4 id="520-km">520 km</h4>
+<h4 id="km-2">km</h4>
 <p>The main process involves the further transformation of Wadsleyite into Ringwoodite. <img src="../attachments/Screenshot%202026-05-27%20at%2023.04.40-optimized.webp" alt="Screenshot 2026-05-27 at 23.04.40" loading="lazy" decoding="async" style="width: min(100%, 532px);">Tian et al. (2020)</p>
-<h4 id="660-km">660 km</h4>
+<h4 id="km-3">km</h4>
 <p>This is an extremely dramatic and important phase transition zone. Ringwoodite decomposes here, transforming into Perovskite and Periclase. <img src="../attachments/Screenshot%202026-05-27%20at%2023.05.47-optimized.webp" alt="Screenshot 2026-05-27 at 23.05.47" loading="lazy" decoding="async" style="width: min(100%, 532px);">Deuss et al. (2006)</p>
 <h4 id="composition-and-mineralogy-of-the-lower-mantle">Composition and Mineralogy of the Lower Mantle</h4>
 <p>Almost all direct observations of deep mantle come from seismology. Any mineralogical model has to match the seismic observations.</p>
@@ -215,22 +216,22 @@
 <p>Slab Pull is widely considered the primary force driving plate movement. This is because, over time, rocks formed from mid-ocean ridges are continuously pushed outwards, their temperature decreases, and their density increases. When this high-density oceanic plate collides with another plate, it bends under its own weight and subducts into the mantle. This force is also transmitted to the plate that has not yet subducted, pulling it along as well.</p>
 <p>During the subduction process, the increasing pressure on the rocks leads to phase transitions. For example, at depths of about 40-60 kilometers, basalt in the oceanic crust transforms into eclogite. Phase transitions are a significant reason for the increased density in subduction zones.</p>
 <p><img src="../attachments/Screenshot%202026-03-30%20at%2020.48.09.png" alt="Screenshot 2026-03-30 at 20.48.09" loading="lazy" decoding="async" style="width: min(100%, 532px);"></p>
-<p>As shown in the figure, we assume that the tectonic plate inserts into the mantle at an angle $\Psi$, and denote the density of the lithosphere as $\rho_L$ and the density of the mantle as $\rho_M$. Since the plate density gradually changes from $\rho_L$ to $\rho_M$ during subduction, we denote the density difference as $\frac{1}{2}(\rho_L-\rho_M)$. Let $E$ be the depth at which the density difference disappears during subduction, and $L$ be the thickness of the lithosphere. Because subduction actually involves a certain inclination, the actual extension length of the plate in the mantle (along the slope) is $E / \sin \Psi$. Therefore, the tensile force exerted by the plate on the subduction zone is...$$F_{sp}=\frac{\rho_L-\rho_M}{2\sin \Psi}ELg$$</p>
+<p>As shown in the figure, we assume that the tectonic plate inserts into the mantle at an angle $\Psi$, and denote the density of the lithosphere as $\rho_L$ and the density of the mantle as $\rho_M$. Since the plate density gradually changes from $\rho_L$ to $\rho_M$ during subduction, we denote the density difference as $\frac{1}{2}(\rho_L-\rho_M)$. Let $E$ be the depth at which the density difference disappears during subduction, and $L$ be the thickness of the lithosphere. Because subduction actually involves a certain inclination, the actual extension length of the plate in the mantle (along the slope) is $E / \sin \Psi$. Therefore, the tensile force exerted by the plate on the subduction zone is... $$F_{sp}=\frac{\rho_L-\rho_M}{2\sin \Psi}ELg$$</p>
 <h4 id="ridge-push">Ridge Push</h4>
 <p>Mid-ocean ridge thrust is considered the second strongest force driving plate movement after plate tension. Its formation is generally attributed to two main factors:</p>
 <ol>
 <li>Due to the thinner lithosphere and higher elevation at mid-ocean ridges, the entire plate &quot;slips&quot; from the ridge to the sides under gravity, generating a horizontal pressure gradient force.</li>
 <li>Over time, newly formed plates gradually harden and age, increasing their density and beginning to sink, causing seafloor depth to increase with distance from the mid-ocean ridge.</li>
 </ol>
-<p>We can quantitatively analyze this physical process. First, from the one-dimensional heat conduction equation, we have$$\frac{\partial T}{\partial t}=\kappa \frac{\partial^2 T}{\partial z^2}$$We assume:</p>
+<p>We can quantitatively analyze this physical process. First, from the one-dimensional heat conduction equation, we have $$\frac{\partial T}{\partial t}=\kappa \frac{\partial^2 T}{\partial z^2}$$ We assume:</p>
 <ul>
 <li>The surface temperature is constant, i.e., $T(z=0,t)=T_0$</li>
 <li>The temperature in the deep mantle is constant, i.e., $T(z=+\infty,t)=T_m$</li>
 <li>We assume the lithosphere &quot;floats&quot; on the asthenosphere and that the pressure is equal at a certain compensation depth.</li>
 </ul>
-<p>The solution is:$$\frac{T(z, t) - T_0}{T_m - T_0} = \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right)$$</p>
+<p>The solution is: $$\frac{T(z, t) - T_0}{T_m - T_0} = \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right)$$</p>
 <p>Therefore, for two points with the same temperature, $\frac{z}{2\sqrt{\kappa t}}$ is constant, meaning that the later the formation time, the thicker the plate.</p>
-<p>Considering the coefficient of thermal expansion $\alpha_v$, density distribution:$$\rho(z, t) = \rho_m [1 + \alpha_v (T_m - T(z, t))]$$ Substituting the temperature formula into:$$\rho(z, t) = \rho_m \left[ 1 + \alpha_v (T_m-T_0) \left( 1 - \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right) \right) \right]$$ The thrust of the mid-ocean ridge, $F_{rp}$, is the resultant force of the pressure difference between the two locations over the entire depth. $$\begin{align*}F_{rp} &amp;= \int_0^\infty (P_{plate}(z, t) - P_{ridge}(z)) \, \mathrm{d}z\\&amp;=g \rho_m \alpha_v (T_m-T_0) \int_0^\infty \left[ \int_z^\infty \text{erfc}\left( \frac{z&#039;}{2\sqrt{\kappa t}} \right) \mathrm{d}z&#039; \right] \mathrm{d}z\\= &amp;g \rho_m \alpha_v (T_m - T_0) \left[ 1 + \frac{2}{\pi} \frac{\rho_m \alpha_v (T_m - T_0)}{\rho_m - \rho_0} \right] \kappa t\end{align*}$$</p>
+<p>Considering the coefficient of thermal expansion $\alpha_v$, density distribution: $$\rho(z, t) = \rho_m [1 + \alpha_v (T_m - T(z, t))]$$ Substituting the temperature formula into: $$\rho(z, t) = \rho_m \left[ 1 + \alpha_v (T_m-T_0) \left( 1 - \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right) \right) \right]$$ The thrust of the mid-ocean ridge, $F_{rp}$, is the resultant force of the pressure difference between the two locations over the entire depth. $$\begin{align*}F_{rp} &amp;= \int_0^\infty (P_{plate}(z, t) - P_{ridge}(z)) \, \,\mathrm{d}z\\&amp;=g \rho_m \alpha_v (T_m-T_0) \int_0^\infty \left[ \int_z^\infty \text{erfc}\left( \frac{z&#039;}{2\sqrt{\kappa t}} \right)\,\mathrm{d}z&#039; \right]\,\mathrm{d}z\\= &amp;g \rho_m \alpha_v (T_m - T_0) \left[ 1 + \frac{2}{\pi} \frac{\rho_m \alpha_v (T_m - T_0)}{\rho_m - \rho_0} \right] \kappa t\end{align*}$$</p>
 <h3 id="plate-motions">Plate Motions</h3>
 <h4 id="relative-plate-motions">Relative Plate Motions</h4>
 <p>Detect Method:</p>
@@ -297,7 +298,7 @@
 <h2 id="structural-geology-todo">Structural Geology (TODO)</h2>
 <h2 id="regional-tectonics-of-china-todo">Regional Tectonics of China (TODO)</h2>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"crystallography-todo","level":1,"text":"Crystallography (TODO)"},{"id":"rock-todo","level":1,"text":"Rock (TODO)"},{"id":"igneous-rock","level":2,"text":"Igneous Rock"},{"id":"sedimentary-rock","level":2,"text":"Sedimentary Rock"},{"id":"metamorphic-rock","level":2,"text":"Metamorphic Rock"},{"id":"earth-s-age","level":1,"text":"Earth's Age"},{"id":"geologic-time-scale","level":2,"text":"Geologic Time Scale"},{"id":"the-structure-and-composition-of-earth","level":1,"text":"The Structure and Composition of Earth"},{"id":"crust","level":2,"text":"Crust"},{"id":"composition-in-different-depth","level":2,"text":"Composition in Different Depth"},{"id":"formation-of-continental-crust","level":2,"text":"Formation of Continental Crust"},{"id":"formation-of-oceanic-crust","level":2,"text":"Formation of Oceanic Crust"},{"id":"infinite-onions","level":3,"text":"Infinite Onions"},{"id":"infinite-leek","level":3,"text":"Infinite Leek"},{"id":"mantle","level":2,"text":"Mantle"},{"id":"410-km","level":3,"text":"410 km"},{"id":"520-km","level":3,"text":"520 km"},{"id":"660-km","level":3,"text":"660 km"},{"id":"composition-and-mineralogy-of-the-lower-mantle","level":3,"text":"Composition and Mineralogy of the Lower Mantle"},{"id":"midocean-ridge-basalts-morb","level":3,"text":"Mid-Ocean Ridge Basalts (MORB)"},{"id":"large-low-shear-velocity-provinces-llsvp","level":3,"text":"Large Low Shear Velocity Provinces (LLSVP)"},{"id":"core","level":2,"text":"Core"},{"id":"core-formation","level":3,"text":"Core Formation"},{"id":"the-theory-of-plate-tectonics","level":1,"text":"The Theory of Plate Tectonics"},{"id":"continental-drift","level":2,"text":"Continental Drift"},{"id":"seafloor-spreading","level":2,"text":"Seafloor Spreading"},{"id":"world-plates","level":2,"text":"World Plates"},{"id":"three-types-of-plate-boundaries","level":2,"text":"Three Types of Plate Boundaries"},{"id":"driving-force-of-plate-tectonics","level":2,"text":"Driving Force of Plate Tectonics"},{"id":"slab-pull","level":3,"text":"Slab Pull"},{"id":"ridge-push","level":3,"text":"Ridge Push"},{"id":"plate-motions","level":2,"text":"Plate Motions"},{"id":"relative-plate-motions","level":3,"text":"Relative Plate Motions"},{"id":"absolute-plate-motions","level":3,"text":"Absolute Plate Motions"},{"id":"morphology-and-fate-of-subducted-slabs","level":2,"text":"Morphology and Fate of Subducted Slabs"},{"id":"earth-evolution","level":1,"text":"Earth Evolution"},{"id":"wilson-cycle","level":2,"text":"Wilson Cycle"},{"id":"snowball-incident","level":2,"text":"Snowball Incident"},{"id":"structural-geology-todo","level":1,"text":"Structural Geology (TODO)"},{"id":"regional-tectonics-of-china-todo","level":1,"text":"Regional Tectonics of China (TODO)"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"crystallography-todo","level":1,"text":"Crystallography (TODO)"},{"id":"rock-todo","level":1,"text":"Rock (TODO)"},{"id":"igneous-rock-todo","level":2,"text":"Igneous Rock (TODO)"},{"id":"sedimentary-rock-todo","level":2,"text":"Sedimentary Rock (TODO)"},{"id":"metamorphic-rock-todo","level":2,"text":"Metamorphic Rock (TODO)"},{"id":"earth-s-age","level":1,"text":"Earth's Age"},{"id":"geologic-time-scale","level":2,"text":"Geologic Time Scale"},{"id":"the-structure-and-composition-of-earth","level":1,"text":"The Structure and Composition of Earth"},{"id":"crust","level":2,"text":"Crust"},{"id":"composition-in-different-depth","level":2,"text":"Composition in Different Depth"},{"id":"formation-of-continental-crust","level":2,"text":"Formation of Continental Crust"},{"id":"formation-of-oceanic-crust","level":2,"text":"Formation of Oceanic Crust"},{"id":"infinite-onions","level":3,"text":"Infinite Onions"},{"id":"infinite-leek","level":3,"text":"Infinite Leek"},{"id":"mantle","level":2,"text":"Mantle"},{"id":"km","level":3,"text":"km"},{"id":"km-2","level":3,"text":"km"},{"id":"km-3","level":3,"text":"km"},{"id":"composition-and-mineralogy-of-the-lower-mantle","level":3,"text":"Composition and Mineralogy of the Lower Mantle"},{"id":"midocean-ridge-basalts-morb","level":3,"text":"Mid-Ocean Ridge Basalts (MORB)"},{"id":"large-low-shear-velocity-provinces-llsvp","level":3,"text":"Large Low Shear Velocity Provinces (LLSVP)"},{"id":"core","level":2,"text":"Core"},{"id":"core-formation","level":3,"text":"Core Formation"},{"id":"the-theory-of-plate-tectonics","level":1,"text":"The Theory of Plate Tectonics"},{"id":"continental-drift","level":2,"text":"Continental Drift"},{"id":"seafloor-spreading","level":2,"text":"Seafloor Spreading"},{"id":"world-plates","level":2,"text":"World Plates"},{"id":"three-types-of-plate-boundaries","level":2,"text":"Three Types of Plate Boundaries"},{"id":"driving-force-of-plate-tectonics","level":2,"text":"Driving Force of Plate Tectonics"},{"id":"slab-pull","level":3,"text":"Slab Pull"},{"id":"ridge-push","level":3,"text":"Ridge Push"},{"id":"plate-motions","level":2,"text":"Plate Motions"},{"id":"relative-plate-motions","level":3,"text":"Relative Plate Motions"},{"id":"absolute-plate-motions","level":3,"text":"Absolute Plate Motions"},{"id":"morphology-and-fate-of-subducted-slabs","level":2,"text":"Morphology and Fate of Subducted Slabs"},{"id":"earth-evolution","level":1,"text":"Earth Evolution"},{"id":"wilson-cycle","level":2,"text":"Wilson Cycle"},{"id":"snowball-incident","level":2,"text":"Snowball Incident"},{"id":"structural-geology-todo","level":1,"text":"Structural Geology (TODO)"},{"id":"regional-tectonics-of-china-todo","level":1,"text":"Regional Tectonics of China (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -316,11 +317,11 @@
 
 # Rock (TODO)
 
-## Igneous Rock
+## Igneous Rock (TODO)
 
-## Sedimentary Rock
+## Sedimentary Rock (TODO)
 
-## Metamorphic Rock
+## Metamorphic Rock (TODO)
 
 # Earth's Age
 
@@ -334,8 +335,11 @@ In 1907, Rutherford suggested that radioactive decay in uranium-bearing minerals
 - How accurate is radiometric dating?
 - Can we place confidence in radiometric dating?
 
-Radioactive source decay equations$$N=N_0 e^{-\lambda t}$$where $\lambda$ is called as <span style="color: red;">decay constant </span>
-<span style="color: red;">half time </span>$$T_{\frac{1}{2}}=\frac{\ln 2}{\lambda}$$
+Radioactive source decay equations
+$$N=N_0 e^{-\lambda t}$$
+where $\lambda$ is called as <span style="color: red;">decay constant </span>
+<span style="color: red;">half time </span>
+$$T_{\frac{1}{2}}=\frac{\ln 2}{\lambda}$$
 Some common radioactive elements in the Earth:
 
 | Parent    | Half-life ($10^9$yrs) | Daughter   | Materials Dated                                                       |
@@ -366,7 +370,8 @@ $d$ and $d_0$ is hard to distinguish. We can only measure $\frac{d+d_0}{D}$
 $$\frac{d+d_0}{D}=\frac{P_0-P+d_0}{D}=\frac{P}{D}(e^{\lambda t}-1)+\frac{d_0}{D}$$
 This is linear equation. By measuring lots of radioactive elements, we can draw an <span style="color: red;">Isochron</span>.
 ![Screenshot 2026-05-16 at 15.02.24](../attachments/Screenshot%202026-05-16%20at%2015.02.24.png){width=410}
-Then$$m=e^{\lambda t}-1$$
+Then
+$$m=e^{\lambda t}-1$$
 $$t=\frac{1}{\lambda}\ln (m+1)$$
 We can choose zircons to measure the age of the Earth.
 - Zircons are everywhere
@@ -447,13 +452,13 @@ If the temperature conditions and mineral composition of the upper and lower bou
 The following figure can intuitively illustrate this property.
 ![Screenshot 2026-05-27 at 23.27.17](../attachments/Screenshot%202026-05-27%20at%2023.27.17-optimized.webp){width=532}Agius et al. (2021) 
 
-### 410 km
+### km
 The main process involves the transformation of Olivine into the more compact Wadsleyite.
 ![Screenshot 2026-05-27 at 23.04.15](../attachments/Screenshot%202026-05-27%20at%2023.04.15-optimized.webp){width=532}Chambers et al. (2005)
-### 520 km
+### km
 The main process involves the further transformation of Wadsleyite into Ringwoodite.
 ![Screenshot 2026-05-27 at 23.04.40](../attachments/Screenshot%202026-05-27%20at%2023.04.40-optimized.webp){width=532}Tian et al. (2020)
-### 660 km
+### km
 This is an extremely dramatic and important phase transition zone. Ringwoodite decomposes here, transforming into Perovskite and Periclase.
 ![Screenshot 2026-05-27 at 23.05.47](../attachments/Screenshot%202026-05-27%20at%2023.05.47-optimized.webp){width=532}Deuss et al. (2006)
 ### Composition and Mineralogy of the Lower Mantle
@@ -549,7 +554,8 @@ During the subduction process, the increasing pressure on the rocks leads to pha
 
 ![Screenshot 2026-03-30 at 20.48.09](../attachments/Screenshot%202026-03-30%20at%2020.48.09.png){width=532}
 
-As shown in the figure, we assume that the tectonic plate inserts into the mantle at an angle $\Psi$, and denote the density of the lithosphere as $\rho_L$ and the density of the mantle as $\rho_M$. Since the plate density gradually changes from $\rho_L$ to $\rho_M$ during subduction, we denote the density difference as $\frac{1}{2}(\rho_L-\rho_M)$. Let $E$ be the depth at which the density difference disappears during subduction, and $L$ be the thickness of the lithosphere. Because subduction actually involves a certain inclination, the actual extension length of the plate in the mantle (along the slope) is $E / \sin \Psi$. Therefore, the tensile force exerted by the plate on the subduction zone is...$$F_{sp}=\frac{\rho_L-\rho_M}{2\sin \Psi}ELg$$
+As shown in the figure, we assume that the tectonic plate inserts into the mantle at an angle $\Psi$, and denote the density of the lithosphere as $\rho_L$ and the density of the mantle as $\rho_M$. Since the plate density gradually changes from $\rho_L$ to $\rho_M$ during subduction, we denote the density difference as $\frac{1}{2}(\rho_L-\rho_M)$. Let $E$ be the depth at which the density difference disappears during subduction, and $L$ be the thickness of the lithosphere. Because subduction actually involves a certain inclination, the actual extension length of the plate in the mantle (along the slope) is $E / \sin \Psi$. Therefore, the tensile force exerted by the plate on the subduction zone is...
+$$F_{sp}=\frac{\rho_L-\rho_M}{2\sin \Psi}ELg$$
 ### Ridge Push
 
 Mid-ocean ridge thrust is considered the second strongest force driving plate movement after plate tension. Its formation is generally attributed to two main factors:
@@ -557,20 +563,25 @@ Mid-ocean ridge thrust is considered the second strongest force driving plate mo
 1. Due to the thinner lithosphere and higher elevation at mid-ocean ridges, the entire plate "slips" from the ridge to the sides under gravity, generating a horizontal pressure gradient force.
 2. Over time, newly formed plates gradually harden and age, increasing their density and beginning to sink, causing seafloor depth to increase with distance from the mid-ocean ridge.
 
-We can quantitatively analyze this physical process. First, from the one-dimensional heat conduction equation, we have$$\frac{\partial T}{\partial t}=\kappa \frac{\partial^2 T}{\partial z^2}$$We assume:
+We can quantitatively analyze this physical process. First, from the one-dimensional heat conduction equation, we have
+$$\frac{\partial T}{\partial t}=\kappa \frac{\partial^2 T}{\partial z^2}$$
+We assume:
 - The surface temperature is constant, i.e., $T(z=0,t)=T_0$
 - The temperature in the deep mantle is constant, i.e., $T(z=+\infty,t)=T_m$
 - We assume the lithosphere "floats" on the asthenosphere and that the pressure is equal at a certain compensation depth.
 
 
-The solution is:$$\frac{T(z, t) - T_0}{T_m - T_0} = \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right)$$
+The solution is:
+$$\frac{T(z, t) - T_0}{T_m - T_0} = \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right)$$
 
 Therefore, for two points with the same temperature, $\frac{z}{2\sqrt{\kappa t}}$ is constant, meaning that the later the formation time, the thicker the plate.
 
-Considering the coefficient of thermal expansion $\alpha_v$, density distribution:$$\rho(z, t) = \rho_m [1 + \alpha_v (T_m - T(z, t))]$$
-Substituting the temperature formula into:$$\rho(z, t) = \rho_m \left[ 1 + \alpha_v (T_m-T_0) \left( 1 - \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right) \right) \right]$$
+Considering the coefficient of thermal expansion $\alpha_v$, density distribution:
+$$\rho(z, t) = \rho_m [1 + \alpha_v (T_m - T(z, t))]$$
+Substituting the temperature formula into:
+$$\rho(z, t) = \rho_m \left[ 1 + \alpha_v (T_m-T_0) \left( 1 - \text{erf}\left( \frac{z}{2\sqrt{\kappa t}} \right) \right) \right]$$
 The thrust of the mid-ocean ridge, $F_{rp}$, is the resultant force of the pressure difference between the two locations over the entire depth.
-$$\begin{align*}F_{rp} &= \int_0^\infty (P_{plate}(z, t) - P_{ridge}(z)) \, \mathrm{d}z\\&=g \rho_m \alpha_v (T_m-T_0) \int_0^\infty \left[ \int_z^\infty \text{erfc}\left( \frac{z'}{2\sqrt{\kappa t}} \right) \mathrm{d}z' \right] \mathrm{d}z\\= &g \rho_m \alpha_v (T_m - T_0) \left[ 1 + \frac{2}{\pi} \frac{\rho_m \alpha_v (T_m - T_0)}{\rho_m - \rho_0} \right] \kappa t\end{align*}$$
+$$\begin{align*}F_{rp} &= \int_0^\infty (P_{plate}(z, t) - P_{ridge}(z)) \, \,\mathrm{d}z\\&=g \rho_m \alpha_v (T_m-T_0) \int_0^\infty \left[ \int_z^\infty \text{erfc}\left( \frac{z'}{2\sqrt{\kappa t}} \right)\,\mathrm{d}z' \right]\,\mathrm{d}z\\= &g \rho_m \alpha_v (T_m - T_0) \left[ 1 + \frac{2}{\pi} \frac{\rho_m \alpha_v (T_m - T_0)}{\rho_m - \rho_0} \right] \kappa t\end{align*}$$
 ## Plate Motions
 ### Relative Plate Motions
 

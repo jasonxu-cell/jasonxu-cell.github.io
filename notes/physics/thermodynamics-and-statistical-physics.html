@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -64,14 +65,14 @@
             <article class="markdown-body" id="markdown-body" data-prerendered="true">
 <h2 id="black-body">Black Body</h2>
 <p>Considering about a cube with E&amp;M standing wave:</p>
-<p>We have $$E_1=\epsilon_1\cos k_1x_1\sin k_2x_2\sin k_3x_3$$ $$E_2=\epsilon_2\sin k_1x_1\cos k_2x_2\sin k_3x_3$$ $$E_3=\epsilon_3\sin k_1x_1\sin k_2x_2\cos k_3x_3$$ where$$k_i=\frac{n_i\pi}{a},n_i\in\mathbb{Z} $$ Use Maxwell relation</p>
+<p>We have $$E_1=\epsilon_1\cos k_1x_1\sin k_2x_2\sin k_3x_3$$ $$E_2=\epsilon_2\sin k_1x_1\cos k_2x_2\sin k_3x_3$$ $$E_3=\epsilon_3\sin k_1x_1\sin k_2x_2\cos k_3x_3$$ where $$k_i=\frac{n_i\pi}{a},n_i\in\mathbb{Z} $$ Use Maxwell relation</p>
 <p>$$\nabla \cdot\mathbf{E}=0\Rightarrow k_1\epsilon_1+k_2\epsilon_2+k_3\epsilon_3=0$$</p>
 <p>$$(\nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2})\mathbf{E}=0\Rightarrow n_1^2+n_2^2+n_3^2=\frac{\omega^2}{c^2}\frac{a^2}{\pi^2}$$</p>
 <p>So we have $$\# \text{modes in sphere}=N\approx \frac{4}{3}\pi\frac{\omega^3}{c^3}\frac{a^3}{\pi^3}\times2(\text{polarization})\times\frac{1}{8}(\text{only positive}) $$</p>
 <p>Considering $(\omega,\omega+\mathrm{d}\omega)$, then $$\mathrm{d} N\approx \frac{\omega^2}{c^3}\frac{V}{\pi^2} \mathrm{d}\omega$$ To transform it into energy, we use <span class="obsidian-red">equipartition</span>, which consider every one has the same energy $k_B T$ $$\rho(\omega,T)=\frac{\mathrm{d}E}{V\mathrm{d}\omega}=k_B T\frac{\omega^2}{\pi^2 c^3}$$ <span class="obsidian-red">Rayleigh-Jeans Formula</span>: $$J(\omega,T)=\frac{k_BT}{8\pi^3c^2}\omega^2$$ <span class="obsidian-red">UV disaster</span></p>
 <p>Planck $$\epsilon=\hbar\omega$$</p>
-<p><span class="obsidian-red">Partition function</span>$$Z=\sum_{n=0}^{+\infty}e^{-\frac{E_n}{k_BT}}$$ $$E=-\frac{\mathrm{d}}{\mathrm{d}\beta}\log Z=\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$</p>
-<p>When$$k_BT \gg\hbar\omega$$ we have$$E\to k_BT$$ $$\rho=\frac{\mathrm{d}E}{V\mathrm{d}\omega}=\frac{\mathrm{d}N}{V\mathrm{d}\omega}\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$ $$J(\omega,T)=\frac{1}{8\pi^3c^2}\frac{\hbar\omega^3}{e^{\hbar\omega/k_BT}-1}$$</p>
+<p><span class="obsidian-red">Partition function</span> $$Z=\sum_{n=0}^{+\infty}e^{-\frac{E_n}{k_BT}}$$ $$E=-\frac{\mathrm{d}}{\mathrm{d}\beta}\log Z=\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$</p>
+<p>When $$k_BT \gg\hbar\omega$$ we have $$E\to k_BT$$ $$\rho=\frac{\mathrm{d}E}{V\mathrm{d}\omega}=\frac{\mathrm{d}N}{V\mathrm{d}\omega}\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$ $$J(\omega,T)=\frac{1}{8\pi^3c^2}\frac{\hbar\omega^3}{e^{\hbar\omega/k_BT}-1}$$</p>
 <p>$$\hbar=1.05\times10^{-34}J\cdot s$$ $$h=2\pi\hbar$$</p>
 <h2 id="thermodynamic-processes-todo">Thermodynamic Processes (TODO)</h2>
 <ul>
@@ -100,7 +101,8 @@ We have
 $$E_1=\epsilon_1\cos k_1x_1\sin k_2x_2\sin k_3x_3$$
 $$E_2=\epsilon_2\sin k_1x_1\cos k_2x_2\sin k_3x_3$$
 $$E_3=\epsilon_3\sin k_1x_1\sin k_2x_2\cos k_3x_3$$
-where$$k_i=\frac{n_i\pi}{a},n_i\in\mathbb{Z} $$
+where
+$$k_i=\frac{n_i\pi}{a},n_i\in\mathbb{Z} $$
 Use Maxwell relation
 
 $$\nabla \cdot\mathbf{E}=0\Rightarrow k_1\epsilon_1+k_2\epsilon_2+k_3\epsilon_3=0$$
@@ -121,11 +123,14 @@ $$J(\omega,T)=\frac{k_BT}{8\pi^3c^2}\omega^2$$
 Planck
 $$\epsilon=\hbar\omega$$
 
-<span style="color: red;">Partition function</span>$$Z=\sum_{n=0}^{+\infty}e^{-\frac{E_n}{k_BT}}$$
+<span style="color: red;">Partition function</span>
+$$Z=\sum_{n=0}^{+\infty}e^{-\frac{E_n}{k_BT}}$$
 $$E=-\frac{\mathrm{d}}{\mathrm{d}\beta}\log Z=\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$
 
-When$$k_BT \gg\hbar\omega$$
-we have$$E\to k_BT$$
+When
+$$k_BT \gg\hbar\omega$$
+we have
+$$E\to k_BT$$
 $$\rho=\frac{\mathrm{d}E}{V\mathrm{d}\omega}=\frac{\mathrm{d}N}{V\mathrm{d}\omega}\frac{\hbar\omega}{e^{\hbar\omega/k_BT}-1}$$
 $$J(\omega,T)=\frac{1}{8\pi^3c^2}\frac{\hbar\omega^3}{e^{\hbar\omega/k_BT}-1}$$
 

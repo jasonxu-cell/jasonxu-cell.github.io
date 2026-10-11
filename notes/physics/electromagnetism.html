@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -65,13 +66,14 @@
 <h2 id="electrostatics">Electrostatics</h2>
 <p><span class="obsidian-red">Coulomb&#039;s law</span> (vacuum, static, point charges): $$\mathbf{F} = \frac{qQ}{4\pi\varepsilon_0 r^2}\,\hat{r}$$ where $\varepsilon_0$ is the vacuum permittivity.</p>
 <p>Since $\mathbf{F}\propto Q$, define the <span class="obsidian-red">electric field</span> $\mathbf{F} = Q\mathbf{E}$. The field of a single static point charge $Q$ is $$\mathbf{E} = \frac{Q}{4\pi\varepsilon_0 r^2}\,\hat{r}$$</p>
-<p>Gauss&#039;s law: $$\oint_S \mathbf{E}\cdot \mathrm{d}\mathbf{S} = \frac{Q}{\varepsilon_0}, \qquad \nabla\cdot\mathbf{E} = \frac{\rho}{\varepsilon_0}$$</p>
-<p>Curl of the electrostatic field: $$\oint_L \mathbf{E}\cdot \mathrm{d}\mathbf{l} = 0, \qquad \nabla\times\mathbf{E} = \mathbf{0} \;\Rightarrow\; \mathbf{E} = -\nabla\phi \quad(\text{potential})$$</p>
+<p>Gauss&#039;s law: $$\oint_S \mathbf{E}\cdot\,\mathrm{d}\mathbf{S} = \frac{Q}{\varepsilon_0}, \qquad \nabla\cdot\mathbf{E} = \frac{\rho}{\varepsilon_0}$$</p>
+<p>Curl of the electrostatic field: $$\oint_L \mathbf{E}\cdot\,\mathrm{d}\mathbf{l} = 0, \qquad \nabla\times\mathbf{E} = \mathbf{0} \;\Rightarrow\; \mathbf{E} = -\nabla\phi \quad(\text{potential})$$</p>
 <p>Combining gives <span class="obsidian-red">Poisson&#039;s equation</span>: $$\nabla^2\phi = -\frac{\rho}{\varepsilon_0}$$</p>
 <p>For a point charge, Coulomb&#039;s law gives $\phi = \dfrac{q}{4\pi\varepsilon_0 r}$ with $\rho = q\,\delta(\mathbf{r})$, hence the identity $$\nabla^2\!\left(\frac{1}{r}\right) = -4\pi\,\delta(\mathbf{r})$$</p>
 <p>In general, with $\mathbf{R} = \mathbf{r}-\mathbf{r}\,&#039;$: $$\Delta\mathbf{E} = \frac{1}{4\pi\varepsilon_0}\frac{\rho(\mathbf{r}\,&#039;)\,\Delta V&#039;}{R^2}\,\hat{e}_R,\qquad \mathbf{E} = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{R^2}\,\hat{e}_R\,\mathrm{d}V&#039;,$$ $$\phi = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{R}\,\mathrm{d}V&#039; = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{|\mathbf{r}-\mathbf{r}\,&#039;|}\,\mathrm{d}V&#039;.$$</p>
 <h3 id="multipole-expansion">Multipole Expansion</h3>
-<p>Taylor-expand the kernel (Einstein summation convention: repeated indices are summed): $$f(\mathbf{r}-\mathbf{r}\,&#039;) = f(\mathbf{r}) - x_i&#039;\,\partial_i f(\mathbf{r}) + \tfrac{1}{2}x_i&#039; x_j&#039;\,\partial_i\partial_j f(\mathbf{r}) + \cdots$$</p>
+<p>Einstein summation convention: repeated indices are summed.</p>
+<p>Taylor-expand the kernel: $$f(\mathbf{r}-\mathbf{r}\,&#039;) = f(\mathbf{r}) - x_i&#039;\,\partial_i f(\mathbf{r}) + \tfrac{1}{2}x_i&#039; x_j&#039;\,\partial_i\partial_j f(\mathbf{r}) + \cdots$$</p>
 <p>This yields the <span class="obsidian-red">multipole expansion</span> of $\phi$: $$\phi^{(0)} = \frac{1}{4\pi\varepsilon_0}\frac{1}{r}\int\rho\,\mathrm{d}V&#039;,\quad \phi^{(1)} = -\frac{1}{4\pi\varepsilon_0}\int\rho\,x_i&#039;\,\mathrm{d}V&#039;\;\nabla\!\left(\tfrac{1}{r}\right),\quad \phi^{(2)} = \frac{1}{8\pi\varepsilon_0}\int\rho\,x_i&#039;x_j&#039;\,\mathrm{d}V&#039;\;\nabla\nabla\!\left(\tfrac{1}{r}\right).$$</p>
 <p>Monopole (total charge): $$q = \int\rho\,\mathrm{d}V&#039; = \sum_a q_a,\qquad \phi^{(0)} = \frac{q}{4\pi\varepsilon_0 r},\qquad \mathbf{E}^{(0)} = \frac{q\,\hat{r}}{4\pi\varepsilon_0 r^2}.$$</p>
 <p><span class="obsidian-red">Electric dipole moment</span>: $$\mathbf{p} = \int\rho\,\mathbf{r}\,&#039;\,\mathrm{d}V&#039; = \sum_a q_a\,\mathbf{r}_a&#039;,$$ $$\phi^{(1)} = \frac{\mathbf{p}\cdot\hat{r}}{4\pi\varepsilon_0 r^2} = \frac{p}{4\pi\varepsilon_0 r^2}\cos\theta.$$</p>
@@ -100,24 +102,25 @@
 <p>These motivate the <span class="obsidian-red">method of images</span>. For a point charge $+q$ at height $d$ above a grounded plane, replace the plane by an image charge $-q$ at $-d$: $$\phi = \frac{1}{4\pi\varepsilon_0}\left[\frac{q}{\sqrt{x^2+y^2+(z-d)^2}} - \frac{q}{\sqrt{x^2+y^2+(z+d)^2}}\right].$$</p>
 <hr>
 <h3 id="boundary-conditions-and-electrostatic-energy">Boundary Conditions and Electrostatic Energy</h3>
-<p>Normal component (pillbox + Gauss): $$\oint\mathbf{E}\cdot \mathrm{d}\mathbf{S} = \frac{q}{\varepsilon_0}\;\Rightarrow\;E_{\text{above}}^{\perp} - E_{\text{below}}^{\perp} = \frac{\sigma}{\varepsilon_0}.$$</p>
-<p>Tangential component (loop + curl-free): $$\oint\mathbf{E}\cdot \mathrm{d}\mathbf{l} = 0\;\Rightarrow\;E_{\text{above}}^{\parallel} = E_{\text{below}}^{\parallel}.$$</p>
+<p>Normal component (pillbox + Gauss): $$\oint\mathbf{E}\cdot\,\mathrm{d}\mathbf{S} = \frac{q}{\varepsilon_0}\;\Rightarrow\;E_{\text{above}}^{\perp} - E_{\text{below}}^{\perp} = \frac{\sigma}{\varepsilon_0}.$$</p>
+<p>Tangential component (loop + curl-free): $$\oint\mathbf{E}\cdot\,\mathrm{d}\mathbf{l} = 0\;\Rightarrow\;E_{\text{above}}^{\parallel} = E_{\text{below}}^{\parallel}.$$</p>
 <p>Electrostatic energy: $$W_e = \int_V w_e\,\mathrm{d}V = \frac{1}{2}\int\rho_0(\mathbf{r})\,\phi(\mathbf{r})\,\mathrm{d}V = \frac{1}{2}\int(\nabla\cdot\mathbf{D})\,\phi\,\mathrm{d}V.$$ Integrating by parts and dropping the surface term at infinity, $$W_e = \frac{1}{2}\int\mathbf{D}\cdot\mathbf{E}\,\mathrm{d}V,\qquad w_e = \tfrac{1}{2}\mathbf{D}\cdot\mathbf{E}.$$</p>
-<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Dielectric/Conducting Sphere in a Uniform Field</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A dielectric sphere (radius $R$, permittivity $\varepsilon$) in a uniform field $\mathbf{E}_0$. Expand: $$\phi_{\text{in}}(r) = \sum_{l=0}^{\infty}A_l r^l P_l(\cos\theta),\qquad \phi_{\text{out}}(r) = -E_0 r\cos\theta + \sum_{l=0}^{\infty}\frac{B_l}{r^{l+1}}P_l(\cos\theta).$$ Boundary conditions $$\phi_{\text{in}}(R)=\phi_{\text{out}}(R) \text{ and } \varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$$ give for $l\neq1$ that $A_l=B_l=0$, and $$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$ Therefore $$\phi_{\text{in}} = -\frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,r\cos\theta,\qquad \mathbf{E}_{\text{in}} = \frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}\mathbf{E}_0 \;(\text{uniform}).$$ $$\phi_{\text{out}} = -E_0 r\cos\theta+\frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^2}\cos\theta$$ $$\mathbf{E}_{\text{out}} = \mathbf{E}_0+ \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^3}(2\cos\theta\mathbf{e_r} +\sin\theta\mathbf{e_{\theta}})\;(\text{uniform+electric dipole})$$</p></div></div>
+<div class="markdown-callout markdown-callout-example"><div class="callout-title"><span class="callout-icon" aria-hidden="true">E</span><span class="callout-title-text">Dielectric/Conducting Sphere in a Uniform Field</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>A dielectric sphere (radius $R$, permittivity $\varepsilon$) in a uniform field $\mathbf{E}_0$. Expand: $$\phi_{\text{in}}(r) = \sum_{l=0}^{\infty}A_l r^l P_l(\cos\theta),\qquad \phi_{\text{out}}(r) = -E_0 r\cos\theta + \sum_{l=0}^{\infty}\frac{B_l}{r^{l+1}}P_l(\cos\theta).$$ Boundary conditions $$\phi_{\text{in}}(R)=\phi_{\text{out}}(R) \text{ and } \varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$$ give for $l\neq1$ that $A_l=B_l=0$, and $$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$ Therefore $$\phi_{\text{in}} = -\frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,r\cos\theta,\qquad \mathbf{E}_{\text{in}} = \frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}\mathbf{E}_0 \;(\text{uniform}).$$ $$\phi_{\text{out}} = -E_0 r\cos\theta+\frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^2}\cos\theta$$</p>
+<p>$$\mathbf{E}_{\text{out}} = \mathbf{E}_0+ \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^3}(2\cos\theta\hat{e}_r +\sin\theta\hat{e}_{\theta})\;(\text{uniform+electric dipole})$$</p></div></div>
 <h3 id="field-energy-self-and-interaction-energy">Field Energy: Self- and Interaction Energy</h3>
 <p>With $w_e = \tfrac{\varepsilon_0}{2}E^2$, $U = \dfrac{\varepsilon_0}{2}\int E^2\,\mathrm{d}V$. Using $\mathbf{E}=-\nabla\phi$ and integrating by parts: $$U = \frac{1}{2}\int\rho\,\phi\,\mathrm{d}V.$$</p>
 <p>For point charges $\rho = \sum_a q_a\delta(\mathbf{x}-\mathbf{x}_a)$: $$U = \frac{1}{2}\sum_a q_a\,\phi(\mathbf{x}_a) = U_{\text{interaction}} + U_{\text{self}},$$ $$U_{\text{interaction}} = \frac{1}{2}\sum_a q_a\sum_{b\neq a}\phi_b(\mathbf{x}_a) = \sum_{a\neq b}\frac{1}{4\pi\varepsilon_0}\frac{q_a q_b}{|\mathbf{x}_a-\mathbf{x}_b|}.$$</p>
 <p>The self-energy of a point charge diverges; equating $U\sim\dfrac{e^2}{4\pi\varepsilon_0 r_0}=mc^2$ defines the classical electron radius: $$r_0 = \frac{e^2}{4\pi\varepsilon_0 mc^2}\sim 10^{-15}\,\text{m}.$$</p>
 <hr>
 <h2 id="steady-currents">Steady Currents</h2>
-<p>Current $I = \dfrac{\mathrm{d}Q}{\mathrm{d}t}$; <span class="obsidian-red">current density</span> $\mathrm{d}I = \mathbf{J}\cdot \mathrm{d}\mathbf{S}$. $$I = \oint_S\mathbf{J}\cdot \mathrm{d}\mathbf{S} = \frac{\mathrm{d}Q}{\mathrm{d}t} = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V \;\Rightarrow\; \int_V\nabla\cdot\mathbf{J}\,\mathrm{d}V = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V.$$</p>
+<p>Current $I = \dfrac{\mathrm{d}Q}{\mathrm{d}t}$; <span class="obsidian-red">current density</span> $\mathrm{d}I = \mathbf{J}\cdot \mathrm{d}\mathbf{S}$. $$I = \oint_S\mathbf{J}\cdot\,\mathrm{d}\mathbf{S} = \frac{\mathrm{d}Q}{\mathrm{d}t} = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V \;\Rightarrow\; \int_V\nabla\cdot\mathbf{J}\,\mathrm{d}V = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V.$$</p>
 <p><span class="obsidian-red">Continuity equation</span>: $$\nabla\cdot\mathbf{J} + \frac{\partial\rho}{\partial t} = 0.$$</p>
 <p>Kirchhoff&#039;s current law and voltage law follow as circuit consequences.</p>
 <hr>
 <h2 id="magnetostatics">Magnetostatics</h2>
 <p>Biot–Savart law: $$\mathbf{B} = \frac{\mu_0}{4\pi}\int_V\frac{\mathbf{J}\times\hat{r}}{r^2}\,\mathrm{d}V&#039; = \frac{\mu_0}{4\pi}\oint_L\frac{I\,\mathrm{d}\mathbf{l}\times\hat{r}}{r^2}.$$</p>
-<p><span class="obsidian-red">Ampère&#039;s law</span> (magnetostatics): $$\oint_L\mathbf{B}\cdot \mathrm{d}\mathbf{l} = \mu_0 I,\qquad \nabla\times\mathbf{B} = \mu_0\mathbf{J}.$$</p>
-<p>No magnetic monopoles: $$\oint_S\mathbf{B}\cdot \mathrm{d}\mathbf{S} = 0,\qquad \nabla\cdot\mathbf{B} = 0 \;\Rightarrow\; \mathbf{B} = \nabla\times\mathbf{A}\quad(\text{vector potential}).$$</p>
+<p><span class="obsidian-red">Ampère&#039;s law</span> (magnetostatics): $$\oint_L\mathbf{B}\cdot\,\mathrm{d}\mathbf{l} = \mu_0 I,\qquad \nabla\times\mathbf{B} = \mu_0\mathbf{J}.$$</p>
+<p>No magnetic monopoles: $$\oint_S\mathbf{B}\cdot\,\mathrm{d}\mathbf{S} = 0,\qquad \nabla\cdot\mathbf{B} = 0 \;\Rightarrow\; \mathbf{B} = \nabla\times\mathbf{A}\quad(\text{vector potential}).$$</p>
 <p>From $\nabla\times(\nabla\times\mathbf{A}) = \mu_0\mathbf{J}$, i.e. $\nabla(\nabla\cdot\mathbf{A}) - \nabla^2\mathbf{A} = \mu_0\mathbf{J}$. Choosing the <span class="obsidian-red">Coulomb gauge</span> $\nabla\cdot\mathbf{A}=0$ (which does not affect $\mathbf{B}$): $$\nabla^2\mathbf{A} = -\mu_0\mathbf{J},\qquad \mathbf{A} = \frac{\mu_0}{4\pi}\int\frac{\mathbf{J}(\mathbf{x}\,&#039;)}{|\mathbf{x}-\mathbf{x}\,&#039;|}\,\mathrm{d}V&#039; = \mathbf{A}^{(0)}+\mathbf{A}^{(1)}+\cdots$$</p>
 <hr>
 <h3 id="magnetic-multipoles-and-dipole">Magnetic Multipoles and Dipole</h3>
@@ -148,7 +151,7 @@
 <p>Energy continuity: $\dfrac{\partial\xi}{\partial t} + \nabla\cdot\mathbf{P} = S_\xi$.</p>
 <p>Rate of work on charges: $\dfrac{\mathrm{d}W}{\mathrm{d}t} = q\mathbf{E}\cdot\mathbf{v}$, so the density rate $\dfrac{\mathrm{d}\xi}{\mathrm{d}t} = \rho\mathbf{E}\cdot\mathbf{v} = \mathbf{E}\cdot\mathbf{J}$, hence $S_\xi = -\mathbf{E}\cdot\mathbf{J}$. Using $\nabla\times\mathbf{B} = \tfrac{1}{c^2}\partial_t\mathbf{E} + \mu_0\mathbf{J}$, $$S_\xi = \frac{1}{\mu_0}\nabla\cdot(\mathbf{E}\times\mathbf{B}) + \frac{1}{\mu_0}\frac{\partial}{\partial t}\!\left(\tfrac12 B^2\right) + \frac{\varepsilon_0}{2}\frac{\partial}{\partial t}E^2.$$</p>
 <p>Therefore the <span class="obsidian-red">electromagnetic energy density</span> and <span class="obsidian-red">Poynting vector</span>: $$\xi = \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right),\qquad \mathbf{P} = \frac{1}{\mu_0}\mathbf{E}\times\mathbf{B}.$$</p>
-<p>Momentum continuity: $\dfrac{\partial\mathbf{g}}{\partial t} + \nabla\cdot\overleftrightarrow{G} = \mathbf{S}_g$, with $\mathbf{S}_g = -\rho(\mathbf{E}+\mathbf{v}\times\mathbf{B})$. Working it out: $$\mathbf{g} = \varepsilon_0\,\mathbf{E}\times\mathbf{B}\quad(\text{EM momentum density}),$$ $$\overleftrightarrow{T} = -\overleftrightarrow{G} = \varepsilon_0\mathbf{E}\mathbf{E} + \frac{1}{\mu_0}\mathbf{B}\mathbf{B} - \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right)\overleftrightarrow{I}\quad(\text{Maxwell stress tensor}),$$ $$\mathbf{F} = \int\nabla\cdot\overleftrightarrow{T}\,\mathrm{d}V = \oint \mathrm{d}\mathbf{S}\cdot\overleftrightarrow{T} = \oint\overleftrightarrow{T}\,\mathrm{d}\mathbf{S}.$$</p>
+<p>Momentum continuity: $\dfrac{\partial\mathbf{g}}{\partial t} + \nabla\cdot\overleftrightarrow{G} = \mathbf{S}_g$, with $\mathbf{S}_g = -\rho(\mathbf{E}+\mathbf{v}\times\mathbf{B})$. Working it out: $$\mathbf{g} = \varepsilon_0\,\mathbf{E}\times\mathbf{B}\quad(\text{EM momentum density}),$$ $$\overleftrightarrow{T} = -\overleftrightarrow{G} = \varepsilon_0\mathbf{E}\mathbf{E} + \frac{1}{\mu_0}\mathbf{B}\mathbf{B} - \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right)\overleftrightarrow{I}\quad(\text{Maxwell stress tensor}),$$ $$\mathbf{F} = \int\nabla\cdot\overleftrightarrow{T}\,\mathrm{d}V = \oint\,\mathrm{d}\mathbf{S}\cdot\overleftrightarrow{T} = \oint\overleftrightarrow{T}\,\mathrm{d}\mathbf{S}.$$</p>
 <hr>
 <h2 id="monochromatic-plane-waves">Monochromatic Plane Waves</h2>
 <p>$$f = f_0\sin(\mathbf{k}\cdot\mathbf{x}-\omega t) = \mathrm{Re}\!\left[\hat{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}\right] = \mathrm{Re}\,\hat{f},\qquad \hat{f} = \hat{A}e^{i(\mathbf{k}\cdot\mathbf{x}-\omega t)}.$$</p>
@@ -201,8 +204,9 @@
 <p>With $\mathbf{J}=\sigma\mathbf{E}$ and Maxwell&#039;s equations, $$\nabla^2\mathbf{E} = \mu\sigma\frac{\partial\mathbf{E}}{\partial t} + \varepsilon\mu\frac{\partial^2\mathbf{E}}{\partial t^2}.$$ Using $\nabla\to ik$, $\partial_t\to-i\omega$: $$-k^2 = -\mu\sigma i\omega - \varepsilon\mu\omega^2.$$</p>
 <p>In a good conductor the conduction current dominates the displacement current, $\mu\sigma\omega\gg\varepsilon\mu\omega^2$ i.e. $\sigma\gg\omega\varepsilon$, so $$-k^2 = -\mu\sigma i\omega \;\Rightarrow\; k = \sqrt{\frac{\mu\sigma\omega}{2}}\,(1+i).$$ $$\mathbf{E} = \mathbf{E}_0 e^{i(kz-\omega t)} = \mathbf{E}_0\,e^{-\sqrt{\mu\sigma\omega/2}\,z}\,e^{i(\sqrt{\mu\sigma\omega/2}\,z-\omega t)},$$ with <span class="obsidian-red">skin depth</span> $$\delta = \sqrt{\frac{2}{\mu\sigma\omega}}.$$</p>
 <hr>
-<h2 id="superconductivity">Superconductivity</h2>
+<h2 id="superconductivity-todo">Superconductivity (TODO)</h2>
 <h2 id="charged-particle-in-an-em-field-lagrangian">Charged Particle in an EM Field (Lagrangian)</h2>
+<p>Einstein summation convention: repeated indices are summed.</p>
 <p>Free-particle action $S_p$ plus interaction $S_{pf}$: $S = S_p + S_{pf}$, with $\mathrm{d}S_p = -mc^2\,\mathrm{d}\tau$, $\mathrm{d}S_{pf} = -q A_\alpha\,\mathrm{d}x^\alpha$, where $A^\alpha = (\phi/c,\mathbf{A})$ and $u^\alpha = (\gamma c,\gamma\mathbf{v})$. $$S = \int_a^b\!\left(-mc^2\,\mathrm{d}\tau - qA_\alpha\,\mathrm{d}x^\alpha\right) = \int_a^b\!\left(-mc^2 - qA_\alpha u^\alpha\right)\frac{\mathrm{d}t}{\gamma}.$$ Since $\tfrac{q}{\gamma}A_\alpha u^\alpha = q\phi - q\mathbf{A}\cdot\mathbf{v}$, the Lagrangian is $$L = -\frac{1}{\gamma}mc^2 - q\phi + q\mathbf{A}\cdot\mathbf{v}.$$</p>
 <p>Euler–Lagrange $\dfrac{\mathrm{d}}{\mathrm{d}t}\!\left(\dfrac{\partial L}{\partial\mathbf{v}}\right) - \dfrac{\partial L}{\partial\mathbf{r}} = 0$ with $$\frac{\partial L}{\partial\mathbf{r}} = q\nabla(\mathbf{A}\cdot\mathbf{v}) - q\nabla\phi,\qquad \nabla(\mathbf{A}\cdot\mathbf{v}) = \mathbf{v}\times(\nabla\times\mathbf{A}) + (\mathbf{v}\cdot\nabla)\mathbf{A},$$ $$\frac{\partial L}{\partial\mathbf{v}} = \mathbf{p} + q\mathbf{A},$$ and $\dfrac{\mathrm{d}}{\mathrm{d}t}\mathbf{A}(t,\mathbf{x}) = \dfrac{\partial\mathbf{A}}{\partial t} + (\mathbf{v}\cdot\nabla)\mathbf{A}$ gives $$\frac{\mathrm{d}}{\mathrm{d}t}\mathbf{p} = q\,\mathbf{v}\times(\nabla\times\mathbf{A}) - q\!\left(\nabla\phi + \frac{\partial\mathbf{A}}{\partial t}\right).$$</p>
 <p>Comparing with the Lorentz force $\mathbf{F} = q(\mathbf{v}\times\mathbf{B} + \mathbf{E})$ defines the potentials: $$\mathbf{B} = \nabla\times\mathbf{A},\qquad \mathbf{E} = -\nabla\phi - \frac{\partial\mathbf{A}}{\partial t},$$ which automatically give $\nabla\cdot\mathbf{B}=0$, $\nabla\times\mathbf{E} = -\partial_t\mathbf{B}$.</p>
@@ -253,7 +257,7 @@
 <p><span class="obsidian-red">Jefimenko&#039;s equations</span>: $$\mathbf{E} = \frac{1}{4\pi\varepsilon_0}\int\!\left[\rho(\mathbf{r}\,&#039;,t_r)\frac{\hat{e}_R}{|\mathbf{x}-\mathbf{x}\,&#039;|^2} + \frac{\dot\rho(\mathbf{r}\,&#039;,t_r)}{c}\frac{\hat{e}_R}{|\mathbf{x}-\mathbf{x}\,&#039;|} - \frac{\dot{\mathbf{J}}(\mathbf{r}\,&#039;,t_r)}{c^2|\mathbf{x}-\mathbf{x}\,&#039;|}\right]\,\mathrm{d}^3x&#039;,$$ $$\mathbf{B} = \frac{\mu_0}{4\pi}\int\!\left[\frac{\mathbf{J}(\mathbf{r}\,&#039;,t_r)}{|\mathbf{x}-\mathbf{x}\,&#039;|^2} + \frac{\dot{\mathbf{J}}(\mathbf{r}\,&#039;,t_r)}{c|\mathbf{x}-\mathbf{x}\,&#039;|}\right]\times\hat{e}_R\,\mathrm{d}^3x&#039;.$$</p>
 <p><span class="obsidian-red">Liénard–Wiechert potentials</span> for a point charge $\rho(\mathbf{r}\,&#039;,t&#039;) = q\,\delta^3(\mathbf{r}\,&#039;-\mathbf{r}_s(t&#039;))$: $$\phi(\mathbf{r},t) = \frac{1}{4\pi\varepsilon_0}\frac{qc}{Rc-\mathbf{R}\cdot\mathbf{v}},\qquad \mathbf{A}(\mathbf{r},t) = \frac{\mathbf{v}}{c^2}\phi(\mathbf{r},t).$$</p>
 <p>The resulting fields (with $\mathbf{u} = c\hat{R}-\mathbf{v}$, $\mathbf{\beta}=\mathbf{v}/c$, $\gamma = 1/\sqrt{1-\beta^2}$): $$\begin{align*}\mathbf{E}&amp; = \frac{q}{4\pi\varepsilon_0}\frac{R}{(\mathbf{R}\cdot\mathbf{u})^3}\big[(c^2-v^2)\mathbf{u} + \mathbf{R}\times(\mathbf{u}\times\mathbf{a})\big] \\&amp;= \underbrace{\frac{q}{4\pi\varepsilon_0}\frac{\hat{e}_R-\mathbf{\beta}}{\gamma^2(1-\mathbf{\beta}\cdot\hat{e}_R)^3 R^2}}_{\text{velocity field}\;\propto 1/R^2} + \underbrace{\frac{q}{4\pi\varepsilon_0 c^2}\frac{\hat{e}_R\times[(\hat{e}_R-\mathbf{\beta})\times\mathbf{a}]}{(1-\mathbf{\beta}\cdot\hat{n})^3 R}}_{\text{radiation field}\;\propto 1/R}\end{align*}$$</p>
-<p>Non-relativistic radiation field: $$\mathbf{E}_r = \frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\,\hat{e}_R\times(\hat{e}_R\times\mathbf{a}) = -\frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\mathbf{a}_\perp,\qquad \mathbf{B} = \frac{1}{c}\hat{e}_R\times\mathbf{E}.$$ It is equivalent to $$\mathbf{B}(\mathbf{r}, t) = -\frac{\mu_0}{4\pi r c} (\ddot{\mathbf{p}} \times \mathbf{n})$$ $$\mathbf{E}(\mathbf{r}, t) = c (\mathbf{B} \times \mathbf{n}) = \frac{\mu_0}{4\pi r} [(\ddot{\mathbf{p}} \times \mathbf{n}) \times \mathbf{n}]$$ Poynting vector and radiated power: $$\mathbf{S}_{\text{rad}} = \frac{1}{\mu_0 c}E_{\text{rad}}^2\,\hat{e}_R = \frac{\mu_0 q^2 a^2}{16\pi^2 c}\frac{\sin^2\theta}{R^2}\,\hat{e}_R,$$ $$\boxed{P = \frac{\mu_0 q^2 a^2}{6\pi c}}\quad(\text{Larmor formula}).$$</p>
+<p>Non-relativistic radiation field: $$\mathbf{E}_r = \frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\,\hat{e}_R\times(\hat{e}_R\times\mathbf{a}) = -\frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\mathbf{a}_\perp,\qquad \mathbf{B} = \frac{1}{c}\hat{e}_R\times\mathbf{E}.$$ It is equivalent to $$\mathbf{B}(\mathbf{r}, t) = -\frac{\mu_0}{4\pi r c} (\ddot{\mathbf{p}} \times \hat{n})$$ $$\mathbf{E}(\mathbf{r}, t) = c (\mathbf{B} \times \hat{n}) = \frac{\mu_0}{4\pi r} [(\ddot{\mathbf{p}} \times \hat{n}) \times \hat{n}]$$ Poynting vector and radiated power: $$\mathbf{S}_{\text{rad}} = \frac{1}{\mu_0 c}E_{\text{rad}}^2\,\hat{e}_R = \frac{\mu_0 q^2 a^2}{16\pi^2 c}\frac{\sin^2\theta}{R^2}\,\hat{e}_R,$$ $$\boxed{P = \frac{\mu_0 q^2 a^2}{6\pi c}}\quad(\text{Larmor formula}).$$</p>
 <p>Accounting for $\mathrm{d}t = (1-\mathbf{\beta}\cdot\hat{e}_R)\,\mathrm{d}t_r$, the actual radiated power and angular distribution give the Liénard generalization: $$\frac{\mathrm{d}P}{\mathrm{d}\Omega} = \frac{q^2}{16\pi^2\varepsilon_0 c}\frac{|\hat{e}_R\times[(\hat{e}_R-\mathbf{\beta})\times\mathbf{a}]|^2}{(1-\mathbf{\beta}\cdot\hat{e}_R)^5},\qquad P = \frac{\mu_0 q^2\gamma^6}{6\pi c}\big(a^2 - |\mathbf{\beta}\times\mathbf{a}|^2\big).$$</p>
 <p>Neglecting relativity ($\mathbf{\beta}=0$) recovers $P = \dfrac{\mu_0 q^2 a^2}{6\pi c}$ (<span class="obsidian-red">bremsstrahlung</span>, &quot;braking radiation&quot;).</p>
 <p>Abraham–Lorentz (<span class="obsidian-red">radiation reaction</span>): from $\int_{t_1}^{t_2}\mathbf{F}_{\text{rad}}\cdot\mathbf{v}\,\mathrm{d}t = -\dfrac{\mu_0 q^2}{6\pi c}\int a^2\,\mathrm{d}t$, integrating by parts, $$\mathbf{F}_{\text{rad}} = \frac{\mu_0 q^2}{6\pi c}\dot{\mathbf{a}}.$$ Setting $\mathbf{F}_{\text{rad}} = m\mathbf{a}$ gives runaway solutions $a(t) = a_0 e^{t/\tau}$, with $\tau = \dfrac{\mu_0 q^2}{6\pi c\,m}$; for an electron $\tau\approx 6\times10^{-24}\,\text{s}$.</p>
@@ -287,7 +291,7 @@
 <p>Time-averaged: $$\langle\mathbf{S}\rangle = \frac{\mu_0 m_0^2\omega^4}{32\pi^2 c^3}\frac{\sin^2\theta}{r^2}\,\hat{r},\qquad \langle P\rangle = \frac{\mu_0 m_0^2\omega^4}{12\pi c^3}.$$</p>
 <p>Compared with electric dipole radiation, magnetic dipole radiation is weaker by a factor $\sim(v/c)^2$ (the extra $1/c^2$).</p>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"electrostatics","level":1,"text":"Electrostatics"},{"id":"multipole-expansion","level":2,"text":"Multipole Expansion"},{"id":"polarization-of-media","level":2,"text":"Polarization of Media"},{"id":"uniqueness-theorems-and-method-of-images","level":2,"text":"Uniqueness Theorems and Method of Images"},{"id":"boundary-conditions-and-electrostatic-energy","level":2,"text":"Boundary Conditions and Electrostatic Energy"},{"id":"field-energy-self-and-interaction-energy","level":2,"text":"Field Energy: Self- and Interaction Energy"},{"id":"steady-currents","level":1,"text":"Steady Currents"},{"id":"magnetostatics","level":1,"text":"Magnetostatics"},{"id":"magnetic-multipoles-and-dipole","level":2,"text":"Magnetic Multipoles and Dipole"},{"id":"magnetization-of-media","level":2,"text":"Magnetization of Media"},{"id":"maxwell-s-equations","level":1,"text":"Maxwell's Equations"},{"id":"field-energy-and-momentum","level":1,"text":"Field Energy and Momentum"},{"id":"monochromatic-plane-waves","level":1,"text":"Monochromatic Plane Waves"},{"id":"energy-analysis","level":2,"text":"Energy Analysis"},{"id":"reflection-and-refraction-fresnel","level":2,"text":"Reflection and Refraction (Fresnel)"},{"id":"phase-analysis","level":2,"text":"Phase Analysis"},{"id":"dispersion-in-linear-media","level":2,"text":"Dispersion in Linear Media"},{"id":"waveguides","level":2,"text":"Waveguides"},{"id":"waves-in-good-conductors","level":2,"text":"Waves in Good Conductors"},{"id":"superconductivity","level":1,"text":"Superconductivity"},{"id":"charged-particle-in-an-em-field-lagrangian","level":1,"text":"Charged Particle in an EM Field (Lagrangian)"},{"id":"the-field-tensor","level":2,"text":"The Field Tensor"},{"id":"lorentz-transformation-of-the-fields","level":2,"text":"Lorentz Transformation of the Fields"},{"id":"lagrangian-field-theory-of-the-em-field","level":2,"text":"Lagrangian Field Theory of the EM Field"},{"id":"energy-momentum-tensor","level":2,"text":"Energy–Momentum Tensor"},{"id":"green-s-function-and-retarded-potentials","level":1,"text":"Green's Function and Retarded Potentials"},{"id":"li-nard-wiechert-potentials-and-radiation","level":2,"text":"Liénard–Wiechert Potentials and Radiation"},{"id":"field-of-a-uniformly-moving-charge","level":2,"text":"Field of a Uniformly Moving Charge"},{"id":"electric-dipole-radiation","level":2,"text":"Electric Dipole Radiation"},{"id":"magnetic-dipole-radiation","level":2,"text":"Magnetic Dipole Radiation"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"electrostatics","level":1,"text":"Electrostatics"},{"id":"multipole-expansion","level":2,"text":"Multipole Expansion"},{"id":"polarization-of-media","level":2,"text":"Polarization of Media"},{"id":"uniqueness-theorems-and-method-of-images","level":2,"text":"Uniqueness Theorems and Method of Images"},{"id":"boundary-conditions-and-electrostatic-energy","level":2,"text":"Boundary Conditions and Electrostatic Energy"},{"id":"field-energy-self-and-interaction-energy","level":2,"text":"Field Energy: Self- and Interaction Energy"},{"id":"steady-currents","level":1,"text":"Steady Currents"},{"id":"magnetostatics","level":1,"text":"Magnetostatics"},{"id":"magnetic-multipoles-and-dipole","level":2,"text":"Magnetic Multipoles and Dipole"},{"id":"magnetization-of-media","level":2,"text":"Magnetization of Media"},{"id":"maxwell-s-equations","level":1,"text":"Maxwell's Equations"},{"id":"field-energy-and-momentum","level":1,"text":"Field Energy and Momentum"},{"id":"monochromatic-plane-waves","level":1,"text":"Monochromatic Plane Waves"},{"id":"energy-analysis","level":2,"text":"Energy Analysis"},{"id":"reflection-and-refraction-fresnel","level":2,"text":"Reflection and Refraction (Fresnel)"},{"id":"phase-analysis","level":2,"text":"Phase Analysis"},{"id":"dispersion-in-linear-media","level":2,"text":"Dispersion in Linear Media"},{"id":"waveguides","level":2,"text":"Waveguides"},{"id":"waves-in-good-conductors","level":2,"text":"Waves in Good Conductors"},{"id":"superconductivity-todo","level":1,"text":"Superconductivity (TODO)"},{"id":"charged-particle-in-an-em-field-lagrangian","level":1,"text":"Charged Particle in an EM Field (Lagrangian)"},{"id":"the-field-tensor","level":2,"text":"The Field Tensor"},{"id":"lorentz-transformation-of-the-fields","level":2,"text":"Lorentz Transformation of the Fields"},{"id":"lagrangian-field-theory-of-the-em-field","level":2,"text":"Lagrangian Field Theory of the EM Field"},{"id":"energy-momentum-tensor","level":2,"text":"Energy–Momentum Tensor"},{"id":"green-s-function-and-retarded-potentials","level":1,"text":"Green's Function and Retarded Potentials"},{"id":"li-nard-wiechert-potentials-and-radiation","level":2,"text":"Liénard–Wiechert Potentials and Radiation"},{"id":"field-of-a-uniformly-moving-charge","level":2,"text":"Field of a Uniformly Moving Charge"},{"id":"electric-dipole-radiation","level":2,"text":"Electric Dipole Radiation"},{"id":"magnetic-dipole-radiation","level":2,"text":"Magnetic Dipole Radiation"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -311,10 +315,10 @@ Since $\mathbf{F}\propto Q$, define the <span style="color: red;">electric field
 $$\mathbf{E} = \frac{Q}{4\pi\varepsilon_0 r^2}\,\hat{r}$$
 
 Gauss's law:
-$$\oint_S \mathbf{E}\cdot \mathrm{d}\mathbf{S} = \frac{Q}{\varepsilon_0}, \qquad \nabla\cdot\mathbf{E} = \frac{\rho}{\varepsilon_0}$$
+$$\oint_S \mathbf{E}\cdot\,\mathrm{d}\mathbf{S} = \frac{Q}{\varepsilon_0}, \qquad \nabla\cdot\mathbf{E} = \frac{\rho}{\varepsilon_0}$$
 
 Curl of the electrostatic field:
-$$\oint_L \mathbf{E}\cdot \mathrm{d}\mathbf{l} = 0, \qquad \nabla\times\mathbf{E} = \mathbf{0} \;\Rightarrow\; \mathbf{E} = -\nabla\phi \quad(\text{potential})$$
+$$\oint_L \mathbf{E}\cdot\,\mathrm{d}\mathbf{l} = 0, \qquad \nabla\times\mathbf{E} = \mathbf{0} \;\Rightarrow\; \mathbf{E} = -\nabla\phi \quad(\text{potential})$$
 
 Combining gives <span style="color: red;">Poisson's equation</span>:
 $$\nabla^2\phi = -\frac{\rho}{\varepsilon_0}$$
@@ -328,7 +332,9 @@ $$\Delta\mathbf{E} = \frac{1}{4\pi\varepsilon_0}\frac{\rho(\mathbf{r}\,')\,\Delt
 $$\phi = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,')}{R}\,\mathrm{d}V' = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,')}{|\mathbf{r}-\mathbf{r}\,'|}\,\mathrm{d}V'.$$
 ## Multipole Expansion
 
-Taylor-expand the kernel (Einstein summation convention: repeated indices are summed):
+Einstein summation convention: repeated indices are summed.
+
+Taylor-expand the kernel:
 $$f(\mathbf{r}-\mathbf{r}\,') = f(\mathbf{r}) - x_i'\,\partial_i f(\mathbf{r}) + \tfrac{1}{2}x_i' x_j'\,\partial_i\partial_j f(\mathbf{r}) + \cdots$$
 
 This yields the <span style="color: red;">multipole expansion</span> of $\phi$:
@@ -407,10 +413,10 @@ $$\phi = \frac{1}{4\pi\varepsilon_0}\left[\frac{q}{\sqrt{x^2+y^2+(z-d)^2}} - \fr
 ## Boundary Conditions and Electrostatic Energy
 
 Normal component (pillbox + Gauss):
-$$\oint\mathbf{E}\cdot \mathrm{d}\mathbf{S} = \frac{q}{\varepsilon_0}\;\Rightarrow\;E_{\text{above}}^{\perp} - E_{\text{below}}^{\perp} = \frac{\sigma}{\varepsilon_0}.$$
+$$\oint\mathbf{E}\cdot\,\mathrm{d}\mathbf{S} = \frac{q}{\varepsilon_0}\;\Rightarrow\;E_{\text{above}}^{\perp} - E_{\text{below}}^{\perp} = \frac{\sigma}{\varepsilon_0}.$$
 
 Tangential component (loop + curl-free):
-$$\oint\mathbf{E}\cdot \mathrm{d}\mathbf{l} = 0\;\Rightarrow\;E_{\text{above}}^{\parallel} = E_{\text{below}}^{\parallel}.$$
+$$\oint\mathbf{E}\cdot\,\mathrm{d}\mathbf{l} = 0\;\Rightarrow\;E_{\text{above}}^{\parallel} = E_{\text{below}}^{\parallel}.$$
 
 Electrostatic energy:
 $$W_e = \int_V w_e\,\mathrm{d}V = \frac{1}{2}\int\rho_0(\mathbf{r})\,\phi(\mathbf{r})\,\mathrm{d}V
@@ -421,10 +427,15 @@ $$W_e = \frac{1}{2}\int\mathbf{D}\cdot\mathbf{E}\,\mathrm{d}V,\qquad w_e = \tfra
 >[!EXAMPLE] Dielectric/Conducting Sphere in a Uniform Field
 >A dielectric sphere (radius $R$, permittivity $\varepsilon$) in a uniform field $\mathbf{E}_0$. Expand:
 >$$\phi_{\text{in}}(r) = \sum_{l=0}^{\infty}A_l r^l P_l(\cos\theta),\qquad \phi_{\text{out}}(r) = -E_0 r\cos\theta + \sum_{l=0}^{\infty}\frac{B_l}{r^{l+1}}P_l(\cos\theta).$$
->Boundary conditions $$\phi_{\text{in}}(R)=\phi_{\text{out}}(R) \text{ and } \varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$$ give for $l\neq1$ that $A_l=B_l=0$, and $$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$
+>Boundary conditions 
+>$$\phi_{\text{in}}(R)=\phi_{\text{out}}(R) \text{ and } \varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$$
+> give for $l\neq1$ that $A_l=B_l=0$, and 
+>$$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$
 >Therefore
 >$$\phi_{\text{in}} = -\frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,r\cos\theta,\qquad \mathbf{E}_{\text{in}} = \frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}\mathbf{E}_0 \;(\text{uniform}).$$
->$$\phi_{\text{out}} = -E_0 r\cos\theta+\frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^2}\cos\theta$$ $$\mathbf{E}_{\text{out}} = \mathbf{E}_0+ \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^3}(2\cos\theta\mathbf{e_r} +\sin\theta\mathbf{e_{\theta}})\;(\text{uniform+electric dipole})$$
+>$$\phi_{\text{out}} = -E_0 r\cos\theta+\frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^2}\cos\theta$$
+> 
+>$$\mathbf{E}_{\text{out}} = \mathbf{E}_0+ \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,\frac{R^3}{r^3}(2\cos\theta\hat{e}_r +\sin\theta\hat{e}_{\theta})\;(\text{uniform+electric dipole})$$
 
 ## Field Energy: Self- and Interaction Energy
 
@@ -443,7 +454,7 @@ $$r_0 = \frac{e^2}{4\pi\varepsilon_0 mc^2}\sim 10^{-15}\,\text{m}.$$
 # Steady Currents
 
 Current $I = \dfrac{\mathrm{d}Q}{\mathrm{d}t}$; <span style="color: red;">current density</span> $\mathrm{d}I = \mathbf{J}\cdot \mathrm{d}\mathbf{S}$.
-$$I = \oint_S\mathbf{J}\cdot \mathrm{d}\mathbf{S} = \frac{\mathrm{d}Q}{\mathrm{d}t} = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V
+$$I = \oint_S\mathbf{J}\cdot\,\mathrm{d}\mathbf{S} = \frac{\mathrm{d}Q}{\mathrm{d}t} = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V
 \;\Rightarrow\; \int_V\nabla\cdot\mathbf{J}\,\mathrm{d}V = -\int_V\frac{\partial\rho}{\partial t}\,\mathrm{d}V.$$
 
 <span style="color: red;">Continuity equation</span>:
@@ -459,10 +470,10 @@ Biot–Savart law:
 $$\mathbf{B} = \frac{\mu_0}{4\pi}\int_V\frac{\mathbf{J}\times\hat{r}}{r^2}\,\mathrm{d}V' = \frac{\mu_0}{4\pi}\oint_L\frac{I\,\mathrm{d}\mathbf{l}\times\hat{r}}{r^2}.$$
 
 <span style="color: red;">Ampère's law</span> (magnetostatics):
-$$\oint_L\mathbf{B}\cdot \mathrm{d}\mathbf{l} = \mu_0 I,\qquad \nabla\times\mathbf{B} = \mu_0\mathbf{J}.$$
+$$\oint_L\mathbf{B}\cdot\,\mathrm{d}\mathbf{l} = \mu_0 I,\qquad \nabla\times\mathbf{B} = \mu_0\mathbf{J}.$$
 
 No magnetic monopoles:
-$$\oint_S\mathbf{B}\cdot \mathrm{d}\mathbf{S} = 0,\qquad \nabla\cdot\mathbf{B} = 0 \;\Rightarrow\; \mathbf{B} = \nabla\times\mathbf{A}\quad(\text{vector potential}).$$
+$$\oint_S\mathbf{B}\cdot\,\mathrm{d}\mathbf{S} = 0,\qquad \nabla\cdot\mathbf{B} = 0 \;\Rightarrow\; \mathbf{B} = \nabla\times\mathbf{A}\quad(\text{vector potential}).$$
 
 From $\nabla\times(\nabla\times\mathbf{A}) = \mu_0\mathbf{J}$, i.e. $\nabla(\nabla\cdot\mathbf{A}) - \nabla^2\mathbf{A} = \mu_0\mathbf{J}$. Choosing the <span style="color: red;">Coulomb gauge</span> $\nabla\cdot\mathbf{A}=0$ (which does not affect $\mathbf{B}$):
 $$\nabla^2\mathbf{A} = -\mu_0\mathbf{J},\qquad
@@ -513,7 +524,8 @@ Matching: $H_\parallel$ continuous $\Rightarrow\Phi$ continuous; $B_\perp$ conti
 >[!EXAMPLE] Dielectric/Conducting Sphere in a Uniform Field
 >A dielectric sphere (radius $R$, permittivity $\varepsilon$) in a uniform field $\mathbf{E}_0$. Expand:
 >$$\phi_{\text{in}}(r) = \sum_{l=0}^{\infty}A_l r^l P_l(\cos\theta),\qquad \phi_{\text{out}}(r) = -E_0 r\cos\theta + \sum_{l=0}^{\infty}\frac{B_l}{r^{l+1}}P_l(\cos\theta).$$
->Boundary conditions $\phi_{\text{in}}(R)=\phi_{\text{out}}(R)$ and $\varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$ give for $l\neq1$ that $A_l=B_l=0$, and $$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$
+>Boundary conditions $\phi_{\text{in}}(R)=\phi_{\text{out}}(R)$ and $\varepsilon\,\partial_r\phi_{\text{in}}|_R = \varepsilon_0\,\partial_r\phi_{\text{out}}|_R$ give for $l\neq1$ that $A_l=B_l=0$, and 
+>$$A_1 = \frac{-3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0,\qquad B_1 = \frac{\varepsilon-\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0 R^3.$$
 >Therefore
 >$$\phi_{\text{in}} = -\frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}E_0\,r\cos\theta,\qquad \mathbf{E}_{\text{in}} = \frac{3\varepsilon_0}{\varepsilon+2\varepsilon_0}\mathbf{E}_0 \;(\text{uniform}).$$
 
@@ -574,7 +586,7 @@ $$\xi = \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right),\qquad
 Momentum continuity: $\dfrac{\partial\mathbf{g}}{\partial t} + \nabla\cdot\overleftrightarrow{G} = \mathbf{S}_g$, with $\mathbf{S}_g = -\rho(\mathbf{E}+\mathbf{v}\times\mathbf{B})$. Working it out:
 $$\mathbf{g} = \varepsilon_0\,\mathbf{E}\times\mathbf{B}\quad(\text{EM momentum density}),$$
 $$\overleftrightarrow{T} = -\overleftrightarrow{G} = \varepsilon_0\mathbf{E}\mathbf{E} + \frac{1}{\mu_0}\mathbf{B}\mathbf{B} - \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right)\overleftrightarrow{I}\quad(\text{Maxwell stress tensor}),$$
-$$\mathbf{F} = \int\nabla\cdot\overleftrightarrow{T}\,\mathrm{d}V = \oint \mathrm{d}\mathbf{S}\cdot\overleftrightarrow{T} = \oint\overleftrightarrow{T}\,\mathrm{d}\mathbf{S}.$$
+$$\mathbf{F} = \int\nabla\cdot\overleftrightarrow{T}\,\mathrm{d}V = \oint\,\mathrm{d}\mathbf{S}\cdot\overleftrightarrow{T} = \oint\overleftrightarrow{T}\,\mathrm{d}\mathbf{S}.$$
 
 ---
 
@@ -719,8 +731,10 @@ with <span style="color: red;">skin depth</span>
 $$\delta = \sqrt{\frac{2}{\mu\sigma\omega}}.$$
 
 ---
-# Superconductivity
+# Superconductivity (TODO)
 # Charged Particle in an EM Field (Lagrangian)
+
+Einstein summation convention: repeated indices are summed.
 
 Free-particle action $S_p$ plus interaction $S_{pf}$: $S = S_p + S_{pf}$, with $\mathrm{d}S_p = -mc^2\,\mathrm{d}\tau$, $\mathrm{d}S_{pf} = -q A_\alpha\,\mathrm{d}x^\alpha$, where $A^\alpha = (\phi/c,\mathbf{A})$ and $u^\alpha = (\gamma c,\gamma\mathbf{v})$.
 $$S = \int_a^b\!\left(-mc^2\,\mathrm{d}\tau - qA_\alpha\,\mathrm{d}x^\alpha\right) = \int_a^b\!\left(-mc^2 - qA_\alpha u^\alpha\right)\frac{\mathrm{d}t}{\gamma}.$$
@@ -896,8 +910,8 @@ Non-relativistic radiation field:
 $$\mathbf{E}_r = \frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\,\hat{e}_R\times(\hat{e}_R\times\mathbf{a}) = -\frac{1}{c^2}\frac{q}{4\pi\varepsilon_0 R}\mathbf{a}_\perp,\qquad
 \mathbf{B} = \frac{1}{c}\hat{e}_R\times\mathbf{E}.$$
 It is equivalent to
-$$\mathbf{B}(\mathbf{r}, t) = -\frac{\mu_0}{4\pi r c} (\ddot{\mathbf{p}} \times \mathbf{n})$$
-$$\mathbf{E}(\mathbf{r}, t) = c (\mathbf{B} \times \mathbf{n}) = \frac{\mu_0}{4\pi r} [(\ddot{\mathbf{p}} \times \mathbf{n}) \times \mathbf{n}]$$
+$$\mathbf{B}(\mathbf{r}, t) = -\frac{\mu_0}{4\pi r c} (\ddot{\mathbf{p}} \times \hat{n})$$
+$$\mathbf{E}(\mathbf{r}, t) = c (\mathbf{B} \times \hat{n}) = \frac{\mu_0}{4\pi r} [(\ddot{\mathbf{p}} \times \hat{n}) \times \hat{n}]$$
 Poynting vector and radiated power:
 $$\mathbf{S}_{\text{rad}} = \frac{1}{\mu_0 c}E_{\text{rad}}^2\,\hat{e}_R = \frac{\mu_0 q^2 a^2}{16\pi^2 c}\frac{\sin^2\theta}{R^2}\,\hat{e}_R,$$
 $$\boxed{P = \frac{\mu_0 q^2 a^2}{6\pi c}}\quad(\text{Larmor formula}).$$

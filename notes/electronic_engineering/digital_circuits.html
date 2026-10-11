@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -98,7 +99,8 @@
 <p>Besides, $$A\oplus B=\overline{A\odot B}$$</p>
 <p>The logic gate symbols are shown in the figure below:</p>
 <p><img src="../attachments/images-12.jpg" alt="images-12" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
-<p>We can use <a href="analog_circuits.html">Analog Circuits</a> to achieve them: <img src="../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp" alt="e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56" loading="lazy" decoding="async"></p>
+<p>We can use <a href="analog_circuits.html#cmos-logic-gates-todo">CMOS Logic Gates (TODO)</a> to achieve them:</p>
+<p><img src="../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp" alt="e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>Basic equations in Boolean algebra:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Name</th><th>OR</th><th>AND</th></tr></thead><tbody><tr><td>Identity Law</td><td>$A+0=A$</td><td>$A\cdot 1=A$</td></tr><tr><td>Dominant Law</td><td>$A+1=1$</td><td>$A\cdot 0=0$</td></tr><tr><td>Idempotent Law</td><td>$A+A=A$</td><td>$A\cdot A=A$</td></tr><tr><td>Complement Law</td><td>$A+\overline{A}=1$</td><td>$A\cdot\overline{A}=0$</td></tr><tr><td>Involution Law</td><td>$\overline{\overline{A}}=A$</td><td></td></tr><tr><td>Commutative Law</td><td>$A+B=B+A$</td><td>$AB=BA$</td></tr><tr><td>Associative Law</td><td>$(A+B)+C=A+(B+C)$</td><td>$(AB)C=A(BC)$</td></tr><tr><td>Distributive Law</td><td>$A(B+C)=AB+AC$</td><td>$A+BC=(A+B)(A+C)$</td></tr><tr><td>Absorption Law</td><td>$A+AB=A$</td><td>$A(A+B)=A$</td></tr><tr><td>De Morgan&#039;s Laws</td><td>$\overline{AB}=\overline{A}+\overline{B}$</td><td>$\overline{A+B}=\overline{A}\cdot\overline{B}$</td></tr></tbody></table></div>
 <h3 id="minterms-and-maxterms">Minterms and Maxterms</h3>
@@ -146,7 +148,9 @@
 <p>Construction (reflect-and-prefix): to build the $n$-bit Gray code, take the $(n-1)$-bit Gray code in order, then append the same list in reverse order (reflection); prefix the first half with 0 and the second half with 1.</p>
 <p>Binary–Gray conversion, for an $n$-bit word with MSB index $n-1$:</p>
 <p>$$\begin{cases}g_{n-1}=b_{n-1}\\ g_i=b_{i+1}\oplus b_i\end{cases},\qquad \begin{cases}b_{n-1}=g_{n-1}\\ b_i=b_{i+1}\oplus g_i\end{cases}\quad(i=0,1,\dots,n-2)$$</p>
-<p>That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of all Gray bits above it. Example: $0101_2\rightarrow 0111_{\text{Gray}}$.</p>
+<p>That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of the Gray bits from the MSB down to and including the current position:</p>
+<p>$$b_i=\bigoplus_{j=i}^{n-1}g_j$$</p>
+<p>Example: $0101_2\rightarrow 0111_{\text{Gray}}$.</p>
 <p>Typical applications:</p>
 <ul>
 <li>Karnaugh maps: rows and columns are labeled in Gray code order so that physically adjacent cells differ in exactly one variable.</li>
@@ -156,16 +160,18 @@
 <h3 id="addition-and-subtraction-of-signed-integers">Addition and Subtraction of Signed Integers</h3>
 <p>A signed integer takes the leading bit as a sign bit: 1 for negative, 0 for positive. This representation is called <span class="obsidian-red">sign-magnitude</span> (e.g. in 8-bit sign-magnitude, <code>0 0001101 = +13</code> and <code>1 0001101 = −13</code>, where the first bit is the sign bit).</p>
 <p>For a negative number, invert every value bit (sign bit excluded) of its sign-magnitude form; the result is called the <span class="obsidian-red">ones&#039; complement</span> (e.g. the 8-bit ones&#039; complement of −13 is <code>1 1110010</code>). The ones&#039; complement of a positive number equals its sign-magnitude form.</p>
-<p>We further define the <span class="obsidian-red">two&#039;s complement</span> as the ones&#039; complement plus 1 (e.g. the 8-bit two&#039;s complement of −13 is <code>1 1110011</code>). The two&#039;s complement of a negative number $-N$ in $n$ bits equals $2^n-N$.</p>
-<p>It is easy to build $a+b$ in hardware; computing $a-b$ is actually done as $a$ plus the two&#039;s complement of $b$, because</p>
-<p>$$Z=X+(2^n-Y)=2^n+(X-Y)$$</p>
-<p>and the term $2^n$ overflows beyond the $n$-bit range and is discarded automatically.</p>
+<p>For a negative number, its <span class="obsidian-red">two&#039;s complement</span> representation is its ones&#039; complement representation plus 1 (e.g. the 8-bit two&#039;s complement of −13 is <code>1 1110011</code>). For a nonnegative number, its two&#039;s complement representation equals its sign-magnitude representation. The two&#039;s complement encoding of $-N$ in $n$ bits is $2^n-N$, for $1\le N\le2^{n-1}$. The representable range is $-2^{n-1}$ to $2^{n-1}-1$; the most negative value has no positive counterpart in the same width.</p>
+<p>It is easy to build $a+b$ in hardware; subtracting an $n$-bit word $Y$ from $X$ uses the bitwise complement of $Y$ plus 1:</p>
+<p>$$Z=(X+\overline{Y}+1)\bmod2^n=(X-Y)\bmod2^n$$</p>
+<p>Any carry beyond the $n$ retained bits is discarded. This modular bit operation works for both unsigned and two&#039;s-complement operands, but carry/borrow and signed overflow are different conditions.</p>
 <p>Overflow detection: two&#039;s-complement addition overflows only when two numbers of the same sign are added and the result has the opposite sign, i.e.</p>
 <ul>
 <li>positive + positive = negative (result sign bit 1)</li>
 <li>negative + negative = positive (result sign bit 0)</li>
 </ul>
-<p>A positive plus a negative never overflows. Subtraction $a-b$ is converted to $a+(-b)$ and judged the same way.</p>
+<p>A positive plus a negative never overflows. For subtraction $r=a-b$, overflow occurs when the operands have different signs and the stored result has the opposite sign to $a$. Writing $s_a,s_b,s_r$ for their sign bits:</p>
+<p>$$V_{\mathrm{sub}}=(s_a\oplus s_b)(s_r\oplus s_a)$$</p>
+<p>For example, in 8 bits, $127-(-128)=255$ is outside the signed range and stores <code>11111111</code> (−1), so overflow is asserted. Do not first negate $b$ in the same width and blindly apply the addition sign rule: negating −128 already exceeds the 8-bit signed range.</p>
 <h3 id="ieee-floatingpoint-numbers">IEEE Floating-Point Numbers</h3>
 <p><a href="https://standards.ieee.org/ieee/754/6210/" target="_blank" rel="noopener noreferrer">IEEE 754-2019</a> defines floating-point formats, arithmetic operations, rounding, and exception handling. This section describes its common binary interchange formats.</p>
 <p>A 32-bit binary32 (single-precision) number is stored as the following bit string:</p>
@@ -194,7 +200,7 @@
 <li>If the discarded part is exactly $0.5$ (i.e. <code>G=1</code>, $R=0$, $S=0$), look at the least significant bit (LSB): round up if $\mathrm{LSB}=1$, round down if $\mathrm{LSB}=0$.</li>
 </ul>
 <h3 id="ascii-code">ASCII Code</h3>
-<p><span class="obsidian-red">ASCII</span> stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.</p>
+<p>ASCII stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.</p>
 <p><img src="../attachments/ascii-table-alpharithms-scaled-1024x610-optimized.webp" alt="ascii-table-alpharithms-scaled-1024x610" loading="lazy" decoding="async" style="width: min(100%, 600px);"></p>
 <h2 id="combinational-logic-circuit">Combinational Logic Circuit</h2>
 <h3 id="race-and-hazard">Race and Hazard</h3>
@@ -240,29 +246,10 @@
     <span class="hljs-keyword">assign</span> Y0 = ~I3 | (I3 &amp; I2 &amp; ~I1);
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
-<p>Here, <code>GS=0</code> means at least one input is active. The same circuit can be described with <code>casez</code>; <code>?</code> matches either bit value:</p>
-<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> priority_encoder (
-    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] I,
-    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] Y,
-    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>        GS
-);
-
-    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
-        Y  = <span class="hljs-number">2&#039;b00</span>;
-        GS = <span class="hljs-number">1&#039;b0</span>;
-        <span class="hljs-keyword">casez</span> (I)
-            <span class="hljs-number">4&#039;b0???</span>: Y = <span class="hljs-number">2&#039;b11</span>; <span class="hljs-comment">// I3 has highest priority</span>
-            <span class="hljs-number">4&#039;b10??</span>: Y = <span class="hljs-number">2&#039;b10</span>;
-            <span class="hljs-number">4&#039;b110?</span>: Y = <span class="hljs-number">2&#039;b01</span>;
-            <span class="hljs-number">4&#039;b1110</span>: Y = <span class="hljs-number">2&#039;b00</span>;
-            <span class="hljs-keyword">default</span>: GS = <span class="hljs-number">1&#039;b1</span>; <span class="hljs-comment">// no active input</span>
-        <span class="hljs-keyword">endcase</span>
-    <span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Here, <code>GS=0</code> means at least one input is active.</p>
 <h3 id="decoder">Decoder</h3>
 <p>The decoder is the reverse process of the encoder. Like the following verilog code:</p>
-<div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
+<div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> A0,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> A1,
@@ -278,22 +265,8 @@
     <span class="hljs-keyword">assign</span> Y3 = E &amp; A0 &amp; A1;
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
-<p>It can also be described as:</p>
-<div class="code-block" data-code-block="4"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
-    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
-    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] A,
-    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] Y
-);
-
-    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
-        Y = <span class="hljs-number">4&#039;b0000</span>;
-        <span class="hljs-keyword">if</span> (E)
-            Y[A] = <span class="hljs-number">1&#039;b1</span>;
-    <span class="hljs-keyword">end</span>
-
-<span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.</p>
-<p>A classic MSI implementation is the <span class="obsidian-red">74HC138</span>, a 3-to-8 line decoder of the 74HC (high-speed CMOS) family. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:</p>
+<p>A classic MSI implementation is the 74x138, a 3-to-8 line decoder in the 74-series logic family. Here, $x$ is a placeholder for the technology designation: for example, 74HC138 uses high-speed CMOS, while 74LS138 uses low-power Schottky TTL. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$G_1$</th><th>$\overline{G_{2A}}$, $\overline{G_{2B}}$</th><th>$A_2A_1A_0$</th><th>Outputs</th></tr></thead><tbody><tr><td>0</td><td>X</td><td>XXX</td><td>all 1</td></tr><tr><td>X</td><td>any 1</td><td>XXX</td><td>all 1</td></tr><tr><td>1</td><td>both 0</td><td>$i$</td><td>$\overline{Y_i}=0$</td></tr></tbody></table></div>
 <p><img src="../attachments/images.jpg" alt="images" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>Writing $E$ for the overall enable condition and $m_i$ for minterm $i$ of $A_2A_1A_0$, each output is an active-low minterm:</p>
@@ -302,11 +275,11 @@
 <ul>
 <li>Address decoding: high-order CPU address lines drive $A_2A_1A_0$, and each $\overline{Y_i}$ becomes the chip-select signal of one memory or I/O device, realizing the address mapping described above.</li>
 <li>Logic synthesis: since every output is an active-low minterm, any 3-variable function $f=\sum m_i$ is obtained by feeding the corresponding outputs into one NAND gate: $f=\overline{\overline{Y_{i_1}}\cdot\overline{Y_{i_2}}\cdot\ldots}$.</li>
-<li>Expansion: two chips form a 4-to-16 decoder by driving $G_1$ of the low half and $\overline{G_{2A}}$ of the high half with the fourth address bit.</li>
+<li>Expansion: two chips form a 4-to-16 decoder. Both receive $A_2A_1A_0$. For the low half (outputs 0–7), connect the fourth address bit $A_3$ to $\overline{G_{2A}}$, tie $G_1=1$, and tie $\overline{G_{2B}}=0$. For the high half (outputs 8–15), connect $A_3$ to $G_1$ and tie both active-low enables to 0. Thus $A_3=0$ enables only the low half, and $A_3=1$ enables only the high half. See the <a href="https://www.ti.com/lit/ds/symlink/sn74hc138.pdf" target="_blank" rel="noopener noreferrer">74HC138 datasheet</a>.</li>
 </ul>
 <h3 id="multiplexer-mux">Multiplexer (MUX)</h3>
 <p>The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow: <img src="../attachments/Pasted%20image%2020260922174945.png" alt="Pasted image 20260922174945" loading="lazy" decoding="async" style="width: min(100%, 212px);"></p>
-<div class="code-block" data-code-block="5"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux2to1 (
+<div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux2to1 (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D0,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D1,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> S,
@@ -317,7 +290,7 @@
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>Generally, $k$ select bits choose one of $2^k$ data inputs. The same Verilog pattern can be parameterized:</p>
-<div class="code-block" data-code-block="6"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux_pow2_to_1 #(
+<div class="code-block" data-code-block="4"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux_pow2_to_1 #(
     <span class="hljs-keyword">parameter</span> <span class="hljs-type">integer</span> SELECT_BITS = <span class="hljs-number">2</span>
 ) (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [(<span class="hljs-number">1</span> &lt;&lt; SELECT_BITS)-<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] D,
@@ -329,7 +302,7 @@
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>For <code>SELECT_BITS = 2</code>, this is a 4-to-1 MUX; for <code>SELECT_BITS = 3</code>, it is an 8-to-1 MUX.</p>
-<p>The classic MSI counterpart is the <span class="obsidian-red">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in <a href="#decoder">Decoder</a>. It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:</p>
+<p>The classic MSI counterpart is the 74x151, an 8-to-1 data selector in the same 74x family as the 74x138 in <a href="#decoder">Decoder</a>. It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$\overline{E}$</th><th>$S_2S_1S_0$</th><th>$Y$</th><th>$\overline{Y}$</th></tr></thead><tbody><tr><td>1</td><td>XXX</td><td>0</td><td>1</td></tr><tr><td>0</td><td>$i$</td><td>$I_i$</td><td>$\overline{I_i}$</td></tr></tbody></table></div>
 <p><img src="../attachments/exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b-optimized.webp" alt="exec-30d3c0c9-10f8-4faa-9369-bf3dd5d0ee8b" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>When enabled ($\overline{E}=0$), with $m_i$ the minterms of the select inputs,</p>
@@ -339,7 +312,7 @@
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$S_1S_0$</th><th>$Y_0$</th><th>$Y_1$</th><th>$Y_2$</th><th>$Y_3$</th></tr></thead><tbody><tr><td>00</td><td>$D$</td><td>0</td><td>0</td><td>0</td></tr><tr><td>01</td><td>0</td><td>$D$</td><td>0</td><td>0</td></tr><tr><td>10</td><td>0</td><td>0</td><td>$D$</td><td>0</td></tr><tr><td>11</td><td>0</td><td>0</td><td>0</td><td>$D$</td></tr></tbody></table></div>
 <p>The output equations are</p>
 <p>$$\begin{aligned} Y_0&amp;=D\overline{S_1}\overline{S_0}, &amp;Y_1&amp;=D\overline{S_1}S_0,\\ Y_2&amp;=DS_1\overline{S_0}, &amp;Y_3&amp;=DS_1S_0. \end{aligned}$$</p>
-<div class="code-block" data-code-block="7"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux1to4 (
+<div class="code-block" data-code-block="5"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux1to4 (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>       D,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>] S,
     <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>] Y
@@ -352,7 +325,7 @@
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>With $k$ select bits, the same idea extends to a 1-to-$2^k$ DEMUX: $Y[S]=D$, and every other output is 0.</p>
-<div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux_1_to_pow2 #(
+<div class="code-block" data-code-block="6"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> demux_1_to_pow2 #(
     <span class="hljs-keyword">parameter</span> <span class="hljs-type">integer</span> SELECT_BITS = <span class="hljs-number">2</span>
 ) (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>                       D,
@@ -365,11 +338,11 @@
     <span class="hljs-keyword">assign</span> Y = {{(OUTPUTS-<span class="hljs-number">1</span>){<span class="hljs-number">1&#039;b0</span>}}, D} &lt;&lt; S;
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
-<p>A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74HC138 (<a href="#decoder">Decoder</a>) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.</p>
+<p>A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74x138 (<a href="#decoder">Decoder</a>) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.</p>
 <h3 id="comparator">Comparator</h3>
 <p>A <span class="obsidian-red">magnitude comparator</span> compares two binary numbers $A$ and $B$ and outputs whether $A&gt;B$, $A=B$, or $A&lt;B$.</p>
 <p>We can easily build the 1-bit comparator:</p>
-<div class="code-block" data-code-block="9"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_1bit (
+<div class="code-block" data-code-block="7"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_1bit (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
     <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F1,  <span class="hljs-comment">// A &lt; B</span>
@@ -383,7 +356,7 @@
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>And we can build the 2-bit comparator as follows:</p>
-<div class="code-block" data-code-block="10"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_2bit (
+<div class="code-block" data-code-block="8"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> comparator_2bit (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>    [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]A,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>    [<span class="hljs-number">1</span>:<span class="hljs-number">0</span>]B,
     <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>    F1,  <span class="hljs-comment">// A &lt; B</span>
@@ -425,7 +398,7 @@ comparator_1bit c1(
 <li>Inputs are two 1-bit binary addends $A$ and $B$.</li>
 <li>Outputs are a 1-bit sum $S$, and a 1-bit carry-out $C_O$.</li>
 </ul>
-<div class="code-block" data-code-block="11"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> half_adder (
+<div class="code-block" data-code-block="9"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> half_adder (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
     <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>     S,
@@ -442,7 +415,7 @@ comparator_1bit c1(
 <li>Inputs: Two 1-bit binary addends $A$ and $B$ and a 1-bit carry-in $C_I$.</li>
 <li>Outputs: A 1-bit sum $S$ and a 1-bit carry-out to the next higher-order bit $C_O$.</li>
 </ul>
-<div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> full_adder (
+<div class="code-block" data-code-block="10"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> full_adder (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     A,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>     B,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   C_I,
@@ -471,8 +444,8 @@ half_adder a1(
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>Logical symbol: <img src="../attachments/Pasted%20image%2020260929175510.png" alt="Pasted image 20260929175510" loading="lazy" decoding="async" style="width: min(100%, 238px);"></p>
 <p>Cascading full adders gives a ripple-carry adder, but the carry must propagate bit by bit, so it costs more time for larger numbers. A classic way to improve the performance is the <span class="obsidian-red">Carry Look-Ahead Adder (CLA)</span>.</p>
-<p>Firstly, calculate:$$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$ Then the carry and sum are $$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$ Expanding the carries recursively expresses every $C_{i+1}$ directly in terms of $P$, $G$, and $C_0$, which removes the ripple.</p>
-<div class="code-block" data-code-block="13"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> cla_4bit (
+<p>Firstly, calculate: $$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$ Then the carry and sum are $$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$ Expanding the carries recursively expresses every $C_{i+1}$ directly in terms of $P$, $G$, and $C_0$, which removes the ripple.</p>
+<div class="code-block" data-code-block="11"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> cla_4bit (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]A,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]B,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   C_I,
@@ -496,7 +469,7 @@ half_adder a1(
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>The integrated 4-bit CLA chip is called 74x283: <img src="../attachments/Pasted%20image%2020260929182843.png" alt="Pasted image 20260929182843" loading="lazy" decoding="async" style="width: min(100%, 237px);"></p>
 <p>We can also use 74x283 to do subtraction. Since $X-Y=X+\overline{Y}+1$, the first adder computes $X-Y$; a carry-out of 1 means no borrow, so $V=\overline{C_1}$ is the borrow (sign) flag ($V=1$ means $X&lt;Y$), not an overflow flag, and the second adder takes the two&#039;s complement of the result only when $V=1$, giving the magnitude $|X-Y|$.</p>
-<div class="code-block" data-code-block="14"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> subtractor_4bit (
+<div class="code-block" data-code-block="12"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> subtractor_4bit (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]X,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]Y,
     <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>   [<span class="hljs-number">3</span>:<span class="hljs-number">0</span>]S,
@@ -526,19 +499,205 @@ cla_4bit a1(
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <h3 id="multiplier">Multiplier</h3>
-<h3 id="divider">Divider</h3>
-<h2 id="sequential-logic-circuits">Sequential logic circuits</h2>
+<p>A multiplier can generate shifted partial products and add them, just as in long multiplication. Two common techniques to improve performance are <span class="obsidian-red">Booth Recoding</span>, which reduces the number of partial products, and a <span class="obsidian-red">Wallace Tree</span>, which reduces them to two rows before the final addition.</p>
+<p>Booth recoding is a method to reduce the number of partial product. The natural way to calculate $A\times 011110$ is $$A\ll1+A\ll2+A\ll3+A\ll4$$ In Booth Recoding, we can calculate it as: $$A\ll5-A\ll1$$ It follows the following rule to deal the number:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$b_i$</th><th>$b_{i-1}$</th><th>Operation</th></tr></thead><tbody><tr><td>$0$</td><td>$0$</td><td>Nothing</td></tr><tr><td>$0$</td><td>$1$</td><td>$+A$</td></tr><tr><td>$1$</td><td>$0$</td><td>$-A$</td></tr><tr><td>$1$</td><td>$1$</td><td>Nothing</td></tr></tbody></table></div>
+<p>For radix-2 Booth recoding, the operation in row $i$ is weighted by $2^i$, and $b_{-1}=0$. Booth recoding also supports two&#039;s-complement multiplication when the multiplier is sign-extended above its MSB. For an unsigned multiplier, zero-extend it above its MSB instead.</p>
+<p>Radix-4 Booth encoding examines 3 bits at a time, with a 1-bit overlap between adjacent groups. Each group produces a coefficient in $\{-2,-1,0,1,2\}$, weighted by $2^{2i}$. For example, take the 8-bit positive multiplier $B=01101101_2=109$ and append $b_{-1}=0$ at the right: $$ B=0\,1101101,\qquad b_{-1}=0 $$ The bits of $B$ are $$ b_7b_6b_5b_4b_3b_2b_1b_0 = 0\,1\,1\,0\,1\,1\,0\,1. $$ Grouping: $$ (b_1b_0b_{-1})=010 $$ $$ (b_3b_2b_1)=110 $$ $$ (b_5b_4b_3)=101 $$ $$ (b_7b_6b_5)=011. $$ Consult the Booth table:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>3-bit Booth</th><th>Result</th></tr></thead><tbody><tr><td>$000$</td><td>$0$</td></tr><tr><td>$001$</td><td>$A$</td></tr><tr><td>$010$</td><td>$A$</td></tr><tr><td>$011$</td><td>$2A$</td></tr><tr><td>$100$</td><td>$-2A$</td></tr><tr><td>$101$</td><td>$-A$</td></tr><tr><td>$110$</td><td>$-A$</td></tr><tr><td>$111$</td><td>$0$</td></tr></tbody></table></div>
+<p>Thus</p>
+<p>$$AB=A-(A\ll2)-(A\ll4)+((2A)\ll6)=109A$$</p>
+<p>The following encoder accepts an unsigned 8-bit multiplicand $X$. Its signed 10-bit internal value and output can represent every partial product from $-2X$ to $2X$, including $\pm510$.</p>
+<div class="code-block" data-code-block="13"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> booth_encoder (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>        [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] X,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>        [<span class="hljs-number">2</span>:<span class="hljs-number">0</span>] code,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span> <span class="hljs-type">signed</span>  [<span class="hljs-number">9</span>:<span class="hljs-number">0</span>] pp
+);
+
+    <span class="hljs-type">wire</span> <span class="hljs-type">signed</span> [<span class="hljs-number">9</span>:<span class="hljs-number">0</span>] a_ext;
+    <span class="hljs-keyword">assign</span> a_ext = <span class="hljs-meta">$signed</span>({<span class="hljs-number">2&#039;b00</span>, X});
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">case</span> (code)
+            <span class="hljs-number">3&#039;b000</span>,
+            <span class="hljs-number">3&#039;b111</span>: pp = <span class="hljs-number">10&#039;sd0</span>;
+
+            <span class="hljs-number">3&#039;b001</span>,
+            <span class="hljs-number">3&#039;b010</span>: pp = a_ext;
+
+            <span class="hljs-number">3&#039;b011</span>: pp = a_ext &lt;&lt; <span class="hljs-number">1</span>;
+
+            <span class="hljs-number">3&#039;b100</span>: pp = -(a_ext &lt;&lt; <span class="hljs-number">1</span>);
+
+            <span class="hljs-number">3&#039;b101</span>,
+            <span class="hljs-number">3&#039;b110</span>: pp = -a_ext;
+
+            <span class="hljs-keyword">default</span>: pp = <span class="hljs-number">10&#039;sd0</span>;
+        <span class="hljs-keyword">endcase</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>For an unsigned 8-bit multiplier $Y$, zero-extend above $Y_7$ and append $b_{-1}=0$. The five groups are <code>{Y[1:0], 1&#039;b0}</code>, <code>Y[3:1]</code>, <code>Y[5:3]</code>, <code>Y[7:5]</code>, and <code>{2&#039;b00, Y[7]}</code>. The fifth group supplies the correction needed when $Y\ge128$; omitting it would interpret the high bit as a negative sign.</p>
+<p>A Wallace tree uses carry-save compressors. Each compressor combines three rows into a sum row and a carry row without propagating carry across the word:</p>
+<p>$$S=A\oplus B\oplus C,\qquad C_{\mathrm{row}}=(AB+AC+BC)\ll1$$</p>
+<p>Here the AND, OR, and XOR operations are bitwise. The carry row already includes its one-bit shift. This 18-bit compressor retains the result modulo $2^{18}$:</p>
+<div class="code-block" data-code-block="14"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> csa_18bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] A,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] B,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] C,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] sum,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] carry
+);
+
+    <span class="hljs-keyword">assign</span> sum   = A ^ B ^ C;
+    <span class="hljs-keyword">assign</span> carry = ((A &amp; B) | (A &amp; C) | (B &amp; C)) &lt;&lt; <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>The complete unsigned multiplier below sign-extends each partial product to 18 bits before shifting, reduces five rows to two with three compressor stages, and uses one final carry-propagating addition. The 16-bit output $S$ holds the exact product, which is at most $255^2=65025$. Here <code>V</code> explicitly indicates overflow if the result is narrowed to 8 bits (<code>S &gt; 255</code>); the full 16-bit product does not overflow.</p>
+<div class="code-block" data-code-block="15"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> multiplier_8bit (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>  [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] X,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span>  [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] Y,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">15</span>:<span class="hljs-number">0</span>] S,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span>        V
+);
+
+    <span class="hljs-type">wire</span> <span class="hljs-type">signed</span> [<span class="hljs-number">9</span>:<span class="hljs-number">0</span>] raw_pp0, raw_pp1, raw_pp2, raw_pp3, raw_pp4;
+    <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] pp0, pp1, pp2, pp3, pp4;
+    <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] sum0, carry0, sum1, carry1, sum2, carry2;
+    <span class="hljs-type">wire</span> [<span class="hljs-number">17</span>:<span class="hljs-number">0</span>] product;
+
+    booth_encoder u0 (.X(X), .code({Y[<span class="hljs-number">1</span>:<span class="hljs-number">0</span>], <span class="hljs-number">1&#039;b0</span>}), .pp(raw_pp0));
+    booth_encoder u1 (.X(X), .code(Y[<span class="hljs-number">3</span>:<span class="hljs-number">1</span>]),         .pp(raw_pp1));
+    booth_encoder u2 (.X(X), .code(Y[<span class="hljs-number">5</span>:<span class="hljs-number">3</span>]),         .pp(raw_pp2));
+    booth_encoder u3 (.X(X), .code(Y[<span class="hljs-number">7</span>:<span class="hljs-number">5</span>]),         .pp(raw_pp3));
+    booth_encoder u4 (.X(X), .code({<span class="hljs-number">2&#039;b00</span>, Y[<span class="hljs-number">7</span>]}),  .pp(raw_pp4));
+
+    <span class="hljs-comment">// Extend before shifting so that no significant bits are lost.</span>
+    <span class="hljs-keyword">assign</span> pp0 = {{<span class="hljs-number">8</span>{raw_pp0[<span class="hljs-number">9</span>]}}, raw_pp0};
+    <span class="hljs-keyword">assign</span> pp1 = {{<span class="hljs-number">8</span>{raw_pp1[<span class="hljs-number">9</span>]}}, raw_pp1} &lt;&lt; <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">assign</span> pp2 = {{<span class="hljs-number">8</span>{raw_pp2[<span class="hljs-number">9</span>]}}, raw_pp2} &lt;&lt; <span class="hljs-number">4</span>;
+    <span class="hljs-keyword">assign</span> pp3 = {{<span class="hljs-number">8</span>{raw_pp3[<span class="hljs-number">9</span>]}}, raw_pp3} &lt;&lt; <span class="hljs-number">6</span>;
+    <span class="hljs-keyword">assign</span> pp4 = {{<span class="hljs-number">8</span>{raw_pp4[<span class="hljs-number">9</span>]}}, raw_pp4} &lt;&lt; <span class="hljs-number">8</span>;
+
+    csa_18bit t0 (.A(pp0),  .B(pp1),    .C(pp2), .sum(sum0), .carry(carry0));
+    csa_18bit t1 (.A(sum0), .B(carry0), .C(pp3), .sum(sum1), .carry(carry1));
+    csa_18bit t2 (.A(sum1), .B(carry1), .C(pp4), .sum(sum2), .carry(carry2));
+
+    <span class="hljs-keyword">assign</span> product = sum2 + carry2;
+    <span class="hljs-keyword">assign</span> S = product[<span class="hljs-number">15</span>:<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">assign</span> V = |S[<span class="hljs-number">15</span>:<span class="hljs-number">8</span>]; <span class="hljs-comment">// overflow only for an 8-bit destination</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>For a signed 8-bit variant, the multiplicand must be sign-extended, and four Booth groups suffice because $Y_7$ is the sign bit. Its inputs, output, and overflow interpretation must be changed consistently.</p>
+<h3 id="divider-todo">Divider (TODO)</h3>
+<h3 id="floatingpoint-calculation-todo">Floating-Point Calculation (TODO)</h3>
+<h2 id="sequential-logic-circuits">Sequential Logic Circuits</h2>
 <h3 id="latch">Latch</h3>
+<p>A <span class="obsidian-red">latch</span> stores one bit. A gated latch is level-sensitive: while its enable is active, the stored state can respond to input changes; when the enable is inactive, it holds its state.</p>
 <h4 id="sr-latch">SR Latch</h4>
+<p>The following cross-coupled NOR circuit is an SR latch with active-high set $S$ and reset $R$ inputs: <img src="../attachments/Screenshot%202026-10-02%20at%2016.15.28.png" alt="Screenshot 2026-10-02 at 16.15.28" loading="lazy" decoding="async" style="width: min(100%, 309px);"> The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261002162445.png" alt="Pasted image 20261002162445" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>We can find that the rule of circuit is:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$S$</th><th>$R$</th><th>$Q$</th><th>$\overline{Q}$</th></tr></thead><tbody><tr><td>$0$</td><td>$0$</td><td>$Q_{\text{old}}$</td><td>$\overline{Q_{\text{old}}}$</td></tr><tr><td>$1$</td><td>$0$</td><td>$1$</td><td>$0$</td></tr><tr><td>$0$</td><td>$1$</td><td>$0$</td><td>$1$</td></tr><tr><td>$1$</td><td>$1$</td><td>$0$ (forbidden)</td><td>$0$ (forbidden)</td></tr></tbody></table></div>
+<p>While $S=R=1$, both physical outputs are forced to 0, so the output labeled $\overline{Q}$ is no longer the complement of $Q$. If both inputs return to 0 together, the final state depends on circuit delays and may pass through metastability. This input combination must be avoided.</p>
+<p>A cross-coupled NAND implementation instead has active-low inputs $\overline{S}$ and $\overline{R}$: <img src="../attachments/Screenshot%202026-10-02%20at%2016.24.01.png" alt="Screenshot 2026-10-02 at 16.24.01" loading="lazy" decoding="async" style="width: min(100%, 297px);"> The logic symbol will become as follows: <img src="../attachments/Pasted%20image%2020261002162428.png" alt="Pasted image 20261002162428" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>Its truth table is:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$\overline{S}$</th><th>$\overline{R}$</th><th>$Q$</th><th>$\overline{Q}$</th><th>Operation</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>$Q_{\text{old}}$</td><td>$\overline{Q_{\text{old}}}$</td><td>Hold</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>Set</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>Reset</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>Forbidden</td></tr></tbody></table></div>
+<p>Here both outputs are forced to 1 during the forbidden condition; releasing both inputs together again leaves the final state uncertain.</p>
+<p>The following behavioral Verilog model uses the active-high NOR convention, assumes $S$ and $R$ are never asserted together, and describes only valid-input behavior. It does not model the physical forbidden state or metastability:</p>
+<div class="code-block" data-code-block="16"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> sr_latch (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> S,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> R,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  Q
+);
+
+<span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">if</span> (S &amp;&amp; !R)
+        Q = <span class="hljs-number">1&#039;b1</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!S &amp;&amp; R)
+        Q = <span class="hljs-number">1&#039;b0</span>;
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>For the active-low NAND convention, use a separate model with input names that make the polarity explicit. It assumes <code>S_n</code> and <code>R_n</code> are never both 0:</p>
+<div class="code-block" data-code-block="17"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> sr_latch_nand (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> S_n,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> R_n,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  Q
+);
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!S_n &amp;&amp; R_n)
+            Q = <span class="hljs-number">1&#039;b1</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (S_n &amp;&amp; !R_n)
+            Q = <span class="hljs-number">1&#039;b0</span>;
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>A gated SR latch adds an active-high enable $E$. With $E=0$, it holds its state regardless of $S$ and $R$; with $E=1$, it follows the active-high SR rules above. The model assumes $S$ and $R$ are not both 1 while enabled:</p>
+<div class="code-block" data-code-block="18"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> gated_sr_latch (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> S,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> R,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  Q
+);
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (E) <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (S &amp;&amp; !R)
+                Q = <span class="hljs-number">1&#039;b1</span>;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!S &amp;&amp; R)
+                Q = <span class="hljs-number">1&#039;b0</span>;
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>The absence of an assignment in the hold condition intentionally infers a latch. <code>always @(*)</code> responds to changes in $E$, $S$, or $R$; <code>always @(E)</code> alone would miss input changes while enabled.</p>
+<p>The logic symbol is: <img src="../attachments/Screenshot%202026-10-02%20at%2016.47.47.png" alt="Screenshot 2026-10-02 at 16.47.47" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <h4 id="d-latch">D Latch</h4>
-<h3 id="flipflop-ff">Flip-Flop (FF)</h3>
-<h4 id="sr-ff">SR FF</h4>
-<h4 id="d-ff">D FF</h4>
-<h4 id="t-ff">T FF</h4>
-<h4 id="jk-ff">JK FF</h4>
-<h2 id="fieldprogrammable-gate-array-fpga">Field-Programmable Gate Array (FPGA)</h2>
+<p><img src="../attachments/Pasted%20image%2020261002165027.png" alt="Pasted image 20261002165027" loading="lazy" decoding="async" style="width: min(100%, 400px);"></p>
+<p>For a D latch with active-high enable $E$, $Q$ follows $D$ while $E=1$ and holds its previous value while $E=0$:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$D$</th><th>$E$</th><th>$Q$</th><th>$\overline{Q}$</th></tr></thead><tbody><tr><td>X</td><td>$0$</td><td>$Q_{\text{old}}$</td><td>$\overline{Q_{\text{old}}}$</td></tr><tr><td>$0$</td><td>$1$</td><td>$0$</td><td>$1$</td></tr><tr><td>$1$</td><td>$1$</td><td>$1$</td><td>$0$</td></tr></tbody></table></div>
+<p>It can be described by Verilog as follows:</p>
+<div class="code-block" data-code-block="19"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> d_latch (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span>  Q
+);
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (E)
+            Q = D;
+    <span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>The 74x373 contains eight transparent D latches with a shared active-high latch enable <code>LE</code> and an active-low output enable (<code>OE_n</code> in the code below). When <code>LE=1</code>, the internal stored data follows $D$; when <code>LE=0</code>, it holds its previous value. When <code>OE_n=1</code>, the output pins are high-impedance (<code>Z</code>); when <code>OE_n=0</code>, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled. See the <a href="https://www.ti.com/lit/ds/symlink/sn74hc373.pdf" target="_blank" rel="noopener noreferrer">74HC373 datasheet</a>.</p>
+<p><img src="../attachments/Pasted%20image%2020261002165655.png" alt="Pasted image 20261002165655" loading="lazy" decoding="async" style="width: min(100%, 272px);"></p>
+<div class="code-block" data-code-block="20"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> latch_74x373 (
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] D,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> LE,
+    <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> OE_n,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] Q
+);
+
+    <span class="hljs-type">reg</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] stored;
+
+    <span class="hljs-keyword">always</span> @(*) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (LE)
+            stored = D;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">assign</span> Q = OE_n ? <span class="hljs-number">8&#039;bzzzzzzzz</span> : stored;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>These latch models have no reset. Their initial stored state is unspecified until a valid set/reset operation or an enabled data load establishes it.</p>
+<h3 id="flipflop-ff-todo">Flip-Flop (FF) (TODO)</h3>
+<h4 id="sr-ff-todo">SR FF (TODO)</h4>
+<h4 id="d-ff-todo">D FF (TODO)</h4>
+<h4 id="t-ff-todo">T FF (TODO)</h4>
+<h4 id="jk-ff-todo">JK FF (TODO)</h4>
+<h2 id="fieldprogrammable-gate-array-fpga-todo">Field-Programmable Gate Array (FPGA) (TODO)</h2>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider","level":2,"text":"Divider"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential logic circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff","level":2,"text":"Flip-Flop (FF)"},{"id":"sr-ff","level":3,"text":"SR FF"},{"id":"d-ff","level":3,"text":"D FF"},{"id":"t-ff","level":3,"text":"T FF"},{"id":"jk-ff","level":3,"text":"JK FF"},{"id":"fieldprogrammable-gate-array-fpga","level":1,"text":"Field-Programmable Gate Array (FPGA)"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider-todo","level":2,"text":"Divider (TODO)"},{"id":"floatingpoint-calculation-todo","level":2,"text":"Floating-Point Calculation (TODO)"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential Logic Circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff-todo","level":2,"text":"Flip-Flop (FF) (TODO)"},{"id":"sr-ff-todo","level":3,"text":"SR FF (TODO)"},{"id":"d-ff-todo","level":3,"text":"D FF (TODO)"},{"id":"t-ff-todo","level":3,"text":"T FF (TODO)"},{"id":"jk-ff-todo","level":3,"text":"JK FF (TODO)"},{"id":"fieldprogrammable-gate-array-fpga-todo","level":1,"text":"Field-Programmable Gate Array (FPGA) (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -635,8 +794,9 @@ The logic gate symbols are shown in the figure below:
 
 ![images-12](../attachments/images-12.jpg){width=450}
 
-We can use [Analog Circuits](analog_circuits.html) to achieve them:
-![e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56](../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp)
+We can use [CMOS Logic Gates (TODO)](analog_circuits.html#cmos-logic-gates-todo) to achieve them:
+
+![e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56](../attachments/e37d22c9de856a88e90ef263e326f6a7e16680c804789a590c849cc1062a0c56-optimized.webp){width=450}
 
 Basic equations in Boolean algebra:
 
@@ -754,7 +914,11 @@ Binary–Gray conversion, for an $n$-bit word with MSB index $n-1$:
 
 $$\begin{cases}g_{n-1}=b_{n-1}\\ g_i=b_{i+1}\oplus b_i\end{cases},\qquad \begin{cases}b_{n-1}=g_{n-1}\\ b_i=b_{i+1}\oplus g_i\end{cases}\quad(i=0,1,\dots,n-2)$$
 
-That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of all Gray bits above it. Example: $0101_2\rightarrow 0111_{\text{Gray}}$.
+That is, Gray to binary: keep the MSB, and each remaining binary bit is the XOR of the Gray bits from the MSB down to and including the current position:
+
+$$b_i=\bigoplus_{j=i}^{n-1}g_j$$
+
+Example: $0101_2\rightarrow 0111_{\text{Gray}}$.
 
 Typical applications:
 
@@ -768,20 +932,24 @@ A signed integer takes the leading bit as a sign bit: 1 for negative, 0 for posi
 
 For a negative number, invert every value bit (sign bit excluded) of its sign-magnitude form; the result is called the <span style="color: red;">ones' complement</span> (e.g. the 8-bit ones' complement of −13 is `1 1110010`). The ones' complement of a positive number equals its sign-magnitude form.
 
-We further define the <span style="color: red;">two's complement</span> as the ones' complement plus 1 (e.g. the 8-bit two's complement of −13 is `1 1110011`). The two's complement of a negative number $-N$ in $n$ bits equals $2^n-N$.
+For a negative number, its <span style="color: red;">two's complement</span> representation is its ones' complement representation plus 1 (e.g. the 8-bit two's complement of −13 is `1 1110011`). For a nonnegative number, its two's complement representation equals its sign-magnitude representation. The two's complement encoding of $-N$ in $n$ bits is $2^n-N$, for $1\le N\le2^{n-1}$. The representable range is $-2^{n-1}$ to $2^{n-1}-1$; the most negative value has no positive counterpart in the same width.
 
-It is easy to build $a+b$ in hardware; computing $a-b$ is actually done as $a$ plus the two's complement of $b$, because
+It is easy to build $a+b$ in hardware; subtracting an $n$-bit word $Y$ from $X$ uses the bitwise complement of $Y$ plus 1:
 
-$$Z=X+(2^n-Y)=2^n+(X-Y)$$
+$$Z=(X+\overline{Y}+1)\bmod2^n=(X-Y)\bmod2^n$$
 
-and the term $2^n$ overflows beyond the $n$-bit range and is discarded automatically.
+Any carry beyond the $n$ retained bits is discarded. This modular bit operation works for both unsigned and two's-complement operands, but carry/borrow and signed overflow are different conditions.
 
 Overflow detection: two's-complement addition overflows only when two numbers of the same sign are added and the result has the opposite sign, i.e.
 
 - positive + positive = negative (result sign bit 1)
 - negative + negative = positive (result sign bit 0)
 
-A positive plus a negative never overflows. Subtraction $a-b$ is converted to $a+(-b)$ and judged the same way.
+A positive plus a negative never overflows. For subtraction $r=a-b$, overflow occurs when the operands have different signs and the stored result has the opposite sign to $a$. Writing $s_a,s_b,s_r$ for their sign bits:
+
+$$V_{\mathrm{sub}}=(s_a\oplus s_b)(s_r\oplus s_a)$$
+
+For example, in 8 bits, $127-(-128)=255$ is outside the signed range and stores `11111111` (−1), so overflow is asserted. Do not first negate $b$ in the same width and blindly apply the addition sign rule: negating −128 already exceeds the 8-bit signed range.
 ## IEEE Floating-Point Numbers
 
 [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) defines floating-point formats, arithmetic operations, rounding, and exception handling. This section describes its common binary interchange formats.
@@ -834,7 +1002,7 @@ IEEE 754-2019 defines five rounding-direction attributes for binary arithmetic; 
 
 ## ASCII Code
 
-<span style="color: red;">ASCII</span> stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.
+ASCII stands for American Standard Code for Information Interchange. It is a system that assigns a unique number to each letter, number, and symbol so computers can represent and exchange text.
 
 ![ascii-table-alpharithms-scaled-1024x610](../attachments/ascii-table-alpharithms-scaled-1024x610-optimized.webp){width=600}
 
@@ -899,29 +1067,7 @@ module priority_encoder (
 endmodule
 ```
 
-Here, `GS=0` means at least one input is active. The same circuit can be described with `casez`; `?` matches either bit value:
-
-```verilog
-module priority_encoder (
-    input  wire [3:0] I,
-    output reg  [1:0] Y,
-    output reg        GS
-);
-
-    always @(*) begin
-        Y  = 2'b00;
-        GS = 1'b0;
-        casez (I)
-            4'b0???: Y = 2'b11; // I3 has highest priority
-            4'b10??: Y = 2'b10;
-            4'b110?: Y = 2'b01;
-            4'b1110: Y = 2'b00;
-            default: GS = 1'b1; // no active input
-        endcase
-    end
-
-endmodule
-```
+Here, `GS=0` means at least one input is active.
 ## Decoder
 
 The decoder is the reverse process of the encoder. Like the following verilog code:
@@ -945,27 +1091,9 @@ module decoder (
 endmodule
 ```
 
-It can also be described as:
-
-```verilog
-module decoder (
-    input  wire E,
-    input  wire [1:0] A,
-    output reg  [3:0] Y
-);
-
-    always @(*) begin
-        Y = 4'b0000;
-        if (E)
-            Y[A] = 1'b1;
-    end
-
-endmodule
-```
-
 In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.
 
-A classic MSI implementation is the <span style="color: red;">74HC138</span>, a 3-to-8 line decoder of the 74HC (high-speed CMOS) family. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:
+A classic MSI implementation is the 74x138, a 3-to-8 line decoder in the 74-series logic family. Here, $x$ is a placeholder for the technology designation: for example, 74HC138 uses high-speed CMOS, while 74LS138 uses low-power Schottky TTL. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:
 
 | $G_1$ | $\overline{G_{2A}}$, $\overline{G_{2B}}$ | $A_2A_1A_0$ | Outputs            |
 | ----- | ---------------------------------------- | ----------- | ------------------ |
@@ -982,7 +1110,7 @@ This structure makes the chip useful beyond plain decoding:
 
 - Address decoding: high-order CPU address lines drive $A_2A_1A_0$, and each $\overline{Y_i}$ becomes the chip-select signal of one memory or I/O device, realizing the address mapping described above.
 - Logic synthesis: since every output is an active-low minterm, any 3-variable function $f=\sum m_i$ is obtained by feeding the corresponding outputs into one NAND gate: $f=\overline{\overline{Y_{i_1}}\cdot\overline{Y_{i_2}}\cdot\ldots}$.
-- Expansion: two chips form a 4-to-16 decoder by driving $G_1$ of the low half and $\overline{G_{2A}}$ of the high half with the fourth address bit.
+- Expansion: two chips form a 4-to-16 decoder. Both receive $A_2A_1A_0$. For the low half (outputs 0–7), connect the fourth address bit $A_3$ to $\overline{G_{2A}}$, tie $G_1=1$, and tie $\overline{G_{2B}}=0$. For the high half (outputs 8–15), connect $A_3$ to $G_1$ and tie both active-low enables to 0. Thus $A_3=0$ enables only the low half, and $A_3=1$ enables only the high half. See the [74HC138 datasheet](https://www.ti.com/lit/ds/symlink/sn74hc138.pdf).
 ## Multiplexer (MUX)
 
 The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow:
@@ -1019,7 +1147,7 @@ endmodule
 
 For `SELECT_BITS = 2`, this is a 4-to-1 MUX; for `SELECT_BITS = 3`, it is an 8-to-1 MUX.
 
-The classic MSI counterpart is the <span style="color: red;">74HC151</span>, an 8-to-1 data selector in the same 74HC family as the 74HC138 in [Decoder](#decoder). It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:
+The classic MSI counterpart is the 74x151, an 8-to-1 data selector in the same 74x family as the 74x138 in [Decoder](#decoder). It has three select inputs $S_2S_1S_0$, eight data inputs $I_0$–$I_7$, an active-low enable $\overline{E}$, and a pair of complementary outputs $Y$ and $\overline{Y}$:
 
 | $\overline{E}$ | $S_2S_1S_0$ | $Y$   | $\overline{Y}$   |
 | -------------- | ----------- | ----- | ---------------- |
@@ -1080,7 +1208,7 @@ module demux_1_to_pow2 #(
 endmodule
 ```
 
-A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74HC138 ([Decoder](#decoder)) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.
+A decoder with an enable input doubles as a DEMUX: feeding the data $D$ into the $\overline{G_{2A}}$ pin of a 74x138 ([Decoder](#decoder)) routes $D$ to the addressed output $\overline{Y_i}$, while all other outputs stay at 1.
 ## Comparator
 
 A <span style="color: red;">magnitude comparator</span> compares two binary numbers $A$ and $B$ and outputs whether $A>B$, $A=B$, or $A<B$.
@@ -1211,8 +1339,10 @@ Logical symbol:
 
 Cascading full adders gives a ripple-carry adder, but the carry must propagate bit by bit, so it costs more time for larger numbers. A classic way to improve the performance is the <span style="color: red;">Carry Look-Ahead Adder (CLA)</span>.
 
-Firstly, calculate:$$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$
-Then the carry and sum are $$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$
+Firstly, calculate:
+$$P_i=A_i\oplus B_i,\qquad G_i=A_iB_i$$
+Then the carry and sum are 
+$$C_{i+1}=G_i+P_iC_i,\qquad S_i=P_i\oplus C_i$$
 Expanding the carries recursively expresses every $C_{i+1}$ directly in terms of $P$, $G$, and $C_0$, which removes the ripple.
 ```verilog
 module cla_4bit (
@@ -1278,24 +1408,325 @@ endmodule
 
 ## Multiplier
 
-## Divider
+A multiplier can generate shifted partial products and add them, just as in long multiplication. Two common techniques to improve performance are <span style="color: red;">Booth Recoding</span>, which reduces the number of partial products, and a <span style="color: red;">Wallace Tree</span>, which reduces them to two rows before the final addition.
 
-# Sequential logic circuits
+Booth recoding is a method to reduce the number of partial product. The natural way to calculate $A\times 011110$ is 
+$$A\ll1+A\ll2+A\ll3+A\ll4$$
+In Booth Recoding, we can calculate it as:
+$$A\ll5-A\ll1$$
+It follows the following rule to deal the number:
+
+| $b_i$ | $b_{i-1}$ | Operation |
+| ----- | --------- | --------- |
+| $0$   | $0$       | Nothing   |
+| $0$   | $1$       | $+A$      |
+| $1$   | $0$       | $-A$      |
+| $1$   | $1$       | Nothing   |
+For radix-2 Booth recoding, the operation in row $i$ is weighted by $2^i$, and $b_{-1}=0$. Booth recoding also supports two's-complement multiplication when the multiplier is sign-extended above its MSB. For an unsigned multiplier, zero-extend it above its MSB instead.
+
+Radix-4 Booth encoding examines 3 bits at a time, with a 1-bit overlap between adjacent groups. Each group produces a coefficient in $\{-2,-1,0,1,2\}$, weighted by $2^{2i}$. For example, take the 8-bit positive multiplier $B=01101101_2=109$ and append $b_{-1}=0$ at the right:
+$$
+B=0\,1101101,\qquad b_{-1}=0
+$$
+The bits of $B$ are
+$$
+b_7b_6b_5b_4b_3b_2b_1b_0
+=
+0\,1\,1\,0\,1\,1\,0\,1.
+$$
+Grouping:
+$$
+(b_1b_0b_{-1})=010
+$$
+$$
+(b_3b_2b_1)=110
+$$
+$$
+(b_5b_4b_3)=101
+$$
+$$
+(b_7b_6b_5)=011.
+$$
+Consult the Booth table:
+
+| 3-bit Booth | Result |
+| ----------- | ------ |
+| $000$       | $0$    |
+| $001$       | $A$    |
+| $010$       | $A$    |
+| $011$       | $2A$   |
+| $100$       | $-2A$  |
+| $101$       | $-A$   |
+| $110$       | $-A$   |
+| $111$       | $0$    |
+Thus
+
+$$AB=A-(A\ll2)-(A\ll4)+((2A)\ll6)=109A$$
+
+The following encoder accepts an unsigned 8-bit multiplicand $X$. Its signed 10-bit internal value and output can represent every partial product from $-2X$ to $2X$, including $\pm510$.
+
+```verilog
+module booth_encoder (
+    input  wire        [7:0] X,
+    input  wire        [2:0] code,
+    output reg signed  [9:0] pp
+);
+
+    wire signed [9:0] a_ext;
+    assign a_ext = $signed({2'b00, X});
+
+    always @(*) begin
+        case (code)
+            3'b000,
+            3'b111: pp = 10'sd0;
+
+            3'b001,
+            3'b010: pp = a_ext;
+
+            3'b011: pp = a_ext << 1;
+
+            3'b100: pp = -(a_ext << 1);
+
+            3'b101,
+            3'b110: pp = -a_ext;
+
+            default: pp = 10'sd0;
+        endcase
+    end
+
+endmodule
+```
+
+For an unsigned 8-bit multiplier $Y$, zero-extend above $Y_7$ and append $b_{-1}=0$. The five groups are `{Y[1:0], 1'b0}`, `Y[3:1]`, `Y[5:3]`, `Y[7:5]`, and `{2'b00, Y[7]}`. The fifth group supplies the correction needed when $Y\ge128$; omitting it would interpret the high bit as a negative sign.
+
+A Wallace tree uses carry-save compressors. Each compressor combines three rows into a sum row and a carry row without propagating carry across the word:
+
+$$S=A\oplus B\oplus C,\qquad C_{\mathrm{row}}=(AB+AC+BC)\ll1$$
+
+Here the AND, OR, and XOR operations are bitwise. The carry row already includes its one-bit shift. This 18-bit compressor retains the result modulo $2^{18}$:
+
+```verilog
+module csa_18bit (
+    input  wire [17:0] A,
+    input  wire [17:0] B,
+    input  wire [17:0] C,
+    output wire [17:0] sum,
+    output wire [17:0] carry
+);
+
+    assign sum   = A ^ B ^ C;
+    assign carry = ((A & B) | (A & C) | (B & C)) << 1;
+
+endmodule
+```
+
+The complete unsigned multiplier below sign-extends each partial product to 18 bits before shifting, reduces five rows to two with three compressor stages, and uses one final carry-propagating addition. The 16-bit output $S$ holds the exact product, which is at most $255^2=65025$. Here `V` explicitly indicates overflow if the result is narrowed to 8 bits (`S > 255`); the full 16-bit product does not overflow.
+
+```verilog
+module multiplier_8bit (
+    input  wire  [7:0] X,
+    input  wire  [7:0] Y,
+    output wire [15:0] S,
+    output wire        V
+);
+
+    wire signed [9:0] raw_pp0, raw_pp1, raw_pp2, raw_pp3, raw_pp4;
+    wire [17:0] pp0, pp1, pp2, pp3, pp4;
+    wire [17:0] sum0, carry0, sum1, carry1, sum2, carry2;
+    wire [17:0] product;
+
+    booth_encoder u0 (.X(X), .code({Y[1:0], 1'b0}), .pp(raw_pp0));
+    booth_encoder u1 (.X(X), .code(Y[3:1]),         .pp(raw_pp1));
+    booth_encoder u2 (.X(X), .code(Y[5:3]),         .pp(raw_pp2));
+    booth_encoder u3 (.X(X), .code(Y[7:5]),         .pp(raw_pp3));
+    booth_encoder u4 (.X(X), .code({2'b00, Y[7]}),  .pp(raw_pp4));
+
+    // Extend before shifting so that no significant bits are lost.
+    assign pp0 = {{8{raw_pp0[9]}}, raw_pp0};
+    assign pp1 = {{8{raw_pp1[9]}}, raw_pp1} << 2;
+    assign pp2 = {{8{raw_pp2[9]}}, raw_pp2} << 4;
+    assign pp3 = {{8{raw_pp3[9]}}, raw_pp3} << 6;
+    assign pp4 = {{8{raw_pp4[9]}}, raw_pp4} << 8;
+
+    csa_18bit t0 (.A(pp0),  .B(pp1),    .C(pp2), .sum(sum0), .carry(carry0));
+    csa_18bit t1 (.A(sum0), .B(carry0), .C(pp3), .sum(sum1), .carry(carry1));
+    csa_18bit t2 (.A(sum1), .B(carry1), .C(pp4), .sum(sum2), .carry(carry2));
+
+    assign product = sum2 + carry2;
+    assign S = product[15:0];
+    assign V = |S[15:8]; // overflow only for an 8-bit destination
+
+endmodule
+```
+
+For a signed 8-bit variant, the multiplicand must be sign-extended, and four Booth groups suffice because $Y_7$ is the sign bit. Its inputs, output, and overflow interpretation must be changed consistently.
+## Divider (TODO)
+
+## Floating-Point Calculation (TODO)
+
+# Sequential Logic Circuits
 
 ## Latch
 
+A <span style="color: red;">latch</span> stores one bit. A gated latch is level-sensitive: while its enable is active, the stored state can respond to input changes; when the enable is inactive, it holds its state.
 ### SR Latch
+
+The following cross-coupled NOR circuit is an SR latch with active-high set $S$ and reset $R$ inputs:
+![Screenshot 2026-10-02 at 16.15.28](../attachments/Screenshot%202026-10-02%20at%2016.15.28.png){width=309}
+The logic symbol is as follows:
+![Pasted image 20261002162445](../attachments/Pasted%20image%2020261002162445.png){width=450}
+
+We can find that the rule of circuit is:
+
+| $S$ | $R$ | $Q$                | $\overline{Q}$              |
+| --- | --- | ------------------ | --------------------------- |
+| $0$ | $0$ | $Q_{\text{old}}$   | $\overline{Q_{\text{old}}}$ |
+| $1$ | $0$ | $1$                | $0$                         |
+| $0$ | $1$ | $0$                | $1$                         |
+| $1$ | $1$ | $0$ (forbidden)    | $0$ (forbidden)             |
+
+While $S=R=1$, both physical outputs are forced to 0, so the output labeled $\overline{Q}$ is no longer the complement of $Q$. If both inputs return to 0 together, the final state depends on circuit delays and may pass through metastability. This input combination must be avoided.
+
+A cross-coupled NAND implementation instead has active-low inputs $\overline{S}$ and $\overline{R}$:
+![Screenshot 2026-10-02 at 16.24.01](../attachments/Screenshot%202026-10-02%20at%2016.24.01.png){width=297}
+The logic symbol will become as follows:
+![Pasted image 20261002162428](../attachments/Pasted%20image%2020261002162428.png){width=450}
+
+Its truth table is:
+
+| $\overline{S}$ | $\overline{R}$ | $Q$ | $\overline{Q}$ | Operation |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | $Q_{\text{old}}$ | $\overline{Q_{\text{old}}}$ | Hold |
+| 0 | 1 | 1 | 0 | Set |
+| 1 | 0 | 0 | 1 | Reset |
+| 0 | 0 | 1 | 1 | Forbidden |
+
+Here both outputs are forced to 1 during the forbidden condition; releasing both inputs together again leaves the final state uncertain.
+
+The following behavioral Verilog model uses the active-high NOR convention, assumes $S$ and $R$ are never asserted together, and describes only valid-input behavior. It does not model the physical forbidden state or metastability:
+```Verilog
+module sr_latch (
+    input  wire S,
+    input  wire R,
+    output reg  Q
+);
+
+always @(*) begin
+    if (S && !R)
+        Q = 1'b1;
+    else if (!S && R)
+        Q = 1'b0;
+end
+
+endmodule
+```
+
+For the active-low NAND convention, use a separate model with input names that make the polarity explicit. It assumes `S_n` and `R_n` are never both 0:
+
+```verilog
+module sr_latch_nand (
+    input  wire S_n,
+    input  wire R_n,
+    output reg  Q
+);
+
+    always @(*) begin
+        if (!S_n && R_n)
+            Q = 1'b1;
+        else if (S_n && !R_n)
+            Q = 1'b0;
+    end
+
+endmodule
+```
+
+A gated SR latch adds an active-high enable $E$. With $E=0$, it holds its state regardless of $S$ and $R$; with $E=1$, it follows the active-high SR rules above. The model assumes $S$ and $R$ are not both 1 while enabled:
+
+```Verilog
+module gated_sr_latch (
+    input  wire S,
+    input  wire R,
+    input  wire E,
+    output reg  Q
+);
+
+    always @(*) begin
+        if (E) begin
+            if (S && !R)
+                Q = 1'b1;
+            else if (!S && R)
+                Q = 1'b0;
+        end
+    end
+
+endmodule
+```
+
+The absence of an assignment in the hold condition intentionally infers a latch. `always @(*)` responds to changes in $E$, $S$, or $R$; `always @(E)` alone would miss input changes while enabled.
+
+The logic symbol is:
+![Screenshot 2026-10-02 at 16.47.47](../attachments/Screenshot%202026-10-02%20at%2016.47.47.png){width=450}
 ### D Latch
 
-## Flip-Flop (FF)
+![Pasted image 20261002165027](../attachments/Pasted%20image%2020261002165027.png){width=400}
 
-### SR FF
-### D FF
+For a D latch with active-high enable $E$, $Q$ follows $D$ while $E=1$ and holds its previous value while $E=0$:
 
-### T FF
-### JK FF
+| $D$ | $E$ | $Q$              | $\overline{Q}$              |
+| --- | --- | ---------------- | --------------------------- |
+| X   | $0$ | $Q_{\text{old}}$ | $\overline{Q_{\text{old}}}$ |
+| $0$ | $1$ | $0$              | $1$                         |
+| $1$ | $1$ | $1$              | $0$                         |
 
-# Field-Programmable Gate Array (FPGA)
+It can be described by Verilog as follows:
+```Verilog
+module d_latch (
+    input  wire D,
+    input  wire E,
+    output reg  Q
+);
+
+    always @(*) begin
+        if (E)
+            Q = D;
+    end
+
+endmodule
+```
+
+The 74x373 contains eight transparent D latches with a shared active-high latch enable `LE` and an active-low output enable (`OE_n` in the code below). When `LE=1`, the internal stored data follows $D$; when `LE=0`, it holds its previous value. When `OE_n=1`, the output pins are high-impedance (`Z`); when `OE_n=0`, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled. See the [74HC373 datasheet](https://www.ti.com/lit/ds/symlink/sn74hc373.pdf).
+
+![Pasted image 20261002165655](../attachments/Pasted%20image%2020261002165655.png){width=272}
+```Verilog
+module latch_74x373 (
+    input  wire [7:0] D,
+    input  wire LE,
+    input  wire OE_n,
+    output wire [7:0] Q
+);
+
+    reg [7:0] stored;
+
+    always @(*) begin
+        if (LE)
+            stored = D;
+    end
+
+    assign Q = OE_n ? 8'bzzzzzzzz : stored;
+
+endmodule
+```
+
+These latch models have no reset. Their initial stored state is unspecified until a valid set/reset operation or an enabled data load establishes it.
+## Flip-Flop (FF) (TODO)
+
+### SR FF (TODO)
+### D FF (TODO)
+
+### T FF (TODO)
+### JK FF (TODO)
+
+# Field-Programmable Gate Array (FPGA) (TODO)
         </script>
     </main>
 

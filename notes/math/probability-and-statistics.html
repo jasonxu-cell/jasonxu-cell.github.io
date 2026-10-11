@@ -33,6 +33,7 @@
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
             <a href="../../research.html">Research</a>
+            <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>
     </nav>
@@ -92,20 +93,26 @@
 <li>average waiting time of customers in the system ($W_s$)</li>
 <li>average waiting time of customers in the queue ($W_q$)</li>
 </ul>
-<p>We define $P_n(t)$ as the probability of $n$ service counters working at the $t$ moment. Given that $n$ is integer, we need to establish an equation, which is a differential equation with respect to $t$, and a difference equation with respect to $n$. The solution of the equation is the transient state solution, but solve this equation is really hard, so we usually solve the steady state solution: $$\lim_{t\rightarrow \infty} P_n(t)=P_n $$We only need to make $P_n’(t)=0$.</p>
+<p>We define $P_n(t)$ as the probability of $n$ service counters working at the $t$ moment. Given that $n$ is integer, we need to establish an equation, which is a differential equation with respect to $t$, and a difference equation with respect to $n$. The solution of the equation is the transient state solution, but solve this equation is really hard, so we usually solve the steady state solution: $$\lim_{t\rightarrow \infty} P_n(t)=P_n $$ We only need to make $P_n’(t)=0$.</p>
 <p>Let $P_n(t_1,t_2)$ be the probability of $n$ customers arrive in the interval time $[t_1,t_2)$. The arrival of customers is <span class="obsidian-red">Poisson Stream</span> if:</p>
 <ol>
 <li>In the non-overlapping interval time, the number of arrivals of customers is independent.</li>
 <li>$$P_1(t,t+\Delta t)=\lambda \Delta t+o(\Delta t)$$</li>
 <li>$$\sum_{n=2}^{\infty}P_n(t,t+\Delta t)=o(\Delta t)$$</li>
 </ol>
-<p>As a result,$$P_0(t,t+\Delta t)=1-\lambda \Delta t +o(\Delta t)$$$$P_n(t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t)$$$$P_n’(t)=\lambda (P_{n-1}(t)-P_n(t))+o(\Delta t)/\Delta t$$ Let $\Delta t \rightarrow 0$, we can set up the following system of equations: $$\left\{\begin{matrix} \frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-\lambda P_n(t)+\lambda P_{n-1}(t),n\ge 1\\P_n(0)=0 \end{matrix}\right.$$ $$\left\{\begin{matrix} \frac{\mathrm{d}P_0 (t)}{\mathrm{d} t}=-\lambda P_0(t)\\P_0(0)=1 \end{matrix}\right.$$ The solution of the system of equations is $$P_n (t)=\frac{(\lambda t )^n}{n!}e^{-\lambda t},t&gt;0,n=0,1,2,\dots$$ It follows Poisson distribution.</p>
+<p>As a result, $$P_0(t,t+\Delta t)=1-\lambda \Delta t +o(\Delta t)$$</p>
+<p>$$P_n(t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t)$$</p>
+<p>$$P_n’(t)=\lambda (P_{n-1}(t)-P_n(t))+o(\Delta t)/\Delta t$$ Let $\Delta t \rightarrow 0$, we can set up the following system of equations: $$\left\{\begin{matrix} \frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-\lambda P_n(t)+\lambda P_{n-1}(t),n\ge 1\\P_n(0)=0 \end{matrix}\right.$$ $$\left\{\begin{matrix} \frac{\mathrm{d}P_0 (t)}{\mathrm{d} t}=-\lambda P_0(t)\\P_0(0)=1 \end{matrix}\right.$$ The solution of the system of equations is $$P_n (t)=\frac{(\lambda t )^n}{n!}e^{-\lambda t},t&gt;0,n=0,1,2,\dots$$ It follows Poisson distribution.</p>
 <h3 id="m-m-1-model">$M/M/1$ Model</h3>
 <p>Let the time of service follow the exponential distribution with parameter $\mu$ and the system is unlimited ($M/M/1/\infty/\infty$). Similarly,</p>
 <p>$$\left\{\begin{matrix} \frac{\mathrm{d}P_0 (t)}{\mathrm{d} t}=-\lambda P_0(t)+\mu P_1(t)\\\frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-(\lambda+\mu) P_n(t)+\lambda P_{n-1}(t)+\mu P_{n+1}(t),n\ge 1\\P_n(0)=0 \end{matrix}\right.$$</p>
-<p>$$\left\{\begin{matrix} -\lambda P_0+\mu P_1=0\\ \lambda P_{n-1}+\mu P_{n+1}-(\lambda +\mu)P_n=0\\ \sum \limits_{n=0}^{\infty}P_n=1 \end{matrix}\right.$$ Let $\rho =\frac{\lambda}{\mu}&lt;1$, then$$P_n=(1-\rho)\rho^n$$ We can solve: $$L_s=\sum _{n=0}^{\infty} nP_n=\sum_{n=1}^{\infty}n(1-\rho)\rho^n=\frac{\rho}{1-\rho}=\frac{\lambda}{\mu-\lambda}$$ $$L_q=\sum _{n=1}^{\infty} (n-1)P_n=\sum_{n=1}^{\infty}nP_n-\sum_{n=1}^{\infty}P_n=L_s-\rho=\frac{\rho^2}{1-\rho}=\frac{\lambda^2}{\mu(\mu-\lambda)}$$ $$W_s=\frac{L_s}{\lambda}$$ $$W_q=\frac{L_q}{\lambda}$$ If the system is restrained ($M/M/1/N/\infty$), then $$\sum_{n=0}^N P_n=1$$ $$P_n=\frac{1-\rho}{1-\rho^{N+1}}\rho^N,\rho \ne 1,n\le N$$ $$L_s=\sum _{n=0}^{N} nP_n=\frac{\rho}{1-\rho}-\frac{(N+1)\rho^{N+1}}{1-\rho ^{N+1}},\rho \ne 1$$ $$L_q=\sum _{n=1}^{N} (n-1)P_n=L_s-(1-P_0)$$ $$W_s=\frac{L_s}{\mu (1-P_0)}=\frac{L_q}{\mu (1-P_N)}+\frac{1}{\mu}$$ $$W_q=W_s-\frac{1}{\mu}$$ If the system is restrained ($M/M/1/\infty/m$, or $M/M/1/m/m$), then we define the rate of effective arrival $\lambda_e$ as $$\lambda_e=\lambda (m-L_s)$$ As a result,$$\left\{\begin{matrix} \mu P_1=m\lambda P_0 \\ \mu P_{n+1} +(m+n-1)\lambda P_{n-1}=[(m-n)\lambda +\mu]P_n,1\le n\le m-1\\ \mu P_m=\lambda P_{m-1}\\\sum_{i=0}\limits^m P_i=1 \end{matrix}\right.$$ yields$$\left\{\begin{matrix} P_0=\frac{1}{\sum \limits_{i=0}^m\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^i} \\ P_n=\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^nP_0 \end{matrix}\right.$$$$L_s=m-\frac{\mu}{\lambda}(1-P_0)$$$$L_q=m-\frac{(\lambda+\mu)}{\lambda}(1-P_0)=L_s-(1-P_0)$$ $$W_s=\frac{m}{\mu(1-P_0)}-\frac{1}{\lambda}$$ $$W_q=W_s-\frac{1}{\mu}$$</p>
+<p>$$\left\{\begin{matrix} -\lambda P_0+\mu P_1=0\\ \lambda P_{n-1}+\mu P_{n+1}-(\lambda +\mu)P_n=0\\ \sum \limits_{n=0}^{\infty}P_n=1 \end{matrix}\right.$$ Let $\rho =\frac{\lambda}{\mu}&lt;1$, then $$P_n=(1-\rho)\rho^n$$ We can solve: $$L_s=\sum _{n=0}^{\infty} nP_n=\sum_{n=1}^{\infty}n(1-\rho)\rho^n=\frac{\rho}{1-\rho}=\frac{\lambda}{\mu-\lambda}$$ $$L_q=\sum _{n=1}^{\infty} (n-1)P_n=\sum_{n=1}^{\infty}nP_n-\sum_{n=1}^{\infty}P_n=L_s-\rho=\frac{\rho^2}{1-\rho}=\frac{\lambda^2}{\mu(\mu-\lambda)}$$ $$W_s=\frac{L_s}{\lambda}$$ $$W_q=\frac{L_q}{\lambda}$$ If the system is restrained ($M/M/1/N/\infty$), then $$\sum_{n=0}^N P_n=1$$ $$P_n=\frac{1-\rho}{1-\rho^{N+1}}\rho^N,\rho \ne 1,n\le N$$ $$L_s=\sum _{n=0}^{N} nP_n=\frac{\rho}{1-\rho}-\frac{(N+1)\rho^{N+1}}{1-\rho ^{N+1}},\rho \ne 1$$ $$L_q=\sum _{n=1}^{N} (n-1)P_n=L_s-(1-P_0)$$ $$W_s=\frac{L_s}{\mu (1-P_0)}=\frac{L_q}{\mu (1-P_N)}+\frac{1}{\mu}$$ $$W_q=W_s-\frac{1}{\mu}$$ If the system is restrained ($M/M/1/\infty/m$, or $M/M/1/m/m$), then we define the rate of effective arrival $\lambda_e$ as $$\lambda_e=\lambda (m-L_s)$$ As a result, $$\left\{\begin{matrix} \mu P_1=m\lambda P_0 \\ \mu P_{n+1} +(m+n-1)\lambda P_{n-1}=[(m-n)\lambda +\mu]P_n,1\le n\le m-1\\ \mu P_m=\lambda P_{m-1}\\\sum_{i=0}\limits^m P_i=1 \end{matrix}\right.$$ yields $$\left\{\begin{matrix} P_0=\frac{1}{\sum \limits_{i=0}^m\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^i} \\ P_n=\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^nP_0 \end{matrix}\right.$$</p>
+<p>$$L_s=m-\frac{\mu}{\lambda}(1-P_0)$$</p>
+<p>$$L_q=m-\frac{(\lambda+\mu)}{\lambda}(1-P_0)=L_s-(1-P_0)$$</p>
+<p>$$W_s=\frac{m}{\mu(1-P_0)}-\frac{1}{\lambda}$$</p>
+<p>$$W_q=W_s-\frac{1}{\mu}$$</p>
 <h3 id="m-m-c-model">$M/M/c$ Model</h3>
-<p>Let$$\rho=\frac{\lambda}{c\mu}$$Then$$\left\{\begin{matrix} \mu P_1=\lambda P_0 \\ (n+1)\mu P_{n+1} +\lambda P_{n-1}=(\lambda +n\mu)P_n,1\le n\le c\\ c\mu P_{n+1}+\lambda P_{n-1}=(\lambda +c\mu)P_n,n&gt;c \end{matrix}\right.$$</p>
+<p>Let $$\rho=\frac{\lambda}{c\mu}$$ Then $$\left\{\begin{matrix} \mu P_1=\lambda P_0 \\ (n+1)\mu P_{n+1} +\lambda P_{n-1}=(\lambda +n\mu)P_n,1\le n\le c\\ c\mu P_{n+1}+\lambda P_{n-1}=(\lambda +c\mu)P_n,n&gt;c \end{matrix}\right.$$</p>
 <ul>
 <li>$M/M/c/\infty/\infty$</li>
 </ul>
@@ -121,9 +128,13 @@
 <h3 id="m-g-1-infty-infty-model">$M/G/1/\infty/\infty$ Model</h3>
 <p>Pollaczek-Khintchine formula $$L_s=\rho+\frac{\rho^2+\lambda^2 Var[T]}{2(1-\rho )},\rho=\lambda \mathbb{E}[T]$$ $$L_s=\rho+L_q$$ $$W_s=\frac{L_s}{\lambda}$$ $$W_q=\frac{L_q}{\lambda}$$</p>
 <ul>
-<li>$M/D/1$ Model $$Var[T]=0$$</li>
-<li>$M/E_k/1$ Model $$Var[T]=\frac{1}{k\mu^2}$$</li>
+<li>$M/D/1$ Model</li>
 </ul>
+<p>$$Var[T]=0$$</p>
+<ul>
+<li>$M/E_k/1$ Model</li>
+</ul>
+<p>$$Var[T]=\frac{1}{k\mu^2}$$</p>
             </article>
             <script type="application/json" id="article-headings">[{"id":"queueing-theory","level":1,"text":"Queueing Theory"},{"id":"notation-explanation","level":2,"text":"Notation Explanation"},{"id":"model-establishment","level":2,"text":"Model Establishment"},{"id":"m-m-1-model","level":2,"text":"$M/M/1$ Model"},{"id":"m-m-c-model","level":2,"text":"$M/M/c$ Model"},{"id":"m-g-1-infty-infty-model","level":2,"text":"$M/G/1/\\infty/\\infty$ Model"}]</script>
         </div>
@@ -141,7 +152,7 @@
         <script type="text/plain" id="article-markdown">
 # Queueing Theory
 
-## Notation Explanation 
+## Notation Explanation
 
 In 1953, D.G.Kendall proposed a classification method for queueing theory:
 1. the distribution of the interval between successive customer arrivals ($X$) 
@@ -170,13 +181,20 @@ We want to know the following index:
 - average waiting time of customers in the system ($W_s$)
 - average waiting time of customers in the queue ($W_q$)
 
-We define $P_n(t)$ as the probability of $n$ service counters working at the $t$ moment. Given that $n$ is integer, we need to establish an equation, which is a differential equation with respect to $t$, and a difference equation with respect to $n$. The solution of the equation is the transient state solution, but solve this equation is really hard, so we usually solve the steady state solution: $$\lim_{t\rightarrow \infty} P_n(t)=P_n $$We only need to make $P_n’(t)=0$.
+We define $P_n(t)$ as the probability of $n$ service counters working at the $t$ moment. Given that $n$ is integer, we need to establish an equation, which is a differential equation with respect to $t$, and a difference equation with respect to $n$. The solution of the equation is the transient state solution, but solve this equation is really hard, so we usually solve the steady state solution: 
+$$\lim_{t\rightarrow \infty} P_n(t)=P_n $$
+We only need to make $P_n’(t)=0$.
 
 Let $P_n(t_1,t_2)$ be the probability of $n$ customers arrive in the interval time $[t_1,t_2)$. The arrival of customers is <span style="color: red;">Poisson Stream</span> if: 
 1. In the non-overlapping interval time, the number of arrivals of customers is independent.
 2. $$P_1(t,t+\Delta t)=\lambda \Delta t+o(\Delta t)$$
 3. $$\sum_{n=2}^{\infty}P_n(t,t+\Delta t)=o(\Delta t)$$
-As a result,$$P_0(t,t+\Delta t)=1-\lambda \Delta t +o(\Delta t)$$$$P_n(t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t)$$$$P_n’(t)=\lambda (P_{n-1}(t)-P_n(t))+o(\Delta t)/\Delta t$$
+As a result,
+$$P_0(t,t+\Delta t)=1-\lambda \Delta t +o(\Delta t)$$
+
+$$P_n(t+\Delta t)=P_n(t)(1-\lambda \Delta t)+P_{n-1}(t)\lambda \Delta t+o(\Delta t)$$
+
+$$P_n’(t)=\lambda (P_{n-1}(t)-P_n(t))+o(\Delta t)/\Delta t$$
 Let $\Delta t \rightarrow 0$, we can set up the following system of equations:
 $$\left\{\begin{matrix}
  \frac{\mathrm{d}P_n (t)}{\mathrm{d} t}=-\lambda P_n(t)+\lambda P_{n-1}(t),n\ge 1\\P_n(0)=0
@@ -187,7 +205,7 @@ $$\left\{\begin{matrix}
 The solution of the system of equations is
 $$P_n (t)=\frac{(\lambda t )^n}{n!}e^{-\lambda t},t>0,n=0,1,2,\dots$$
 It follows Poisson distribution.
-## $M/M/1$ Model 
+## $M/M/1$ Model
 
 Let the time of service follow the exponential distribution with parameter $\mu$ and the system is unlimited ($M/M/1/\infty/\infty$). Similarly,
 
@@ -198,27 +216,44 @@ $$\left\{\begin{matrix}
 $$\left\{\begin{matrix}
 -\lambda P_0+\mu P_1=0\\ \lambda P_{n-1}+\mu P_{n+1}-(\lambda +\mu)P_n=0\\ \sum \limits_{n=0}^{\infty}P_n=1
 \end{matrix}\right.$$
-Let $\rho =\frac{\lambda}{\mu}<1$, then$$P_n=(1-\rho)\rho^n$$
+Let $\rho =\frac{\lambda}{\mu}<1$, then
+$$P_n=(1-\rho)\rho^n$$
 We can solve:
 $$L_s=\sum _{n=0}^{\infty} nP_n=\sum_{n=1}^{\infty}n(1-\rho)\rho^n=\frac{\rho}{1-\rho}=\frac{\lambda}{\mu-\lambda}$$
 $$L_q=\sum _{n=1}^{\infty} (n-1)P_n=\sum_{n=1}^{\infty}nP_n-\sum_{n=1}^{\infty}P_n=L_s-\rho=\frac{\rho^2}{1-\rho}=\frac{\lambda^2}{\mu(\mu-\lambda)}$$
 $$W_s=\frac{L_s}{\lambda}$$
 $$W_q=\frac{L_q}{\lambda}$$
-If the system is restrained ($M/M/1/N/\infty$), then $$\sum_{n=0}^N P_n=1$$
+If the system is restrained ($M/M/1/N/\infty$), then 
+$$\sum_{n=0}^N P_n=1$$
 $$P_n=\frac{1-\rho}{1-\rho^{N+1}}\rho^N,\rho \ne 1,n\le N$$
 $$L_s=\sum _{n=0}^{N} nP_n=\frac{\rho}{1-\rho}-\frac{(N+1)\rho^{N+1}}{1-\rho ^{N+1}},\rho \ne 1$$
 $$L_q=\sum _{n=1}^{N} (n-1)P_n=L_s-(1-P_0)$$
 $$W_s=\frac{L_s}{\mu (1-P_0)}=\frac{L_q}{\mu (1-P_N)}+\frac{1}{\mu}$$
 $$W_q=W_s-\frac{1}{\mu}$$
-If the system is restrained ($M/M/1/\infty/m$, or $M/M/1/m/m$), then we define the rate of effective arrival $\lambda_e$ as $$\lambda_e=\lambda (m-L_s)$$
-As a result,$$\left\{\begin{matrix}
+If the system is restrained ($M/M/1/\infty/m$, or $M/M/1/m/m$), then we define the rate of effective arrival $\lambda_e$ as 
+$$\lambda_e=\lambda (m-L_s)$$
+As a result,
+$$\left\{\begin{matrix}
 \mu P_1=m\lambda P_0 \\ \mu P_{n+1} +(m+n-1)\lambda P_{n-1}=[(m-n)\lambda +\mu]P_n,1\le n\le m-1\\ \mu P_m=\lambda P_{m-1}\\\sum_{i=0}\limits^m P_i=1
-\end{matrix}\right.$$ yields$$\left\{\begin{matrix}
+\end{matrix}\right.$$
+ yields
+$$\left\{\begin{matrix}
 P_0=\frac{1}{\sum \limits_{i=0}^m\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^i} \\ P_n=\frac{m!}{(m-i)!}(\frac{\lambda}{\mu})^nP_0
-\end{matrix}\right.$$$$L_s=m-\frac{\mu}{\lambda}(1-P_0)$$$$L_q=m-\frac{(\lambda+\mu)}{\lambda}(1-P_0)=L_s-(1-P_0)$$ $$W_s=\frac{m}{\mu(1-P_0)}-\frac{1}{\lambda}$$ $$W_q=W_s-\frac{1}{\mu}$$
-## $M/M/c$ Model 
+\end{matrix}\right.$$
 
-Let$$\rho=\frac{\lambda}{c\mu}$$Then$$\left\{\begin{matrix}
+$$L_s=m-\frac{\mu}{\lambda}(1-P_0)$$
+
+$$L_q=m-\frac{(\lambda+\mu)}{\lambda}(1-P_0)=L_s-(1-P_0)$$
+ 
+$$W_s=\frac{m}{\mu(1-P_0)}-\frac{1}{\lambda}$$
+ 
+$$W_q=W_s-\frac{1}{\mu}$$
+## $M/M/c$ Model
+
+Let
+$$\rho=\frac{\lambda}{c\mu}$$
+Then
+$$\left\{\begin{matrix}
 \mu P_1=\lambda P_0 \\ (n+1)\mu P_{n+1} +\lambda P_{n-1}=(\lambda +n\mu)P_n,1\le n\le c\\ c\mu P_{n+1}+\lambda P_{n-1}=(\lambda +c\mu)P_n,n>c
 \end{matrix}\right.$$
 - $M/M/c/\infty/\infty$
@@ -255,8 +290,10 @@ $$L_s=\rho+\frac{\rho^2+\lambda^2 Var[T]}{2(1-\rho )},\rho=\lambda \mathbb{E}[T]
 $$L_s=\rho+L_q$$
 $$W_s=\frac{L_s}{\lambda}$$
 $$W_q=\frac{L_q}{\lambda}$$
-- $M/D/1$ Model $$Var[T]=0$$
-- $M/E_k/1$ Model $$Var[T]=\frac{1}{k\mu^2}$$
+- $M/D/1$ Model 
+  $$Var[T]=0$$
+- $M/E_k/1$ Model 
+  $$Var[T]=\frac{1}{k\mu^2}$$
         </script>
     </main>
 
