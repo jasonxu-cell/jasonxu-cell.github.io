@@ -14,9 +14,9 @@
     var CACHE_TTL = 30 * 60 * 1000; // 30 minutes
     var FALLBACK = {
         articles: 3,
-        notes: 28,
-        commits: 48,
-        lastUpdated: "2026-09-30T12:00:00+08:00"
+        notes: 29,
+        commits: 57,
+        lastUpdated: "2026-10-11T18:00:00+08:00"
     };
 
     var panel = document.querySelector("[data-site-status]");
