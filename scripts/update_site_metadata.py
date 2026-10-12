@@ -9,18 +9,21 @@ It updates every HTML page (including the note pages written by
 sync_obsidian_notes.py, which applies the same rules when it generates them):
 head metadata, primary navigation, skip link, footer, lazy images,
 content-hash ``?v=`` versions for shared CSS/JS, and static pre-rendering of
-Markdown pages (needs Node.js). It also regenerates ``sitemap.xml`` from the
-indexable pages.
+Markdown pages (needs Node.js). It also dates every <time> from content changes
+(files differing from HEAD get today's date; build churn is ignored), and
+regenerates ``sitemap.xml`` and the homepage "Recently Updated" list from them.
 """
 
 from __future__ import annotations
 
 import html
 import json
+import posixpath
 import re
 import shutil
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -398,6 +401,191 @@ def page_lastmod(source: str) -> str:
     return max(dates) if dates else ""
 
 
+RECENT_UPDATES_LIMIT = 5
+RECENT_UPDATES_BEGIN = "<!-- recent-updates:begin -->"
+RECENT_UPDATES_END = "<!-- recent-updates:end -->"
+
+RECENT_KIND_LABELS = {
+    "math": "Math",
+    "physics": "Physics",
+    "cs": "CS",
+    "geoscience": "Geoscience",
+    "electronic_engineering": "Electronic Engineering",
+}
+
+
+def recent_updates(pages: list[tuple[str, str]]) -> list[tuple[str, str, str, str]]:
+    """Newest content pages (articles, notes, interactive) by their <time> date."""
+    items = []
+    for relative, source in pages:
+        if relative in UNLISTED_PAGES or relative in NOINDEX_PAGES:
+            continue
+        if relative.startswith("articles/") and relative.count("/") == 1:
+            kind = "Article"
+        elif relative.startswith("notes/") and relative.count("/") == 2:
+            subject = relative.split("/")[1]
+            kind = RECENT_KIND_LABELS.get(subject, subject.replace("_", " ").title())
+        elif relative.startswith("interactive/") and relative.count("/") == 1:
+            kind = "Interactive"
+        else:
+            continue
+        date = page_lastmod(source)
+        if not date:
+            continue
+        title = re.sub(
+            r"\s*\|\s*Yang\s*$", "",
+            extract(r"<title>([\s\S]*?)</title>", source, relative),
+        )
+        items.append((date, title, relative, kind))
+    items.sort(key=lambda item: (item[0], item[2]), reverse=True)
+    return items[:RECENT_UPDATES_LIMIT]
+
+
+def recent_updates_block(items: list[tuple[str, str, str, str]]) -> str:
+    rows = "\n".join(
+        "                    <li>\n"
+        f'                        <a href="{relative}">{html.escape(title)}</a>\n'
+        f'                        <span class="recent-updates-kind">{kind}</span>\n'
+        f'                        <time datetime="{date}">{date}</time>\n'
+        "                    </li>"
+        for date, title, relative, kind in items
+    )
+    return (
+        f"{RECENT_UPDATES_BEGIN}\n"
+        '            <section class="recent-updates" aria-labelledby="recent-updates-title">\n'
+        '                <p class="recent-updates-title" id="recent-updates-title">Recently Updated</p>\n'
+        '                <ol class="recent-updates-list">\n'
+        f"{rows}\n"
+        "                </ol>\n"
+        "            </section>\n"
+        f"            {RECENT_UPDATES_END}"
+    )
+
+
+def inject_recent_updates(source: str, items: list[tuple[str, str, str, str]]) -> str:
+    """Rewrite the marked homepage block; leave the page alone if it's gone."""
+    pattern = re.escape(RECENT_UPDATES_BEGIN) + r"[\s\S]*?" + re.escape(RECENT_UPDATES_END)
+    if not re.search(pattern, source):
+        return source
+    return re.sub(pattern, lambda _: recent_updates_block(items), source, count=1)
+
+
+MONTH_ABBR = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+TIME_RE = re.compile(r"<time\b[^>]*>[^<]*</time>", flags=re.IGNORECASE)
+CARD_RE = re.compile(r'<a\b[^>]*href="([^"#]+\.html)[^"]*"[^>]*>[\s\S]*?</a>', flags=re.IGNORECASE)
+
+
+def display_date(iso: str) -> str:
+    year, month, day = iso.split("-")
+    return f"{MONTH_ABBR[int(month) - 1]} {int(day)}, {year}"
+
+
+def retime(tag: str, iso: str) -> str:
+    """Rewrite a <time> tag, keeping its display style (ISO vs. 'Mon D, YYYY')."""
+    if 'datetime="' in tag:
+        tag = re.sub(r'datetime="[^"]*"', f'datetime="{iso}"', tag, count=1)
+    else:
+        tag = re.sub(r"<time\b", f'<time datetime="{iso}"', tag, count=1)
+    text = iso if re.search(r">\d{4}-\d{2}-\d{2}<", tag) else display_date(iso)
+    return re.sub(r">[^<]*</time>$", lambda _: f">{text}</time>", tag)
+
+
+def resolve_href(relative: str, href: str) -> str:
+    if re.match(r"[a-z][a-z0-9+.-]*:", href, flags=re.IGNORECASE):
+        return ""  # absolute URL or mailto:
+    return posixpath.normpath(posixpath.join(posixpath.dirname(relative), href))
+
+
+def normalize_page(source: str) -> str:
+    """Strip build churn (?v= hashes, <time> values) so only real edits count."""
+    source = re.sub(r"\?v=[0-9a-f]+", "?v=", source)
+    return TIME_RE.sub("<time></time>", source)
+
+
+def head_source(relative: str) -> str:
+    try:
+        return subprocess.run(
+            ["git", "show", f"HEAD:{relative}"],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return ""
+
+
+def content_dates(pages: list[tuple[str, str]]) -> dict[str, str]:
+    """Last content-change date per detail page, derived from git.
+
+    A page's date advances to today when its content differs from HEAD (build
+    churn like ?v= bumps is normalized away); untouched pages keep the date
+    already in the file. Since the script runs right before committing, "today"
+    is the upcoming commit date. Without git, every page keeps its date."""
+    dirty: set[str] = set()
+    try:
+        status = subprocess.run(
+            ["git", "status", "--porcelain", "--", "*.html"],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        ).stdout
+        for entry in status.splitlines():
+            path = entry[3:].split(" -> ")[-1].strip('"')
+            if path.endswith(".html"):
+                dirty.add(path)
+    except (OSError, subprocess.CalledProcessError):
+        pass
+
+    today = date.today().isoformat()
+    dates: dict[str, str] = {}
+    for relative, source in pages:
+        if relative in UNLISTED_PAGES or relative in NOINDEX_PAGES:
+            continue
+        if not (
+            relative.startswith("articles/") and relative.count("/") == 1
+            or relative.startswith("notes/") and relative.count("/") == 2
+            or relative.startswith("interactive/") and relative.count("/") == 1
+        ):
+            continue
+        if relative not in dirty:
+            dates[relative] = page_lastmod(source)
+            continue
+        old = head_source(relative)
+        if old and normalize_page(old) == normalize_page(source):
+            dates[relative] = page_lastmod(old)
+        else:
+            dates[relative] = today
+    return dates
+
+
+def update_times(source: str, relative: str, dates: dict[str, str]) -> str:
+    """Date every <time>: card entries follow the linked page's date, the rest
+    follow the page's own. The generated Recently Updated block is skipped;
+    inject_recent_updates() fills it afterwards."""
+    assignments = []  # (start, end, iso date)
+    card_spans = []
+    for card in CARD_RE.finditer(source):
+        card_spans.append(card.span())
+        target = resolve_href(relative, card.group(1))
+        iso = dates.get(target) if target else None
+        if not iso:
+            continue
+        for time in TIME_RE.finditer(card.group(0)):
+            assignments.append((card.start() + time.start(), card.start() + time.end(), iso))
+    own = dates.get(relative)
+    if own:
+        recent = re.search(
+            re.escape(RECENT_UPDATES_BEGIN) + r"[\s\S]*?" + re.escape(RECENT_UPDATES_END), source
+        )
+        for time in TIME_RE.finditer(source):
+            if any(start <= time.start() < end for start, end in card_spans):
+                continue
+            if recent and recent.start() <= time.start() < recent.end():
+                continue
+            assignments.append((time.start(), time.end(), own))
+    for start, end, iso in sorted(assignments, reverse=True):
+        source = source[:start] + retime(source[start:end], iso) + source[end:]
+    return source
+
+
 def write_sitemap(pages: list[tuple[str, str]]) -> None:
     entries = []
     for relative, source in sorted(pages):
@@ -440,6 +628,20 @@ def main() -> None:
     rendered = prerender([updated[i] for i in markdown_indexes])
     for i, page in zip(markdown_indexes, rendered):
         updated[i] = page
+
+    dates = content_dates([(path.relative_to(ROOT).as_posix(), page) for path, page in zip(paths, updated)])
+    if dates:
+        # The homepage "Last updated" fallback tracks the newest content page.
+        dates["index.html"] = max(dates.values())
+    updated = [
+        update_times(page, path.relative_to(ROOT).as_posix(), dates) if dates else page
+        for path, page in zip(paths, updated)
+    ]
+
+    recent = recent_updates([(path.relative_to(ROOT).as_posix(), page) for path, page in zip(paths, updated)])
+    for i, path in enumerate(paths):
+        if path.relative_to(ROOT).as_posix() == "index.html":
+            updated[i] = inject_recent_updates(updated[i], recent)
 
     changed = 0
     for path, source, page in zip(paths, originals, updated):

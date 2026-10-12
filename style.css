@@ -47,7 +47,7 @@ body::before {
 nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 
     padding: 15px 20px;
     margin-bottom: 30px;
@@ -66,7 +66,7 @@ nav {
 .nav-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -288,13 +288,11 @@ button:focus-visible {
     }
 
     nav {
-        justify-content: center;
         padding: 13px 14px;
         margin-bottom: 20px;
     }
 
     .nav-links {
-        justify-content: center;
         gap: 9px 17px;
     }
 
@@ -2512,6 +2510,93 @@ main,
 @media (max-width: 620px) {
     .site-status {
         padding: 26px 20px;
+    }
+}
+
+/* ==========================================
+   Homepage: recently updated panel
+   ========================================== */
+
+.recent-updates {
+    min-width: 0;
+    padding: clamp(26px, 4vw, 40px) clamp(30px, 5vw, 52px);
+    background: var(--surface);
+    backdrop-filter: blur(16px) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.recent-updates-title {
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.recent-updates-list {
+    display: grid;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+}
+
+.recent-updates-list li {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    min-width: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.recent-updates-list li:last-child {
+    border-bottom: 0;
+}
+
+.recent-updates-list a {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recent-updates-list a:hover {
+    color: var(--accent-strong);
+    text-decoration: underline;
+}
+
+.recent-updates-kind {
+    flex: none;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.recent-updates-list time {
+    flex: none;
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 620px) {
+    .recent-updates {
+        padding: 22px 20px;
+    }
+
+    .recent-updates-list a {
+        flex-basis: 100%;
+        white-space: normal;
     }
 }
 
