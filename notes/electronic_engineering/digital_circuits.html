@@ -48,7 +48,7 @@
                     <span>Logic</span>
                     <span>Digital</span>
                 </div>
-                <time datetime="2026-09-22">Sep 22, 2026</time>
+                <time datetime="2026-10-12">Oct 12, 2026</time>
             </div>
         </header>
 
@@ -247,7 +247,7 @@
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>Here, <code>GS=0</code> means at least one input is active.</p>
 <h3 id="decoder">Decoder</h3>
-<p>The decoder is the reverse process of the encoder. Like the following verilog code:</p>
+<p>The decoder is the reverse process of the encoder, as in the following Verilog code:</p>
 <div class="code-block" data-code-block="2"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> decoder (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> E,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> A0,
@@ -264,7 +264,7 @@
     <span class="hljs-keyword">assign</span> Y3 = E &amp; A0 &amp; A1;
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
-<p>In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.</p>
+<p>In a computer, the CPU outputs the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.</p>
 <p>A classic MSI implementation is the 74x138, a 3-to-8 line decoder in the 74-series logic family. Here, $x$ is a placeholder for the technology designation: for example, 74HC138 uses high-speed CMOS, while 74LS138 uses low-power Schottky TTL. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$G_1$</th><th>$\overline{G_{2A}}$, $\overline{G_{2B}}$</th><th>$A_2A_1A_0$</th><th>Outputs</th></tr></thead><tbody><tr><td>0</td><td>X</td><td>XXX</td><td>all 1</td></tr><tr><td>X</td><td>any 1</td><td>XXX</td><td>all 1</td></tr><tr><td>1</td><td>both 0</td><td>$i$</td><td>$\overline{Y_i}=0$</td></tr></tbody></table></div>
 <p><img src="../attachments/images.jpg" alt="images" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
@@ -277,7 +277,7 @@
 <li>Expansion: two chips form a 4-to-16 decoder. Both receive $A_2A_1A_0$. For the low half (outputs 0–7), connect the fourth address bit $A_3$ to $\overline{G_{2A}}$, tie $G_1=1$, and tie $\overline{G_{2B}}=0$. For the high half (outputs 8–15), connect $A_3$ to $G_1$ and tie both active-low enables to 0. Thus $A_3=0$ enables only the low half, and $A_3=1$ enables only the high half. See the <a href="https://www.ti.com/lit/ds/symlink/sn74hc138.pdf" target="_blank" rel="noopener noreferrer">74HC138 datasheet</a>.</li>
 </ul>
 <h3 id="multiplexer-mux">Multiplexer (MUX)</h3>
-<p>The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow: <img src="../attachments/Pasted%20image%2020260922174945.png" alt="Pasted image 20260922174945" loading="lazy" decoding="async" style="width: min(100%, 212px);"></p>
+<p>The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follows: <img src="../attachments/Pasted%20image%2020260922174945.png" alt="Pasted image 20260922174945" loading="lazy" decoding="async" style="width: min(100%, 212px);"></p>
 <div class="code-block" data-code-block="3"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> mux2to1 (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D0,
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D1,
@@ -392,7 +392,7 @@ comparator_1bit c1(
 <p>Although the serial (cascade) expansion approach is structurally intuitive, the result must be propagated stage by stage; the more stages involved, the greater the latency, resulting in relatively slow speeds. A better approach is to use parallel expansion.</p>
 <p><img src="../attachments/Pasted%20image%2020260929175017-optimized.webp" alt="Pasted image 20260929175017" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <h3 id="adder">Adder</h3>
-<p><span class="obsidian-red">Half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.</p>
+<p><span class="obsidian-red">half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.</p>
 <ul>
 <li>Inputs are two 1-bit binary addends $A$ and $B$.</li>
 <li>Outputs are a 1-bit sum $S$, and a 1-bit carry-out $C_O$.</li>
@@ -409,7 +409,7 @@ comparator_1bit c1(
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>Logical symbol: <img src="../attachments/Pasted%20image%2020260929175433.png" alt="Pasted image 20260929175433" loading="lazy" decoding="async" style="width: min(100%, 276px);"></p>
-<p><span class="obsidian-red">Full Adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.</p>
+<p><span class="obsidian-red">full adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.</p>
 <ul>
 <li>Inputs: Two 1-bit binary addends $A$ and $B$ and a 1-bit carry-in $C_I$.</li>
 <li>Outputs: A 1-bit sum $S$ and a 1-bit carry-out to the next higher-order bit $C_O$.</li>
@@ -656,6 +656,7 @@ cla_4bit a1(
 <p><img src="../attachments/Pasted%20image%2020261002165027.png" alt="Pasted image 20261002165027" loading="lazy" decoding="async" style="width: min(100%, 400px);"></p>
 <p>For a D latch with active-high enable $E$, $Q$ follows $D$ while $E=1$ and holds its previous value while $E=0$:</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>$D$</th><th>$E$</th><th>$Q$</th><th>$\overline{Q}$</th></tr></thead><tbody><tr><td>X</td><td>$0$</td><td>$Q_{\text{old}}$</td><td>$\overline{Q_{\text{old}}}$</td></tr><tr><td>$0$</td><td>$1$</td><td>$0$</td><td>$1$</td></tr><tr><td>$1$</td><td>$1$</td><td>$1$</td><td>$0$</td></tr></tbody></table></div>
+<p>The logic symbol is: <img src="../attachments/Pasted%20image%2020261011210750.png" alt="Pasted image 20261011210750" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>It can be described by Verilog as follows:</p>
 <div class="code-block" data-code-block="19"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> d_latch (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> D,
@@ -669,7 +670,16 @@ cla_4bit a1(
     <span class="hljs-keyword">end</span>
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
-<p>The 74x373 contains eight transparent D latches with a shared active-high latch enable <code>LE</code> and an active-low output enable (<code>OE_n</code> in the code below). When <code>LE=1</code>, the internal stored data follows $D$; when <code>LE=0</code>, it holds its previous value. When <code>OE_n=1</code>, the output pins are high-impedance (<code>Z</code>); when <code>OE_n=0</code>, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled. See the <a href="https://www.ti.com/lit/ds/symlink/sn74hc373.pdf" target="_blank" rel="noopener noreferrer">74HC373 datasheet</a>.</p>
+<p>A real D latch is not instantaneous. Its timing parameters are measured at the 50% points of the waveforms (the tick marks in the figure):</p>
+<p><img src="../attachments/Pasted%20image%2020261011211254.png" alt="Pasted image 20261011211254" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<ul>
+<li>Setup time $t_{\text{SU}}$: the <span class="obsidian-red">setup time</span> is the minimum interval that $D$ must be stable before the latching edge of $E$ (the falling edge for an active-high enable). In the figure, $D$ rises, and $t_{\text{SU}}$ is measured from that transition to the falling edge of $E$.</li>
+<li>Hold time $t_{\text{H}}$: the <span class="obsidian-red">hold time</span> is the minimum interval that $D$ must remain stable after the latching edge of $E$. In the figure, $t_{\text{H}}$ runs from the falling edge of $E$ to the next change of $D$. If $D$ changes inside the setup-plus-hold window around the latching edge, the latch may store the wrong value or enter a metastable state.</li>
+<li>Propagation delay $t_{\text{pLH}}$ and $t_{\text{pHL}}$: the <span class="obsidian-red">propagation delay</span> is the time from an input transition to the resulting output transition, named by the direction of the output: $t_{\text{pLH}}$ for $Q$ going low-to-high, $t_{\text{pHL}}$ for $Q$ going high-to-low. Because a latch is transparent, there are two paths. In the figure, $t_{\text{pLH}}$ is measured from $D$ to $Q$: $E$ is already high, so $Q$ follows the change of $D$ directly. $t_{\text{pHL}}$ is measured from $E$ to $Q$: $D$ is already low, so $Q$ only changes when $E$ rises and opens the latch. Datasheets list both $t_{\text{p},D\to Q}$ and $t_{\text{p},E\to Q}$; the two directions are generally unequal.</li>
+<li>Minimum pulse width $t_{\text{W}}$: the <span class="obsidian-red">minimum pulse width</span> is the shortest time $E$ must stay active for the latch to capture $D$ reliably; a narrower enable pulse may not let the internal feedback settle. In the figure, $t_{\text{W}}$ is the width of the high pulse of $E$ measured between its rising and falling edges.</li>
+</ul>
+<p>As a result $$\boxed{t_{\text{SU}},\; t_{\text{H}},\; t_{\text{W}} \text{ are constraints on the inputs}}$$$$\boxed{t_{\text{pLH}},\; t_{\text{pHL}} \text{ are guarantees on the output.}}$$</p>
+<p>The 74x373 contains eight transparent D latches with a shared active-high latch enable <code>LE</code> and an active-low output enable (<code>OE_n</code> in the code below). When <code>LE=1</code>, the internal stored data follows $D$; when <code>LE=0</code>, it holds its previous value. When <code>OE_n=1</code>, the output pins are high-impedance (<code>Z</code>); when <code>OE_n=0</code>, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled.</p>
 <p><img src="../attachments/Pasted%20image%2020261002165655.png" alt="Pasted image 20261002165655" loading="lazy" decoding="async" style="width: min(100%, 272px);"></p>
 <div class="code-block" data-code-block="20"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> latch_74x373 (
     <span class="hljs-keyword">input</span>  <span class="hljs-type">wire</span> [<span class="hljs-number">7</span>:<span class="hljs-number">0</span>] D,
@@ -689,14 +699,110 @@ cla_4bit a1(
 
 <span class="hljs-keyword">endmodule</span></code></pre></div>
 <p>These latch models have no reset. Their initial stored state is unspecified until a valid set/reset operation or an enabled data load establishes it.</p>
-<h3 id="flipflop-ff-todo">Flip-Flop (FF) (TODO)</h3>
-<h4 id="sr-ff-todo">SR FF (TODO)</h4>
-<h4 id="d-ff-todo">D FF (TODO)</h4>
-<h4 id="t-ff-todo">T FF (TODO)</h4>
-<h4 id="jk-ff-todo">JK FF (TODO)</h4>
+<h3 id="flipflop-ff">Flip-Flop (FF)</h3>
+<p>A <span class="obsidian-red">Flip-Flop</span> also stores one bit. Compared to the latch, FF is edge-sensitive: the stored state can respond to input changes only when the signal is changing.</p>
+<p>Generally, we call the current state as $Q^n$ and the next state as $Q^{n+1}$.</p>
+<h4 id="d-ff">D FF</h4>
+<p>To make an edge-triggered FF, we connect two latches together and use transmission gates to control the circuit. We call the left latch as the master latch, the right latch as the slave latch.</p>
+<p><img src="../attachments/Screenshot%202026-10-12%20at%2012.39.38.png" alt="Screenshot 2026-10-12 at 12.39.38" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>In the circuit, we use the clock $CLK$ to control the signal $C$. <img src="../attachments/Pasted%20image%2020261012124134.png" alt="Pasted image 20261012124134" loading="lazy" decoding="async" style="width: min(100%, 450px);"> We can find that when $CLK=0$, the signal $\overline{Q&#039;}=D$, but $TG_3$ is not closed, so it cannot be transmitted to the next latch. And when $CLK=1$, it can transmit the signal to $Q$, but $TG_1$ is not closed, so it cannot get the new signal.</p>
+<p>In conclusion, the state changes to $D$ only when the $CLK$ changes from $0$ to $1$. The characteristic equation can be written as: $$Q^{n+1}=D^n$$</p>
+<p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012124915.png" alt="Pasted image 20261012124915" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>We can add preset and clear signals to the D FF. <img src="../attachments/Screenshot%202026-10-12%20at%2013.05.29.png" alt="Screenshot 2026-10-12 at 13.05.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>This circuit works only when $\overline{R_D}+\overline{S_D}=1$. If $\overline{R_D}=\overline{S_D}=1$, D FF will work. And when the signal $\overline{R_D}$ and $\overline{S_D}$ is different, $Q$ will be the same as $S_D$.</p>
+<p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012131237.png" alt="Pasted image 20261012131237" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The following behavioral Verilog model achieve this circuit:</p>
+<div class="code-block" data-code-block="21"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> D_FF (
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> D,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> CLK,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> S_n,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> R_n,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span> Q,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Q_n
+);
+
+    <span class="hljs-keyword">always</span> @(<span class="hljs-keyword">posedge</span> CLK <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> S_n <span class="hljs-keyword">or</span> <span class="hljs-keyword">negedge</span> R_n) <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (!R_n)
+            Q &lt;= <span class="hljs-number">1&#039;b0</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!S_n)
+            Q &lt;= <span class="hljs-number">1&#039;b1</span>;
+        <span class="hljs-keyword">else</span>
+            Q &lt;= D;
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-keyword">assign</span> Q_n = ~Q;
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<p>Another design is to use feedback to achieve latching and blocking as follows. <img src="../attachments/Pasted%20image%2020261012125729.png" alt="Pasted image 20261012125729" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<h4 id="jk-ff">JK FF</h4>
+<p>JK FF has the following functions:</p>
+<ul>
+<li>$JK=00$, keep the state; $JK=11$, flip the state</li>
+<li>$JK=01$, $Q=0$; $JK=10$, $Q=1$</li>
+</ul>
+<p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012133341.png" alt="Pasted image 20261012133341" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="code-block" data-code-block="22"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> JK_FF (
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> J,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> K,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> CLK,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> S_n,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> R_n,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span> Q,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Q_n
+);
+
+    <span class="hljs-type">wire</span> D;
+    <span class="hljs-keyword">assign</span> D = (J &amp; ~Q) | (~K &amp; Q);
+    
+    D_FF uut(
+	    .D(D),
+	    .CLK(CLK),
+	    .S_n(S_n),
+	    .R_n(R_n),
+	    .Q(Q),
+	    .Q_n(Q_n)
+    );
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<h4 id="t-ff">T FF</h4>
+<p>T FF has the following functions:</p>
+<ul>
+<li>$T=0$, keep the state</li>
+<li>$T=1$, flip the state</li>
+</ul>
+<p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012133434.png" alt="Pasted image 20261012133434" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<div class="code-block" data-code-block="23"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> T_FF (
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> T,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> CLK,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> S_n,
+    <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> R_n,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">reg</span> Q,
+    <span class="hljs-keyword">output</span> <span class="hljs-type">wire</span> Q_n
+);
+
+    <span class="hljs-type">wire</span> D;
+    <span class="hljs-keyword">assign</span> D = T ^ Q;
+    
+    D_FF uut(
+	    .D(D),
+	    .CLK(CLK),
+	    .S_n(S_n),
+	    .R_n(R_n),
+	    .Q(Q),
+	    .Q_n(Q_n)
+    );
+
+<span class="hljs-keyword">endmodule</span></code></pre></div>
+<h3 id="finite-state-machine-fsm">Finite State Machine (FSM)</h3>
+<p>A Finite State Machine (FSM) is a mathematical model that describes system behavior using a finite number of states, and it is also one of the most important control logic design methods in digital circuits.</p>
+<p>Finite state machine can be classified into two categories:</p>
+<ul>
+<li>Moore:</li>
+<li>Mealy:</li>
+</ul>
 <h2 id="fieldprogrammable-gate-array-fpga-todo">Field-Programmable Gate Array (FPGA) (TODO)</h2>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider-todo","level":2,"text":"Divider (TODO)"},{"id":"floatingpoint-calculation-todo","level":2,"text":"Floating-Point Calculation (TODO)"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential Logic Circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff-todo","level":2,"text":"Flip-Flop (FF) (TODO)"},{"id":"sr-ff-todo","level":3,"text":"SR FF (TODO)"},{"id":"d-ff-todo","level":3,"text":"D FF (TODO)"},{"id":"t-ff-todo","level":3,"text":"T FF (TODO)"},{"id":"jk-ff-todo","level":3,"text":"JK FF (TODO)"},{"id":"fieldprogrammable-gate-array-fpga-todo","level":1,"text":"Field-Programmable Gate Array (FPGA) (TODO)"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider-todo","level":2,"text":"Divider (TODO)"},{"id":"floatingpoint-calculation-todo","level":2,"text":"Floating-Point Calculation (TODO)"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential Logic Circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff","level":2,"text":"Flip-Flop (FF)"},{"id":"d-ff","level":3,"text":"D FF"},{"id":"jk-ff","level":3,"text":"JK FF"},{"id":"t-ff","level":3,"text":"T FF"},{"id":"finite-state-machine-fsm","level":2,"text":"Finite State Machine (FSM)"},{"id":"fieldprogrammable-gate-array-fpga-todo","level":1,"text":"Field-Programmable Gate Array (FPGA) (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -854,7 +960,7 @@ These are the canonical SOP and canonical POS forms; the two index sets are comp
 >- If $x_i=1$: the right-hand side equals $1\cdot f(x_1,\dots,1,\dots,x_n)+0\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,1,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=1$.
 >- If $x_i=0$: the right-hand side equals $0\cdot f(x_1,\dots,1,\dots,x_n)+1\cdot f(x_1,\dots,0,\dots,x_n)=f(x_1,\dots,0,\dots,x_n)$, which is exactly $f$ evaluated at $x_i=0$.
 >
->Since both sides agree for $x_i=0$ and $x_i=1$, and these are the only possible values of $x_i$, the identity holds for every input. 
+>Since both sides agree for $x_i=0$ and $x_i=1$, and these are the only possible values of $x_i$, the identity holds for every input.
 
 The two subfunctions are called cofactors, written $f_{x_i}=f(x_1,\dots,x_{i-1},1,x_{i+1},\dots,x_n)$ and $f_{\overline{x_i}}=f(x_1,\dots,x_{i-1},0,x_{i+1},\dots,x_n)$, so the theorem reads compactly as
 
@@ -1069,7 +1175,7 @@ endmodule
 Here, `GS=0` means at least one input is active.
 ## Decoder
 
-The decoder is the reverse process of the encoder. Like the following verilog code:
+The decoder is the reverse process of the encoder, as in the following Verilog code:
 
 ```verilog
 module decoder (
@@ -1090,7 +1196,7 @@ module decoder (
 endmodule
 ```
 
-In computer, CPU output the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.
+In a computer, the CPU outputs the binary address. The addresses are first mapped to different memory areas, such as ROM, RAM, etc. Then in the memory area, it will continue internal addressing.
 
 A classic MSI implementation is the 74x138, a 3-to-8 line decoder in the 74-series logic family. Here, $x$ is a placeholder for the technology designation: for example, 74HC138 uses high-speed CMOS, while 74LS138 uses low-power Schottky TTL. It provides three address inputs $A_2A_1A_0$, eight active-low outputs $\overline{Y_0}$–$\overline{Y_7}$, and three enable inputs: $G_1$ active high, $\overline{G_{2A}}$ and $\overline{G_{2B}}$ active low. The decoder is enabled only when $G_1=1$ and $\overline{G_{2A}}=\overline{G_{2B}}=0$; then exactly one output, selected by the address, goes low:
 
@@ -1112,7 +1218,7 @@ This structure makes the chip useful beyond plain decoding:
 - Expansion: two chips form a 4-to-16 decoder. Both receive $A_2A_1A_0$. For the low half (outputs 0–7), connect the fourth address bit $A_3$ to $\overline{G_{2A}}$, tie $G_1=1$, and tie $\overline{G_{2B}}=0$. For the high half (outputs 8–15), connect $A_3$ to $G_1$ and tie both active-low enables to 0. Thus $A_3=0$ enables only the low half, and $A_3=1$ enables only the high half. See the [74HC138 datasheet](https://www.ti.com/lit/ds/symlink/sn74hc138.pdf).
 ## Multiplexer (MUX)
 
-The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follow:
+The multiplexer is used to select one input from multiple channels and route it to the output channel. For a 2-to-1 data selector, we can use function $Y=\overline{S}D_0+SD_1$ to describe. And the symbol is as follows:
 ![Pasted image 20260922174945](../attachments/Pasted%20image%2020260922174945.png){width=212}
 
 ```verilog
@@ -1278,7 +1384,7 @@ Although the serial (cascade) expansion approach is structurally intuitive, the 
 ![Pasted image 20260929175017](../attachments/Pasted%20image%2020260929175017-optimized.webp){width=450}
 ## Adder
 
-<span style="color: red;">Half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.
+<span style="color: red;">half-adder</span>: An addition circuit that considers only the two addends themselves, without accounting for a carry-in from a lower-order bit.
 - Inputs are two 1-bit binary addends $A$ and $B$.
 - Outputs are a 1-bit sum $S$, and a 1-bit carry-out $C_O$.
 
@@ -1299,7 +1405,7 @@ endmodule
 Logical symbol:
 ![Pasted image 20260929175433](../attachments/Pasted%20image%2020260929175433.png){width=276}
 
-<span style="color: red;">Full Adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.
+<span style="color: red;">full adder</span>: A circuit that performs the addition of two binary numbers and a carry-in signal from a lower-order bit.
 - Inputs: Two 1-bit binary addends $A$ and $B$ and a 1-bit carry-in $C_I$.
 - Outputs: A 1-bit sum $S$ and a 1-bit carry-out to the next higher-order bit $C_O$.
 
@@ -1603,7 +1709,7 @@ Its truth table is:
 Here both outputs are forced to 1 during the forbidden condition; releasing both inputs together again leaves the final state uncertain.
 
 The following behavioral Verilog model uses the active-high NOR convention, assumes $S$ and $R$ are never asserted together, and describes only valid-input behavior. It does not model the physical forbidden state or metastability:
-```Verilog
+```verilog
 module sr_latch (
     input  wire S,
     input  wire R,
@@ -1641,7 +1747,7 @@ endmodule
 
 A gated SR latch adds an active-high enable $E$. With $E=0$, it holds its state regardless of $S$ and $R$; with $E=1$, it follows the active-high SR rules above. The model assumes $S$ and $R$ are not both 1 while enabled:
 
-```Verilog
+```verilog
 module gated_sr_latch (
     input  wire S,
     input  wire R,
@@ -1676,9 +1782,11 @@ For a D latch with active-high enable $E$, $Q$ follows $D$ while $E=1$ and holds
 | X   | $0$ | $Q_{\text{old}}$ | $\overline{Q_{\text{old}}}$ |
 | $0$ | $1$ | $0$              | $1$                         |
 | $1$ | $1$ | $1$              | $0$                         |
+The logic symbol is:
+![Pasted image 20261011210750](../attachments/Pasted%20image%2020261011210750.png){width=450}
 
 It can be described by Verilog as follows:
-```Verilog
+```verilog
 module d_latch (
     input  wire D,
     input  wire E,
@@ -1693,10 +1801,22 @@ module d_latch (
 endmodule
 ```
 
-The 74x373 contains eight transparent D latches with a shared active-high latch enable `LE` and an active-low output enable (`OE_n` in the code below). When `LE=1`, the internal stored data follows $D$; when `LE=0`, it holds its previous value. When `OE_n=1`, the output pins are high-impedance (`Z`); when `OE_n=0`, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled. See the [74HC373 datasheet](https://www.ti.com/lit/ds/symlink/sn74hc373.pdf).
+A real D latch is not instantaneous. Its timing parameters are measured at the 50% points of the waveforms (the tick marks in the figure):
+
+![Pasted image 20261011211254](../attachments/Pasted%20image%2020261011211254.png){width=450}
+
+- Setup time $t_{\text{SU}}$: the <span style="color: red;">setup time</span> is the minimum interval that $D$ must be stable before the latching edge of $E$ (the falling edge for an active-high enable). In the figure, $D$ rises, and $t_{\text{SU}}$ is measured from that transition to the falling edge of $E$.
+- Hold time $t_{\text{H}}$: the <span style="color: red;">hold time</span> is the minimum interval that $D$ must remain stable after the latching edge of $E$. In the figure, $t_{\text{H}}$ runs from the falling edge of $E$ to the next change of $D$. If $D$ changes inside the setup-plus-hold window around the latching edge, the latch may store the wrong value or enter a metastable state.
+- Propagation delay $t_{\text{pLH}}$ and $t_{\text{pHL}}$: the <span style="color: red;">propagation delay</span> is the time from an input transition to the resulting output transition, named by the direction of the output: $t_{\text{pLH}}$ for $Q$ going low-to-high, $t_{\text{pHL}}$ for $Q$ going high-to-low. Because a latch is transparent, there are two paths. In the figure, $t_{\text{pLH}}$ is measured from $D$ to $Q$: $E$ is already high, so $Q$ follows the change of $D$ directly. $t_{\text{pHL}}$ is measured from $E$ to $Q$: $D$ is already low, so $Q$ only changes when $E$ rises and opens the latch. Datasheets list both $t_{\text{p},D\to Q}$ and $t_{\text{p},E\to Q}$; the two directions are generally unequal.
+- Minimum pulse width $t_{\text{W}}$: the <span style="color: red;">minimum pulse width</span> is the shortest time $E$ must stay active for the latch to capture $D$ reliably; a narrower enable pulse may not let the internal feedback settle. In the figure, $t_{\text{W}}$ is the width of the high pulse of $E$ measured between its rising and falling edges.
+
+As a result
+$$\boxed{t_{\text{SU}},\; t_{\text{H}},\; t_{\text{W}} \text{ are constraints on the inputs}}$$$$\boxed{t_{\text{pLH}},\; t_{\text{pHL}} \text{ are guarantees on the output.}}$$
+
+The 74x373 contains eight transparent D latches with a shared active-high latch enable `LE` and an active-low output enable (`OE_n` in the code below). When `LE=1`, the internal stored data follows $D$; when `LE=0`, it holds its previous value. When `OE_n=1`, the output pins are high-impedance (`Z`); when `OE_n=0`, they drive the stored data. Output enable does not affect storage, so data can still be updated while the outputs are disabled.
 
 ![Pasted image 20261002165655](../attachments/Pasted%20image%2020261002165655.png){width=272}
-```Verilog
+```verilog
 module latch_74x373 (
     input  wire [7:0] D,
     input  wire LE,
@@ -1717,14 +1837,138 @@ endmodule
 ```
 
 These latch models have no reset. Their initial stored state is unspecified until a valid set/reset operation or an enabled data load establishes it.
-## Flip-Flop (FF) (TODO)
+## Flip-Flop (FF)
 
-### SR FF (TODO)
-### D FF (TODO)
+A <span style="color: red;">Flip-Flop</span> also stores one bit. Compared to the latch, FF is edge-sensitive: the stored state can respond to input changes only when the signal is changing.
 
-### T FF (TODO)
-### JK FF (TODO)
+Generally, we call the current state as $Q^n$ and the next state as $Q^{n+1}$.
+### D FF
 
+To make an edge-triggered FF, we connect two latches together and use transmission gates to control the circuit. We call the left latch as the master latch, the right latch as the slave latch.
+
+![Screenshot 2026-10-12 at 12.39.38](../attachments/Screenshot%202026-10-12%20at%2012.39.38.png){width=450}
+
+In the circuit, we use the clock $CLK$ to control the signal $C$.
+![Pasted image 20261012124134](../attachments/Pasted%20image%2020261012124134.png){width=450}
+We can find that when $CLK=0$, the signal $\overline{Q'}=D$, but $TG_3$ is not closed, so it cannot be transmitted to the next latch. And when $CLK=1$, it can transmit the signal to $Q$, but $TG_1$ is not closed, so it cannot get the new signal.
+
+In conclusion, the state changes to $D$ only when the $CLK$ changes from $0$ to $1$. The characteristic equation can be written as:
+$$Q^{n+1}=D^n$$
+
+The logic symbol is as follows:
+![Pasted image 20261012124915](../attachments/Pasted%20image%2020261012124915.png){width=450}
+
+We can add preset and clear signals to the D FF.
+![Screenshot 2026-10-12 at 13.05.29](../attachments/Screenshot%202026-10-12%20at%2013.05.29.png){width=450}
+
+This circuit works only when $\overline{R_D}+\overline{S_D}=1$. If $\overline{R_D}=\overline{S_D}=1$, D FF will work. And when the signal $\overline{R_D}$ and $\overline{S_D}$ is different, $Q$ will be the same as $S_D$.
+
+The logic symbol is as follows:
+![Pasted image 20261012131237](../attachments/Pasted%20image%2020261012131237.png){width=450}
+
+The following behavioral Verilog model achieve this circuit:
+
+```verilog
+module D_FF (
+    input wire D,
+    input wire CLK,
+    input wire S_n,
+    input wire R_n,
+    output reg Q,
+    output wire Q_n
+);
+
+    always @(posedge CLK or negedge S_n or negedge R_n) begin
+        if (!R_n)
+            Q <= 1'b0;
+        else if (!S_n)
+            Q <= 1'b1;
+        else
+            Q <= D;
+    end
+
+    assign Q_n = ~Q;
+
+endmodule
+```
+
+Another design is to use feedback to achieve latching and blocking as follows.
+![Pasted image 20261012125729](../attachments/Pasted%20image%2020261012125729.png){width=450}
+### JK FF
+
+JK FF has the following functions:
+- $JK=00$, keep the state; $JK=11$, flip the state
+- $JK=01$, $Q=0$; $JK=10$, $Q=1$
+
+The logic symbol is as follows:
+![Pasted image 20261012133341](../attachments/Pasted%20image%2020261012133341.png){width=450}
+
+```verilog
+module JK_FF (
+    input wire J,
+    input wire K,
+    input wire CLK,
+    input wire S_n,
+    input wire R_n,
+    output reg Q,
+    output wire Q_n
+);
+
+    wire D;
+    assign D = (J & ~Q) | (~K & Q);
+    
+    D_FF uut(
+	    .D(D),
+	    .CLK(CLK),
+	    .S_n(S_n),
+	    .R_n(R_n),
+	    .Q(Q),
+	    .Q_n(Q_n)
+    );
+
+endmodule
+```
+### T FF
+
+T FF has the following functions:
+- $T=0$, keep the state
+- $T=1$, flip the state
+
+The logic symbol is as follows:
+![Pasted image 20261012133434](../attachments/Pasted%20image%2020261012133434.png){width=450}
+
+```verilog
+module T_FF (
+    input wire T,
+    input wire CLK,
+    input wire S_n,
+    input wire R_n,
+    output reg Q,
+    output wire Q_n
+);
+
+    wire D;
+    assign D = T ^ Q;
+    
+    D_FF uut(
+	    .D(D),
+	    .CLK(CLK),
+	    .S_n(S_n),
+	    .R_n(R_n),
+	    .Q(Q),
+	    .Q_n(Q_n)
+    );
+
+endmodule
+```
+
+## Finite State Machine (FSM)
+
+A Finite State Machine (FSM) is a mathematical model that describes system behavior using a finite number of states, and it is also one of the most important control logic design methods in digital circuits.
+
+Finite state machine can be classified into two categories:
+- Moore:
+- Mealy:
 # Field-Programmable Gate Array (FPGA) (TODO)
         </script>
     </main>
