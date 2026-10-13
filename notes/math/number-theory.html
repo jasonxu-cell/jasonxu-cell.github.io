@@ -48,7 +48,7 @@
                     <span>Congruences</span>
                     <span>Diophantine Equations</span>
                 </div>
-                <time datetime="2026-07-30">Jul 30, 2026</time>
+                <time datetime="2026-10-13">Oct 13, 2026</time>
             </div>
         </header>
 
@@ -105,8 +105,7 @@
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Fundamental Theorem of Arithmetic</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>Every integer greater than $1$ can be factored into a product of finitely many primes, and this factorization is unique up to order.</p></div></div>
 <p><em>Existence</em> by strong induction; <em>uniqueness</em> by <span class="obsidian-red">Euclid&#039;s lemma</span>. Hence every positive integer $n = \prod_p p^{v_p(n)}$ with $v_p(n) \in \mathbb{N}$, and every nonzero rational $r = \prod_p p^{v_p(r)}$ with $v_p(r) \in \mathbb{Z}$.</p>
 <p>A positive integer $d \mid n \iff d = \prod_p p^{v_p(d)}$ with $0 \le v_p(d) \le v_p(n)$. In terms of valuations, $$(a, b) = \prod_p p^{\min(v_p(a), v_p(b))}, \qquad [a, b] = \prod_p p^{\max(v_p(a), v_p(b))}$$</p>
-<h2 id="fast-exponentiation-and-perfect-numbers">Fast Exponentiation and Perfect Numbers</h2>
-<p><span class="obsidian-red">Fast exponentiation</span> (computing $a^n \bmod m$): write $n = \sum_i n_i 2^i$ in binary; with $a_0 = a$, repeatedly square $a_i = a_{i-1}^2 \bmod m$, accumulating the product over bits where $n_i = 1$. This takes $O(\log n)$ multiplications.</p>
+<h2 id="perfect-numbers">Perfect Numbers</h2>
 <p>A positive integer $n$ is <span class="obsidian-red">perfect</span> if $\sigma(n) = 2n$ (sum of divisors).</p>
 <div class="markdown-callout markdown-callout-theorem"><div class="callout-title"><span class="callout-icon" aria-hidden="true">T</span><span class="callout-title-text">Euclid–Euler</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>$n$ is an even perfect number $\iff n = 2^{k-1}(2^k - 1)$ where $P = 2^k - 1$ is a <span class="obsidian-red">Mersenne prime</span>.</p></div></div>
 <p><em>Proof sketch.</em> Write $n = 2^{k-1}X$ with $X$ odd. Then $\sigma(n) = (2^k - 1)\sigma(X) = 2n = 2^k X$, so $\sigma(X) = \frac{2^k X}{2^k - 1}$. Writing $X = (2^k - 1)Y$, the analysis forces $Y = 1$ and $2^k - 1$ prime. $\square$</p>
@@ -207,7 +206,7 @@
 <li>Perfect cuboid: a box with integer edges, face diagonals, and space diagonal ($a^2 + b^2 = m^2$, $a^2 + c^2 = n^2$, $b^2 + c^2 = p^2$, $a^2 + b^2 + c^2 = q^2$). Dropping the space-diagonal condition gives an Euler brick; the smallest is $(a, b, c) = (44, 117, 240)$.</li>
 </ul>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"divisibility","level":1,"text":"Divisibility"},{"id":"greatest-common-divisor","level":2,"text":"Greatest Common Divisor"},{"id":"b-zout-s-identity","level":2,"text":"Bézout's Identity"},{"id":"euclidean-algorithm","level":2,"text":"Euclidean Algorithm"},{"id":"least-common-multiple","level":2,"text":"Least Common Multiple"},{"id":"fundamental-theorem-of-arithmetic","level":1,"text":"Fundamental Theorem of Arithmetic"},{"id":"fast-exponentiation-and-perfect-numbers","level":1,"text":"Fast Exponentiation and Perfect Numbers"},{"id":"lifting-the-exponent-lte","level":1,"text":"Lifting the Exponent (LTE)"},{"id":"the-m-bius-function","level":1,"text":"The Möbius Function"},{"id":"diophantine-equations","level":1,"text":"Diophantine Equations"},{"id":"modular-arithmetic","level":1,"text":"Modular Arithmetic"},{"id":"euler-s-theorem-and-fermat-s-little-theorem","level":2,"text":"Euler's Theorem and Fermat's Little Theorem"},{"id":"chinese-remainder-theorem","level":2,"text":"Chinese Remainder Theorem"},{"id":"primitive-roots","level":1,"text":"Primitive Roots"},{"id":"quadratic-reciprocity","level":1,"text":"Quadratic Reciprocity"},{"id":"sums-of-squares","level":1,"text":"Sums of Squares"},{"id":"pell-s-equation","level":1,"text":"Pell's Equation"},{"id":"fermat-s-last-theorem-n-3","level":1,"text":"Fermat's Last Theorem, $n = 3$"},{"id":"the-riemann-zeta-function-and-the-prime-number-theorem","level":1,"text":"The Riemann Zeta Function and the Prime Number Theorem"},{"id":"selected-exercises","level":1,"text":"Selected Exercises"},{"id":"appendix","level":1,"text":"Appendix"},{"id":"primitive-roots-of-small-odd-primes","level":2,"text":"Primitive Roots of Small Odd Primes"},{"id":"mersenne-primes-and-perfect-numbers","level":2,"text":"Mersenne Primes and Perfect Numbers"},{"id":"open-problems","level":2,"text":"Open Problems"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"divisibility","level":1,"text":"Divisibility"},{"id":"greatest-common-divisor","level":2,"text":"Greatest Common Divisor"},{"id":"b-zout-s-identity","level":2,"text":"Bézout's Identity"},{"id":"euclidean-algorithm","level":2,"text":"Euclidean Algorithm"},{"id":"least-common-multiple","level":2,"text":"Least Common Multiple"},{"id":"fundamental-theorem-of-arithmetic","level":1,"text":"Fundamental Theorem of Arithmetic"},{"id":"perfect-numbers","level":1,"text":"Perfect Numbers"},{"id":"lifting-the-exponent-lte","level":1,"text":"Lifting the Exponent (LTE)"},{"id":"the-m-bius-function","level":1,"text":"The Möbius Function"},{"id":"diophantine-equations","level":1,"text":"Diophantine Equations"},{"id":"modular-arithmetic","level":1,"text":"Modular Arithmetic"},{"id":"euler-s-theorem-and-fermat-s-little-theorem","level":2,"text":"Euler's Theorem and Fermat's Little Theorem"},{"id":"chinese-remainder-theorem","level":2,"text":"Chinese Remainder Theorem"},{"id":"primitive-roots","level":1,"text":"Primitive Roots"},{"id":"quadratic-reciprocity","level":1,"text":"Quadratic Reciprocity"},{"id":"sums-of-squares","level":1,"text":"Sums of Squares"},{"id":"pell-s-equation","level":1,"text":"Pell's Equation"},{"id":"fermat-s-last-theorem-n-3","level":1,"text":"Fermat's Last Theorem, $n = 3$"},{"id":"the-riemann-zeta-function-and-the-prime-number-theorem","level":1,"text":"The Riemann Zeta Function and the Prime Number Theorem"},{"id":"selected-exercises","level":1,"text":"Selected Exercises"},{"id":"appendix","level":1,"text":"Appendix"},{"id":"primitive-roots-of-small-odd-primes","level":2,"text":"Primitive Roots of Small Odd Primes"},{"id":"mersenne-primes-and-perfect-numbers","level":2,"text":"Mersenne Primes and Perfect Numbers"},{"id":"open-problems","level":2,"text":"Open Problems"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -284,9 +283,7 @@ $(a^n - 1, a^m - 1) = a^{(n,m)} - 1$. Hence if $p = a^n - 1$ is prime, then $a =
 A positive integer $d \mid n \iff d = \prod_p p^{v_p(d)}$ with $0 \le v_p(d) \le v_p(n)$. In terms of valuations,
 $$(a, b) = \prod_p p^{\min(v_p(a), v_p(b))}, \qquad [a, b] = \prod_p p^{\max(v_p(a), v_p(b))}$$
 
-# Fast Exponentiation and Perfect Numbers
-
-<span style="color: red;">Fast exponentiation</span> (computing $a^n \bmod m$): write $n = \sum_i n_i 2^i$ in binary; with $a_0 = a$, repeatedly square $a_i = a_{i-1}^2 \bmod m$, accumulating the product over bits where $n_i = 1$. This takes $O(\log n)$ multiplications.
+# Perfect Numbers
 
 A positive integer $n$ is <span style="color: red;">perfect</span> if $\sigma(n) = 2n$ (sum of divisors). 
 

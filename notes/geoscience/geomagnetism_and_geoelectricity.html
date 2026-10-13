@@ -51,7 +51,7 @@
                     <span>Induction</span>
                     <span>Conductivity</span>
                 </div>
-                <time datetime="2026-07-30">Jul 30, 2026</time>
+                <time datetime="2026-10-13">Oct 13, 2026</time>
             </div>
         </header>
 
@@ -85,7 +85,7 @@
 <li>Horizontal X component (northward) $X$</li>
 <li>Horizontal Y component (eastward) $Y$</li>
 </ul>
-<p>$$H=\sqrt{X^2+Y^2},\qquad F=\sqrt{H^2+Z^2},\qquad D=\operatorname{atan2}(Y,X),\qquad I=\operatorname{atan2}(Z,H)$$ Here $Z$ is positive downward, and $D$ is positive east of geographic north. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.</p>
+<p>$$H=\sqrt{X^2+Y^2},\qquad F=\sqrt{H^2+Z^2},\qquad D=\operatorname{atan2}(Y,X),\qquad I=\operatorname{atan2}(Z,H)$$ Here $Z$ is positive downward, and $D$ is positive east of geographic north. When $H=0$, the declination $D$ is undefined. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.</p>
 <p><img src="../attachments/Screenshot%202026-05-18%20at%2019.04.27-optimized.webp" alt="Screenshot 2026-05-18 at 19.04.27" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p><img src="../attachments/Pasted%20image%2020260518163913-optimized.webp" alt="Pasted image 20260518163913" loading="lazy" decoding="async" style="width: min(100%, 450px);"> <img src="../attachments/Pasted%20image%2020260518163921-optimized.webp" alt="Pasted image 20260518163921" loading="lazy" decoding="async" style="width: min(100%, 450px);"> <img src="../attachments/Pasted%20image%2020260518164109-optimized.webp" alt="Pasted image 20260518164109" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <ul>
@@ -210,8 +210,48 @@
 <li>$D_{CF}$: The Chapman-Ferraro field from magnetopause currents. Increased solar-wind dynamic pressure compresses the magnetosphere and usually gives a positive low-latitude horizontal-field perturbation, often seen at storm commencement.</li>
 <li>$D_R$: The disturbance from the enhanced westward ring current, usually giving a negative low-latitude horizontal-field perturbation during the storm main phase.</li>
 </ul>
-<p>The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields. See <a href="https://wdc.kugi.kyoto-u.ac.jp/dstdir/dst2/onDstindex.html" target="_blank" rel="noopener noreferrer">WDC Kyoto&#039;s derivation and interpretation of $D_{st}$</a>.</p>
-<h2 id="resistivity-and-permittivity">Resistivity and Permittivity</h2>
+<p>The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields.</p>
+<h2 id="conductivity-model">Conductivity Model</h2>
+<h3 id="electromagnetic-induction-in-a-spherical-model">Electromagnetic Induction in a Spherical Model</h3>
+<p>Consider a spherically symmetric Earth with conductivity $\sigma(r)$ and spatially constant absolute permeability $\mu$. The surrounding air has permeability $\mu_0$; define $\mu_r=\mu/\mu_0$. Use complex amplitudes with time dependence $e^{i\omega t}$ and neglect displacement current in the conducting Earth ($\sigma\gg\omega\varepsilon$). The sign of the imaginary terms is consequently opposite to the $e^{-i\omega t}$ convention in <a href="../physics/electromagnetism.html#waves-in-good-conductors">Waves in Good Conductors</a>.</p>
+<p>In the current-free region between the Earth and the external source currents, $$\mathbf{H}=-\nabla U,\qquad \mathbf{B}=\mu_0\mathbf{H},\qquad \nabla^2U=0.$$ For one degree-$n$ spherical harmonic $Y_n^m(\theta,\lambda)$, the radial solutions in <a href="../math/equations-of-mathematical-physics.html#spherical-harmonics">Spherical Harmonics</a> give $$U_n=R\left[e_n\left(\frac{r}{R}\right)^n+i_n\left(\frac{r}{R}\right)^{-n-1}\right]Y_n^m.$$ The order $m$ is suppressed in $e_n,i_n$. These coefficients are external and induced magnetic-field-intensity amplitudes in $\mathrm{A\,m^{-1}}$, unlike the flux-density Gauss coefficients used earlier. The symbol $i$ without a subscript is the imaginary unit. Thus $$\begin{aligned} H_r&amp;=-\left[ne_n\left(\frac{r}{R}\right)^{n-1}-(n+1)i_n\left(\frac{r}{R}\right)^{-n-2}\right]Y_n^m,\\ H_\theta&amp;=-\left[e_n\left(\frac{r}{R}\right)^{n-1}+i_n\left(\frac{r}{R}\right)^{-n-2}\right]\frac{\partial Y_n^m}{\partial\theta},\\ H_\lambda&amp;=-\left[e_n\left(\frac{r}{R}\right)^{n-1}+i_n\left(\frac{r}{R}\right)^{-n-2}\right]\frac{1}{\sin\theta}\frac{\partial Y_n^m}{\partial\lambda}. \end{aligned}$$</p>
+<p>Inside the Earth, choose a divergence-free toroidal vector potential, $$\mathbf{A}=F_n(r)(\mathbf{r}\times\nabla Y_n^m),\qquad \mathbf{B}=\nabla\times\mathbf{A},\qquad \mathbf{E}=-i\omega\mathbf{A}.$$ For this mode, Maxwell&#039;s equations give $$\nabla^2\mathbf{A}-i\omega\mu\sigma(r)\mathbf{A}=0,$$ or equivalently $$\frac{\mathrm{d}^2F_n}{\mathrm{d}r^2}+\frac{2}{r}\frac{\mathrm{d}F_n}{\mathrm{d}r}-\left[\frac{n(n+1)}{r^2}+i\omega\mu\sigma(r)\right]F_n=0.$$ For a homogeneous conducting solid sphere, define $$\kappa^2=i\omega\mu\sigma,\qquad \operatorname{Re}\kappa&gt;0.$$ The solution regular at the center is $$F_n(r)=C_n r^{-1/2}I_{n+1/2}(\kappa r),$$ where $I_\nu$ is a modified Bessel function, as introduced in <a href="../math/equations-of-mathematical-physics.html#cylindrical-coordinates-bessel-functions">Cylindrical Coordinates → Bessel Functions</a>. In a homogeneous spherical shell, both $r^{-1/2}I_{n+1/2}(\kappa r)$ and $r^{-1/2}K_{n+1/2}(\kappa r)$ are generally needed. For a layered sphere, match the fields at every interface; for a general $\sigma(r)$, solve the radial equation rather than substituting a constant-$\sigma$ Bessel solution.</p>
+<p>At $r=R$, in the absence of an imposed surface current, the normal component of $\mathbf{B}$ and the tangential components of $\mathbf{H}$ are continuous. Since the interior field has $B_r=-n(n+1)F_nY_n^m/r$, these conditions give $$\begin{aligned} ne_n-(n+1)i_n&amp;=\frac{n(n+1)}{\mu_0R}F_n(R),\\ e_n+i_n&amp;=\frac{1}{\mu R}\left.\frac{\mathrm{d}(rF_n)}{\mathrm{d}r}\right|_{r=R}. \end{aligned}$$ Define the dimensionless logarithmic derivative $$L_n=\frac{\left.\mathrm{d}(rF_n)/\mathrm{d}r\right|_{r=R}}{F_n(R)}=1+\frac{R}{F_n(R)}\left.\frac{\mathrm{d}F_n}{\mathrm{d}r}\right|_{r=R}.$$ Eliminating the interior amplitude gives $$\boxed{Q_n(\omega)=\frac{i_n}{e_n}=\frac{n}{n+1}\frac{L_n-(n+1)\mu_r}{L_n+n\mu_r}}.$$ For the usual nonmagnetic approximation $\mu=\mu_0$, this reduces to $$Q_n(\omega)=\frac{n}{n+1}\frac{L_n-(n+1)}{L_n+n}.$$ The response depends on conductivity, frequency, permeability, and geometry. In the nonmagnetic case, the low-frequency limit is $Q_n\to0$; a perfectly shielding sphere has $Q_n\to n/(n+1)$.</p>
+<h3 id="electromagnetic-induction-in-a-plane-model">Electromagnetic Induction in a Plane Model</h3>
+<p>Use $z$ positive downward, with a horizontal interface at $z=d$. The air above it is insulating with permeability $\mu_0$; the conducting half-space below it has constant $\sigma,\mu$. Retain the $e^{i\omega t}$ convention and $\mu_r=\mu/\mu_0$ from <a href="#electromagnetic-induction-in-a-spherical-model">Electromagnetic Induction in a Spherical Model</a>.</p>
+<p>For a horizontal Fourier mode labeled by $m,n$, let $$V_{mn}=e^{i(k_xx+k_yy)},\qquad \lambda=\sqrt{k_x^2+k_y^2}&gt;0,$$ where $k_x,k_y,\lambda$ are spatial wavenumbers in $\mathrm{m^{-1}}$. Here $\lambda$ is a wavenumber, rather than the longitude used in the spherical model. The real sine and cosine modes follow by taking linear combinations.</p>
+<p>In the source-free air region, the external and induced potentials are $$U_{mn}=\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)V_{mn},\qquad \mathbf{H}=-\nabla U_{mn}.$$ Unlike the spherical coefficients above, $e_{mn},i_{mn}$ here are scalar-potential amplitudes in amperes. Differentiation gives $$\begin{aligned} H_x&amp;=-\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)\frac{\partial V_{mn}}{\partial x},\\ H_y&amp;=-\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)\frac{\partial V_{mn}}{\partial y},\\ H_z&amp;=\lambda\left(e_{mn}e^{-\lambda z}-i_{mn}e^{\lambda z}\right)V_{mn}. \end{aligned}$$</p>
+<p>Define the vertical decay constant $$q=\sqrt{\lambda^2+i\omega\mu\sigma},\qquad \operatorname{Re}q&gt;0.$$ The interior vector potential and magnetic flux density can be written as $$\mathbf{A}=C_{mn}e^{-qz}(\nabla V_{mn}\times\hat{e}_z),\qquad \mathbf{B}=\nabla\times\mathbf{A}.$$ At $z=d$, continuity of tangential $\mathbf{H}$ and normal $\mathbf{B}$ gives, respectively, $$\begin{aligned} \mu\left(e_{mn}e^{-\lambda d}+i_{mn}e^{\lambda d}\right)&amp;=C_{mn}q e^{-qd},\\ e_{mn}e^{-\lambda d}-i_{mn}e^{\lambda d}&amp;=\frac{C_{mn}\lambda}{\mu_0}e^{-qd}. \end{aligned}$$ Solving for the response coefficients, $$\boxed{\frac{i_{mn}}{e_{mn}}=e^{-2\lambda d}\frac{q-\mu_r\lambda}{q+\mu_r\lambda}},\qquad \frac{C_{mn}}{e_{mn}}=\frac{2\mu e^{(q-\lambda)d}}{q+\mu_r\lambda}.$$ Both $q$ and $\mu_r\lambda$ have units of $\mathrm{m^{-1}}$. Setting $d=0$ places the coordinate origin at the interface. For $\mu=\mu_0$ and $\omega\to0$, the induced-potential ratio tends to zero.</p>
+<h3 id="magnetotelluric-method-mt-and-gds">Magnetotelluric Method (MT) and GDS</h3>
+<p>The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.</p>
+<p>For a vertically incident plane wave in a homogeneous conducting half-space, use $z$ positive downward and time dependence $e^{i\omega t}$. The scalar impedance for the polarization $(E_x,H_y)$ is $$Z_{\mathrm{MT}}=\frac{E_x}{H_y}=\sqrt{\frac{i\omega\mu}{\sigma}},$$ with the square-root branch giving a field that decays with depth. $E_x$ is in $\mathrm{V\,m^{-1}}$ and $H_y$ in $\mathrm{A\,m^{-1}}$, so $Z_{\mathrm{MT}}$ has units of ohms. Define $$\rho_a=\frac{|Z_{\mathrm{MT}}|^2}{\mu_0\omega}.$$ In a nonmagnetic homogeneous half-space ($\mu=\mu_0$), $\rho_a=1/\sigma$ and the impedance phase is $45^\circ$. For a general two- or three-dimensional Earth, the horizontal electric and magnetic fields are related by an impedance tensor rather than one scalar ratio.</p>
+<p>Geomagnetic depth sounding (GDS) uses magnetic-field variations to investigate electrical structure. For the particular finite-wavelength mode $V=e^{i\lambda x}$ in <a href="#electromagnetic-induction-in-a-plane-model">Electromagnetic Induction in a Plane Model</a>, with $\mu=\mu_0$, the ground response is $$R_{\mathrm{GDS}}=\frac{H_z}{H_x}=\frac{i\lambda}{q},\qquad q=\sqrt{\lambda^2+i\omega\mu_0\sigma}.$$ This is a mode-specific relation, not a general definition of the GDS response. In the horizontally uniform, vertically incident plane-wave model used for one-dimensional MT, $\lambda=0$ and $H_z=0$. For lateral conductivity variations, the usual vertical magnetic transfer function, or tipper, is $$H_z(\omega)=T_x(\omega)H_x(\omega)+T_y(\omega)H_y(\omega),$$ where $T_x,T_y$ are dimensionless complex coefficients. A nonzero vertical field can also reflect a spatially nonuniform source; interpreting it as a conductivity anomaly requires the source approximation to be checked. See <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10348949/" target="_blank" rel="noopener noreferrer">Xu et al. (2023)</a> for the tipper convention and its plane-wave assumptions.</p>
+<p>Skin depth (derived in <a href="../physics/electromagnetism.html#waves-in-good-conductors">Waves in Good Conductors</a>): $$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}\approx503.3\sqrt{\frac{\rho}{f}}$$ The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.</p>
+<p>Advantages and interpretation conditions:</p>
+<ul>
+<li>No local transmitter or source power supply is required.</li>
+<li>Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.</li>
+<li>Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.</li>
+<li>Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.</li>
+<li>A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.</li>
+</ul>
+<h3 id="the-effect-of-seawater-on-the-magnetic-field">The Effect of Seawater on the Magnetic Field</h3>
+<h4 id="thin-seawater-layer">Thin Seawater Layer</h4>
+<p>As a simple shielding model, approximate seawater by an infinite horizontal sheet at $z=0$, with $z$ positive downward and uniform sheet conductance $$S=\sigma_w h,$$ where $\sigma_w$ is the water conductivity and $h$ its thickness; $S$ is in siemens. Both surrounding regions are insulating with permeability $\mu_0$, and the inducing source is above the sheet. Use $e^{i\omega t}$ and neglect displacement current. The thin-sheet approximation requires $$h\ll\delta_w=\sqrt{\frac{2}{\omega\mu_0\sigma_w}},\qquad \lambda h\ll1.$$</p>
+<p>For a horizontal mode $e^{i\lambda x}$ with $\lambda&gt;0$, write $$\begin{aligned} U_{\mathrm{above}}&amp;=\left(u_e e^{-\lambda z}+u_i e^{\lambda z}\right)e^{i\lambda x},\\ U_{\mathrm{below}}&amp;=u_t e^{-\lambda z}e^{i\lambda x}. \end{aligned}$$ Let $U_e=u_e e^{-\lambda z}e^{i\lambda x}$ be the source potential extrapolated below the sheet in its absence, and $U=U_{\mathrm{below}}$ the total potential there. With $\mathbf{H}=-\nabla U$, normal-field continuity gives $u_t=u_e-u_i$. The tangential-field jump, Faraday&#039;s law, and the sheet Ohm&#039;s law give $$K_y=2i\lambda u_i=S E_y=-\omega\mu_0S u_t.$$ Consequently, $$\boxed{U=f(\omega,\lambda)U_e,\qquad f(\omega,\lambda)=\frac{1}{1+i\omega\tau_\lambda},\qquad \tau_\lambda=\frac{\mu_0S}{2\lambda}}.$$ The response $f$ is dimensionless and $\tau_\lambda$ is a decay time in seconds; the same sheet time constant is derived in <a href="https://ocw.mit.edu/courses/6-641-electromagnetic-fields-forces-and-motion-spring-2005/3ef5dd8c906b36a248d7f5379395e0e2_10.pdf#page=52" target="_blank" rel="noopener noreferrer">Haus and Melcher, Chapter 10, Problem 10.5.1</a>.</p>
+<p>For $\omega\tau_\lambda\ll1$, $f\approx1-i\omega\tau_\lambda$ and shielding is weak. For $\omega\tau_\lambda\gg1$, $|f|\approx1/(\omega\tau_\lambda)$ and the transmitted field lags by nearly $90^\circ$, provided the thin-sheet conditions still hold. Each horizontal wavenumber has its own response; this expression does not apply directly to the $\lambda=0$ MT plane-wave model.</p>
+<p>Real oceans require the underlying Earth&#039;s conductivity, variable water depth, and coastline geometry. The formula above isolates shielding by an ideal sheet; it is not a universal ocean correction. More general ocean-Earth coupling is treated by <a href="https://academic.oup.com/gji/article/189/1/343/574868" target="_blank" rel="noopener noreferrer">Sun and Egbert (2012)</a>.</p>
+<h4 id="oceanic-edge-effect">Oceanic Edge Effect</h4>
+<p>For a resistive landmass adjacent to conductive seawater, a common conductivity contrast is $$\sigma_{\text{land}}\ll\sigma_{\text{ocean}}$$ This contrast allows seawater to carry a greater share of the induced current. Current redistribution near the coast can produce a pronounced vertical magnetic-field response. Its amplitude and phase depend on period, water depth, coastal geometry, and the conductivity beneath the ocean and land.</p>
+<h4 id="csem">CSEM</h4>
+<p><img src="../attachments/CSEM_MTconcepts-optimized.webp" alt="CSEM_MTconcepts" loading="lazy" decoding="async" style="width: min(100%, 630px);"></p>
+<p>Marine controlled-source electromagnetics (CSEM) uses an artificial transmitter. In the illustrated configuration, a horizontal electric dipole is towed close to the seafloor and electric and magnetic fields are recorded by seabed receivers. The surface ship powers and tows the source; it is not the submerged radiating dipole. Marine MT uses seabed recordings of natural fields. CSEM can be sensitive to thin resistive layers, including some hydrocarbon-bearing reservoirs; a resistive anomaly alone does not identify hydrocarbons. See the <a href="https://marineemlab.ucsd.edu/resources/concepts/CSEM_MT.html" target="_blank" rel="noopener noreferrer">Scripps Marine EM Laboratory explanation of the diagram</a>.</p>
+<p>Conductive seawater attenuates electromagnetic fields. Placing a source and receivers near the seabed can improve sensitivity to the subsurface compared with some surface configurations. The response difference between models with and without a resistive layer depends on frequency, water depth, source-receiver geometry, and target properties; it cannot be assumed universally small. In shallow water, fields traveling through the air can also contribute strongly and reduce relative sensitivity to the subsurface, so the air-water interface must be included in the model.</p>
+<h3 id="electrical-conductivity-anomaly">Electrical Conductivity Anomaly</h3>
+<p>Use magnetic flux-density components in a north-east-down coordinate system, all in the same units. For approximately in-phase variations described by real coefficients $A,B$, the empirical relation is $$\Delta B_z=A\Delta B_x+B\Delta B_y.$$ The coefficients are dimensionless. The declination angle $D$ defined earlier is not an eastward field component. In a coordinate system aligned with the background horizontal field, its small transverse perturbation is approximately $H_0\Delta D$, with $\Delta D$ in radians and $H_0$ the background horizontal flux-density magnitude.</p>
+<p>The <span class="obsidian-red">Wiese vector</span> in this real-plane representation is $$\mathbf{V}_W=(A,B,0).$$ The variations lie in the plane $A\Delta B_x+B\Delta B_y-\Delta B_z=0$. Its downward unit normal is $$\hat{n}=\frac{(-A,-B,1)}{\sqrt{1+A^2+B^2}}.$$ The <span class="obsidian-red">Parkinson vector</span> is the projection of this unit normal onto the horizontal plane: $$\mathbf{V}_P=\frac{(-A,-B,0)}{\sqrt{1+A^2+B^2}}=-\frac{\mathbf{V}_W}{\sqrt{1+A^2+B^2}}.$$ These geometrical definitions are described by <a href="https://www.mtnet.info/papers/ClassicPapers/Gregori%2BLanzerotti_1980_RevGeophysSpacePhys.pdf" target="_blank" rel="noopener noreferrer">Gregori and Lanzerotti (1980)</a>.</p>
+<p>In frequency-domain processing, use the complex transfer function from <a href="#magnetotelluric-method-mt-and-gds">Magnetotelluric Method (MT) and GDS</a>: $$B_z(\omega)=T_x(\omega)B_x(\omega)+T_y(\omega)B_y(\omega).$$ Modern induction arrows are usually drawn separately for real and imaginary parts. In the Parkinson sign convention, $$\mathbf{a}_{P,\mathrm{Re}}=(-\operatorname{Re}T_x,-\operatorname{Re}T_y,0),\qquad \mathbf{a}_{P,\mathrm{Im}}=(-\operatorname{Im}T_x,-\operatorname{Im}T_y,0).$$ The Wiese convention reverses both arrow directions. These arrow lengths are unnormalized transfer-function magnitudes, not the unit-normal projection above. Parkinson real-part arrows commonly point toward anomalous current concentrations, whereas Wiese real-part arrows point away; imaginary arrows and complex three-dimensional structures require more detailed interpretation. A general complex transfer function does not define one fixed real plane of instantaneous variations.</p>
+<h3 id="electrical-conductivity-distribution-within-the-earth-s-interior">Electrical Conductivity Distribution within the Earth&#039;s Interior</h3>
 <p>For an effective medium made of thin, isotropic layers, we define: <span class="obsidian-red">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering). <span class="obsidian-red">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding. (For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.) <span class="obsidian-red">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$ <span class="obsidian-red">mean macroscopic resistivity</span> / <span class="obsidian-red">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$</p>
 <p>For layers with resistivities $\rho_i$, thicknesses $h_i$, and total thickness $d=\sum_i h_i$, $$\rho_t=\frac{d}{\sum_i h_i/\rho_i},\qquad \rho_n=\frac{\sum_i h_i\rho_i}{d}.$$ The longitudinal and transverse resistivities are the thickness-weighted harmonic and arithmetic means. The geometric mean $\rho_m$ is a useful effective parameter, rather than a replacement for the full anisotropic resistivity tensor in every geometry.</p>
 <p>The following picture illustrates approximate resistivity ranges (in $\Omega\,\mathrm{m}$) for a continental crust-mantle model. Both layer depths and resistivities vary between regions. <img src="../attachments/Screenshot%202026-05-15%20at%2017.20.29-optimized.webp" alt="Screenshot 2026-05-15 at 17.20.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
@@ -223,12 +263,10 @@
 <li>Surface conduction: Associated with charged mineral-fluid interfaces, especially clay-rich rocks. Solid-state ionic conduction may also contribute, particularly at high temperatures; dry quartz, mica, and calcite are generally resistive.</li>
 </ol>
 <p>Based on the different resistivity of various rocks, we can use electrical exploration to detect the variety of rocks. However, due to the overlapping of the scope of resistivity of various rocks, electrical exploration has its limitations.</p>
-<p>The following relative-permittivity values are approximate reference values. The original course table does not specify its sources or measurement frequencies, so the mineral and rock ranges require verification before quantitative use. Frequency, water content, temperature, and mineral composition affect these values; conducting materials require a complex, frequency-dependent permittivity.</p>
-<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Mineral</th><th>$\epsilon_r$</th><th>Rock</th><th>$\epsilon_r$</th></tr></thead><tbody><tr><td>Quartz</td><td>4.2-5.5</td><td>Igneous rock</td><td>7-15</td></tr><tr><td>Feldspar</td><td>4-10</td><td>Metamorphic rock</td><td>5-13</td></tr><tr><td>Mica</td><td>5-8</td><td>Sedimentary rock</td><td>4-15</td></tr><tr><td>Chlorite</td><td>5-6</td><td>Limestone</td><td>8-12</td></tr><tr><td>Sulfide</td><td>8-17</td><td>Sandstone</td><td>5-11</td></tr><tr><td>Water-free petroleum</td><td>about 2-3</td><td>Sand</td><td>3-25</td></tr><tr><td>Water near room temperature, low frequency</td><td>about 80</td><td>Mudstone</td><td>4-30</td></tr></tbody></table></div>
-<p>Water-free petroleum normally has a relative permittivity near $2$, rather than the original table&#039;s $10$–$30$; water-bearing emulsions can be much higher. <a href="https://nfogm.no/wp-content/uploads/2019/02/1984-14-Continuous-On-Line-Water-Measurement-Wilson-BP.pdf" target="_blank" rel="noopener noreferrer">Wilson (1984), Sect. 1.2.4</a> reports measured dry-oil values around $2.24$–$2.48$ at $20\,{}^\circ\mathrm{C}$ for the crude oils studied.</p>
-<h2 id="methods-for-measuring-resistivity">Methods for Measuring Resistivity</h2>
+<h2 id="electrical-and-electromagnetic-exploration-methods">Electrical and Electromagnetic Exploration Methods</h2>
 <h3 id="direct-current-dc-resistivity-method">Direct Current (DC) Resistivity Method</h3>
-<p>In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces, giving <img src="../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp" alt="Screenshot 2026-05-15 at 17.29.04" loading="lazy" decoding="async" style="width: min(100%, 475px);"></p>
+<p>In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces: <img src="../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp" alt="Screenshot 2026-05-15 at 17.29.04" loading="lazy" decoding="async" style="width: min(100%, 475px);"></p>
+<div class="markdown-callout markdown-callout-note"><div class="callout-title"><span class="callout-icon" aria-hidden="true">N</span><span class="callout-title-text">Note</span><span class="callout-actions"><button type="button" class="callout-copy">Copy</button><button type="button" class="callout-toggle" aria-expanded="true">Collapse</button></span></div><div class="callout-content"><p>The figure shows a finite source-return pair, corresponding to the superposition used below. Its bottom legend is reversed: the red curves with arrows are current-flow lines, and the blue dashed curves are equipotential lines.</p></div></div>
 <p>$$j=\frac{I}{2\pi r^2}$$ $$E=\rho j=\frac{\rho I}{2\pi r^2}$$ $$U(r_M)=-\int_{\infty}^{r_M}E(r)\,\mathrm{d}r=-\int_{\infty}^{r_M}\frac{\rho I}{2\pi r^2}\,\mathrm{d}r=\frac{\rho I}{2\pi r_M}$$ For current injection at $A$ and withdrawal at $B$, superposition gives $$U_M=U_M^A+U_M^B=\frac{\rho I}{2\pi |AM|}+\frac{-\rho I}{2\pi |BM|}=\frac{\rho I}{2\pi}(\frac{1}{|AM|}-\frac{1}{|BM|})$$ $$U_{MN}=U_M-U_N=\frac{\rho I}{2\pi}(\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|})$$ Let <span class="obsidian-red">Geometric Factor</span> $$K=\frac{2\pi}{\frac{1}{|AM|}+\frac{1}{|BN|}-\frac{1}{|BM|}-\frac{1}{|AN|}}$$ For a homogeneous half-space, $\rho=KU_{MN}/I$. For an inhomogeneous or anisotropic Earth, the same operation defines the <span class="obsidian-red">apparent resistivity</span>: $$\boxed{\rho_a=K\frac{U_{MN}}{I}}.$$ Recovering the true subsurface resistivity distribution requires inversion. The voltage sign must follow the electrode ordering used in $K$; a negative signed geometric factor is possible when the potential electrodes are reversed. See <a href="https://data.usgs.gov/datacatalog/data/USGS%3A5cb7785ae4b0c3b0065d7d37" target="_blank" rel="noopener noreferrer">USGS&#039;s description of ERT measurements</a>.</p>
 <h4 id="wenner">Wenner</h4>
 <p><img src="../attachments/Screenshot%202026-05-15%20at%2020.59.33.png" alt="Screenshot 2026-05-15 at 20.59.33" loading="lazy" decoding="async" style="width: min(100%, 580px);"> The electrode order is $A,C,D,B$ with equal adjacent spacings $a$, and $V=U_C-U_D$. $$\rho_a=\frac{2\pi a V}{I}$$ The Wenner array generally gives a strong voltage signal and is useful for detecting vertical changes in resistivity, such as horizontal layering. Its resolution still depends on electrode spacing, survey coverage, and the inversion.</p>
@@ -242,26 +280,6 @@
 <p>For the common spacing convention $BD=na$, $L=(n+1)a$ and $K=\pi a n(n+1)(n+2)$, with the voltage polarity used in the figure. Mineralized zones and faults may be detected through their resistivity contrast with the surrounding rocks.</p>
 <h4 id="multiple-electrode">Multiple Electrode</h4>
 <p>An array of many installed electrodes is connected to a switching unit, which selects successive current and potential pairs. Multiple configurations and spacings provide a set of apparent-resistivity measurements for two- or three-dimensional electrical resistivity tomography. The installed electrodes do not all inject current simultaneously in a standard four-electrode measurement.</p>
-<h3 id="magnetotelluric-method-mt">Magnetotelluric Method (MT)</h3>
-<p>The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.</p>
-<ul>
-<li>natural signal source</li>
-<li><span class="obsidian-red">Magnetotelluric Method (MT)</span>: Low-frequency natural signals mainly originate from ionospheric and magnetospheric currents influenced by the solar wind. Long-period measurements can probe crustal and mantle structures.</li>
-<li><span class="obsidian-red">Audio Magnetotelluric Method (AMT)</span>: The audio-frequency extension of MT, typically using frequencies from a few hertz to tens of kilohertz, mainly supplied by distant lightning. It is often used for shallower structures. MT and AMT bands overlap; $8\,\mathrm{Hz}$ is not a universal boundary between them.</li>
-<li>controlled signal source</li>
-<li><span class="obsidian-red">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span>: Uses an artificial transmitter. Applying a plane-wave MT interpretation requires a suitable far-field configuration; near-field effects must otherwise be modeled. Investigation depth depends on frequency, conductivity, and transmitter-receiver geometry.</li>
-</ul>
-<p>The change between solar-wind-related and lightning-dominated sources is gradual and includes weak-signal bands. See <a href="https://www.usgs.gov/publications/a-practical-low-noise-coil-system-magnetotellurics" target="_blank" rel="noopener noreferrer">Stanley and Tinkler (1983)</a>.</p>
-<p>In the frequency domain, the horizontal fields are related by an impedance tensor: $$\begin{pmatrix}E_x\\E_y\end{pmatrix}=\begin{pmatrix}Z_{xx}&amp;Z_{xy}\\Z_{yx}&amp;Z_{yy}\end{pmatrix}\begin{pmatrix}H_x\\H_y\end{pmatrix}.$$ For a nonmagnetic Earth, each impedance element gives an apparent resistivity $\rho_{a,ij}=|Z_{ij}|^2/(\mu_0\omega)$ and a phase $\phi_{ij}=\arg Z_{ij}$, with a stated Fourier sign convention. Here $\mathbf{H}$ is in $\mathrm{A\,m^{-1}}$. If a transfer tensor $\overleftrightarrow{W}$ is instead estimated from the measured $\mathbf{B}$ through $\mathbf{E}_h=\overleftrightarrow{W}\cdot\mathbf{B}_h$, then $Z_{ij}=\mu_0W_{ij}$ and $\rho_{a,ij}=\mu_0|W_{ij}|^2/\omega$.</p>
-<p>Skin depth (derived in <a href="../physics/electromagnetism.html#waves-in-good-conductors">Waves in Good Conductors</a>): $$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$ The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.</p>
-<p>Advantages and interpretation conditions:</p>
-<ul>
-<li>Omitting the power supply equipment</li>
-<li>Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.</li>
-<li>Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.</li>
-<li>Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.</li>
-<li>A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.</li>
-</ul>
 <h3 id="transient-electromagnetic-method-tem">Transient Electromagnetic Method (TEM)</h3>
 <p><img src="../attachments/Screenshot%202026-05-15%20at%2020.14.32-optimized.webp" alt="Screenshot 2026-05-15 at 20.14.32" loading="lazy" decoding="async" style="width: min(100%, 541px);"></p>
 <p>The <span class="obsidian-red">Transient Electromagnetic Method (TEM)</span> uses a controlled time-varying transmitter current, commonly with a rapid turn-off. The changing primary magnetic field induces subsurface eddy currents. After turn-off, their decay produces a secondary field, measured as a magnetic field or an induced receiver voltage proportional to its time derivative.</p>
@@ -270,14 +288,14 @@
 <li>A slowly decaying response may indicate a conductive body, such as connected sulfides, clay-rich material, or saline groundwater.</li>
 <li>A rapidly decaying or weak response may indicate relatively resistive material. Decay also depends on body size, depth, geometry, and coupling; conductivity alone does not identify an ore body or groundwater.</li>
 </ul>
-<p>key advantages:</p>
+<p>Advantages:</p>
 <ul>
-<li>High Resolution: Excellent at detecting highly conductive bodies (e.g., massive sulfides).</li>
+<li>Sensitivity to Conductive Targets: TEM is particularly sensitive to conductive bodies such as connected massive sulfides. Spatial resolution depends on target depth, geometry, survey design, and noise.</li>
 <li>No Galvanic Contact: Loop-source TEM does not require grounded electrodes, which is useful where electrode contact is poor, such as dry sand or permafrost.</li>
 <li>Depth Sensitivity: Later time windows generally emphasize deeper or more slowly decaying current systems. Investigation depth also depends on conductivity, transmitter moment, geometry, and noise.</li>
 </ul>
 <h3 id="self-potential">Self Potential</h3>
-<p>Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets.</p>
+<p>Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets. SP does not independently measure resistivity; conductivity affects the observed voltages, but interpreting them also requires a model of the natural source currents.</p>
 <ul>
 <li>Electrochemical potentials: Associated with redox reactions, including current systems around some mineralized bodies.</li>
 <li>Streaming potentials: Associated with fluid motion through charged pore surfaces during groundwater flow.</li>
@@ -286,7 +304,7 @@
 <p><img src="../attachments/Screenshot%202026-05-15%20at%2020.23.30-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.30" loading="lazy" decoding="async" style="width: min(100%, 450px);"> The gradient method measures voltage differences between successive nearby stations; the fixed-base method measures each station relative to a common reference.</p>
 <p>SP measurements can help map groundwater-flow changes associated with pumping. Estimating a pumping influence radius requires hydrogeological constraints and an electrokinetic model; a voltage anomaly alone does not determine it uniquely. See <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2004jb003049" target="_blank" rel="noopener noreferrer">Rizzo et al. (2004)</a> for pumping experiments and their interpretation. <img src="../attachments/Screenshot%202026-05-15%20at%2020.23.47-optimized.webp" alt="Screenshot 2026-05-15 at 20.23.47" loading="lazy" decoding="async" style="width: min(100%, 456px);"></p>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"geomagnetic-field","level":1,"text":"Geomagnetic Field"},{"id":"formation-of-the-geomagnetic-field","level":2,"text":"Formation of the Geomagnetic Field"},{"id":"properties","level":2,"text":"Properties"},{"id":"gauss-s-spherical-harmonic-analysis","level":2,"text":"Gauss's Spherical Harmonic Analysis"},{"id":"scalar-potential-and-gauss-coefficients","level":3,"text":"Scalar Potential and Gauss Coefficients"},{"id":"dipole-field-n-1","level":3,"text":"Dipole Field ($n=1$)"},{"id":"eccentric-dipole-model","level":3,"text":"Eccentric Dipole Model"},{"id":"timevarying-magnetic-field","level":2,"text":"Time-Varying Magnetic Field"},{"id":"introduction-to-timevariation","level":3,"text":"Introduction to Time-Variation"},{"id":"principle-of-periodic-superposition","level":3,"text":"Principle of Periodic Superposition"},{"id":"analysis-of-sq","level":3,"text":"Analysis of $Sq$"},{"id":"ionosphere-and-atmospheric-dynamo-theory","level":3,"text":"Ionosphere and Atmospheric Dynamo Theory"},{"id":"magnetic-storm","level":3,"text":"Magnetic Storm"},{"id":"resistivity-and-permittivity","level":1,"text":"Resistivity and Permittivity"},{"id":"methods-for-measuring-resistivity","level":1,"text":"Methods for Measuring Resistivity"},{"id":"direct-current-dc-resistivity-method","level":2,"text":"Direct Current (DC) Resistivity Method"},{"id":"wenner","level":3,"text":"Wenner"},{"id":"schlumberger","level":3,"text":"Schlumberger"},{"id":"dipoledipole","level":3,"text":"Dipole-Dipole"},{"id":"multiple-electrode","level":3,"text":"Multiple Electrode"},{"id":"magnetotelluric-method-mt","level":2,"text":"Magnetotelluric Method (MT)"},{"id":"transient-electromagnetic-method-tem","level":2,"text":"Transient Electromagnetic Method (TEM)"},{"id":"self-potential","level":2,"text":"Self Potential"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"geomagnetic-field","level":1,"text":"Geomagnetic Field"},{"id":"formation-of-the-geomagnetic-field","level":2,"text":"Formation of the Geomagnetic Field"},{"id":"properties","level":2,"text":"Properties"},{"id":"gauss-s-spherical-harmonic-analysis","level":2,"text":"Gauss's Spherical Harmonic Analysis"},{"id":"scalar-potential-and-gauss-coefficients","level":3,"text":"Scalar Potential and Gauss Coefficients"},{"id":"dipole-field-n-1","level":3,"text":"Dipole Field ($n=1$)"},{"id":"eccentric-dipole-model","level":3,"text":"Eccentric Dipole Model"},{"id":"timevarying-magnetic-field","level":2,"text":"Time-Varying Magnetic Field"},{"id":"introduction-to-timevariation","level":3,"text":"Introduction to Time-Variation"},{"id":"principle-of-periodic-superposition","level":3,"text":"Principle of Periodic Superposition"},{"id":"analysis-of-sq","level":3,"text":"Analysis of $Sq$"},{"id":"ionosphere-and-atmospheric-dynamo-theory","level":3,"text":"Ionosphere and Atmospheric Dynamo Theory"},{"id":"magnetic-storm","level":3,"text":"Magnetic Storm"},{"id":"conductivity-model","level":1,"text":"Conductivity Model"},{"id":"electromagnetic-induction-in-a-spherical-model","level":2,"text":"Electromagnetic Induction in a Spherical Model"},{"id":"electromagnetic-induction-in-a-plane-model","level":2,"text":"Electromagnetic Induction in a Plane Model"},{"id":"magnetotelluric-method-mt-and-gds","level":2,"text":"Magnetotelluric Method (MT) and GDS"},{"id":"the-effect-of-seawater-on-the-magnetic-field","level":2,"text":"The Effect of Seawater on the Magnetic Field"},{"id":"thin-seawater-layer","level":3,"text":"Thin Seawater Layer"},{"id":"oceanic-edge-effect","level":3,"text":"Oceanic Edge Effect"},{"id":"csem","level":3,"text":"CSEM"},{"id":"electrical-conductivity-anomaly","level":2,"text":"Electrical Conductivity Anomaly"},{"id":"electrical-conductivity-distribution-within-the-earth-s-interior","level":2,"text":"Electrical Conductivity Distribution within the Earth's Interior"},{"id":"electrical-and-electromagnetic-exploration-methods","level":1,"text":"Electrical and Electromagnetic Exploration Methods"},{"id":"direct-current-dc-resistivity-method","level":2,"text":"Direct Current (DC) Resistivity Method"},{"id":"wenner","level":3,"text":"Wenner"},{"id":"schlumberger","level":3,"text":"Schlumberger"},{"id":"dipoledipole","level":3,"text":"Dipole-Dipole"},{"id":"multiple-electrode","level":3,"text":"Multiple Electrode"},{"id":"transient-electromagnetic-method-tem","level":2,"text":"Transient Electromagnetic Method (TEM)"},{"id":"self-potential","level":2,"text":"Self Potential"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -329,7 +347,7 @@ Electromagnetic coupling with the outer core and gravitational coupling with the
 - Horizontal Y component (eastward) $Y$
 
 $$H=\sqrt{X^2+Y^2},\qquad F=\sqrt{H^2+Z^2},\qquad D=\operatorname{atan2}(Y,X),\qquad I=\operatorname{atan2}(Z,H)$$
-Here $Z$ is positive downward, and $D$ is positive east of geographic north. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.
+Here $Z$ is positive downward, and $D$ is positive east of geographic north. When $H=0$, the declination $D$ is undefined. Field strengths $F,H,X,Y,Z$ are usually reported in $\mathrm{nT}$, while $D,I$ are angles. The scalar horizontal intensity $H$ must be distinguished from the magnetic field intensity vector $\mathbf{H}$ in $\mathrm{A\,m^{-1}}$.
 
 ![Screenshot 2026-05-18 at 19.04.27](../attachments/Screenshot%202026-05-18%20at%2019.04.27-optimized.webp){width=450}
 
@@ -729,9 +747,168 @@ A <span style="color: red;">magnetic storm</span> is a large-scale geomagnetic d
 - $D_{CF}$: The Chapman-Ferraro field from magnetopause currents. Increased solar-wind dynamic pressure compresses the magnetosphere and usually gives a positive low-latitude horizontal-field perturbation, often seen at storm commencement.
 - $D_R$: The disturbance from the enhanced westward ring current, usually giving a negative low-latitude horizontal-field perturbation during the storm main phase.
 
-The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields. See [WDC Kyoto's derivation and interpretation of $D_{st}$](https://wdc.kugi.kyoto-u.ac.jp/dstdir/dst2/onDstindex.html).
+The traditional schematic decomposition is $\Delta H_{\mathrm{storm}}\approx D_{CF}+D_R$. Tail currents, other current systems, and currents induced in the Earth also contribute. $D_{st}$ is an hourly index derived from low-latitude horizontal disturbances after removing the main-field baseline and $S_q$ and normalizing to the dipole equator. Thus $D_{st}$ is not defined as an exact sum of only two source fields.
 
-# Resistivity and Permittivity
+# Conductivity Model
+
+## Electromagnetic Induction in a Spherical Model
+
+Consider a spherically symmetric Earth with conductivity $\sigma(r)$ and spatially constant absolute permeability $\mu$. The surrounding air has permeability $\mu_0$; define $\mu_r=\mu/\mu_0$. Use complex amplitudes with time dependence $e^{i\omega t}$ and neglect displacement current in the conducting Earth ($\sigma\gg\omega\varepsilon$). The sign of the imaginary terms is consequently opposite to the $e^{-i\omega t}$ convention in [Waves in Good Conductors](../physics/electromagnetism.html#waves-in-good-conductors).
+
+In the current-free region between the Earth and the external source currents,
+$$\mathbf{H}=-\nabla U,\qquad \mathbf{B}=\mu_0\mathbf{H},\qquad \nabla^2U=0.$$
+For one degree-$n$ spherical harmonic $Y_n^m(\theta,\lambda)$, the radial solutions in [Spherical Harmonics](../math/equations-of-mathematical-physics.html#spherical-harmonics) give
+$$U_n=R\left[e_n\left(\frac{r}{R}\right)^n+i_n\left(\frac{r}{R}\right)^{-n-1}\right]Y_n^m.$$
+The order $m$ is suppressed in $e_n,i_n$. These coefficients are external and induced magnetic-field-intensity amplitudes in $\mathrm{A\,m^{-1}}$, unlike the flux-density Gauss coefficients used earlier. The symbol $i$ without a subscript is the imaginary unit. Thus
+$$\begin{aligned}
+H_r&=-\left[ne_n\left(\frac{r}{R}\right)^{n-1}-(n+1)i_n\left(\frac{r}{R}\right)^{-n-2}\right]Y_n^m,\\
+H_\theta&=-\left[e_n\left(\frac{r}{R}\right)^{n-1}+i_n\left(\frac{r}{R}\right)^{-n-2}\right]\frac{\partial Y_n^m}{\partial\theta},\\
+H_\lambda&=-\left[e_n\left(\frac{r}{R}\right)^{n-1}+i_n\left(\frac{r}{R}\right)^{-n-2}\right]\frac{1}{\sin\theta}\frac{\partial Y_n^m}{\partial\lambda}.
+\end{aligned}$$
+
+Inside the Earth, choose a divergence-free toroidal vector potential,
+$$\mathbf{A}=F_n(r)(\mathbf{r}\times\nabla Y_n^m),\qquad \mathbf{B}=\nabla\times\mathbf{A},\qquad \mathbf{E}=-i\omega\mathbf{A}.$$
+For this mode, Maxwell's equations give
+$$\nabla^2\mathbf{A}-i\omega\mu\sigma(r)\mathbf{A}=0,$$
+or equivalently
+$$\frac{\mathrm{d}^2F_n}{\mathrm{d}r^2}+\frac{2}{r}\frac{\mathrm{d}F_n}{\mathrm{d}r}-\left[\frac{n(n+1)}{r^2}+i\omega\mu\sigma(r)\right]F_n=0.$$
+For a homogeneous conducting solid sphere, define
+$$\kappa^2=i\omega\mu\sigma,\qquad \operatorname{Re}\kappa>0.$$
+The solution regular at the center is
+$$F_n(r)=C_n r^{-1/2}I_{n+1/2}(\kappa r),$$
+where $I_\nu$ is a modified Bessel function, as introduced in [Cylindrical Coordinates → Bessel Functions](../math/equations-of-mathematical-physics.html#cylindrical-coordinates-bessel-functions). In a homogeneous spherical shell, both $r^{-1/2}I_{n+1/2}(\kappa r)$ and $r^{-1/2}K_{n+1/2}(\kappa r)$ are generally needed. For a layered sphere, match the fields at every interface; for a general $\sigma(r)$, solve the radial equation rather than substituting a constant-$\sigma$ Bessel solution.
+
+At $r=R$, in the absence of an imposed surface current, the normal component of $\mathbf{B}$ and the tangential components of $\mathbf{H}$ are continuous. Since the interior field has $B_r=-n(n+1)F_nY_n^m/r$, these conditions give
+$$\begin{aligned}
+ne_n-(n+1)i_n&=\frac{n(n+1)}{\mu_0R}F_n(R),\\
+e_n+i_n&=\frac{1}{\mu R}\left.\frac{\mathrm{d}(rF_n)}{\mathrm{d}r}\right|_{r=R}.
+\end{aligned}$$
+Define the dimensionless logarithmic derivative
+$$L_n=\frac{\left.\mathrm{d}(rF_n)/\mathrm{d}r\right|_{r=R}}{F_n(R)}=1+\frac{R}{F_n(R)}\left.\frac{\mathrm{d}F_n}{\mathrm{d}r}\right|_{r=R}.$$
+Eliminating the interior amplitude gives
+$$\boxed{Q_n(\omega)=\frac{i_n}{e_n}=\frac{n}{n+1}\frac{L_n-(n+1)\mu_r}{L_n+n\mu_r}}.$$
+For the usual nonmagnetic approximation $\mu=\mu_0$, this reduces to
+$$Q_n(\omega)=\frac{n}{n+1}\frac{L_n-(n+1)}{L_n+n}.$$
+The response depends on conductivity, frequency, permeability, and geometry. In the nonmagnetic case, the low-frequency limit is $Q_n\to0$; a perfectly shielding sphere has $Q_n\to n/(n+1)$.
+
+## Electromagnetic Induction in a Plane Model
+
+Use $z$ positive downward, with a horizontal interface at $z=d$. The air above it is insulating with permeability $\mu_0$; the conducting half-space below it has constant $\sigma,\mu$. Retain the $e^{i\omega t}$ convention and $\mu_r=\mu/\mu_0$ from [Electromagnetic Induction in a Spherical Model](#electromagnetic-induction-in-a-spherical-model).
+
+For a horizontal Fourier mode labeled by $m,n$, let
+$$V_{mn}=e^{i(k_xx+k_yy)},\qquad \lambda=\sqrt{k_x^2+k_y^2}>0,$$
+where $k_x,k_y,\lambda$ are spatial wavenumbers in $\mathrm{m^{-1}}$. Here $\lambda$ is a wavenumber, rather than the longitude used in the spherical model. The real sine and cosine modes follow by taking linear combinations.
+
+In the source-free air region, the external and induced potentials are
+$$U_{mn}=\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)V_{mn},\qquad \mathbf{H}=-\nabla U_{mn}.$$
+Unlike the spherical coefficients above, $e_{mn},i_{mn}$ here are scalar-potential amplitudes in amperes. Differentiation gives
+$$\begin{aligned}
+H_x&=-\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)\frac{\partial V_{mn}}{\partial x},\\
+H_y&=-\left(e_{mn}e^{-\lambda z}+i_{mn}e^{\lambda z}\right)\frac{\partial V_{mn}}{\partial y},\\
+H_z&=\lambda\left(e_{mn}e^{-\lambda z}-i_{mn}e^{\lambda z}\right)V_{mn}.
+\end{aligned}$$
+
+Define the vertical decay constant
+$$q=\sqrt{\lambda^2+i\omega\mu\sigma},\qquad \operatorname{Re}q>0.$$
+The interior vector potential and magnetic flux density can be written as
+$$\mathbf{A}=C_{mn}e^{-qz}(\nabla V_{mn}\times\hat{e}_z),\qquad \mathbf{B}=\nabla\times\mathbf{A}.$$
+At $z=d$, continuity of tangential $\mathbf{H}$ and normal $\mathbf{B}$ gives, respectively,
+$$\begin{aligned}
+\mu\left(e_{mn}e^{-\lambda d}+i_{mn}e^{\lambda d}\right)&=C_{mn}q e^{-qd},\\
+e_{mn}e^{-\lambda d}-i_{mn}e^{\lambda d}&=\frac{C_{mn}\lambda}{\mu_0}e^{-qd}.
+\end{aligned}$$
+Solving for the response coefficients,
+$$\boxed{\frac{i_{mn}}{e_{mn}}=e^{-2\lambda d}\frac{q-\mu_r\lambda}{q+\mu_r\lambda}},\qquad
+\frac{C_{mn}}{e_{mn}}=\frac{2\mu e^{(q-\lambda)d}}{q+\mu_r\lambda}.$$
+Both $q$ and $\mu_r\lambda$ have units of $\mathrm{m^{-1}}$. Setting $d=0$ places the coordinate origin at the interface. For $\mu=\mu_0$ and $\omega\to0$, the induced-potential ratio tends to zero.
+
+## Magnetotelluric Method (MT) and GDS
+
+The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.
+
+For a vertically incident plane wave in a homogeneous conducting half-space, use $z$ positive downward and time dependence $e^{i\omega t}$. The scalar impedance for the polarization $(E_x,H_y)$ is
+$$Z_{\mathrm{MT}}=\frac{E_x}{H_y}=\sqrt{\frac{i\omega\mu}{\sigma}},$$
+with the square-root branch giving a field that decays with depth. $E_x$ is in $\mathrm{V\,m^{-1}}$ and $H_y$ in $\mathrm{A\,m^{-1}}$, so $Z_{\mathrm{MT}}$ has units of ohms. Define
+$$\rho_a=\frac{|Z_{\mathrm{MT}}|^2}{\mu_0\omega}.$$
+In a nonmagnetic homogeneous half-space ($\mu=\mu_0$), $\rho_a=1/\sigma$ and the impedance phase is $45^\circ$. For a general two- or three-dimensional Earth, the horizontal electric and magnetic fields are related by an impedance tensor rather than one scalar ratio.
+
+Geomagnetic depth sounding (GDS) uses magnetic-field variations to investigate electrical structure. For the particular finite-wavelength mode $V=e^{i\lambda x}$ in [Electromagnetic Induction in a Plane Model](#electromagnetic-induction-in-a-plane-model), with $\mu=\mu_0$, the ground response is
+$$R_{\mathrm{GDS}}=\frac{H_z}{H_x}=\frac{i\lambda}{q},\qquad q=\sqrt{\lambda^2+i\omega\mu_0\sigma}.$$
+This is a mode-specific relation, not a general definition of the GDS response. In the horizontally uniform, vertically incident plane-wave model used for one-dimensional MT, $\lambda=0$ and $H_z=0$. For lateral conductivity variations, the usual vertical magnetic transfer function, or tipper, is
+$$H_z(\omega)=T_x(\omega)H_x(\omega)+T_y(\omega)H_y(\omega),$$
+where $T_x,T_y$ are dimensionless complex coefficients. A nonzero vertical field can also reflect a spatially nonuniform source; interpreting it as a conductivity anomaly requires the source approximation to be checked. See [Xu et al. (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10348949/) for the tipper convention and its plane-wave assumptions.
+
+Skin depth (derived in [Waves in Good Conductors](../physics/electromagnetism.html#waves-in-good-conductors)):
+$$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}\approx503.3\sqrt{\frac{\rho}{f}}$$
+The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.
+
+Advantages and interpretation conditions:
+- No local transmitter or source power supply is required.
+- Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.
+- Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.
+- Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.
+- A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.
+
+## The Effect of Seawater on the Magnetic Field
+
+### Thin Seawater Layer
+
+As a simple shielding model, approximate seawater by an infinite horizontal sheet at $z=0$, with $z$ positive downward and uniform sheet conductance
+$$S=\sigma_w h,$$
+where $\sigma_w$ is the water conductivity and $h$ its thickness; $S$ is in siemens. Both surrounding regions are insulating with permeability $\mu_0$, and the inducing source is above the sheet. Use $e^{i\omega t}$ and neglect displacement current. The thin-sheet approximation requires
+$$h\ll\delta_w=\sqrt{\frac{2}{\omega\mu_0\sigma_w}},\qquad \lambda h\ll1.$$
+
+For a horizontal mode $e^{i\lambda x}$ with $\lambda>0$, write
+$$\begin{aligned}
+U_{\mathrm{above}}&=\left(u_e e^{-\lambda z}+u_i e^{\lambda z}\right)e^{i\lambda x},\\
+U_{\mathrm{below}}&=u_t e^{-\lambda z}e^{i\lambda x}.
+\end{aligned}$$
+Let $U_e=u_e e^{-\lambda z}e^{i\lambda x}$ be the source potential extrapolated below the sheet in its absence, and $U=U_{\mathrm{below}}$ the total potential there. With $\mathbf{H}=-\nabla U$, normal-field continuity gives $u_t=u_e-u_i$. The tangential-field jump, Faraday's law, and the sheet Ohm's law give
+$$K_y=2i\lambda u_i=S E_y=-\omega\mu_0S u_t.$$
+Consequently,
+$$\boxed{U=f(\omega,\lambda)U_e,\qquad f(\omega,\lambda)=\frac{1}{1+i\omega\tau_\lambda},\qquad \tau_\lambda=\frac{\mu_0S}{2\lambda}}.$$
+The response $f$ is dimensionless and $\tau_\lambda$ is a decay time in seconds; the same sheet time constant is derived in [Haus and Melcher, Chapter 10, Problem 10.5.1](https://ocw.mit.edu/courses/6-641-electromagnetic-fields-forces-and-motion-spring-2005/3ef5dd8c906b36a248d7f5379395e0e2_10.pdf#page=52).
+
+For $\omega\tau_\lambda\ll1$, $f\approx1-i\omega\tau_\lambda$ and shielding is weak. For $\omega\tau_\lambda\gg1$, $|f|\approx1/(\omega\tau_\lambda)$ and the transmitted field lags by nearly $90^\circ$, provided the thin-sheet conditions still hold. Each horizontal wavenumber has its own response; this expression does not apply directly to the $\lambda=0$ MT plane-wave model.
+
+Real oceans require the underlying Earth's conductivity, variable water depth, and coastline geometry. The formula above isolates shielding by an ideal sheet; it is not a universal ocean correction. More general ocean-Earth coupling is treated by [Sun and Egbert (2012)](https://academic.oup.com/gji/article/189/1/343/574868).
+
+### Oceanic Edge Effect
+
+For a resistive landmass adjacent to conductive seawater, a common conductivity contrast is
+$$\sigma_{\text{land}}\ll\sigma_{\text{ocean}}$$
+This contrast allows seawater to carry a greater share of the induced current. Current redistribution near the coast can produce a pronounced vertical magnetic-field response. Its amplitude and phase depend on period, water depth, coastal geometry, and the conductivity beneath the ocean and land.
+
+### CSEM
+
+![CSEM_MTconcepts](../attachments/CSEM_MTconcepts-optimized.webp){width=630}
+
+Marine controlled-source electromagnetics (CSEM) uses an artificial transmitter. In the illustrated configuration, a horizontal electric dipole is towed close to the seafloor and electric and magnetic fields are recorded by seabed receivers. The surface ship powers and tows the source; it is not the submerged radiating dipole. Marine MT uses seabed recordings of natural fields. CSEM can be sensitive to thin resistive layers, including some hydrocarbon-bearing reservoirs; a resistive anomaly alone does not identify hydrocarbons. See the [Scripps Marine EM Laboratory explanation of the diagram](https://marineemlab.ucsd.edu/resources/concepts/CSEM_MT.html).
+
+Conductive seawater attenuates electromagnetic fields. Placing a source and receivers near the seabed can improve sensitivity to the subsurface compared with some surface configurations. The response difference between models with and without a resistive layer depends on frequency, water depth, source-receiver geometry, and target properties; it cannot be assumed universally small. In shallow water, fields traveling through the air can also contribute strongly and reduce relative sensitivity to the subsurface, so the air-water interface must be included in the model.
+
+## Electrical Conductivity Anomaly
+
+Use magnetic flux-density components in a north-east-down coordinate system, all in the same units. For approximately in-phase variations described by real coefficients $A,B$, the empirical relation is
+$$\Delta B_z=A\Delta B_x+B\Delta B_y.$$
+The coefficients are dimensionless. The declination angle $D$ defined earlier is not an eastward field component. In a coordinate system aligned with the background horizontal field, its small transverse perturbation is approximately $H_0\Delta D$, with $\Delta D$ in radians and $H_0$ the background horizontal flux-density magnitude.
+
+The <span style="color: red;">Wiese vector</span> in this real-plane representation is
+$$\mathbf{V}_W=(A,B,0).$$
+The variations lie in the plane $A\Delta B_x+B\Delta B_y-\Delta B_z=0$. Its downward unit normal is
+$$\hat{n}=\frac{(-A,-B,1)}{\sqrt{1+A^2+B^2}}.$$
+The <span style="color: red;">Parkinson vector</span> is the projection of this unit normal onto the horizontal plane:
+$$\mathbf{V}_P=\frac{(-A,-B,0)}{\sqrt{1+A^2+B^2}}=-\frac{\mathbf{V}_W}{\sqrt{1+A^2+B^2}}.$$
+These geometrical definitions are described by [Gregori and Lanzerotti (1980)](https://www.mtnet.info/papers/ClassicPapers/Gregori%2BLanzerotti_1980_RevGeophysSpacePhys.pdf).
+
+In frequency-domain processing, use the complex transfer function from [Magnetotelluric Method (MT) and GDS](#magnetotelluric-method-mt-and-gds):
+$$B_z(\omega)=T_x(\omega)B_x(\omega)+T_y(\omega)B_y(\omega).$$
+Modern induction arrows are usually drawn separately for real and imaginary parts. In the Parkinson sign convention,
+$$\mathbf{a}_{P,\mathrm{Re}}=(-\operatorname{Re}T_x,-\operatorname{Re}T_y,0),\qquad
+\mathbf{a}_{P,\mathrm{Im}}=(-\operatorname{Im}T_x,-\operatorname{Im}T_y,0).$$
+The Wiese convention reverses both arrow directions. These arrow lengths are unnormalized transfer-function magnitudes, not the unit-normal projection above. Parkinson real-part arrows commonly point toward anomalous current concentrations, whereas Wiese real-part arrows point away; imaginary arrows and complex three-dimensional structures require more detailed interpretation. A general complex transfer function does not define one fixed real plane of instantaneous variations.
+
+## Electrical Conductivity Distribution within the Earth's Interior
 
 For an effective medium made of thin, isotropic layers, we define:
 <span style="color: red;">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering).
@@ -756,26 +933,16 @@ Conduction mechanisms in crustal materials:
 
 Based on the different resistivity of various rocks, we can use electrical exploration to detect the variety of rocks. However, due to the overlapping of the scope of resistivity of various rocks, electrical exploration has its limitations.
 
-The following relative-permittivity values are approximate reference values. The original course table does not specify its sources or measurement frequencies, so the mineral and rock ranges require verification before quantitative use. Frequency, water content, temperature, and mineral composition affect these values; conducting materials require a complex, frequency-dependent permittivity.
 
-| Mineral   | $\epsilon_r$ | Rock             | $\epsilon_r$ |
-| --------- | ------------ | ---------------- | ------------ |
-| Quartz    | 4.2-5.5      | Igneous rock     | 7-15         |
-| Feldspar  | 4-10         | Metamorphic rock | 5-13         |
-| Mica      | 5-8          | Sedimentary rock | 4-15         |
-| Chlorite  | 5-6          | Limestone        | 8-12         |
-| Sulfide   | 8-17         | Sandstone        | 5-11         |
-| Water-free petroleum | about 2-3 | Sand             | 3-25         |
-| Water near room temperature, low frequency | about 80 | Mudstone         | 4-30         |
-
-Water-free petroleum normally has a relative permittivity near $2$, rather than the original table's $10$–$30$; water-bearing emulsions can be much higher. [Wilson (1984), Sect. 1.2.4](https://nfogm.no/wp-content/uploads/2019/02/1984-14-Continuous-On-Line-Water-Measurement-Wilson-BP.pdf) reports measured dry-oil values around $2.24$–$2.48$ at $20\,{}^\circ\mathrm{C}$ for the crude oils studied.
-
-# Methods for Measuring Resistivity
+# Electrical and Electromagnetic Exploration Methods
 
 ## Direct Current (DC) Resistivity Method
 
-In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces, giving
+In the ideal model, a point electrode injects current $I$ into a homogeneous, isotropic half-space of resistivity $\rho$, with an insulating air boundary and a remote return electrode. Current spreads over hemispherical surfaces:
 ![Screenshot 2026-05-15 at 17.29.04](../attachments/Screenshot%202026-05-15%20at%2017.29.04-optimized.webp){width=475}
+
+>[!NOTE]
+>The figure shows a finite source-return pair, corresponding to the superposition used below. Its bottom legend is reversed: the red curves with arrows are current-flow lines, and the blue dashed curves are equipotential lines.
 
 $$j=\frac{I}{2\pi r^2}$$
 $$E=\rho j=\frac{\rho I}{2\pi r^2}$$
@@ -818,33 +985,6 @@ For the common spacing convention $BD=na$, $L=(n+1)a$ and $K=\pi a n(n+1)(n+2)$,
 
 An array of many installed electrodes is connected to a switching unit, which selects successive current and potential pairs. Multiple configurations and spacings provide a set of apparent-resistivity measurements for two- or three-dimensional electrical resistivity tomography. The installed electrodes do not all inject current simultaneously in a standard four-electrode measurement.
 
-## Magnetotelluric Method (MT)
-
-The MT method records natural variations of horizontal electric and magnetic fields at the ground to infer the electrical structure of the Earth. The source field induces telluric currents; no local transmitter is required.
-
-- natural signal source
-	- <span style="color: red;">Magnetotelluric Method (MT)</span>: Low-frequency natural signals mainly originate from ionospheric and magnetospheric currents influenced by the solar wind. Long-period measurements can probe crustal and mantle structures.
-	- <span style="color: red;">Audio Magnetotelluric Method (AMT)</span>: The audio-frequency extension of MT, typically using frequencies from a few hertz to tens of kilohertz, mainly supplied by distant lightning. It is often used for shallower structures. MT and AMT bands overlap; $8\,\mathrm{Hz}$ is not a universal boundary between them.
-- controlled signal source
-	- <span style="color: red;">Controlled-Source Audio-frequency Magnetotellurics (CSAMT)</span>: Uses an artificial transmitter. Applying a plane-wave MT interpretation requires a suitable far-field configuration; near-field effects must otherwise be modeled. Investigation depth depends on frequency, conductivity, and transmitter-receiver geometry.
-
-The change between solar-wind-related and lightning-dominated sources is gradual and includes weak-signal bands. See [Stanley and Tinkler (1983)](https://www.usgs.gov/publications/a-practical-low-noise-coil-system-magnetotellurics).
-
-In the frequency domain, the horizontal fields are related by an impedance tensor:
-$$\begin{pmatrix}E_x\\E_y\end{pmatrix}=\begin{pmatrix}Z_{xx}&Z_{xy}\\Z_{yx}&Z_{yy}\end{pmatrix}\begin{pmatrix}H_x\\H_y\end{pmatrix}.$$
-For a nonmagnetic Earth, each impedance element gives an apparent resistivity $\rho_{a,ij}=|Z_{ij}|^2/(\mu_0\omega)$ and a phase $\phi_{ij}=\arg Z_{ij}$, with a stated Fourier sign convention. Here $\mathbf{H}$ is in $\mathrm{A\,m^{-1}}$. If a transfer tensor $\overleftrightarrow{W}$ is instead estimated from the measured $\mathbf{B}$ through $\mathbf{E}_h=\overleftrightarrow{W}\cdot\mathbf{B}_h$, then $Z_{ij}=\mu_0W_{ij}$ and $\rho_{a,ij}=\mu_0|W_{ij}|^2/\omega$.
-
-Skin depth (derived in [Waves in Good Conductors](../physics/electromagnetism.html#waves-in-good-conductors)):
-$$\delta=\sqrt{\frac{2}{\omega \mu \sigma}}=\sqrt{\frac{\rho}{\pi \mu f}}=503.3\sqrt{\frac{\rho}{f}}$$
-The numerical factor $503.3$ assumes $\mu=\mu_0$, $\rho$ in $\Omega\,\mathrm{m}$, $f$ in $\mathrm{Hz}$, and $\delta$ in metres. This skin depth is the amplitude e-folding length in a uniform good conductor; it is not an exact investigation depth in a layered Earth. Higher frequencies generally sample shallower structure.
-
-Advantages and interpretation conditions:
-- Omitting the power supply equipment
-- Broadband MT and AMT together can span roughly $10^{-4}$–$10^4\,\mathrm{Hz}$, corresponding to periods of $10^4$–$10^{-4}\,\mathrm{s}$. The useful survey band depends on the instruments, source strength, and target depth.
-- Magnetic activity can strengthen some long-period signals, but storms are not required; rapidly varying or spatially nonuniform sources can also complicate processing.
-- Resistive cover allows relatively deep electromagnetic penetration, while conductive layers often produce strong responses. Deep conductors can nevertheless be masked by conductive overburden.
-- A distant source is approximated as a plane wave over the survey area. This is an interpretation assumption, not a property guaranteed for every source or every survey.
-
 ## Transient Electromagnetic Method (TEM)
 
 ![Screenshot 2026-05-15 at 20.14.32](../attachments/Screenshot%202026-05-15%20at%2020.14.32-optimized.webp){width=541}
@@ -857,14 +997,14 @@ This transmitter-receiver sketch illustrates controlled-source electromagnetic i
 - A slowly decaying response may indicate a conductive body, such as connected sulfides, clay-rich material, or saline groundwater.
 - A rapidly decaying or weak response may indicate relatively resistive material. Decay also depends on body size, depth, geometry, and coupling; conductivity alone does not identify an ore body or groundwater.
 
-key advantages:
-- High Resolution: Excellent at detecting highly conductive bodies (e.g., massive sulfides).
+Advantages:
+- Sensitivity to Conductive Targets: TEM is particularly sensitive to conductive bodies such as connected massive sulfides. Spatial resolution depends on target depth, geometry, survey design, and noise.
 - No Galvanic Contact: Loop-source TEM does not require grounded electrodes, which is useful where electrode contact is poor, such as dry sand or permafrost.
 - Depth Sensitivity: Later time windows generally emphasize deeper or more slowly decaying current systems. Investigation depth also depends on conductivity, transmitter moment, geometry, and noise.
 
 ## Self Potential
 
-Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets.
+Self-potential (SP) surveys measure naturally occurring voltage differences relative to a reference electrode, without injecting survey current. Nonpolarizing electrodes help reduce electrode-generated offsets. SP does not independently measure resistivity; conductivity affects the observed voltages, but interpreting them also requires a model of the natural source currents.
 
 - Electrochemical potentials: Associated with redox reactions, including current systems around some mineralized bodies.
 - Streaming potentials: Associated with fluid motion through charged pore surfaces during groundwater flow.

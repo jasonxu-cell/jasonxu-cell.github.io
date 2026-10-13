@@ -48,7 +48,7 @@
                     <span>Logic</span>
                     <span>Digital</span>
                 </div>
-                <time datetime="2026-10-12">Oct 12, 2026</time>
+                <time datetime="2026-10-13">Oct 13, 2026</time>
             </div>
         </header>
 
@@ -797,9 +797,13 @@ cla_4bit a1(
 <p>A Finite State Machine (FSM) is a mathematical model that describes system behavior using a finite number of states, and it is also one of the most important control logic design methods in digital circuits.</p>
 <p>Finite state machine can be classified into two categories:</p>
 <ul>
-<li>Moore:</li>
-<li>Mealy:</li>
+<li>Moore: The output is only related to the state.</li>
+<li>Mealy: The output is related to the state and output.</li>
 </ul>
+<p>We can use state diagram to illustrate it. For example, the following circuit can be explained as a state diagram:</p>
+<p><img src="../attachments/Screenshot%202026-10-13%20at%2018.46.31.png" alt="Screenshot 2026-10-13 at 18.46.31" loading="lazy" decoding="async"></p>
+<p><img src="../attachments/Screenshot%202026-10-13%20at%2018.47.35.png" alt="Screenshot 2026-10-13 at 18.47.35" loading="lazy" decoding="async"></p>
+<p>We can find that this is a Mearly circuit, so we label the output on the arrow. For a Moorly circuit, the output is labeled in the circle.</p>
 <h2 id="fieldprogrammable-gate-array-fpga-todo">Field-Programmable Gate Array (FPGA) (TODO)</h2>
             </article>
             <script type="application/json" id="article-headings">[{"id":"boolean-algebra","level":1,"text":"Boolean Algebra"},{"id":"basic-operations-and-equations","level":2,"text":"Basic Operations and Equations"},{"id":"minterms-and-maxterms","level":2,"text":"Minterms and Maxterms"},{"id":"shannon-expansion-theorem","level":2,"text":"Shannon Expansion Theorem"},{"id":"computer-operations-and-coding","level":1,"text":"Computer Operations and Coding"},{"id":"bcd-code","level":2,"text":"BCD Code"},{"id":"gray-code","level":2,"text":"Gray Code"},{"id":"addition-and-subtraction-of-signed-integers","level":2,"text":"Addition and Subtraction of Signed Integers"},{"id":"ieee-floatingpoint-numbers","level":2,"text":"IEEE Floating-Point Numbers"},{"id":"ascii-code","level":2,"text":"ASCII Code"},{"id":"combinational-logic-circuit","level":1,"text":"Combinational Logic Circuit"},{"id":"race-and-hazard","level":2,"text":"Race and Hazard"},{"id":"encoder","level":2,"text":"Encoder"},{"id":"decoder","level":2,"text":"Decoder"},{"id":"multiplexer-mux","level":2,"text":"Multiplexer (MUX)"},{"id":"demultiplexer-demux","level":2,"text":"Demultiplexer (DEMUX)"},{"id":"comparator","level":2,"text":"Comparator"},{"id":"adder","level":2,"text":"Adder"},{"id":"multiplier","level":2,"text":"Multiplier"},{"id":"divider-todo","level":2,"text":"Divider (TODO)"},{"id":"floatingpoint-calculation-todo","level":2,"text":"Floating-Point Calculation (TODO)"},{"id":"sequential-logic-circuits","level":1,"text":"Sequential Logic Circuits"},{"id":"latch","level":2,"text":"Latch"},{"id":"sr-latch","level":3,"text":"SR Latch"},{"id":"d-latch","level":3,"text":"D Latch"},{"id":"flipflop-ff","level":2,"text":"Flip-Flop (FF)"},{"id":"d-ff","level":3,"text":"D FF"},{"id":"jk-ff","level":3,"text":"JK FF"},{"id":"t-ff","level":3,"text":"T FF"},{"id":"finite-state-machine-fsm","level":2,"text":"Finite State Machine (FSM)"},{"id":"fieldprogrammable-gate-array-fpga-todo","level":1,"text":"Field-Programmable Gate Array (FPGA) (TODO)"}]</script>
@@ -1967,8 +1971,17 @@ endmodule
 A Finite State Machine (FSM) is a mathematical model that describes system behavior using a finite number of states, and it is also one of the most important control logic design methods in digital circuits.
 
 Finite state machine can be classified into two categories:
-- Moore:
-- Mealy:
+- Moore: The output is only related to the state.
+- Mealy: The output is related to the state and output.
+
+We can use state diagram to illustrate it. For example, the following circuit can be explained as a state diagram:
+
+![Screenshot 2026-10-13 at 18.46.31](../attachments/Screenshot%202026-10-13%20at%2018.46.31.png)
+
+![Screenshot 2026-10-13 at 18.47.35](../attachments/Screenshot%202026-10-13%20at%2018.47.35.png)
+
+We can find that this is a Mearly circuit, so we label the output on the arrow. For a Moorly circuit, the output is labeled in the circle.
+
 # Field-Programmable Gate Array (FPGA) (TODO)
         </script>
     </main>

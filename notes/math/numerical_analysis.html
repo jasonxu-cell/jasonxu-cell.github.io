@@ -49,7 +49,7 @@
                     <span>Interpolation</span>
                     <span>Numerical Integration</span>
                 </div>
-                <time datetime="2026-07-30">Jul 30, 2026</time>
+                <time datetime="2026-10-13">Oct 13, 2026</time>
             </div>
         </header>
 
@@ -207,7 +207,7 @@
 <ul>
 <li>Simpson formula ($n=2$):</li>
 </ul>
-<p>$$\int_a^b f(x)\,\mathrm{d}x\approx\frac{h}{3}(f(x_0)+4f(x_1)+f(x_2))$$</p>
+<p>$$\int_a^b f(x)\,\mathrm{d}x\approx\frac{h}{6}(f(x_0)+4f(x_1)+f(x_2))$$</p>
 <ul>
 <li>Simpson $3/8$ formula ($n=3$):</li>
 </ul>
@@ -225,7 +225,7 @@
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Formula</th><th>Algebraic Precision</th></tr></thead><tbody><tr><td>Trapezoid ($n=1$)</td><td>$1$</td></tr><tr><td>Simpson ($n=2$)</td><td>$3$</td></tr><tr><td>Simpson $3/8$ ($n=3$)</td><td>$3$</td></tr><tr><td>Cotes ($n=4$)</td><td>$5$</td></tr></tbody></table></div>
 <h3 id="romberg-algorithm">Romberg Algorithm</h3>
 <p>We can also use the composite integral formula divides the entire integration interval $[a, b]$ into many smaller intervals, applies the same simple numerical integral formula to each smaller interval, and finally adds the results together.</p>
-<p>For the composite trapezoid rule, let $h=(b-a)/n$ and $I=\int_a^b f(x)\,\mathrm{d}x$. Then $$T(h)=h[\frac{1}{2}f(a)+\sum_{i=1}^{n-1}f(a+ih)+\frac{1}{2}f(b)].$$ If $f\in C^{2p+2}[a,b]$, the Euler–Maclaurin formula gives the asymptotic expansion $$T(h)=I+c_1h^2+c_2h^4+\cdots+c_ph^{2p}+O(h^{2p+2}),$$ where the coefficients are independent of $h$. This is a finite asymptotic expansion, not necessarily a convergent infinite series. See <a href="https://dlmf.nist.gov/3.5#iii" target="_blank" rel="noopener noreferrer">NIST DLMF, Romberg Integration</a>. Observation: $$T(h/2)=I+c_1h^2/4+c_2h^4/16+\dots$$ $$(4T(h/2)-T(h))/3=I-\frac{c_2}{4}h^4+\dots$$</p>
+<p>For the composite trapezoid rule, let $h=(b-a)/n$ and $I=\int_a^b f(x)\,\mathrm{d}x$. Then $$T(h)=h[\frac{1}{2}f(a)+\sum_{i=1}^{n-1}f(a+ih)+\frac{1}{2}f(b)].$$ If $f\in C^{2p+2}[a,b]$, the Euler–Maclaurin formula gives the asymptotic expansion $$T(h)=I+c_1h^2+c_2h^4+\cdots+c_ph^{2p}+O(h^{2p+2}),$$ where the coefficients are independent of $h$. This is a finite asymptotic expansion, not necessarily a convergent infinite series. Observation: $$T(h/2)=I+c_1h^2/4+c_2h^4/16+\dots$$ $$(4T(h/2)-T(h))/3=I-\frac{c_2}{4}h^4+\dots$$</p>
 <p>We can find that the error transformed from $O(h^2)$ to $O(h^4)$. We can also use this method to limit error to $O(h^6),O(h^8),\dots$ The algorithm is called <span class="obsidian-red">Romberg Algorithm</span>.</p>
 <p>Specifically, Define $$R_{k,0}=T_k=T(\frac{b-a}{2^k})$$ Then $$R_{k,j}=R_{k,j-1}+\frac{R_{k,j-1}-R_{k-1,j-1}}{4^j-1}$$ where $$k=1,2,\dots,j=1,2,\dots,k$$ For each fixed column $j$ and sufficiently smooth $f$ (for example $f\in C^{2j+2}[a,b]$), we have $$R_{k,j}=I+O\left(\left(\frac{b-a}{2^k}\right)^{2j+2}\right),\qquad k\to\infty.$$</p>
 <h3 id="gausslegendre-theorem">Gauss-Legendre Theorem</h3>
@@ -690,7 +690,7 @@ Commonly, we have
 - Trapezoid formula ($n=1$): 
   $$\int_a^b f(x)\,\mathrm{d}x\approx\frac{h}{2}(f(x_0)+f(x_1))$$
 - Simpson formula ($n=2$): 
-  $$\int_a^b f(x)\,\mathrm{d}x\approx\frac{h}{3}(f(x_0)+4f(x_1)+f(x_2))$$
+  $$\int_a^b f(x)\,\mathrm{d}x\approx\frac{h}{6}(f(x_0)+4f(x_1)+f(x_2))$$
 - Simpson $3/8$ formula ($n=3$): 
   $$\int_a^b f(x)\,\mathrm{d}x\approx\frac{3h}{8}(f(x_0)+3f(x_1)+3f(x_2)+f(x_3))$$
 
@@ -750,7 +750,7 @@ For the composite trapezoid rule, let $h=(b-a)/n$ and $I=\int_a^b f(x)\,\mathrm{
 $$T(h)=h[\frac{1}{2}f(a)+\sum_{i=1}^{n-1}f(a+ih)+\frac{1}{2}f(b)].$$
 If $f\in C^{2p+2}[a,b]$, the Euler–Maclaurin formula gives the asymptotic expansion
 $$T(h)=I+c_1h^2+c_2h^4+\cdots+c_ph^{2p}+O(h^{2p+2}),$$
-where the coefficients are independent of $h$. This is a finite asymptotic expansion, not necessarily a convergent infinite series. See [NIST DLMF, Romberg Integration](https://dlmf.nist.gov/3.5#iii).
+where the coefficients are independent of $h$. This is a finite asymptotic expansion, not necessarily a convergent infinite series. 
 Observation:
 $$T(h/2)=I+c_1h^2/4+c_2h^4/16+\dots$$
 $$(4T(h/2)-T(h))/3=I-\frac{c_2}{4}h^4+\dots$$
