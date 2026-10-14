@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fbfc"/><stop offset="1" stop-color="#e3eef3"/></linearGradient>
+<radialGradient id="glow" cx="0.85" cy="0.12" r="0.65"><stop offset="0" stop-color="#f6d6e0" stop-opacity="0.9"/><stop offset="1" stop-color="#f6d6e0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx="0.1" cy="0.92" r="0.6"><stop offset="0" stop-color="#cfe6ee" stop-opacity="0.9"/><stop offset="1" stop-color="#cfe6ee" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#8fb0bc" fill-opacity="0.3"/></pattern>
+<linearGradient id="gate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="1.0"/><stop offset="1" stop-color="#cfe3ea" stop-opacity="1.0"/></linearGradient>
+</defs>
+<rect width="400" height="400" fill="url(#bg)"/>
+<rect width="400" height="400" fill="url(#glow)"/>
+<rect width="400" height="400" fill="url(#glow2)"/>
+<rect width="400" height="400" fill="url(#dots)"/>
+
+<g fill="none" stroke="#2c5a69" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M44 122H92M44 158H92M44 242H104M44 278H104"/>
+<path d="M163 140H206V182H236M180 260H214V218H236"/>
+<path d="M307 200H332"/>
+</g>
+<path d="M92 105H128A35 35 0 0 1 128 175H92Z" fill="url(#gate)" stroke="#2c5a69" stroke-width="4.5"/>
+<path d="M94 225Q120 260 94 295Q146 295 180 260Q146 225 94 225Z" fill="url(#gate)" stroke="#2c5a69" stroke-width="4.5"/>
+<path d="M236 165H272A35 35 0 0 1 272 235H236Z" fill="url(#gate)" stroke="#2c5a69" stroke-width="4.5"/>
+<circle cx="44" cy="122" r="7.5" fill="#e0ac58" stroke="#ffffff" stroke-width="2.5"/><circle cx="44" cy="158" r="7.5" fill="#e0ac58" stroke="#ffffff" stroke-width="2.5"/><circle cx="44" cy="242" r="7.5" fill="#f7fafc" stroke="#2c5a69" stroke-width="3"/><circle cx="44" cy="278" r="7.5" fill="#e0ac58" stroke="#ffffff" stroke-width="2.5"/>
+<circle cx="348" cy="200" r="26" fill="#e0ac58" fill-opacity="0.22"/><circle cx="348" cy="200" r="14" fill="#e0ac58" stroke="#ffffff" stroke-width="4"/>
+<path d="M40 344H72V326H104V344H136V326H168V344H200V326H232V344H264V326H296V344H328V326H360V344" fill="none" stroke="#3f8597" stroke-width="3.5" stroke-linejoin="round" stroke-opacity="0.85"/>
+<path d="M340 67Q340 76 349 76Q340 76 340 85Q340 76 331 76Q340 76 340 67Z" fill="#df93aa" fill-opacity="0.8"/>
+
+</svg>

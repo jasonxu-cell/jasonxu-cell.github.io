@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fbfc"/><stop offset="1" stop-color="#e3eef3"/></linearGradient>
+<radialGradient id="glow" cx="0.85" cy="0.12" r="0.65"><stop offset="0" stop-color="#f6d6e0" stop-opacity="0.9"/><stop offset="1" stop-color="#f6d6e0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx="0.1" cy="0.92" r="0.6"><stop offset="0" stop-color="#cfe6ee" stop-opacity="0.9"/><stop offset="1" stop-color="#cfe6ee" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#8fb0bc" fill-opacity="0.3"/></pattern>
+<linearGradient id="imem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f2f6" stop-opacity="1.0"/><stop offset="1" stop-color="#bcd8e2" stop-opacity="1.0"/></linearGradient><linearGradient id="reg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe8ee" stop-opacity="1.0"/><stop offset="1" stop-color="#efc3d0" stop-opacity="1.0"/></linearGradient><linearGradient id="alu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbecc9" stop-opacity="1.0"/><stop offset="1" stop-color="#e0ac58" stop-opacity="1.0"/></linearGradient>
+</defs>
+<rect width="400" height="400" fill="url(#bg)"/>
+<rect width="400" height="400" fill="url(#glow)"/>
+<rect width="400" height="400" fill="url(#glow2)"/>
+<rect width="400" height="400" fill="url(#dots)"/>
+
+<path d="M40 82H70V64H100V82H130V64H160V82H190V64H220V82H250V64H280V82H310V64H340V82H370V64" fill="none" stroke="#e0ac58" stroke-width="3.5" stroke-linejoin="round" stroke-opacity="0.8"/>
+<path d="M354 200H376V312H64V232" fill="none" stroke="#df93aa" stroke-width="4" stroke-linejoin="round" stroke-dasharray="7 7"/>
+<path d="M69.8 242.5L64 232L58.2 242.5" fill="none" stroke="#df93aa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="170" width="48" height="60" rx="9" fill="#f7fafc" stroke="#2c5a69" stroke-width="4.5"/>
+<rect x="50" y="182" width="28" height="7" rx="3.5" fill="#df93aa" fill-opacity="0.7"/>
+<rect x="116" y="128" width="74" height="144" rx="11" fill="url(#imem)" stroke="#2c5a69" stroke-width="4.5"/>
+<g fill="#ffffff" fill-opacity="0.75"><rect x="128" y="146" width="50" height="9" rx="4.5"/><rect x="128" y="166" width="50" height="9" rx="4.5"/><rect x="128" y="186" width="50" height="9" rx="4.5"/><rect x="128" y="206" width="50" height="9" rx="4.5"/><rect x="128" y="226" width="50" height="9" rx="4.5"/><rect x="128" y="246" width="50" height="9" rx="4.5"/></g>
+<rect x="214" y="148" width="66" height="104" rx="11" fill="url(#reg)" stroke="#2c5a69" stroke-width="4.5"/>
+<g stroke="#ffffff" stroke-width="3" stroke-linecap="round"><path d="M224 170H270"/><path d="M224 188H270"/><path d="M224 206H270"/><path d="M224 224H270"/><path d="M224 242H270"/></g>
+<path d="M300 135L354 172V228L300 265V218L316 200L300 182Z" fill="url(#alu)" stroke="#2c5a69" stroke-width="4.5" stroke-linejoin="round"/>
+<path d="M88 200L112 200" stroke="#3f8597" stroke-width="5" stroke-linecap="round"/><path d="M102.3 205.3L112 200L102.3 194.7" fill="none" stroke="#3f8597" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M190 200L210 200" stroke="#3f8597" stroke-width="5" stroke-linecap="round"/><path d="M200.3 205.3L210 200L200.3 194.7" fill="none" stroke="#3f8597" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M280 176L298 176" stroke="#3f8597" stroke-width="5" stroke-linecap="round"/><path d="M289.2 180.8L298 176L289.2 171.2" fill="none" stroke="#3f8597" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M280 224L298 224" stroke="#3f8597" stroke-width="5" stroke-linecap="round"/><path d="M289.2 228.8L298 224L289.2 219.2" fill="none" stroke="#3f8597" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M354 200L380 200" stroke="#3f8597" stroke-width="5" stroke-linecap="round"/><path d="M370.3 205.3L380 200L370.3 194.7" fill="none" stroke="#3f8597" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>

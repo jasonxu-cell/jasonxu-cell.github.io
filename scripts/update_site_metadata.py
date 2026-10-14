@@ -90,7 +90,8 @@ DESCRIPTIONS = {
         "and programming paradigms."
     ),
     "notes/cs/computer_organization_and_design.html": (
-        "计算机组成与设计课程笔记，涵盖指令系统、处理器、存储层次结构与计算机体系结构。"
+        "Computer organization and design notes by Yang on instruction set architecture, "
+        "CPU design, memory systems, bus systems, and I/O systems."
     ),
     "notes/electronic_engineering/analog_circuits.html": (
         "Analog circuits notes by Yang on semiconductor devices, diodes, MOSFETs, "
@@ -110,7 +111,6 @@ DESCRIPTIONS = {
 ZH_CN_PAGES = {
     "articles/article_1.html",
     "articles/article_2.html",
-    "notes/cs/computer_organization_and_design.html",
 }
 
 # Pages that exist in the repo but are not part of the public site.
@@ -443,22 +443,22 @@ def recent_updates(pages: list[tuple[str, str]]) -> list[tuple[str, str, str, st
 
 def recent_updates_block(items: list[tuple[str, str, str, str]]) -> str:
     rows = "\n".join(
-        "                    <li>\n"
-        f'                        <a href="{relative}">{html.escape(title)}</a>\n'
-        f'                        <span class="recent-updates-kind">{kind}</span>\n'
-        f'                        <time datetime="{date}">{date}</time>\n'
-        "                    </li>"
+        "                        <li>\n"
+        f'                            <a href="{relative}">{html.escape(title)}</a>\n'
+        f'                            <span class="recent-updates-kind">{kind}</span>\n'
+        f'                            <time datetime="{date}">{date}</time>\n'
+        "                        </li>"
         for date, title, relative, kind in items
     )
     return (
         f"{RECENT_UPDATES_BEGIN}\n"
-        '            <section class="recent-updates" aria-labelledby="recent-updates-title">\n'
-        '                <p class="recent-updates-title" id="recent-updates-title">Recently Updated</p>\n'
-        '                <ol class="recent-updates-list">\n'
+        '                <section class="recent-updates" aria-labelledby="recent-updates-title">\n'
+        '                    <p class="recent-updates-title" id="recent-updates-title">Recently Updated</p>\n'
+        '                    <ol class="recent-updates-list">\n'
         f"{rows}\n"
-        "                </ol>\n"
-        "            </section>\n"
-        f"            {RECENT_UPDATES_END}"
+        "                    </ol>\n"
+        "                </section>\n"
+        f"                {RECENT_UPDATES_END}"
     )
 
 

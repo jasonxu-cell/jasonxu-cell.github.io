@@ -1632,6 +1632,38 @@
         scheduleUpdate();
     }
 
+    function setupTocFold() {
+        const tocPanel = tocElement.closest(".article-toc-panel");
+        const title = tocPanel && tocPanel.querySelector(":scope > p");
+
+        if (!title || !window.matchMedia) {
+            return;
+        }
+
+        // On narrow screens the contents list sits above the article; fold it
+        // so the reader reaches the text first.
+        const narrow = window.matchMedia("(max-width: 900px)");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "toc-fold-toggle";
+        button.textContent = title.textContent;
+        button.setAttribute("aria-controls", tocElement.id);
+        title.replaceChildren(button);
+
+        function setFolded(folded) {
+            tocPanel.classList.toggle("is-folded", folded);
+            button.setAttribute("aria-expanded", String(!folded));
+        }
+
+        button.addEventListener("click", () => {
+            if (narrow.matches) {
+                setFolded(!tocPanel.classList.contains("is-folded"));
+            }
+        });
+        narrow.addEventListener("change", (event) => setFolded(event.matches));
+        setFolded(narrow.matches);
+    }
+
     function copyText(value) {
         if (navigator.clipboard && window.isSecureContext) {
             return navigator.clipboard.writeText(value);
@@ -1836,6 +1868,7 @@
 
     renderToc(headings);
     setupTocScrollSpy(headings);
+    setupTocFold();
     enhanceCodeBlocks();
     enhanceCallouts();
     loadHighlightJs();

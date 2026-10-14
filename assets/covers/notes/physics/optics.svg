@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fbfc"/><stop offset="1" stop-color="#e3eef3"/></linearGradient>
+<radialGradient id="glow" cx="0.85" cy="0.12" r="0.65"><stop offset="0" stop-color="#f6d6e0" stop-opacity="0.9"/><stop offset="1" stop-color="#f6d6e0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx="0.1" cy="0.92" r="0.6"><stop offset="0" stop-color="#cfe6ee" stop-opacity="0.9"/><stop offset="1" stop-color="#cfe6ee" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#8fb0bc" fill-opacity="0.3"/></pattern>
+<linearGradient id="prism" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/><stop offset="1" stop-color="#bcd8e2" stop-opacity="0.75"/></linearGradient><linearGradient id="inside" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="1" stop-color="#df93aa" stop-opacity="0.45"/></linearGradient>
+</defs>
+<rect width="400" height="400" fill="url(#bg)"/>
+<rect width="400" height="400" fill="url(#glow)"/>
+<rect width="400" height="400" fill="url(#glow2)"/>
+<rect width="400" height="400" fill="url(#dots)"/>
+
+<path d="M254 189L392 208" stroke="#e98a92" stroke-width="5.5" stroke-linecap="round"/><path d="M258.3 197.1L392 234" stroke="#f0b07a" stroke-width="5.5" stroke-linecap="round"/><path d="M262.6 205.2L392 260" stroke="#e8cf74" stroke-width="5.5" stroke-linecap="round"/><path d="M267 213.2L392 286" stroke="#9cd09a" stroke-width="5.5" stroke-linecap="round"/><path d="M271.3 221.3L392 312" stroke="#86bfd6" stroke-width="5.5" stroke-linecap="round"/><path d="M275.6 229.4L392 338" stroke="#a597d6" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M16 228L148.2 185" stroke="#a9c1ca" stroke-width="14" stroke-linecap="round"/>
+<path d="M16 228L148.2 185" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+<path d="M200 88L92 290L308 290Z" fill="url(#prism)" stroke="#2c5a69" stroke-width="5.5" stroke-linejoin="round"/>
+<path d="M148.2 185L254 189L275.6 229.4Z" fill="url(#inside)"/>
+<path d="M192 114L114 276" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+<path d="M66 83Q66 92 75 92Q66 92 66 101Q66 92 57 92Q66 92 66 83Z" fill="#e0ac58" fill-opacity="0.8"/><path d="M330 66Q330 74 338 74Q330 74 330 82Q330 74 322 74Q330 74 330 66Z" fill="#8cc2d3" fill-opacity="0.9"/>
+
+</svg>

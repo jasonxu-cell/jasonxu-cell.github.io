@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fbfc"/><stop offset="1" stop-color="#e3eef3"/></linearGradient>
+<radialGradient id="glow" cx="0.85" cy="0.12" r="0.65"><stop offset="0" stop-color="#f6d6e0" stop-opacity="0.9"/><stop offset="1" stop-color="#f6d6e0" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx="0.1" cy="0.92" r="0.6"><stop offset="0" stop-color="#cfe6ee" stop-opacity="0.9"/><stop offset="1" stop-color="#cfe6ee" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#8fb0bc" fill-opacity="0.3"/></pattern>
+<linearGradient id="tri" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f2f6" stop-opacity="0.9"/><stop offset="1" stop-color="#bcd8e2" stop-opacity="0.9"/></linearGradient>
+</defs>
+<rect width="400" height="400" fill="url(#bg)"/>
+<rect width="400" height="400" fill="url(#glow)"/>
+<rect width="400" height="400" fill="url(#glow2)"/>
+<rect width="400" height="400" fill="url(#dots)"/>
+
+<path d="M302.2 155L200 332L97.8 155Z" fill="#df93aa" fill-opacity="0.08" stroke="#df93aa" stroke-opacity="0.45" stroke-width="2.5" stroke-dasharray="6 7"/>
+<g stroke="#a9c1ca" stroke-width="2.5" stroke-dasharray="5 8"><path d="M200 69L200 299"/><path d="M325.6 286.5L126.4 171.5"/><path d="M74.4 286.5L273.6 171.5"/></g>
+<path d="M200 96L302.2 273L97.8 273Z" fill="url(#tri)" stroke="#2c5a69" stroke-width="5.5" stroke-linejoin="round"/>
+<path d="M270.4 81.6A150 150 0 0 1 346.7 182.8" fill="none" stroke="#e0ac58" stroke-width="5" stroke-linecap="round"/>
+<path d="M337 171.4L346.7 182.8L351 168.4" fill="none" stroke="#e0ac58" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="200" cy="96" r="12" fill="#3f8597" stroke="#ffffff" stroke-width="3"/><circle cx="302.2" cy="273" r="12" fill="#df93aa" stroke="#ffffff" stroke-width="3"/><circle cx="97.8" cy="273" r="12" fill="#e0ac58" stroke="#ffffff" stroke-width="3"/>
+<circle cx="200" cy="214" r="5" fill="#2c5a69"/>
+<path d="M64 65Q64 74 73 74Q64 74 64 83Q64 74 55 74Q64 74 64 65Z" fill="#8cc2d3" fill-opacity="0.9"/>
+
+</svg>
