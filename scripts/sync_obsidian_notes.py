@@ -467,6 +467,7 @@ def html_page(
             <a href="../../index.html">Home</a>
             <a href="../../notes.html" aria-current="page">Notes</a>
             <a href="../../articles.html">Articles</a>
+            <a href="../../projects.html">Projects</a>
             <a href="../../interactive.html">Interactive</a>
             <a href="../../ask.html">Ask</a>
         </div>

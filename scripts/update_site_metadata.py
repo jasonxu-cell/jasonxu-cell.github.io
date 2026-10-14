@@ -41,6 +41,10 @@ OG_IMAGE = {
 }
 
 DESCRIPTIONS = {
+    "projects.html": (
+        "Software projects by Yang, including Mathematics Notebook, an open-source "
+        "Wolfram Language compatible notebook for macOS and Linux, powered by Mathics3."
+    ),
     "interactive.html": "Interactive math and science experiments by Yang. Explore abstract ideas through hands-on visual demonstrations.",
     "interactive/archimedes.html": "Vary the number of polygon sides from 3 to 1000 and watch inscribed and circumscribed perimeters squeeze toward π from below and above.",
     "index.html": (
@@ -154,6 +158,7 @@ def replace_navigation(source: str, relative: str) -> str:
         "Home" if relative == "index.html" else
         "Notes" if relative.startswith("notes") else
         "Articles" if relative.startswith("articles") else
+        "Projects" if relative == "projects.html" or relative.startswith("projects/") else
         "Interactive" if relative == "interactive.html" or relative.startswith("interactive/") else
         "Ask" if relative == "ask.html" else ""
     )
@@ -176,6 +181,13 @@ def replace_navigation(source: str, relative: str) -> str:
         nav = re.sub(
             r'(\s*<a\b[^>]*href="(?:\.\./)*ask\.html")',
             f'\n            <a href="{prefix}interactive.html">Interactive</a>' + r'\1',
+            nav,
+            count=1,
+        )
+    if 'class="nav-links"' in nav and not re.search(r'<a\b[^>]*href="(?:\.\./)*projects\.html"', nav):
+        nav = re.sub(
+            r'(\s*<a\b[^>]*href="(?:\.\./)*interactive\.html")',
+            f'\n            <a href="{prefix}projects.html">Projects</a>' + r'\1',
             nav,
             count=1,
         )
@@ -499,8 +511,10 @@ def resolve_href(relative: str, href: str) -> str:
 
 
 def normalize_page(source: str) -> str:
-    """Strip build churn (?v= hashes, <time> values) so only real edits count."""
+    """Strip build churn (?v= hashes, <time> values, the script-managed primary
+    navigation) so only real edits count."""
     source = re.sub(r"\?v=[0-9a-f]+", "?v=", source)
+    source = re.sub(r'<nav\b[^>]*aria-label="Primary navigation"[^>]*>[\s\S]*?</nav>', "<nav></nav>", source)
     return TIME_RE.sub("<time></time>", source)
 
 

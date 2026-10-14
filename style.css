@@ -311,16 +311,17 @@ button:focus-visible {
     }
 
     nav {
-        padding: 13px 14px;
+        padding: 13px 10px;
         margin-bottom: 20px;
     }
 
+    /* Six links stay on one line down to ~360px wide phones. */
     .nav-links {
-        gap: 9px 17px;
+        gap: 9px clamp(6px, 2.4vw, 12px);
     }
 
     .nav-links a {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     .hero {
@@ -514,7 +515,8 @@ button:focus-visible {
 
 .note-sidebar .note-image {
     height: auto;
-    aspect-ratio: 1 / 1;
+    /* Matches the 640x400 subject covers so nothing is cropped. */
+    aspect-ratio: 8 / 5;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 4px;
 }
@@ -2713,4 +2715,237 @@ main,
     .article-toc-panel.is-folded > ol {
         display: none;
     }
+}
+
+/* ==========================================
+   Projects page
+   ========================================== */
+
+/* One card, several rows on a shared two-column grid: the project itself,
+   then one row per platform, so images and text line up in columns. */
+.project-card {
+    padding: 36px 40px;
+    background: var(--surface);
+    backdrop-filter: blur(16px) saturate(115%);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+}
+
+.project-cover {
+    overflow: hidden;
+    aspect-ratio: 8 / 5;
+    background: #e3eef2;
+    border-radius: 12px;
+}
+
+.project-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-body {
+    min-width: 0;
+}
+
+/* Title with the version on the same baseline to its right. */
+.project-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    margin-bottom: 14px;
+}
+
+.project-body h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, calc(1.5rem + 0.8vw), 2.125rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.project-version {
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.project-summary {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.project-features {
+    margin: 0 0 24px;
+    padding-left: 20px;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.project-features li + li {
+    margin-top: 4px;
+}
+
+.project-features li::marker {
+    color: var(--accent);
+}
+
+.project-features code,
+.project-note code {
+    padding: 1px 5px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.85em;
+    overflow-wrap: anywhere;
+    background: rgba(23, 95, 112, 0.08);
+    border-radius: 4px;
+}
+
+/* Download rows: a button on the left, one line of requirements on the right. */
+.project-downloads {
+    display: grid;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+
+.project-download {
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 24px;
+    align-items: center;
+}
+
+/* Icon, label, format and size sit in fixed columns so ".dmg"/".deb" and the
+   sizes line up vertically across buttons. */
+.project-download .button {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr) 2.6em 4.4em;
+    column-gap: 10px;
+    min-height: 46px;
+    padding: 10px 20px;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.project-download .button-size {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.project-download p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.project-body .button {
+    min-height: 42px;
+    padding: 9px 16px;
+    font-size: 14px;
+}
+
+.project-body .button svg {
+    flex: none;
+}
+
+.button-meta {
+    font-weight: 500;
+    opacity: 0.72;
+}
+
+.project-note {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+}
+
+.project-body > :last-child {
+    margin-bottom: 0;
+}
+
+.project-note strong {
+    color: var(--ink);
+}
+
+.project-note a {
+    color: var(--accent-strong);
+    font-weight: 600;
+    text-decoration-color: rgba(15, 77, 91, 0.35);
+    text-underline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+    .project-card {
+        padding: 26px 22px;
+    }
+
+    .project-row {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .project-downloads {
+        margin-top: 26px;
+        padding-top: 22px;
+        gap: 18px;
+    }
+
+    .project-download {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .project-download .button {
+        grid-template-columns: 16px minmax(0, 1fr) 2.5em 3.9em;
+        column-gap: 8px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 620px) {
+    /* Small enough that the version still fits beside the title. */
+    .project-body h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Inline link inside the homepage introduction. */
+.profile-intro a {
+    color: var(--accent-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(15, 77, 91, 0.35);
+    text-underline-offset: 3px;
+}
+
+.profile-intro a:hover {
+    text-decoration-color: currentColor;
 }

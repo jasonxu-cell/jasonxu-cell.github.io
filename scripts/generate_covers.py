@@ -593,7 +593,119 @@ def languages():
     return svg(body, defs, glow=(0.12, 0.1), glow2=(0.92, 0.95), glow2_color="#f3dbe3")
 
 
+# ---------------------------------------------------------------- archimedes
+def archimedes():
+    cx, cy, R = 212, 204, 116
+
+    def polygon(k, radius, phase=-90):
+        return [(cx + radius * math.cos(math.radians(phase + 360 * i / k)),
+                 cy + radius * math.sin(math.radians(phase + 360 * i / k))) for i in range(k)]
+
+    k = 6
+    inner = polygon(k, R)
+    outer = polygon(k, R / math.cos(math.pi / k), -90 + 180 / k)
+    finer = polygon(2 * k, R)
+    # Convergence chart: perimeter bounds n sin(pi/n) and n tan(pi/n) closing on pi.
+    # Log-scaled n axis (4 to 128) so the squeeze stays visible across the chart.
+    x0, x1, y_lo, y_hi = 398, 590, 296, 112
+    ns = [4 * 2 ** (j / 8) for j in range(41)]
+
+    def X(i):
+        return x0 + (x1 - x0) * i / (len(ns) - 1)
+
+    def Y(v):
+        return y_lo - (v - 2.78) / (4.06 - 2.78) * (y_lo - y_hi)
+
+    lower = [(X(i), Y(m * math.sin(math.pi / m))) for i, m in enumerate(ns)]
+    upper = [(X(i), Y(m * math.tan(math.pi / m))) for i, m in enumerate(ns)]
+    marks = [0, 8, 16, 24, 32]
+    defs = f"""
+<linearGradient id="inner" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{TEAL}" stop-opacity="0.2"/><stop offset="1" stop-color="{SKY}" stop-opacity="0.12"/></linearGradient>
+<linearGradient id="gap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{BLUSH}" stop-opacity="0.22"/><stop offset="1" stop-color="{TEAL}" stop-opacity="0.12"/></linearGradient>"""
+    body = f"""
+<circle cx="{cx}" cy="{cy}" r="{n(R / math.cos(math.pi / k) + 22)}" fill="#ffffff" fill-opacity="0.45"/>
+<path d="M{cx - 160} {cy}H{cx + 160}M{cx} {cy - 160}V{cy + 160}" stroke="#d3e2e8" stroke-width="1.5"/>
+<path d="{poly_path(outer)}Z" fill="{BLUSH}" fill-opacity="0.1" stroke="{BLUSH}" stroke-width="3" stroke-linejoin="round"/>
+<path d="{poly_path(finer)}Z" fill="none" stroke="{SKY}" stroke-width="2" stroke-dasharray="5 6" stroke-linejoin="round"/>
+<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{INK}" stroke-width="3"/>
+<path d="{poly_path(inner)}Z" fill="url(#inner)" stroke="{TEAL}" stroke-width="3" stroke-linejoin="round"/>
+<path d="M{cx} {cy}L{n(inner[1][0])} {n(inner[1][1])}M{cx} {cy}L{n(outer[0][0])} {n(outer[0][1])}" stroke="{MUTED}" stroke-width="2" stroke-dasharray="4 6"/>
+{"".join(f'<circle cx="{n(x)}" cy="{n(y)}" r="4.5" fill="#ffffff" stroke="{TEAL}" stroke-width="2.2"/>' for x, y in inner)}
+<circle cx="{cx}" cy="{cy}" r="5" fill="{INK}"/>
+<circle cx="{n(inner[1][0])}" cy="{n(inner[1][1])}" r="6.5" fill="{GOLD}" stroke="#ffffff" stroke-width="2.5"/>
+<rect x="374" y="86" width="238" height="236" rx="16" fill="#ffffff" fill-opacity="0.72" stroke="#d3e3e9"/>
+<g stroke="#e2edf1" stroke-width="1">{"".join(f'<path d="M{x} 100V306"/>' for x in range(398, 591, 24))}</g>
+<path d="{poly_path(upper)}{"".join(f"L{n(x)} {n(y)}" for x, y in reversed(lower))}Z" fill="url(#gap)"/>
+<path d="M392 {n(Y(math.pi))}H596" stroke="{GOLD}" stroke-width="2.2" stroke-dasharray="6 6"/>
+<path d="{poly_path(upper)}" fill="none" stroke="{BLUSH}" stroke-width="3.2" stroke-linecap="round"/>
+<path d="{poly_path(lower)}" fill="none" stroke="{TEAL}" stroke-width="3.2" stroke-linecap="round"/>
+{"".join(f'<circle cx="{n(upper[i][0])}" cy="{n(upper[i][1])}" r="4.5" fill="#ffffff" stroke="{BLUSH}" stroke-width="2.2"/><circle cx="{n(lower[i][0])}" cy="{n(lower[i][1])}" r="4.5" fill="#ffffff" stroke="{TEAL}" stroke-width="2.2"/>' for i in marks)}
+<path d="M392 306H598M392 306V96" stroke="{INK}" stroke-width="2.2" stroke-linecap="round"/>
+{sparkle(64, 64, 8, GOLD, 0.8)}{sparkle(600, 352, 7, SKY, 0.9)}
+"""
+    return svg(body, defs, glow=(0.9, 0.1), glow2=(0.05, 0.95))
+
+
+# ------------------------------------------------------ mathematics notebook
+def mathematics_notebook():
+    # App window: example sidebar, input cells, a 2D plot, a 3D surface, a slider.
+    sidebar = "".join(
+        f'<rect x="108" y="{y}" width="{w}" height="8" rx="4" fill="{c}"/>'
+        for y, w, c in ((104, 70, "#cfe0e6"), (124, 84, "#cfe0e6"), (144, 58, "#f1d3dc"),
+                        (164, 76, "#cfe0e6"), (184, 64, "#d6e9ef"), (204, 80, "#cfe0e6"), (224, 52, "#f3e3c3"))
+    )
+
+    def cell(y, widths):
+        x, bars = 252, []
+        for w, c in widths:
+            bars.append(f'<rect x="{x}" y="{y + 11}" width="{w}" height="8" rx="4" fill="{c}"/>')
+            x += w + 8
+        return (f'<rect x="226" y="{y}" width="302" height="30" rx="8" fill="#ffffff" stroke="#d3e2e8"/>'
+                f'<rect x="232" y="{y + 9}" width="12" height="12" rx="3" fill="{TEAL}" fill-opacity="0.75"/>'
+                + "".join(bars) + f'<path d="M534 {y + 2}V{y + 28}" stroke="{SKY}" stroke-width="2.5" stroke-linecap="round"/>')
+
+    px0, py0, pw, ph = 230, 176, 140, 96
+    plot_a = [(px0 + 8 + t, py0 + ph / 2 - 30 * math.sin(t / 22)) for t in range(0, pw - 15, 2)]
+    plot_b = [(px0 + 8 + t, py0 + ph / 2 - 18 * math.cos(t / 15)) for t in range(0, pw - 15, 2)]
+    scx, scy = 454, 226
+
+    def iso(x, y):
+        z = math.sin(x * 1.3) * math.cos(y * 1.3)
+        return scx + (x - y) * 15, scy + (x + y) * 6.5 - z * 16
+
+    grid = [i * 0.25 - 2 for i in range(17)]
+    surface = "".join(f'<path d="{poly_path([iso(a, b) for b in grid])}"/>' for a in grid[::2]) + \
+              "".join(f'<path d="{poly_path([iso(a, b) for a in grid])}"/>' for b in grid[::2])
+    body = f"""
+<rect x="90" y="46" width="460" height="308" rx="18" fill="#ffffff" fill-opacity="0.74" stroke="#d3e2e8"/>
+<path d="M90 80H550" stroke="#dce8ec"/>
+<circle cx="112" cy="63" r="5" fill="{BLUSH}" fill-opacity="0.8"/><circle cx="129" cy="63" r="5" fill="{GOLD}" fill-opacity="0.8"/><circle cx="146" cy="63" r="5" fill="{SKY}"/>
+<rect x="250" y="58" width="140" height="10" rx="5" fill="#e3edf1"/>
+<rect x="470" y="56" width="62" height="14" rx="7" fill="{TEAL}" fill-opacity="0.85"/>
+<path d="M210 80V354" stroke="#dce8ec"/>
+<rect x="98" y="92" width="104" height="246" rx="10" fill="#f1f7f9"/>
+{sidebar}
+<rect x="104" y="140" width="98" height="16" rx="6" fill="{BLUSH}" fill-opacity="0.18"/>
+{cell(96, ((88, "#cfe0e6"), (46, "#f1d3dc"), (60, "#cfe0e6")))}
+{cell(134, ((54, "#cfe0e6"), (110, "#d6e9ef")))}
+<rect x="{px0}" y="{py0}" width="{pw}" height="{ph}" rx="10" fill="#ffffff" stroke="#d3e2e8"/>
+<path d="M{px0 + 8} {py0 + ph / 2}H{px0 + pw - 8}M{px0 + pw / 2} {py0 + 8}V{py0 + ph - 8}" stroke="#d3e2e8" stroke-width="1.5"/>
+<path d="{poly_path(plot_b)}" fill="none" stroke="{BLUSH}" stroke-width="2.6" stroke-linecap="round"/>
+<path d="{poly_path(plot_a)}" fill="none" stroke="{TEAL}" stroke-width="3" stroke-linecap="round"/>
+<rect x="384" y="{py0}" width="140" height="{ph}" rx="10" fill="#ffffff" stroke="#d3e2e8"/>
+<g fill="none" stroke="{TEAL}" stroke-width="1.4" stroke-opacity="0.75" stroke-linejoin="round">{surface}</g>
+<rect x="226" y="290" width="302" height="46" rx="10" fill="#ffffff" stroke="#d3e2e8"/>
+<path d="M246 313H508" stroke="#d3e2e8" stroke-width="5" stroke-linecap="round"/>
+<path d="M246 313H404" stroke="{TEAL}" stroke-width="5" stroke-linecap="round"/>
+<circle cx="404" cy="313" r="9" fill="{GOLD}" stroke="#ffffff" stroke-width="3"/>
+{sparkle(592, 72, 9, GOLD, 0.8)}{sparkle(50, 330, 8, SKY, 0.9)}{sparkle(600, 320, 6, BLUSH, 0.8)}
+"""
+    return svg(body, glow=(0.88, 0.12), glow2=(0.06, 0.9))
+
+
 COVERS = {
+    "mathematics-notebook.svg": mathematics_notebook,
+    "archimedes.svg": archimedes,
     "geoscience.svg": geoscience,
     "physics.svg": physics,
     "math.svg": mathematics,
