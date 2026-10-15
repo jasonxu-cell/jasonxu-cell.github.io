@@ -5,7 +5,7 @@
     --lower: #137d89;
     --upper: #bc6539;
 }
-.lab-shell { background: rgba(252, 254, 255, .94); border: 1px solid var(--surface-border); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; }
+.lab-shell { background: var(--surface-reading); border: 1px solid var(--surface-border); border-radius: 16px; overflow: hidden; }
 .lab-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 28px; border-bottom: 1px solid var(--line); }
 .lab-toolbar p { margin: 0; font-size: 13px; color: var(--muted); }
 .lab-toolbar p span { color: var(--ink); font-weight: 600; margin-right: 12px; }
@@ -57,7 +57,7 @@
 .preset-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
 .preset-row > span { font-size: 12px; color: var(--muted); margin-right: 4px; }
 .preset-row .lab-button { padding: 7px 13px; }
-.lab-explanation { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin: 32px 0; padding: 26px; border-radius: 16px; background: rgba(252, 254, 255, .9); border: 1px solid var(--surface-border); }
+.lab-explanation { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin: 32px 0; padding: 26px; border-radius: 16px; background: var(--surface-reading); border: 1px solid var(--surface-border); }
 .lab-explanation h2 { font-size: 16px; margin: 0 0 12px; }
 .lab-explanation p { color: var(--muted); font-size: 14px; line-height: 1.85; margin: 0 0 12px; }
 .lab-formula { font-family: var(--serif); font-size: clamp(16px, 1.8vw, 21px); line-height: 1.8; color: var(--ink); }
