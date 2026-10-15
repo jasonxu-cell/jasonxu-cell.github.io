@@ -72,10 +72,11 @@ nav {
     align-items: center;
     justify-content: center;
 
+    width: fit-content;
     padding: 15px 20px;
     margin-bottom: 30px;
 
-    max-width: var(--page-width);
+    max-width: 100%;
     margin-right: auto;
     margin-left: auto;
     background: var(--surface);
