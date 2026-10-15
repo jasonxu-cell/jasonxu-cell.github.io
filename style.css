@@ -167,6 +167,10 @@ section {
     line-height: 1.7;
 }
 
+.profile > .button {
+    margin-top: 20px;
+}
+
 /* About Me and Recently Updated side by side under the profile. */
 .home-panels {
     display: grid;
@@ -2924,9 +2928,9 @@ main,
 
     .project-download .button {
         grid-template-columns: 16px minmax(0, 1fr) 2.5em 3.9em;
-        column-gap: 8px;
-        padding: 10px 14px;
-        font-size: 14px;
+        column-gap: 6px;
+        padding: 10px 12px;
+        font-size: 13.5px;
     }
 }
 

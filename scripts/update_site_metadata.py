@@ -43,7 +43,7 @@ OG_IMAGE = {
 DESCRIPTIONS = {
     "projects.html": (
         "Software projects by Yang, including Mathematics Notebook, an open-source "
-        "Wolfram Language compatible notebook for macOS and Linux, powered by Mathics3."
+        "Wolfram Language compatible notebook for macOS, Windows and Linux, powered by Mathics3."
     ),
     "interactive.html": "Interactive math and science experiments by Yang. Explore abstract ideas through hands-on visual demonstrations.",
     "interactive/archimedes.html": "Vary the number of polygon sides from 3 to 1000 and watch inscribed and circumscribed perimeters squeeze toward π from below and above.",
