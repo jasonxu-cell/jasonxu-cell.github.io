@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Numerical Analysis | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=dd2645fcc0">
+    <link rel="stylesheet" href="../../style.css?v=8801534efc">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
@@ -50,7 +50,7 @@
                     <span>Interpolation</span>
                     <span>Numerical Integration</span>
                 </div>
-                <time datetime="2026-10-13">Oct 13, 2026</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
             </div>
         </header>
 
@@ -270,6 +270,16 @@
 <p>For equally spaced nodes $x_i=x_0+ih$ with $n=2$, evaluating $L_2&#039;(x)$ at the three nodes gives the three-point formulas</p>
 <div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Node</th><th>Formula</th><th>Error</th></tr></thead><tbody><tr><td>$x_0$</td><td>$f&#039;(x_0)\approx\dfrac{-3f(x_0)+4f(x_1)-f(x_2)}{2h}$</td><td>$\dfrac{h^2}{3}f&#039;&#039;&#039;(\xi)$</td></tr><tr><td>$x_1$</td><td>$f&#039;(x_1)\approx\dfrac{f(x_2)-f(x_0)}{2h}$</td><td>$-\dfrac{h^2}{6}f&#039;&#039;&#039;(\xi)$</td></tr><tr><td>$x_2$</td><td>$f&#039;(x_2)\approx\dfrac{f(x_0)-4f(x_1)+3f(x_2)}{2h}$</td><td>$\dfrac{h^2}{3}f&#039;&#039;&#039;(\xi)$</td></tr></tbody></table></div>
 <p>The errors in the table are exact derivative minus approximation, with $f\in C^3[x_0,x_2]$. The middle formula is exactly the central difference above, and its error agrees with the Taylor analysis. In floating-point computation, very small $h$ amplifies data and roundoff errors through division by $h$; decreasing $h$ indefinitely need not improve accuracy.</p>
+<h2 id="ordinary-differential-equations-ode">Ordinary Differential Equations (ODE)</h2>
+<p>In this section, we will talk about how to numerically solve the equation: $$\left\{\begin{matrix} \frac{\mathrm{d}y}{\mathrm{d}x}=f(x,y)\\ y(a)=y_0 \end{matrix}\right.$$</p>
+<h3 id="euler-formula">Euler Formula</h3>
+<p>We want to solve it in interval $[a,b]$.</p>
+<p>Let $m\ge1$ be an integer, $h=(b-a)/m&gt;0$, and $$x_n=a+nh,\qquad n=0,1,\dots,m.$$ If we use forward difference, then $$f(x_n,y(x_n))=y&#039;(x_n)\approx\frac{y(x_{n+1})-y(x_n)}{h}$$ We use $y_n$ to approximate $y(x_n)$. Starting with $y_0=y(a)$, the update is $$y_{n+1}=y_n+hf(x_n,y_n),\qquad n=0,1,\dots,m-1.$$ It is called <span class="obsidian-red">forward Euler formula</span>.</p>
+<p>To analyze the error of it, we use the error of numerical difference. $$y(x_{n+1})=y(x_n)+hf(x_n,y(x_n))+ \frac{h^2}{2!}y&#039;&#039;(\xi_n),x_n\le\xi_n\le x_{n+1}$$ Therefore, if $y_n=y(x_n)$, the error of it is $$T_{n+1}=y(x_{n+1})-y_{n+1}=\frac{h^2}{2!}y&#039;&#039;(\xi_n)=O(h^2),x_n\le\xi_n\le x_{n+1}$$</p>
+<p>Here $T_{n+1}$ is the local one-step error, assuming an exact starting value for that step. Some texts define the local truncation error as $T_{n+1}/h$, which is $O(h)$. The global error $e_n=y(x_n)-y_n$ is different: if $y&#039;&#039;$ is bounded and $f$ is Lipschitz in $y$ with constant $L$ on the relevant region, then $$|e_{n+1}|\le(1+hL)|e_n|+Ch^2.$$ With $e_0=0$, this yields $\max_{0\le n\le m}|e_n|=O(h)$ on the fixed interval $[a,b]$. We can also use backward difference $$f(x_{n+1},y(x_{n+1}))=y&#039;(x_{n+1})\approx\frac{y(x_{n+1})-y(x_{n})}{h}$$ As a result, $$y_{n+1}=y_{n}+hf(x_{n+1},y_{n+1})$$ This is the backward Euler formula. It requires solving an implicit equation at each step. Some equations can be solved explicitly; otherwise a nonlinear solver such as Newton&#039;s method can be used. A fixed-point solver needs its own convergence conditions.</p>
+<h3 id="rungekutta-formula">Runge-Kutta Formula</h3>
+<p>We can also calculate the average of them and get the trapezoid formula: $$y_{n+1}=y_n+\frac{h}{2}(f(x_n,y_n)+f(x_{n+1},y_{n+1}))$$</p>
+<p>The trapezoid method is implicit. Replacing its unknown endpoint value by an Euler predictor gives the explicit Heun method: $$\begin{aligned} \widetilde y_{n+1}&amp;=y_n+hf(x_n,y_n),\\ y_{n+1}&amp;=y_n+\frac h2\left[f(x_n,y_n)+f(x_{n+1},\widetilde y_{n+1})\right]. \end{aligned}$$ Equivalently, using stages that represent slopes, $$\begin{aligned} K_1&amp;=f(x_n,y_n),\\ K_2&amp;=f(x_n+h,y_n+hK_1),\\ y_{n+1}&amp;=y_n+\frac h2(K_1+K_2). \end{aligned}$$ Heun&#039;s method is a second-order explicit Runge–Kutta method. It approximates the implicit trapezoid step; the two methods are not identical. Under sufficient smoothness and a Lipschitz condition in $y$, both have local one-step error $O(h^3)$ and global error $O(h^2)$. Solvability of the implicit equation must also hold for the trapezoid method.</p>
 <h2 id="iterative-method-to-solve-linear-equation">Iterative Method to Solve Linear Equation</h2>
 <h3 id="jacobi-iterative">Jacobi Iterative</h3>
 <p>JOR Iterative</p>
@@ -325,18 +335,8 @@
 <h2 id="approximation-todo">Approximation (TODO)</h2>
 <h3 id="best-square-approximation-todo">Best Square Approximation (TODO)</h3>
 <h3 id="best-uniform-approximation-polynomial-todo">Best Uniform Approximation Polynomial (TODO)</h3>
-<h2 id="ordinary-differential-equations-ode">Ordinary Differential Equations (ODE)</h2>
-<p>In this section, we will talk about how to numerically solve the equation: $$\left\{\begin{matrix} \frac{\mathrm{d}y}{\mathrm{d}x}=f(x,y)\\ y(a)=y_0 \end{matrix}\right.$$</p>
-<h3 id="euler-formula">Euler Formula</h3>
-<p>We want to solve it in interval $[a,b]$.</p>
-<p>Let $m\ge1$ be an integer, $h=(b-a)/m&gt;0$, and $$x_n=a+nh,\qquad n=0,1,\dots,m.$$ If we use forward difference, then $$f(x_n,y(x_n))=y&#039;(x_n)\approx\frac{y(x_{n+1})-y(x_n)}{h}$$ We use $y_n$ to approximate $y(x_n)$. Starting with $y_0=y(a)$, the update is $$y_{n+1}=y_n+hf(x_n,y_n),\qquad n=0,1,\dots,m-1.$$ It is called <span class="obsidian-red">forward Euler formula</span>.</p>
-<p>To analyze the error of it, we use the error of numerical difference. $$y(x_{n+1})=y(x_n)+hf(x_n,y(x_n))+ \frac{h^2}{2!}y&#039;&#039;(\xi_n),x_n\le\xi_n\le x_{n+1}$$ Therefore, if $y_n=y(x_n)$, the error of it is $$T_{n+1}=y(x_{n+1})-y_{n+1}=\frac{h^2}{2!}y&#039;&#039;(\xi_n)=O(h^2),x_n\le\xi_n\le x_{n+1}$$</p>
-<p>Here $T_{n+1}$ is the local one-step error, assuming an exact starting value for that step. Some texts define the local truncation error as $T_{n+1}/h$, which is $O(h)$. The global error $e_n=y(x_n)-y_n$ is different: if $y&#039;&#039;$ is bounded and $f$ is Lipschitz in $y$ with constant $L$ on the relevant region, then $$|e_{n+1}|\le(1+hL)|e_n|+Ch^2.$$ With $e_0=0$, this yields $\max_{0\le n\le m}|e_n|=O(h)$ on the fixed interval $[a,b]$. We can also use backward difference $$f(x_{n+1},y(x_{n+1}))=y&#039;(x_{n+1})\approx\frac{y(x_{n+1})-y(x_{n})}{h}$$ As a result, $$y_{n+1}=y_{n}+hf(x_{n+1},y_{n+1})$$ This is the backward Euler formula. It requires solving an implicit equation at each step. Some equations can be solved explicitly; otherwise a nonlinear solver such as Newton&#039;s method can be used. A fixed-point solver needs its own convergence conditions.</p>
-<h3 id="rungekutta-formula">Runge-Kutta Formula</h3>
-<p>We can also calculate the average of them and get the trapezoid formula: $$y_{n+1}=y_n+\frac{h}{2}(f(x_n,y_n)+f(x_{n+1},y_{n+1}))$$</p>
-<p>The trapezoid method is implicit. Replacing its unknown endpoint value by an Euler predictor gives the explicit Heun method: $$\begin{aligned} \widetilde y_{n+1}&amp;=y_n+hf(x_n,y_n),\\ y_{n+1}&amp;=y_n+\frac h2\left[f(x_n,y_n)+f(x_{n+1},\widetilde y_{n+1})\right]. \end{aligned}$$ Equivalently, using stages that represent slopes, $$\begin{aligned} K_1&amp;=f(x_n,y_n),\\ K_2&amp;=f(x_n+h,y_n+hK_1),\\ y_{n+1}&amp;=y_n+\frac h2(K_1+K_2). \end{aligned}$$ Heun&#039;s method is a second-order explicit Runge–Kutta method. It approximates the implicit trapezoid step; the two methods are not identical. Under sufficient smoothness and a Lipschitz condition in $y$, both have local one-step error $O(h^3)$ and global error $O(h^2)$. Solvability of the implicit equation must also hold for the trapezoid method.</p>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"interpolation","level":1,"text":"Interpolation"},{"id":"lagrange-interpolation","level":2,"text":"Lagrange Interpolation"},{"id":"polynomial-construction-and-interpolation-error","level":3,"text":"Polynomial Construction and Interpolation Error"},{"id":"barycentric-lagrange-interpolation","level":3,"text":"Barycentric Lagrange Interpolation"},{"id":"newton-interpolation","level":2,"text":"Newton Interpolation"},{"id":"hermite-interpolation","level":2,"text":"Hermite Interpolation"},{"id":"lagrange-method","level":3,"text":"Lagrange Method"},{"id":"newton-method-for-hermite-interpolation","level":3,"text":"Newton Method for Hermite Interpolation"},{"id":"error-analysis","level":3,"text":"Error Analysis"},{"id":"cubic-spline-interpolation","level":2,"text":"Cubic Spline Interpolation"},{"id":"numerical-integration-and-numerical-differentiation","level":1,"text":"Numerical Integration and Numerical Differentiation"},{"id":"interpolationtype-numerical-integration","level":2,"text":"Interpolation-Type Numerical Integration"},{"id":"algebraic-precision","level":2,"text":"Algebraic Precision"},{"id":"romberg-algorithm","level":2,"text":"Romberg Algorithm"},{"id":"gausslegendre-theorem","level":2,"text":"Gauss-Legendre Theorem"},{"id":"numerical-differentiation","level":2,"text":"Numerical Differentiation"},{"id":"iterative-method-to-solve-linear-equation","level":1,"text":"Iterative Method to Solve Linear Equation"},{"id":"jacobi-iterative","level":2,"text":"Jacobi Iterative"},{"id":"gaussseidel-iterative","level":2,"text":"Gauss-Seidel Iterative"},{"id":"nonlinear-equation","level":1,"text":"Non-Linear Equation"},{"id":"bisection-method","level":2,"text":"Bisection Method"},{"id":"fixedpoint-iteration","level":2,"text":"Fixed-Point Iteration"},{"id":"newton-method","level":2,"text":"Newton Method"},{"id":"secant-method","level":2,"text":"Secant Method"},{"id":"newton-s-method-for-nonlinear-equation-systems","level":2,"text":"Newton's Method for Nonlinear Equation Systems"},{"id":"fitting","level":1,"text":"Fitting"},{"id":"optimization-without-constraint-todo","level":1,"text":"Optimization without Constraint (TODO)"},{"id":"onedimensional-search-todo","level":2,"text":"One-Dimensional Search (TODO)"},{"id":"gradient-methods-todo","level":2,"text":"Gradient Methods (TODO)"},{"id":"conjugate-direction-method-todo","level":2,"text":"Conjugate Direction Method (TODO)"},{"id":"heuristic-algorithm-todo","level":2,"text":"Heuristic Algorithm (TODO)"},{"id":"optimization-with-constraint","level":1,"text":"Optimization with Constraint"},{"id":"lagrange-multiplier-method-todo","level":2,"text":"Lagrange Multiplier Method (TODO)"},{"id":"karushkuhntucker-condition-todo","level":2,"text":"Karush-Kuhn-Tucker Condition (TODO)"},{"id":"convex-optimization-todo","level":2,"text":"Convex Optimization (TODO)"},{"id":"multiobjective-optimization-todo","level":2,"text":"Multi-Objective Optimization (TODO)"},{"id":"approximation-todo","level":1,"text":"Approximation (TODO)"},{"id":"best-square-approximation-todo","level":2,"text":"Best Square Approximation (TODO)"},{"id":"best-uniform-approximation-polynomial-todo","level":2,"text":"Best Uniform Approximation Polynomial (TODO)"},{"id":"ordinary-differential-equations-ode","level":1,"text":"Ordinary Differential Equations (ODE)"},{"id":"euler-formula","level":2,"text":"Euler Formula"},{"id":"rungekutta-formula","level":2,"text":"Runge-Kutta Formula"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"interpolation","level":1,"text":"Interpolation"},{"id":"lagrange-interpolation","level":2,"text":"Lagrange Interpolation"},{"id":"polynomial-construction-and-interpolation-error","level":3,"text":"Polynomial Construction and Interpolation Error"},{"id":"barycentric-lagrange-interpolation","level":3,"text":"Barycentric Lagrange Interpolation"},{"id":"newton-interpolation","level":2,"text":"Newton Interpolation"},{"id":"hermite-interpolation","level":2,"text":"Hermite Interpolation"},{"id":"lagrange-method","level":3,"text":"Lagrange Method"},{"id":"newton-method-for-hermite-interpolation","level":3,"text":"Newton Method for Hermite Interpolation"},{"id":"error-analysis","level":3,"text":"Error Analysis"},{"id":"cubic-spline-interpolation","level":2,"text":"Cubic Spline Interpolation"},{"id":"numerical-integration-and-numerical-differentiation","level":1,"text":"Numerical Integration and Numerical Differentiation"},{"id":"interpolationtype-numerical-integration","level":2,"text":"Interpolation-Type Numerical Integration"},{"id":"algebraic-precision","level":2,"text":"Algebraic Precision"},{"id":"romberg-algorithm","level":2,"text":"Romberg Algorithm"},{"id":"gausslegendre-theorem","level":2,"text":"Gauss-Legendre Theorem"},{"id":"numerical-differentiation","level":2,"text":"Numerical Differentiation"},{"id":"ordinary-differential-equations-ode","level":1,"text":"Ordinary Differential Equations (ODE)"},{"id":"euler-formula","level":2,"text":"Euler Formula"},{"id":"rungekutta-formula","level":2,"text":"Runge-Kutta Formula"},{"id":"iterative-method-to-solve-linear-equation","level":1,"text":"Iterative Method to Solve Linear Equation"},{"id":"jacobi-iterative","level":2,"text":"Jacobi Iterative"},{"id":"gaussseidel-iterative","level":2,"text":"Gauss-Seidel Iterative"},{"id":"nonlinear-equation","level":1,"text":"Non-Linear Equation"},{"id":"bisection-method","level":2,"text":"Bisection Method"},{"id":"fixedpoint-iteration","level":2,"text":"Fixed-Point Iteration"},{"id":"newton-method","level":2,"text":"Newton Method"},{"id":"secant-method","level":2,"text":"Secant Method"},{"id":"newton-s-method-for-nonlinear-equation-systems","level":2,"text":"Newton's Method for Nonlinear Equation Systems"},{"id":"fitting","level":1,"text":"Fitting"},{"id":"optimization-without-constraint-todo","level":1,"text":"Optimization without Constraint (TODO)"},{"id":"onedimensional-search-todo","level":2,"text":"One-Dimensional Search (TODO)"},{"id":"gradient-methods-todo","level":2,"text":"Gradient Methods (TODO)"},{"id":"conjugate-direction-method-todo","level":2,"text":"Conjugate Direction Method (TODO)"},{"id":"heuristic-algorithm-todo","level":2,"text":"Heuristic Algorithm (TODO)"},{"id":"optimization-with-constraint","level":1,"text":"Optimization with Constraint"},{"id":"lagrange-multiplier-method-todo","level":2,"text":"Lagrange Multiplier Method (TODO)"},{"id":"karushkuhntucker-condition-todo","level":2,"text":"Karush-Kuhn-Tucker Condition (TODO)"},{"id":"convex-optimization-todo","level":2,"text":"Convex Optimization (TODO)"},{"id":"multiobjective-optimization-todo","level":2,"text":"Multi-Objective Optimization (TODO)"},{"id":"approximation-todo","level":1,"text":"Approximation (TODO)"},{"id":"best-square-approximation-todo","level":2,"text":"Best Square Approximation (TODO)"},{"id":"best-uniform-approximation-polynomial-todo","level":2,"text":"Best Uniform Approximation Polynomial (TODO)"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -862,6 +862,59 @@ For equally spaced nodes $x_i=x_0+ih$ with $n=2$, evaluating $L_2'(x)$ at the th
 
 The errors in the table are exact derivative minus approximation, with $f\in C^3[x_0,x_2]$. The middle formula is exactly the central difference above, and its error agrees with the Taylor analysis. In floating-point computation, very small $h$ amplifies data and roundoff errors through division by $h$; decreasing $h$ indefinitely need not improve accuracy.
 
+# Ordinary Differential Equations (ODE)
+
+In this section, we will talk about how to numerically solve the equation:
+$$\left\{\begin{matrix}
+ \frac{\mathrm{d}y}{\mathrm{d}x}=f(x,y)\\
+y(a)=y_0
+\end{matrix}\right.$$
+
+## Euler Formula
+
+We want to solve it in interval $[a,b]$.
+
+Let $m\ge1$ be an integer, $h=(b-a)/m>0$, and 
+$$x_n=a+nh,\qquad n=0,1,\dots,m.$$
+If we use forward difference, then
+$$f(x_n,y(x_n))=y'(x_n)\approx\frac{y(x_{n+1})-y(x_n)}{h}$$
+We use $y_n$ to approximate $y(x_n)$. Starting with $y_0=y(a)$, the update is 
+$$y_{n+1}=y_n+hf(x_n,y_n),\qquad n=0,1,\dots,m-1.$$
+It is called <span style="color: red;">forward Euler formula</span>.
+
+To analyze the error of it, we use the error of numerical difference.
+$$y(x_{n+1})=y(x_n)+hf(x_n,y(x_n))+
+\frac{h^2}{2!}y''(\xi_n),x_n\le\xi_n\le x_{n+1}$$
+Therefore, if $y_n=y(x_n)$, the error of it is
+$$T_{n+1}=y(x_{n+1})-y_{n+1}=\frac{h^2}{2!}y''(\xi_n)=O(h^2),x_n\le\xi_n\le x_{n+1}$$
+
+Here $T_{n+1}$ is the local one-step error, assuming an exact starting value for that step. Some texts define the local truncation error as $T_{n+1}/h$, which is $O(h)$. The global error $e_n=y(x_n)-y_n$ is different: if $y''$ is bounded and $f$ is Lipschitz in $y$ with constant $L$ on the relevant region, then
+$$|e_{n+1}|\le(1+hL)|e_n|+Ch^2.$$
+With $e_0=0$, this yields $\max_{0\le n\le m}|e_n|=O(h)$ on the fixed interval $[a,b]$.
+We can also use backward difference
+$$f(x_{n+1},y(x_{n+1}))=y'(x_{n+1})\approx\frac{y(x_{n+1})-y(x_{n})}{h}$$
+As a result, 
+$$y_{n+1}=y_{n}+hf(x_{n+1},y_{n+1})$$
+This is the backward Euler formula. It requires solving an implicit equation at each step. Some equations can be solved explicitly; otherwise a nonlinear solver such as Newton's method can be used. A fixed-point solver needs its own convergence conditions.
+
+## Runge-Kutta Formula
+
+We can also calculate the average of them and get the trapezoid formula:
+$$y_{n+1}=y_n+\frac{h}{2}(f(x_n,y_n)+f(x_{n+1},y_{n+1}))$$
+
+The trapezoid method is implicit. Replacing its unknown endpoint value by an Euler predictor gives the explicit Heun method:
+$$\begin{aligned}
+\widetilde y_{n+1}&=y_n+hf(x_n,y_n),\\
+y_{n+1}&=y_n+\frac h2\left[f(x_n,y_n)+f(x_{n+1},\widetilde y_{n+1})\right].
+\end{aligned}$$
+Equivalently, using stages that represent slopes,
+$$\begin{aligned}
+K_1&=f(x_n,y_n),\\
+K_2&=f(x_n+h,y_n+hK_1),\\
+y_{n+1}&=y_n+\frac h2(K_1+K_2).
+\end{aligned}$$
+Heun's method is a second-order explicit Runge–Kutta method. It approximates the implicit trapezoid step; the two methods are not identical. Under sufficient smoothness and a Lipschitz condition in $y$, both have local one-step error $O(h^3)$ and global error $O(h^2)$. Solvability of the implicit equation must also hold for the trapezoid method.
+
 # Iterative Method to Solve Linear Equation
 
 ## Jacobi Iterative
@@ -1076,59 +1129,6 @@ For the linear version, we introduced it in [Standard Form of Linear Programming
 ## Best Square Approximation (TODO)
 
 ## Best Uniform Approximation Polynomial (TODO)
-
-# Ordinary Differential Equations (ODE)
-
-In this section, we will talk about how to numerically solve the equation:
-$$\left\{\begin{matrix}
- \frac{\mathrm{d}y}{\mathrm{d}x}=f(x,y)\\
-y(a)=y_0
-\end{matrix}\right.$$
-
-## Euler Formula
-
-We want to solve it in interval $[a,b]$.
-
-Let $m\ge1$ be an integer, $h=(b-a)/m>0$, and 
-$$x_n=a+nh,\qquad n=0,1,\dots,m.$$
-If we use forward difference, then
-$$f(x_n,y(x_n))=y'(x_n)\approx\frac{y(x_{n+1})-y(x_n)}{h}$$
-We use $y_n$ to approximate $y(x_n)$. Starting with $y_0=y(a)$, the update is 
-$$y_{n+1}=y_n+hf(x_n,y_n),\qquad n=0,1,\dots,m-1.$$
-It is called <span style="color: red;">forward Euler formula</span>.
-
-To analyze the error of it, we use the error of numerical difference.
-$$y(x_{n+1})=y(x_n)+hf(x_n,y(x_n))+
-\frac{h^2}{2!}y''(\xi_n),x_n\le\xi_n\le x_{n+1}$$
-Therefore, if $y_n=y(x_n)$, the error of it is
-$$T_{n+1}=y(x_{n+1})-y_{n+1}=\frac{h^2}{2!}y''(\xi_n)=O(h^2),x_n\le\xi_n\le x_{n+1}$$
-
-Here $T_{n+1}$ is the local one-step error, assuming an exact starting value for that step. Some texts define the local truncation error as $T_{n+1}/h$, which is $O(h)$. The global error $e_n=y(x_n)-y_n$ is different: if $y''$ is bounded and $f$ is Lipschitz in $y$ with constant $L$ on the relevant region, then
-$$|e_{n+1}|\le(1+hL)|e_n|+Ch^2.$$
-With $e_0=0$, this yields $\max_{0\le n\le m}|e_n|=O(h)$ on the fixed interval $[a,b]$.
-We can also use backward difference
-$$f(x_{n+1},y(x_{n+1}))=y'(x_{n+1})\approx\frac{y(x_{n+1})-y(x_{n})}{h}$$
-As a result, 
-$$y_{n+1}=y_{n}+hf(x_{n+1},y_{n+1})$$
-This is the backward Euler formula. It requires solving an implicit equation at each step. Some equations can be solved explicitly; otherwise a nonlinear solver such as Newton's method can be used. A fixed-point solver needs its own convergence conditions.
-
-## Runge-Kutta Formula
-
-We can also calculate the average of them and get the trapezoid formula:
-$$y_{n+1}=y_n+\frac{h}{2}(f(x_n,y_n)+f(x_{n+1},y_{n+1}))$$
-
-The trapezoid method is implicit. Replacing its unknown endpoint value by an Euler predictor gives the explicit Heun method:
-$$\begin{aligned}
-\widetilde y_{n+1}&=y_n+hf(x_n,y_n),\\
-y_{n+1}&=y_n+\frac h2\left[f(x_n,y_n)+f(x_{n+1},\widetilde y_{n+1})\right].
-\end{aligned}$$
-Equivalently, using stages that represent slopes,
-$$\begin{aligned}
-K_1&=f(x_n,y_n),\\
-K_2&=f(x_n+h,y_n+hK_1),\\
-y_{n+1}&=y_n+\frac h2(K_1+K_2).
-\end{aligned}$$
-Heun's method is a second-order explicit Runge–Kutta method. It approximates the implicit trapezoid step; the two methods are not identical. Under sufficient smoothness and a Lipschitz condition in $y$, both have local one-step error $O(h^3)$ and global error $O(h^2)$. Solvability of the implicit equation must also hold for the trapezoid method.
         </script>
     </main>
 

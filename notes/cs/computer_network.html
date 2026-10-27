@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Computer Network | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=dd2645fcc0">
+    <link rel="stylesheet" href="../../style.css?v=8801534efc">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
@@ -51,7 +51,7 @@
                     <span>Routing</span>
                     <span>Protocols</span>
                 </div>
-                <time datetime="2026-07-30">Jul 30, 2026</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
             </div>
         </header>
 
@@ -428,7 +428,6 @@ Client: socket → connect ───────────→ send/recv → cl
 <h3 id="transportlayer-overview">Transport-Layer Overview</h3>
 <p>The network layer provides logical host-to-host communication. The transport layer extends this service to provide logical process-to-process communication.</p>
 <p>At the sender, the transport layer divides application messages as needed, adds transport headers, and passes the resulting units to the network layer for encapsulation in IP datagrams. The receiver performs the reverse process.</p>
-<h4 id="multiplexing-and-demultiplexing">Multiplexing and Demultiplexing</h4>
 <ul>
 <li><span class="obsidian-red">Multiplexing</span>: The sender gathers data from multiple sockets, adds header information, and passes the segments or datagrams to the network layer.</li>
 <li><span class="obsidian-red">Demultiplexing</span>: The receiver examines transport-layer header fields and delivers data to the correct socket.</li>
@@ -438,38 +437,39 @@ Client: socket → connect ───────────→ send/recv → cl
 <li>UDP demultiplexing primarily uses the tuple <code>(destination IP, destination port)</code>. Datagrams from different sources can be delivered to the same destination socket.</li>
 <li>A TCP connection is identified by the four-tuple <code>(source IP, source port, destination IP, destination port)</code>. A server can therefore support many simultaneous connections on one listening port.</li>
 </ul>
-<h3 id="udp">UDP</h3>
-<p>UDP adds only basic multiplexing, demultiplexing, and error detection to IP. It is connectionless, has a small header, and does not guarantee delivery or ordering.</p>
-<h4 id="udp-datagram-structure">UDP Datagram Structure</h4>
-<p>The UDP header is 8 bytes long:</p>
-<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Field</th><th>Length</th><th>Purpose</th></tr></thead><tbody><tr><td>Source port</td><td>16 bits</td><td>Identifies the sending process; may be zero</td></tr><tr><td>Destination port</td><td>16 bits</td><td>Identifies the receiving process</td></tr><tr><td>Length</td><td>16 bits</td><td>Total length of the header and payload</td></tr><tr><td>Checksum</td><td>16 bits</td><td>Detects bit errors in the header and payload</td></tr></tbody></table></div>
-<p>The UDP checksum can detect many transmission errors, but it cannot recover lost, reordered, or corrupted data. Applications must implement retransmission, ordering, or other reliability mechanisms when needed.</p>
-<h3 id="principles-of-reliable-data-transfer">Principles of Reliable Data Transfer</h3>
-<p>Common reliability mechanisms include error detection, sequence numbers, acknowledgments, timeout-based retransmission, and pipelining.</p>
-<h4 id="evolution-of-the-rdt-protocols">Evolution of the rdt Protocols</h4>
+<h4 id="reliable-data-transfer-rdt">Reliable Data Transfer (RDT)</h4>
+<p>RDT refers to a series of abstract protocol models used to study how to achieve reliable transmission. The following is its evolution:</p>
 <ul>
 <li>rdt1.0: Assumes a completely reliable underlying channel.</li>
 <li>rdt2.0: Handles bit errors with checksums, ACK/NAK feedback, and retransmission, but does not handle corrupted ACK or NAK packets.</li>
 <li>rdt2.1: Adds sequence numbers so duplicate packets can be recognized.</li>
-<li>rdt2.2: Uses numbered ACKs and no longer requires NAKs.</li>
+<li>rdt2.2: Uses numbered ACKs and no longer requires NAKs. If the packet has errors, we send the former ACK.</li>
 <li>rdt3.0: Also handles lost data packets and ACKs by adding timers and timeout retransmission. Because its sequence number alternates between 0 and 1, it is also called the alternating-bit protocol.</li>
 </ul>
 <p>These are fundamentally <span class="obsidian-red">stop-and-wait</span> protocols: the sender transmits one packet and waits for an acknowledgment. If ACK transmission time is ignored, sender utilization is approximately:</p>
 <p>$$ \boxed{U_{sender}=\frac{L/R}{RTT+L/R}} $$</p>
-<p>Stop-and-wait performs poorly when RTT is large, which motivates <span class="obsidian-red">pipelined protocols</span>.</p>
+<p>where $L$ is the size of data grouping, $R$ is the rate of link transmission.</p>
 <h4 id="gbn-and-sr">GBN and SR</h4>
-<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Property</th><th>Go-Back-N (GBN)</th><th>Selective Repeat (SR)</th></tr></thead><tbody><tr><td>Acknowledgment</td><td>Cumulative</td><td>Individual</td></tr><tr><td>Receiver behavior</td><td>Usually discards out-of-order packets</td><td>Buffers out-of-order packets</td></tr><tr><td>Timers</td><td>Usually one timer for the oldest unacknowledged packet</td><td>Usually one timer per unacknowledged packet</td></tr><tr><td>Retransmission</td><td>Retransmits all outstanding packets from the missing one onward</td><td>Retransmits only packets suspected to be missing</td></tr><tr><td>Complexity</td><td>Lower</td><td>Higher, but more efficient on lossy links</td></tr></tbody></table></div>
-<p>To avoid sequence-number ambiguity in SR, if the sequence-number space has size $K$, the window size should satisfy:</p>
-<p>$$ \boxed{N\le \frac{K}{2}} $$</p>
-<h3 id="tcp">TCP</h3>
-<h4 id="tcp-connections-and-data-transfer">TCP Connections and Data Transfer</h4>
-<p>TCP is a full-duplex, point-to-point, connection-oriented protocol that provides a reliable byte stream. Each endpoint maintains its own send and receive buffers.</p>
+<p>Stop-and-wait performs poorly when RTT is large, which motivates <span class="obsidian-red">pipelined protocols</span>. We call the size of data transmitted simultaneously as window. For example, the window in the following figure is $3$. We can find that this method triples $U$. <img src="../attachments/Screenshot%202026-10-19%20at%2014.56.50-optimized.webp" alt="Screenshot 2026-10-19 at 14.56.50" loading="lazy" decoding="async"></p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Property</th><th>Go-Back-N (GBN)</th><th>Selective Repeat (SR)</th></tr></thead><tbody><tr><td>Receiver behavior</td><td>Usually discards out-of-order packets</td><td>Buffers out-of-order packets</td></tr><tr><td>Timers</td><td>Usually one timer for the oldest unacknowledged packet</td><td>Usually one timer per unacknowledged packet</td></tr><tr><td>Retransmission</td><td>Retransmits all outstanding packets from the missing one onward</td><td>Retransmits only packets suspected to be missing</td></tr><tr><td>Complexity</td><td>Lower</td><td>Higher, but more efficient on lossy links</td></tr></tbody></table></div>
+<p>Although SR is more efficient, it has a big problem: Ambiguity between old and new packets resulting from sequence number wrap-around. For example, when we want to transmit the 2 bit packer: $$0,1,2,3,0,1,\cdots$$ If we transmit too much data simultaneously, we cannot distinguish the new and old packet. To avoid sequence-number ambiguity in SR, if the sequence-number space has size $K$, the window size should satisfy: $$ \boxed{N\le \frac{K}{2}} $$</p>
+<h3 id="udp">UDP</h3>
+<p>UDP adds only basic multiplexing, demultiplexing, and error detection to IP. It is connectionless, has a small header, and does not guarantee delivery or ordering.</p>
+<p>When an application calls <code>sendto()</code>, UDP typically constructs a datagram immediately and passes it to the IP layer for processing, without waiting for an acknowledgment (ACK) or for a send window to open.</p>
+<p>Consequently, the application gains more direct control over the timing of datagram transmission and preserves application-layer message boundaries.</p>
+<h4 id="udp-datagram-structure">UDP Datagram Structure</h4>
+<p>The UDP header is 8 bytes long:</p>
+<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table><thead><tr><th>Field</th><th>Length</th><th>Purpose</th></tr></thead><tbody><tr><td>Source port</td><td>16 bits</td><td>Identifies the sending process; may be zero</td></tr><tr><td>Destination port</td><td>16 bits</td><td>Identifies the receiving process</td></tr><tr><td>Length</td><td>16 bits</td><td>Total length of the header and payload</td></tr><tr><td>Checksum</td><td>16 bits</td><td>Detects bit errors in the header and payload</td></tr></tbody></table></div>
+<p>The UDP checksum can detect many transmission errors, but it cannot recover lost, reordered, or corrupted data. Applications must implement retransmission, ordering, or other reliability mechanisms when needed.</p>
+<p>We use checksum to detect the error in the header. Checksum is the complement of the sum of the pseudo-header, UDP header, UDP data. Pseudo-header includes the sender and receiver&#039;s IP. <img src="../attachments/Screenshot%202026-10-19%20at%2015.49.42-optimized.webp" alt="Screenshot 2026-10-19 at 15.49.42" loading="lazy" decoding="async"> Notice:</p>
 <ul>
-<li><span class="obsidian-red">Maximum Segment Size (MSS)</span>: The maximum amount of application data in a TCP segment.</li>
-<li>Maximum Transmission Unit (MTU): The largest network-layer packet that a link-layer frame can carry.</li>
-<li>Ethernet commonly has a 1500-byte MTU. With IPv4 and TCP headers that contain no options, a typical MSS is 1460 bytes.</li>
+<li>When calculating the checksum, set the checksum field to 0.</li>
+<li>The receiver calculates the sum of the UDP packet (including the checksum) and the pseudo-header; if the result is 0xFFFF, it is considered error-free.</li>
 </ul>
+<h3 id="tcp">TCP</h3>
+<p>TCP is a full-duplex, point-to-point, connection-oriented protocol that provides a reliable byte stream. Each endpoint maintains its own send and receive buffers. To provide reliable, ordered data transmission and network congestion control, TCP independently manages the organization of segments and the timing of their transmission.</p>
 <h4 id="important-tcp-header-fields">Important TCP Header Fields</h4>
+<p><img src="../attachments/Screenshot%202026-10-19%20at%2016.44.23-optimized.webp" alt="Screenshot 2026-10-19 at 16.44.23" loading="lazy" decoding="async"></p>
 <ul>
 <li>Source and destination ports;</li>
 <li>Sequence number;</li>
@@ -480,11 +480,20 @@ Client: socket → connect ───────────→ send/recv → cl
 <li>Options such as MSS, window scaling, and timestamps.</li>
 </ul>
 <p>TCP sequence numbers count bytes. The acknowledgment number indicates the sequence number of the next byte the receiver expects.</p>
+<ul>
+<li><span class="obsidian-red">Maximum Segment Size (MSS)</span>: The maximum amount of application data in a TCP segment.</li>
+<li><span class="obsidian-red">Window Scale</span>: Receive window only has 16 bits, so it can at most denote $2^{16}-1=65535$. To express larger one, we introduce the window scale $S$. The actual receive window is interpreted as:</li>
+</ul>
+<p>$$ \text{rwnd}=\text{Window}\times2^S $$</p>
+<ul>
+<li><span class="obsidian-red">SACK</span>: Next expected byte order.</li>
+</ul>
 <h4 id="rtt-estimation-and-timeout">RTT Estimation and Timeout</h4>
-<p>TCP smooths RTT measurements so that the retransmission timeout does not change dramatically after one sample:</p>
-<p>$$ EstimatedRTT=(1-\alpha)EstimatedRTT+\alpha SampleRTT $$</p>
-<p>$$ DevRTT=(1-\beta)DevRTT+\beta|SampleRTT-EstimatedRTT| $$</p>
-<p>$$ \boxed{TimeoutInterval=EstimatedRTT+4DevRTT} $$</p>
+<p>TCP smooths RTT measurements so that the retransmission timeout does not change dramatically after one sample: $$ \text{EstimatedRTT}=(1-\alpha)\text{EstimatedRTT}+\alpha \text{SampleRTT} $$</p>
+<p>It can be also written as: $$ E_n=(1-\alpha)E_{n-1}+\alpha S_n $$</p>
+<p>where $E_n$ is the estimated time after sample $n$ and $S_n$ is the time of sample $n$.</p>
+<p>We can find that $$E_n=(1-\alpha)^nE_0+\alpha\sum_{k=0}^{n-1}(1-\alpha)^kS_{n-k}$$ So this method is called <span class="obsidian-red">Exponentially Weighted Moving Average</span>.</p>
+<p>We typically use DevRTT to measure the degree of fluctuation in network latency. $$ \text{DevRTT}=(1-\beta)\text{DevRTT}+\beta|\text{SampleRTT}-\text{EstimatedRTT}| $$ And generally, we use TimeOutInterval to judge the time of retransmit the data. To avoid misidentifying lost packets, we need to consider DevRTT. The following is a commonly used empirical formula. $$ \boxed{\text{TimeOutInterval}=\text{EstimatedRTT}+4\text{DevRTT}} $$</p>
 <p>Textbook examples commonly use $\alpha=0.125$ and $\beta=0.25$.</p>
 <h4 id="reliable-transfer-and-fast-retransmit">Reliable Transfer and Fast Retransmit</h4>
 <p>TCP uses checksums, sequence numbers, cumulative acknowledgments, timers, and retransmission to provide reliable transfer. After receiving multiple duplicate ACKs, a sender can infer that a segment was probably lost and perform fast retransmit before the timer expires.</p>
@@ -596,7 +605,7 @@ Client: socket → connect ───────────→ send/recv → cl
 <li>Keeping software updated and monitoring logs for anomalous behavior.</li>
 </ul>
             </article>
-            <script type="application/json" id="article-headings">[{"id":"internet-overview","level":1,"text":"Internet Overview"},{"id":"components","level":2,"text":"Components"},{"id":"two-views-of-the-internet","level":2,"text":"Two Views of the Internet"},{"id":"network-edge-and-access-networks","level":2,"text":"Network Edge and Access Networks"},{"id":"residential-access-digital-subscriber-line-dsl","level":3,"text":"Residential Access: Digital Subscriber Line (DSL)"},{"id":"residential-access-cable-networks-and-hfc","level":3,"text":"Residential Access: Cable Networks and HFC"},{"id":"residential-access-fiber-to-the-home-ftth","level":3,"text":"Residential Access: Fiber to the Home (FTTH)"},{"id":"enterprise-and-campus-access-ethernet","level":3,"text":"Enterprise and Campus Access: Ethernet"},{"id":"wireless-access","level":3,"text":"Wireless Access"},{"id":"network-core","level":2,"text":"Network Core"},{"id":"forwarding-and-routing","level":3,"text":"Forwarding and Routing"},{"id":"circuit-switching-and-packet-switching","level":3,"text":"Circuit Switching and Packet Switching"},{"id":"network-of-networks","level":3,"text":"Network of Networks"},{"id":"delay-packet-loss-and-throughput","level":3,"text":"Delay, Packet Loss, and Throughput"},{"id":"layering-and-encapsulation","level":2,"text":"Layering and Encapsulation"},{"id":"application-layer","level":1,"text":"Application Layer"},{"id":"application-architectures","level":2,"text":"Application Architectures"},{"id":"client-server","level":3,"text":"Client–Server"},{"id":"peertopeer-p2p","level":3,"text":"Peer-to-Peer (P2P)"},{"id":"processes-sockets-and-addressing","level":2,"text":"Processes, Sockets, and Addressing"},{"id":"transport-services-required-by-applications","level":2,"text":"Transport Services Required by Applications"},{"id":"web-and-http","level":2,"text":"Web and HTTP"},{"id":"core-concepts","level":3,"text":"Core Concepts"},{"id":"connections-and-response-time","level":3,"text":"Connections and Response Time"},{"id":"http-messages","level":3,"text":"HTTP Messages"},{"id":"cookies","level":3,"text":"Cookies"},{"id":"web-caching-and-conditional-requests","level":3,"text":"Web Caching and Conditional Requests"},{"id":"file-transfer-protocol-ftp","level":2,"text":"File Transfer Protocol (FTP)"},{"id":"email","level":2,"text":"Email"},{"id":"domain-name-system-dns","level":2,"text":"Domain Name System (DNS)"},{"id":"purpose-and-properties","level":3,"text":"Purpose and Properties"},{"id":"resolution-process","level":3,"text":"Resolution Process"},{"id":"dns-caching","level":3,"text":"DNS Caching"},{"id":"common-resource-records","level":3,"text":"Common Resource Records"},{"id":"p2p-file-distribution-and-bittorrent","level":2,"text":"P2P File Distribution and BitTorrent"},{"id":"video-streaming-and-cdns","level":2,"text":"Video Streaming and CDNs"},{"id":"dynamic-adaptive-streaming-over-http-dash","level":3,"text":"Dynamic, Adaptive Streaming over HTTP (DASH)"},{"id":"content-distribution-networks-cdns","level":3,"text":"Content Distribution Networks (CDNs)"},{"id":"socket-programming","level":2,"text":"Socket Programming"},{"id":"udp-sockets","level":3,"text":"UDP Sockets"},{"id":"tcp-sockets","level":3,"text":"TCP Sockets"},{"id":"transport-layer","level":1,"text":"Transport Layer"},{"id":"transportlayer-overview","level":2,"text":"Transport-Layer Overview"},{"id":"multiplexing-and-demultiplexing","level":3,"text":"Multiplexing and Demultiplexing"},{"id":"udp","level":2,"text":"UDP"},{"id":"udp-datagram-structure","level":3,"text":"UDP Datagram Structure"},{"id":"principles-of-reliable-data-transfer","level":2,"text":"Principles of Reliable Data Transfer"},{"id":"evolution-of-the-rdt-protocols","level":3,"text":"Evolution of the rdt Protocols"},{"id":"gbn-and-sr","level":3,"text":"GBN and SR"},{"id":"tcp","level":2,"text":"TCP"},{"id":"tcp-connections-and-data-transfer","level":3,"text":"TCP Connections and Data Transfer"},{"id":"important-tcp-header-fields","level":3,"text":"Important TCP Header Fields"},{"id":"rtt-estimation-and-timeout","level":3,"text":"RTT Estimation and Timeout"},{"id":"reliable-transfer-and-fast-retransmit","level":3,"text":"Reliable Transfer and Fast Retransmit"},{"id":"flow-control-and-congestion-control","level":3,"text":"Flow Control and Congestion Control"},{"id":"connection-management","level":3,"text":"Connection Management"},{"id":"network-layer-todo","level":1,"text":"Network Layer (TODO)"},{"id":"networklayer-overview","level":2,"text":"Network-Layer Overview"},{"id":"the-ip-service-model","level":2,"text":"The IP Service Model"},{"id":"subnets-and-forwarding","level":2,"text":"Subnets and Forwarding"},{"id":"the-control-plane","level":2,"text":"The Control Plane"},{"id":"link-layer-and-local-area-networks-todo","level":1,"text":"Link Layer and Local Area Networks (TODO)"},{"id":"linklayer-overview","level":2,"text":"Link-Layer Overview"},{"id":"mac-addresses-and-ethernet","level":2,"text":"MAC Addresses and Ethernet"},{"id":"arp","level":2,"text":"ARP"},{"id":"error-detection","level":2,"text":"Error Detection"},{"id":"wireless-networks-todo","level":1,"text":"Wireless Networks (TODO)"},{"id":"wireless-networking-essentials","level":2,"text":"Wireless Networking Essentials"},{"id":"network-security-todo","level":1,"text":"Network Security (TODO)"},{"id":"security-goals-and-common-attacks","level":2,"text":"Security Goals and Common Attacks"}]</script>
+            <script type="application/json" id="article-headings">[{"id":"internet-overview","level":1,"text":"Internet Overview"},{"id":"components","level":2,"text":"Components"},{"id":"two-views-of-the-internet","level":2,"text":"Two Views of the Internet"},{"id":"network-edge-and-access-networks","level":2,"text":"Network Edge and Access Networks"},{"id":"residential-access-digital-subscriber-line-dsl","level":3,"text":"Residential Access: Digital Subscriber Line (DSL)"},{"id":"residential-access-cable-networks-and-hfc","level":3,"text":"Residential Access: Cable Networks and HFC"},{"id":"residential-access-fiber-to-the-home-ftth","level":3,"text":"Residential Access: Fiber to the Home (FTTH)"},{"id":"enterprise-and-campus-access-ethernet","level":3,"text":"Enterprise and Campus Access: Ethernet"},{"id":"wireless-access","level":3,"text":"Wireless Access"},{"id":"network-core","level":2,"text":"Network Core"},{"id":"forwarding-and-routing","level":3,"text":"Forwarding and Routing"},{"id":"circuit-switching-and-packet-switching","level":3,"text":"Circuit Switching and Packet Switching"},{"id":"network-of-networks","level":3,"text":"Network of Networks"},{"id":"delay-packet-loss-and-throughput","level":3,"text":"Delay, Packet Loss, and Throughput"},{"id":"layering-and-encapsulation","level":2,"text":"Layering and Encapsulation"},{"id":"application-layer","level":1,"text":"Application Layer"},{"id":"application-architectures","level":2,"text":"Application Architectures"},{"id":"client-server","level":3,"text":"Client–Server"},{"id":"peertopeer-p2p","level":3,"text":"Peer-to-Peer (P2P)"},{"id":"processes-sockets-and-addressing","level":2,"text":"Processes, Sockets, and Addressing"},{"id":"transport-services-required-by-applications","level":2,"text":"Transport Services Required by Applications"},{"id":"web-and-http","level":2,"text":"Web and HTTP"},{"id":"core-concepts","level":3,"text":"Core Concepts"},{"id":"connections-and-response-time","level":3,"text":"Connections and Response Time"},{"id":"http-messages","level":3,"text":"HTTP Messages"},{"id":"cookies","level":3,"text":"Cookies"},{"id":"web-caching-and-conditional-requests","level":3,"text":"Web Caching and Conditional Requests"},{"id":"file-transfer-protocol-ftp","level":2,"text":"File Transfer Protocol (FTP)"},{"id":"email","level":2,"text":"Email"},{"id":"domain-name-system-dns","level":2,"text":"Domain Name System (DNS)"},{"id":"purpose-and-properties","level":3,"text":"Purpose and Properties"},{"id":"resolution-process","level":3,"text":"Resolution Process"},{"id":"dns-caching","level":3,"text":"DNS Caching"},{"id":"common-resource-records","level":3,"text":"Common Resource Records"},{"id":"p2p-file-distribution-and-bittorrent","level":2,"text":"P2P File Distribution and BitTorrent"},{"id":"video-streaming-and-cdns","level":2,"text":"Video Streaming and CDNs"},{"id":"dynamic-adaptive-streaming-over-http-dash","level":3,"text":"Dynamic, Adaptive Streaming over HTTP (DASH)"},{"id":"content-distribution-networks-cdns","level":3,"text":"Content Distribution Networks (CDNs)"},{"id":"socket-programming","level":2,"text":"Socket Programming"},{"id":"udp-sockets","level":3,"text":"UDP Sockets"},{"id":"tcp-sockets","level":3,"text":"TCP Sockets"},{"id":"transport-layer","level":1,"text":"Transport Layer"},{"id":"transportlayer-overview","level":2,"text":"Transport-Layer Overview"},{"id":"reliable-data-transfer-rdt","level":3,"text":"Reliable Data Transfer (RDT)"},{"id":"gbn-and-sr","level":3,"text":"GBN and SR"},{"id":"udp","level":2,"text":"UDP"},{"id":"udp-datagram-structure","level":3,"text":"UDP Datagram Structure"},{"id":"tcp","level":2,"text":"TCP"},{"id":"important-tcp-header-fields","level":3,"text":"Important TCP Header Fields"},{"id":"rtt-estimation-and-timeout","level":3,"text":"RTT Estimation and Timeout"},{"id":"reliable-transfer-and-fast-retransmit","level":3,"text":"Reliable Transfer and Fast Retransmit"},{"id":"flow-control-and-congestion-control","level":3,"text":"Flow Control and Congestion Control"},{"id":"connection-management","level":3,"text":"Connection Management"},{"id":"network-layer-todo","level":1,"text":"Network Layer (TODO)"},{"id":"networklayer-overview","level":2,"text":"Network-Layer Overview"},{"id":"the-ip-service-model","level":2,"text":"The IP Service Model"},{"id":"subnets-and-forwarding","level":2,"text":"Subnets and Forwarding"},{"id":"the-control-plane","level":2,"text":"The Control Plane"},{"id":"link-layer-and-local-area-networks-todo","level":1,"text":"Link Layer and Local Area Networks (TODO)"},{"id":"linklayer-overview","level":2,"text":"Link-Layer Overview"},{"id":"mac-addresses-and-ethernet","level":2,"text":"MAC Addresses and Ethernet"},{"id":"arp","level":2,"text":"ARP"},{"id":"error-detection","level":2,"text":"Error Detection"},{"id":"wireless-networks-todo","level":1,"text":"Wireless Networks (TODO)"},{"id":"wireless-networking-essentials","level":2,"text":"Wireless Networking Essentials"},{"id":"network-security-todo","level":1,"text":"Network Security (TODO)"},{"id":"security-goals-and-common-attacks","level":2,"text":"Security Goals and Common Attacks"}]</script>
         </div>
 
         <section class="article-comments" aria-labelledby="comments-title">
@@ -1163,8 +1172,6 @@ The network layer provides logical host-to-host communication. The transport lay
 
 At the sender, the transport layer divides application messages as needed, adds transport headers, and passes the resulting units to the network layer for encapsulation in IP datagrams. The receiver performs the reverse process.
 
-### Multiplexing and Demultiplexing
-
 - <span style="color: red;">Multiplexing</span>: The sender gathers data from multiple sockets, adds header information, and passes the segments or datagrams to the network layer.
 - <span style="color: red;">Demultiplexing</span>: The receiver examines transport-layer header fields and delivers data to the correct socket.
 
@@ -1173,10 +1180,48 @@ A port number is 16 bits long and ranges from 0 to 65535. Ports 0–1023 are com
 - UDP demultiplexing primarily uses the tuple `(destination IP, destination port)`. Datagrams from different sources can be delivered to the same destination socket.
 - A TCP connection is identified by the four-tuple `(source IP, source port, destination IP, destination port)`. A server can therefore support many simultaneous connections on one listening port.
 
+### Reliable Data Transfer (RDT)
+
+RDT refers to a series of abstract protocol models used to study how to achieve reliable transmission. The following is its evolution:
+
+- rdt1.0: Assumes a completely reliable underlying channel.
+- rdt2.0: Handles bit errors with checksums, ACK/NAK feedback, and retransmission, but does not handle corrupted ACK or NAK packets.
+- rdt2.1: Adds sequence numbers so duplicate packets can be recognized.
+- rdt2.2: Uses numbered ACKs and no longer requires NAKs. If the packet has errors, we send the former ACK.
+- rdt3.0: Also handles lost data packets and ACKs by adding timers and timeout retransmission. Because its sequence number alternates between 0 and 1, it is also called the alternating-bit protocol.
+
+These are fundamentally <span style="color: red;">stop-and-wait</span> protocols: the sender transmits one packet and waits for an acknowledgment. If ACK transmission time is ignored, sender utilization is approximately:
+
+$$
+\boxed{U_{sender}=\frac{L/R}{RTT+L/R}}
+$$
+
+where $L$ is the size of data grouping, $R$ is the rate of link transmission.
+
+### GBN and SR
+
+Stop-and-wait performs poorly when RTT is large, which motivates <span style="color: red;">pipelined protocols</span>. We call the size of data transmitted simultaneously as window. For example, the window in the following figure is $3$. We can find that this method triples $U$.
+![Screenshot 2026-10-19 at 14.56.50](../attachments/Screenshot%202026-10-19%20at%2014.56.50-optimized.webp)
+
+| Property          | Go-Back-N (GBN)                                                 | Selective Repeat (SR)                            |
+| ----------------- | --------------------------------------------------------------- | ------------------------------------------------ |
+| Receiver behavior | Usually discards out-of-order packets                           | Buffers out-of-order packets                     |
+| Timers            | Usually one timer for the oldest unacknowledged packet          | Usually one timer per unacknowledged packet      |
+| Retransmission    | Retransmits all outstanding packets from the missing one onward | Retransmits only packets suspected to be missing |
+| Complexity        | Lower                                                           | Higher, but more efficient on lossy links        |
+Although SR is more efficient, it has a big problem: Ambiguity between old and new packets resulting from sequence number wrap-around. For example, when we want to transmit the 2 bit packer: $$0,1,2,3,0,1,\cdots$$
+If we transmit too much data simultaneously, we cannot distinguish the new and old packet. To avoid sequence-number ambiguity in SR, if the sequence-number space has size $K$, the window size should satisfy:
+$$
+\boxed{N\le \frac{K}{2}}
+$$
+
 ## UDP
 
 UDP adds only basic multiplexing, demultiplexing, and error detection to IP. It is connectionless, has a small header, and does not guarantee delivery or ordering.
 
+When an application calls `sendto()`, UDP typically constructs a datagram immediately and passes it to the IP layer for processing, without waiting for an acknowledgment (ACK) or for a send window to open.
+
+Consequently, the application gains more direct control over the timing of datagram transmission and preserves application-layer message boundaries.
 ### UDP Datagram Structure
 
 The UDP header is 8 bytes long:
@@ -1190,54 +1235,18 @@ The UDP header is 8 bytes long:
 
 The UDP checksum can detect many transmission errors, but it cannot recover lost, reordered, or corrupted data. Applications must implement retransmission, ordering, or other reliability mechanisms when needed.
 
-## Principles of Reliable Data Transfer
-
-Common reliability mechanisms include error detection, sequence numbers, acknowledgments, timeout-based retransmission, and pipelining.
-
-### Evolution of the rdt Protocols
-
-- rdt1.0: Assumes a completely reliable underlying channel.
-- rdt2.0: Handles bit errors with checksums, ACK/NAK feedback, and retransmission, but does not handle corrupted ACK or NAK packets.
-- rdt2.1: Adds sequence numbers so duplicate packets can be recognized.
-- rdt2.2: Uses numbered ACKs and no longer requires NAKs.
-- rdt3.0: Also handles lost data packets and ACKs by adding timers and timeout retransmission. Because its sequence number alternates between 0 and 1, it is also called the alternating-bit protocol.
-
-These are fundamentally <span style="color: red;">stop-and-wait</span> protocols: the sender transmits one packet and waits for an acknowledgment. If ACK transmission time is ignored, sender utilization is approximately:
-
-$$
-\boxed{U_{sender}=\frac{L/R}{RTT+L/R}}
-$$
-
-Stop-and-wait performs poorly when RTT is large, which motivates <span style="color: red;">pipelined protocols</span>.
-
-### GBN and SR
-
-| Property | Go-Back-N (GBN) | Selective Repeat (SR) |
-|---|---|---|
-| Acknowledgment | Cumulative | Individual |
-| Receiver behavior | Usually discards out-of-order packets | Buffers out-of-order packets |
-| Timers | Usually one timer for the oldest unacknowledged packet | Usually one timer per unacknowledged packet |
-| Retransmission | Retransmits all outstanding packets from the missing one onward | Retransmits only packets suspected to be missing |
-| Complexity | Lower | Higher, but more efficient on lossy links |
-
-To avoid sequence-number ambiguity in SR, if the sequence-number space has size $K$, the window size should satisfy:
-
-$$
-\boxed{N\le \frac{K}{2}}
-$$
+We use checksum to detect the error in the header. Checksum is the complement of the sum of the pseudo-header, UDP header, UDP data. Pseudo-header includes the sender and receiver's IP. 
+![Screenshot 2026-10-19 at 15.49.42](../attachments/Screenshot%202026-10-19%20at%2015.49.42-optimized.webp)
+Notice:
+- When calculating the checksum, set the checksum field to 0.
+- The receiver calculates the sum of the UDP packet (including the checksum) and the pseudo-header; if the result is 0xFFFF, it is considered error-free.
 
 ## TCP
 
-### TCP Connections and Data Transfer
-
-TCP is a full-duplex, point-to-point, connection-oriented protocol that provides a reliable byte stream. Each endpoint maintains its own send and receive buffers.
-
-- <span style="color: red;">Maximum Segment Size (MSS)</span>: The maximum amount of application data in a TCP segment.
-- Maximum Transmission Unit (MTU): The largest network-layer packet that a link-layer frame can carry.
-- Ethernet commonly has a 1500-byte MTU. With IPv4 and TCP headers that contain no options, a typical MSS is 1460 bytes.
-
+TCP is a full-duplex, point-to-point, connection-oriented protocol that provides a reliable byte stream. Each endpoint maintains its own send and receive buffers. To provide reliable, ordered data transmission and network congestion control, TCP independently manages the organization of segments and the timing of their transmission.
 ### Important TCP Header Fields
 
+![Screenshot 2026-10-19 at 16.44.23](../attachments/Screenshot%202026-10-19%20at%2016.44.23-optimized.webp)
 - Source and destination ports;
 - Sequence number;
 - Acknowledgment number;
@@ -1248,20 +1257,37 @@ TCP is a full-duplex, point-to-point, connection-oriented protocol that provides
 
 TCP sequence numbers count bytes. The acknowledgment number indicates the sequence number of the next byte the receiver expects.
 
+- <span style="color: red;">Maximum Segment Size (MSS)</span>: The maximum amount of application data in a TCP segment.
+- <span style="color: red;">Window Scale</span>: Receive window only has 16 bits, so it can at most denote $2^{16}-1=65535$. To express larger one, we introduce the window scale $S$. The actual receive window is interpreted as:
+$$
+\text{rwnd}=\text{Window}\times2^S
+$$
+- <span style="color: red;">SACK</span>: Next expected byte order.
 ### RTT Estimation and Timeout
 
 TCP smooths RTT measurements so that the retransmission timeout does not change dramatically after one sample:
-
 $$
-EstimatedRTT=(1-\alpha)EstimatedRTT+\alpha SampleRTT
-$$
-
-$$
-DevRTT=(1-\beta)DevRTT+\beta|SampleRTT-EstimatedRTT|
+\text{EstimatedRTT}=(1-\alpha)\text{EstimatedRTT}+\alpha \text{SampleRTT}
 $$
 
+It can be also written as:
 $$
-\boxed{TimeoutInterval=EstimatedRTT+4DevRTT}
+E_n=(1-\alpha)E_{n-1}+\alpha S_n
+$$
+
+where $E_n$ is the estimated time after sample $n$ and $S_n$ is the time of sample $n$.
+
+We can find that
+$$E_n=(1-\alpha)^nE_0+\alpha\sum_{k=0}^{n-1}(1-\alpha)^kS_{n-k}$$
+So this method is called <span style="color: red;">Exponentially Weighted Moving Average</span>.
+
+We typically use DevRTT to measure the degree of fluctuation in network latency.
+$$
+\text{DevRTT}=(1-\beta)\text{DevRTT}+\beta|\text{SampleRTT}-\text{EstimatedRTT}|
+$$
+And generally, we use TimeOutInterval to judge the time of retransmit the data. To avoid misidentifying lost packets, we need to consider DevRTT. The following is a commonly used empirical formula.
+$$
+\boxed{\text{TimeOutInterval}=\text{EstimatedRTT}+4\text{DevRTT}}
 $$
 
 Textbook examples commonly use $\alpha=0.125$ and $\beta=0.25$.

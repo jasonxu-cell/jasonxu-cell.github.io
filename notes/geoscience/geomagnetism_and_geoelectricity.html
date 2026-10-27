@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Geomagnetism and Geoelectricity | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=dd2645fcc0">
+    <link rel="stylesheet" href="../../style.css?v=8801534efc">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
@@ -52,7 +52,7 @@
                     <span>Induction</span>
                     <span>Conductivity</span>
                 </div>
-                <time datetime="2026-10-13">Oct 13, 2026</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
             </div>
         </header>
 
@@ -253,7 +253,13 @@
 <p>The <span class="obsidian-red">Wiese vector</span> in this real-plane representation is $$\mathbf{V}_W=(A,B,0).$$ The variations lie in the plane $A\Delta B_x+B\Delta B_y-\Delta B_z=0$. Its downward unit normal is $$\hat{n}=\frac{(-A,-B,1)}{\sqrt{1+A^2+B^2}}.$$ The <span class="obsidian-red">Parkinson vector</span> is the projection of this unit normal onto the horizontal plane: $$\mathbf{V}_P=\frac{(-A,-B,0)}{\sqrt{1+A^2+B^2}}=-\frac{\mathbf{V}_W}{\sqrt{1+A^2+B^2}}.$$ These geometrical definitions are described by <a href="https://www.mtnet.info/papers/ClassicPapers/Gregori%2BLanzerotti_1980_RevGeophysSpacePhys.pdf" target="_blank" rel="noopener noreferrer">Gregori and Lanzerotti (1980)</a>.</p>
 <p>In frequency-domain processing, use the complex transfer function from <a href="#magnetotelluric-method-mt-and-gds">Magnetotelluric Method (MT) and GDS</a>: $$B_z(\omega)=T_x(\omega)B_x(\omega)+T_y(\omega)B_y(\omega).$$ Modern induction arrows are usually drawn separately for real and imaginary parts. In the Parkinson sign convention, $$\mathbf{a}_{P,\mathrm{Re}}=(-\operatorname{Re}T_x,-\operatorname{Re}T_y,0),\qquad \mathbf{a}_{P,\mathrm{Im}}=(-\operatorname{Im}T_x,-\operatorname{Im}T_y,0).$$ The Wiese convention reverses both arrow directions. These arrow lengths are unnormalized transfer-function magnitudes, not the unit-normal projection above. Parkinson real-part arrows commonly point toward anomalous current concentrations, whereas Wiese real-part arrows point away; imaginary arrows and complex three-dimensional structures require more detailed interpretation. A general complex transfer function does not define one fixed real plane of instantaneous variations.</p>
 <h3 id="electrical-conductivity-distribution-within-the-earth-s-interior">Electrical Conductivity Distribution within the Earth&#039;s Interior</h3>
-<p>For an effective medium made of thin, isotropic layers, we define: <span class="obsidian-red">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering). <span class="obsidian-red">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding. (For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.) <span class="obsidian-red">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$ <span class="obsidian-red">mean macroscopic resistivity</span> / <span class="obsidian-red">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$</p>
+<p>For an effective medium made of thin, isotropic layers, we define:</p>
+<ul>
+<li><span class="obsidian-red">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering).</li>
+<li><span class="obsidian-red">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding.(For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.)</li>
+<li><span class="obsidian-red">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$</li>
+<li><span class="obsidian-red">mean macroscopic resistivity</span> / <span class="obsidian-red">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$</li>
+</ul>
 <p>For layers with resistivities $\rho_i$, thicknesses $h_i$, and total thickness $d=\sum_i h_i$, $$\rho_t=\frac{d}{\sum_i h_i/\rho_i},\qquad \rho_n=\frac{\sum_i h_i\rho_i}{d}.$$ The longitudinal and transverse resistivities are the thickness-weighted harmonic and arithmetic means. The geometric mean $\rho_m$ is a useful effective parameter, rather than a replacement for the full anisotropic resistivity tensor in every geometry.</p>
 <p>The following picture illustrates approximate resistivity ranges (in $\Omega\,\mathrm{m}$) for a continental crust-mantle model. Both layer depths and resistivities vary between regions. <img src="../attachments/Screenshot%202026-05-15%20at%2017.20.29-optimized.webp" alt="Screenshot 2026-05-15 at 17.20.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>Conduction mechanisms in crustal materials:</p>
@@ -412,6 +418,7 @@ paleomagnetic stratigraphy
 ![Pasted image 20260518171527](../attachments/Pasted%20image%2020260518171527.png){width=450}
 
 ## Gauss's Spherical Harmonic Analysis
+
 
 ### Scalar Potential and Gauss Coefficients
 
@@ -912,11 +919,11 @@ The Wiese convention reverses both arrow directions. These arrow lengths are unn
 ## Electrical Conductivity Distribution within the Earth's Interior
 
 For an effective medium made of thin, isotropic layers, we define:
-<span style="color: red;">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering).
-<span style="color: red;">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding.
-(For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.)
-<span style="color: red;">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$
-<span style="color: red;">mean macroscopic resistivity</span> / <span style="color: red;">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$
+
+- <span style="color: red;">Longitudinal Resistivity</span> $\rho_t$: the average resistivity along the bedding direction (parallel to layering).
+- <span style="color: red;">Transverse Resistivity</span> $\rho_n$: the average resistivity in the direction perpendicular to bedding.(For this layered-medium model, $\rho_n\ge\rho_t$ and $\lambda\ge1$, with equality for identical layer resistivities. The inequality is not a general law for every form of rock anisotropy.)
+- <span style="color: red;">Anisotropy Coefficient</span> $\lambda =\sqrt{\frac{\rho_n}{\rho_t}}$
+- <span style="color: red;">mean macroscopic resistivity</span> / <span style="color: red;">equivalent isotropic resistivity</span>  $\rho_m=\sqrt{\rho_n \rho_t}$
 
 For layers with resistivities $\rho_i$, thicknesses $h_i$, and total thickness $d=\sum_i h_i$,
 $$\rho_t=\frac{d}{\sum_i h_i/\rho_i},\qquad \rho_n=\frac{\sum_i h_i\rho_i}{d}.$$

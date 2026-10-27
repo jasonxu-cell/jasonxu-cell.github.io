@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Digital Circuits | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=dd2645fcc0">
+    <link rel="stylesheet" href="../../style.css?v=8801534efc">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
@@ -49,7 +49,7 @@
                     <span>Logic</span>
                     <span>Digital</span>
                 </div>
-                <time datetime="2026-10-13">Oct 13, 2026</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
             </div>
         </header>
 
@@ -708,7 +708,8 @@ cla_4bit a1(
 <p><img src="../attachments/Screenshot%202026-10-12%20at%2012.39.38.png" alt="Screenshot 2026-10-12 at 12.39.38" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>In the circuit, we use the clock $CLK$ to control the signal $C$. <img src="../attachments/Pasted%20image%2020261012124134.png" alt="Pasted image 20261012124134" loading="lazy" decoding="async" style="width: min(100%, 450px);"> We can find that when $CLK=0$, the signal $\overline{Q&#039;}=D$, but $TG_3$ is not closed, so it cannot be transmitted to the next latch. And when $CLK=1$, it can transmit the signal to $Q$, but $TG_1$ is not closed, so it cannot get the new signal.</p>
 <p>In conclusion, the state changes to $D$ only when the $CLK$ changes from $0$ to $1$. The characteristic equation can be written as: $$Q^{n+1}=D^n$$</p>
-<p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012124915.png" alt="Pasted image 20261012124915" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
+<p>The logic symbol is as follows:</p>
+<p><img src="../attachments/Pasted%20image%2020261012124915.png" alt="Pasted image 20261012124915" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>We can add preset and clear signals to the D FF. <img src="../attachments/Screenshot%202026-10-12%20at%2013.05.29.png" alt="Screenshot 2026-10-12 at 13.05.29" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <p>This circuit works only when $\overline{R_D}+\overline{S_D}=1$. If $\overline{R_D}=\overline{S_D}=1$, D FF will work. And when the signal $\overline{R_D}$ and $\overline{S_D}$ is different, $Q$ will be the same as $S_D$.</p>
 <p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012131237.png" alt="Pasted image 20261012131237" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
@@ -741,6 +742,7 @@ cla_4bit a1(
 <li>$JK=00$, keep the state; $JK=11$, flip the state</li>
 <li>$JK=01$, $Q=0$; $JK=10$, $Q=1$</li>
 </ul>
+<p>$$Q^{n+1}=J\overline{Q^n}+\overline{K}Q^n$$</p>
 <p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012133341.png" alt="Pasted image 20261012133341" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <div class="code-block" data-code-block="22"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> JK_FF (
     <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> J,
@@ -771,6 +773,7 @@ cla_4bit a1(
 <li>$T=0$, keep the state</li>
 <li>$T=1$, flip the state</li>
 </ul>
+<p>$$Q^{n+1}=T\overline{Q^n}+\overline{T}Q^n=T\oplus Q^n$$</p>
 <p>The logic symbol is as follows: <img src="../attachments/Pasted%20image%2020261012133434.png" alt="Pasted image 20261012133434" loading="lazy" decoding="async" style="width: min(100%, 450px);"></p>
 <div class="code-block" data-code-block="23"><div class="code-toolbar"><span class="code-language">VERILOG</span><div class="code-actions"><button type="button" class="code-copy">Copy</button><button type="button" class="code-toggle" aria-expanded="true">Collapse</button></div></div><pre><code class="hljs language-verilog" data-highlighted="local"><span class="hljs-keyword">module</span> T_FF (
     <span class="hljs-keyword">input</span> <span class="hljs-type">wire</span> T,
@@ -1861,6 +1864,7 @@ In conclusion, the state changes to $D$ only when the $CLK$ changes from $0$ to 
 $$Q^{n+1}=D^n$$
 
 The logic symbol is as follows:
+
 ![Pasted image 20261012124915](../attachments/Pasted%20image%2020261012124915.png){width=450}
 
 We can add preset and clear signals to the D FF.
@@ -1905,6 +1909,8 @@ JK FF has the following functions:
 - $JK=00$, keep the state; $JK=11$, flip the state
 - $JK=01$, $Q=0$; $JK=10$, $Q=1$
 
+$$Q^{n+1}=J\overline{Q^n}+\overline{K}Q^n$$
+
 The logic symbol is as follows:
 ![Pasted image 20261012133341](../attachments/Pasted%20image%2020261012133341.png){width=450}
 
@@ -1938,6 +1944,8 @@ endmodule
 T FF has the following functions:
 - $T=0$, keep the state
 - $T=1$, flip the state
+
+$$Q^{n+1}=T\overline{Q^n}+\overline{T}Q^n=T\oplus Q^n$$
 
 The logic symbol is as follows:
 ![Pasted image 20261012133434](../attachments/Pasted%20image%2020261012133434.png){width=450}

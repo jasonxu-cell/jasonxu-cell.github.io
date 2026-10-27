@@ -20,7 +20,7 @@
     <meta name="twitter:image" content="https://jasonxu-cell.github.io/assets/og-image-yang.png">
     <meta name="twitter:image:alt" content="Yang — Geophysics · USTC">
     <title>Electromagnetism | Yang</title>
-    <link rel="stylesheet" href="../../style.css?v=dd2645fcc0">
+    <link rel="stylesheet" href="../../style.css?v=8801534efc">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
@@ -52,7 +52,7 @@
                     <span>Fields</span>
                     <span>Waves</span>
                 </div>
-                <time datetime="2026-08-08">Aug 8, 2026</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
             </div>
         </header>
 
@@ -72,7 +72,6 @@
 <p>For a point charge, Coulomb&#039;s law gives $\phi = \dfrac{q}{4\pi\varepsilon_0 r}$ with $\rho = q\,\delta(\mathbf{r})$, hence the identity $$\nabla^2\!\left(\frac{1}{r}\right) = -4\pi\,\delta(\mathbf{r})$$</p>
 <p>In general, with $\mathbf{R} = \mathbf{r}-\mathbf{r}\,&#039;$: $$\Delta\mathbf{E} = \frac{1}{4\pi\varepsilon_0}\frac{\rho(\mathbf{r}\,&#039;)\,\Delta V&#039;}{R^2}\,\hat{e}_R,\qquad \mathbf{E} = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{R^2}\,\hat{e}_R\,\mathrm{d}V&#039;,$$ $$\phi = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{R}\,\mathrm{d}V&#039; = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,&#039;)}{|\mathbf{r}-\mathbf{r}\,&#039;|}\,\mathrm{d}V&#039;.$$</p>
 <h3 id="multipole-expansion">Multipole Expansion</h3>
-<p>Einstein summation convention: repeated indices are summed.</p>
 <p>Taylor-expand the kernel: $$f(\mathbf{r}-\mathbf{r}\,&#039;) = f(\mathbf{r}) - x_i&#039;\,\partial_i f(\mathbf{r}) + \tfrac{1}{2}x_i&#039; x_j&#039;\,\partial_i\partial_j f(\mathbf{r}) + \cdots$$</p>
 <p>This yields the <span class="obsidian-red">multipole expansion</span> of $\phi$: $$\phi^{(0)} = \frac{1}{4\pi\varepsilon_0}\frac{1}{r}\int\rho\,\mathrm{d}V&#039;,\quad \phi^{(1)} = -\frac{1}{4\pi\varepsilon_0}\int\rho\,x_i&#039;\,\mathrm{d}V&#039;\;\nabla\!\left(\tfrac{1}{r}\right),\quad \phi^{(2)} = \frac{1}{8\pi\varepsilon_0}\int\rho\,x_i&#039;x_j&#039;\,\mathrm{d}V&#039;\;\nabla\nabla\!\left(\tfrac{1}{r}\right).$$</p>
 <p>Monopole (total charge): $$q = \int\rho\,\mathrm{d}V&#039; = \sum_a q_a,\qquad \phi^{(0)} = \frac{q}{4\pi\varepsilon_0 r},\qquad \mathbf{E}^{(0)} = \frac{q\,\hat{r}}{4\pi\varepsilon_0 r^2}.$$</p>
@@ -206,7 +205,6 @@
 <hr>
 <h2 id="superconductivity-todo">Superconductivity (TODO)</h2>
 <h2 id="charged-particle-in-an-em-field-lagrangian">Charged Particle in an EM Field (Lagrangian)</h2>
-<p>Einstein summation convention: repeated indices are summed.</p>
 <p>Free-particle action $S_p$ plus interaction $S_{pf}$: $S = S_p + S_{pf}$, with $\mathrm{d}S_p = -mc^2\,\mathrm{d}\tau$, $\mathrm{d}S_{pf} = -q A_\alpha\,\mathrm{d}x^\alpha$, where $A^\alpha = (\phi/c,\mathbf{A})$ and $u^\alpha = (\gamma c,\gamma\mathbf{v})$. $$S = \int_a^b\!\left(-mc^2\,\mathrm{d}\tau - qA_\alpha\,\mathrm{d}x^\alpha\right) = \int_a^b\!\left(-mc^2 - qA_\alpha u^\alpha\right)\frac{\mathrm{d}t}{\gamma}.$$ Since $\tfrac{q}{\gamma}A_\alpha u^\alpha = q\phi - q\mathbf{A}\cdot\mathbf{v}$, the Lagrangian is $$L = -\frac{1}{\gamma}mc^2 - q\phi + q\mathbf{A}\cdot\mathbf{v}.$$</p>
 <p>Euler–Lagrange $\dfrac{\mathrm{d}}{\mathrm{d}t}\!\left(\dfrac{\partial L}{\partial\mathbf{v}}\right) - \dfrac{\partial L}{\partial\mathbf{r}} = 0$ with $$\frac{\partial L}{\partial\mathbf{r}} = q\nabla(\mathbf{A}\cdot\mathbf{v}) - q\nabla\phi,\qquad \nabla(\mathbf{A}\cdot\mathbf{v}) = \mathbf{v}\times(\nabla\times\mathbf{A}) + (\mathbf{v}\cdot\nabla)\mathbf{A},$$ $$\frac{\partial L}{\partial\mathbf{v}} = \mathbf{p} + q\mathbf{A},$$ and $\dfrac{\mathrm{d}}{\mathrm{d}t}\mathbf{A}(t,\mathbf{x}) = \dfrac{\partial\mathbf{A}}{\partial t} + (\mathbf{v}\cdot\nabla)\mathbf{A}$ gives $$\frac{\mathrm{d}}{\mathrm{d}t}\mathbf{p} = q\,\mathbf{v}\times(\nabla\times\mathbf{A}) - q\!\left(\nabla\phi + \frac{\partial\mathbf{A}}{\partial t}\right).$$</p>
 <p>Comparing with the Lorentz force $\mathbf{F} = q(\mathbf{v}\times\mathbf{B} + \mathbf{E})$ defines the potentials: $$\mathbf{B} = \nabla\times\mathbf{A},\qquad \mathbf{E} = -\nabla\phi - \frac{\partial\mathbf{A}}{\partial t},$$ which automatically give $\nabla\cdot\mathbf{B}=0$, $\nabla\times\mathbf{E} = -\partial_t\mathbf{B}$.</p>
@@ -331,8 +329,6 @@ $$\Delta\mathbf{E} = \frac{1}{4\pi\varepsilon_0}\frac{\rho(\mathbf{r}\,')\,\Delt
 \mathbf{E} = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,')}{R^2}\,\hat{e}_R\,\mathrm{d}V',$$
 $$\phi = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,')}{R}\,\mathrm{d}V' = \frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\mathbf{r}\,')}{|\mathbf{r}-\mathbf{r}\,'|}\,\mathrm{d}V'.$$
 ## Multipole Expansion
-
-Einstein summation convention: repeated indices are summed.
 
 Taylor-expand the kernel:
 $$f(\mathbf{r}-\mathbf{r}\,') = f(\mathbf{r}) - x_i'\,\partial_i f(\mathbf{r}) + \tfrac{1}{2}x_i' x_j'\,\partial_i\partial_j f(\mathbf{r}) + \cdots$$
@@ -733,8 +729,6 @@ $$\delta = \sqrt{\frac{2}{\mu\sigma\omega}}.$$
 ---
 # Superconductivity (TODO)
 # Charged Particle in an EM Field (Lagrangian)
-
-Einstein summation convention: repeated indices are summed.
 
 Free-particle action $S_p$ plus interaction $S_{pf}$: $S = S_p + S_{pf}$, with $\mathrm{d}S_p = -mc^2\,\mathrm{d}\tau$, $\mathrm{d}S_{pf} = -q A_\alpha\,\mathrm{d}x^\alpha$, where $A^\alpha = (\phi/c,\mathbf{A})$ and $u^\alpha = (\gamma c,\gamma\mathbf{v})$.
 $$S = \int_a^b\!\left(-mc^2\,\mathrm{d}\tau - qA_\alpha\,\mathrm{d}x^\alpha\right) = \int_a^b\!\left(-mc^2 - qA_\alpha u^\alpha\right)\frac{\mathrm{d}t}{\gamma}.$$

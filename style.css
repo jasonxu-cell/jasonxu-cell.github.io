@@ -81,7 +81,7 @@ body::after {
    its colour (a pre-blurred copy), and the solid cards carry the reading. */
 body:not(.home-background) {
     background-color: #eef4f7;
-    background-image: url("assets/background-soft.webp");
+    background-image: url("assets/background-sky.webp");
 }
 
 body:not(.home-background)::before {
@@ -1223,6 +1223,29 @@ button:focus-visible {
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 24px;
+}
+
+/* A thin, light scrollbar so long contents lists don't show the heavy system one. */
+.article-toc-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(23, 95, 112, 0.22) transparent;
+}
+
+.article-toc-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.article-toc-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.article-toc-panel::-webkit-scrollbar-thumb {
+    background: rgba(23, 95, 112, 0.22);
+    border-radius: 999px;
+}
+
+.article-toc-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(23, 95, 112, 0.4);
 }
 
 .article-toc-panel p {
